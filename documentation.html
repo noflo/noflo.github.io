@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>Documentation | NoFlo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="./css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./css/main.css" />
+
+</head>
+<body>
+<div class="page">
+	
+	<div class="row-fluid">
+
+		<div class="site-header span12">
+
+			<div class="container">
+
+				<a href="./" class="logo">NoFlo</a>
+
+				<nav class="main-nav">
+					<ul class="nav">
+						<li><a href="./demos.html">Demos</a></li>
+						<li><a href="./documentation.html">Documentation</a></li>
+						<li><a href="./library.html">Library</a></li>
+					</ul>
+				</nav>
+
+				<nav class="util-nav">
+					<ul class="nav dropdown">
+						<li>
+							<a href="./" class="email" data-toggle="dropdown" data-target="#">Email</a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="./">
+										<span class="dropdown__action">Download</span>
+										<span class="dropdown__tally">104</span>
+									</a>
+								</li>
+								<li>
+									<a href="./">
+										<span class="dropdown__action">Star</span>
+										<span class="dropdown__tally">8201</span>
+									</a>
+								</li>
+								<li>
+									<a href="./">
+										<span class="dropdown__action">Fork</span>
+										<span class="dropdown__tally">321</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="./" class="share" data-toggle="dropdown" data-target="#">Share</a>
+						</li>
+						<li>
+							<a href="./" class="github" data-toggle="dropdown" data-target="#">Github</a>
+						</li>
+					</ul>
+				</nav>
+
+			</div>
+			<!-- /.container -->
+
+		</div>
+		<!-- .site-header-->
+
+	</div>
+	<!-- /.row -->
+
+	<div class="row-fluid">
+
+		<div class="page-title">
+			
+			<div class="container">
+				<h1 class="page-title__title">Documentation</h1>
+				<a href="./" class="btn btn-primary page-title__button big-button">On GitHub</a>
+			</div>
+
+		</div>
+		<!-- /.page-title -->
+
+	</div>
+	<!-- /.row -->
+
+	<div class="row-fluid">
+
+		<div class="container">
+
+			<div class="main">
+		
+				<div class="sidebar span4">
+					
+					<nav>
+						<ul class="sidebar__nav">
+							<li><a href="./">Requirements and installing</a></li>
+							<li><a href="./">Changes</a></li>
+							<li><a href="./">Using NoFlo</a></li>
+							<li><a href="./">Running the Examples</a></li>
+							<li><a href="./">Terminology</a></li>
+							<li><a href="./">Components</a></li>
+							<li><a href="./">The NoFlo Shell</a></li>
+							<li><a href="./">Designing NoFlo graphs with DrawFBP</a></li>
+							<li><a href="./">The web-based NoFlo monitor</a></li>
+							<li><a href="./">NoFlo graph file format</a></li>
+							<li><a href="./">Language for Flow-Based Programming</a></li>
+							<li><a href="./">Development</a></li>
+							<li><a href="./">Discussion</a></li>
+						</ul>
+					</nav>
+
+				</div>
+				<!-- /.sidebar -->
+
+				<div class="content span8">
+					
+					<h1>NoFlo: Flow-based programming for Node.js</h1>
+
+					<h2>Requirements and installing</h3>
+					<p>NoFlo is available <a href="./">via NPM</a>, so you can install it with:</p>
+					<pre><code>$ npm install -g noflo</code></pre>
+
+					<h3>Installing from Git</h3>
+					<p>NoFlo requires a reasonably recent version of <a href="./">Node.js</a>, and some 
+						<a href="./">npm</a> packages. Ensure you have the grunt-cli package installed (grunt command should be available on command line) and NoFlo checked out from Git. Build NoFlo with:</p>
+					<pre><code>$ grunt build</code></pre>
+
+					<p>You can also build NoFlo only for the desired target platform with either <em>grunt build:nodejs</em> or <em>grunt build:browser</em>.</p>
+
+					<p>Then you can install everything needed by a simple:</p>
+					<pre><code>$ npm link</code></pre>
+
+					<p>NoFlo is available from <a href="./">GitHub</a> under the MIT licence.</p>
+
+					<hr />
+
+					<h2>Changes</h2>
+					<p>Please refer to the <a href="./">CHANGES.md document</a>.</p>
+
+					<hr />
+
+					<h2>Using NoFlo</h2>
+					<p>There are two ways to use NoFlo:</p>
+
+					<ul>
+ 						<li><strong>Independent:</strong> Building the whole control logic of your software as a 
+ 							NoFlo graph, and running it with the noflo tool</li>
+						<li><strong>Embedded:</strong> Using NoFlo as a library and calling some NoFlo graphs whenever 
+							your software needs workflows</li>
+					</ul>
+
+					<p>When you create a NoFlo graph, it doesn't do anything by itself. It only loads the 
+						components of the graph and sets up the connections between them. Then it is up to 
+						the components to actually start sending messages to their outports, or reacting to 
+						messages they receive on their inports.</p>
+
+					<p>Since most components require some input before they act, the usual way to make a NoFlo 
+						graph run is to send it some initial information packets, or IIPs. Examples of this 
+						would include sending a port number that a web server could listen to the web 
+						server component, or sending a file name to a file reader.</p>
+
+					<p>This activation model provides many possibilities:</p>
+
+					<ul>
+						<li>Starting the graph based on user interaction (shell command, clicking a button)</li>
+						<li>Starting the graph based on a received signal (Redis pub/sub, D-Bus signal, WebHook, 
+							email)</li>
+						<li>Starting the graph at a given time or interval (running a graph on the first of 
+							every month, or five minutes from now)</li>
+						<li>Starting the graph based on context (when arriving to a physical location, when user 
+							goes to a ...</li>
+					</ul>
+
+				</div>
+				<!-- /.content -->
+
+			</div>
+			<!-- /.main -->
+
+		</div>
+		<!-- /.container -->
+
+	</div>
+	<!-- /.row -->
+
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="./js/min/bootstrap.min.js"></script>
+<!--<script src="https://raw.github.com/jkeyes/baseline/master/baseliner/baseliner.js"></script>
+<script>
+window.onload = function() {
+    baseliner = new Baseliner(15);
+}
+</script>-->
+</body>
+</html>
