@@ -209,7 +209,7 @@ body {
   font-size: 18px;
   line-height: 1;
   color: #333333;
-  background-color: #fbfbfb;
+  background-color: #fafafa;
 }
 a {
   color: #0088cc;
@@ -978,7 +978,7 @@ table {
   border-top: 2px solid #dddddd;
 }
 .table .table {
-  background-color: #fbfbfb;
+  background-color: #fafafa;
 }
 .table-condensed th,
 .table-condensed td {
@@ -3209,7 +3209,7 @@ input[type="submit"].btn.btn-mini {
 .nav-tabs > .active > a:hover,
 .nav-tabs > .active > a:focus {
   color: #555555;
-  background-color: #fbfbfb;
+  background-color: #fafafa;
   border: 1px solid #ddd;
   border-bottom-color: transparent;
   cursor: default;
