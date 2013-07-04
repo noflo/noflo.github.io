@@ -317,6 +317,9 @@ hr {
   overflow: hidden;
   padding-top: 75px;
   border-bottom: 1px solid #ededed; }
+  @media (max-width: 767px) {
+    .plain-title {
+      margin-bottom: 15px; } }
   .plain-title h1 {
     margin-bottom: 13px; }
 

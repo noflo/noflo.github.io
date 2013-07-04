@@ -494,6 +494,10 @@ hr {
 	padding-top: 75px;
 	border-bottom: 1px solid #ededed;
 
+	@include breakpoint(small) {
+		margin-bottom: 15px;
+	}
+
 	h1 {
 		margin-bottom: 13px;
 	}
