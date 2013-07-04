@@ -343,6 +343,7 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
     $Footer
 \*------------------------------------*/
 .site-footer {
+	margin-top: 15px;
 	padding-top: 15px;
 	padding-bottom: 15px;
 	background-color: #1e1f21;
@@ -546,9 +547,10 @@ hr {
 }
 
 	.sidebar__title {
-		padding-bottom: 5px;
+		padding-bottom: 10px;
 		margin-bottom: 0;
 		border-bottom: 1px solid #ededed;
+		font-size: $twenty-one;
 	}
 
 	.sidebar__nav {
@@ -684,16 +686,17 @@ code {
 
 .library__title {
 	line-height: 1;
+	font-size: $twenty-one;
 }
 
 .library__updated {
 	display: inline-block;
 	margin-bottom: 15px;
 	font-size: $fourteen;
+	color: #808080;
 }
 
 .library__description {
-	font-size: 16px;
 	float: left;
 	width: 100%;
 	margin-bottom: 0;
@@ -704,6 +707,8 @@ code {
 	position: absolute;
 	top: 15px;
 	right: 15px;
+	font-size: $fourteen;
+	text-align: right;
 
 	@include breakpoint(small) {
 		position: relative;
@@ -719,8 +724,7 @@ code {
 
 	strong, em {
 		display: block;
-		font-size: $fourteen;
-		text-align: right;
+		margin-bottom: 5px;
 
 		@include breakpoint(small) {
 			display: inline;
@@ -729,7 +733,7 @@ code {
 	}
 
 	em {
-		color: #c3c3c3;
+		color: #808080;
 	}
 
 }
@@ -741,16 +745,24 @@ code {
 	border-bottom: 1px solid #ededed;
 	border-top: 1px solid #ffffff;
 
+	dl {
+		margin: 0;
+	}
+
 	dt {
+		font-size: $fourteen;
+		font-weight: normal;
 		margin-bottom: 15px;
 	}
 
 	dd {
+		font-size: $fourteen;
+		font-weight: normal;
 		margin-left: 0;
 	}
 
 	a {
-		font-weight: bold;
+		font-family: $ProximaSemiboldStack;
 	}
 
 }
@@ -758,10 +770,13 @@ code {
 	.overview__downloads {
 		float: left;
 		width: 50%;
+		margin-bottom: 0;
 		line-height: 1.3;
 
 		strong {
 			display: block;
+			font-family: $ProximaSemiboldStack;
+			font-weight: normal;
 		}
 
 		em {
