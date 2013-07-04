@@ -8,6 +8,7 @@
  * Mixins
  * Layout
  * Header
+ * Footer
  * Promo
  * Typography
  * Page Title
@@ -333,6 +334,27 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	font-weight: normal;
 	background-color: #ebedef;
 }
+
+
+
+
+
+/*------------------------------------*\
+    $Footer
+\*------------------------------------*/
+.site-footer {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: #1e1f21;
+
+	p {
+		font-size: $fourteen;
+		color: #fff;
+		margin-bottom: 0;
+		text-align: center;
+	}
+}
+
 
 
 
@@ -801,4 +823,3 @@ code {
 	font-size: $fourteen;
 	color: #808080;
 }
-

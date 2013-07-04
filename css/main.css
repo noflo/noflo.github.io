@@ -8,6 +8,7 @@
  * Mixins
  * Layout
  * Header
+ * Footer
  * Promo
  * Typography
  * Page Title
@@ -194,6 +195,19 @@
   display: inline-block;
   font-weight: normal;
   background-color: #ebedef; }
+
+/*------------------------------------*\
+    $Footer
+\*------------------------------------*/
+.site-footer {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #1e1f21; }
+  .site-footer p {
+    font-size: 0.77778em;
+    color: #fff;
+    margin-bottom: 0;
+    text-align: center; }
 
 /*------------------------------------*\
     $Promo
