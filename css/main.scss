@@ -81,6 +81,7 @@
 \*------------------------------------*/
 $fourteen: 0.777777em;		/* 14px: 1 / (18x14) = 0.777777  */
 $fifteen: 0.8333325em;		/* 15px: 1 / (18x15) = 0.8333325 */
+$twenty-one: 1.1666666em;	/* 21px: 1 / (18x21) = 1.1666666 */
 $twenty-four: 1.333332em;	/* 24px: 1 / (18x24) = 1.5 		 */
 $thirty: 1.666665em;		/* 30px: 1 / (18x30) = 1.666665  */
 $thirty-six: 1.999998em;	/* 36px: 1 / (18x36) = 1.999998  */
@@ -771,6 +772,11 @@ code {
 .demo {
 	float: left;
 	width: 100%;
+}
+
+.demo__title {
+	font-size: $twenty-one;
+	font-family: $ProximaSemiboldStack;
 }
 
 .demo__screenshot {

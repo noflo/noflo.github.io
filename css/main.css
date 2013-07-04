@@ -55,6 +55,7 @@
 \*------------------------------------*/
 /* 14px: 1 / (18x14) = 0.777777  */
 /* 15px: 1 / (18x15) = 0.8333325 */
+/* 21px: 1 / (18x21) = 1.1666666 */
 /* 24px: 1 / (18x24) = 1.5 		 */
 /* 30px: 1 / (18x30) = 1.666665  */
 /* 36px: 1 / (18x36) = 1.999998  */
@@ -503,6 +504,10 @@ code {
 .demo {
   float: left;
   width: 100%; }
+
+.demo__title {
+  font-size: 1.16667em;
+  font-family: "proxima-nova-semibold", Arial, sans-serif; }
 
 .demo__screenshot > img {
   float: right;
