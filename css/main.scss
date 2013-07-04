@@ -13,6 +13,7 @@
  * Page Title
  * Sidebar
  * Content
+ * Home
  * Code Samples
  * Library
  * Demos
@@ -491,7 +492,7 @@ hr {
 \*------------------------------------*/
 .plain-title {
 	overflow: hidden;
-	padding-top: 75px;
+	padding-top: 73px;
 	border-bottom: 1px solid #ededed;
 
 	@include breakpoint(small) {
@@ -499,7 +500,12 @@ hr {
 	}
 
 	h1 {
-		margin-bottom: 13px;
+		margin-bottom: 20px;
+	}
+
+	p {
+		margin-bottom: 24px;
+		line-height: 1.6;
 	}
 
 }
@@ -567,6 +573,34 @@ hr {
 .content {
 
 }
+
+
+
+
+
+
+/*------------------------------------*\
+    $Home
+\*------------------------------------*/
+.understanding-noflo {
+	background-color: #e7e7e7;
+
+	h2 {
+		font-family: $ProximaLightStack;
+		font-size: $thirty-six;
+	}
+
+}
+
+.significance-of-noflo {
+
+	h2 {
+		font-family: $ProximaLightStack;
+		font-size: $thirty-six;
+	}	
+
+}
+
 
 
 
@@ -753,5 +787,12 @@ code {
 		
 	}
 
+}
+
+.screenshot__explaination {
+	float: left;
+	width: 70%;
+	font-size: $fourteen;
+	color: #808080;
 }
 

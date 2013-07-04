@@ -13,6 +13,7 @@
  * Page Title
  * Sidebar
  * Content
+ * Home
  * Code Samples
  * Library
  * Demos
@@ -315,13 +316,16 @@ hr {
 \*------------------------------------*/
 .plain-title {
   overflow: hidden;
-  padding-top: 75px;
+  padding-top: 73px;
   border-bottom: 1px solid #ededed; }
   @media (max-width: 767px) {
     .plain-title {
       margin-bottom: 15px; } }
   .plain-title h1 {
-    margin-bottom: 13px; }
+    margin-bottom: 20px; }
+  .plain-title p {
+    margin-bottom: 24px;
+    line-height: 1.6; }
 
 /*------------------------------------*\
     $Sidebar
@@ -357,6 +361,19 @@ hr {
   @media (max-width: 767px) {
     .main {
       margin-top: 0; } }
+
+/*------------------------------------*\
+    $Home
+\*------------------------------------*/
+.understanding-noflo {
+  background-color: #e7e7e7; }
+  .understanding-noflo h2 {
+    font-family: "proxima-nova-light", Arial, sans-serif;
+    font-size: 2.0em; }
+
+.significance-of-noflo h2 {
+  font-family: "proxima-nova-light", Arial, sans-serif;
+  font-size: 2.0em; }
 
 /*------------------------------------*\
     $Code Examples
@@ -496,3 +513,9 @@ code {
   -ms-border-radius: 4px;
   border-radius: 4px;
   box-shadow: -2px 2px 2px #ddd; }
+
+.screenshot__explaination {
+  float: left;
+  width: 70%;
+  font-size: 0.77778em;
+  color: #808080; }
