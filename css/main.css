@@ -215,10 +215,15 @@
     $Footer
 \*------------------------------------*/
 .site-footer {
-  margin-top: 15px;
   padding-top: 30px;
   padding-bottom: 30px;
   background-color: #1e1f21; }
+  @media (max-width: 767px) {
+    .site-footer {
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-left: 20px;
+      padding-right: 20px; } }
   .site-footer p {
     font-size: 0.77778em;
     color: #fff;
@@ -401,14 +406,20 @@ hr {
 .about-noflo {
   padding-bottom: 60px; }
 
-.video {
-  margin-left: -20px;
-  margin-right: -20px; }
+@media (max-width: 767px) {
+  .video {
+    margin-left: -20px;
+    margin-right: -20px; } }
 
 .understanding-noflo {
-  margin-left: -20px;
-  margin-right: -20px;
+  padding-top: 15px;
   background-color: #e7e7e7; }
+  @media (max-width: 767px) {
+    .understanding-noflo {
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-right: 20px;
+      padding-left: 20px; } }
   .understanding-noflo h2 {
     font-family: "proxima-nova-light", Arial, sans-serif;
     font-size: 2.0em; }
@@ -418,7 +429,56 @@ hr {
   font-size: 2.0em; }
 
 .part-of-noflo {
-  background-color: #021422; }
+  height: 455px;
+  padding-top: 60px;
+  color: #fff;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-image: url(../img/part-of-noflo.png); }
+  @media (max-width: 767px) {
+    .part-of-noflo {
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-left: 20px;
+      padding-right: 20px; } }
+  .part-of-noflo .container {
+    height: 100%; }
+  .part-of-noflo h2 {
+    font-family: "proxima-nova-light", Arial, sans-serif;
+    font-size: 2.0em; }
+
+.part-of-noflo__screen {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: 100%;
+  background-image: url(../img/diagrams/changelog-screen.png); }
+  .part-of-noflo__screen p {
+    font-size: 0.77778em; }
+
+.who-uses-noflo {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-color: #eeeeee; }
+  @media (max-width: 767px) {
+    .who-uses-noflo {
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-left: 20px;
+      padding-right: 20px; } }
+  .who-uses-noflo h2 {
+    font-family: "proxima-nova-light", Arial, sans-serif;
+    font-size: 2.0em; }
+
+.who-uses-noflo__logos {
+  list-style: none;
+  padding-left: 40px;
+  border-left: 1px solid #e7e7e7; }
+  .who-uses-noflo__logos li, .who-uses-noflo__logos a, .who-uses-noflo__logos img {
+    display: inline-block; }
+  .who-uses-noflo__logos li {
+    float: left;
+    margin-top: 15px;
+    margin-right: 15px; }
 
 /*------------------------------------*\
     $Code Examples

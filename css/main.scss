@@ -362,10 +362,16 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
     $Footer
 \*------------------------------------*/
 .site-footer {
-	margin-top: 15px;
 	padding-top: 30px;
 	padding-bottom: 30px;
 	background-color: #1e1f21;
+
+	@include breakpoint(small) {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 
 	p {
 		font-size: $fourteen;
@@ -632,14 +638,24 @@ hr {
 }
 
 .video {
-	margin-left: -20px;
-	margin-right: -20px;
+
+	@include breakpoint(small) {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+
 }
 
 .understanding-noflo {
-	margin-left: -20px;
-	margin-right: -20px;
+	padding-top: 15px;
 	background-color: #e7e7e7;
+
+	@include breakpoint(small) {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-right: 20px;
+		padding-left: 20px;
+	}
 
 	h2 {
 		font-family: $ProximaLightStack;
@@ -653,14 +669,83 @@ hr {
 	h2 {
 		font-family: $ProximaLightStack;
 		font-size: $thirty-six;
-	}	
+	}
 
 }
 
 .part-of-noflo {
-	background-color: #021422;
+	height: 455px;
+	padding-top: 60px;
+	color: #fff;
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-image: url(../img/part-of-noflo.png);
+
+	@include breakpoint(small) {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.container {
+		height: 100%;
+	}
+
+	h2 {
+		font-family: $ProximaLightStack;
+		font-size: $thirty-six;
+	}
+
 }
 
+	.part-of-noflo__screen {
+		height: 100%;
+		background-repeat: no-repeat;
+		background-position: 100%;
+		background-image: url(../img/diagrams/changelog-screen.png);
+
+		p {
+			font-size: $fourteen;
+		}
+
+	}
+
+.who-uses-noflo {
+	padding-top: 60px;
+	padding-bottom: 60px;
+	background-color: #eeeeee;
+
+	@include breakpoint(small) {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	h2 {
+		font-family: $ProximaLightStack;
+		font-size: $thirty-six;
+	}
+
+}
+
+.who-uses-noflo__logos {
+	list-style: none;
+	padding-left: 40px;
+	border-left: 1px solid #e7e7e7;
+
+	li, a, img {
+		display: inline-block;
+	}
+
+	li {
+		float: left;
+		margin-top: 15px;
+		margin-right: 15px;
+	}
+
+}
 
 
 
