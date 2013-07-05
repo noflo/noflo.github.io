@@ -307,9 +307,9 @@ li {
   line-height: 1.5; }
 
 a {
-  color: #8bb6e4; }
+  color: #467eb8; }
   a:hover {
-    color: #8bb6e4;
+    color: #467eb8;
     text-decoration: underline; }
 
 hr {
@@ -329,6 +329,7 @@ hr {
   background-repeat: no-repeat; }
   @media (max-width: 767px) {
     .page-title {
+      padding-top: 60px;
       padding-right: 20px;
       padding-left: 20px;
       margin-right: -20px;
@@ -340,9 +341,19 @@ hr {
   color: white;
   line-height: 1;
   font-size: 2.0em; }
+  @media (max-width: 767px) {
+    .page-title__title {
+      float: none;
+      text-align: center; } }
 
 .page-title__button {
   float: right; }
+  @media (max-width: 767px) {
+    .page-title__button {
+      float: none;
+      display: block;
+      width: 150px;
+      margin: 0 auto; } }
 
 .big-button {
   padding: 15px 30px;

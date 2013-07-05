@@ -477,10 +477,10 @@ li {
 }
 
 a {
-	color: hsla(211, 62, 72, 1);
+	color: #467eb8;
 
 	&:hover {
-		color: hsla(211, 62, 72, 1);
+		color: #467eb8;
 		text-decoration: underline;
 	}
 
@@ -509,6 +509,7 @@ hr {
 	background-repeat: no-repeat;
 
 	@include breakpoint(small) {
+		padding-top: 60px;
 		padding-right: 20px;
 		padding-left: 20px;
 		margin-right: -20px;
@@ -522,10 +523,24 @@ hr {
 		color: hsla(0, 0, 100, 1);
 		line-height: 1;
 		font-size: $thirty-six;
+
+		@include breakpoint(small) {
+			float: none;
+			text-align: center;
+		}
+
 	}
 
 	.page-title__button {
 		float: right;
+
+		@include breakpoint(small) {
+			float: none;
+			display: block;
+			width: 150px;
+			margin: 0 auto;
+		}
+
 	}
 
 .big-button {
