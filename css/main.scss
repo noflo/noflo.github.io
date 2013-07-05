@@ -178,7 +178,7 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	background-position: 50% 0;
 	background-image: url(../img/logo-small.png);
 
-	&:hover {
+	&:hover, &.active {
 		background-color: transparent;
 		border-bottom: 4px solid $blue;
 	}
@@ -230,7 +230,7 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 			height: 75px;
 			line-height: 1;
 
-			&:hover {
+			&:hover, &.active {
 				background-color: transparent;
 				border-bottom: 4px solid $blue;
 			}
