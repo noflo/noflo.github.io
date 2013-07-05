@@ -91,7 +91,7 @@ $ninety: 4.999995em;		/* 90px: 1 / (18x90) = 4.999995  */
 $onefourty: 7.77777em;		/* 140px: 1 / (18x140) = 7.77777 */
 
 $blue: #5396db;
-$fadedgrey: rgba(234, 234, 234, 0.6);
+$fadedwhite: rgba(255, 255, 255, 0.6);
 $solidgrey: rgba(234, 234, 234, 1);
 
 $ProximaBoldStack: "proxima-nova-bold", Arial, sans-serif;
@@ -196,7 +196,7 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	z-index: 99;
 	width: 100%;
 	height: 75px;
-	background-color: $fadedgrey;
+	background-color: $fadedwhite;
 
 	@include breakpoint(small) {
 		padding: 0 20px;
