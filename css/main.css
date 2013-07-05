@@ -435,9 +435,14 @@ hr {
     font-family: "proxima-nova-light", Arial, sans-serif;
     font-size: 2.0em; }
 
-.significance-of-noflo h2 {
-  font-family: "proxima-nova-light", Arial, sans-serif;
-  font-size: 2.0em; }
+.significance-of-noflo {
+  padding-bottom: 60px; }
+  .significance-of-noflo h2 {
+    font-family: "proxima-nova-light", Arial, sans-serif;
+    font-size: 2.0em; }
+
+.fbp-book p {
+  font-size: 0.77778em; }
 
 .part-of-noflo {
   height: 455px;
