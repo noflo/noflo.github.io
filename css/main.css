@@ -123,6 +123,9 @@
 .main-nav {
   float: left;
   margin-bottom: 0; }
+  @media (max-width: 767px) {
+    .main-nav {
+      display: none; } }
   .main-nav .nav {
     margin-bottom: 0; }
     .main-nav .nav a {
@@ -134,6 +137,18 @@
       .main-nav .nav a:hover {
         background-color: transparent;
         border-bottom: 4px solid #5396db; }
+
+.toggle-main-nav {
+  display: none; }
+  @media (max-width: 767px) {
+    .toggle-main-nav {
+      display: block;
+      float: left;
+      width: 27px;
+      height: 27px;
+      margin-top: 25px;
+      text-indent: -9999px;
+      background-color: #5396db; } }
 
 .util-nav {
   float: right;
@@ -333,7 +348,7 @@ hr {
 \*------------------------------------*/
 .plain-title {
   overflow: hidden;
-  padding-top: 73px;
+  padding-top: 60px;
   border-bottom: 1px solid #ededed; }
   @media (max-width: 767px) {
     .plain-title {
@@ -383,7 +398,16 @@ hr {
 /*------------------------------------*\
     $Home
 \*------------------------------------*/
+.about-noflo {
+  padding-bottom: 60px; }
+
+.video {
+  margin-left: -20px;
+  margin-right: -20px; }
+
 .understanding-noflo {
+  margin-left: -20px;
+  margin-right: -20px;
   background-color: #e7e7e7; }
   .understanding-noflo h2 {
     font-family: "proxima-nova-light", Arial, sans-serif;
@@ -392,6 +416,9 @@ hr {
 .significance-of-noflo h2 {
   font-family: "proxima-nova-light", Arial, sans-serif;
   font-size: 2.0em; }
+
+.part-of-noflo {
+  background-color: #021422; }
 
 /*------------------------------------*\
     $Code Examples

@@ -216,6 +216,10 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	float: left;
 	margin-bottom: 0;
 
+	@include breakpoint(small) {
+		display: none;
+	}
+
 	.nav {
 		margin-bottom: 0;
 
@@ -233,6 +237,21 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 
 		}
 
+	}
+
+}
+
+.toggle-main-nav {
+	display: none;
+
+	@include breakpoint(small) {
+		display: block;
+		float: left;
+		width: 27px;
+		height: 27px;
+		margin-top: 25px;
+		text-indent: -9999px;
+		background-color: $blue;
 	}
 
 }
@@ -517,7 +536,7 @@ hr {
 \*------------------------------------*/
 .plain-title {
 	overflow: hidden;
-	padding-top: 73px;
+	padding-top: 60px;
 	border-bottom: 1px solid #ededed;
 
 	@include breakpoint(small) {
@@ -608,7 +627,18 @@ hr {
 /*------------------------------------*\
     $Home
 \*------------------------------------*/
+.about-noflo {
+	padding-bottom: 60px;
+}
+
+.video {
+	margin-left: -20px;
+	margin-right: -20px;
+}
+
 .understanding-noflo {
+	margin-left: -20px;
+	margin-right: -20px;
 	background-color: #e7e7e7;
 
 	h2 {
@@ -625,6 +655,10 @@ hr {
 		font-size: $thirty-six;
 	}	
 
+}
+
+.part-of-noflo {
+	background-color: #021422;
 }
 
 
