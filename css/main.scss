@@ -695,6 +695,41 @@ hr {
 	}
 }
 
+.book-sellers {
+	list-style: none;
+	margin-top: 5px;
+
+	li {
+		display: inline-block;
+		float: left;
+		height: 35px;
+	}
+
+	a {
+		display: block;
+		text-indent: -9999px;
+		background-repeat: no-repeat;
+		background-color: transparent;
+		background-position: 0 0;
+		background-image: url(../img/book-sellers.png);
+	}
+
+	.epub {
+		width: 53px;
+	}
+
+	.paperback {
+		width: 117px;
+		background-position: -53px 0;
+	}
+
+	.kindle {
+		width: 75px;
+		background-position: -170px 0;
+	}
+
+}
+
 .part-of-noflo {
 	height: 455px;
 	padding-top: 60px;
