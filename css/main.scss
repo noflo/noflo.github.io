@@ -82,6 +82,7 @@
 \*------------------------------------*/
 $fourteen: 0.777777em;		/* 14px: 1 / (18x14) = 0.777777  */
 $fifteen: 0.8333325em;		/* 15px: 1 / (18x15) = 0.8333325 */
+$sixteen: 0.888888em;		/* 16px: 1 / (18x16) = 0.888888  */
 $twenty-one: 1.1666666em;	/* 21px: 1 / (18x21) = 1.1666666 */
 $twenty-four: 1.333332em;	/* 24px: 1 / (18x24) = 1.5 		 */
 $thirty: 1.666665em;		/* 30px: 1 / (18x30) = 1.666665  */
@@ -318,17 +319,12 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 \*------------------------------------*/
 .dropdown-menu {
 	left: -50%;
+	padding-top: 0;
 	@include border-radius;
 	border-top: 4px solid $blue;
-
-	&:before {
-		top: -11px !important;
-	}
-
-	&:after {
-		border-bottom: 6px solid $blue !important;
-		top: -10px !important;
-	}
+	/*background-position: 50% 0;
+	background-repeat: no-repeat;
+	background-image: url(../img/dropdown-bg.png);*/
 
 	li {
 		display: block;
@@ -337,7 +333,8 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 		font-size: $fourteen;
 
 		> a {
-			padding: 0;
+			padding: 15px 20px;
+			font-weight: bold;
 
 			&:hover {
 				color: #333;
@@ -345,22 +342,31 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 				background-color: transparent;
 			}
 
+			&.stamp {
+				padding-left: 50px;
+				background-repeat: no-repeat;
+				background-position: -20px 20px;
+				background-image: url(../img/dropdown-actions.png);
+			}
+
+			&.on-twitter {
+				background-position: -20px -105px;
+			}
+
+			&.on-facebook {
+				background-position: -20px -145px;
+			}
+
 		}
 	}
 
 }
 
-.dropdown__action {
-	display: inline-block;
-	font-weight: bold;
-	background-color: #f1f1f1;
+.dropdown-menu--github {
+	left: auto;
+	right: 0;
 }
 
-.dropdown__tally {
-	display: inline-block;
-	font-weight: normal;
-	background-color: #ebedef;
-}
 
 
 
@@ -450,6 +456,11 @@ h1, .h1 {
 	font-weight: normal;
 	font-family: $ProximaLightStack;
 	font-size: $fourty-eight;
+
+	@include breakpoint(small) {
+		font-size: $thirty;
+	}
+
 }
 
 h2, .h2 {
@@ -459,6 +470,10 @@ h2, .h2 {
 	font-weight: normal;
 	font-family: $ProximaSemiboldStack;
 	font-size: $twenty-four;
+
+	@include breakpoint(small) {
+		font-size: 1em;
+	}
 }
 
 h3, .h3 {
@@ -467,6 +482,11 @@ h3, .h3 {
 	font-size: 1em;
 	line-height: 1.4;
 	font-family: $ProximaSemiboldStack;
+
+	@include breakpoint(small) {
+		font-size: $sixteen;
+	}
+
 }
 
 h4, .h4 {
@@ -611,6 +631,11 @@ blockquote {
 		margin-bottom: 0;
 		border-bottom: 1px solid #ededed;
 		font-size: $twenty-one;
+
+		@include breakpoint(small) {
+			font-size: 1em;
+		}
+
 	}
 
 	.sidebar__nav {
