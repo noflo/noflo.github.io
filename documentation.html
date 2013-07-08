@@ -96,19 +96,19 @@
 					
 					<nav>
 						<ul class="sidebar__nav">
-							<li><a href="./">Requirements and installing</a></li>
-							<li><a href="./">Changes</a></li>
-							<li><a href="./">Using NoFlo</a></li>
-							<li><a href="./">Running the Examples</a></li>
-							<li><a href="./">Terminology</a></li>
-							<li><a href="./">Components</a></li>
-							<li><a href="./">The NoFlo Shell</a></li>
-							<li><a href="./">Designing NoFlo graphs with DrawFBP</a></li>
-							<li><a href="./">The web-based NoFlo monitor</a></li>
-							<li><a href="./">NoFlo graph file format</a></li>
-							<li><a href="./">Language for Flow-Based Programming</a></li>
-							<li><a href="./">Development</a></li>
-							<li><a href="./">Discussion</a></li>
+							<li><a href="#requirements-and-installing">Requirements and installing</a></li>
+							<li><a href="#changes">Changes</a></li>
+							<li><a href="#using-noflo">Using NoFlo</a></li>
+							<li><a href="#running-the-examples">Running the Examples</a></li>
+							<li><a href="#terminology">Terminology</a></li>
+							<li><a href="#components">Components</a></li>
+							<li><a href="#the-noflo-shell">The NoFlo Shell</a></li>
+							<li><a href="#designing-noflo-graphs-with-drawFBP">Designing NoFlo graphs with DrawFBP</a></li>
+							<li><a href="#the-web-based-noflo-monitor">The web-based NoFlo monitor</a></li>
+							<li><a href="#noflo-graph-file-format">NoFlo graph file format</a></li>
+							<li><a href="#language-for-flow-based-programming">Language for Flow-Based Programming</a></li>
+							<li><a href="#development">Development</a></li>
+							<li><a href="#discussion">Discussion</a></li>
 						</ul>
 					</nav>
 
@@ -119,13 +119,13 @@
 					
 					<h1>NoFlo: Flow-based programming for Node.js</h1>
 
-					<h2>Requirements and installing</h3>
-					<p>NoFlo is available <a href="./">via NPM</a>, so you can install it with:</p>
+					<h2><a href="#requirements-and-installing" name="requirements-and-installing">Requirements and installing</a></h2>
+					<p>NoFlo is available <a href="https://npmjs.org/package/noflo">via NPM</a>, so you can install it with:</p>
 					<pre><code>$ npm install -g noflo</code></pre>
 
-					<h3>Installing from Git</h3>
-					<p>NoFlo requires a reasonably recent version of <a href="./">Node.js</a>, and some 
-						<a href="./">npm</a> packages. Ensure you have the grunt-cli package installed (grunt command should be available on command line) and NoFlo checked out from Git. Build NoFlo with:</p>
+					<h3><a href="#installing-from-git" name="installing-from-git">Installing from Git</a></h3>
+					<p>NoFlo requires a reasonably recent version of <a href="http://nodejs.org/">Node.js</a>, and some 
+						<a href="https://npmjs.org/">npm</a> packages. Ensure you have the <code>grunt-cli</code> package installed (<code>grunt</code> command should be available on command line) and NoFlo checked out from Git. Build NoFlo with:</p>
 					<pre><code>$ grunt build</code></pre>
 
 					<p>You can also build NoFlo only for the desired target platform with either <em>grunt build:nodejs</em> or <em>grunt build:browser</em>.</p>
@@ -133,21 +133,21 @@
 					<p>Then you can install everything needed by a simple:</p>
 					<pre><code>$ npm link</code></pre>
 
-					<p>NoFlo is available from <a href="./">GitHub</a> under the MIT licence.</p>
+					<p>NoFlo is available from <a href="https://github.com/bergie/noflo">GitHub</a> under the MIT licence.</p>
 
 					<hr />
 
-					<h2>Changes</h2>
-					<p>Please refer to the <a href="./">CHANGES.md document</a>.</p>
+					<h2><a href="#changes" name="changes">Changes</a></h2>
+					<p>Please refer to the <a href="https://github.com/bergie/noflo/releases">Release Notes</a> and the <a href="https://github.com/bergie/noflo/blob/master/CHANGES.md">CHANGES.md document</a>.</p>
 
 					<hr />
 
-					<h2>Using NoFlo</h2>
+					<h2><a href="#using-noflo" name="using-noflo">Using NoFlo</a></h2>
 					<p>There are two ways to use NoFlo:</p>
 
 					<ul>
  						<li><strong>Independent:</strong> Building the whole control logic of your software as a 
- 							NoFlo graph, and running it with the noflo tool</li>
+ 							NoFlo graph, and running it with the <code>noflo</code> tool</li>
 						<li><strong>Embedded:</strong> Using NoFlo as a library and calling some NoFlo graphs whenever 
 							your software needs workflows</li>
 					</ul>
@@ -172,6 +172,391 @@
 							every month, or five minutes from now)</li>
 						<li>Starting the graph based on context (when arriving to a physical location, when user 
 							goes to a ...</li>
+					</ul>
+
+					<hr />
+
+					<h2><a href="#running-the-examples" name="running-the-examples">Running the examples</a></h2>
+
+					<p>File line count using embedded NoFlo:</p>
+					<pre><code>$ coffee ./examples/linecount/count.coffee somefile.txt</code></pre>
+
+					<p>File line count as an individual NoFlo application:</p>
+					<pre><code>$ noflo -i <br />NoFlo>> load examples/linecount/count.json</code></pre>
+
+					<p>or</p>
+
+					<pre><code>$ noflo examples/linecount/count.json</code></pre>
+					
+					<p>Simple "Hello, world" web service with Basic authentication using embedded NoFlo:</p>
+					<pre><code>$ coffee ./examples/http/hello.coffee</code></pre>
+
+					<p>Then just point your browser to http://localhost:8003/. Note that this example needs to have <code>connect</code> NPM package installed. Username is <code>user</code> and password is <code>pass</code>.</p>
+
+					<hr />
+
+					<h2><a href="#terminology" name="terminology">Terminology</a></h2>
+
+					<ul>
+						<li>Component: individual, pluggable and reusable piece of software. In this case a NoFlo-compatible CommonJS module</li>
+						<li>Component Library: an NPM module providing a set of components for a particular domain (for example, noflo-fs for file operations components)</li>
+						<li>Graph: the control logic of a FBP application, can be either in programmatical or file format</li>
+						<li>Inport: inbound port of a component</li>
+						<li>Network: collection of processes connected by sockets. A running version of a graph</li>
+						<li>Outport: outbound port of a component</li>
+						<li>Process: an instance of a component that is running as part of a graph (also known as Node in non-live graphs)</li>
+						<li>Connection: connection between an outport of a Process, and inport of another Process (also known as Edge in non-live graphs)</li>
+						<li>Initial Information Packet: predefined data packet sent to a defined inport of a Process</li>	
+					</ul>
+
+					<hr />
+
+					<h2><a href="#components" name="components">Components</a></h2>
+					<p>A component is the main ingredient of flow-based programming. Component is a CommonJS module providing a set of input and output port handlers. These ports are used for connecting components to each other.</p>
+
+					<p>NoFlo processes (the boxes of a flow graph) are instances of a component, with the graph controlling connections between ports of components.</p>
+
+					<p>Since version 0.2.0, NoFlo has been able to utilize components shared via NPM packages. Read the introductory blog post to learn more.</p>
+
+					<h3><a href="#structure-of-a-component" name="structure-of-a-component">Structure of a component</a></h3>
+					<p>Functionality a component provides:</p>
+
+					<ul>
+						<li>List of inports (named inbound ports)</li>
+						<li>List of outports (named outbound ports)</li>
+						<li>Handler for component initialization that accepts configuration</li>
+						<li>Handler for connections for each inport</li>
+					</ul>
+					
+					<p>Minimal component written in CoffeeScript would look like the following:</p>
+
+					<pre><code><span class="nv">noflo = </span><span class="nx">require</span> <span class="s">"noflo"</span>
+
+<span class="k">class</span> <span class="nx">Forwarder</span> <span class="k">extends</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">Component</span>
+    <span class="nv">description: </span><span class="s">"This component receives data on a single input </span>
+<span class="s">    port and sends the same data out to the output port"</span>
+
+    <span class="nv">constructor: </span><span class="nf">-&gt;</span>
+        <span class="c1"># Register ports</span>
+        <span class="vi">@inPorts =</span>
+            <span class="k">in</span><span class="o">:</span> <span class="k">new</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">Port</span><span class="p">()</span>
+        <span class="vi">@outPorts =</span>
+            <span class="nv">out: </span><span class="k">new</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">Port</span><span class="p">()</span>
+
+        <span class="nx">@inPorts</span><span class="p">.</span><span class="nx">in</span><span class="p">.</span><span class="nx">on</span> <span class="s">"data"</span><span class="p">,</span> <span class="nf">(data) =&gt;</span>
+            <span class="c1"># Forward data when we receive it.</span>
+            <span class="c1"># Note: send() will connect automatically if needed</span>
+            <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span>
+
+        <span class="nx">@inPorts</span><span class="p">.</span><span class="nx">in</span><span class="p">.</span><span class="nx">on</span> <span class="s">"disconnect"</span><span class="p">,</span> <span class="o">=&gt;</span>
+            <span class="c1"># Disconnect output port when input port disconnects</span>
+            <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
+
+<span class="nv">exports.getComponent = </span><span class="nf">-&gt;</span>
+    <span class="k">new</span> <span class="nx">Forwarder</span><span class="p">()</span></code></pre>
+
+    				<p>This example component register two ports: <em>in</em> and <em>out</em>. When it receives data in the <em>in</em> port, it opens the <em>out</em> port and sends the same data there. When the <em>in</em> connection closes, it will also close the <em>out</em> connection. So basically this component would be a simple repeater.</p>
+
+					<p>You can find more examples of components in the <code>components</code> folder shipping with NoFlo.</p>
+
+					<hr />
+
+					<h3><a href="#subgraphs" name="subgraphs">Subgraphs</a></h3>
+					<p>A NoFlo graph may contain multiple subgraphs, managed by instances of the <code>Graph</code> component. Subgraphs are useful for packaging particular flows to be used as a "new component" by other flows. This allows building more advanced functionality by creating reusable graphs of connected components.</p>
+
+					<p>The Graph component loads the graph given to it as a new NoFlo network, and looks for unattached ports in it. It then exposes these ports as its own inports or outports. This way a graph containing subgraphs can easily connect data between the main graph and the subgraph.</p>
+
+					<p>Unattached ports from the subgraph will be available through naming <code>ProcessName.port</code> on the Graph component instance.</p>
+
+					<p>Simple example, specifying what file a spreadsheet-parsing subgraph should run with:</p>
+
+					<pre lang="fbp"><code># Load a subgraph as a new process
+'examples/spreadsheet/parse.fbp' -&gt; GRAPH Reader(Graph)
+# Send the filename to the component (subgraph)
+'somefile.xls' -&gt; READ.SOURCE Reader()
+# Display the results
+Reader() ENTITIZE.OUT -&gt; IN Display(Output)
+</code></pre>
+
+					<p>Just like with components, it is possible to share subgraphs via NPM. You have to register them in your <code>package.json</code>, for example:</p>
+
+					<div class="highlight"><pre> <code><span class="s2">"name"</span><span class="err">:</span> <span class="s2">"noflo-spreadsheet"</span><span class="err">,</span>
+  <span class="s2">"noflo"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nt">"graphs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"Parse"</span><span class="p">:</span> <span class="s2">"./graphs/parse.fbp"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre></div>
+
+					<p>After this the subgraph is available as a "virtual component" with the name <code>spreadsheet/Parse</code> and can be used just like any other component. Subgraphs exported in this manner can be in either JSON or the <code>.fbp</code> format.</p>
+
+					<hr />
+
+					<h3><a href="#some-words-on-component-design" name="some-words-on-component-design">Some words on component design</a></h3>
+					<p>Components should aim to be reusable, to do one thing and do it well. This is why often it is a good idea to split functionality traditionally done in one function to multiple components. For example, counting lines in a text file could happen in the following way:</p>
+
+					<ul>
+						<li>Filename is sent to a Read File component</li>
+						<li>Read File reads it and sends the contents onwards to Split String component</li>
+						<li>Split String splits the contents by newlines, and sends each line separately to a Count component</li>
+						<li>Count counts the number of packets it received, and sends the total to a Output component</li>
+						<li>Output displays the number</li>
+					</ul>
+
+					<p>This way the whole logic of the application is in the graph, in how the components are wired together. And each of the components is easily reusable for other purposes.</p>
+
+					<p>If a component requires configuration, the good approach is to set sensible defaults in the component, and to allow them to be overridden via an input port. This method of configuration allows the settings to be kept in the graph itself, or for example to be read from a file or database, depending on the needs of the application.</p>
+
+					<p>The components should not depend on a particular global state, either, but instead attempt to keep the input and output ports their sole interface to the external world. There may be some exceptions, like a component that listens for HTTP requests or Redis pub-sub messages, but even in these cases the server, or subscription should be set up by the component itself.</p>
+
+					<p>When discussing how to solve the unnecessary complexity of software, Out of the Tar Pit promotes an approach quite similar to the one discussed here:</p>
+
+					<blockquote>
+						<p>The first thing that we're doing is to advocate separating out all complexity of any 
+							kind from the pure logic of the system (which - having nothing to do with either 
+							state or control - we’re not really considering part of the complexity).</p>
+					</blockquote>
+
+					<p>Done this way, components represent the pure logic, and the control flow and state of 
+						the application is managed separately of them in the graph. This separation makes the 
+						system a lot simpler.</p>
+
+					<h3><a href="#ports-and-events" name="ports-and-events">Ports and events</a></h3>
+					<p>Being a flow-based programming environment, the main action in NoFlo happens through ports and their connections. There are several events that can be associated with ports:</p>
+
+					<ul>
+						<li><em>Attach</em>: there is a connection to the port</li>
+						<li><em>Connect</em>: the port has started sending or receiving a data transmission</li>
+						<li><em>BeginGroup</em>: the data stream after this event is associated with a given named group. Components may or may not utilize this information</li>
+						<li><em>Data</em>: an individual data packet in a transmission. There might be multiple depending on how a component operates</li>
+						<li><em>EndGroup</em>: A particular grouped stream of data ends</li>
+						<li><em>Disconnect</em>: end of data transmission</li>
+						<li><em>Detach</em>: A connection to the port has been removed</li>
+					</ul>
+
+					<p>It depends on the nature of the component how these events may be handled. Most typical components do operations on a whole transmission, meaning that they should wait for the <em>disconnect</em> event on inports before they act, but some components can also act on single <em>data</em> packets coming in.</p>
+
+					<p>When a port has no connections, meaning that it was initialized without a connection, or a <em>detach</em> event has happened, it should do no operations regarding that port.</p>
+
+					<h3><a href="#conveniently-add-logging-to-your-components" name="conveniently-add-logging-to-your-components">Conveniently add logging to your components</a></h3>
+					<p>There are many ways to monitor the health of your flow based programmes, one way being to log important events from your components as they happen. To help with this we provide a LoggingComponent base class which you can extend when you create your own components. It will set up an initial outPorts data member with an out port named 'log'. It also provides a convenience method for sending log messages. When the log port is not attached, it will send the log messages to the console.</p>
+
+					<p>Here's a version of the Forwarder component from above that logs messages when it can't send them.</p>
+
+					<div class="highlight"><pre><code><span class="nv">noflo = </span><span class="nx">require</span> <span class="s">"noflo"</span>
+
+<span class="k">class</span> <span class="nx">LoggingForwarder</span> <span class="k">extends</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">Component</span>
+    <span class="nv">description: </span><span class="s">"This component receives data on a single input</span>
+<span class="s">    port and sends the same data out to the output port"</span>
+
+    <span class="nv">constructor: </span><span class="nf">-&gt;</span>
+        <span class="c1"># Register ports</span>
+        <span class="vi">@inPorts =</span>
+            <span class="k">in</span><span class="o">:</span> <span class="k">new</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">Port</span><span class="p">()</span>
+        <span class="vi">@outPorts =</span>
+            <span class="nv">out: </span><span class="k">new</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">Port</span><span class="p">()</span>
+
+        <span class="nx">@inPorts</span><span class="p">.</span><span class="nx">in</span><span class="p">.</span><span class="nx">on</span> <span class="s">"data"</span><span class="p">,</span> <span class="nf">(data) =&gt;</span>
+            <span class="c1"># Forward data when we receive it.</span>
+            <span class="k">if</span> <span class="nx">@outports</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
+              <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span>
+            <span class="k">else</span>
+              <span class="nx">@sendLog</span>
+                <span class="nv">logLevel: </span><span class="s">"error"</span>
+                <span class="nv">message: </span><span class="s">"Received message '</span><span class="si">#{</span><span class="nx">data</span><span class="si">}</span><span class="s"> on IN port but OUT port isn't attached."</span>
+
+        <span class="nx">@inPorts</span><span class="p">.</span><span class="nx">in</span><span class="p">.</span><span class="nx">on</span> <span class="s">"disconnect"</span><span class="p">,</span> <span class="o">=&gt;</span>
+            <span class="c1"># Disconnect output port when input port disconnects</span>
+            <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">out</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
+
+<span class="nv">exports.getComponent = </span><span class="nf">-&gt;</span> <span class="k">new</span> <span class="nx">LoggingForwarder</span><span class="p">()</span>
+</code></pre></div>
+
+					<p>You can send objects, as I have done in this example, or simple strings, numbers etc. This isn't the only way to log but it is provided here for your convenience should you wish to use it.</p>
+
+					<hr />
+
+					<h2><a href="#the-noflo-shell" name="the-noflo-shell">The NoFlo shell</a></h2>
+					<p>NoFlo comes with a command shell that you can use to load, run and manipulate NoFlo graphs. For example, the <em>line count</em> graph that was explained in <em>Component design</em> could be built with the shell in the following way:</p>
+
+<pre><code>$ noflo
+NoFlo&gt;&gt; new countlines
+countlines&gt;&gt; add read ReadFile
+countlines&gt;&gt; add split SplitStr
+countlines&gt;&gt; add count Counter
+countlines&gt;&gt; add display Output
+countlines&gt;&gt; connect read out split in
+countlines&gt;&gt; connect split out count in
+countlines&gt;&gt; connect count count display in
+countlines&gt;&gt; dot
+digraph {
+  read [shape=box]
+  split [shape=box]
+  count [shape=box]
+  display [shape=box]
+  read -&gt; split[label='out']
+  split -&gt; count[label='out']
+  count -&gt; display[label='count']
+}
+countlines&gt;&gt; send read source somefile
+</code></pre>
+
+					<p>You can run <em>help</em> to see all available NoFlo shell commands, and <em>quit</em> to get out of the shell.</p>
+
+					<hr />
+
+					<h2><a href="#designing-noflo-graphs-with-drawFBP" name="designing-noflo-graphs-with-drawFBP">Designing NoFlo graphs with DrawFBP</a></h2>
+					<p>As of version 2.6 onwards, the <a href="http://www.jpaulmorrison.com/cgi-bin/wiki.pl?DrawFBP">DrawFBP</a> GUI tool for designing Flow-Based Programming graphs is able to generate graphs compatible with NoFlo.</p>
+
+					<p>The graphs can be exported to NoFlo format from the <em>File -&gt; Generate network -&gt; NoFlo</em> menu and then run normally.</p>
+
+					<hr />
+
+					<h2><a href="#the-web-based-noflo-monitor" name="the-web-based-noflo-monitor">The web-based NoFlo monitor</a></h2>
+					<p>In addition to the shell, NoFlo also comes with a web interface that allows loaded graphs to be monitored. To start it, load a graph into the NoFlo shell, and run:</p>
+
+					<pre><code>&gt;&gt; startserver 8080</code></pre>
+
+					<p>This will start the NoFlo monitor on port <code>8080</code> of your system, so browsers can connect to it with <code>http://localhost:8080</code>. You can also use another port number.</p>
+
+					<p>At the moment the monitor only displays the graph, showing the processes and connections between them. Real-time statistics of data flow, and support for visual graph editing are planned.</p>
+
+					<hr />
+
+					<h2><a href="#noflo-graph-file-format" name="noflo-graph-file-format">NoFlo graph file format</a></h2>
+					<p>In addition to using NoFlo in <em>embedded mode</em> where you create the FBP graph programmatically (<a href="https://raw.github.com/bergie/noflo/master/examples/linecount/count.coffee">see example</a>), you can also initialize and run graphs defined using a JSON file.</p>
+
+					<p>The NoFlo JSON files declare the processes used in the FBP graph, and the connections between them. They look like the following:</p>
+
+<div class="highlight"><pre><code><span class="p">{</span>
+    <span class="nt">"properties"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Count lines in a file"</span>
+    <span class="p">},</span>
+    <span class="nt">"processes"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"Read File"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">"component"</span><span class="p">:</span> <span class="s2">"ReadFile"</span><span class="p">,</span>
+            <span class="nt">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="err">...</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">"Split by Lines"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">"component"</span><span class="p">:</span> <span class="s2">"SplitStr"</span>
+        <span class="p">},</span>
+        <span class="err">...</span>
+    <span class="p">},</span>
+    <span class="nt">"connections"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">"data"</span><span class="p">:</span> <span class="s2">"package.json"</span><span class="p">,</span>
+            <span class="nt">"tgt"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">"process"</span><span class="p">:</span> <span class="s2">"Read File"</span><span class="p">,</span>
+                <span class="nt">"port"</span><span class="p">:</span> <span class="s2">"source"</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">"src"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">"process"</span><span class="p">:</span> <span class="s2">"Read File"</span><span class="p">,</span>
+                <span class="nt">"port"</span><span class="p">:</span> <span class="s2">"out"</span>
+            <span class="p">},</span>
+            <span class="nt">"tgt"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">"process"</span><span class="p">:</span> <span class="s2">"Split by Lines"</span><span class="p">,</span>
+                <span class="nt">"port"</span><span class="p">:</span> <span class="s2">"in"</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="err">...</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+					<p>To run a graph file, you can either use the <em>load</em> command of the NoFlo shell, or do it programmatically:</p>
+
+					<div class="highlight"><pre><code><span class="nv">noflo = </span><span class="nx">require</span> <span class="s">"noflo"</span>
+<span class="nx">noflo</span><span class="p">.</span><span class="nx">loadFile</span> <span class="s">"example.json"</span><span class="p">,</span> <span class="nf">(network) -&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">"Graph loaded"</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">toDOT</span><span class="p">()</span>
+</code></pre></div>
+
+					<hr />
+
+					<h2><a href="#language-for-flow-based-programming" name="language-for-flow-based-programming">Language for Flow-Based Programming</a></h2>
+					<p>In addition to the JSON format described above, FBP has its own Domain-Specific Language 
+						(DSL) for easy graph definition. The syntax is the following:</p>
+
+					<ul>
+						<li>
+							<code>'somedata' -&gt; PORT Process(Component)</code> sends initial data <em>somedata</em> to port <em>PORT</em> of process <em>Process</em> that runs component <em>Component</em>
+						</li>
+						<li>
+							<code>A(Component1) X -&gt; Y B(Component2)</code> sets up a connection between port <em>X</em> of process <em>A</em> that runs component <em>Component1</em> and port <em>Y</em> of process <em>B</em> that runs component <em>Component2</em>
+						</li>
+					</ul>
+
+					<p>You can connect multiple components and ports together on one line, and separate 
+						connection definitions with a newline or a comma (<code>,</code>). </p>
+
+					<p>Components only have to be specified the first time you mention a new process. Afterwards, 
+						simply append empty parentheses (<code>()</code>) after the process name.</p>
+
+					<p>Example:</p>
+
+					<pre lang="fbp"><code>'somefile.txt' -&gt; SOURCE Read(ReadFile) OUT -&gt; IN Split(SplitStr)
+Split() OUT -&gt; IN Count(Counter) COUNT -&gt; IN Display(Output)
+Read() ERROR -&gt; IN Display()
+</code></pre>
+
+					<p>NoFlo supports the FBP language fully. You can either load a graph with a string of FBP-language commands with:</p>
+
+					<div class="highlight"><pre><code><span class="nv">fbpData = </span><span class="s">"&lt;some FBP language connections&gt;"</span>
+
+<span class="nv">noflo = </span><span class="nx">require</span> <span class="s">"noflo"</span>
+<span class="nx">noflo</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">loadFbp</span> <span class="nx">fbpData</span><span class="p">,</span> <span class="nf">(graph) -&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">"Graph loaded"</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">toDOT</span><span class="p">()</span>
+</code></pre></div>
+
+					<p>The <code>.fbp</code> file suffix is used for files containing FBP language. This means you can load them also the same way as you load JSON files, using the <code>noflo.loadFile</code> method, or the NoFlo shell. Example:</p>
+
+					<pre><code>$ noflo examples/linecount/count.fbp</code></pre>
+
+					<hr />
+
+					<h2><a href="#development" name="development">Development</a></h2>
+					<p>NoFlo development happens on GitHub. Just fork the <a href="https://github.com/bergie/noflo">main repository</a>, make modifications and send a pull request.</p>
+
+					<p>We have an extensive suite of tests available for NoFlo. Run them with:</p>
+
+					<pre><code>$ grunt test</code></pre>
+
+					<p>or:</p>
+
+					<pre><code>$ npm test</code></pre>
+
+					<h3><a href="#platform-specific-tests" name="platform-specific-tests">Platform-specific tests</h3>
+					<p>By default, the tests are run for both Node.js and the browser. You can also run only the tests for a particular target platform:</p>
+
+					<pre><code>$ grunt test:nodejs</code></pre>
+
+					<p>or:</p>
+
+					<pre><code>$ grunt test:browser</code></pre>
+
+					<h3><a href="#running-tests-automatically" name="running-tests-automatically">Running tests automatically</a></h3>
+					<p>The build system used for NoFlo is also able to watch for changes in the filesystem and run the tests automatically when something changes. To start the watcher, run:</p>
+
+					<pre><code>$ grunt watch</code></pre>
+
+					<p>To quit thew watcher, just end the process with Ctrl-C.</p>
+
+					<h2><a href="#discussion" name="discussion">Discussion</a></h2>
+					<p>Flow-based programming in general, including NoFlo can be discussed on the <a href="http://groups.google.com/group/flow-based-programming">Flow Based Programming Google group</a>.</p>
+
+					<p>There is also an IRC channel <code>#fbp</code> on FreeNode.</p>
+
+					<h3><a href="#some-ideas" name="some-ideas">Some ideas</a></h3>
+					<ul>
+						<li>Real-time status of the NoFlo graph via socket.io, see where data is flowing</li>
+						<li>
+						<a href="https://github.com/pgriess/node-webworker">Web Workers</a> based multiprocess runner</li>
+						<li>Sockets-based multi-computer runner, or possibly DNode</li>
 					</ul>
 
 				</div>

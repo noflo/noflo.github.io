@@ -466,6 +466,10 @@ h4, .h4 {
 	font-weight: normal;
 }
 
+h1 a, h2 a, h3 a {
+	color: #333;
+}
+
 p {
 	margin: 0 0 15px 0;
 	line-height: 1.5;
@@ -490,6 +494,14 @@ hr {
 	float: left;
 	width: 100%;
 	margin-bottom: 15px;
+}
+
+blockquote {
+
+	p {
+		font-size: 1em;
+	}
+
 }
 
 
