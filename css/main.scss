@@ -243,15 +243,23 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 
 .toggle-main-nav {
 	display: none;
+	outline: none !important;
 
 	@include breakpoint(small) {
 		display: block;
 		float: left;
-		width: 27px;
-		height: 27px;
+		width: 20px;
+		height: 20px;
 		margin-top: 25px;
 		text-indent: -9999px;
-		background-color: $blue;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-image: url(../img/toggle-menu.png);
+	}
+
+	&.toggle-menu--open {
+		background-position: 0 -20px;
 	}
 
 }
