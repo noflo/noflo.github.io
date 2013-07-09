@@ -18,21 +18,67 @@
 
 			<div class="container">
 
-				<a href="./" class="logo">NoFlo</a>
+				<a href="./" class="logo active">NoFlo</a>
+
+				<a href="./" class="toggle-main-nav">Navigation</a>
+
+				<div class="search-site">
+
+					<a href="./" class="toggle-search">Search</a>
+
+					<form action="./" method="post" class="search-form">
+
+						<fieldset>
+
+							<input type="text" id="keywords" name="keywords" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+
+							<button class="search-button">Search</button>
+
+						</fieldset>
+
+					</form>
+
+				</div>
+				<!-- /.search-form -->
 
 				<nav class="main-nav">
 					<ul class="nav">
 						<li><a href="./demos.html">Demos</a></li>
 						<li><a href="./documentation.html">Documentation</a></li>
-						<li><a href="./library.html" class="active">Library</a></li>
+						<li><a href="./library.html">Library</a></li>
 					</ul>
 				</nav>
 
 				<nav class="util-nav">
-					<ul class="nav dropdown">
-						<li>
+					<ul class="nav">
+						<li class="dropdown">
 							<a href="./" class="email" data-toggle="dropdown" data-target="#">Email</a>
 							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="./" class="stamp on-github">GitHub</a>
+								</li>
+								<li>
+									<a href="./" class="stamp on-github">Google Groups</a>
+								</li>
+								<li>
+									<a href="./" class="stamp on-email">Email</a>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="./" class="share" data-toggle="dropdown" data-target="#">Share</a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="./" class="stamp on-twitter">on Twitter</a>
+								</li>
+								<li>
+									<a href="./" class="stamp on-facebook">on Facebook</a>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="./" class="github" data-toggle="dropdown" data-target="#">Github</a>
+							<ul class="dropdown-menu dropdown-menu--github" role="menu">
 								<li>
 									<a href="./">
 										<span class="dropdown__action">Download </span>
@@ -52,12 +98,6 @@
 									</a>
 								</li>
 							</ul>
-						</li>
-						<li>
-							<a href="./" class="share" data-toggle="dropdown" data-target="#">Share</a>
-						</li>
-						<li>
-							<a href="./" class="github" data-toggle="dropdown" data-target="#">Github</a>
 						</li>
 					</ul>
 				</nav>
