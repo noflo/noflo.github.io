@@ -26,13 +26,14 @@
 
 					<a href="./" class="toggle-search">Search</a>
 
-					<form action="./" method="post" class="search-form">
+					<form action="./search" method="post" class="search-form">
 
 						<fieldset>
 
 							<input type="text" id="keywords" name="keywords" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
 
 							<button class="search-button">Search</button>
+							<span class="search-prompt">Hit Return</span>
 
 						</fieldset>
 
@@ -45,7 +46,14 @@
 					<ul class="nav">
 						<li><a href="./demos.html">Demos</a></li>
 						<li><a href="./documentation.html">Documentation</a></li>
-						<li><a href="./library.html">Library</a></li>
+						<li class="last"><a href="./library.html">Library</a></li>
+						<li>
+							<form action="./" method="post">
+								<fieldset>
+									
+								</fieldset>
+							</form>
+						</li>
 					</ul>
 				</nav>
 
@@ -139,7 +147,7 @@
 			<div class="main">
 		
 				<div class="sidebar span4">
-					<img src="./img/diagrams/circles.png" alt="" title="" />
+					<img src="./img/diagrams/circles.png" alt="" title="" class="sidebar__image" />
 				</div>
 				<!-- /.sidebar -->
 

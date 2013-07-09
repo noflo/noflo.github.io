@@ -227,10 +227,41 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 
 	@include breakpoint(small) {
 		display: none;
+		position: absolute;
+		top: 75%;
+		left: 2%;
+		width: 96%;
+		background-color: transparent;
+		background-position: 7px 0;
+		background-repeat: no-repeat;
+		background-image: url(../img/blue-top-arrow.png);
 	}
 
 	.nav {
 		margin-bottom: 0;
+
+		@include breakpoint(small) {
+			padding-top: 60px;
+			margin-top: 6px;
+			@include border-radius(4px);
+			border-top: 4px solid $blue;
+			background-color: $fadedwhite;
+			background-position: 25px 15px;
+			background-repeat: no-repeat;
+			background-image: url(../img/logo-grey.png);
+		}
+
+		li {
+			@include breakpoint(small) {
+				display: block;
+				border-top: 1px solid #ededed;
+				border-bottom: 1px solid #ffffff;
+			}
+		}
+
+		.last {
+			border-bottom: 0;
+		}
 
 		a {
 			color: #000;
@@ -238,15 +269,33 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 			margin-right: 50px;
 			height: 75px;
 			line-height: 1;
+			font-size: $fourteen;
+			font-family: $ProximaSemiboldStack;
+
+			@include breakpoint(small) {
+				margin-right: 0;
+				padding: 20px;
+				height: auto;
+			}
 
 			&:hover {
 				background-color: transparent;
 				border-bottom: 4px solid $fadedblue;
+
+				@include breakpoint(small) {
+					border-bottom: 0;
+				}
+
 			}
 
 			&.active {
 				background-color: transparent;
-				border-bottom: 4px solid $fadedblue;	
+				border-bottom: 4px solid $fadedblue;
+
+				@include breakpoint(small) {
+					border-bottom: 0;
+				}
+
 			}
 
 		}
@@ -341,12 +390,15 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	height: 75px;
 	padding: 0 20px;
 	outline: none !important;
-	
 	margin-right: 25px;
 	text-indent: -9999px;
 	background-repeat: no-repeat;
 	background-position: 50% 0;
 	background-image: url(../img/toggle-search.png);
+
+	@include breakpoint(small) {
+		display: none;
+	}
 
 	&:hover {
 		border-bottom: 4px solid $fadedblue;
@@ -379,9 +431,10 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 
 	.search__keywords {
 		float: left;
+		width: 75%;
 		height: 25px;
 		margin-left: 5px;
-		padding: 5px 25px;
+		padding: 5px 25px 5px 20px;
 		box-shadow: none;
 		@include border-radius(0px);
 		border: 0;
@@ -394,6 +447,15 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 			border-left: 1px solid #f2f2f2;
 		}
 
+	}
+
+	.search-prompt {
+		display: none;
+		float: right;
+		color: #808080;
+		margin-top: 5px;
+		margin-right: 10px;
+		font-size: $fourteen;
 	}
 
 	.search-button {
@@ -536,6 +598,11 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 		font-size: $twenty-four;
 		color: #fff;
 		text-align: center;
+
+		@include breakpoint(small) {
+			font-size: $twenty-one;
+		}
+
 	}
 
 	.promo__button {
@@ -767,6 +834,11 @@ blockquote {
 
 	}
 
+	.sidebar__image {
+		display: block;
+		margin: 0 auto;
+	}
+
 
 
 
@@ -822,6 +894,11 @@ blockquote {
 	h2 {
 		font-family: $ProximaLightStack;
 		font-size: $thirty-six;
+
+		@include breakpoint(small) {
+			font-size: $thirty;
+		}
+
 	}
 
 }
@@ -832,6 +909,11 @@ blockquote {
 	h2 {
 		font-family: $ProximaLightStack;
 		font-size: $thirty-six;
+
+		@include breakpoint(small) {
+			font-size: $thirty;
+		}
+
 	}
 
 }
@@ -899,6 +981,11 @@ blockquote {
 	h2 {
 		font-family: $ProximaLightStack;
 		font-size: $thirty-six;
+
+		@include breakpoint(small) {
+			font-size: $thirty;
+		}
+
 	}
 
 }
@@ -930,6 +1017,11 @@ blockquote {
 	h2 {
 		font-family: $ProximaLightStack;
 		font-size: $thirty-six;
+
+		@include breakpoint(small) {
+			font-size: $thirty;
+		}
+
 	}
 
 }
