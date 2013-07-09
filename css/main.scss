@@ -269,13 +269,13 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 			margin-right: 50px;
 			height: 75px;
 			line-height: 1;
-			font-size: $fourteen;
-			font-family: $ProximaSemiboldStack;
 
 			@include breakpoint(small) {
 				margin-right: 0;
 				padding: 20px;
 				height: auto;
+				font-size: $fourteen;
+				font-family: $ProximaSemiboldStack;
 			}
 
 			&:hover {
@@ -471,6 +471,10 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 		background-image: url(../img/toggle-search.png);
 	}
 
+}
+
+.mobile-nav-search__button {
+	display: none;
 }
 
 
