@@ -8,6 +8,8 @@
  * Mixins
  * Layout
  * Header
+ * Search Form
+ * Dropdown
  * Footer
  * Promo
  * Typography
@@ -92,7 +94,8 @@ $ninety: 4.999995em;		/* 90px: 1 / (18x90) = 4.999995  */
 $onefourty: 7.77777em;		/* 140px: 1 / (18x140) = 7.77777 */
 
 $blue: #5396db;
-$fadedwhite: rgba(255, 255, 255, 0.6);
+$fadedblue: #ddebf8;
+$fadedwhite: rgba(255, 255, 255, 0.8);
 $solidgrey: rgba(234, 234, 234, 1);
 
 $ProximaBoldStack: "proxima-nova-bold", Arial, sans-serif;
@@ -179,9 +182,14 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	background-position: 50% 0;
 	background-image: url(../img/logo-small.png);
 
-	&:hover, &.active {
+	&.active {
 		background-color: transparent;
 		border-bottom: 4px solid $blue;
+	}
+
+	&:hover {
+		background-color: transparent;
+		border-bottom: 4px solid $fadedblue;
 	}
 
 	@include breakpoint(small) {
@@ -231,9 +239,14 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 			height: 75px;
 			line-height: 1;
 
-			&:hover, &.active {
+			&:hover {
 				background-color: transparent;
-				border-bottom: 4px solid $blue;
+				border-bottom: 4px solid $fadedblue;
+			}
+
+			&.active {
+				background-color: transparent;
+				border-bottom: 4px solid $fadedblue;	
 			}
 
 		}
@@ -305,6 +318,95 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 			}
 		}
 
+	}
+
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    $Search Form
+\*------------------------------------*/
+.search-site {
+	position: relative;
+	float: left;
+}
+
+.toggle-search {
+	display: inline-block;
+	width: 20px;
+	height: 75px;
+	padding: 0 20px;
+	outline: none !important;
+	
+	margin-right: 25px;
+	text-indent: -9999px;
+	background-repeat: no-repeat;
+	background-position: 50% 0;
+	background-image: url(../img/toggle-search.png);
+
+	&:hover {
+		border-bottom: 4px solid $fadedblue;
+		background-position: 50% -75px;
+	}
+
+}
+
+.toggle-search--active {
+	margin-right: 0;
+	background-position: 50% -150px;
+	border-bottom: 4px solid $fadedblue;
+
+	&:hover {
+		background-position: 50% -150px;
+	}
+
+}
+
+.search-form {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 100%;
+	width: 600px;
+	max-width: 600px;
+	height: 75px;
+	padding: 25px 0;
+	border-bottom: 4px solid $fadedblue;
+
+	.search__keywords {
+		float: left;
+		height: 25px;
+		margin-left: 5px;
+		padding: 5px 25px;
+		box-shadow: none;
+		@include border-radius(0px);
+		border: 0;
+		border-left: 1px solid #f2f2f2;
+		background-color: transparent;
+		color: #333;
+
+		&:focus, &:active {
+			border: 0;
+			border-left: 1px solid #f2f2f2;
+		}
+
+	}
+
+	.search-button {
+		float: right;
+		display: block;
+		width: 25px;
+		height: 25px;
+		border: 0;
+		text-indent: -9999px;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-position: 50% -100px;
+		background-image: url(../img/toggle-search.png);
 	}
 
 }

@@ -16,4 +16,11 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$(".toggle-search").bind("click", function(event) {
+		$(this).toggleClass("toggle-search--active");
+		$(".search-form").toggle();
+		$(".main-nav").toggle();
+		return false;
+	});
+
 });
