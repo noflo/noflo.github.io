@@ -1356,9 +1356,15 @@ code {
 /*------------------------------------*\
     $Demos
 \*------------------------------------*/
+.demos {
+	float: left;
+	padding-bottom: 60px;
+}
+
 .demo {
 	float: left;
 	width: 100%;
+	margin-bottom: 15px;
 }
 
 .demo__title {
@@ -1378,6 +1384,7 @@ code {
 
 	> img {
 		float: right;
+		width: 100%;
 		margin-bottom: 15px;
 		border: 1px solid #ddd;
 		@include border-radius;
@@ -1385,7 +1392,11 @@ code {
 	}
 
 	.btn {
-		
+		float: right;
+
+		@include breakpoint(small) {
+			float: left;
+		}
 	}
 
 }
@@ -1395,4 +1406,17 @@ code {
 	width: 70%;
 	font-size: $fourteen;
 	color: #808080;
+
+	@include breakpoint(small) {
+		width: 100%;
+	}
+
 }
+
+.demo__button {
+	
+
+}
+
+
+
