@@ -520,6 +520,7 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 \*------------------------------------*/
 .dropdown-menu {
 	min-width: 190px;
+	top: 140%;
 	left: -75px;
 	padding-top: 0;
 	@include border-radius;
@@ -576,6 +577,29 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 
 }
 
+	.dropdown-menu:before {
+	  content: '';
+	  display: inline-block;
+	  border-left: 7px solid transparent;
+	  border-right: 7px solid transparent;
+	  border-bottom: 7px solid #ccc;
+	  border-bottom-color: rgba(0, 0, 0, 0.2);
+	  position: absolute;
+	  top: -11px;
+	  left: 43%;
+	}
+
+	.dropdown-menu:after {
+	  content: '';
+	  display: inline-block;
+	  border-left: 6px solid transparent;
+	  border-right: 6px solid transparent;
+	  border-bottom: 6px solid $blue;
+	  position: absolute;
+	  top: -10px;
+	  left: 44%;
+	}
+
 .dropdown-menu--github {
 	left: auto;
 	right: 0;
@@ -596,6 +620,16 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	}
 	
 }
+	
+	.dropdown-menu--github:before {
+		left: auto;
+		right: 4px;
+	}
+
+	.dropdown-menu--github:after {
+		left: auto;
+		right: 4px;
+	}
 
 .dropdown__action {
 	width: 65%;
