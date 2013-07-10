@@ -17,6 +17,12 @@
  * Sidebar
  * Content
  * Home
+ * Home - About NoFlo
+ * Home - Video
+ * Home - Understanding NoFlo
+ * Home - Significance of NoFlo
+ * Home - Be Part of NoFlo
+ * Home - Who Uses NoFlo
  * Code Samples
  * Library
  * Demos
@@ -1028,21 +1034,92 @@ blockquote {
 
 
 /*------------------------------------*\
-    $Home
+    $Home - About NoFlo
 \*------------------------------------*/
 .about-noflo {
 	padding-bottom: 60px;
 }
 
+
+
+
+
+/*------------------------------------*\
+    $Home - Video
+\*------------------------------------*/
 .video {
+	height: 600px;
+	padding-top: 180px;
+	background-color: #000;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	background-image: url(../img/video-bg.png);
 
 	@include breakpoint(small) {
 		margin-left: -20px;
 		margin-right: -20px;
 	}
 
+	h2 {
+		color: #fff;
+		text-align: center;
+		font-family: $ProximaLightStack;
+		font-size: $thirty-six;
+
+		@include breakpoint(small) {
+			font-size: $thirty;
+		}
+
+	}
+
+	p {
+		text-align: center;
+		color: rgba(255, 255, 255, 0.5);
+	}
+
 }
 
+.video__play {
+	display: block;
+	margin: 0 auto 20px auto;
+	width: 48px;
+	height: 48px;
+	text-indent: -9999px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-image: url(../img/video__play.png);
+}
+
+.video__duration {
+	position: relative;
+	display: block;
+	width: 48px;
+	height: 48px;
+	padding-top: 15px;
+	margin: 0 auto;
+	@include border-radius(30px);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	font-size: 13px;
+}
+
+	.video__duration:before {
+		content: "";
+		display: block;
+		position: absolute;
+		top: -20px;
+		left: 50%;
+		width: 1px;
+		height: 20px;
+		background-color: rgba(255, 255, 255, 0.5);
+	}
+
+
+
+
+/*------------------------------------*\
+    $Home - Understanding NoFlo
+\*------------------------------------*/
 .understanding-noflo {
 	overflow: hidden;
 	position: relative;
@@ -1089,6 +1166,13 @@ blockquote {
 
 }
 
+
+
+
+
+/*------------------------------------*\
+    $Home - Significance of NoFlo
+\*------------------------------------*/
 .significance-of-noflo {
 	padding-bottom: 60px;
 
@@ -1145,6 +1229,13 @@ blockquote {
 
 }
 
+
+
+
+
+/*------------------------------------*\
+    $Home - Be Part of NoFlo
+\*------------------------------------*/
 .part-of-noflo {
 	height: 455px;
 	padding-top: 60px;
@@ -1188,6 +1279,14 @@ blockquote {
 
 	}
 
+
+
+
+
+
+/*------------------------------------*\
+    $Home - Who Uses NoFlo
+\*------------------------------------*/
 .who-uses-noflo {
 	padding-top: 60px;
 	padding-bottom: 60px;
