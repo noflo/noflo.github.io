@@ -519,7 +519,8 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
     $Dropdown
 \*------------------------------------*/
 .dropdown-menu {
-	left: -50%;
+	min-width: 190px;
+	left: -75px;
 	padding-top: 0;
 	@include border-radius;
 	border-top: 4px solid $blue;
@@ -544,10 +545,22 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 			}
 
 			&.stamp {
-				padding-left: 50px;
+				padding-left: 60px;
 				background-repeat: no-repeat;
 				background-position: -20px 20px;
 				background-image: url(../img/dropdown-actions.png);
+			}
+
+			&.on-github {
+				background-position: -20px -188px;
+			}
+
+			&.on-google {
+				background-position: -20px -227px;
+			}
+
+			&.on-email {
+				background-position: -20px -268px;
 			}
 
 			&.on-twitter {
@@ -566,8 +579,51 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 .dropdown-menu--github {
 	left: auto;
 	right: 0;
+	width: 230px;
+
+	li {
+		overflow: hidden;
+
+		a {
+			padding: 0;
+		}
+
+	}
+
+	span {
+		float: left;
+		display: block;
+	}
+	
 }
 
+.dropdown__action {
+	width: 65%;
+	padding: 20px 20px 20px 40px;
+	background-repeat: no-repeat;
+	background-position: -28px 20px;
+	background-image: url(../img/dropdown-actions.png);
+}
+
+	.github-download {
+		background-position: -28px 20px;
+	}
+
+	.github-star {
+		background-position: -28px -23px;
+	}
+
+	.github-fork {
+		background-position: -28px -63px;
+	}
+
+.dropdown__tally {
+	width: 35%;
+	padding: 20px;
+	font-weight: normal;
+	background-color: #f7f8fa;
+	box-shadow: inset 5px 0 8px -6px #ccc;
+}
 
 
 
