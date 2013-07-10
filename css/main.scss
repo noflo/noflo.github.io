@@ -703,9 +703,9 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 .promo {
 	padding-top: 230px;
 	height: 675px;
-	background-color: transparent;
+	background-color: #000;
 	background-repeat: no-repeat;
-	background-position: 0 0;
+	background-position: 50%;
 	background-image: url(../img/map-bg.png);
 
 	@include breakpoint(small) {
@@ -1044,14 +1044,15 @@ blockquote {
 }
 
 .understanding-noflo {
+	overflow: hidden;
+	position: relative;
 	padding-top: 15px;
 	background-color: #e7e7e7;
 
 	@include breakpoint(small) {
 		margin-left: -20px;
 		margin-right: -20px;
-		padding-right: 20px;
-		padding-left: 20px;
+		padding: 15px 20px 160px 20px;
 	}
 
 	h2 {
@@ -1062,6 +1063,28 @@ blockquote {
 			font-size: $thirty;
 		}
 
+	}
+
+}
+
+.understanding-noflo__image {
+	position: absolute;
+	top: 15%;
+	right: -25%;
+	height: 100%;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-image: url(../img/diagrams/screen-and-map.png);
+
+	img {
+		display: none;
+	}
+
+	@include breakpoint(small) {
+		height: 200px;
+		top: auto;
+		bottom: 0;
 	}
 
 }
