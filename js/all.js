@@ -46,7 +46,7 @@ var UI = {
 		*/
 		$(".toggle-search").bind("click", function(event) {
 			$(this).toggleClass("toggle-search--active");
-			$(".search-form").toggle();
+			$(".search-form").toggle().toggleClass("search-form--open");
 			$(".main-nav").toggle();
 			return false;
 		});

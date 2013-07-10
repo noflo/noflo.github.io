@@ -265,8 +265,8 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 
 		a {
 			color: #000;
-			padding: 30px 5px;
-			margin-right: 50px;
+			padding: 30px 15px;
+			margin-right: 30px;
 			height: 75px;
 			line-height: 1;
 
@@ -279,7 +279,7 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 			}
 
 			&:hover {
-				background-color: transparent;
+				background-color: #fff;
 				border-bottom: 4px solid $fadedblue;
 
 				@include breakpoint(small) {
@@ -401,6 +401,7 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	}
 
 	&:hover {
+		background-color: #fff;
 		border-bottom: 4px solid $fadedblue;
 		background-position: 50% -75px;
 	}
@@ -411,6 +412,7 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	margin-right: 0;
 	background-position: 50% -150px;
 	border-bottom: 4px solid $fadedblue;
+	background-color: #fff;
 
 	&:hover {
 		background-position: 50% -150px;
@@ -423,10 +425,10 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	position: absolute;
 	top: 0;
 	left: 100%;
-	width: 440px;
-	max-width: 440px;
+	width: 460px;
+	max-width: 460px;
 	height: 75px;
-	padding: 25px 0;
+	padding: 25px 15px 25px 0;
 	border-bottom: 4px solid $fadedblue;
 
 	.search__keywords {
@@ -471,6 +473,10 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 		background-image: url(../img/toggle-search.png);
 	}
 
+}
+
+.search-form--open {
+	background-color: #fff;
 }
 
 .mobile-nav-search {
