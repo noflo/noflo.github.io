@@ -73,6 +73,15 @@ var UI = {
 			$(this).removeClass("library__item--active");
 		});
 
+		/**
+		* Sidebar Extra Content
+		*/
+		$(".sidebar__show-extra").bind("click", function() {
+			$(this).toggleClass("sidebar__show-extra--active")
+			$(".sidebar__extra").toggle();
+			return false;
+		});
+
 	}, 
 
 	getSiteMode: function() {
