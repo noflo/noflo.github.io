@@ -220,6 +220,15 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	li {
 		display: inline-block;
 	}
+
+	&:hover {
+		background-color: #fff;
+		-webkit-transition: background-color 300ms linear;
+		-moz-transition: background-color 300ms linear;
+		-o-transition: background-color 300ms linear;
+		-ms-transition: background-color 300ms linear;
+		transition: background-color 300ms linear;
+	}
 	
 }
 
@@ -286,6 +295,11 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 
 			&:hover {
 				background-color: #fff;
+				-webkit-transition: background-color 300ms linear;
+				-moz-transition: background-color 300ms linear;
+				-o-transition: background-color 300ms linear;
+				-ms-transition: background-color 300ms linear;
+				transition: background-color 300ms linear;
 				border-bottom: 4px solid $fadedblue;
 
 				@include breakpoint(small) {
@@ -418,7 +432,6 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	margin-right: 0;
 	background-position: 50% -150px;
 	border-bottom: 4px solid $fadedblue;
-	background-color: #fff;
 
 	&:hover {
 		background-position: 50% -150px;
@@ -479,10 +492,6 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 		background-image: url(../img/toggle-search.png);
 	}
 
-}
-
-.search-form--open {
-	background-color: #fff;
 }
 
 .mobile-nav-search {
