@@ -43,20 +43,13 @@
 				<!-- /.search-form -->
 
 				<nav class="main-nav">
+
 					<ul class="nav">
 						<li><a href="./demos.html">Demos</a></li>
 						<li><a href="./documentation.html">Documentation</a></li>
-						<li class="last"><a href="./library.html">Library</a></li>
-						<li class="visible-phone">
-							<form action="./" method="post" class="mobile-nav-search">
-								<fieldset>
-									<label for="mobile-nav-search" class="mobile-nav-search__label">Search</label>
-									<input type="text" id="mobile-nav-search" class="mobile-nav-search__text" name="mobile-nav-search" value="" placeholder="Search" />
-									<button class="mobile-nav-search__button">Search</button>
-								</fieldset>
-							</form>
-						</li>
+						<li><a href="./library.html">Library</a></li>
 					</ul>
+
 				</nav>
 
 				<nav class="util-nav">
@@ -91,19 +84,19 @@
 							<ul class="dropdown-menu dropdown-menu--github" role="menu">
 								<li>
 									<a href="https://github.com/bergie/noflo">
-										<span class="dropdown__action github-download">Download </span>
+										<span class="dropdown__action github__action github-download">Download </span>
 										<span class="dropdown__tally">104</span>
 									</a>
 								</li>
 								<li>
 									<a href="https://github.com/bergie/noflo">
-										<span class="dropdown__action github-star">Star</span>
+										<span class="dropdown__action github__action github-star">Star</span>
 										<span class="dropdown__tally">8201</span>
 									</a>
 								</li>
 								<li>
 									<a href="https://github.com/bergie/noflo">
-										<span class="dropdown__action github-fork">Fork</span>
+										<span class="dropdown__action github__action github-fork">Fork</span>
 										<span class="dropdown__tally">321</span>
 									</a>
 								</li>
@@ -401,6 +394,45 @@
 		<!-- /.row -->
 
 	</footer>
+
+	<nav class="mobile-nav">
+		<ul class="nav">
+			<li><h3>Site</h3></li>
+			<li><a href="./demos.html">Demos</a></li>
+			<li><a href="./documentation.html">Documentation</a></li>
+			<li><a href="./library.html">Library</a></li>
+			<li class="last">
+				<form action="./" method="post" class="mobile-nav-search">
+					<fieldset>
+						<label for="mobile-nav-search" class="mobile-nav-search__label">Search</label>
+						<input type="text" id="mobile-nav-search" class="mobile-nav-search__text" name="mobile-nav-search" value="" placeholder="Search" />
+						<button class="mobile-nav-search__button">Search</button>
+					</fieldset>
+				</form>
+			</li>
+			<li><h3>Contact</h3></li>
+			<li>
+				<a href="https://github.com/bergie/noflo" class="stamp on-github">GitHub</a>
+			</li>
+			<li>
+				<a href="http://groups.google.com" class="stamp on-google">Google Groups</a>
+			</li>
+			<li>
+				<a href="./" class="stamp on-email">Email</a>
+			</li>
+			<li><h3>GitHub</h3></li>
+			<li>
+				<a href="https://github.com/bergie/noflo" class="github__action github-download">Download</a>
+			</li>
+			<li>
+				<a href="https://github.com/bergie/noflo" class="github__action github-star">Star</a>
+			</li>
+			<li>
+				<a href="https://github.com/bergie/noflo" class="github__action github-fork">Fork</a>
+			</li>
+
+		</ul>
+	</nav>
 
 
 </div>

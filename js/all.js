@@ -37,7 +37,7 @@ var UI = {
 		*/
 		$(".toggle-main-nav").bind("click", function(event) {
 			$(this).toggleClass("toggle-menu--open");
-			$(".main-nav").toggle();
+			$(".mobile-nav").toggle();
 			return false;
 		});
 
