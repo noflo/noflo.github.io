@@ -3,3 +3,39 @@ tagline: Visual Control Flows for JavaScript
 markdown: redcarpet
 permalink: /:categories/:title/
 baseurl: /noflojs.org/
+libraries:
+  - kenhkan/noflo-adapters
+  - bergie/noflo-basecamp
+  - kenhkan/noflo-compare
+  - bergie/noflo-couchdb
+  - bergie/noflo-diffbot
+  - noflo/noflo-docco
+  - bergie/noflo-ducksboard
+  - bergie/noflo-filesystem
+  - kenhkan/noflo-flow
+  - bergie/noflo-git
+  - bergie/noflo-github
+  - kenhkan/noflo-handyman
+  - bergie/noflo-html
+  - kenhkan/noflo-lift
+  - bergie/noflo-liquid
+  - bergie/noflo-markdown
+  - bergie/noflo-mq
+  - kenhkan/noflo-objects
+  - bergie/noflo-oembed
+  - kenhkan/noflo-packets
+  - kenhkan/noflo-pg
+  - kenhkan/noflo-pgorm
+  - bergie/noflo-redis
+  - bergie/noflo-restfulmetrics
+  - kenhkan/noflo-routers
+  - kenhkan/noflo-strings
+  - svetly/noflo-stripe
+  - kenhkan/noflo-swiss
+  - kenhkan/noflo-twilio
+  - robingl/noflo-twitter
+  - kenhkan/noflo-underscore
+  - bergie/noflo-webserver
+  - kenhkan/noflo-woute
+  - bergie/noflo-xml
+  - bergie/noflo-yaml
