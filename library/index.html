@@ -1,118 +1,60 @@
 ---
 layout: default
-title: Demos
+title: Component Libraries
 categories:
  - library
 ---
   <div class="row-fluid">
-
     <div class="container">
-
       <div class="plain-title">
-
-        <h1>Component Library</h1>
-        <h2>Flow-based Programming environment for Node.js</h2>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempor erat non lorem faucibus, eget suscipit neque feugiat. Proin non tortor nisl.</p>
-
+        <h1>Component Libraries</h1>
+        <h2>{{ site.tagline }}</h2>
+        <p>NoFlo enables creating software out of reusable building blocks, Components. This page lists the publicly available components for NoFlo. In addition, you can <a href="{{ site.baseurl }}documentation/components/">write your own</a>.</p>
       </div>
-      <!-- /.plain-title -->
-
       <div class="main">
-    
         <div class="sidebar span4">
-                
           <h3 class="sidebar__title">NoFlo Overview</h3>
-
           <div class="overview">
-            
             <p class="overview__downloads">
-              <strong>46</strong> downloads <em>This week</em>
+              <strong>{{ site.categories['library'] | size }}</strong> component libraries
             </p>
-
             <p class="overview__downloads">
-              <strong>199</strong> downloads <em>This month</em>
+              <strong>{{ site.categories['component'] | size }}</strong> reusable components
             </p>
-
           </div>
-          <!-- /.overview -->
-
           <div class="sidebar__extra">
-
             <div class="overview">
-
               <dl>
                 <dt>Maintainers:</dt>
-                <dd><img src="http://placehold.it/23x23" class="avatar" /><a href="https://npmjs.org/~bergie">bergie</a></dd>
+                <dd><img src="https://secure.gravatar.com/avatar/995f27ce7205a79c55d4e44223cd6de0?s=23" class="avatar" /><a href="http://bergie.iki.fi">Henri Bergius</a></dd>
               </dl>
-
             </div>
-            <!-- /.overview -->
-
             <div class="overview">
-
               <dl>
-                <dt>Licence:</dt>
+                <dt>License:</dt>
                 <dd><a href="./">MIT</a></dd>
               </dl>
-
             </div>
-            <!-- /.overview -->
-
             <div class="overview">
-
-              <dl>
-                <dt>Keywords:</dt>
-                <dd><a href="./">fbp</a>, <a href="./">workflow</a>, <a href="./">flow</a></dd>
-              </dl>
-
-            </div>
-            <!-- /.overview -->
-
-            <div class="overview">
-
               <dl>
                 <dt>Repository:</dt>
                 <dd><a href="./">git://github.com/bergie/noflo.git</a></dd>
               </dl>
-
             </div>
-            <!-- /.overview -->
-
             <div class="overview">
-
               <dl>
                 <dt>Homepage:</dt>
                 <dd><a href="./">http://noflojs.org</a></dd>
               </dl>
-
             </div>
-            <!-- /.overview -->
-
-            <div class="overview">
-
-              <dl>
-                <dt>Dependencies (7):</dt>
-                <dd><a href="./">shell</a>, <a href="./">cli</a>, <a href="./">cli-color</a>, 
-                  <a href="./">underscore</a>, <a href="./">read-installed</a>, <a href="./">npmlog</a>, <a href="./">coffee-script</a></dd>
-              </dl>
-
-            </div>
-            <!-- /.overview -->
-
           </div>
-          <!-- /.overview-extras -->
-
-          <a href="./" class="sidebar__show-extra">More</a>
-
         </div>
-        <!-- /.sidebar -->
 
         <div class="content span8">
           {% for library in site.categories['library'] %}
           <div class="library__item">
             <div class="library__info">
-              <h3 class="library__title"><a href="https://npmjs.org/package/{{ library.title }}">{{ library.title }}</a></h3>
+              <h3 class="library__title"><a href="{{ site.baseurl}}{{ library.url }}">{{ library.title }}</a></h3>
               <span class="library__updated">{{ library.author }}</span>
             </div>
             <p class="library__description">{{ library.description }}</p>
