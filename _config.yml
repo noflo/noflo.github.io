@@ -2,3 +2,4 @@ title: NoFlo
 tagline: Visual Control Flows for JavaScript
 markdown: redcarpet
 permalink: /:categories/:title/
+baseurl: /noflojs.org/
