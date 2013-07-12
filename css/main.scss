@@ -1060,7 +1060,7 @@ blockquote {
 			font-family: $ProximaRegularStack;
 			border-left: 2px solid transparent;
 
-			&:hover {
+			&:hover, &.active {
 				border-left: 2px solid $blue;
 				text-decoration: none;
 			}
