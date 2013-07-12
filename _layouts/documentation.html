@@ -18,7 +18,7 @@ layout: default
             <ul class="sidebar__nav">
               {% for post in site.categories['documentation'] %}
               <li>
-                <a href="{{ post.url }}"{% if post.url == page.url %} class="active"{% endif%}>{{ post.title }}</a>
+              <a href="{{ site.baseurl }}{{ post.url }}"{% if post.url == page.url %} class="active"{% endif%}>{{ post.title }}</a>
               </li>
               {% endfor %}
             </ul>

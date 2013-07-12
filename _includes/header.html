@@ -1,8 +1,8 @@
   <header class="row-fluid">
     <div class="site-header span12">
       <div class="container">
-        <a href="{{ site.baseurl }}" class="logo{% if page.url == '/index.html' %} active{% endif %}">{{ site.title }}</a>
-        <a href="{{ site.baseurl }}" class="toggle-main-nav">Navigation</a>
+        <a href="{{ site.baseurl }}/" class="logo{% if page.url == '/index.html' %} active{% endif %}">{{ site.title }}</a>
+        <a href="{{ site.baseurl }}/" class="toggle-main-nav">Navigation</a>
         <div class="search-site">
           <a href="{{ site.baseurl }}" class="toggle-search">Search</a>
           <form action="./search" method="post" class="search-form">
@@ -16,7 +16,7 @@
         <nav class="main-nav">
           <ul class="nav">
             <li><a href="./demos.html">Demos</a></li>
-            <li><a href="{{ site.baseurl }}documentation/"{% if page.categories contains 'documentation' %} class="active"{% endif %}>Documentation</a></li>
+            <li><a href="{{ site.baseurl }}/documentation/"{% if page.categories contains 'documentation' %} class="active"{% endif %}>Documentation</a></li>
             <li class="last"><a href="./library.html">Library</a></li>
             <li class="visible-phone">
               <form action="./" method="post" class="mobile-nav-search">
@@ -33,7 +33,7 @@
         <nav class="util-nav">
           <ul class="nav">
             <li class="dropdown">
-              <a href="{{ site.baseurl }}" class="email" data-toggle="dropdown" data-target="#">Email</a>
+              <a href="{{ site.baseurl }}/" class="email" data-toggle="dropdown" data-target="#">Email</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
                   <a href="https://github.com/bergie/noflo" class="stamp on-github">GitHub</a>
@@ -42,12 +42,12 @@
                   <a href="http://groups.google.com" class="stamp on-google">Google Groups</a>
                 </li>
                 <li>
-                  <a href="{{ site.baseurl }}" class="stamp on-email">Email</a>
+                  <a href="{{ site.baseurl }}/" class="stamp on-email">Email</a>
                 </li>
               </ul>
             </li>
             <li class="dropdown">
-              <a href="{{ site.baseurl }}" class="share" data-toggle="dropdown" data-target="#">Share</a>
+              <a href="{{ site.baseurl }}/" class="share" data-toggle="dropdown" data-target="#">Share</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
                   <a href="http://www.twitter.com" class="stamp on-twitter">on Twitter</a>
