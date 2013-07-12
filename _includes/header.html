@@ -15,9 +15,9 @@
         </div>
         <nav class="main-nav">
           <ul class="nav">
-            <li><a href="./demos.html">Demos</a></li>
+            <li><a href="{{ site.baseurl }}/demo/"{% if page.categories contains 'demo' %} class="active"{% endif %}>Demos</a></li>
             <li><a href="{{ site.baseurl }}/documentation/"{% if page.categories contains 'documentation' %} class="active"{% endif %}>Documentation</a></li>
-            <li class="last"><a href="./library.html">Library</a></li>
+            <li class="last"><a href="{{ site.baseurl }}/library/"{% if page.categories contains 'library' %} class="active"{% endif %}>Library</a></li>
             <li class="visible-phone">
               <form action="./" method="post" class="mobile-nav-search">
                 <fieldset>
