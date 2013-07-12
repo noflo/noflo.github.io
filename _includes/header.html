@@ -1,0 +1,87 @@
+  <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo active">{{ site.title }}</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="/" class="toggle-search">Search</a>
+          <form action="./search" method="post" class="search-form">
+            <fieldset>
+              <input type="text" id="keywords" name="keywords" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <button class="search-button">Search</button>
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="./demos.html">Demos</a></li>
+            <li><a href="./documentation.html">Documentation</a></li>
+            <li class="last"><a href="./library.html">Library</a></li>
+            <li class="visible-phone">
+              <form action="./" method="post" class="mobile-nav-search">
+                <fieldset>
+                  <label for="mobile-nav-search" class="mobile-nav-search__label">Search</label>
+                  <input type="text" id="mobile-nav-search" class="mobile-nav-search__text" name="mobile-nav-search" value="" placeholder="Search" />
+                  <button class="mobile-nav-search__button">Search</button>
+                </fieldset>
+              </form>
+            </li>
+          </ul>
+        </nav>
+
+        <nav class="util-nav">
+          <ul class="nav">
+            <li class="dropdown">
+              <a href="./" class="email" data-toggle="dropdown" data-target="#">Email</a>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a href="https://github.com/bergie/noflo" class="stamp on-github">GitHub</a>
+                </li>
+                <li>
+                  <a href="http://groups.google.com" class="stamp on-google">Google Groups</a>
+                </li>
+                <li>
+                  <a href="./" class="stamp on-email">Email</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="./" class="share" data-toggle="dropdown" data-target="#">Share</a>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a href="http://www.twitter.com" class="stamp on-twitter">on Twitter</a>
+                </li>
+                <li>
+                  <a href="http://www.facebook.com" class="stamp on-facebook">on Facebook</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="./" class="github" data-toggle="dropdown" data-target="#">Github</a>
+              <ul class="dropdown-menu dropdown-menu--github" role="menu">
+                <li>
+                  <a href="https://github.com/bergie/noflo">
+                    <span class="dropdown__action github-download">Download </span>
+                    <span class="dropdown__tally">104</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/bergie/noflo">
+                    <span class="dropdown__action github-star">Star</span>
+                    <span class="dropdown__tally">8201</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/bergie/noflo">
+                    <span class="dropdown__action github-fork">Fork</span>
+                    <span class="dropdown__tally">321</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
