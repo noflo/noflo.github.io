@@ -5,6 +5,9 @@
   author: 
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"
+  repository: 
+    type: "git"
+    url: "git://github.com/kenhkan/noflo-twilio.git"
   layout: "library"
 
 ---

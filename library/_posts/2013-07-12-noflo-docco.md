@@ -5,6 +5,9 @@
   author: 
     name: "Henri Bergius"
     email: "henri.bergius@iki.fi"
+  repository: 
+    type: "git"
+    url: "git://github.com/noflo/noflo-docco.git"
   layout: "library"
 
 ---

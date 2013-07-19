@@ -27,12 +27,14 @@ layout: default
                 <dd><a href="./">MIT</a></dd>
               </dl>
             </div>
+            {% if page.repository %}
             <div class="overview">
               <dl>
                 <dt>Repository:</dt>
-                <dd><a href="./">git://github.com/bergie/noflo.git</a></dd>
+                <dd><a href="{{ page.repository.url }}">{{ page.repository.url }}</a></dd>
               </dl>
             </div>
+            {% endif %}
           </div>
         </div>
 
