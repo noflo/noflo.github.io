@@ -1,7 +1,7 @@
 ---
   title: "UserStream"
   library: "noflo-twitter"
-  layout: "library"
+  layout: "component"
 
 ---
 UserStream

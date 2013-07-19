@@ -1,7 +1,7 @@
 ---
   title: "ParseSource"
   library: "noflo-docco"
-  layout: "library"
+  layout: "component"
 
 ---
 ParseSource

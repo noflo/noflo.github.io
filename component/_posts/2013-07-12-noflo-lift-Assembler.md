@@ -1,7 +1,7 @@
 ---
   title: "Assembler"
   library: "noflo-lift"
-  layout: "library"
+  layout: "component"
 
 ---
 Assembler

@@ -1,7 +1,7 @@
 ---
   title: "HasGroup"
   library: "noflo-flow"
-  layout: "library"
+  layout: "component"
 
 ---
 HasGroup

@@ -1,7 +1,7 @@
 ---
   title: "MatchReplace"
   library: "noflo-strings"
-  layout: "library"
+  layout: "component"
 
 ---
 MatchReplace

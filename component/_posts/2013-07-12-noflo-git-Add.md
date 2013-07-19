@@ -1,7 +1,7 @@
 ---
   title: "Add"
   library: "noflo-git"
-  layout: "library"
+  layout: "component"
 
 ---
 Add

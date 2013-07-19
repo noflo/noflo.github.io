@@ -1,7 +1,7 @@
 ---
   title: "Filter"
   library: "noflo-strings"
-  layout: "library"
+  layout: "component"
 
 ---
 Filter

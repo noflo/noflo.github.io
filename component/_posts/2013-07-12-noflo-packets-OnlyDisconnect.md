@@ -1,7 +1,7 @@
 ---
   title: "OnlyDisconnect"
   library: "noflo-packets"
-  layout: "library"
+  layout: "component"
 
 ---
 OnlyDisconnect

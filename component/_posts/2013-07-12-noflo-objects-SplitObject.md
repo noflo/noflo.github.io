@@ -1,7 +1,7 @@
 ---
   title: "SplitObject"
   library: "noflo-objects"
-  layout: "library"
+  layout: "component"
 
 ---
 SplitObject

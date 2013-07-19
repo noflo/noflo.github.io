@@ -1,7 +1,7 @@
 ---
   title: "CountedMerge"
   library: "noflo-flow"
-  layout: "library"
+  layout: "component"
 
 ---
 CountedMerge

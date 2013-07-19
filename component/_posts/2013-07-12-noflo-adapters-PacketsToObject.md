@@ -1,7 +1,7 @@
 ---
   title: "PacketsToObject"
   library: "noflo-adapters"
-  layout: "library"
+  layout: "component"
 
 ---
 PacketsToObject

@@ -1,7 +1,7 @@
 ---
   title: "ResolvePath"
   library: "noflo-woute"
-  layout: "library"
+  layout: "component"
 
 ---
 ResolvePath

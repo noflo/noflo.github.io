@@ -1,7 +1,7 @@
 ---
   title: "Quit"
   library: "noflo-handyman"
-  layout: "library"
+  layout: "component"
 
 ---
 Quit

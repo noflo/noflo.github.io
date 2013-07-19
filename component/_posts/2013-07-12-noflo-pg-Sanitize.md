@@ -1,7 +1,7 @@
 ---
   title: "Sanitize"
   library: "noflo-pg"
-  layout: "library"
+  layout: "component"
 
 ---
 Sanitize

@@ -1,7 +1,7 @@
 ---
   title: "FilterProperty"
   library: "noflo-objects"
-  layout: "library"
+  layout: "component"
 
 ---
 FilterProperty

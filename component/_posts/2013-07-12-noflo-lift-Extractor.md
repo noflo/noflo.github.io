@@ -1,7 +1,7 @@
 ---
   title: "Extractor"
   library: "noflo-lift"
-  layout: "library"
+  layout: "component"
 
 ---
 Extractor

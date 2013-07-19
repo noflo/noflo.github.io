@@ -1,7 +1,7 @@
 ---
   title: "ToYaml"
   library: "noflo-yaml"
-  layout: "library"
+  layout: "component"
 
 ---
 ToYaml

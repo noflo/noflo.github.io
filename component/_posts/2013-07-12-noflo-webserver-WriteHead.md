@@ -1,7 +1,7 @@
 ---
   title: "WriteHead"
   library: "noflo-webserver"
-  layout: "library"
+  layout: "component"
 
 ---
 WriteHead

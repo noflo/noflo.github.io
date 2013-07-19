@@ -1,7 +1,7 @@
 ---
   title: "GetCurrentUser"
   library: "noflo-github"
-  layout: "library"
+  layout: "component"
 
 ---
 GetCurrentUser

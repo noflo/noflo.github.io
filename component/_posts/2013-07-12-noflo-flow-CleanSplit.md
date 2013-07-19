@@ -1,7 +1,7 @@
 ---
   title: "CleanSplit"
   library: "noflo-flow"
-  layout: "library"
+  layout: "component"
 
 ---
 CleanSplit

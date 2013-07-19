@@ -1,7 +1,7 @@
 ---
   title: "Replace"
   library: "noflo-strings"
-  layout: "library"
+  layout: "component"
 
 ---
 Replace

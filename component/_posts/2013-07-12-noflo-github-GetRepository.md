@@ -1,7 +1,7 @@
 ---
   title: "GetRepository"
   library: "noflo-github"
-  layout: "library"
+  layout: "component"
 
 ---
 GetRepository

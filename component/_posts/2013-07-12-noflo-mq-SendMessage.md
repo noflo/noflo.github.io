@@ -1,7 +1,7 @@
 ---
   title: "SendMessage"
   library: "noflo-mq"
-  layout: "library"
+  layout: "component"
 
 ---
 SendMessage

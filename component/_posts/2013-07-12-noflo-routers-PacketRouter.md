@@ -1,7 +1,7 @@
 ---
   title: "PacketRouter"
   library: "noflo-routers"
-  layout: "library"
+  layout: "component"
 
 ---
 PacketRouter

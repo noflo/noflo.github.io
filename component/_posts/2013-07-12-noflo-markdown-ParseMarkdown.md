@@ -1,7 +1,7 @@
 ---
   title: "ParseMarkdown"
   library: "noflo-markdown"
-  layout: "library"
+  layout: "component"
 
 ---
 ParseMarkdown

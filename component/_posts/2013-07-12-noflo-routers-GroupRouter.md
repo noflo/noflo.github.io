@@ -1,7 +1,7 @@
 ---
   title: "GroupRouter"
   library: "noflo-routers"
-  layout: "library"
+  layout: "component"
 
 ---
 GroupRouter

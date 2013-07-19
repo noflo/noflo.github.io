@@ -1,7 +1,7 @@
 ---
   title: "Jsonify"
   library: "noflo-strings"
-  layout: "library"
+  layout: "component"
 
 ---
 Jsonify

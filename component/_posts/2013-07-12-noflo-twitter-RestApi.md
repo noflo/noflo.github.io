@@ -1,7 +1,7 @@
 ---
   title: "RestApi"
   library: "noflo-twitter"
-  layout: "library"
+  layout: "component"
 
 ---
 RestApi

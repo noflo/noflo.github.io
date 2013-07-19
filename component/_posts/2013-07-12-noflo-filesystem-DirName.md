@@ -1,7 +1,7 @@
 ---
   title: "DirName"
   library: "noflo-filesystem"
-  layout: "library"
+  layout: "component"
 
 ---
 DirName

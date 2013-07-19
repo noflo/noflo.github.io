@@ -1,7 +1,7 @@
 ---
   title: "Server"
   library: "noflo-webserver"
-  layout: "library"
+  layout: "component"
 
 ---
 Server

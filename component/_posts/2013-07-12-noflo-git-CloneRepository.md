@@ -1,7 +1,7 @@
 ---
   title: "CloneRepository"
   library: "noflo-git"
-  layout: "library"
+  layout: "component"
 
 ---
 CloneRepository

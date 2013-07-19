@@ -1,7 +1,7 @@
 ---
   title: "SendWith"
   library: "noflo-packets"
-  layout: "library"
+  layout: "component"
 
 ---
 SendWith

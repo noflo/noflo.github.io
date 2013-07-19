@@ -1,7 +1,7 @@
 ---
   title: "PairsToObject"
   library: "noflo-adapters"
-  layout: "library"
+  layout: "component"
 
 ---
 PairsToObject

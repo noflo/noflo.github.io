@@ -1,7 +1,7 @@
 ---
   title: "ParseXml"
   library: "noflo-xml"
-  layout: "library"
+  layout: "component"
 
 ---
 ParseXml

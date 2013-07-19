@@ -1,7 +1,7 @@
 ---
   title: "Print"
   library: "noflo-handyman"
-  layout: "library"
+  layout: "component"
 
 ---
 Print

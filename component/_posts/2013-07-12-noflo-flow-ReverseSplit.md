@@ -1,7 +1,7 @@
 ---
   title: "ReverseSplit"
   library: "noflo-flow"
-  layout: "library"
+  layout: "component"
 
 ---
 ReverseSplit

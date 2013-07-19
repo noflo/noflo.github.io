@@ -1,7 +1,7 @@
 ---
   title: "SendResponse"
   library: "noflo-webserver"
-  layout: "library"
+  layout: "component"
 
 ---
 SendResponse

@@ -1,7 +1,7 @@
 ---
   title: "ReadDocument"
   library: "noflo-couchdb"
-  layout: "library"
+  layout: "component"
 
 ---
 ReadDocument

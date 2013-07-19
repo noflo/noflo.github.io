@@ -1,7 +1,7 @@
 ---
   title: "ReadFile"
   library: "noflo-filesystem"
-  layout: "library"
+  layout: "component"
 
 ---
 ReadFile

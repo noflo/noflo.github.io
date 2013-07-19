@@ -1,7 +1,7 @@
 ---
   title: "Publish"
   library: "noflo-redis"
-  layout: "library"
+  layout: "component"
 
 ---
 Publish

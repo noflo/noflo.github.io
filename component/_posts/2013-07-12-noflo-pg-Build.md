@@ -1,7 +1,7 @@
 ---
   title: "Build"
   library: "noflo-pg"
-  layout: "library"
+  layout: "component"
 
 ---
 Build

@@ -1,7 +1,7 @@
 ---
   title: "ObjectToString"
   library: "noflo-adapters"
-  layout: "library"
+  layout: "component"
 
 ---
 ObjectToString

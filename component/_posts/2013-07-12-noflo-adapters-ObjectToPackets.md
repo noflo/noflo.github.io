@@ -1,7 +1,7 @@
 ---
   title: "ObjectToPackets"
   library: "noflo-adapters"
-  layout: "library"
+  layout: "component"
 
 ---
 ObjectToPackets

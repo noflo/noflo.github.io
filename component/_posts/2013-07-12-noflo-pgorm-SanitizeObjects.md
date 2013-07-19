@@ -1,7 +1,7 @@
 ---
   title: "SanitizeObjects"
   library: "noflo-pgorm"
-  layout: "library"
+  layout: "component"
 
 ---
 SanitizeObjects

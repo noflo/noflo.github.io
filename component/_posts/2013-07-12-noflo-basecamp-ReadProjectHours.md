@@ -1,7 +1,7 @@
 ---
   title: "ReadProjectHours"
   library: "noflo-basecamp"
-  layout: "library"
+  layout: "component"
 
 ---
 ReadProjectHours

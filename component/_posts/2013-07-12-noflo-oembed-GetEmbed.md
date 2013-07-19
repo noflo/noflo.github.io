@@ -1,7 +1,7 @@
 ---
   title: "GetEmbed"
   library: "noflo-oembed"
-  layout: "library"
+  layout: "component"
 
 ---
 GetEmbed

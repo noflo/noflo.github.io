@@ -1,7 +1,7 @@
 ---
   title: "WriteDocument"
   library: "noflo-couchdb"
-  layout: "library"
+  layout: "component"
 
 ---
 WriteDocument

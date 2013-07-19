@@ -1,7 +1,7 @@
 ---
   title: "Underscore"
   library: "noflo-swiss"
-  layout: "library"
+  layout: "component"
 
 ---
 Underscore

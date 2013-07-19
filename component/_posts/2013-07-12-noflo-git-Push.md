@@ -1,7 +1,7 @@
 ---
   title: "Push"
   library: "noflo-git"
-  layout: "library"
+  layout: "component"
 
 ---
 Push

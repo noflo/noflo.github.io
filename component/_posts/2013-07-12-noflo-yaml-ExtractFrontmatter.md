@@ -1,7 +1,7 @@
 ---
   title: "ExtractFrontmatter"
   library: "noflo-yaml"
-  layout: "library"
+  layout: "component"
 
 ---
 ExtractFrontmatter

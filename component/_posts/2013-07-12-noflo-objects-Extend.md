@@ -1,7 +1,7 @@
 ---
   title: "Extend"
   library: "noflo-objects"
-  layout: "library"
+  layout: "component"
 
 ---
 Extend

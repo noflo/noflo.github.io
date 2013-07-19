@@ -1,7 +1,7 @@
 ---
   title: "ReadDocumentAttachment"
   library: "noflo-couchdb"
-  layout: "library"
+  layout: "component"
 
 ---
 ReadDocumentAttachment

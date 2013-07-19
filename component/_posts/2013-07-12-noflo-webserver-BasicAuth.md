@@ -1,7 +1,7 @@
 ---
   title: "BasicAuth"
   library: "noflo-webserver"
-  layout: "library"
+  layout: "component"
 
 ---
 BasicAuth

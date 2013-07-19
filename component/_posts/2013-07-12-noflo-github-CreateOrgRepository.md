@@ -1,7 +1,7 @@
 ---
   title: "CreateOrgRepository"
   library: "noflo-github"
-  layout: "library"
+  layout: "component"
 
 ---
 CreateOrgRepository

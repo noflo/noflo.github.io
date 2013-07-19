@@ -1,7 +1,7 @@
 ---
   title: "FilterPackets"
   library: "noflo-packets"
-  layout: "library"
+  layout: "component"
 
 ---
 FilterPackets

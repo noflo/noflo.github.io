@@ -1,7 +1,7 @@
 ---
   title: "ExtractProperty"
   library: "noflo-objects"
-  layout: "library"
+  layout: "component"
 
 ---
 ExtractProperty

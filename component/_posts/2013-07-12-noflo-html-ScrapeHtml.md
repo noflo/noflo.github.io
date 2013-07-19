@@ -1,7 +1,7 @@
 ---
   title: "ScrapeHtml"
   library: "noflo-html"
-  layout: "library"
+  layout: "component"
 
 ---
 ScrapeHtml

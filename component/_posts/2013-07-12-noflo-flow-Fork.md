@@ -1,7 +1,7 @@
 ---
   title: "Fork"
   library: "noflo-flow"
-  layout: "library"
+  layout: "component"
 
 ---
 Fork

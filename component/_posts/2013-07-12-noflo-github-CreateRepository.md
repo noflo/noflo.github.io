@@ -1,7 +1,7 @@
 ---
   title: "CreateRepository"
   library: "noflo-github"
-  layout: "library"
+  layout: "component"
 
 ---
 CreateRepository

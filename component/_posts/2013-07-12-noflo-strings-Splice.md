@@ -1,7 +1,7 @@
 ---
   title: "Splice"
   library: "noflo-strings"
-  layout: "library"
+  layout: "component"
 
 ---
 Splice

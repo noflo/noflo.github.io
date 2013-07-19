@@ -1,7 +1,7 @@
 ---
   title: "Template"
   library: "noflo-liquid"
-  layout: "library"
+  layout: "component"
 
 ---
 Template

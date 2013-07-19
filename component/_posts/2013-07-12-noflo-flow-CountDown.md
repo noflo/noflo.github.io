@@ -1,7 +1,7 @@
 ---
   title: "CountDown"
   library: "noflo-flow"
-  layout: "library"
+  layout: "component"
 
 ---
 CountDown

@@ -1,7 +1,7 @@
 ---
   title: "ConstructWrite"
   library: "noflo-pgorm"
-  layout: "library"
+  layout: "component"
 
 ---
 ConstructWrite

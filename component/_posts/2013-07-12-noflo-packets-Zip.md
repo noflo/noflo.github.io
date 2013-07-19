@@ -1,7 +1,7 @@
 ---
   title: "Zip"
   library: "noflo-packets"
-  layout: "library"
+  layout: "component"
 
 ---
 Zip

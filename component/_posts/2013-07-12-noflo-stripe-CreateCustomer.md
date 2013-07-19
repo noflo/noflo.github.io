@@ -1,7 +1,7 @@
 ---
   title: "CreateCustomer"
   library: "noflo-stripe"
-  layout: "library"
+  layout: "component"
 
 ---
 CreateCustomer

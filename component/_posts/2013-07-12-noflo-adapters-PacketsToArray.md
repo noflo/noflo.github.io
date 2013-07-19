@@ -1,7 +1,7 @@
 ---
   title: "PacketsToArray"
   library: "noflo-adapters"
-  layout: "library"
+  layout: "component"
 
 ---
 PacketsToArray

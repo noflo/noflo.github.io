@@ -1,7 +1,7 @@
 ---
   title: "Stop"
   library: "noflo-flow"
-  layout: "library"
+  layout: "component"
 
 ---
 Stop

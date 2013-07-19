@@ -1,7 +1,7 @@
 ---
   title: "RandomUuid"
   library: "noflo-swiss"
-  layout: "library"
+  layout: "component"
 
 ---
 RandomUuid

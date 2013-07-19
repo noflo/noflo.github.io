@@ -1,7 +1,7 @@
 ---
   title: "Template"
   library: "noflo-strings"
-  layout: "library"
+  layout: "component"
 
 ---
 Template

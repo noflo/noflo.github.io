@@ -1,7 +1,7 @@
 ---
   title: "GetArticle"
   library: "noflo-diffbot"
-  layout: "library"
+  layout: "component"
 
 ---
 GetArticle

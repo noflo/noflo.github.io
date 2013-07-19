@@ -1,7 +1,7 @@
 ---
   title: "Cache"
   library: "noflo-flow"
-  layout: "library"
+  layout: "component"
 
 ---
 Cache

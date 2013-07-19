@@ -1,7 +1,7 @@
 ---
   title: "Subscribe"
   library: "noflo-redis"
-  layout: "library"
+  layout: "component"
 
 ---
 Subscribe

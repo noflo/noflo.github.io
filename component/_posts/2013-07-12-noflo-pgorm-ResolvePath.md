@@ -1,7 +1,7 @@
 ---
   title: "ResolvePath"
   library: "noflo-pgorm"
-  layout: "library"
+  layout: "component"
 
 ---
 ResolvePath

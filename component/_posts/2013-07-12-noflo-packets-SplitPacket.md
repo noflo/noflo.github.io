@@ -1,7 +1,7 @@
 ---
   title: "SplitPacket"
   library: "noflo-packets"
-  layout: "library"
+  layout: "component"
 
 ---
 SplitPacket

@@ -1,7 +1,7 @@
 ---
   title: "FilterByPosition"
   library: "noflo-packets"
-  layout: "library"
+  layout: "component"
 
 ---
 FilterByPosition

@@ -1,7 +1,7 @@
 ---
   title: "PushDelta"
   library: "noflo-ducksboard"
-  layout: "library"
+  layout: "component"
 
 ---
 PushDelta

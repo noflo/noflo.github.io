@@ -1,7 +1,7 @@
 ---
   title: "ParseYaml"
   library: "noflo-yaml"
-  layout: "library"
+  layout: "component"
 
 ---
 ParseYaml

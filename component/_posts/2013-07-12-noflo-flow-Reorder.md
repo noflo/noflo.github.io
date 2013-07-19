@@ -1,7 +1,7 @@
 ---
   title: "Reorder"
   library: "noflo-flow"
-  layout: "library"
+  layout: "component"
 
 ---
 Reorder

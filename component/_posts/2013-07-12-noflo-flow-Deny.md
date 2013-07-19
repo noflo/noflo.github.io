@@ -1,7 +1,7 @@
 ---
   title: "Deny"
   library: "noflo-flow"
-  layout: "library"
+  layout: "component"
 
 ---
 Deny

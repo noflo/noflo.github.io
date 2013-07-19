@@ -1,7 +1,7 @@
 ---
   title: "WriteFile"
   library: "noflo-filesystem"
-  layout: "library"
+  layout: "component"
 
 ---
 WriteFile

@@ -1,7 +1,7 @@
 ---
   title: "ListenQueue"
   library: "noflo-mq"
-  layout: "library"
+  layout: "component"
 
 ---
 ListenQueue

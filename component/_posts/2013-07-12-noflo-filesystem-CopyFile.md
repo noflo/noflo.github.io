@@ -1,7 +1,7 @@
 ---
   title: "CopyFile"
   library: "noflo-filesystem"
-  layout: "library"
+  layout: "component"
 
 ---
 CopyFile

@@ -1,7 +1,7 @@
 ---
   title: "DeepCopy"
   library: "noflo-swiss"
-  layout: "library"
+  layout: "component"
 
 ---
 DeepCopy

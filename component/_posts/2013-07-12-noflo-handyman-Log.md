@@ -1,7 +1,7 @@
 ---
   title: "Log"
   library: "noflo-handyman"
-  layout: "library"
+  layout: "component"
 
 ---
 Log

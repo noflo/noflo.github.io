@@ -1,7 +1,7 @@
 ---
   title: "ReadProject"
   library: "noflo-basecamp"
-  layout: "library"
+  layout: "component"
 
 ---
 ReadProject

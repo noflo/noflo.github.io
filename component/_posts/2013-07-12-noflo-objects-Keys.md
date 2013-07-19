@@ -1,7 +1,7 @@
 ---
   title: "Keys"
   library: "noflo-objects"
-  layout: "library"
+  layout: "component"
 
 ---
 Keys

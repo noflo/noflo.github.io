@@ -1,7 +1,7 @@
 ---
   title: "RegexpRouter"
   library: "noflo-routers"
-  layout: "library"
+  layout: "component"
 
 ---
 RegexpRouter

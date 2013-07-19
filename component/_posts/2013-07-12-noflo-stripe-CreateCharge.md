@@ -1,7 +1,7 @@
 ---
   title: "CreateCharge"
   library: "noflo-stripe"
-  layout: "library"
+  layout: "component"
 
 ---
 CreateCharge

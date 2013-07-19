@@ -1,7 +1,7 @@
 ---
   title: "WriteFileRaw"
   library: "noflo-filesystem"
-  layout: "library"
+  layout: "component"
 
 ---
 WriteFileRaw

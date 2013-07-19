@@ -1,7 +1,7 @@
 ---
   title: "ReadDir"
   library: "noflo-filesystem"
-  layout: "library"
+  layout: "component"
 
 ---
 ReadDir

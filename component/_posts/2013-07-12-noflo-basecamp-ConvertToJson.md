@@ -1,7 +1,7 @@
 ---
   title: "ConvertToJson"
   library: "noflo-basecamp"
-  layout: "library"
+  layout: "component"
 
 ---
 ConvertToJson

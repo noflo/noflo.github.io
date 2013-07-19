@@ -1,7 +1,7 @@
 ---
   title: "MakeDir"
   library: "noflo-filesystem"
-  layout: "library"
+  layout: "component"
 
 ---
 MakeDir

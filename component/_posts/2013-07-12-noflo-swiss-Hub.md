@@ -1,7 +1,7 @@
 ---
   title: "Hub"
   library: "noflo-swiss"
-  layout: "library"
+  layout: "component"
 
 ---
 Hub

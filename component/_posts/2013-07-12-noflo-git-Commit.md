@@ -1,7 +1,7 @@
 ---
   title: "Commit"
   library: "noflo-git"
-  layout: "library"
+  layout: "component"
 
 ---
 Commit

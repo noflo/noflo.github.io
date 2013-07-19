@@ -1,7 +1,7 @@
 ---
   title: "CopyTree"
   library: "noflo-filesystem"
-  layout: "library"
+  layout: "component"
 
 ---
 CopyTree

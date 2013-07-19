@@ -1,7 +1,7 @@
 ---
   title: "GetContents"
   library: "noflo-github"
-  layout: "library"
+  layout: "component"
 
 ---
 GetContents

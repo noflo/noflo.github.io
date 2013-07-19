@@ -1,7 +1,7 @@
 ---
   title: "WriteResponse"
   library: "noflo-webserver"
-  layout: "library"
+  layout: "component"
 
 ---
 WriteResponse

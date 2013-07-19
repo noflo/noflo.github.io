@@ -1,7 +1,7 @@
 ---
   title: "BodyParser"
   library: "noflo-webserver"
-  layout: "library"
+  layout: "component"
 
 ---
 BodyParser

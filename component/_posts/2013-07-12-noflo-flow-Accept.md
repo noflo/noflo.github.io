@@ -1,7 +1,7 @@
 ---
   title: "Accept"
   library: "noflo-flow"
-  layout: "library"
+  layout: "component"
 
 ---
 Accept

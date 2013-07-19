@@ -1,7 +1,7 @@
 ---
   title: "EscapeQuotes"
   library: "noflo-strings"
-  layout: "library"
+  layout: "component"
 
 ---
 EscapeQuotes

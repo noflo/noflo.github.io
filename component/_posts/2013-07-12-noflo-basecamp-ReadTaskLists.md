@@ -1,7 +1,7 @@
 ---
   title: "ReadTaskLists"
   library: "noflo-basecamp"
-  layout: "library"
+  layout: "component"
 
 ---
 ReadTaskLists

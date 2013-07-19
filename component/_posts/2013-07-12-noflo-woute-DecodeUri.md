@@ -1,7 +1,7 @@
 ---
   title: "DecodeUri"
   library: "noflo-woute"
-  layout: "library"
+  layout: "component"
 
 ---
 DecodeUri

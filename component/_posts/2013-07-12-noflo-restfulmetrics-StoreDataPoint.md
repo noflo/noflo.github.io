@@ -1,7 +1,7 @@
 ---
   title: "StoreDataPoint"
   library: "noflo-restfulmetrics"
-  layout: "library"
+  layout: "component"
 
 ---
 StoreDataPoint

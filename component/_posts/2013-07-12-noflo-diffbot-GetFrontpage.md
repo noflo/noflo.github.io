@@ -1,7 +1,7 @@
 ---
   title: "GetFrontpage"
   library: "noflo-diffbot"
-  layout: "library"
+  layout: "component"
 
 ---
 GetFrontpage

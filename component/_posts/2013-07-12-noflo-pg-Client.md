@@ -1,7 +1,7 @@
 ---
   title: "Client"
   library: "noflo-pg"
-  layout: "library"
+  layout: "component"
 
 ---
 Client

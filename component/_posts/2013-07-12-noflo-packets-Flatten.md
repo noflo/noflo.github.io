@@ -1,7 +1,7 @@
 ---
   title: "Flatten"
   library: "noflo-packets"
-  layout: "library"
+  layout: "component"
 
 ---
 Flatten

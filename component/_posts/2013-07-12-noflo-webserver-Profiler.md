@@ -1,7 +1,7 @@
 ---
   title: "Profiler"
   library: "noflo-webserver"
-  layout: "library"
+  layout: "component"
 
 ---
 Profiler

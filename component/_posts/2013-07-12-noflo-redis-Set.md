@@ -1,7 +1,7 @@
 ---
   title: "Set"
   library: "noflo-redis"
-  layout: "library"
+  layout: "component"
 
 ---
 Set
