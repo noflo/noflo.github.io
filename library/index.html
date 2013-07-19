@@ -9,39 +9,11 @@ categories:
       <div class="plain-title">
         <h1>Component Libraries</h1>
         <h2>{{ site.tagline }}</h2>
-        <p>NoFlo enables creating software out of reusable building blocks, or components. This page lists the publicly available components for NoFlo. In addition, you can <a href="{{ site.baseurl }}documentation/components/">write your own</a>.</p>
+        <p>NoFlo enables creating software out of reusable building blocks, or components. This page lists the publicly available components libraries for NoFlo. In addition, you can <a href="{{ site.baseurl }}documentation/components/">write your own</a>. <a href="{{ site.baseurl }}/component/">See all components</a>.</p>
       </div>
       <div class="main">
         <div class="sidebar span4">
-          <h3 class="sidebar__title">NoFlo Overview</h3>
-          <div class="overview">
-            <p class="overview__downloads">
-              <strong>{{ site.categories['library'] | size }}</strong> component libraries
-            </p>
-            <p class="overview__downloads">
-              <strong>{{ site.categories['component'] | size }}</strong> reusable components
-            </p>
-          </div>
-          <div class="sidebar__extra">
-            <div class="overview">
-              <dl>
-                <dt>Maintainers:</dt>
-                <dd><img src="https://secure.gravatar.com/avatar/995f27ce7205a79c55d4e44223cd6de0?s=23" class="avatar" /><a href="http://bergie.iki.fi">Henri Bergius</a></dd>
-              </dl>
-            </div>
-            <div class="overview">
-              <dl>
-                <dt>License:</dt>
-                <dd><a href="./">MIT</a></dd>
-              </dl>
-            </div>
-            <div class="overview">
-              <dl>
-                <dt>Repository:</dt>
-                <dd><a href="https://github.com/bergie/noflo">git://github.com/bergie/noflo.git</a></dd>
-              </dl>
-            </div>
-          </div>
+          {% include noflo.html %}
         </div>
 
         <div class="content span8">
@@ -55,14 +27,6 @@ categories:
               <span class="library__updated">{{ library.author }}</span>
             </div>
             <p class="library__description">{{ library.description }}</p>
-            <p class="library__description">
-            {% for component in site.categories['component'] %}
-              {% if component.library == library.title %}
-              <a href="{{ site.baseurl }}{{ component.url }}">{{ component.title }}</a>
-              {% endif %}
-            {% endfor %}
-            </p>
-
             <div class="library__download">
               <em>Version {{ library.version}}</em>
             </div>

@@ -35,11 +35,11 @@ layout: default
                 <dd><a href="./">MIT</a></dd>
               </dl>
             </div>
-            {% if page.repository %}
+            {% if library.repository %}
             <div class="overview">
               <dl>
                 <dt>Repository:</dt>
-                <dd><a href="{{ page.repository.url }}">{{ page.repository.url }}</a></dd>
+                <dd><a href="{{ library.repository.url | replace: 'git://', 'https://' }}">{{ library.repository.url }}</a></dd>
               </dl>
             </div>
             {% endif %}

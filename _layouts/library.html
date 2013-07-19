@@ -31,7 +31,7 @@ layout: default
             <div class="overview">
               <dl>
                 <dt>Repository:</dt>
-                <dd><a href="{{ page.repository.url }}">{{ page.repository.url }}</a></dd>
+                <dd><a href="{{ page.repository.url | replace: 'git://', 'https://' }}">{{ page.repository.url }}</a></dd>
               </dl>
             </div>
             {% endif %}
