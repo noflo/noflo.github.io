@@ -1,6 +1,8 @@
 ---
 layout: default
 title: NoFlo - Flow-Based Programming for JavaScript
+libraries:
+  - noflo-stripe
 ---
   <section class="row-fluid homepage-section">
     <div class="promo">
@@ -42,9 +44,9 @@ title: NoFlo - Flow-Based Programming for JavaScript
   <section class="row-fluid homepage-section">
     <div class="video">
       <h2>NoFlo Video</h2>
-      <p>Description of the NoFlo video goes here</p>
-      <a href="./" class="video__play">Play Video</a>
-      <p class="video__duration">9 mins</p>
+      <p>NoFlo presentation from JS.Everywhere 2011</p>
+      <a href="http://youtu.be/pgP4v9b5DvE" class="video__play">Play Video</a>
+      <p class="video__duration">26min</p>
     </div>
   </section>
 
@@ -139,51 +141,20 @@ title: NoFlo - Flow-Based Programming for JavaScript
     <div class="who-uses-noflo">
       <div class="container">
         <div class="span2">
-          <h2>Who Uses NoFlo</h2>
-          <p>Here are a few companies that are successfully using NoFlo.</p>
+          <h2>Component Libraries</h2>
+          <p>There are hundreds of <a href="{{ site.baseurl }}/library/">ready-made NoFlo components</a> available, including components for:</p>
         </div>
         <div class="span9 offset1 who-uses-noflo__logos">
           <ul>
+            {% for library in site.categories['library'] %}
+              {% if page.libraries contains library.title %}
             <li>
-              <a href="./">
-                <img src="http://placehold.it/180x115" alt="" title="" />
+              <a href="{{ site.baseurl }}{{ library.url }}">
+                <img src="{{ site.baseurl }}/img/library/{{ library.title}}.jpg" alt="{{ library.title }}" title="{{ library.title }}" />
               </a>
             </li>
-            <li>
-              <a href="./">
-                <img src="http://placehold.it/180x115" alt="" title="" />
-              </a>
-            </li>
-            <li>
-              <a href="./">
-                <img src="http://placehold.it/180x115" alt="" title="" />
-              </a>
-            </li>
-            <li>
-              <a href="./">
-                <img src="http://placehold.it/180x115" alt="" title="" />
-              </a>
-            </li>
-            <li>
-              <a href="./">
-                <img src="http://placehold.it/180x115" alt="" title="" />
-              </a>
-            </li>
-            <li>
-              <a href="./">
-                <img src="http://placehold.it/180x115" alt="" title="" />
-              </a>
-            </li>
-            <li>
-              <a href="./">
-                <img src="http://placehold.it/180x115" alt="" title="" />
-              </a>
-            </li>
-            <li>
-              <a href="./">
-                <img src="http://placehold.it/180x115" alt="" title="" />
-              </a>
-            </li>
+                {% endif %}
+              {% endfor %}
           </ul>
         </div>
       </div>
