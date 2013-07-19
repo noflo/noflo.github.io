@@ -3,6 +3,10 @@ tagline: Visual Control Flows for JavaScript
 markdown: redcarpet
 permalink: /:categories/:title/
 baseurl: /noflojs.org/
+highlight_libraries:
+  - noflo-stripe
+  - noflo-github
+  - noflo-twilio
 libraries:
   - kenhkan/noflo-adapters
   - bergie/noflo-basecamp

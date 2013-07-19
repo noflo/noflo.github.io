@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{{ page.title }}{% unless page.url == '/index.html' %} | {{ site.title }}{% endunless %}</title>
+  <title>{% if page.library %}{{ page.library | replace: 'noflo-', '' }}/{% endif %}{{ page.title }}{% unless page.url == '/index.html' %} | {{ site.title }}{% endunless %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ site.baseurl }}/css/bootstrap.min.css" />
   <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css" />

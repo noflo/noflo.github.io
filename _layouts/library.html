@@ -4,6 +4,9 @@ layout: default
   <div class="row-fluid">
     <div class="container">
       <div class="plain-title">
+        {% if site.highlight_libraries contains page.title %}
+        <img src="{{ site.baseurl }}/img/library/{{ page.title }}.jpg" alt="{{ page.title }}" title="{{ page.title }}" class="library__logo pull-right" />
+        {% endif %}
         <h1>{{ page.title }}</h1>
         <h2>Component Library</h2>
         <p>{{ page.description }}</p>

@@ -1,8 +1,6 @@
 ---
 layout: default
 title: NoFlo - Flow-Based Programming for JavaScript
-libraries:
-  - noflo-stripe
 ---
   <section class="row-fluid homepage-section">
     <div class="promo">
@@ -147,7 +145,7 @@ libraries:
         <div class="span9 offset1 who-uses-noflo__logos">
           <ul>
             {% for library in site.categories['library'] %}
-              {% if page.libraries contains library.title %}
+              {% if site.highlight_libraries contains library.title %}
             <li>
               <a href="{{ site.baseurl }}{{ library.url }}">
                 <img src="{{ site.baseurl }}/img/library/{{ library.title}}.jpg" alt="{{ library.title }}" title="{{ library.title }}" />

@@ -4,8 +4,11 @@ layout: default
   <div class="row-fluid">
     <div class="container">
       <div class="plain-title">
-        <h1>{{ page.title }}</h1>
-        <h2>Component from <a href="{{ site.baseurl }}/library/{{ page.lubrary }}/">{{ page.library }}</a></h2>
+        {% if site.highlight_libraries contains page.library %}
+        <img src="{{ site.baseurl }}/img/library/{{ page.library }}.jpg" alt="{{ page.library }}" title="{{ page.library }}" class="library__logo pull-right" />
+        {% endif %}
+        <h1>{{ page.library | replace: 'noflo-', '' }}/{{ page.title }}</h1>
+        <h2>Component from <a href="{{ site.baseurl }}/library/{{ page.library }}/">{{ page.library }}</a></h2>
         <p>{{ page.description }}</p>
       </div>
       <div class="main">

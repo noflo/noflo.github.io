@@ -54,6 +54,9 @@ categories:
           {% for library in site.categories['library'] %}
           <div class="library__item">
             <div class="library__info">
+              {% if site.highlight_libraries contains library.title %}
+              <img src="{{ site.baseurl }}/img/library/{{ library.title}}.jpg" alt="{{ library.title }}" title="{{ library.title }}" class="library__logo" />
+              {% endif %}
               <h3 class="library__title"><a href="{{ site.baseurl}}{{ library.url }}">{{ library.title }}</a></h3>
               <span class="library__updated">{{ library.author }}</span>
             </div>
