@@ -20,7 +20,11 @@ layout: default
             <div class="overview">
               <dl>
                 <dt>Maintainers:</dt>
+                {% if library.author.name %}
+                <dd>{{ library.author.name }}</dd>
+                {% else %}
                 <dd>{{ library.author }}</dd>
+                {% endif %}
               </dl>
             </div>
             <div class="overview">
@@ -29,12 +33,22 @@ layout: default
                 <dd>{{ library.version }}</dd>
               </dl>
             </div>
+            {% if library.license == 'MIT' %}
             <div class="overview">
               <dl>
                 <dt>License:</dt>
-                <dd><a href="./">MIT</a></dd>
+                <dd><a href="{{ site.baseurl }}/license/">MIT</a></dd>
               </dl>
             </div>
+            {% endif %}
+            {% if library.license.url and library.license.type %}
+            <div class="overview">
+              <dl>
+                <dt>License:</dt>
+                <dd><a href="{{ library.license.url }}">{{ library.license.type }}</a></dd>
+              </dl>
+            </div>
+            {% endif %}
             {% if library.repository %}
             <div class="overview">
               <dl>
