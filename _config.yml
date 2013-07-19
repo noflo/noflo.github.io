@@ -5,6 +5,7 @@ permalink: /:categories/:title/
 baseurl: /noflojs.org/
 highlight_libraries:
   - noflo-couchdb
+  - noflo-diffbot
   - noflo-stripe
   - noflo-github
   - noflo-twilio
