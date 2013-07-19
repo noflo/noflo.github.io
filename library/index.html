@@ -61,7 +61,7 @@ categories:
             <p class="library__description">
             {% for component in site.categories['component'] %}
               {% if component.library == library.title %}
-              {{ component.title }}
+              <a href="{{ site.baseurl }}{{ component.url }}">{{ component.title }}</a>
               {% endif %}
             {% endfor %}
             </p>

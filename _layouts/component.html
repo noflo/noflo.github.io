@@ -1,0 +1,51 @@
+---
+layout: default
+---
+  <div class="row-fluid">
+    <div class="container">
+      <div class="plain-title">
+        <h1>{{ page.title }}</h1>
+        <h2>Component from <a href="{{ site.baseurl }}/library/{{ page.lubrary }}/">{{ page.library }}</a></h2>
+        <p>{{ page.description }}</p>
+      </div>
+      <div class="main">
+        <div class="sidebar span4">
+          {% for library in site.categories['library'] %}
+            {% if library.title == page.library %}
+          <h3 class="sidebar__title">{{ library.title }} Overview</h3>
+          <div class="sidebar__extra">
+            <div class="overview">
+              <dl>
+                <dt>Maintainers:</dt>
+                <dd>{{ library.author }}</dd>
+              </dl>
+            </div>
+            <div class="overview">
+              <dl>
+                <dt>Version:</dt>
+                <dd>{{ library.version }}</dd>
+              </dl>
+            </div>
+            <div class="overview">
+              <dl>
+                <dt>License:</dt>
+                <dd><a href="./">MIT</a></dd>
+              </dl>
+            </div>
+            <div class="overview">
+              <dl>
+                <dt>Repository:</dt>
+                <dd><a href="./">git://github.com/bergie/noflo.git</a></dd>
+              </dl>
+            </div>
+          </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <div class="content span8">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+  </div>
