@@ -37,6 +37,10 @@ layout: default
         </div>
 
         <div class="content span8">
+          <h2>Using this library</h2>
+          <p>Add this library to your project's dependencies with:</p>
+          <pre>$ npm install {{ page.title }} --save</pre>
+          <h2>Components</h2>
           {% for component in site.categories['component'] %}
             {% if component.library == page.title %}
           <div class="library__item">
