@@ -63,7 +63,7 @@ layout: default
         </div>
 
         <div class="content span8">
-          {{ content }}
+          <pre>{{ content | xml_escape }}</pre>
         </div>
       </div>
     </div>
