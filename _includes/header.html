@@ -5,13 +5,7 @@
         <a href="{{ site.baseurl }}/" class="toggle-main-nav">Navigation</a>
         <div class="search-site">
           <a href="{{ site.baseurl }}" class="toggle-search">Search</a>
-          <form action="./search" method="post" class="search-form">
-            <fieldset>
-              <input type="text" id="keywords" name="keywords" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
-              <button class="search-button">Search</button>
-              <span class="search-prompt">Hit Return</span>
-            </fieldset>
-          </form>
+          {% include search.html %}
         </div>
         <nav class="main-nav">
           <ul class="nav">
@@ -20,15 +14,6 @@
             -->
             <li><a href="{{ site.baseurl }}/documentation/"{% if page.categories contains 'documentation' %} class="active"{% endif %}>Documentation</a></li>
             <li class="last"><a href="{{ site.baseurl }}/library/"{% if page.categories contains 'library' or page.categories contains 'component' %} class="active"{% endif %}>Libraries</a></li>
-            <li class="visible-phone">
-              <form action="./" method="post" class="mobile-nav-search">
-                <fieldset>
-                  <label for="mobile-nav-search" class="mobile-nav-search__label">Search</label>
-                  <input type="text" id="mobile-nav-search" class="mobile-nav-search__text" name="mobile-nav-search" value="" placeholder="Search" />
-                  <button class="mobile-nav-search__button">Search</button>
-                </fieldset>
-              </form>
-            </li>
           </ul>
         </nav>
 
