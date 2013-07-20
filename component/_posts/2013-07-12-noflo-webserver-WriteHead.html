@@ -1,0 +1,33 @@
+---
+  title: "WriteHead"
+  library: "noflo-webserver"
+  layout: "component"
+
+---
+noflo = require 'noflo'
+
+class WriteHead extends noflo.Component
+  description: 'Given a status code and an object containing return headers,
+    call `writeHead` on incoming `res`'
+
+  constructor: ->
+    @inPorts =
+      in: new noflo.Port()
+      status: new noflo.Port()
+      headers: new noflo.Port()
+    @outPorts =
+      out: new noflo.Port()
+
+    @inPorts.headers.on 'data', (@headers) =>
+    @inPorts.status.on 'data', (@status) =>
+
+    @inPorts.in.on 'data', (request) =>
+      request.res.writeHead @status, @headers if @status?
+      @outPorts.out.send request
+
+    @inPorts.in.on 'disconnect', =>
+      delete @headers
+      delete @status
+      @outPorts.out.disconnect()
+
+exports.getComponent = -> new WriteHead

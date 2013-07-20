@@ -1,0 +1,30 @@
+---
+  title: "ParseFrontmatter"
+  library: "noflo-yaml"
+  layout: "component"
+
+---
+EXPORT=CONTENT.IN:CONTENT
+EXPORT=RESULTS.OUT:RESULTS
+
+Content(Split) OUT -> IN FileName(ReadGroup)
+'path' -> PROPERTY SetFileName(SetPropertyValue)
+FileName() GROUP -> VALUE SetFileName()
+
+Content() OUT -> IN Clean(RemoveGroups)
+Clean() OUT -> IN Extract(yaml/ExtractFrontmatter) OUT -> IN SplitProps(Split)
+
+'head' -> KEY GetYaml(GetObjectKey)
+SplitProps() OUT -> IN GetYaml()
+GetYaml() OUT -> IN ParseYaml(yaml/ParseYaml)
+
+'body' -> KEY GetBody(GetObjectKey)
+'body' -> PROPERTY Results(SetPropertyValue)
+SplitProps() OUT -> IN GetBody() OUT -> IN MergeBody(Merge)
+
+# Handle files with empty body
+'' -> DATA EmptyBody(Kick)
+GetBody() MISSED -> IN EmptyBody() OUT -> IN MergeBody()
+
+MergeBody() OUT -> VALUE Results()
+ParseYaml() OUT -> IN SetFileName() OUT -> IN Results()

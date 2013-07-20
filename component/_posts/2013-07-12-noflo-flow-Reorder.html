@@ -1,0 +1,62 @@
+---
+  title: "Reorder"
+  library: "noflo-flow"
+  layout: "component"
+
+---
+noflo = require "noflo"
+_ = require "underscore"
+_s = require "underscore.string"
+{ CacheStorage } = require "../lib/cache_storage"
+
+class Reorder extends noflo.Component
+
+  description: _s.clean "Connect to some number of inports and some number of
+  outports. All packets are stored and when the lessor of the number of inports
+  or of outports is reached, flush the packets in *reverse* order."
+
+  constructor: ->
+    @sockets = []
+    @cache = new CacheStorage
+
+    @inPorts =
+      in: new noflo.ArrayPort
+    @outPorts =
+      out: new noflo.ArrayPort
+
+    @inPorts.in.on "connect", (socket) =>
+      @socIndex = @sockets.indexOf socket
+      if @socIndex < 0
+        @socIndex = @sockets.length
+        @sockets.push socket
+      @cache.connect @socIndex
+
+    @inPorts.in.on "begingroup", (group) =>
+      @cache.beginGroup group, @socIndex
+
+    @inPorts.in.on "data", (data) =>
+      @cache.send data, @socIndex
+
+    @inPorts.in.on "endgroup", (group) =>
+      @cache.endGroup @socIndex
+
+    @inPorts.in.on "disconnect", =>
+      @cache.disconnect @socIndex
+      @flush()
+
+  flush: ->
+    threshold = _.min [@inPorts.in.sockets.length, @outPorts.out.sockets.length]
+    current = @cache.getCacheKeys().length
+
+    # Flush in reverse order if we have enough connections
+    if current >= threshold
+      for i in [threshold-1..0]
+        socket = @inPorts.in.sockets[i]
+        socIndex = @sockets.indexOf socket
+        @outPorts.out.connect i
+        a = @cache.flushCache @outPorts.out, socIndex, i
+        @outPorts.out.disconnect i
+
+      @sockets = []
+
+exports.getComponent = -> new Reorder
