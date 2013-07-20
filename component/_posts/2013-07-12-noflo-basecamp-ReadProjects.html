@@ -1,0 +1,34 @@
+---
+  title: "ReadProjects"
+  library: "noflo-basecamp"
+  layout: "component"
+
+---
+noflo = require "noflo"
+base = require "../lib/BasecampComponent.coffee"
+
+class ReadProjects extends base.BasecampComponent
+  constructor: ->
+    do @basePortSetup
+    @outPorts =
+      out: new noflo.Port()
+
+    @inPorts.apikey.on "disconnect", =>
+      do @readProject if @hostname
+    @inPorts.hostname.on "disconnect", =>
+      do @readProject if @apikey
+
+  readProject: ->
+    @get "/projects.xml", (data) =>
+      @parseProject data
+
+  parseProject: (data) ->
+    target = @outPorts.out
+    id = "https://#{@hostname}/"
+    @parse data, (parsed) ->
+      target.beginGroup id
+      target.send project for project in parsed.project
+      target.endGroup()
+      target.disconnect()
+    
+exports.getComponent = -> new ReadProjects
