@@ -22,6 +22,8 @@
   * LOG Inherited from LoggingComponent to send log messages for error handling.
   * OUT Created in this class to send whole documents that were read from CouchDB.
 
+Use this component to read documents out of a CouchDB database.
+
 
     class ReadDocument extends CouchDbComponentBase
       constructor: ->
