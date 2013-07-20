@@ -6,6 +6,9 @@ baseurl: /noflojs.org/
 repository:
   web: "https://github.com/bergie/noflo"
   git: "git://github.com/bergie/noflo.git"
+google:
+  search: "016364845905675673706:orufl0szkhw"
+  analytics: "UA-75936-14"
 highlight_libraries:
   - noflo-couchdb
   - noflo-diffbot
