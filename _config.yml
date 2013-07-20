@@ -6,8 +6,10 @@ baseurl: /noflojs.org/
 highlight_libraries:
   - noflo-couchdb
   - noflo-diffbot
-  - noflo-stripe
+  - noflo-ducksboard
   - noflo-github
+  - noflo-stripe
+  - noflo-redis
   - noflo-twilio
   - noflo-twitter
 libraries:
