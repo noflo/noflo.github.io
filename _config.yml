@@ -2,7 +2,7 @@ title: NoFlo
 tagline: Visual Control Flows for JavaScript
 markdown: redcarpet
 permalink: /:categories/:title/
-baseurl: /noflojs.org/
+baseurl: ""
 repository:
   web: "https://github.com/bergie/noflo"
   git: "git://github.com/bergie/noflo.git"
