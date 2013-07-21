@@ -9,6 +9,7 @@ repository:
 google:
   search: "016364845905675673706:orufl0szkhw"
   analytics: "UA-75936-14"
+  plus: "u/0/112372998187205178398"
 highlight_libraries:
   - noflo-couchdb
   - noflo-diffbot
