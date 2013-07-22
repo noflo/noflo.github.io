@@ -4,51 +4,127 @@ title: Getting started with NoFlo
 categories:
  - documentation
 ---
-There are two ways to use NoFlo:
+NoFlo is a [Flow-Based Programming](http://en.wikipedia.org/wiki/Flow-based_programming) environment for JavaScript. In flow-based programs, the logic of your software is defined as a *graph*. The *nodes* of the graph are instances of NoFlo components, and the *edges* define the connections between them.
 
-* _Independent_: Building the whole control logic of your software as a NoFlo graph, and running it with the `noflo` tool
-* _Embedded_: Using NoFlo as a library and calling some NoFlo graphs whenever your software needs workflows
+NoFlo components react to incoming messages, or *packets*. When a component receives packets in its input ports it performs a predefined operation, and sends its result out as a packet to its output ports. There is no shared state, and the only way to communicate between components is by sending packets.
 
-When you create a NoFlo graph, it doesn't do anything by itself. It only loads the components of the graph and sets up the connections between them. Then it is up to the components to actually start sending messages to their outports, or reacting to messages they receive on their inports.
+NoFlo components are built as simple [CoffeeScript](http://coffeescript.org/) classes that define the input and output ports, and register various event listeners on them. When executed, NoFlo creates a live graph, or *network* out of a graph, instantiates the components used in the graph, and connects them together.
 
-Since most components require some input before they act, the usual way to make a NoFlo graph run is to send it some _initial information packets_, or IIPs. Examples of this would include sending a port number that a web server could listen to the web server component, or sending a file name to a file reader.
+NoFlo graphs can deal with multiple different input paradigms. The same flow can react to incoming HTTP requests, text messages, and changes in the file system, and can similarly output to different targets like writing to a database, responding to the HTTP requests, or updating a dashboard. It is simply a matter of choosing the components you want to use.
+
+## Using NoFlo
+
+There are two ways to run your flow-based programs with NoFlo. If your whole application is based on flows, you can simply have NoFlo execute and run it. Flow-based programs done in this way are called *independent* graphs. You can run them with the `noflo` command that ships with the NoFlo package.
+
+The other option is to *embed* NoFlo graphs into your existing JavaScript application by using it as a regular Node.js library. This is useful when you already have an existing system where you want to automate some parts as their own flows, or to add new functionality.
+
+Examples of embedded usage of NoFlo include handling billing processes or routing incoming SMS or email within an existing Node.js web application.
+
+### Activation model
+
+When you start a NoFlo network, it doesn't do anything by itself. It only loads the components of the graph and sets up the connections between them. Then it is up to the components to actually start sending messages to their outports, or reacting to messages they receive on their input ports.
+
+Since most components require some input before they act, the usual way to make a NoFlo graph run is to send it some initial information packets, or *IIPs*. Examples of this would include sending a port number that a web server could listen to the web server component, or sending a file name to a file reader.
 
 This activation model provides many possibilities:
 
-* Starting the graph based on user interaction (shell command, clicking a button)
-* Starting the graph based on a received signal (Redis pub/sub, D-Bus signal, WebHook, email)
-* Starting the graph at a given time or interval (running a graph on the first of every month, or five minutes from now)
-* Starting the graph based on context (when arriving to a physical location, when user goes to a given web site)
+* Starting a flow based on user interaction (shell command, clicking a button)
+* Starting a flow based on a received signal (Redis pub/sub, D-Bus signal, WebHook, email)
+* Starting a flow at a given time or interval (running a graph on the first of every month, or five minutes from now)
+* Starting a flow based on context (when arriving to a physical location, when user goes to a given web site)
 
-### Running the examples
+## Creating a NoFlo project
 
-File line count using _embedded_ NoFlo:
+NoFlo projects are created in the same way as any other Node.js project would. To get started, you need a working installation of [Node.js](http://nodejs.org/) (version 0.8 or later), and the [NPM](https://npmjs.org/) package manager that comes with it.
 
-    $ coffee ./examples/linecount/count.coffee somefile.txt
+You can test that your Node.js installation works by running:
 
-File line count as an _individual_ NoFlo application:
+    $ npm -v
 
-    $ noflo -i
-    NoFlo>> load examples/linecount/count.json
+If this doesn't work, read the [Node.js installation instructions](http://nodejs.org/download/) for your operating system.
 
-or
+### Project folder
 
-    $ noflo examples/linecount/count.json
+To create a new project, you should create a new folder in the file system. This folder will contain all the files specific to your project, including dependency declarations, unit tests, and the NoFlo graphs and components. This is what you’ll usually want to manage in version control.
 
-Simple "Hello, world" web service with Basic authentication using _embedded_ NoFlo:
+    $ mkdir my-noflo-example-app
 
-    $ coffee ./examples/http/hello.coffee
+Then go to that folder:
 
-Then just point your browser to [http://localhost:8003/](http://localhost:8003/). Note that this example needs to have `connect` NPM package installed. Username is `user` and password is `pass`.
+    $ cd my-noflo-example-app
 
-## Terminology
+### Installing NoFlo
 
-* Component: individual, pluggable and reusable piece of software. In this case a NoFlo-compatible CommonJS module
-* Component Library: an NPM module providing a set of components for a particular domain (for example, *noflo-fs* for file operations components)
-* Graph: the control logic of a FBP application, can be either in programmatical or file format
-* Inport: inbound port of a component
-* Network: collection of processes connected by sockets. A running version of a graph
-* Outport: outbound port of a component
-* Process: an instance of a component that is running as part of a graph (also known as Node in non-live graphs)
-* Connection: connection between an outport of a Process, and inport of another Process (also known as Edge in non-live graphs)
-* Initial Information Packet: predefined data packet sent to a defined inport of a Process
+The first thing to do with your project is to create a `package.json` file into the project root. This is the file that is used by NPM for finding and installing the libraries your project needs.
+
+A basic `package.json` file could look like the following. Create one using a text editor:
+
+    {
+      "name": "my-noflo-example-app",
+      "version": "0.0.1"
+    }
+
+Once the `package.json` file is in place, you're ready to install NoFlo. Do this by running:
+
+    $ npm install noflo --save
+
+NPM will fetch the latest release version of NoFlo and all its dependencies. Once this has finished, try that NoFlo works by running:
+
+    $ ./node_modules/.bin/noflo -h
+
+### Getting components
+
+The main NoFlo package gives you the environment for running flows. In addition you'll need the components that you'll be using in your graphs.
+
+There are {{ site.categories['component'] | size }} open source components available via [NoFlo Component Libraries](/library/) that you can install with NPM.
+
+For example, to install the [filesystem components](/library/noflo-filesystem/), you can run:
+
+    $ npm install noflo-filesystem --save
+
+Once NPM completes the components from that library will be available to your project. Your project can pull in components from as many NoFlo libraries as needed.
+
+You can see a list of components that are installed in your project with:
+
+    $ ./node_modules/.bin/noflo list .
+
+## Defining your first graph
+
+All NoFlo programs are built as graphs, which define the nodes and components used, and connections between them.
+
+NoFlo graphs can be either defined in a [JSON file format](/documentation/json/) or using the [`.fbp` domain-specific language](/documentation/fbp/). For brevity, this guide uses the `.fbp` syntax.
+
+Our first graph can be a simple one. Since we already have the file system components available, we can implement a graph that reads a file, and outputs its contents on the screen.
+
+Graphs are typically stored in the graphs subfolder of a NoFlo project. Create that folder:
+
+    $ mkdir graphs
+
+Create a new file in that folder called `ShowContents.fbp` and open it in your favorite text editor. Paste in the following contents:
+
+    # In the graph we first need to define the nodes and the connections between them
+    Read(filesystem/ReadFile) OUT -> IN Display(Output)
+
+    # Start off the graph by sending a filename to the file reader
+    'package.json' -> IN Read()
+
+Once you've saved the file you can run the graph with NoFlo:
+
+    $ ./node_modules/.bin/noflo graphs/ShowContents.fbp
+
+The contents of your `package.json` should be shown on the console.
+
+### Debugging the graph
+
+If you want to see how the graph works internally, you can run NoFlo with the debugger:
+
+    $ ./node_modules/.bin/noflo --debug graphs/ShowContents.fbp
+
+This will show all the various events happening inside the graph:
+
+* Connections being opened
+* Package groups being started and finished
+* Data being sent through the connections
+* Connections being closed
+
+Looking at this is useful in order to understand how information flows through a NoFlo network.
