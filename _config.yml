@@ -26,16 +26,19 @@ libraries:
   - bergie/noflo-couchdb
   - bergie/noflo-diffbot
   - noflo/noflo-docco
+  - kenhkan/noflo-crypto
   - bergie/noflo-ducksboard
   - bergie/noflo-filesystem
   - kenhkan/noflo-flow
   - bergie/noflo-git
   - bergie/noflo-github
+  - kenhkan/noflo-groups
   - kenhkan/noflo-handyman
   - bergie/noflo-html
   - kenhkan/noflo-lift
   - bergie/noflo-liquid
   - bergie/noflo-markdown
+  - bergie/noflo-math
   - bergie/noflo-mq
   - kenhkan/noflo-objects
   - bergie/noflo-oembed
@@ -45,6 +48,7 @@ libraries:
   - bergie/noflo-redis
   - bergie/noflo-restfulmetrics
   - kenhkan/noflo-routers
+  - kenhkan/noflo-semanticsthree
   - kenhkan/noflo-strings
   - svetly/noflo-stripe
   - kenhkan/noflo-swiss
