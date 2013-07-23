@@ -16,7 +16,7 @@ categories:
           {% include noflo.html %}
         </div>
         <div class="content span8">
-          {% for component in site.categories['component'] %}
+          {% for component in site.categories['component'] reversed %}
           <div class="library__item">
             <div class="library__info">
               <h3 class="library__title"><a href="{{ site.baseurl}}{{ component.url }}">{{ component.library | replace: 'noflo-', '' }}/{{ component.title }}</a></h3>

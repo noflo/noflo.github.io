@@ -54,7 +54,7 @@ layout: default
 
         <div class="content span8">
           <h2>Components</h2>
-          {% for component in site.categories['component'] %}
+          {% for component in site.categories['component'] reversed %}
             {% if component.library == page.title %}
           <div class="library__item">
             <div class="library__info">

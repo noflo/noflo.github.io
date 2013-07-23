@@ -17,7 +17,7 @@ categories:
         </div>
 
         <div class="content span8">
-          {% for library in site.categories['library'] %}
+          {% for library in site.categories['library'] reversed %}
           <div class="library__item">
             <div class="library__info">
               {% if site.highlight_libraries contains library.title %}

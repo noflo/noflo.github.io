@@ -146,7 +146,7 @@ title: NoFlo | Flow-Based Programming for JavaScript
         </div>
         <div class="span9 offset1 who-uses-noflo__logos">
           <ul>
-            {% for library in site.categories['library'] %}
+            {% for library in site.categories['library'] reversed %}
               {% if site.highlight_libraries contains library.title %}
             <li>
               <a href="{{ site.baseurl }}{{ library.url }}">
