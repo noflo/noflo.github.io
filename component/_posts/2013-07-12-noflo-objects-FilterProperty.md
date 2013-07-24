@@ -20,11 +20,23 @@
         @recurse = false
         @keep = false
     
+        @legacy = false
+
+Legacy mode
+
+        @accepts = []
+        @regexps = []
+    
         @inPorts =
           in: new noflo.Port
           key: new noflo.Port
           recurse: new noflo.Port
           keep: new noflo.Port
+
+Legacy mode
+
+          accept: new noflo.ArrayPort
+          regexp: new noflo.ArrayPort
         @outPorts =
           out: new noflo.Port
     
@@ -39,14 +51,30 @@
         @inPorts.key.on "data", (key) =>
           @keys.push new RegExp key, "g"
     
+
+Legacy mode
+
+        @inPorts.accept.on "data", (data) =>
+          @legacy = true
+          @accepts.push data
+        @inPorts.regexp.on "data", (data) =>
+          @legacy = true
+          @regexps.push data
+    
         @inPorts.in.on "begingroup", (group) =>
           @outPorts.out.beginGroup group
     
         @inPorts.in.on "data", (data) =>
-          if _.isObject data
-            data = deepCopy data
-            @filter data
-            @outPorts.out.send data
+
+Legacy mode
+
+          if @legacy
+            @filterData data
+          else
+            if _.isObject data
+              data = deepCopy data
+              @filter data
+              @outPorts.out.send data
     
         @inPorts.in.on "endgroup", (group) =>
           @outPorts.out.endGroup()
@@ -70,6 +98,27 @@
     
           if not isMatched and _.isObject(value) and @recurse
             @filter value
+    
+
+Legacy mode
+
+      filterData: (object) ->
+        newData = {}
+        match = false
+        for property, value of object
+          if @accepts.indexOf(property) isnt -1
+            newData[property] = value
+            match = true
+            continue
+    
+          for expression in @regexps
+            regexp = new RegExp expression
+            if regexp.exec property
+              newData[property] = value
+              match = true
+    
+        return unless match
+        @outPorts.out.send newData
     
     exports.getComponent = -> new FilterProperty
     

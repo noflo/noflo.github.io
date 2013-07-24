@@ -10,7 +10,7 @@
     
     class ParseJson extends noflo.Component
       constructor: ->
-        @try = true
+        @try = false
     
         @inPorts =
           in: new noflo.Port()
@@ -19,7 +19,7 @@
           out: new noflo.Port()
     
         @inPorts.in.on "data", (data) =>
-          @try = false if data is "false"
+          @try = true if data is "true"
     
         @inPorts.in.on "begingroup", (group) =>
           @outPorts.out.beginGroup group

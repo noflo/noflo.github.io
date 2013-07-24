@@ -7,7 +7,7 @@
 
     noflo = require("noflo")
     
-    class Remove extends noflo.Component
+    class RemoveGroups extends noflo.Component
     
       description: "Remove a group given a string or a regex string"
     
@@ -37,5 +37,5 @@
         @inPorts.in.on "disconnect", =>
           @outPorts.out.disconnect()
     
-    exports.getComponent = -> new Remove
+    exports.getComponent = -> new RemoveGroups
     

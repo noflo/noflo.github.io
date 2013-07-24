@@ -2,10 +2,10 @@
   title: "noflo-adapters"
   description: "Packet Format Conversion for NoFlo"
   author: "Kenneth Kan <kenhkan@gmail.com>"
-  version: "0.0.6"
+  version: "0.1.0"
   repository: 
     type: "git"
-    url: "git://github.com/kenhkan/noflo-adapters"
+    url: "https://github.com/noflo/noflo-adapters"
   layout: "library"
 
 ---

@@ -5,43 +5,49 @@
 
 ---
 
-    noflo = require "noflo"
-    _ = require "underscore"
-    _s = require "underscore.string"
+    noflo = require 'noflo'
     
     class Template extends noflo.Component
-    
-      description: _s.clean "Like 'Replace', but fix the template and pass in an
-      object of patterns and replacements."
+      description: 'This component receives a templating engine name,
+        a string containing the template, and variables for the template.
+        Then it runs the chosen template engine and sends resulting
+        templated content to the output port'
     
       constructor: ->
+        @engine = 'jade'
+        @variables = null
         @template = null
     
         @inPorts =
-          in: new noflo.Port()
+          engine: new noflo.Port()
+          options: new noflo.Port()
           template: new noflo.Port()
+    
         @outPorts =
           out: new noflo.Port()
     
-        @inPorts.template.on "data", (template) =>
-          @template = template if _.isString template
+        @inPorts.engine.on 'data', (data) =>
+          @engine = data
     
-        @inPorts.in.on "begingroup", (group) =>
-          @outPorts.out.beginGroup group
+        @inPorts.options.on 'connect', =>
+          @variables = null
+        @inPorts.options.on 'data', (data) =>
+          @variables = data
+        @inPorts.options.on 'disconnect', =>
+          @outPorts.out.connect() if @template
     
-        @inPorts.in.on "data", (data) =>
-          string = @template or ""
+        @inPorts.template.on 'connect', =>
+          @template = null
+        @inPorts.template.on 'data', (data) =>
+          @template = data
+        @inPorts.template.on 'disconnect', =>
+          @outPorts.out.connect() if @variables
     
-          for pattern, replacement of data
-            pattern = new RegExp(pattern, "g")
-            string = string.replace pattern, replacement
-    
-          @outPorts.out.send string
-    
-        @inPorts.in.on "endgroup", =>
-          @outPorts.out.endGroup()
-    
-        @inPorts.in.on "disconnect", =>
+        @outPorts.out.on 'connect', =>
+          templating = require @engine
+          fn = templating.compile @template, @variables
+          @outPorts.out.send fn @variables.locals
+          @variables = null
           @outPorts.out.disconnect()
     
     exports.getComponent = -> new Template

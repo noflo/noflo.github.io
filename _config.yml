@@ -20,42 +20,42 @@ highlight_libraries:
   - noflo-twilio
   - noflo-twitter
 libraries:
-  - kenhkan/noflo-adapters
-  - bergie/noflo-basecamp
+  - noflo/noflo-adapters
+  - noflo/noflo-basecamp
   - kenhkan/noflo-compare
-  - bergie/noflo-couchdb
-  - bergie/noflo-diffbot
+  - noflo/noflo-couchdb
+  - noflo/noflo-diffbot
   - noflo/noflo-docco
   - kenhkan/noflo-crypto
-  - bergie/noflo-ducksboard
-  - bergie/noflo-filesystem
-  - kenhkan/noflo-flow
-  - bergie/noflo-git
-  - bergie/noflo-github
-  - kenhkan/noflo-groups
+  - noflo/noflo-ducksboard
+  - noflo/noflo-filesystem
+  - noflo/noflo-flow
+  - noflo/noflo-git
+  - noflo/noflo-github
+  - noflo/noflo-groups
   - kenhkan/noflo-handyman
-  - bergie/noflo-html
-  - kenhkan/noflo-lift
-  - bergie/noflo-liquid
-  - bergie/noflo-markdown
-  - bergie/noflo-math
+  - noflo/noflo-html
+  - noflo/noflo-lift
+  - noflo/noflo-liquid
+  - noflo/noflo-markdown
+  - noflo/noflo-math
   - bergie/noflo-mq
-  - kenhkan/noflo-objects
-  - bergie/noflo-oembed
-  - kenhkan/noflo-packets
+  - noflo/noflo-objects
+  - noflo/noflo-oembed
+  - noflo/noflo-packets
   - kenhkan/noflo-pg
   - kenhkan/noflo-pgorm
-  - bergie/noflo-redis
-  - bergie/noflo-restfulmetrics
-  - kenhkan/noflo-routers
+  - noflo/noflo-redis
+  - noflo/noflo-restfulmetrics
+  - noflo/noflo-routers
   - kenhkan/noflo-semanticsthree
-  - kenhkan/noflo-strings
+  - noflo/noflo-strings
   - svetly/noflo-stripe
   - kenhkan/noflo-swiss
   - kenhkan/noflo-twilio
   - robingl/noflo-twitter
   - kenhkan/noflo-underscore
-  - bergie/noflo-webserver
+  - noflo/noflo-webserver
   - kenhkan/noflo-woute
-  - bergie/noflo-xml
-  - bergie/noflo-yaml
+  - noflo/noflo-xml
+  - noflo/noflo-yaml

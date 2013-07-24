@@ -3,10 +3,13 @@
   description: "CouchDB components for the NoFlo flow-based programming environment"
   author: "Henri Bergius <henri.bergius@iki.fi>"
   version: "1.0.0"
+  repository: 
+    type: "git"
+    url: "https://github.com/noflo/noflo-couchdb.git"
   layout: "library"
 
 ---
-CouchDB components for NoFlo [![Build Status](https://secure.travis-ci.org/bergie/noflo-couchdb.png?branch=master)](https://travis-ci.org/bergie/noflo-couchdb)
+CouchDB components for NoFlo [![Build Status](https://secure.travis-ci.org/noflo/noflo-couchdb.png?branch=master)](https://travis-ci.org/noflo/noflo-couchdb)
 =========================
 
 This module provides CouchDB components for the [NoFlo](http://noflojs.org/) flow-based programming framework

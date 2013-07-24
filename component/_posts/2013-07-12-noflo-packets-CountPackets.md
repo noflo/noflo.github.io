@@ -8,7 +8,7 @@
     noflo = require("noflo")
     _ = require("underscore")
     
-    class Counter extends noflo.Component
+    class CountPackets extends noflo.Component
     
       description: "count number of data IPs"
     
@@ -44,5 +44,5 @@
           @outPorts.count.disconnect()
           @outPorts.out.disconnect()
     
-    exports.getComponent = -> new Counter
+    exports.getComponent = -> new CountPackets
     

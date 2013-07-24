@@ -5,17 +5,17 @@
 
 ---
 
-    noflo = require "noflo"
-    _s = require "underscore.string"
+    noflo = require 'noflo'
+    _s = require 'underscore.string'
     
     class Replace extends noflo.Component
     
-      description: _s.clean "Given a fixed pattern and its replacement, replace all
-      occurrences in the incoming template."
+      description: _s.clean 'Given a fixed pattern and its replacement, replace all
+      occurrences in the incoming template.'
     
       constructor: ->
         @pattern = null
-        @replacement = ""
+        @replacement = ''
     
         @inPorts =
           in: new noflo.Port()
@@ -24,21 +24,21 @@
         @outPorts =
           out: new noflo.Port()
     
-        @inPorts.pattern.on "data", (data) =>
+        @inPorts.pattern.on 'data', (data) =>
           @pattern = new RegExp(data, 'g')
-        @inPorts.replacement.on "data", (data) =>
+        @inPorts.replacement.on 'data', (data) =>
           @replacement = data
     
-        @inPorts.in.on "begingroup", (group) =>
+        @inPorts.in.on 'begingroup', (group) =>
           @outPorts.out.beginGroup group
-        @inPorts.in.on "data", (data) =>
+        @inPorts.in.on 'data', (data) =>
           string = data
           if @pattern?
             string = "#{data}".replace @pattern, @replacement
           @outPorts.out.send string
-        @inPorts.in.on "endgroup", =>
+        @inPorts.in.on 'endgroup', =>
           @outPorts.out.endGroup()
-        @inPorts.in.on "disconnect", =>
+        @inPorts.in.on 'disconnect', =>
           @outPorts.out.disconnect()
     
     exports.getComponent = -> new Replace
