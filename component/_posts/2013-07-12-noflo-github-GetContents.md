@@ -35,14 +35,15 @@
     
         unless @repo
           callback new Error 'repository name required'
+        repo = @repo
     
-        request = api.get "/repos/#{@repo}/contents/#{path}"
+        request = api.get "/repos/#{repo}/contents/#{path}"
         request.on 'success', (res) =>
           unless res.body.content
             callback new Error 'content not found'
             return
           buf = new Buffer res.body.content, 'base64'
-          @outPorts.out.beginGroup @repo
+          @outPorts.out.beginGroup repo
           @outPorts.out.beginGroup path
           @outPorts.out.send buf.toString 'ascii'
           @outPorts.out.endGroup()

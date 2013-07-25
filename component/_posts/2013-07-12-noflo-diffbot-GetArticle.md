@@ -32,7 +32,7 @@
           stats: true
         , (err, article) =>
           return callback err if err
-          return callback article if article.statusCode is 401
+          return callback article if article.errorCode is 401
           @outPorts.out.beginGroup url
           @outPorts.out.send article
           @outPorts.out.endGroup()
