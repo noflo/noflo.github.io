@@ -1,0 +1,6 @@
+{
+  "libraries": {
+    "noflo/noflo-dom": "*",
+    "d4tocchni/noflo-draggabilly": "*"
+  }
+}
