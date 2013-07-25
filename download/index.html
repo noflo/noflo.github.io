@@ -17,36 +17,58 @@ title: Download NoFlo for the browser
           <p>
           The NoFlo download builder will generate a custom JavaScript file with the <a href="{{ site.baseurl }}">component libraries</a> you need for your project.
           </p>
-          <form method="post" action="http://noflo-builder.herokuapp.com/">
+          <form method="post" action="http://noflo-builder.herokuapp.com/" class="form-horizontal">
             <fieldset>
-              <button type="submit" class="btn">Build Download</button>
-              <label class="checkbox">
-                <input type="checkbox" checked disabled>
-                NoFlo core
-              </label>
+              <fieldset>
+                <legend>Core functionality</legend>
+                <div class="control-group">
+                  <label class="control-label" for="noflo-core">
+                    NoFlo core
+                  </label>
+                  <div class="controls">
+                    <input id="noflo-core" type="checkbox" checked disabled>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend>Component Libraries to include</legend>
               {% for library in site.browser_libraries %}
-              <label class="checkbox">
-                <input name="{{ library }}" type="checkbox">
-                {{ library }}
-              </label>
+                <div class="control-group">
+                  <label class="control-label" for="{{ library | replace: '/', '-' }}">
+                    {{ library }}
+                  </label>
+                  <div class="controls">
+                    <input name="{{ library }}" type="checkbox" id="{{ library | replace: '/', '-' }}">
+                  </div>
+                </div>
               {% endfor %}
+              </fieldset>
+              <div class="control-group">
+                <div class="controls">
+                  <button type="submit" class="btn">Build Download</button>
+                </div>
+              </div>
             </fieldset>
           </form>
+          <h2>Usage</h2>
           <p>
           To use NoFlo in your web app, simply include it to your pages:
           </p>
-          <pre>
-&lt;script src="/path/to/noflo.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-var noflo = require('/noflo');
+{% highlight html %}
+<script src="/path/to/noflo.js"></script>
+<script>
+// Load some graph definition into NoFlo
 noflo.graph.loadJSON(someJSON, function (graph) {
+  // Make all included component libraries available
   graph.baseDir = '/noflo-custom';
+
+  // Create the live NoFlo network
   noflo.createNetwork(graph, function (network) {
     console.log("Network created");
   });
 });
-&lt;/script&gt;
-          </pre>
+</script>
+{% endhighlight %}
         </div>
       </div>
     </div>
