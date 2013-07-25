@@ -4,8 +4,8 @@ markdown: redcarpet
 permalink: /:categories/:title/
 baseurl: ""
 repository:
-  web: "https://github.com/bergie/noflo"
-  git: "git://github.com/bergie/noflo.git"
+  web: "https://github.com/noflo/noflo"
+  git: "git://github.com/noflo/noflo.git"
 google:
   search: "016364845905675673706:orufl0szkhw"
   analytics: "UA-75936-14"
@@ -39,7 +39,7 @@ libraries:
   - noflo/noflo-liquid
   - noflo/noflo-markdown
   - noflo/noflo-math
-  - bergie/noflo-mq
+  - noflo/noflo-mq
   - noflo/noflo-objects
   - noflo/noflo-oembed
   - noflo/noflo-packets
