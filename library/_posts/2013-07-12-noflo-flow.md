@@ -9,7 +9,7 @@
   layout: "library"
 
 ---
-Flow Control for NoFlo [![Build Status](https://secure.travis-ci.org/kenhkan/noflo-flow.png?branch=master)](https://travis-ci.org/kenhkan/noflo-flow)
+Flow Control for NoFlo [![Build Status](https://secure.travis-ci.org/noflo/noflo-flow.png?branch=master)](https://travis-ci.org/noflo/noflo-flow)
 ===============================
 
 This package provides utility components to control the flow within a
@@ -20,9 +20,3 @@ to one out port versus another (or not at all).
 
 Feel free to contribute new components and graphs! I'll try to
 incorporate as soon as time allows.
-
-
-TODO
--------------------------------
-
-Document components

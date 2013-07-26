@@ -14,11 +14,11 @@
         @open = false
     
         @inPorts =
-          in: new noflo.Port
-          open: new noflo.Port
-          close: new noflo.Port
+          in: new noflo.Port 'all'
+          open: new noflo.Port 'bang'
+          close: new noflo.Port 'bang'
         @outPorts =
-          out: new noflo.Port
+          out: new noflo.Port 'all'
     
         @inPorts.in.on 'connect', =>
           return unless @open

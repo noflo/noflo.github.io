@@ -23,6 +23,7 @@ libraries:
   - noflo/noflo-adapters
   - noflo/noflo-basecamp
   - kenhkan/noflo-compare
+  - noflo/noflo-core
   - noflo/noflo-couchdb
   - noflo/noflo-diffbot
   - noflo/noflo-docco
