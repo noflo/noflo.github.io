@@ -46,6 +46,7 @@ libraries:
   - noflo/noflo-packets
   - kenhkan/noflo-pg
   - kenhkan/noflo-pgorm
+  - noflo/noflo-physics
   - noflo/noflo-redis
   - noflo/noflo-restfulmetrics
   - noflo/noflo-routers
@@ -62,4 +63,6 @@ libraries:
   - noflo/noflo-yaml
 browser_libraries:
   - noflo/noflo-dom
+  - noflo/noflo-math
+  - noflo/noflo-physics
   - d4tocchini/noflo-draggabilly

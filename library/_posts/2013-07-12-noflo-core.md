@@ -1,6 +1,6 @@
 ---
   title: "noflo-core"
-  description: "noflo Essentials"
+  description: "NoFlo Essentials"
   version: "0.1.0"
   author: 
     name: "Henri Bergius"
