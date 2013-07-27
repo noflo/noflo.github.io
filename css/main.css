@@ -901,11 +901,11 @@ blockquote p {
 .understanding-noflo__image {
   position: absolute;
   top: 15%;
-  right: 0;
+  right: -25%;
   height: 100%;
   background-color: transparent;
   background-repeat: no-repeat;
-  background-position: right top;
+  background-position: 0 0;
   background-image: url(../img/diagrams/screen-and-map.png); }
   .understanding-noflo__image img {
     display: none; }
@@ -980,6 +980,7 @@ blockquote p {
   .part-of-noflo .container {
     height: 100%; }
   .part-of-noflo h2 {
+    margin-top: 0;
     font-family: "proxima-nova-light", "Helvetica Neue Light", "HelveticaNeueLight", "HelveticaNeueLight", "Helvetica Neue", "HelveticaNeue", Arial, sans-serif;
     font-size: 2.0em; }
     @media (max-width: 767px) {
@@ -1256,10 +1257,14 @@ code {
 .library__component_list {
   float: left;
   margin-bottom: 60px;
-  margin-top: 15px; }
+  margin-top: 15px;
+  width: 100%; }
   .library__component_list .library__item {
     width: 48%;
     margin-right: 2%; }
+    @media (max-width: 767px) {
+      .library__component_list .library__item {
+        width: 100%; } }
 
 /*------------------------------------*\
     $Demos

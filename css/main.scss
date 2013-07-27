@@ -1272,11 +1272,11 @@ blockquote {
 .understanding-noflo__image {
 	position: absolute;
 	top: 15%;
-	right: 0;
+	right: -25%;
 	height: 100%;
 	background-color: transparent;
 	background-repeat: no-repeat;
-	background-position: right top;
+	background-position: 0 0;
 	background-image: url(../img/diagrams/screen-and-map.png);
 
 	img {
@@ -1290,6 +1290,8 @@ blockquote {
 	}
 
 }
+
+
 
 
 
@@ -1390,6 +1392,7 @@ blockquote {
 	}
 
 	h2 {
+		margin-top: 0;
 		font-family: $ProximaLightStack;
 		font-size: $thirty-six;
 
@@ -1772,11 +1775,15 @@ code {
 	float: left;
 	margin-bottom: 60px;
 	margin-top: 15px;
-	.library__item {
-		
+	width: 100%;
+	.library__item {		
 		width: 48%;
 		margin-right: 2%;
+		@include breakpoint(small) {
+			width: 100%;	 	
+		}
 	}
+	
 	
 }
 
