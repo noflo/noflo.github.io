@@ -41,10 +41,16 @@ We start with no motion
         @inPorts =
           anchor: new noflo.Port 'number'
           in: new noflo.Port 'number'
+          stiffness: new noflo.Port 'int'
+          mass: new noflo.Port 'int'
+          friction: new noflo.Port 'int'
         @outPorts =
           out: new noflo.Port 'number'
      
         @inPorts.anchor.on 'data', (@anchorPosition) =>
+        @inPorts.stiffness.on 'data', (@stiffness) =>
+        @inPorts.mass.on 'data', (@mass) =>
+        @inPorts.friction.on 'data', (@friction) =>
         @inPorts.in.on 'data', (@massPosition) =>
           @step()
     
