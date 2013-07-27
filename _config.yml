@@ -70,3 +70,10 @@ browser_libraries:
   - noflo/noflo-physics
   - noflo/noflo-strings
   - d4tocchini/noflo-draggabilly
+exclude:
+  - "node_modules"
+  - "Gruntfile.coffee"
+  - "README.md"
+  - "npm-debug.log"
+  - "package.json"
+  - "*.scss"

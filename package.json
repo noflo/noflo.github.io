@@ -1,0 +1,11 @@
+{
+  "name": "noflojs-org",
+  "version": "1.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-jekyll": "~0.3.8",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt-contrib-sass": "~0.4.1"
+  }
+}

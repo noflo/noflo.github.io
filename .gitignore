@@ -38,3 +38,4 @@ intermediate
 publish
 .idea
 _site
+/node_modules/
