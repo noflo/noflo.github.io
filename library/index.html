@@ -23,17 +23,19 @@ categories:
               {% if site.highlight_libraries contains library.title %}
               <img src="{{ site.baseurl }}/img/library/{{ library.title}}.jpg" alt="{{ library.title }}" title="{{ library.title }}" class="library__logo" />
               {% endif %}
-              <h3 class="library__title"><a href="{{ site.baseurl}}{{ library.url }}">{{ library.title }}</a></h3>
+              <h3 class="library__title">
+                <a href="{{ site.baseurl}}{{ library.url }}">{{ library.title }}</a>
+                <span class="library__version">
+                  v{{ library.version}}
+                </span>
+              </h3>
               {% if library.author.name %}
-              <span class="library__updated">{{ library.author.name }}</span>
+              <a class="library__author">{{ library.author.name }}</a>
               {% else %}
-              <span class="library__updated">{{ library.author }}</span>
+              <a class="library__author">{{ library.author }}</a>
               {% endif %}
             </div>
             <p class="library__description">{{ library.description }}</p>
-            <div class="library__download">
-              <em>Version {{ library.version}}</em>
-            </div>
           </div>
           {% endfor %}
         </div>

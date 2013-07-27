@@ -54,20 +54,24 @@ layout: default
 
         <div class="content span8">
           <h2>Components</h2>
+          <div class= "library__component_list">
           {% for component in site.categories['component'] reversed %}
             {% if component.library == page.title %}
-          <div class="library__item">
-            <div class="library__info">
-              <h3 class="library__title"><a href="{{ site.baseurl}}{{ component.url }}">{{ component.title }}</a></h3>
+            <div class="library__item library__component_lib">
+              <div class="library__info">
+                <h3 class="library__title"><a href="{{ site.baseurl}}{{ component.url }}">{{ component.title }}</a></h3>
+              </div>
+              <p class="library__description">{{ component.description }}</p>
             </div>
-            <p class="library__description">{{ component.description }}</p>
-          </div>
             {% endif %}
           {% endfor %}
-          {{ content | replace: 'h1>', 'h2>' }}
-          <h2>Using this library</h2>
-          <p>Add this library to your project's dependencies with:</p>
-          <pre>$ npm install {{ page.title }} --save</pre>
+          </div>
+          <div class= "library__component_info">
+            {{ content | replace: 'h1>', 'h2>' }}
+            <h2>Using this library</h2>
+            <p>Add this library to your project's dependencies with:</p>
+            <pre>$ npm install {{ page.title }} --save</pre>
+          </div>
         </div>
       </div>
     </div>

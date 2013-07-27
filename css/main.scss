@@ -1,5 +1,5 @@
 /*------------------------------------*\
-    $Contents
+    $Contents D4 Was here!!!!
 \*------------------------------------*/
 /**
 
@@ -26,11 +26,20 @@
  * Code Samples
  * Library
  * Demos
+ * Documentation
 
  */
 
 
+body {
+	background-color: hsl(210, 8%, 96.5%);
+	text-shadow: 0 1px 0 white;
 
+}
+
+input[type=text], textarea {
+  outline: none !important;
+}
 
 
 /*------------------------------------*\
@@ -88,6 +97,7 @@
 /*------------------------------------*\
     $Variables
 \*------------------------------------*/
+$twelve: 0.6666666em;		/* 14px: 12/18 = 0.6666666 */
 $fourteen: 0.777777em;		/* 14px: 1 / (18x14) = 0.777777  */
 $fifteen: 0.8333325em;		/* 15px: 1 / (18x15) = 0.8333325 */
 $sixteen: 0.888888em;		/* 16px: 1 / (18x16) = 0.888888  */
@@ -100,14 +110,14 @@ $ninety: 4.999995em;		/* 90px: 1 / (18x90) = 4.999995  */
 $onefourty: 7.77777em;		/* 140px: 1 / (18x140) = 7.77777 */
 
 $blue: #5396db;
-$fadedblue: #ddebf8;
-$fadedwhite: rgba(255, 255, 255, 0.9);
+$fadedblue: hsl(211, 45%, 50%); //hsl(209, 66%, 92%);
+$fadedwhite: rgba(252, 252, 252, 0.96);
 $solidgrey: rgba(234, 234, 234, 1);
 
-$ProximaBoldStack: "proxima-nova-bold", Arial, sans-serif;
-$ProximaSemiboldStack: "proxima-nova-semibold", Arial, sans-serif;
-$ProximaRegularStack: "proxima-nova-regular", Arial, sans-serif;
-$ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
+$ProximaBoldStack: "proxima-nova-bold", "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosCnBold', "Helvetica", "Tahoma", "Geneva", "Arial Narrow", "Arial", Arial, sans-serif;
+$ProximaSemiboldStack: "proxima-nova-semibold", "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosCnBold', "Helvetica", "Tahoma", "Geneva", "Arial Narrow", "Arial", Arial, sans-serif;
+$ProximaRegularStack: "proxima-nova-regular", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
+$ProximaLightStack: "proxima-nova-light", "Helvetica Neue Light", "HelveticaNeueLight","HelveticaNeueLight", "Helvetica Neue", "HelveticaNeue", Arial, sans-serif;
 
 
 
@@ -217,6 +227,8 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	width: 100%;
 	height: 75px;
 	background-color: $fadedwhite;
+	border-bottom: solid 1px white;
+	box-shadow: 0 1px 1px hsla(220,10%,20%,.1);
 
 	@include breakpoint(small) {
 		padding: 0 20px;
@@ -525,13 +537,15 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	height: 75px;
 	padding: 25px 15px 25px 0;
 	border-bottom: 4px solid $fadedblue;
-
+	
 	.search__keywords {
+		
 		float: left;
 		width: 75%;
 		height: 25px;
 		margin-left: 5px;
-		padding: 5px 25px 5px 20px;
+		padding: 6px 25px 5px 20px;
+		outline: none !important;
 		box-shadow: none;
 		@include border-radius(0px);
 		border: 0;
@@ -541,6 +555,8 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 
 		&:focus, &:active {
 			border: 0;
+			outline: none !important;
+			box-shadow: none;
 			border-left: 1px solid #f2f2f2;
 		}
 
@@ -777,6 +793,8 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 	padding-top: 30px;
 	padding-bottom: 30px;
 	background-color: #1e1f21;
+	
+	border-top: 1px solid white;
 
 	@include breakpoint(small) {
 		margin-left: -20px;
@@ -790,6 +808,7 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
 		color: #fff;
 		margin-bottom: 0;
 		text-align: center;
+		text-shadow: 0 1px black;
 	}
 }
 
@@ -854,7 +873,7 @@ $ProximaLightStack: "proxima-nova-light", Arial, sans-serif;
     $Typography
 \*------------------------------------*/
 h1, .h1 {
-	margin-top: 0;
+	margin-top: 15px;
 	margin-bottom: 15px;
 	line-height: 1.3;
 	font-weight: normal;
@@ -868,9 +887,9 @@ h1, .h1 {
 }
 
 h2, .h2 {
-	margin-top: 0;
+	margin-top: 15px;
 	margin-bottom: 15px;
-	line-height: 1.4;
+	line-height: 1.2;
 	font-weight: normal;
 	font-family: $ProximaSemiboldStack;
 	font-size: $twenty-four;
@@ -881,7 +900,7 @@ h2, .h2 {
 }
 
 h3, .h3 {
-	margin-top: 0;
+	margin-top: 15px;
 	margin-bottom: 15px;
 	font-size: 1em;
 	line-height: 1.4;
@@ -950,6 +969,10 @@ blockquote {
 	background-color: transparent;
 	background-position: 0 0;
 	background-image: url(../img/map-bg.png);
+	-webkit-background-size: cover;           /* Safari 3.0 */
+     -moz-background-size: cover;           /* Gecko 1.9.2 (Firefox 3.6) */
+       -o-background-size: cover;           /* Opera 9.5 */
+          background-size: cover;           /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
 	background-repeat: no-repeat;
 
 	@include breakpoint(small) {
@@ -1002,7 +1025,8 @@ blockquote {
 .plain-title {
 	overflow: hidden;
 	padding-top: 60px;
-	border-bottom: 1px solid #ededed;
+	border-bottom: 1px solid hsl(220,10%,90%);
+	box-shadow: 0 1px 0px white;
 
 	@include breakpoint(small) {
 		margin-bottom: 15px;
@@ -1112,8 +1136,10 @@ blockquote {
     $Content
 \*------------------------------------*/
 .main {
-	margin-top: 45px;
-
+	margin-top: 60px;
+	.content {
+		margin-bottom: 90px;
+	}
 	@include breakpoint(small) {
 		margin-top: 0;
 	}
@@ -1133,7 +1159,8 @@ blockquote {
     $Home - About NoFlo
 \*------------------------------------*/
 .about-noflo {
-	padding-bottom: 60px;
+	padding-bottom: 90px;
+	
 }
 
 
@@ -1220,8 +1247,9 @@ blockquote {
 .understanding-noflo {
 	overflow: hidden;
 	position: relative;
-	padding-top: 15px;
-	background-color: #e7e7e7;
+	padding-top: 90px;
+	background-color: hsl(220, 8%, 85%);;
+	border-bottom: 1px solid white;
 
 	@include breakpoint(small) {
 		margin-left: -20px;
@@ -1244,11 +1272,11 @@ blockquote {
 .understanding-noflo__image {
 	position: absolute;
 	top: 15%;
-	right: -25%;
+	right: 0;
 	height: 100%;
 	background-color: transparent;
 	background-repeat: no-repeat;
-	background-position: 0 0;
+	background-position: right top;
 	background-image: url(../img/diagrams/screen-and-map.png);
 
 	img {
@@ -1270,8 +1298,9 @@ blockquote {
 /*------------------------------------*\
     $Home - Significance of NoFlo
 \*------------------------------------*/
-.significance-of-noflo {
-	padding-bottom: 60px;
+.significance-of-noflo {	
+	padding-top: 60px;
+	padding-bottom: 120px;
 
 	h2 {
 		font-family: $ProximaLightStack;
@@ -1288,6 +1317,10 @@ blockquote {
 .fbp-book {
 	p {
 		font-size: $fourteen;
+	}
+	img {
+		border-top: 1px solid white;
+		border-left: 1px solid white;
 	}
 }
 
@@ -1334,10 +1367,12 @@ blockquote {
     $Home - Be Part of NoFlo
 \*------------------------------------*/
 .part-of-noflo {
+	text-shadow: 0 1px 0 black;
+	text-shadow: 0 1px 0 hsla(0,0%,0%,.5);
 	overflow: hidden;
 	position: relative;
 	min-height: 455px;
-	padding-top: 60px;
+	padding-top: 100px;
 	color: #fff;
 	background-repeat: no-repeat;
 	background-position: 50%;
@@ -1366,7 +1401,9 @@ blockquote {
 
 	hr {
 		border-top: 0;
-		border-color: rgba(255, 255, 255, 0.5);
+		border-color: black;
+		box-shadow: 0 1px hsl(220,20%,30%);
+		box-shadow: 0 1px hsla(220,20%,40%,.5);
 
 		@include breakpoint(small) {
 			display: none;
@@ -1378,7 +1415,7 @@ blockquote {
 
 	.part-of-noflo__screen {
 		position: absolute;
-		top: 35%;
+		top: 40%;
 		right: -15%;
 		width: 100%;
 		height: 100%;
@@ -1397,7 +1434,7 @@ blockquote {
 .development-sources {
 	float: left;
 	width: 100%;
-	margin-bottom: 15px;
+	margin-bottom: 120px;
 	list-style: none;
 
 	@include breakpoint(small) {
@@ -1405,8 +1442,10 @@ blockquote {
 	}
 
 	li {
-		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-
+		border-bottom: 1px solid  black;
+		box-shadow: 0 1px hsl(220,20%,30%);
+		box-shadow: 0 1px hsla(220,20%,40%,.5);
+		
 		@include breakpoint(small) {
 			float: left;
 			width: 33.333333333%;
@@ -1460,9 +1499,9 @@ blockquote {
     $Home - Who Uses NoFlo
 \*------------------------------------*/
 .who-uses-noflo {
-	padding-top: 60px;
-	padding-bottom: 60px;
-	background-color: #eeeeee;
+	padding-top: 120px;
+	padding-bottom: 180px;
+	background-color: hsl(220, 10%, 96%);
 
 	@include breakpoint(small) {
 		margin-left: -20px;
@@ -1480,13 +1519,23 @@ blockquote {
 		}
 
 	}
+	
+	ul {
+		margin:0;
+	}
 
 }
 
 .who-uses-noflo__logos {
 	list-style: none;
 	padding-left: 40px;
-	border-left: 1px solid #e7e7e7;
+	border-left: 1px solid white;
+	box-shadow: -1px 0px 0px hsl(220, 10%, 88%);
+	
+	img {
+		border: 2px solid white;
+		box-shadow: 0 1px 1px hsl(220, 10%, 70%);
+	}
 
 	li, a, img {
 		display: inline-block;
@@ -1494,7 +1543,7 @@ blockquote {
 
 	li {
 		float: left;
-		margin-top: 15px;
+		margin-bottom: 15px;
 		margin-right: 15px;
 	}
 
@@ -1527,6 +1576,7 @@ pre {
 
 code {
 	font-size: $fourteen;
+	text-shadow: none;
 }
 
 
@@ -1538,17 +1588,39 @@ code {
 .library__item {
 	position: relative;
 	float: left;
-	width: 100%;
-	padding: 15px;
-	margin-bottom: 15px;
+	width: 100%;	
 	@include border-radius;
-	box-shadow: 0px 1px 1px 1px #c0c0c0;
+	border: 1px solid white;
+	box-shadow: 0px 1px 1px 0px hsl(220, 10%, 75%);
+	background-color: hsl(210, 10%, 98%);
+	
+	overflow:hidden;
+
+	padding: 15px;
+	margin-bottom: 10px;
+	h3 {
+		
+	}
+	.library__updated {
+		display: inline-block;
+		margin-bottom: 5px;
+	}
+	img {
+		position:absolute;
+		right:0px;
+		top:0px;
+		border-left: 1px solid hsl(220,10%,88%);
+		border-bottom: 1px solid hsl(220,10%,88%);
+		box-shadow: -1px 1px 0px hsl(220,10%,100%);
+		width:92px;
+	}
 }
 
 	.library__item--active {
 		padding-left: 11px;
 		border-left: 4px solid $blue;
 		background-color: #fff;
+		box-shadow: 0px 1px 2px 0px hsl(220, 10%, 75%);
 	}
 
 .library__info {
@@ -1558,26 +1630,45 @@ code {
 .library__title {
 	line-height: 1;
 	font-size: $twenty-one;
+	margin-top: 0px;
+		margin-bottom: 10px;
 }
 
 .library__updated {
 	display: inline-block;
-	margin-bottom: 15px;
 	font-size: $fourteen;
 	color: #808080;
+	
+	font-weight: normal;
+	color: hsl(220,20%,70%);
+	font-family: $ProximaLightStack;
 }
 
 .library__description {
 	float: left;
 	width: 100%;
 	margin-bottom: 0;
+	margin-top: 5px;
 	clear: both;
+	font-size: $fourteen;
 }
 
+.library__version {
+	font-size:$twelve;
+	font-weight: normal;
+	color: hsl(220,20%,70%);
+	margin-left: 0px;
+	font-family: $ProximaLightStack;
+}
+
+.library__author {
+	font-family: $ProximaSemiboldStack;
+	font-size: $fourteen;
+}
 .library__download {
 	position: absolute;
 	top: 15px;
-	right: 15px;
+	right: 135px;
 	font-size: $fourteen;
 	text-align: right;
 
@@ -1673,6 +1764,21 @@ code {
 }
 
 
+
+
+
+
+.library__component_list {
+	float: left;
+	margin-bottom: 60px;
+	margin-top: 15px;
+	.library__item {
+		
+		width: 48%;
+		margin-right: 2%;
+	}
+	
+}
 
 
 
