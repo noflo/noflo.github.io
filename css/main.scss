@@ -1776,11 +1776,14 @@ code {
 	margin-bottom: 60px;
 	margin-top: 15px;
 	width: 100%;
-	.library__item {
-		
+	.library__item {		
 		width: 48%;
 		margin-right: 2%;
+		@include breakpoint(small) {
+			width: 100%;	 	
+		}
 	}
+	
 	
 }
 

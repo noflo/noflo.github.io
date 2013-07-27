@@ -1262,6 +1262,9 @@ code {
   .library__component_list .library__item {
     width: 48%;
     margin-right: 2%; }
+    @media (max-width: 767px) {
+      .library__component_list .library__item {
+        width: 100%; } }
 
 /*------------------------------------*\
     $Demos
