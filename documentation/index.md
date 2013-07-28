@@ -39,7 +39,9 @@ NoFlo projects are created in the same way as any other Node.js project would. T
 
 You can test that your Node.js installation works by running:
 
-    $ npm -v
+```bash
+$ npm -v
+```
 
 If this doesn't work, read the [Node.js installation instructions](http://nodejs.org/download/) for your operating system.
 
@@ -47,11 +49,15 @@ If this doesn't work, read the [Node.js installation instructions](http://nodejs
 
 To create a new project, you should create a new folder in the file system. This folder will contain all the files specific to your project, including dependency declarations, unit tests, and the NoFlo graphs and components. This is what you’ll usually want to manage in version control.
 
-    $ mkdir my-noflo-example-app
+```bash
+$ mkdir my-noflo-example-app
+```
 
 Then go to that folder:
 
-    $ cd my-noflo-example-app
+```bash
+$ cd my-noflo-example-app
+```
 
 ### Installing NoFlo
 
@@ -68,11 +74,15 @@ A basic `package.json` file could look like the following. Create one using a te
 
 Once the `package.json` file is in place, you're ready to install NoFlo. Do this by running:
 
-    $ npm install noflo --save
+```bash
+$ npm install noflo --save
+```
 
 NPM will fetch the latest release version of NoFlo and all its dependencies. Once this has finished, try that NoFlo works by running:
 
-    $ ./node_modules/.bin/noflo -h
+```bash
+$ ./node_modules/.bin/noflo -h
+```
 
 ### Getting components
 
@@ -82,13 +92,17 @@ There are {{ site.categories['component'] | size }} open source components avail
 
 For example, to install the [filesystem components](/library/noflo-filesystem/), you can run:
 
-    $ npm install noflo-filesystem --save
+```bash
+$ npm install noflo-filesystem --save
+```
 
 Once NPM completes the components from that library will be available to your project. Your project can pull in components from as many NoFlo libraries as needed.
 
 You can see a list of components that are installed in your project with:
 
-    $ ./node_modules/.bin/noflo list .
+```bash
+$ ./node_modules/.bin/noflo list .
+```
 
 ## Defining your first graph
 
@@ -100,19 +114,25 @@ Our first graph can be a simple one. Since we already have the file system compo
 
 Graphs are typically stored in the graphs subfolder of a NoFlo project. Create that folder:
 
-    $ mkdir graphs
+```bash
+$ mkdir graphs
+```
 
 Create a new file in that folder called `ShowContents.fbp` and open it in your favorite text editor. Paste in the following contents:
 
-    # In the graph we first need to define the nodes and the connections between them
-    Read(filesystem/ReadFile) OUT -> IN Display(Output)
+```coffeescript
+# In the graph we first need to define the nodes and the connections between them
+Read(filesystem/ReadFile) OUT -> IN Display(Output)
 
-    # Start off the graph by sending a filename to the file reader
-    'package.json' -> IN Read()
+# Start off the graph by sending a filename to the file reader
+'package.json' -> IN Read()
+```
 
 Once you've saved the file you can run the graph with NoFlo:
 
-    $ ./node_modules/.bin/noflo graphs/ShowContents.fbp
+```bash
+$ ./node_modules/.bin/noflo graphs/ShowContents.fbp
+```
 
 The contents of your `package.json` should be shown on the console.
 
@@ -120,7 +140,9 @@ The contents of your `package.json` should be shown on the console.
 
 If you want to see how the graph works internally, you can run NoFlo with the debugger:
 
-    $ ./node_modules/.bin/noflo --debug graphs/ShowContents.fbp
+```bash
+$ ./node_modules/.bin/noflo --debug graphs/ShowContents.fbp
+```
 
 This will show all the various events happening inside the graph:
 
