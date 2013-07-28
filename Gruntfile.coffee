@@ -14,13 +14,13 @@ module.exports = ->
       src:
         options:
           sourcemap: true
-          style: 'expanded'
+          style: 'compressed'
         files:
           'css/main.css': 'css/main.scss'
       site:
         options:
           sourcemap: true
-          style: 'expanded'
+          style: 'compressed'
         files:
           '_site/css/main.css': '_site/css/main.scss'
     
