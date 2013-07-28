@@ -31,8 +31,21 @@ module.exports = ->
           cwd: '_site/css/'
           src: ['main.*'],
           dest: 'css/'
-        ]
+        ]  
+    
+    #imagemin:
+    #  dist:
+    #    options:
+    #      optimizationLevel: 7        
+    #    files: [
+    #        expand: true # only compressing jpg right now
+    #        cwd: 'img-src/'
+    #        src: ['**/*.jpg']
+    #        dest: 'img/',
+    #        ext: '.jpg'
+    #    ]
           
+        
 
     jekyll:
       dev:
@@ -90,8 +103,12 @@ module.exports = ->
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-contrib-sass'
   @loadNpmTasks 'grunt-contrib-copy'
+  #@loadNpmTasks 'grunt-contrib-imagemin'
 
-  
+  #@registerTask 'img', [
+  #  'copy:img'
+  #  'imagemin:dist'
+  #]
   @registerTask 'chrome', [
     'connect:dev'
     'build'

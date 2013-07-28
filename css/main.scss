@@ -836,6 +836,52 @@ $ProximaLightStack: "proxima-nova-light", "Helvetica Neue Light", "HelveticaNeue
     $Promo
 \*------------------------------------*/
 .promo {
+<<<<<<< HEAD
+	padding-top: 230px;
+	height: 675px;
+	background-color: #000;
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-size: cover;
+	background-image: url(../img/map-bg.jpg);
+
+	@include breakpoint(small) {
+		height: 400px;
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-top: 100px;
+	}
+}
+
+	.promo__title {
+		width: 225px;
+		height: 90px;
+		margin: 0 auto 20px auto;
+		text-indent: -9999px;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-image: url(../img/logo-white-large.png);
+	}
+
+	.promo__text {
+		font-size: $twenty-four;
+		color: #fff;
+		text-align: center;
+
+		@include breakpoint(small) {
+			font-size: $twenty-one;
+		}
+
+	}
+
+	.promo__button {
+		display: block;
+		margin: 0 auto;
+		padding: 15px 30px;
+		width: 240px;
+	}
+=======
   padding-top: 230px;
   height: 675px;
   background-color: #000;
@@ -880,6 +926,7 @@ $ProximaLightStack: "proxima-nova-light", "Helvetica Neue Light", "HelveticaNeue
     padding: 15px 30px;
     width: 240px;
   }
+>>>>>>> 03dea2d1ec99483eccdc191c88fb6cf248436ca8
 
 
 
@@ -979,12 +1026,21 @@ blockquote {
     $Page Title
 \*------------------------------------*/
 .page-title {
+<<<<<<< HEAD
+	height: 210px;
+	padding: 90px 0;
+	background-color: transparent;
+	background-position: 0 0;
+	background-image: url(../img/map-bg.jpg);
+	-webkit-background-size: cover;           /* Safari 3.0 */
+=======
   height: 210px;
   padding: 90px 0;
   background-color: transparent;
   background-position: 0 0;
   background-image: url(../img/map-bg.png);
   -webkit-background-size: cover;           /* Safari 3.0 */
+>>>>>>> 03dea2d1ec99483eccdc191c88fb6cf248436ca8
      -moz-background-size: cover;           /* Gecko 1.9.2 (Firefox 3.6) */
        -o-background-size: cover;           /* Opera 9.5 */
           background-size: cover;           /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
@@ -1186,6 +1242,30 @@ blockquote {
     $Home - Video
 \*------------------------------------*/
 .video {
+<<<<<<< HEAD
+	height: 600px;
+	padding-top: 180px;
+	background-color: #000;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: url(../img/video-bg.jpg);
+
+	@include breakpoint(small) {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+
+	h2 {
+		color: #fff;
+		text-align: center;
+		font-family: $ProximaLightStack;
+		font-size: $thirty-six;
+
+		@include breakpoint(small) {
+			font-size: $thirty;
+		}
+=======
   height: 600px;
   padding-top: 180px;
   background-color: #000;
@@ -1208,6 +1288,7 @@ blockquote {
     @include breakpoint(small) {
       font-size: $thirty;
     }
+>>>>>>> 03dea2d1ec99483eccdc191c88fb6cf248436ca8
 
   }
 
@@ -1384,6 +1465,78 @@ blockquote {
     $Home - Be Part of NoFlo
 \*------------------------------------*/
 .part-of-noflo {
+<<<<<<< HEAD
+	text-shadow: 0 1px 0 black;
+	text-shadow: 0 1px 0 hsla(0,0%,0%,.5);
+	overflow: hidden;
+	position: relative;
+	min-height: 455px;
+	padding-top: 100px;
+	color: #fff;
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-size: cover;
+	background-image: url(../img/part-of-noflo.jpg);
+
+	@include breakpoint(small) {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding: 60px 20px 200px 20px;
+	}
+
+	.container {
+		height: 100%;
+	}
+
+	h2 {
+		margin-top: 0;
+		font-family: $ProximaLightStack;
+		font-size: $thirty-six;
+
+		@include breakpoint(small) {
+			font-size: $thirty;
+		}
+
+	}
+
+	hr {
+		border-top: 0;
+		border-color: black;
+		box-shadow: 0 1px hsl(220,20%,30%);
+		box-shadow: 0 1px hsla(220,20%,40%,.5);
+
+		@include breakpoint(small) {
+			display: none;
+		}
+		
+	}
+
+}
+
+	.part-of-noflo__screen {
+		position: absolute;
+		top: 40%;
+		right: -15%;
+		width: 100%;
+		height: 100%;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-image: url(../img/diagrams/changelog-screen.png);
+		
+		@include breakpoint(small) {
+			height: 200px;
+			top: auto;
+			bottom: 0;
+		}
+	}
+
+.development-sources {
+	float: left;
+	width: 100%;
+	margin-bottom: 120px;
+	list-style: none;
+=======
   text-shadow: 0 1px 0 black;
   text-shadow: 0 1px 0 hsla(0,0%,0%,.5);
   overflow: hidden;
@@ -1414,6 +1567,7 @@ blockquote {
     @include breakpoint(small) {
       font-size: $thirty;
     }
+>>>>>>> 03dea2d1ec99483eccdc191c88fb6cf248436ca8
 
   }
 
