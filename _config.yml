@@ -33,6 +33,7 @@ libraries:
   - noflo/noflo-flow
   - noflo/noflo-git
   - noflo/noflo-github
+  - noflo/noflo-gravatar
   - noflo/noflo-groups
   - kenhkan/noflo-handyman
   - noflo/noflo-html
