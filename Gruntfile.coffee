@@ -52,6 +52,7 @@ module.exports = ->
           # Ignore the generated files
           '!_site/**'
           '!_src/**'
+          '!node_modules/**'
         ]
         tasks: ['jekyll']
       sass:
