@@ -1,0 +1,191 @@
+---
+layout: default
+title: "shell"
+categories:
+  - api
+---
+   <div class="row-fluid">     <div class="page-title documentation-page-title">       <div class="container">         <h1 class="page-title__title">API Documentation</h1>         <a href="https://github.com/noflo/noflo" class="btn btn-primary page-title__button big-button">On GitHub</a>       </div>     </div>   </div>    <div class="row-fluid">     <div class="container documentation-main-container">       <div class="main">         <div class="sidebar span4">                    <nav>             <ul class="sidebar__nav">                                                 <li>                   <a {% if page.url == '/api/ArrayPort.html' %}class="active" {% endif %}href="ArrayPort.html">                     ArrayPort                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/AsyncComponent.html' %}class="active" {% endif %}href="AsyncComponent.html">                     AsyncComponent                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/Component.html' %}class="active" {% endif %}href="Component.html">                     Component                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/ComponentLoader.html' %}class="active" {% endif %}href="ComponentLoader.html">                     ComponentLoader                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/Graph.html' %}class="active" {% endif %}href="Graph.html">                     Graph                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/InternalSocket.html' %}class="active" {% endif %}href="InternalSocket.html">                     InternalSocket                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/LoggingComponent.html' %}class="active" {% endif %}href="LoggingComponent.html">                     LoggingComponent                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/Network.html' %}class="active" {% endif %}href="Network.html">                     Network                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/NoFlo.html' %}class="active" {% endif %}href="NoFlo.html">                     NoFlo                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/Port.html' %}class="active" {% endif %}href="Port.html">                     Port                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/shell.html' %}class="active" {% endif %}href="shell.html">                     shell                   </a>                 </li>                            </ul>           </nav>                  </div>         <div class="content span8">           <h1>{{ page.title }}</h1>                                                                 <div class="highlight"><pre><span class="nv">noflo_root = </span><span class="s">&quot;</span><span class="si">#{</span><span class="nx">__dirname</span><span class="si">}</span><span class="s">/..&quot;</span>
+<span class="nv">noflo = </span><span class="nx">require</span> <span class="s">&quot;./NoFlo&quot;</span>
+<span class="nv">shell = </span><span class="nx">require</span> <span class="s">&quot;shell&quot;</span>
+
+<span class="nx">process</span><span class="p">.</span><span class="kc">on</span> <span class="s">&quot;uncaughtException&quot;</span><span class="p">,</span> <span class="nf">(e) -&gt;</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">e</span><span class="p">.</span><span class="nx">stack</span><span class="si">}</span><span class="s">\n&quot;</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">()</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nv">app = </span><span class="k">new</span> <span class="nx">shell</span>
+  <span class="nv">isShell: </span><span class="kc">true</span>
+
+<span class="nv">app.setPrompt = </span><span class="nf">(prompt) -&gt;</span>
+  <span class="vi">@settings.prompt = </span><span class="s">&quot;</span><span class="si">#{</span><span class="nx">prompt</span><span class="si">}</span><span class="s">&gt;&gt; &quot;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">configure</span> <span class="o">-&gt;</span></pre></div>                                                  <p>app.use shell.history
+     shell: app</p>                            <div class="highlight"><pre>  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="nx">shell</span><span class="p">.</span><span class="nx">router</span>
+    <span class="nv">shell: </span><span class="nx">app</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span> <span class="nx">shell</span><span class="p">.</span><span class="nx">help</span>
+    <span class="nv">shell: </span><span class="nx">app</span>
+    <span class="nv">introduction: </span><span class="kc">true</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">setPrompt</span> <span class="s">&quot;NoFlo&quot;</span>
+<span class="nv">app.network = </span><span class="kc">null</span>
+<span class="nv">app.filename = </span><span class="kc">null</span>
+
+<span class="nv">normalizePath = </span><span class="nf">(path) -&gt;</span>
+  <span class="k">return</span> <span class="nx">path</span> <span class="k">if</span> <span class="nx">path</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">is</span> <span class="s">&quot;/&quot;</span>
+  <span class="s">&quot;</span><span class="si">#{</span><span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">()</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">path</span><span class="si">}</span><span class="s">&quot;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;new *&quot;</span><span class="p">,</span> <span class="s">&quot;Create a new NoFlo graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nv">graph = </span><span class="nx">noflo</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">createGraph</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">setPrompt</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="nv">app.network = </span><span class="nx">noflo</span><span class="p">.</span><span class="nx">createNetwork</span> <span class="nx">graph</span>
+  <span class="k">delete</span> <span class="nx">app</span><span class="p">.</span><span class="nx">filename</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;load *&quot;</span><span class="p">,</span> <span class="s">&quot;Load a NoFlo graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nv">app.filename = </span><span class="nx">normalizePath</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="nx">noflo</span><span class="p">.</span><span class="nx">loadFile</span> <span class="nx">app</span><span class="p">.</span><span class="nx">filename</span><span class="p">,</span> <span class="nf">(network) -&gt;</span>
+    <span class="nv">app.network = </span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">setPrompt</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">name</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;save *&quot;</span><span class="p">,</span> <span class="s">&quot;Save a NoFlo graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nv">app.filename = </span><span class="nx">normalizePath</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+  <span class="nx">noflo</span><span class="p">.</span><span class="nx">saveFile</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">filename</span><span class="p">,</span> <span class="o">-&gt;</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">green</span> <span class="s">&quot;Saved to </span><span class="si">#{</span><span class="nx">app</span><span class="p">.</span><span class="nx">filename</span><span class="si">}</span><span class="s">&quot;</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;save&quot;</span><span class="p">,</span> <span class="s">&quot;Save a NoFlo graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">filename</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No filename known, use &#39;save &lt;somefile&gt;&#39;&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+  <span class="nx">noflo</span><span class="p">.</span><span class="nx">saveFile</span> <span class="nx">app</span><span class="p">.</span><span class="nx">filename</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">,</span> <span class="o">-&gt;</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">green</span> <span class="s">&quot;Saved to </span><span class="si">#{</span><span class="nx">app</span><span class="p">.</span><span class="nx">filename</span><span class="si">}</span><span class="s">&quot;</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;close&quot;</span><span class="p">,</span> <span class="s">&quot;Close a NoFlo graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+  <span class="k">delete</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+  <span class="k">delete</span> <span class="nx">app</span><span class="p">.</span><span class="nx">filename</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">setPrompt</span> <span class="s">&quot;NoFlo&quot;</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;add :id :component&quot;</span><span class="p">,</span> <span class="s">&quot;Add a node to the graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">addNode</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">component</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;remove :id&quot;</span><span class="p">,</span> <span class="s">&quot;Remove a node from the graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">removeNode</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;connect :fromid :fromport :toid :toport&quot;</span><span class="p">,</span> <span class="s">&quot;Connect nodes in graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">addEdge</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">fromid</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">fromport</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">toid</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">toport</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;disconnect :id :port&quot;</span><span class="p">,</span> <span class="s">&quot;Disconnect a node in graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">removeEdge</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">port</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;send :id :port :data&quot;</span><span class="p">,</span> <span class="s">&quot;Send data packet to a node&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">addInitial</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">port</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;dot&quot;</span><span class="p">,</span> <span class="s">&quot;Get a DOT visualization of a graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">blue</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">toDOT</span><span class="p">()</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;json&quot;</span><span class="p">,</span> <span class="s">&quot;Get a JSON visualization of a graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+  <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">blue</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">(),</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">4</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span></pre></div>                                                  <h1>#</h1>                            <div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;startserver :port&quot;</span><span class="p">,</span> <span class="s">&quot;Start graph HTTP server&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+  <span class="nv">server = </span><span class="nx">require</span> <span class="s">&quot;./Server&quot;</span>
+  <span class="nx">server</span><span class="p">.</span><span class="nx">createServer</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">port</span><span class="p">,</span> <span class="nf">(server) -&gt;</span>
+    <span class="nv">app.server = </span><span class="nx">server</span>
+    <span class="nx">server</span><span class="p">.</span><span class="nx">networks</span><span class="p">.</span><span class="nx">push</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">blue</span> <span class="s">&quot;HTTP server is running in port </span><span class="si">#{</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">port</span><span class="si">}</span><span class="s">&quot;</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;stopserver&quot;</span><span class="p">,</span> <span class="s">&quot;Stop graph HTTP server&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">server</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No server is running&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+  <span class="nx">app</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="kc">on</span> <span class="s">&quot;close&quot;</span><span class="p">,</span> <span class="o">-&gt;</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">blue</span> <span class="s">&quot;HTTP server stopped&quot;</span>
+    <span class="nv">app.server = </span><span class="kc">null</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">server</span><span class="p">.</span><span class="nx">close</span><span class="p">()</span></pre></div>                                                  <h1>#</h1>                            <div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">cmd</span> <span class="s">&quot;uptime&quot;</span><span class="p">,</span> <span class="s">&quot;Show uptime of graph&quot;</span><span class="p">,</span> <span class="nf">(req, res, next) -&gt;</span>
+  <span class="nx">unless</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">red</span> <span class="s">&quot;No graph is loaded&quot;</span>
+    <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+  <span class="nv">convertUptime = </span><span class="nf">(uptime) -&gt;</span>
+    <span class="nv">seconds = </span><span class="nx">uptime</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="nv">days = </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">seconds</span> <span class="o">/</span> <span class="mi">86400</span><span class="p">)</span>
+    <span class="nv">hours = </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">seconds</span> <span class="o">-</span> <span class="p">(</span><span class="nx">days</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">))</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">)</span>
+    <span class="nv">minutes = </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">seconds</span> <span class="o">-</span> <span class="p">(</span><span class="nx">days</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nx">hours</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">))</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nv">secs = </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">seconds</span> <span class="o">-</span> <span class="p">(</span><span class="nx">days</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nx">hours</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nx">minutes</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)))</span>
+
+    <span class="nv">timedef =</span>
+      <span class="nv">days: </span><span class="nx">days</span>
+      <span class="nv">hours: </span><span class="nx">hours</span>
+      <span class="nv">minutes: </span><span class="nx">minutes</span>
+      <span class="nv">seconds: </span><span class="nx">secs</span>
+
+  <span class="nv">prettyUptime = </span><span class="nf">(uptime) -&gt;</span>
+    <span class="nv">timedef = </span><span class="nx">convertUptime</span> <span class="nx">uptime</span>
+
+    <span class="nv">prettyDate = </span><span class="s">&quot;Graph uptime is&quot;</span>
+
+    <span class="k">if</span> <span class="nx">timedef</span><span class="p">.</span><span class="nx">days</span>
+      <span class="nv">prettyDate = </span><span class="s">&quot;</span><span class="si">#{</span><span class="nx">prettyDate</span><span class="si">}</span><span class="s"> </span><span class="si">#{</span><span class="nx">timedef</span><span class="p">.</span><span class="nx">days</span><span class="si">}</span><span class="s"> days&quot;</span>
+
+    <span class="k">if</span> <span class="nx">timedef</span><span class="p">.</span><span class="nx">hours</span>
+      <span class="nv">prettyDate = </span><span class="s">&quot;</span><span class="si">#{</span><span class="nx">prettyDate</span><span class="si">}</span><span class="s"> </span><span class="si">#{</span><span class="nx">timedef</span><span class="p">.</span><span class="nx">hours</span><span class="si">}</span><span class="s"> hours&quot;</span>
+
+    <span class="k">if</span> <span class="nx">timedef</span><span class="p">.</span><span class="nx">minutes</span>
+      <span class="nv">prettyDate = </span><span class="s">&quot;</span><span class="si">#{</span><span class="nx">prettyDate</span><span class="si">}</span><span class="s"> </span><span class="si">#{</span><span class="nx">timedef</span><span class="p">.</span><span class="nx">minutes</span><span class="si">}</span><span class="s"> minutes&quot;</span>
+
+    <span class="nx">unless</span> <span class="nx">prettyDate</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">15</span>
+      <span class="nv">prettyDate = </span><span class="s">&quot;</span><span class="si">#{</span><span class="nx">prettyDate</span><span class="si">}</span><span class="s"> and&quot;</span>
+
+    <span class="nv">prettyDate = </span><span class="s">&quot;</span><span class="si">#{</span><span class="nx">prettyDate</span><span class="si">}</span><span class="s"> </span><span class="si">#{</span><span class="nx">timedef</span><span class="p">.</span><span class="nx">seconds</span><span class="si">}</span><span class="s"> seconds&quot;</span>
+
+  <span class="nx">app</span><span class="p">.</span><span class="nx">styles</span><span class="p">.</span><span class="nx">blue</span> <span class="nx">prettyUptime</span> <span class="nx">app</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">uptime</span><span class="p">()</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">prompt</span><span class="p">()</span>
+
+<span class="nv">exports.app = </span><span class="nx">app</span>
+
+</pre></div>                                 </div>       </div>     </div>   </div> 

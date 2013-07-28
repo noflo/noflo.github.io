@@ -77,3 +77,4 @@ exclude:
   - "npm-debug.log"
   - "package.json"
   - "*.scss"
+  - "docco.css"

@@ -22,7 +22,24 @@ module.exports = ->
       dev:
         options: {}
 
+    docco:
+      noflo:
+        src: ['_src/src/lib/*.coffee']
+        options:
+          output: 'api/'
+          template: '_docco/docco.jst'
+
+    shell:
+      gitclone:
+        command: 'git clone git://github.com/noflo/noflo.git _src'
+
     watch:
+      noflo:
+        files: [
+          '_docco/*.jst'
+          '_src/**'
+        ]
+        tasks: ['docco']
       jekyll:
         files: [
           '_config.yml'
@@ -34,6 +51,7 @@ module.exports = ->
           '**/_posts/*.md'
           # Ignore the generated files
           '!_site/**'
+          '!_src/**'
         ]
         tasks: ['jekyll']
       sass:
@@ -43,14 +61,21 @@ module.exports = ->
         tasks: ['sass']
 
   @loadNpmTasks 'grunt-jekyll'
+  @loadNpmTasks 'grunt-shell'
+  @loadNpmTasks 'grunt-docco'
   @loadNpmTasks 'grunt-contrib-connect'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-contrib-sass'
 
   @registerTask 'dev', [
     'connect:dev'
-    'sass'
-    'jekyll'
+    'build'
     'watch'
+  ]
+  @registerTask 'build', [
+    'sass'
+    'shell:gitclone'
+    'docco'
+    'jekyll'
   ]
   @registerTask 'default', ['dev']
