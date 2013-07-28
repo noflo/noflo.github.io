@@ -1865,7 +1865,6 @@ body .sourcecode {
 
 body pre {
   margin: 20px 0 20px 0;
-  overflow: scroll;
   //font-family: 'Monaco', Monaco, 'Bitstream Vera Sans Mono','Courier', monospace;
   //Monaco,Menlo,Consolas,"Courier New",monospace
   font-family: 'Bitstream Vera Sans Mono', Courier, monospace !important;  
@@ -1874,6 +1873,7 @@ body pre {
   color: hsl(220, 20%, 20%);
   white-space: pre;
   word-wrap: normal;
+  overflow-x: auto;
   letter-spacing: 1px;
   line-height: 18px;
   padding: 15px 15px;

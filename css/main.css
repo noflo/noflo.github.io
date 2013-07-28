@@ -1581,13 +1581,13 @@ code {
 
 body pre {
   margin: 20px 0 20px 0;
-  overflow: scroll;
   font-family: 'Bitstream Vera Sans Mono', Courier, monospace !important;
   font-weight: normal;
   font-size: 11px;
   color: #29303d;
   white-space: pre;
   word-wrap: normal;
+  overflow-x: auto;
   letter-spacing: 1px;
   line-height: 18px;
   padding: 15px 15px;
