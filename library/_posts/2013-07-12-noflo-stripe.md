@@ -4,6 +4,7 @@
   author: 
     name: "Svetly Metodiev"
     email: "svetly@gmail.com"
+    avatar: "http://www.gravatar.com/avatar/ebdbf30c894f9c9fac9a0b5078a3f6b0?s=23"
   version: "0.0.3"
   layout: "library"
 

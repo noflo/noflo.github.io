@@ -18,10 +18,10 @@ layout: default
             <div class="overview">
               <dl>
                 <dt>Maintainers:</dt>
-                {% if page.author.name %}
-                <dd>{{ page.author.name }}</dd>
+                {% if page.author.url %}
+                <dd><img src="{{ page.author.avatar }}" class="avatar" /><a href="{{ page.author.url }}">{{ page.author.name }}</a></dd>
                 {% else %}
-                <dd>{{ page.author }}</dd>
+                <dd><img src="{{ page.author.avatar }}" class="avatar" />{{ page.author.name }}</dd>
                 {% endif %}
               </dl>
             </div>
