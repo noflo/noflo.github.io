@@ -76,5 +76,4 @@ exclude:
   - "README.md"
   - "npm-debug.log"
   - "package.json"
-  - "*.scss"
   - "docco.css"

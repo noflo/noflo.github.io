@@ -11,12 +11,28 @@ module.exports = ->
           base: '_site'
 
     sass:
-      dev:
+      src:
         options:
-          # sourcemap: true
+          sourcemap: true
           style: 'expanded'
         files:
           'css/main.css': 'css/main.scss'
+      site:
+        options:
+          sourcemap: true
+          style: 'expanded'
+        files:
+          '_site/css/main.css': '_site/css/main.scss'
+    
+    copy:
+      site2src:
+        files: [
+          expand: true
+          cwd: '_site/css/'
+          src: ['main.*'],
+          dest: 'css/'
+        ]
+          
 
     jekyll:
       dev:
@@ -53,28 +69,44 @@ module.exports = ->
           '!_site/**'
           '!_src/**'
           '!node_modules/**'
+          '!.git/**'
         ]
         tasks: ['jekyll']
       sass:
         files: [
           'css/*.scss'
         ]
-        tasks: ['sass']
-
+        tasks: ['sass:src']
+      siteSass:
+        files: [
+          '_site/css/*.scss'
+        ]
+        tasks: ['sass:site', 'copy:site2src']
+        
   @loadNpmTasks 'grunt-jekyll'
   @loadNpmTasks 'grunt-shell'
   @loadNpmTasks 'grunt-docco'
   @loadNpmTasks 'grunt-contrib-connect'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-contrib-sass'
+  @loadNpmTasks 'grunt-contrib-copy'
 
+  
+  @registerTask 'chrome', [
+    'connect:dev'
+    'build'
+    'sass:site'
+    'watch:siteSass'
+  ]
   @registerTask 'dev', [
     'connect:dev'
     'build'
-    'watch'
+    'watch:noflo'
+    'watch:jekyll'
+    'watch:sass'    
   ]
   @registerTask 'build', [
-    'sass'
+    'sass:src'
     'shell:gitclone'
     'docco'
     'jekyll'
