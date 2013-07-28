@@ -5,8 +5,10 @@
 
 ---
 
-    EXPORT=STRINGIFYURL.IN:IN
-    EXPORT=STRINGIFYURL.OUT:OUT
-    
-    '/' -> DELIMITER StringifyUrl(adapters/PacketsToString)
-    
+```coffeescript
+EXPORT=STRINGIFYURL.IN:IN
+EXPORT=STRINGIFYURL.OUT:OUT
+
+'/' -> DELIMITER StringifyUrl(adapters/PacketsToString)
+
+```

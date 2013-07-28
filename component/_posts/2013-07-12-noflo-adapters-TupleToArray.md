@@ -5,8 +5,10 @@
 
 ---
 
-    EXPORT=ARRAYIFY.IN:IN
-    EXPORT=ARRAYIFY.OUT:OUT
-    
-    ',' -> DELIMITER Arrayify(adapters/StringToArray)
-    
+```coffeescript
+EXPORT=ARRAYIFY.IN:IN
+EXPORT=ARRAYIFY.OUT:OUT
+
+',' -> DELIMITER Arrayify(adapters/StringToArray)
+
+```

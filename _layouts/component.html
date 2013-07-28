@@ -20,10 +20,10 @@ layout: default
             <div class="overview">
               <dl>
                 <dt>Maintainers:</dt>
-                {% if library.author.name %}
-                <dd>{{ library.author.name }}</dd>
+                {% if library.author.url %}
+                <dd><img src="{{ library.author.avatar }}" class="avatar" /><a href="{{ library.author.url }}">{{ library.author.name }}</a></dd>
                 {% else %}
-                <dd>{{ library.author }}</dd>
+                <dd><img src="{{ library.author.avatar }}" class="avatar" />{{ library.author.name }}</dd>
                 {% endif %}
               </dl>
             </div>

@@ -1,7 +1,10 @@
 ---
   title: "noflo-html"
   description: "HTML handling components for the NoFlo flow-based programming environment"
-  author: "Ryan Shaw <ryanshaw@unc.edu>"
+  author: 
+    name: "Ryan Shaw"
+    email: "ryanshaw@unc.edu"
+    avatar: "http://www.gravatar.com/avatar/11fe582b6b9e02f1325d70c80a71b026?s=23"
   version: "0.0.2"
   repository: 
     type: "git"

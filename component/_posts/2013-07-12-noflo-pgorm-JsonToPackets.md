@@ -5,22 +5,26 @@
 
 ---
 
-    EXPORT=EXTRACTROW.IN:IN
-    EXPORT=PACKETIZE.OUT:OUT
-    EXPORT=SENDFILTER.IN:FILTER
-    
+```coffeescript
+EXPORT=EXTRACTROW.IN:IN
+EXPORT=PACKETIZE.OUT:OUT
+EXPORT=SENDFILTER.IN:FILTER
 
+```
 Filter output
 
 
-    'true' -> RECURSE FilterAttributes(objects/FilterProperty)
-    '^_.+' -> WITH SendFilter(packets/SendWith) OUT -> KEY FilterAttributes()
-    
+```coffeescript
+'true' -> RECURSE FilterAttributes(objects/FilterProperty)
+'^_.+' -> WITH SendFilter(packets/SendWith) OUT -> KEY FilterAttributes()
 
+```
 Actual packetizing
 
 
-    'out' -> KEY ExtractRow(objects/ExtractProperty)
-    '_type' -> PROPERTY GroupByType(underscore/GroupBy)
-    ExtractRow() OUT -> IN ParseRows(strings/ParseJson) OUT -> IN GroupByType() OUT -> IN FilterAttributes() OUT -> IN Packetize(adapters/ObjectToPackets)
-    
+```coffeescript
+'out' -> KEY ExtractRow(objects/ExtractProperty)
+'_type' -> PROPERTY GroupByType(underscore/GroupBy)
+ExtractRow() OUT -> IN ParseRows(strings/ParseJson) OUT -> IN GroupByType() OUT -> IN FilterAttributes() OUT -> IN Packetize(adapters/ObjectToPackets)
+
+```

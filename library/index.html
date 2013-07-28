@@ -29,10 +29,12 @@ categories:
                   v{{ library.version}}
                 </span>
               </h3>
-              {% if library.author.name %}
-              <a class="library__author">{{ library.author.name }}</a>
+              {% if library.author.url %}
+              <img class="avatar" src="{{ library.author.avatar }}" />
+              <a class="library__author" href="{{ library.author.url }}">{{ library.author.name }}</a>
               {% else %}
-              <a class="library__author">{{ library.author }}</a>
+              <img class="avatar" src="{{ library.author.avatar }}" />
+              <span class="library__author">{{ library.author.name }}</span>
               {% endif %}
             </div>
             <p class="library__description">{{ library.description }}</p>

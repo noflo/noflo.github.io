@@ -1354,7 +1354,7 @@ blockquote p {
   display: inline-block;
   margin-bottom: 5px;
 }
-.library__item img {
+.library__item img.library__logo {
   position: absolute;
   right: 0px;
   top: 0px;

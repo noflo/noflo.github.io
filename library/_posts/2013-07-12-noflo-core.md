@@ -5,6 +5,7 @@
   author: 
     name: "Henri Bergius"
     email: "henri.bergius@iki.fi"
+    avatar: "http://www.gravatar.com/avatar/995f27ce7205a79c55d4e44223cd6de0?s=23"
   repository: 
     type: "git"
     url: "https://github.com/noflo/noflo-core.git"

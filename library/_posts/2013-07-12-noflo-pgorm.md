@@ -1,7 +1,10 @@
 ---
   title: "noflo-pgorm"
   description: "PostgreSQL ORM on top of noflo-pg"
-  author: "Kenneth Kan <kenhkan@gmail.com>"
+  author: 
+    name: "Kenneth Kan"
+    email: "kenhkan@gmail.com"
+    avatar: "http://www.gravatar.com/avatar/3db61a4a42000b4ff62648c0979e8920?s=23"
   version: "0.0.13"
   repository: 
     type: "git"

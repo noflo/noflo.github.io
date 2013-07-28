@@ -1,7 +1,10 @@
 ---
   title: "noflo-twitter"
   description: "Twitter components for the NoFlo flow-based programming environment"
-  author: "Robin Galloway-Lunn"
+  author: 
+    name: "Robin Galloway-Lunn"
+    email: "henri.bergius+noflo@gmail.com"
+    avatar: "http://www.gravatar.com/avatar/21ed02329e70781e3d8ce1c1bd23437c?s=23"
   version: "0.0.1"
   repository: 
     type: "git"
