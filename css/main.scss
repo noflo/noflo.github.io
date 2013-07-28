@@ -1,5 +1,5 @@
 /*------------------------------------*\
-    $Contents
+    $Contents !D4! !!!
 \*------------------------------------*/
 /**
 
@@ -27,6 +27,7 @@
  * Library
  * Demos
  * Documentation
+ * Code
 
  */
 
@@ -113,6 +114,20 @@ $blue: #5396db;
 $fadedblue: hsl(211, 45%, 50%); //hsl(209, 66%, 92%);
 $fadedwhite: rgba(252, 252, 252, 0.96);
 $solidgrey: rgba(234, 234, 234, 1);
+
+$c0  : hsl(220, 10%, 40%); /* Gray */
+$c1  : hsl(  0, 68%, 70%); /* Red */
+$c2  : hsl( 30, 68%, 70%); /* Orange */
+$c3  : hsl( 60, 68%, 70%); /* Yellow */
+$c4  : hsl( 90, 68%, 70%); /* Lime Green */
+$c5  : hsl(120, 68%, 70%); /* Green */
+$c6  : hsl(150, 68%, 70%); /* Green-Turq */
+$c7  : hsl(180, 68%, 70%); /* Bright Blue */
+$c8  : hsl(210, 68%, 70%); /* blue */
+$c9  : hsl(240, 68%, 70%); /* Purple */
+$c10 : hsl(270, 68%, 70%); /* Violet */
+$c11 : hsl(300, 68%, 70%); /* Pink */
+$c12 : hsl(330, 68%, 70%); 
 
 $ProximaBoldStack: "proxima-nova-bold", "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosCnBold', "Helvetica", "Tahoma", "Geneva", "Arial Narrow", "Arial", Arial, sans-serif;
 $ProximaSemiboldStack: "proxima-nova-semibold", "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosCnBold', "Helvetica", "Tahoma", "Geneva", "Arial Narrow", "Arial", Arial, sans-serif;
@@ -1556,31 +1571,6 @@ blockquote {
 
 
 
-/*------------------------------------*\
-    $Code Examples
-\*------------------------------------*/
-pre {
-	margin: 0 0 15px 0;
-	padding: 15px;
-	border-left: 10px solid #28323e;
-	letter-spacing: 1px;
-	font-size: $fourteen;
-	font-family: "Myriad Pro", Aperture, Arial, sans-serif;
-	line-height: 1;
-	@include border-radius;
-	background-color: hsl(240, 3.6%, 11.6%);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(.5, hsl(240, 3.1%, 12.6%)), color-stop(.5, transparent), to(transparent));
-	background-image: -moz-linear-gradient(hsl(240, 3.1%, 12.6%) 50%, transparent 50%, transparent);
-	background-image: -o-linear-gradient(hsl(240, 3.1%, 12.6%) 50%, transparent 50%, transparent);
-	background-image: linear-gradient(hsl(240, 3.1%, 12.6%) 50%, transparent 50%, transparent);
-	background-size: 30px 30px;
-	color: #fff;
-}
-
-code {
-	font-size: $fourteen;
-	text-shadow: none;
-}
 
 
 
@@ -1855,4 +1845,131 @@ code {
 }
 
 
+/*------------------------------------*\
+    $Code
+\*------------------------------------*/
 
+
+/*------------------------------------*\
+    $Code Examples
+\*------------------------------------*/
+
+code {
+	text-shadow: none;
+	font-size: 11px;
+}
+
+body .sourcecode {
+	
+}
+
+body pre {
+  margin: 20px 0 20px 0;
+  overflow: scroll;
+  //font-family: 'Monaco', Monaco, 'Bitstream Vera Sans Mono','Courier', monospace;
+  //Monaco,Menlo,Consolas,"Courier New",monospace
+  font-family: 'Bitstream Vera Sans Mono', Courier, monospace !important;  
+  font-weight: normal;
+  font-size: 11px;
+  color: hsl(220, 20%, 20%);
+  white-space: pre;
+  word-wrap: normal;
+  letter-spacing: 1px;
+  line-height: 18px;
+  padding: 15px 15px;
+  background-color: hsl(230, 8%, 92%);
+  background-image: none;
+  @include border-radius;
+  text-shadow: 0 1px white;  
+  border: 1px solid white;
+  border-bottom: 1px solid white;
+  box-shadow: inset 0 2px 1px hsl(220, 10%, 80%);
+}
+
+.highlight {
+  ::-moz-selection { background: hsl(230, 100%, 35%); }
+  ::selection      { background: hsl(230, 100%, 35%); } 
+}
+
+.highlight pre { 
+  background-color: hsl(230, 13%, 18%);
+  background-image: none;
+  text-shadow: 0 1px black;  
+  border: 1px solid black;
+  border-bottom: 1px solid white;
+  box-shadow: 0px -1px 1px 2px white;
+  box-shadow: inset 0 3px 1px black, 0px -1px 1px 2px white;
+  color: #ffffff;
+}
+
+ 
+.highlight pre {
+  .c { color: hsl(220, 8%, 50%); } /* Comment */
+  .err { color: hsl( 30, 88%, 70%) } /* Error */
+  .g { color: hsl(300, 78%, 75%) } /* Generic */
+  .k { color: hsl(300, 78%, 75%) } /* Keyword */
+  .l { color: hsl(300, 78%, 75%) } /* Literal */
+  .n { color: hsl(300, 78%, 75%)} /* Name */
+  .o { color: hsl(300, 78%, 75%) } /* Operator */
+  .x { color: #CB4B16 } /* Other */
+  .p { color: hsl( 30, 88%, 70%) } /* Punctuation */
+  .cm { color: #586E75 } /* Comment.Multiline */
+  .cp { color: #859900 } /* Comment.Preproc */
+  .c1 { color: #586E75 } /* Comment.Single */
+  .cs { color: #859900 } /* Comment.Special */
+  .gd { color: #2AA198 } /* Generic.Deleted */
+  .ge { color: hsl( 30, 88%, 70%); font-style: italic } /* Generic.Emph */
+  .gr { color: #DC322F } /* Generic.Error */
+  .gh { color: #CB4B16 } /* Generic.Heading */
+  .gi { color: #859900 } /* Generic.Inserted */
+  .go { color: hsl( 30, 88%, 70%) } /* Generic.Output */
+  .gp { color: hsl( 30, 88%, 70%) } /* Generic.Prompt */
+  .gs { color: hsl( 30, 88%, 70%); font-weight: bold } /* Generic.Strong */
+  .gu { color: #CB4B16 } /* Generic.Subheading */
+  .gt { color: hsl( 30, 88%, 70%) } /* Generic.Traceback */
+  .kc { color: hsl(  0, 88%, 70%) } /* Keyword.Constant */
+  .kd { color: #288BD2 } /* Keyword.Declaration */
+  .kn { color: hsl( 60, 88%, 70%) } /* Keyword.Namespace */
+  .kp { color: #859900 } /* Keyword.Pseudo */
+  .kr { color: #288BD2 } /* Keyword.Reserved */
+  .kt { color: #DC322F } /* Keyword.Type */
+  .ld { color: hsl( 30, 88%, 70%) } /* Literal.Date */
+  .m { color: #2AA198 } /* Literal.Number */
+  .s { color: hsl(180, 88%, 70%); } /* Literal.String */
+  .na { color: hsl( 30, 88%, 70%) } /* Name.Attribute */
+  .nb { color: hsl(  0, 100%, 50%); } /* Name.Builtin */
+  .nc { color: hsl(180, 88%, 70%) } /* Name.Class */
+  .no { color: #CB4B16 } /* Name.Constant */
+  .nd { color: #288BD2 } /* Name.Decorator */
+  .ni { color: hsl(120, 88%, 75%) } /* Name.Entity */
+  .ne { color: hsl(120, 88%, 75%) } /* Name.Exception */
+  .nf { color: hsl(120, 88%, 75%) } /* Name.Function */
+  .nl { color: hsl( 30, 88%, 70%) } /* Name.Label */
+  .nn { color: hsl( 30, 88%, 70%) } /* Name.Namespace */
+  .nx { color: hsl(210, 15%, 99%); } /* Name.Other */
+  .py { color: hsl( 30, 88%, 70%) } /* Name.Property */
+  .nt { color: hsl( 30, 88%, 70%) } /* Name.Tag */
+  .nv { color: hsl(210, 100%, 75%); } /* Name.Variable */
+  .ow { color: #859900 } /* Operator.Word */
+  .w { color: hsl( 30, 88%, 70%) } /* Text.Whitespace */
+  .mf { color: hsl( 90, 88%, 70%) } /* Literal.Number.Float */
+  .mh { color: hsl( 90, 88%, 70%) } /* Literal.Number.Hex */
+  .mi { color: hsl( 90, 88%, 70%) } /* Literal.Number.Integer */
+  .mo { color: hsl( 90, 88%, 70%)} /* Literal.Number.Oct */
+  .sb { color: hsl(180, 88%, 70%); } /* Literal.String.Backtick */
+  .sc { color: hsl(180, 88%, 70%); } /* Literal.String.Char */
+  .sd { color: hsl( 30, 88%, 70%) } /* Literal.String.Doc */
+  .s2 { color: hsl(180, 88%, 70%); } /* Literal.String.Double */
+  .se { color: hsl(180, 88%, 70%); } /* Literal.String.Escape */
+  .sh { color: hsl( 30, 88%, 70%) } /* Literal.String.Heredoc */
+  .si { color: #2AA198 } /* Literal.String.Interpol */
+  .sx { color: #2AA198 } /* Literal.String.Other */
+  .sr { color: #DC322F } /* Literal.String.Regex */
+  .s1 { color: #2AA198 } /* Literal.String.Single */
+  .ss { color: #2AA198 } /* Literal.String.Symbol */
+  .bp { color: hsl(150, 88%, 70%) } /* Name.Builtin.Pseudo */
+  .vc { color: hsl(150, 88%, 70%) } /* Name.Variable.Class */
+  .vg { color: hsl(150, 88%, 70%) } /* Name.Variable.Global */
+  .vi { color: hsl( 60, 88%, 70%) } /* Name.Variable.Instance */
+  .il { color: #2AA198 } /* Literal.Number.Integer.Long */
+}
