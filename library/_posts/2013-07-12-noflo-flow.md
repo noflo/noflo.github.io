@@ -1,7 +1,9 @@
 ---
   title: "noflo-flow"
   description: "Flow Control for NoFlo"
-  author: "Kenneth Kan <kenhkan@gmail.com>"
+  author: 
+    name: "Kenneth Kan"
+    email: "kenhkan@gmail.com"
   version: "0.1.0"
   repository: 
     type: "git"

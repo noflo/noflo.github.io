@@ -1,7 +1,9 @@
 ---
   title: "noflo-routers"
   description: "Routing Packets in NoFlo"
-  author: "Kenneth Kan <kenhkan@gmail.com>"
+  author: 
+    name: "Kenneth Kan"
+    email: "kenhkan@gmail.com"
   version: "0.1.0"
   repository: 
     type: "git"

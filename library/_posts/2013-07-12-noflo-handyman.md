@@ -1,7 +1,9 @@
 ---
   title: "noflo-handyman"
   description: "Handy tools for debugging in NoFlo"
-  author: "Kenneth Kan <kenhkan@gmail.com>"
+  author: 
+    name: "Kenneth Kan"
+    email: "kenhkan@gmail.com"
   version: "0.0.7"
   repository: 
     type: "git"

@@ -1,7 +1,9 @@
 ---
   title: "noflo-swiss"
   description: "Swiss Army Knife for NoFlo Programming"
-  author: "Kenneth Kan <kenhkan@gmail.com>"
+  author: 
+    name: "Kenneth Kan"
+    email: "kenhkan@gmail.com"
   version: "0.0.7"
   repository: 
     type: "git"

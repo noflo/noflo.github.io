@@ -1,7 +1,9 @@
 ---
   title: "noflo-woute"
   description: "Routing web requests based on the request's URL"
-  author: "Kenneth Kan <kenhkan@gmail.com>"
+  author: 
+    name: "Kenneth Kan"
+    email: "kenhkan@gmail.com"
   version: "0.0.11"
   repository: 
     type: "git"

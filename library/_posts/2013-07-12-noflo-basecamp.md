@@ -1,7 +1,9 @@
 ---
   title: "noflo-basecamp"
   description: "BaseCamp Classic components for the NoFlo flow-based programming environment"
-  author: "Henri Bergius <henri.bergius@iki.fi>"
+  author: 
+    name: "Henri Bergius"
+    email: "henri.bergius@iki.fi"
   version: "0.0.3"
   repository: 
     type: "git"

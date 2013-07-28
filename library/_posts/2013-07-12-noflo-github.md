@@ -1,7 +1,9 @@
 ---
   title: "noflo-github"
   description: "GitHub service components for the NoFlo flow-based programming environment"
-  author: "Henri Bergius <henri.bergius@iki.fi>"
+  author: 
+    name: "Henri Bergius"
+    email: "henri.bergius@iki.fi"
   version: "0.0.4"
   repository: 
     type: "git"

@@ -1,7 +1,9 @@
 ---
   title: "noflo-filesystem"
   description: "Filesystem components for the NoFlo flow-based programming environment"
-  author: "Henri Bergius <henri.bergius@iki.fi>"
+  author: 
+    name: "Henri Bergius"
+    email: "henri.bergius@iki.fi"
   version: "1.0.0"
   repository: 
     type: "git"
