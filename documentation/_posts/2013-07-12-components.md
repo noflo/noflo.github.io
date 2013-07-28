@@ -59,7 +59,7 @@ Unattached ports from the subgraph will be available through naming `ProcessName
 
 Simple example, specifying what file a spreadsheet-parsing subgraph should run with:
 
-```
+```coffeescript
 # Load a subgraph as a new process
 'examples/spreadsheet/parse.fbp' -> GRAPH Reader(Graph)
 # Send the filename to the component (subgraph)
@@ -71,12 +71,14 @@ Reader() ENTITIZE.OUT -> IN Display(Output)
 Just like with components, it is possible to share subgraphs via NPM. You have to register them in your `package.json`, for example:
 
 ```json
+{
   "name": "noflo-spreadsheet",
   "noflo": {
     "graphs": {
       "Parse": "./graphs/parse.fbp"
     }
   }
+}
 ```
 
 After this the subgraph is available as a "virtual component" with the name `spreadsheet/Parse` and can be used just like any other component. Subgraphs exported in this manner can be in either JSON or the `.fbp` format.

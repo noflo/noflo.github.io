@@ -104,11 +104,13 @@ Graphs are typically stored in the graphs subfolder of a NoFlo project. Create t
 
 Create a new file in that folder called `ShowContents.fbp` and open it in your favorite text editor. Paste in the following contents:
 
-    # In the graph we first need to define the nodes and the connections between them
-    Read(filesystem/ReadFile) OUT -> IN Display(Output)
+```coffeescript
+# In the graph we first need to define the nodes and the connections between them
+Read(filesystem/ReadFile) OUT -> IN Display(Output)
 
-    # Start off the graph by sending a filename to the file reader
-    'package.json' -> IN Read()
+# Start off the graph by sending a filename to the file reader
+'package.json' -> IN Read()
+```
 
 Once you've saved the file you can run the graph with NoFlo:
 

@@ -82,7 +82,7 @@ input[type=text], textarea {
 /* 15px: 1 / (18x15) = 0.8333325 */
 /* 16px: 1 / (18x16) = 0.888888  */
 /* 21px: 1 / (18x21) = 1.1666666 */
-/* 24px: 1 / (18x24) = 1.5 		 */
+/* 24px: 1 / (18x24) = 1.5     */
 /* 30px: 1 / (18x30) = 1.666665  */
 /* 36px: 1 / (18x36) = 1.999998  */
 /* 48px: 1 / (18x48) = 2.666664  */
@@ -1577,6 +1577,7 @@ blockquote p {
 code {
   text-shadow: none;
   font-size: 11px;
+  color: #29303d;
 }
 
 body pre {
@@ -1695,7 +1696,7 @@ body pre {
   color: #757c8a;
 }
 .highlight pre .err {
-  color: #f6b36f;
+  color: red;
 }
 .highlight pre .g {
   color: #f18ef1;
