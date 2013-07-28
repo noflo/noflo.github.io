@@ -17,11 +17,13 @@
             <ul class="sidebar__nav">
               <% for (var i=0, l = sources.length; i < l; i++) { %>
                 <% var source = sources[i]; %>
+                <% if (path.basename(source) !== 'shell.coffee') { %>
                 <li>
                   <a {% if page.url == '/api/<%= path.basename(destination(source)) %>' %}class="active" {% endif %}href="<%= path.basename(destination(source)) %>">
                     <%= path.basename(source).replace('.coffee', '') %>
                   </a>
                 </li>
+                <% } %>
               <% } %>
             </ul>
           </nav>
