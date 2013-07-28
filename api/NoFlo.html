@@ -7,56 +7,84 @@ categories:
    <div class="row-fluid">     <div class="page-title documentation-page-title">       <div class="container">         <h1 class="page-title__title">API Documentation</h1>         <a href="https://github.com/noflo/noflo" class="btn btn-primary page-title__button big-button">On GitHub</a>       </div>     </div>   </div>    <div class="row-fluid">     <div class="container documentation-main-container">       <div class="main">         <div class="sidebar span4">                    <nav>             <ul class="sidebar__nav">                                                 <li>                   <a {% if page.url == '/api/ArrayPort.html' %}class="active" {% endif %}href="ArrayPort.html">                     ArrayPort                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/AsyncComponent.html' %}class="active" {% endif %}href="AsyncComponent.html">                     AsyncComponent                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/Component.html' %}class="active" {% endif %}href="Component.html">                     Component                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/ComponentLoader.html' %}class="active" {% endif %}href="ComponentLoader.html">                     ComponentLoader                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/Graph.html' %}class="active" {% endif %}href="Graph.html">                     Graph                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/InternalSocket.html' %}class="active" {% endif %}href="InternalSocket.html">                     InternalSocket                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/LoggingComponent.html' %}class="active" {% endif %}href="LoggingComponent.html">                     LoggingComponent                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/Network.html' %}class="active" {% endif %}href="Network.html">                     Network                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/NoFlo.html' %}class="active" {% endif %}href="NoFlo.html">                     NoFlo                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/Port.html' %}class="active" {% endif %}href="Port.html">                     Port                   </a>                 </li>                                                 <li>                   <a {% if page.url == '/api/shell.html' %}class="active" {% endif %}href="shell.html">                     shell                   </a>                 </li>                            </ul>           </nav>                  </div>         <div class="content span8">           <h1>{{ page.title }}</h1>                                     <pre><code>NoFlo - Flow-Based Programming for Node.js
 (c) 2011 Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license
-</code></pre>                            <div class="highlight"><pre><span class="nv">internalSocket = </span><span class="nx">require</span> <span class="s">&quot;./InternalSocket&quot;</span>
-<span class="nv">component = </span><span class="nx">require</span> <span class="s">&quot;./Component&quot;</span>
-<span class="nv">asynccomponent = </span><span class="nx">require</span> <span class="s">&quot;./AsyncComponent&quot;</span>
-<span class="nv">port = </span><span class="nx">require</span> <span class="s">&quot;./Port&quot;</span>
-<span class="nv">arrayport = </span><span class="nx">require</span> <span class="s">&quot;./ArrayPort&quot;</span>
-<span class="nv">graph = </span><span class="nx">require</span> <span class="s">&quot;./Graph&quot;</span>
-<span class="p">{</span><span class="nx">Network</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&quot;./Network&quot;</span>
-<span class="p">{</span><span class="nx">LoggingComponent</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&quot;./LoggingComponent&quot;</span>
+</code></pre>
 
-<span class="k">if</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">is</span> <span class="s">&#39;object&#39;</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">title</span> <span class="o">is</span> <span class="s">&#39;node&#39;</span>
-  <span class="nv">componentLoader = </span><span class="nx">require</span> <span class="s">&quot;./nodejs/ComponentLoader&quot;</span>
-<span class="k">else</span>
-  <span class="nv">componentLoader = </span><span class="nx">require</span> <span class="s">&#39;./ComponentLoader&#39;</span>
+<p>NoFlo is a Flow-Based Programming environment for JavaScript. This file provides the
+main entry point to the NoFlo network.</p>
 
-<span class="nv">exports.createNetwork = </span><span class="nf">(graph, callback, delay) -&gt;</span>
-  <span class="nv">network = </span><span class="k">new</span> <span class="nx">Network</span> <span class="nx">graph</span>
+<p>Find out more about using NoFlo from <a href="http://noflojs.org/documentation/">http://noflojs.org/documentation/</a></p>
+
+<h2>Main APIs</h2>
+
+<h3>Graph interface</h3>
+
+<p><a href="Graph.html">Graph</a> is used for instantiating FBP graph definitions.</p>                            <div class="highlight"><pre><span class="nv">exports.graph = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./Graph&#39;</span><span class="p">)</span>
+<span class="nv">exports.Graph = </span><span class="nx">exports</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">Graph</span></pre></div>                                                  <h2>Network interface</h2>
+
+<p><a href="Network.html">Network</a> is used for running NoFlo graphs.</p>                            <div class="highlight"><pre><span class="nv">exports.Network = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./Network&#39;</span><span class="p">).</span><span class="nx">Network</span></pre></div>                                                  <h3>Component Loader</h3>
+
+<p>The <a href="ComponentLoader.html">ComponentLoader</a> is responsible for finding and loading
+NoFlo components.</p>                            <div class="highlight"><pre><span class="k">if</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">is</span> <span class="s">&#39;object&#39;</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">title</span> <span class="o">is</span> <span class="s">&#39;node&#39;</span></pre></div>                                                  <p>Node.js version of the Component Loader finds components and graphs by traversing
+the NPM dependency tree from a given root directory on the file system.</p>                            <div class="highlight"><pre>  <span class="nv">exports.ComponentLoader = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./nodejs/ComponentLoader&#39;</span><span class="p">).</span><span class="nx">ComponentLoader</span>
+<span class="k">else</span></pre></div>                                                  <p>Browser version of the Component Loader finds components and graphs by traversing
+the <a href="http://component.io/">Component</a> dependency tree from a given Component package
+name.</p>                            <div class="highlight"><pre>  <span class="nv">exports.ComponentLoader = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./ComponentLoader&#39;</span><span class="p">).</span><span class="nx">ComponentLoader</span></pre></div>                                                  <h3>Component baseclasses</h3>
+
+<p>These baseclasses can be used for defining NoFlo components.</p>                            <div class="highlight"><pre><span class="nv">exports.Component = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./Component&#39;</span><span class="p">).</span><span class="nx">Component</span>
+<span class="nv">exports.AsyncComponent = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./AsyncComponent&#39;</span><span class="p">).</span><span class="nx">AsyncComponent</span>
+<span class="nv">exports.LoggingComponent = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./LoggingComponent&#39;</span><span class="p">).</span><span class="nx">LoggingComponent</span></pre></div>                                                  <h3>NoFlo ports</h3>
+
+<p>These classes are used for instantiating ports on NoFlo components.</p>                            <div class="highlight"><pre><span class="nv">exports.Port = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./Port&#39;</span><span class="p">).</span><span class="nx">Port</span>
+<span class="nv">exports.ArrayPort = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./ArrayPort&#39;</span><span class="p">).</span><span class="nx">ArrayPort</span></pre></div>                                                  <h3>NoFlo sockets</h3>
+
+<p>The NoFlo <a href="InternalSocket.html">internalSocket</a> is used for connecting ports of
+different components together in a network.</p>                            <div class="highlight"><pre><span class="nv">exports.internalSocket = </span><span class="nx">require</span><span class="p">(</span><span class="s">&#39;./InternalSocket&#39;</span><span class="p">)</span></pre></div>                                                  <h2>Network instantiation</h2>
+
+<p>This function handles instantiation of NoFlo networks from a Graph object. It creates
+the network, and then starts execution by sending the Initial Information Packets.</p>
+
+<pre><code>noflo.createNetwork(someGraph, function (network) {
+  console.log('Network is now running!');
+});
+</code></pre>
+
+<p>It is also possible to instantiate a Network but delay its execution by giving the
+third <code>delay</code> parameter. In this case you will have to handle connecting the graph and
+sending of IIPs manually.</p>
+
+<pre><code>noflo.createNetwork(someGraph, function (network) {
+  network.connect(function () {
+    network.sendInitials();
+    console.log('Network is now running!');
+  })
+}, true);
+</code></pre>                            <div class="highlight"><pre><span class="nv">exports.createNetwork = </span><span class="nf">(graph, callback, delay) -&gt;</span>
+  <span class="nv">network = </span><span class="k">new</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">Network</span> <span class="nx">graph</span>
 
   <span class="nv">networkReady = </span><span class="nf">(network) -&gt;</span>
-    <span class="nx">callback</span> <span class="nx">network</span> <span class="k">if</span> <span class="nx">callback</span><span class="o">?</span>
-    <span class="nx">network</span><span class="p">.</span><span class="nx">sendInitials</span><span class="p">()</span>
+    <span class="nx">callback</span> <span class="nx">network</span> <span class="k">if</span> <span class="nx">callback</span><span class="o">?</span></pre></div>                                                  <p>Send IIPs</p>                            <div class="highlight"><pre>    <span class="nx">network</span><span class="p">.</span><span class="nx">sendInitials</span><span class="p">()</span>
 
-  <span class="k">if</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">nodes</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
-    <span class="nx">setTimeout</span> <span class="o">-&gt;</span>
+  <span class="k">if</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">nodes</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span></pre></div>                                                  <p>Empty network, no need to connect it up</p>                            <div class="highlight"><pre>    <span class="nx">setTimeout</span> <span class="o">-&gt;</span>
       <span class="nx">networkReady</span> <span class="nx">network</span>
     <span class="p">,</span> <span class="mi">0</span>
     <span class="k">return</span> <span class="nx">network</span></pre></div>                                                  <p>Ensure components are loaded before continuing</p>                            <div class="highlight"><pre>  <span class="nx">network</span><span class="p">.</span><span class="nx">loader</span><span class="p">.</span><span class="nx">listComponents</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">delay</span>
-      <span class="nx">callback</span> <span class="nx">network</span> <span class="k">if</span> <span class="nx">callback</span><span class="o">?</span>
-      <span class="k">return</span>
-    <span class="nx">network</span><span class="p">.</span><span class="nx">connect</span> <span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="nx">delay</span></pre></div>                                                  <p>In case of delayed execution we don't wire it up</p>                            <div class="highlight"><pre>      <span class="nx">callback</span> <span class="nx">network</span> <span class="k">if</span> <span class="nx">callback</span><span class="o">?</span>
+      <span class="k">return</span></pre></div>                                                  <p>Wire the network up</p>                            <div class="highlight"><pre>    <span class="nx">network</span><span class="p">.</span><span class="nx">connect</span> <span class="o">-&gt;</span>
       <span class="nx">networkReady</span> <span class="nx">network</span>
 
-  <span class="nx">network</span>
+  <span class="nx">network</span></pre></div>                                                  <h3>Starting a network from a file</h3>
 
-<span class="nv">exports.loadFile = </span><span class="nf">(file, callback) -&gt;</span>
-  <span class="nx">graph</span><span class="p">.</span><span class="nx">loadFile</span> <span class="nx">file</span><span class="p">,</span> <span class="nf">(net) -&gt;</span>
-    <span class="nx">exports</span><span class="p">.</span><span class="nx">createNetwork</span> <span class="nx">net</span><span class="p">,</span> <span class="nx">callback</span>
+<p>It is also possible to start a NoFlo network by giving it a path to a <code>.json</code> or <code>.fbp</code> network
+definition file.</p>
 
-<span class="nv">exports.saveFile = </span><span class="nf">(graph, file, callback) -&gt;</span>
-  <span class="nx">graph</span><span class="p">.</span><span class="nx">save</span> <span class="nx">file</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="nx">callback</span> <span class="nx">file</span>
+<pre><code>noflo.loadFile('somefile.json', function (network) {
+  console.log('Network is now running!');
+});
+</code></pre>                            <div class="highlight"><pre><span class="nv">exports.loadFile = </span><span class="nf">(file, callback) -&gt;</span>
+  <span class="nx">exports</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">loadFile</span> <span class="nx">file</span><span class="p">,</span> <span class="nf">(net) -&gt;</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">createNetwork</span> <span class="nx">net</span><span class="p">,</span> <span class="nx">callback</span></pre></div>                                                  <h3>Saving a network definition</h3>
 
-<span class="nv">exports.Component = </span><span class="nx">component</span><span class="p">.</span><span class="nx">Component</span>
-<span class="nv">exports.ComponentLoader = </span><span class="nx">componentLoader</span><span class="p">.</span><span class="nx">ComponentLoader</span>
-<span class="nv">exports.AsyncComponent = </span><span class="nx">asynccomponent</span><span class="p">.</span><span class="nx">AsyncComponent</span>
-<span class="nv">exports.LoggingComponent = </span><span class="nx">LoggingComponent</span>
-<span class="nv">exports.Port = </span><span class="nx">port</span><span class="p">.</span><span class="nx">Port</span>
-<span class="nv">exports.ArrayPort = </span><span class="nx">arrayport</span><span class="p">.</span><span class="nx">ArrayPort</span>
-<span class="nv">exports.Graph = </span><span class="nx">graph</span><span class="p">.</span><span class="nx">Graph</span>
-<span class="nv">exports.Network = </span><span class="nx">Network</span>
-<span class="nv">exports.graph = </span><span class="nx">graph</span>
-<span class="nv">exports.internalSocket = </span><span class="nx">internalSocket</span>
+<p>NoFlo graph files can be saved back into the filesystem with this method.</p>                            <div class="highlight"><pre><span class="nv">exports.saveFile = </span><span class="nf">(graph, file, callback) -&gt;</span>
+  <span class="nx">exports</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">save</span> <span class="nx">file</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="nx">callback</span> <span class="nx">file</span>
 
 </pre></div>                                 </div>       </div>     </div>   </div> 
