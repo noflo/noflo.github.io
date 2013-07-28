@@ -692,7 +692,7 @@ input[type=text], textarea {
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: cover;
-  background-image: url(../img/map-bg.png);
+  background-image: url(../img/map-bg.jpg);
 }
 @media (max-width: 767px) {
   .promo {
@@ -821,7 +821,7 @@ blockquote p {
   padding: 90px 0;
   background-color: transparent;
   background-position: 0 0;
-  background-image: url(../img/map-bg.png);
+  background-image: url(../img/map-bg.jpg);
   -webkit-background-size: cover;
   /* Safari 3.0 */
   -moz-background-size: cover;
@@ -1000,7 +1000,7 @@ blockquote p {
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url(../img/video-bg.png);
+  background-image: url(../img/video-bg.jpg);
 }
 @media (max-width: 767px) {
   .video {
@@ -1178,7 +1178,7 @@ blockquote p {
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: cover;
-  background-image: url(../img/part-of-noflo.png);
+  background-image: url(../img/part-of-noflo.jpg);
 }
 @media (max-width: 767px) {
   .part-of-noflo {
