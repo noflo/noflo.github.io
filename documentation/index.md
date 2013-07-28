@@ -59,10 +59,12 @@ The first thing to do with your project is to create a `package.json` file into 
 
 A basic `package.json` file could look like the following. Create one using a text editor:
 
-    {
-      "name": "my-noflo-example-app",
-      "version": "0.0.1"
-    }
+```json
+{
+  "name": "my-noflo-example-app",
+  "version": "0.0.1"
+}
+```
 
 Once the `package.json` file is in place, you're ready to install NoFlo. Do this by running:
 

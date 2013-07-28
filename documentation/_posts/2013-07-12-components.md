@@ -23,27 +23,26 @@ Minimal component written in CoffeeScript would look like the following:
 noflo = require "noflo"
 
 class Forwarder extends noflo.Component
-    description: "This component receives data on a single input 
-    port and sends the same data out to the output port"
+  description: "This component receives data on a single input 
+  port and sends the same data out to the output port"
 
-    constructor: ->
-        # Register ports
-        @inPorts =
-            in: new noflo.Port()
-        @outPorts =
-            out: new noflo.Port()
+  constructor: ->
+    # Register ports
+    @inPorts =
+      in: new noflo.Port()
+    @outPorts =
+      out: new noflo.Port()
 
-        @inPorts.in.on "data", (data) =>
-            # Forward data when we receive it.
-            # Note: send() will connect automatically if needed
-            @outPorts.out.send data
+    @inPorts.in.on "data", (data) =>
+      # Forward data when we receive it.
+      # Note: send() will connect automatically if needed
+      @outPorts.out.send data
 
-        @inPorts.in.on "disconnect", =>
-            # Disconnect output port when input port disconnects
-            @outPorts.out.disconnect()
+    @inPorts.in.on "disconnect", =>
+      # Disconnect output port when input port disconnects
+      @outPorts.out.disconnect()
 
-exports.getComponent = ->
-    new Forwarder()
+exports.getComponent = -> new Forwarder()
 ```
 
 This example component register two ports: _in_ and _out_. When it receives data in the _in_ port, it opens the _out_ port and sends the same data there. When the _in_ connection closes, it will also close the _out_ connection. So basically this component would be a simple repeater.
@@ -130,28 +129,28 @@ Here's a version of the Forwarder component from above that logs messages when i
 noflo = require "noflo"
 
 class LoggingForwarder extends noflo.Component
-    description: "This component receives data on a single input
-    port and sends the same data out to the output port"
+  description: "This component receives data on a single input
+  port and sends the same data out to the output port"
 
-    constructor: ->
-        # Register ports
-        @inPorts =
-            in: new noflo.Port()
-        @outPorts =
-            out: new noflo.Port()
+  constructor: ->
+    # Register ports
+    @inPorts =
+      in: new noflo.Port()
+    @outPorts =
+      out: new noflo.Port()
 
-        @inPorts.in.on "data", (data) =>
-            # Forward data when we receive it.
-            if @outports.out.isAttached()
-              @outPorts.out.send data
-            else
-              @sendLog
-                logLevel: "error"
-                message: "Received message '#{data} on IN port but OUT port isn't attached."
+    @inPorts.in.on "data", (data) =>
+      # Forward data when we receive it.
+      if @outports.out.isAttached()
+        @outPorts.out.send data
+        return
+      @sendLog
+        logLevel: "error"
+        message: "Received message '#{data} on IN port but OUT port isn't attached."
 
-        @inPorts.in.on "disconnect", =>
-            # Disconnect output port when input port disconnects
-            @outPorts.out.disconnect()
+    @inPorts.in.on "disconnect", =>
+      # Disconnect output port when input port disconnects
+      @outPorts.out.disconnect()
 
 exports.getComponent = -> new LoggingForwarder()
 ```
