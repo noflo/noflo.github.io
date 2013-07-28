@@ -5,9 +5,11 @@
 
 ---
 
-    EXPORT=ARRAYIFY.IN:IN
-    EXPORT=PACKETIZE.OUT:OUT
-    EXPORT=DELIMITER.IN:DELIMITER
-    
-    ',' -> IN Delimiter(Merge) OUT -> DELIMITER Arrayify(adapters/StringToArray) OUT -> IN Packetize(adapters/ObjectToPackets)
-    
+```coffeescript
+EXPORT=ARRAYIFY.IN:IN
+EXPORT=PACKETIZE.OUT:OUT
+EXPORT=DELIMITER.IN:DELIMITER
+
+',' -> IN Delimiter(Merge) OUT -> DELIMITER Arrayify(adapters/StringToArray) OUT -> IN Packetize(adapters/ObjectToPackets)
+
+```

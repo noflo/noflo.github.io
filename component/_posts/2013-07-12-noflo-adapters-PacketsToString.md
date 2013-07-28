@@ -5,11 +5,13 @@
 
 ---
 
-    EXPORT=ARRAYIFY.IN:IN
-    EXPORT=JOIN.OUT:OUT
-    EXPORT=DELIMITER.IN:DELIMITER
-    
-    Delimiter(Repeat) OUT -> IN MergeDelim(Merge)
-    ',' -> IN MergeDelim() OUT -> DELIMITER Join(objects/Join)
-    Arrayify(adapters/PacketsToArray) OUT -> IN Join()
-    
+```coffeescript
+EXPORT=ARRAYIFY.IN:IN
+EXPORT=JOIN.OUT:OUT
+EXPORT=DELIMITER.IN:DELIMITER
+
+Delimiter(Repeat) OUT -> IN MergeDelim(Merge)
+',' -> IN MergeDelim() OUT -> DELIMITER Join(objects/Join)
+Arrayify(adapters/PacketsToArray) OUT -> IN Join()
+
+```
