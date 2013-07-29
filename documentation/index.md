@@ -96,6 +96,12 @@ For example, to install the [filesystem components](/library/noflo-filesystem/),
 $ npm install noflo-filesystem --save
 ```
 
+We should also install [noflo-core](/library/noflo-core/), which provides various general utility components:
+
+```bash
+$ npm install noflo-core --save
+```
+
 Once NPM completes the components from that library will be available to your project. Your project can pull in components from as many NoFlo libraries as needed.
 
 You can see a list of components that are installed in your project with:
@@ -122,7 +128,7 @@ Create a new file in that folder called `ShowContents.fbp` and open it in your f
 
 ```coffeescript
 # In the graph we first need to define the nodes and the connections between them
-Read(filesystem/ReadFile) OUT -> IN Display(Output)
+Read(filesystem/ReadFile) OUT -> IN Display(core/Output)
 
 # Start off the graph by sending a filename to the file reader
 'package.json' -> IN Read()
@@ -152,3 +158,29 @@ This will show all the various events happening inside the graph:
 * Connections being closed
 
 Looking at this is useful in order to understand how information flows through a NoFlo network.
+
+## Building a simple calculator
+
+NoFlo has a [wealth of components](/library/) available. One such example is the [noflo-math](/library/noflo-math/), which can be used for performing simple calculations.
+
+Install it with:
+
+```bash
+$ npm install noflo-math --save
+```
+
+Now we can build a simple calculator. For example, to multiply numbers we can create the following graph at `graphs/Calculate.fbp`:
+
+```coffeescript
+'6' -> MULTIPLICAND Multiply(math/Multiply)
+'7' -> MULTIPLIER Multiply()
+Multiply() PRODUCT -> IN Display(core/Output
+```
+
+If you run this with:
+
+```bash
+$ ./node_modules/.bin/noflo graphs/Calculate.fbp
+```
+
+it will give the answer of `42`. Doing other mathematical operations with noflo-math is left as an exercise to the user.
