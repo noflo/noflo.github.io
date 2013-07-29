@@ -12,7 +12,7 @@ EXPORT=VALUE.OUT:OUT
 
 Group(ReadGroup) OUT -> IN SliceSplit(Split)
 
-SliceSplit() OUT -> IN WaitForPattern(flow/Cache) OUT -> IN Filter(FilterString) OUT -> IN Value(Replace)
+SliceSplit() OUT -> IN WaitForPattern(flow/Cache) OUT -> IN Filter(Filter) OUT -> IN Value(Replace)
 SliceSplit() OUT -> READY WaitForGroup(flow/Cache)
 
 '$1' -> REPLACEMENT Value()

@@ -25,7 +25,7 @@ class CollectGroups extends noflo.Component
       @data = {}
     @inPorts.in.on 'begingroup', (group) =>
       if group is '$data'
-        @error 'groups cannot be named '$data''
+        @error 'groups cannot be named \'$data\''
         return
       @parents.push @data
       @groups.push group

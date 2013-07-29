@@ -12,7 +12,7 @@
   layout: "library"
 
 ---
-Group Utilities for NoFlo [![Build Status](https://secure.travis-ci.org/kenhkan/noflo-groups.png?branch=master)](https://travis-ci.org/kenhkan/noflo-groups)
+Group Utilities for NoFlo [![Build Status](https://secure.travis-ci.org/noflo/noflo-groups.png?branch=master)](https://travis-ci.org/noflo/noflo-groups)
 ===============================
 
 This package provides utility components to manipulate groups in
