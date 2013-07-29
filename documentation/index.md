@@ -174,7 +174,7 @@ Now we can build a simple calculator. For example, to multiply numbers we can cr
 ```coffeescript
 '6' -> MULTIPLICAND Multiply(math/Multiply)
 '7' -> MULTIPLIER Multiply()
-Multiply() PRODUCT -> IN Display(core/Output
+Multiply() PRODUCT -> IN Display(core/Output)
 ```
 
 If you run this with:
