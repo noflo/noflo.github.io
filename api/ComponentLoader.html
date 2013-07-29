@@ -64,7 +64,7 @@ NoFlo may be freely distributed under the MIT license
         <span class="k">if</span> <span class="nx">componentName</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">is</span> <span class="nx">name</span>
           <span class="nv">component = </span><span class="nx">@components</span><span class="p">[</span><span class="nx">componentName</span><span class="p">]</span>
           <span class="k">break</span>
-      <span class="nx">unless</span> <span class="nx">component</span></pre></div>                                                  <p>Failure to load</p>                            <div class="highlight"><pre>        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Component </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s"> not available&quot;</span>
+      <span class="nx">unless</span> <span class="nx">component</span></pre></div>                                                  <p>Failure to load</p>                            <div class="highlight"><pre>        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Component </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s"> not available with base </span><span class="si">#{</span><span class="nx">@baseDir</span><span class="si">}</span><span class="s">&quot;</span>
         <span class="k">return</span>
 
     <span class="k">if</span> <span class="nx">@isGraph</span> <span class="nx">component</span>
@@ -117,4 +117,4 @@ NoFlo may be freely distributed under the MIT license
 
 <span class="nv">exports.ComponentLoader = </span><span class="nx">ComponentLoader</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-07-28 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.coffee">ComponentLoader.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-07-29 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.coffee">ComponentLoader.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

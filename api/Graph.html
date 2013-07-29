@@ -73,12 +73,14 @@ emitted.</p>                            <div class="highlight"><pre>  <span clas
     <span class="nv">node = </span><span class="nx">@getNode</span> <span class="nx">id</span>
 
     <span class="k">for</span> <span class="nx">edge</span> <span class="k">in</span> <span class="nx">@edges</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">edge</span>
       <span class="k">if</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
         <span class="nx">@removeEdge</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">node</span><span class="p">,</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">port</span>
       <span class="k">if</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
         <span class="nx">@removeEdge</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span><span class="p">,</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span>
 
     <span class="k">for</span> <span class="nx">initializer</span> <span class="k">in</span> <span class="nx">@initializers</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">initializer</span>
       <span class="k">if</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
         <span class="nx">@removeEdge</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span><span class="p">,</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span>
 
@@ -92,6 +94,7 @@ emitted.</p>                            <div class="highlight"><pre>  <span clas
 <pre><code>myNode = myGraph.getNode 'Read'
 </code></pre>                            <div class="highlight"><pre>  <span class="nv">getNode: </span><span class="nf">(id) -&gt;</span>
     <span class="k">for</span> <span class="nx">node</span> <span class="k">in</span> <span class="nx">@nodes</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">node</span>
       <span class="k">return</span> <span class="nx">node</span> <span class="k">if</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span> <span class="o">is</span> <span class="nx">id</span>
     <span class="k">return</span> <span class="kc">null</span></pre></div>                                                  <h2>Renaming a node</h2>
 
@@ -101,12 +104,14 @@ emitted.</p>                            <div class="highlight"><pre>  <span clas
     <span class="nv">node.id = </span><span class="nx">newId</span>
 
     <span class="k">for</span> <span class="nx">edge</span> <span class="k">in</span> <span class="nx">@edges</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">edge</span>
       <span class="k">if</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">oldId</span>
         <span class="nv">edge.from.node = </span><span class="nx">newId</span>
       <span class="k">if</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">oldId</span>
         <span class="nv">edge.to.node = </span><span class="nx">newId</span>
 
     <span class="k">for</span> <span class="nx">iip</span> <span class="k">in</span> <span class="nx">@initializers</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">iip</span>
       <span class="k">if</span> <span class="nx">iip</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">oldId</span>
         <span class="nv">iip.to.node = </span><span class="nx">newId</span>
 
@@ -321,4 +326,4 @@ filenames to read, or network ports to listen to.</p>
     <span class="nv">definition = </span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span> <span class="nx">data</span>
     <span class="nx">exports</span><span class="p">.</span><span class="nx">loadJSON</span> <span class="nx">definition</span><span class="p">,</span> <span class="nx">success</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-07-28 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Graph.coffee">Graph.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-07-29 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Graph.coffee">Graph.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
