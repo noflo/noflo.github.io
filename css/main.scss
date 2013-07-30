@@ -854,7 +854,7 @@ $ProximaLightStack: "proxima-nova-light", "Helvetica Neue Light", "HelveticaNeue
 	background-position: 50%;
 	background-size: cover;
 	background-image: url(../img/map-bg.jpg);
-  @include image-2x("../images/map-bg@2.png", 1360px, 760px);
+  @include image-2x("../images/map-bg@2.jpg", 1360px, 760px);
 
 	@include breakpoint(small) {
 		height: 400px;
@@ -1206,7 +1206,7 @@ blockquote {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-image: url(../img/video-bg.jpg);
-  @include image-2x("../images/video-bg@2.png", 1360px, 600px);
+  @include image-2x("../images/video-bg@2.jpg", 1360px, 600px);
 
 	@include breakpoint(small) {
 		margin-left: -20px;
@@ -1409,6 +1409,7 @@ blockquote {
   background-position: 50%;
   background-size: cover;
   background-image: url(../img/part-of-noflo.jpg);
+  @include image-2x("../images/part-of-noflo@2.jpg", 1360px, 600px);
 
   @include breakpoint(small) {
     margin-left: -20px;
