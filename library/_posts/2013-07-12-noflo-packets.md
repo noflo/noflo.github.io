@@ -6,13 +6,10 @@
     email: "kenhkan@gmail.com"
     avatar: "http://www.gravatar.com/avatar/3db61a4a42000b4ff62648c0979e8920?s=23"
   version: "0.0.8"
-  repository: 
-    type: "git"
-    url: "https://github.com/noflo/noflo-packets"
   layout: "library"
 
 ---
-Packet Utilities for NoFlo [![Build Status](https://secure.travis-ci.org/kenhkan/noflo-packets.png?branch=master)](https://travis-ci.org/kenhkan/noflo-packets)
+Packet Utilities for NoFlo [![Build Status](https://secure.travis-ci.org/noflo/noflo-packets.png?branch=master)](https://travis-ci.org/noflo/noflo-packets)
 ===============================
 
 This package provides utility components to manipulate packets and

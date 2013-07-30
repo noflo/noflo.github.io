@@ -12,7 +12,7 @@ NoFlo may be freely distributed under the MIT license
 <p>NoFlo graphs are Event Emitters, providing signals when the graph
 definition changes.</p>
 
-<p>On Node.js we use the build-in EventEmitter implementation</p>                            <div class="highlight"><pre><span class="k">if</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">is</span> <span class="s">&#39;object&#39;</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">title</span> <span class="o">is</span> <span class="s">&#39;node&#39;</span>
+<p>On Node.js we use the build-in EventEmitter implementation</p>                            <div class="highlight"><pre><span class="k">if</span> <span class="nx">process</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s">&#39;node&#39;</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span>
   <span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;events&#39;</span></pre></div>                                                  <p>On browser we use Component's EventEmitter implementation</p>                            <div class="highlight"><pre><span class="k">else</span>
   <span class="nv">EventEmitter = </span><span class="nx">require</span> <span class="s">&#39;emitter&#39;</span></pre></div>                                                  <p>This class represents an abstract NoFlo graph containing nodes
 connected to each other with edges.</p>
@@ -311,7 +311,7 @@ filenames to read, or network ports to listen to.</p>
   <span class="nx">exports</span><span class="p">.</span><span class="nx">loadJSON</span> <span class="nx">definition</span><span class="p">,</span> <span class="nx">success</span>
 
 <span class="nv">exports.loadFile = </span><span class="nf">(file, success) -&gt;</span>
-  <span class="nx">unless</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">is</span> <span class="s">&#39;object&#39;</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">title</span> <span class="o">is</span> <span class="s">&#39;node&#39;</span>
+  <span class="nx">unless</span> <span class="nx">process</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s">&#39;node&#39;</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">try</span>
       <span class="nv">definition = </span><span class="nx">require</span> <span class="nx">file</span>
       <span class="nx">exports</span><span class="p">.</span><span class="nx">loadJSON</span> <span class="nx">definition</span><span class="p">,</span> <span class="nx">success</span>
@@ -326,4 +326,4 @@ filenames to read, or network ports to listen to.</p>
     <span class="nv">definition = </span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span> <span class="nx">data</span>
     <span class="nx">exports</span><span class="p">.</span><span class="nx">loadJSON</span> <span class="nx">definition</span><span class="p">,</span> <span class="nx">success</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-07-29 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Graph.coffee">Graph.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-07-30 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Graph.coffee">Graph.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

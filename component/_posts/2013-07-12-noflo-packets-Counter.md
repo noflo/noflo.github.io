@@ -50,6 +50,7 @@ When IN port disconnects we send the COUNT
     @inPorts.in.on 'disconnect', =>
       @outPorts.count.send @count
       @outPorts.count.disconnect()
+      @outPorts.out.disconnect()
       @count = null
 
 exports.getComponent = -> new Counter

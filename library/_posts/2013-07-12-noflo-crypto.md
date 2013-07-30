@@ -1,14 +1,14 @@
 ---
   title: "noflo-crypto"
   description: "Wrapper around googlecode's crypto-js"
-  version: "0.2.1"
+  version: "0.2.2"
   author: 
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"
     avatar: "http://www.gravatar.com/avatar/3db61a4a42000b4ff62648c0979e8920?s=23"
   repository: 
     type: "git"
-    url: "git://github.com/kenhkan/noflo-crypto.git"
+    url: "https://github.com/kenhkan/noflo-crypto.git"
   layout: "library"
 
 ---

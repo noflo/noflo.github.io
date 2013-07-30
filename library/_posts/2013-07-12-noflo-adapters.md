@@ -1,45 +1,21 @@
 ---
   title: "noflo-adapters"
   description: "Packet Format Conversion for NoFlo"
+  version: "0.1.1"
   author: 
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"
     avatar: "http://www.gravatar.com/avatar/3db61a4a42000b4ff62648c0979e8920?s=23"
-  version: "0.1.0"
   repository: 
     type: "git"
-    url: "https://github.com/noflo/noflo-adapters"
+    url: "https://github.com/noflo/noflo-adapters.git"
   layout: "library"
 
 ---
-Packet Format Conversion for NoFlo [![Build Status](https://secure.travis-ci.org/kenhkan/noflo-adapters.png?branch=master)](https://travis-ci.org/kenhkan/noflo-adapters)
-===============================
+# noflo-adapters [![Build Status](https://secure.travis-ci.org/noflo/noflo-adapters.png?branch=master)](http://travis-ci.org/noflo/noflo-adapters)
 
 This package provides various components to convert packets from one
 format to another in [NoFlo](http://noflojs.org/).
 
 Feel free to contribute new components and graphs! I'll try to
 incorporate as soon as time allows.
-
-
-Usage
--------------------------------
-
-### ObjectToPackets ###
-
-Convert a packet that is an object into grouped packets.
-
-#### In-ports
-
-  * IN: a packet that is an object
-  * DEPTH: how many levels to parse in the provided object
-
-#### Out-ports
-
-  * OUT: grouped packets
-
-#### Examples
-
-Convert objects to packets.
-
-    'whatever' -> IN Quit(handyman/Quit) OUT -> IN NotReceivingIt(core/Output)

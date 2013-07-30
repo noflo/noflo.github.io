@@ -14,4 +14,4 @@
 ---
 # noflo-core [![Build Status](https://secure.travis-ci.org/noflo/noflo-core.png?branch=master)](http://travis-ci.org/noflo/noflo-core)
 
-noflo Essentials
+Essential components for NoFlo

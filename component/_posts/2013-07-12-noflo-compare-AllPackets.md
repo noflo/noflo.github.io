@@ -6,15 +6,15 @@
 ---
 
 ```coffeescript
-noflo = require "noflo"
-_ = require "underscore"
-_s = require "underscore.string"
+noflo = require 'noflo'
+_ = require 'underscore'
+_s = require 'underscore.string'
 
 class AllPackets extends noflo.Component
 
-  description: _s.clean "compare two connections and pass to out the
+  description: _s.clean 'compare two connections and pass to out the
   connection with the most packets winning a comparison, numerically for
-  numbers and lexicographically for strings"
+  numbers and lexicographically for strings'
 
   constructor: ->
     @connections = []
@@ -24,13 +24,13 @@ class AllPackets extends noflo.Component
     @outPorts =
       out: new noflo.Port
 
-    @inPorts.in.on "connect", =>
+    @inPorts.in.on 'connect', =>
       @connection = []
 
-    @inPorts.in.on "data", (data) =>
+    @inPorts.in.on 'data', (data) =>
       @connection.push data
 
-    @inPorts.in.on "disconnect", =>
+    @inPorts.in.on 'disconnect', =>
       @connections.push @connection
 
       if @connections.length is 2

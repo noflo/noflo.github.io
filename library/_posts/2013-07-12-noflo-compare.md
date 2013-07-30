@@ -1,19 +1,18 @@
 ---
   title: "noflo-compare"
   description: "Performing Comparisons in NoFlo"
+  version: "0.1.1"
   author: 
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"
     avatar: "http://www.gravatar.com/avatar/3db61a4a42000b4ff62648c0979e8920?s=23"
-  version: "0.0.5"
   repository: 
     type: "git"
-    url: "git://github.com/kenhkan/noflo-compare"
+    url: "https://github.com/kenhkan/compare.git"
   layout: "library"
 
 ---
-Performing Comparisons in NoFlo [![Build Status](https://secure.travis-ci.org/kenhkan/noflo-compare.png?branch=master)](https://travis-ci.org/kenhkan/noflo-compare)
-===============================
+# noflo-compare [![Build Status](https://secure.travis-ci.org/kenhkan/noflo-compare.png?branch=master)](http://travis-ci.org/kenhkan/noflo-compare)
 
 This package provides utility components to compare between two or more
 connections within a [NoFlo](http://noflojs.org/) program.
