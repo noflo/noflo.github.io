@@ -170,6 +170,17 @@ $ProximaLightStack: "proxima-nova-light", "Helvetica Neue Light", "HelveticaNeue
           border-radius: $radius;
 }
 
+@mixin image-2x($image, $width, $height) {
+    @media (min--moz-device-pixel-ratio: 1.3),
+        (-o-min-device-pixel-ratio: 2.6/2),
+        (-webkit-min-device-pixel-ratio: 1.3),
+        (min-device-pixel-ratio: 1.3),
+        (min-resolution: 1.3dppx) {
+    /* on retina, use image that's scaled by 2 */
+    background-image: url($image);
+    background-size: $width $height;
+    }
+}
 
 
 
@@ -843,6 +854,7 @@ $ProximaLightStack: "proxima-nova-light", "Helvetica Neue Light", "HelveticaNeue
 	background-position: 50%;
 	background-size: cover;
 	background-image: url(../img/map-bg.jpg);
+  @include image-2x("../images/map-bg@2.png", 1360px, 760px);
 
 	@include breakpoint(small) {
 		height: 400px;
@@ -1194,6 +1206,7 @@ blockquote {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-image: url(../img/video-bg.jpg);
+  @include image-2x("../images/video-bg@2.png", 1360px, 600px);
 
 	@include breakpoint(small) {
 		margin-left: -20px;
@@ -1293,6 +1306,7 @@ blockquote {
   background-repeat: no-repeat;
   background-position: 0 0;
   background-image: url(../img/diagrams/screen-and-map.png);
+  @include image-2x("../img/diagrams/screen-and-map.png", 885px, 792px);
 
   img {
     display: none;
