@@ -224,6 +224,7 @@ $ProximaLightStack: "proxima-nova-light", "Helvetica Neue Light", "HelveticaNeue
   background-repeat: no-repeat;
   background-position: 50% 0;
   background-image: url(../img/logo-small.png);
+  @include image-2x("../img/logo-small@2.png", 50px, 75px);
 
   &.active {
     background-color: transparent;
