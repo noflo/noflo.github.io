@@ -25,7 +25,7 @@ main entry point to the NoFlo network.</p>
 
 <p>NoFlo works on both Node.js and the browser. Because some dependencies are different,
 we need a way to detect which we're on.</p>                            <div class="highlight"><pre><span class="nv">exports.isBrowser = </span><span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="nx">process</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s">&#39;node&#39;</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span>
+  <span class="k">if</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">isnt</span> <span class="s">&#39;undefined&#39;</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s">&#39;node&#39;</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">return</span> <span class="kc">false</span>
   <span class="kc">true</span></pre></div>                                                  <h3>Component Loader</h3>
 
@@ -94,4 +94,4 @@ definition file.</p>
 <p>NoFlo graph files can be saved back into the filesystem with this method.</p>                            <div class="highlight"><pre><span class="nv">exports.saveFile = </span><span class="nf">(graph, file, callback) -&gt;</span>
   <span class="nx">exports</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">save</span> <span class="nx">file</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="nx">callback</span> <span class="nx">file</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-07-30 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.coffee">NoFlo.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-07-31 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.coffee">NoFlo.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
