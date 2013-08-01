@@ -19,6 +19,7 @@
  * Home
  * Home - About NoFlo
  * Home - Video
+ * Home - Kickstarter
  * Home - Understanding NoFlo
  * Home - Significance of NoFlo
  * Home - Be Part of NoFlo
@@ -133,7 +134,7 @@ $ProximaBoldStack: "proxima-nova-bold", "HelveticaNeueBold", "HelveticaNeue-Bold
 $ProximaSemiboldStack: "proxima-nova-semibold", "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosCnBold', "Helvetica", "Tahoma", "Geneva", "Arial Narrow", "Arial", Arial, sans-serif;
 $ProximaRegularStack: "proxima-nova-regular", "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, sans-serif;
 $ProximaLightStack: "proxima-nova-light", "Helvetica Neue Light", "HelveticaNeueLight","HelveticaNeueLight", "Helvetica Neue", "HelveticaNeue", Arial, sans-serif;
-
+$HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosCnBold', "Helvetica", "Tahoma", "Geneva", "Arial Narrow", "Arial", Arial, sans-serif;
 
 
 
@@ -889,10 +890,29 @@ $ProximaLightStack: "proxima-nova-light", "Helvetica Neue Light", "HelveticaNeue
 
 	.promo__button {
 		display: block;
-		margin: 0 auto;
+		margin: 0 auto 10px auto;
 		padding: 15px 30px;
 		width: 240px;
 	}
+
+.btn-kickstarter {
+  background-image: none;
+  padding: 10px;
+
+  &:hover {
+    background-image: none;    
+  }
+
+  &.btn-white {
+    background-color: #ffffff;
+  }
+
+  &.btn-black {
+    background-color: #000000;
+  }
+
+}
+
 
 
 
@@ -1266,6 +1286,93 @@ blockquote {
     height: 20px;
     background-color: rgba(255, 255, 255, 0.5);
   }
+
+
+
+
+
+/*------------------------------------*\
+    $Home - Kickstarter
+\*------------------------------------*/
+.kickstarter-panel {
+  overflow: hidden;
+  height: 900px;
+  min-height: 900px;
+  position: relative;
+  background-color: #eef2ea;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-image: url(../img/kickstarter-k.png);
+  @include image-2x("../img/kickstarter-k@2.png", 545px, 540px);
+
+  @include breakpoint(small) {
+    height: auto;
+    min-height: auto;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 20px 20px 200px 20px;
+  }
+
+  .sidebar {
+    padding-top: 120px;
+
+    @include breakpoint(small) {
+      padding-top: 0;
+    }
+
+    h2 {
+      font-family: $ProximaLightStack;
+      font-size: $thirty-six;
+
+      @include breakpoint(small) {
+        font-size: $thirty;
+      }
+
+    }
+
+  }
+
+}
+
+.kickstarter__title {
+  text-align: center;
+
+  h2 {
+    font-family: $HelveticaNeueBoldStack;
+    font-size: $thirty-six;
+    font-weight: bold;
+
+    @include breakpoint(small) {
+      font-size: $thirty;
+    }
+
+  }
+
+}
+
+.kickstarter__screen {
+  position: absolute;
+  top: 25%;
+  right: -25%;
+  height: 100%;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: url(../img/diagrams/kickstarter-screen.jpg);
+  @include image-2x("../img/diagrams/kickstarter-screen@2.jpg", 940px, 715px);
+
+  img {
+    display: none;
+  }
+
+  @include breakpoint(small) {
+    height: 200px;
+    top: auto;
+    bottom: 0;
+  }
+
+}
+
 
 
 
