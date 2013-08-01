@@ -1299,8 +1299,8 @@ blockquote {
   @include image-2x("../img/kickstarter-k@2.png", 545px, 540px);
 
   @include breakpoint(small) {
-    height: 650px;
-    min-height: 650px;
+    height: 750px;
+    min-height: 750px;
     margin-left: -20px;
     margin-right: -20px;
     padding: 20px 20px 200px 20px;
