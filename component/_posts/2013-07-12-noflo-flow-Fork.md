@@ -9,7 +9,7 @@
 noflo = require "noflo"
 _ = require "underscore"
 _s = require "underscore.string"
-{ CacheStorage } = require "../lib/cache_storage"
+{ CacheStorage } = require "nohoarder"
 
 class Fork extends noflo.Component
 

@@ -12,7 +12,7 @@
   layout: "library"
 
 ---
-Routing Packets in NoFlo [![Build Status](https://secure.travis-ci.org/kenhkan/noflo-routers.png?branch=master)](https://travis-ci.org/kenhkan/noflo-routers)
+Routing Packets in NoFlo [![Build Status](https://secure.travis-ci.org/noflo/noflo-routers.png?branch=master)](https://travis-ci.org/noflo/noflo-routers)
 ===============================
 
 Whenever you want to forward an IP to a particular process downstream

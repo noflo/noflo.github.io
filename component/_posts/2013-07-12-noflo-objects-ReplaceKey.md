@@ -7,11 +7,10 @@
 
 ```coffeescript
 noflo = require("noflo")
-_s = require("underscore.string")
 
 class ReplaceKey extends noflo.Component
 
-  description: _s.clean "given a regexp matching any key of an incoming
+  description: "given a regexp matching any key of an incoming
   object as a data IP, replace the key with the provided string"
 
   constructor: ->

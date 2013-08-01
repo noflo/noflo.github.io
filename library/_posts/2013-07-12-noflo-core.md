@@ -1,7 +1,7 @@
 ---
   title: "noflo-core"
   description: "NoFlo Essentials"
-  version: "0.1.0"
+  version: "0.1.1"
   author: 
     name: "Henri Bergius"
     email: "henri.bergius@iki.fi"

@@ -1,14 +1,11 @@
 ---
   title: "noflo-objects"
   description: "Object Utilities for NoFlo"
+  version: "0.1.0"
   author: 
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"
     avatar: "http://www.gravatar.com/avatar/3db61a4a42000b4ff62648c0979e8920?s=23"
-  version: "0.1.0"
-  repository: 
-    type: "git"
-    url: "https://github.com/noflo/noflo-objects"
   layout: "library"
 
 ---

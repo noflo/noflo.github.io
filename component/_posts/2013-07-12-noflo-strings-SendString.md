@@ -12,10 +12,10 @@ class SendString extends noflo.Component
   constructor: ->
     @string = ''
     @inPorts =
-      string: new noflo.Port
-      in: new noflo.Port
+      string: new noflo.Port 'string'
+      in: new noflo.Port 'bang'
     @outPorts =
-      out: new noflo.Port
+      out: new noflo.Port 'string'
 
     @inPorts.string.on 'data', (data) =>
       @string = data

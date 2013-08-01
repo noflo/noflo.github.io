@@ -8,11 +8,10 @@
 ```coffeescript
 noflo = require("noflo")
 _ = require("underscore")
-_s = require("underscore.string")
 
 class ExtractProperty extends noflo.Component
 
-  description: _s.clean "Given a key, return only the value matching that key
+  description: "Given a key, return only the value matching that key
   in the incoming object"
 
   constructor: ->

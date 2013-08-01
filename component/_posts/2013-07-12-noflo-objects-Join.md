@@ -8,11 +8,10 @@
 ```coffeescript
 _ = require("underscore")
 noflo = require("noflo")
-_s = require("underscore.string")
 
 class Join extends noflo.Component
 
-  description: _s.clean "Join all values of a passed packet together as a
+  description: "Join all values of a passed packet together as a
   string with a predefined delimiter"
 
   constructor: ->

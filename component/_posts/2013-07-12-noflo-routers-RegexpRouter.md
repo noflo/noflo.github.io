@@ -51,6 +51,8 @@ How deep are we in the group hierarchy?
       @level = 0
 
     @inPorts.in.on "begingroup", (group) =>
+      index = @matchedRouteIndex
+
 ```
 Only at root level
 
@@ -64,8 +66,8 @@ Only at root level
               @outPorts.route.disconnect()
             break
 
-      else if @matchedRouteIndex? and @outPorts.out.isAttached @matchedRouteIndex
-        @outPorts.out.beginGroup(group, @matchedRouteIndex)
+      else if index? and @outPorts.out.isAttached index
+        @outPorts.out.beginGroup(group, index)
       else if @outPorts.missed.isAttached()
         @outPorts.missed.beginGroup(group)
 

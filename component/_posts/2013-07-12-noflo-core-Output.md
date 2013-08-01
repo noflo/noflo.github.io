@@ -8,7 +8,7 @@
 ```coffeescript
 noflo = require 'noflo'
 
-if typeof process is 'object' and process.title is 'node'
+unless noflo.isBrowser()
   util = require 'util'
 else
   util =

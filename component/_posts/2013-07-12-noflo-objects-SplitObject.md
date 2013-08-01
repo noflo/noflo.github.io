@@ -7,11 +7,10 @@
 
 ```coffeescript
 noflo = require("noflo")
-_s = require("underscore.string")
 
 class SplitObject extends noflo.Component
 
-  description: _s.clean "splits a single object into multiple IPs,
+  description: "splits a single object into multiple IPs,
     wrapped with the key as the group"
 
   constructor: ->

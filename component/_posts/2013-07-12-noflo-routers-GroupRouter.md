@@ -9,7 +9,7 @@
 noflo = require "noflo"
 _ = require "underscore"
 _s = require "underscore.string"
-{ CacheStorage } = require "noflo-flow"
+{ CacheStorage } = require "nohoarder"
 
 class GroupRouter extends noflo.Component
 
