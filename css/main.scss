@@ -1362,8 +1362,8 @@ blockquote {
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: 0 0;
-  background-image: url(../img/diagrams/kickstarter-screen.jpg);
-  @include image-2x("../img/diagrams/kickstarter-screen@2.jpg", 940px, 715px);
+  background-image: url(../img/diagrams/kickstarter-screen.png);
+  @include image-2x("../img/diagrams/kickstarter-screen@2.png", 1000px, 1140px);
 
   img {
     display: none;
