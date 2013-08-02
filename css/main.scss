@@ -1371,6 +1371,20 @@ blockquote {
   left: 30px;
 }
 
+.support-us-on-kickstarter {
+  float: right;
+  display: inline-block;
+  width: 125px;
+  height: 33px;
+  margin-top: -2px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: url(../img/support-us-on-kickstarter.png);
+  @include image-2x("../img/support-us-on-kickstarter@2.png", 125px, 33px);
+  text-indent: -9999px;
+}
+
 
 
 
