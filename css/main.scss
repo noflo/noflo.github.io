@@ -136,6 +136,14 @@ $ProximaRegularStack: "proxima-nova-regular", "Helvetica Neue", "HelveticaNeue",
 $ProximaLightStack: "proxima-nova-light", "Helvetica Neue Light", "HelveticaNeueLight","HelveticaNeueLight", "Helvetica Neue", "HelveticaNeue", Arial, sans-serif;
 $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosCnBold', "Helvetica", "Tahoma", "Geneva", "Arial Narrow", "Arial", Arial, sans-serif;
 
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
 
 
 /*------------------------------------*\
@@ -364,11 +372,15 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
 }
 
 .util-nav {
-  float: right;
+  float: left;
   margin-top: 25px;
 
   @include breakpoint(small) {
     display: none;
+  }
+
+  @include breakpoint(medium) {
+    float: right;
   }
   
 
@@ -1376,13 +1388,25 @@ blockquote {
   display: inline-block;
   width: 125px;
   height: 33px;
-  margin-top: -2px;
+  margin-top: 22px;
+  margin-left: 15px;
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: 0 0;
   background-image: url(../img/support-us-on-kickstarter.png);
   @include image-2x("../img/support-us-on-kickstarter@2.png", 125px, 33px);
+  background-size: 125px 33px;
   text-indent: -9999px;
+
+  @include breakpoint(medium) {
+    clear: both;
+    margin: 0 5px 15px 15px;
+  }
+
+  @include breakpoint(small) {
+    display: none;
+  }
+
 }
 
 
