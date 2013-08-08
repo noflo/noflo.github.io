@@ -8,13 +8,12 @@
 ```coffeescript
 noflo = require "noflo"
 _ = require "underscore"
-_s = require "underscore.string"
 { CacheStorage } = require "nohoarder"
 
 class CleanSplit extends noflo.Component
 
-  description: _s.clean "Like the generic split, except this splits the
-  incoming connection one by one to each port, so a connection must disconnect
+  description: "Like the generic split, except this splits the incoming
+  connection one by one to each port, so a connection must disconnect
   first before the next port receives the connection. Think of it as
   serializing splits."
 

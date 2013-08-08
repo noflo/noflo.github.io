@@ -8,11 +8,10 @@
 ```coffeescript
 noflo = require "noflo"
 _ = require "underscore"
-_s = require "underscore.string"
 
 class TemplateReplace extends noflo.Component
 
-  description: _s.clean "The inverse of 'Replace': fix the template and pass in
+  description: "The inverse of 'Replace': fix the template and pass in
   an object of patterns and replacements."
 
   constructor: ->

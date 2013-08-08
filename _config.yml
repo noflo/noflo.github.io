@@ -25,6 +25,7 @@ libraries:
   - kenhkan/noflo-compare
   - noflo/noflo-core
   - noflo/noflo-couchdb
+  - robingl/noflo-csv
   - noflo/noflo-diffbot
   - noflo/noflo-docco
   - kenhkan/noflo-crypto

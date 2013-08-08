@@ -12,9 +12,9 @@ parser = require 'json2yaml'
 class ToYaml extends noflo.Component
   constructor: ->
     @inPorts =
-      in: new noflo.Port()
+      in: new noflo.Port 'object'
     @outPorts =
-      out: new noflo.Port()
+      out: new noflo.Port 'string'
 
     @inPorts.in.on "data", (data) =>
       @outPorts.out.send parser.stringify data

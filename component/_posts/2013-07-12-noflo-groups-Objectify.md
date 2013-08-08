@@ -8,12 +8,11 @@
 ```coffeescript
 noflo = require("noflo")
 _ = require("underscore")
-_s = require("underscore.string")
 
 class Objectify extends noflo.Component
 
-  description: _s.clean "specify a regexp string, use the first match as
-  the key of an object containing the data"
+  description: "specify a regexp string, use the first match as the key
+  of an object containing the data"
 
   constructor: ->
     @regexp = null

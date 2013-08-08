@@ -7,13 +7,12 @@
 
 ```coffeescript
 noflo = require "noflo"
-_s = require "underscore.string"
 { CacheStorage } = require "nohoarder"
 
 class Cache extends noflo.Component
 
-  description: _s.clean "save incoming IPs and send the saved IPs to
-  port 'out' upon any data IP from 'ready'"
+  description: "save incoming IPs and send the saved IPs to port 'out'
+  upon any data IP from 'ready'"
 
   constructor: ->
     @keep = false

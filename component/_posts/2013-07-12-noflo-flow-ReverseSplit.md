@@ -8,7 +8,6 @@
 ```coffeescript
 noflo = require "noflo"
 _ = require "underscore"
-_s = require "underscore.string"
 
 class ReverseSplit extends noflo.Component
 

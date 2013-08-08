@@ -7,11 +7,10 @@
 
 ```coffeescript
 noflo = require("noflo")
-_s = require("underscore.string")
 
 class CountDown extends noflo.Component
 
-  description: _s.clean "count down from particular number, by default 1, and
+  description: "count down from particular number, by default 1, and
     send an empty IP when it hits 0"
 
   constructor: ->

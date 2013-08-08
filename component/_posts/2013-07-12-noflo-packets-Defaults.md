@@ -8,12 +8,11 @@
 ```coffeescript
 noflo = require("noflo")
 _ = require("underscore")
-_s = require("underscore.string")
 
 class Defaults extends noflo.Component
 
-  description: _s.clean "if incoming is short of the length of the
-  default packets, send the default packets."
+  description: "if incoming is short of the length of the default
+  packets, send the default packets."
 
   constructor: ->
     @defaults = []

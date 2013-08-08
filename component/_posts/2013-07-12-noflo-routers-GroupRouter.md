@@ -8,13 +8,12 @@
 ```coffeescript
 noflo = require "noflo"
 _ = require "underscore"
-_s = require "underscore.string"
 { CacheStorage } = require "nohoarder"
 
 class GroupRouter extends noflo.Component
 
-  description: _s.clean "routes IPs based on groups, which are matched and
-    routed but not removed when forwarding"
+  description: "routes IPs based on groups, which are matched and routed
+  but not removed when forwarding"
 
   constructor: ->
     @routes = []
@@ -54,8 +53,8 @@ Legacy-compatibility ports
 ```coffeescript
     @inPorts.routes.on "data", (routes) =>
       if typeof routes is "string"
-        @routes = _.map routes.split(","), (route) ->
-          _.map route.split(":"), (segment) ->
+        @routes = _.map routes.split(','), (route) ->
+          _.map route.split(':'), (segment) ->
             new RegExp segment
 
     @inPorts.in.on "connect", (port) =>
@@ -75,7 +74,7 @@ Where we are in terms of groups and whether they match
         @cache.beginGroup group, @matchedIndex
 
       @breadcrumb.push group
-      @matchRoute group, true
+      @matchRoute group
 
     @inPorts.in.on "data", (data) =>
       if @outPorts.out.isAttached @matchedIndex

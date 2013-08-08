@@ -7,13 +7,12 @@
 
 ```coffeescript
 _ = require("underscore")
-_s = require("underscore.string")
 noflo = require("noflo")
 
 class Unzip extends noflo.Component
 
-  description: _s.clean "Send packets whose position upon receipt is even to
-  the EVEN port, otherwise the ODD port."
+  description: "Send packets whose position upon receipt is even to the
+  EVEN port, otherwise the ODD port."
 
   constructor: ->
     @inPorts =

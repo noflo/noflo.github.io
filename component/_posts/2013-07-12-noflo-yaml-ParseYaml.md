@@ -12,9 +12,10 @@ parser = require 'js-yaml'
 class ParseYaml extends noflo.Component
   constructor: ->
     @inPorts =
-      in: new noflo.Port()
+      in: new noflo.Port 'string'
     @outPorts =
-      out: new noflo.Port()
+      out: new noflo.Port 'object'
+      error: new noflo.Port 'object'
 
     @inPorts.in.on "data", (data) =>
       try

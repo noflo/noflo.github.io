@@ -8,14 +8,13 @@
 ```coffeescript
 noflo = require "noflo"
 _ = require "underscore"
-_s = require "underscore.string"
 { CacheStorage } = require "nohoarder"
 
 class Fork extends noflo.Component
 
-  description: _s.clean "Connect some ports to 'OUT', send some IPs to 'IN',
-    and send the desired port to 'PORT' to selectively forward to a particular
-    port"
+  description: "Connect some ports to 'OUT', send some IPs to 'IN', and
+    send the desired port to 'PORT' to selectively forward to a
+    particular port"
 
   constructor: ->
     @portIndex = null

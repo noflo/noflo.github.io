@@ -7,12 +7,11 @@
 
 ```coffeescript
 _ = require "underscore"
-_s = require "underscore.string"
 noflo = require "noflo"
 
 class PairsToObject extends noflo.Component
 
-  description: _s.clean "Assume packets at odd numbers to be keys and those at
+  description: "Assume packets at odd numbers to be keys and those at
   even numbers to be values"
 
   constructor: ->

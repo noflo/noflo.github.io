@@ -7,13 +7,12 @@
 
 ```coffeescript
 noflo = require "noflo"
-_s = require "underscore.string"
 { CacheStorage } = require "nohoarder"
 
 class Stop extends noflo.Component
 
-  description: _s.clean "Stop everything that's received and send out
-  once we're told that we're ready to send."
+  description: "Stop everything that's received and send out once we're
+  told that we're ready to send."
 
   constructor: ->
     @count = 0

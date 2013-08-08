@@ -7,12 +7,11 @@
 
 ```coffeescript
 noflo = require "noflo"
-_s = require "underscore.string"
 
 class ObjectToString extends noflo.Component
 
-  description: _s.clean "stringifies a simple object with configurable
-  associator and delimiter"
+  description: "stringifies a simple object with configurable associator and
+    delimiter"
 
   constructor: ->
     @assoc = ":"

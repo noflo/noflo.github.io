@@ -8,7 +8,6 @@
 ```coffeescript
 noflo = require "noflo"
 _ = require "underscore"
-_s = require "underscore.string"
 print = require "node-print"
 util = require "util"
 { deepCopy } = require "owl-deepcopy"
@@ -53,8 +52,8 @@ display = (log) ->
 
 class Log extends noflo.Component
 
-  description: _s.clean "Log all packets, groups, and disconnects, when
-  the entire stream is complete."
+  description: "Log all packets, groups, and disconnects, when the
+  entire stream is complete."
 
   constructor: ->
     @inPorts =

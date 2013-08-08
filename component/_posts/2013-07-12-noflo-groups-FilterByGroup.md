@@ -7,13 +7,12 @@
 
 ```coffeescript
 noflo = require("noflo")
-_s = require("underscore.string")
 
 class FilterByGroup extends noflo.Component
 
-  description: _s.clean "Given a RegExp string, filter out groups that do not
-  match and their children data packets/groups. Forward only the content of the
-  matching group."
+  description: "Given a RegExp string, filter out groups that do not
+  match and their children data packets/groups. Forward only the content
+  of the matching group."
 
   constructor: ->
     @regexp = null

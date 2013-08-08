@@ -1,7 +1,7 @@
 ---
   title: "noflo-objects"
   description: "Object Utilities for NoFlo"
-  version: "0.1.0"
+  version: "0.1.2"
   author: 
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"

@@ -8,11 +8,10 @@
 ```coffeescript
 noflo = require 'noflo'
 _ = require 'underscore'
-_s = require 'underscore.string'
 
 class Jsonify extends noflo.Component
 
-  description: _s.clean "JSONify all incoming, unless a raw flag is set to
+  description: "JSONify all incoming, unless a raw flag is set to
   exclude data packets that are pure strings"
 
   constructor: ->

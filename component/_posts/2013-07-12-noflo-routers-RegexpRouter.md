@@ -8,12 +8,11 @@
 ```coffeescript
 noflo = require("noflo")
 _ = require("underscore")
-_s = require("underscore.string")
 
 class RegexpRouter extends noflo.Component
 
-  description: _s.clean "Route IPs based on RegExp (top-level only). The
-  position of the RegExp determines which port to forward to."
+  description: "Route IPs based on RegExp (top-level only). The position
+  of the RegExp determines which port to forward to."
 
   constructor: ->
     @routes = []

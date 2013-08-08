@@ -1,7 +1,7 @@
 ---
   title: "noflo-crypto"
   description: "Wrapper around googlecode's crypto-js"
-  version: "0.2.2"
+  version: "0.2.3"
   author: 
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"

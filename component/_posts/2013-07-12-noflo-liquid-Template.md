@@ -26,12 +26,12 @@ class Template extends noflo.Component
     @groups = []
 
     @inPorts =
-      includes: new noflo.Port()
-      template: new noflo.Port()
-      variables: new noflo.Port()
+      includes: new noflo.Port 'object'
+      template: new noflo.Port 'string'
+      variables: new noflo.Port 'object'
     @outPorts =
-      out: new noflo.Port()
-      error: new noflo.Port()
+      out: new noflo.Port 'string'
+      error: new noflo.Port 'object'
 
     @inPorts.includes.on 'data', (data) =>
       @addInclude data

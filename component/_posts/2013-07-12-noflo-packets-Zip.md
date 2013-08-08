@@ -8,11 +8,10 @@
 ```coffeescript
 noflo = require("noflo")
 _ = require("underscore")
-_s = require("underscore.string")
 
 class Zip extends noflo.Component
 
-  description: _s.clean "zip through multiple IPs and output a series of zipped
+  description: "zip through multiple IPs and output a series of zipped
   IPs just like how _.zip() works in Underscore.js"
 
   constructor: ->

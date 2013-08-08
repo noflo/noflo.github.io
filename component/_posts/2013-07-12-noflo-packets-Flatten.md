@@ -8,11 +8,10 @@
 ```coffeescript
 noflo = require("noflo")
 _ = require("underscore")
-_s = require("underscore.string")
 
 class Flatten extends noflo.Component
 
-  description: _s.clean "Flatten the IP structure but preserve all groups (i.e.
+  description: "Flatten the IP structure but preserve all groups (i.e.
     all groups are at the top level)"
 
   constructor: ->

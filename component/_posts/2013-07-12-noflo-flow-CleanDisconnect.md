@@ -8,14 +8,14 @@
 ```coffeescript
 noflo = require "noflo"
 _ = require "underscore"
-_s = require "underscore.string"
 { CacheStorage } = require "nohoarder"
 
 class CleanDisconnect extends noflo.Component
 
-  description: _s.clean "when several streams are nested through the array
+  description: "when several streams are nested through the array
   in-port (i.e. a connect through one of the ports before there is a
-  disconnect), separate the streams into distinct streams with no overlapping"
+  disconnect), separate the streams into distinct streams with no
+  overlapping"
 
   constructor: ->
     @cache = new CacheStorage

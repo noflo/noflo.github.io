@@ -1,7 +1,7 @@
 ---
   title: "noflo-math"
   description: "Mathematical components for NoFlo"
-  version: "0.0.1"
+  version: "0.0.2"
   author: 
     name: "Henri Bergius"
     email: "henri.bergius@iki.fi"

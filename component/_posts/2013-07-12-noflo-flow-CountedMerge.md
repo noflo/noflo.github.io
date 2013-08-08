@@ -7,12 +7,11 @@
 
 ```coffeescript
 noflo = require "noflo"
-_s = require "underscore.string"
 { CacheStorage } = require "nohoarder"
 
 class CountedMerge extends noflo.Component
 
-  description: _s.clean "Like the normal 'Merge', but merge up to a specified
+  description: "Like the normal 'Merge', but merge up to a specified
   number of connections."
 
   constructor: ->

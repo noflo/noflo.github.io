@@ -20,7 +20,7 @@ class CreateDate extends noflo.Component
         date = new Date
       else
         date = new Date data
-      @outPorts.out.send date.toJSON()
+      @outPorts.out.send date
       @outPorts.out.disconnect()
 
 exports.getComponent = -> new CreateDate

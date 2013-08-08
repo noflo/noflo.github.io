@@ -8,13 +8,12 @@
 ```coffeescript
 noflo = require 'noflo'
 _ = require 'underscore'
-_s = require 'underscore.string'
 
 class AllPackets extends noflo.Component
 
-  description: _s.clean 'compare two connections and pass to out the
-  connection with the most packets winning a comparison, numerically for
-  numbers and lexicographically for strings'
+  description: 'compare two connections and pass to out the connection with the
+  most packets winning a comparison, numerically for numbers and
+    lexicographically for strings'
 
   constructor: ->
     @connections = []
