@@ -88,7 +88,7 @@ $ ./node_modules/.bin/noflo -h
 
 The main NoFlo package gives you the environment for running flows. In addition you'll need the components that you'll be using in your graphs.
 
-There are {{ site.categories['component'] | size }} open source components available via [NoFlo Component Libraries](/library/) that you can install with NPM.
+There are {{ site.categories.component | size }} open source components available via [NoFlo Component Libraries](/library/) that you can install with NPM.
 
 For example, to install the [filesystem components](/library/noflo-filesystem/), you can run:
 
