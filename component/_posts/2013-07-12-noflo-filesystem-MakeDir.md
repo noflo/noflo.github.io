@@ -8,15 +8,15 @@
 ```coffeescript
 fs = require 'fs'
 path = require 'path'
-noflo = require "noflo"
+noflo = require 'noflo'
 
 class MakeDir extends noflo.AsyncComponent
   constructor: ->
     @inPorts =
-      in: new noflo.Port()
+      in: new noflo.Port 'string'
     @outPorts =
-      out: new noflo.Port()
-      error: new noflo.Port()
+      out: new noflo.Port 'string'
+      error: new noflo.Port 'object'
 
     super()
 
@@ -32,28 +32,34 @@ class MakeDir extends noflo.AsyncComponent
   mkDir: (dirPath, callback) ->
     orig = dirPath
     dirPath = path.resolve dirPath
+
+```
+Try creating it
+
+```coffeescript
     fs.mkdir dirPath, (err) =>
 ```
 Directory was created
 
 ```coffeescript
-      return callback null unless err
+      unless err
+        return callback null
 
       switch err.code
-        when 'ENOENT'
 ```
 Parent missing, create
 
 ```coffeescript
+        when 'ENOENT'
           @mkDir path.dirname(dirPath), (err) =>
             return callback err if err
             @mkDir dirPath, callback
 
-        else
 ```
 Check if the directory actually exists already
 
 ```coffeescript
+        else
           fs.stat dirPath, (statErr, stat) =>
             return callback err if statErr
             return callback err unless stat.isDirectory()
