@@ -5,173 +5,209 @@
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"
     avatar: "http://www.gravatar.com/avatar/3db61a4a42000b4ff62648c0979e8920?s=23"
-  version: "0.0.11"
+  version: "0.1.1"
   repository: 
     type: "git"
     url: "git://github.com/kenhkan/noflo-woute"
   layout: "library"
 
 ---
-Routing web requests based on the request's URL [![Build Status](https://secure.travis-ci.org/kenhkan/noflo-woute.png?branch=master)](https://travis-ci.org/kenhkan/noflo-woute)
-===============================
+# Woute: A Web Request Router [![Build Status](https://secure.travis-ci.org/kenhkan/noflo-woute.png?branch=master)](https://travis-ci.org/kenhkan/noflo-woute)
 
-Most of the time you want to define a bunch of URL patterns and provide
-a handler for each of them, not unlike
-[Sinatra](http://www.sinatrarb.com/). With Woute, you can route web
-requests similar to Sintra! You simply send in an array of URL patterns
-and attach handler components to it.
+The most natural way to route web requests is to use matching rules, not
+unlike [Sinatra](http://www.sinatrarb.com/) in Ruby and
+[Express](http://expressjs.com/) in JavaScript.
 
+However, in NoFlo, it's a network of blackboxes you connect to make a
+program. The intuitive way is to connect incoming requests to a series
+of matchers; failure to match forwards to the next matcher.
 
-Usage
--------------------------------
+When successful matches occur, the request is sent to wherever the
+programmer wants, which hopefully produces some result to be sent to a
+responder. An abstract example would be:
 
-Note: All the following examples are written in FBP.
-
-First, set up a Woute server with an array of URL patterns, which is
-based on [noflo-webserver](https://github.com/bergie/noflo-webserver):
-
-    '8080' -> LISTEN Woute(woute/Woute)
-    'a/b.+,a/c,.+' -> ROUTES Woute()
-
-Routes are defined *at once*. The second time Woute's 'ROUTES' port
-receives something, all routes would be replaced. Each data IP
-represents one pattern to match.
-
-Routes are RegExp strings that have an implied '^', meaning that the URL
-must match from the beginning onward. In the example above, 'a/b.+'
-matches only URL starting with 'a' then followed by any string starting
-with 'b', and followed by anything afterwards. '.+' would simply match
-anything that is not empty (i.e. the "home page").
-
-Each route is then coupled with a handler that attaches to the 'OUT'
-port of Woute. Coupling is done by *position* of attachment. For
-instance, continuing from the above:
-
-    Woute() OUT -> IN AB(Output)
-    Woute() OUT -> IN AC(Output)
-    Woute() OUT -> IN Any(Output)
-
-If the definition is somewhat juggled around, however, like:
-
-    'a/b.+,.+,a/c' -> ROUTES Woute(Woute)
-
-Then you would have to write the FBP program as:
-
-    Woute() OUT -> IN AB(Output)
-    Woute() OUT -> IN Any(Output)
-    Woute() OUT -> IN AC(Output)
-
-Note: placing a '.+' route would render any routes after it never to be
-reached, except of course '.\*' or ''.
-
-Any unmatched requests are simply ignored. Therefore, it is advised to
-have a '.\*' at the end of your route definition.
-
-If you prefer to pass each route individually, you may also send the
-route to the 'ROUTE' port (as opposed to the 'ROUTES' port).
-
-    'a/b.+' -> ROUTE Woute(Woute)
-    '.+' -> ROUTE Woute()
-    'a/c' -> ROUTE Woute()
-    Woute() OUT -> IN AB(Output)
-    Woute() OUT -> IN Any(Output)
-    Woute() OUT -> IN AC(Output)
-
-#### What is passed on?
-
-The handler with a matching URL would receive the URL, the headers, body
-of the request, and also a random UUID for replying back to the client.
-
-If the request looks like:
-
-    GET /a/cat/something/here HTTP/1.1
-    Host: example.com
-    Content-Type: application/json; charset=utf-8
-    Content-Length: 23
-
-    {
-      "Transaction": "OK"
-    }
-
-The handler 'AC', in the first example, would then receive:
-
-    GROUP: session-id
-      DATA: <SomeRandomSessionIDHere>
-    GROUP: url
-      DATA: a
-      DATA: cat
-      DATA: something
-      DATA: here
-    GROUP: headers
-      DATA: {
-        Host: example.com
-        Content-Type: application/json; charset=utf-8
-        Content-Length: 23
-      }
-    GROUP: body
-      DATA: { Transaction: "Is it OK?" }
-
-Note that the 'body' and 'headers' data packet contains a JavaScript
-object rather than a JSON string.
-
-#### Sending back a response
-
-Instead of sending your response to the Woute process, create a
-Responder process and pass an object following the structure of that
-emitted by the Woute component.
-
-    Woute(woute/Woute) OUT -> IN Responder(woute/Responder)
-
-Note that the 'body' and 'headers' data packet should contain a
-JavaScript object rather than a JSON string.
-
-#### Handling 404s
-
-There is a convenient port 'MISSING' on Woute that echoes what is sent
-to it but responds with status code 404. It is as easy as giving the
-object emitted from 'OUT' straight to 'MISSING'.
+    
+                           /login                /get_images
+                             +                      +
+                             |                      |
+                             |                      |
+    +-----------+        +---v-------+         +----v------+           +------------+
+    |           |        |           |         |           |           |            |
+    |           |  Req   |  First    |  Fail   |  Second   |  Fail     |  Third     |
+    | Webserver +-------->  Matcher  +--------->  Matcher  +----------->  Matcher   |
+    |           |        |           |         |           |           |            |
+    +-----------+        +---+-------+         +----+------+           +---+--------+
+                             |                      |                      |
+                             |Success               |Success               |Success
+                             |                      |                      |
+                         +---v-------+         +----v------+           +---v--------+
+                         |           |         |           |           |            |
+                         |           |         |           |           |            |
+                         |           |         | Fetch     |           |            |
+                         | Login     |         | Images    |           | 404        |
+                         |           |         |           |           |            |
+                         +-----+-----+         +----+------+           +---+--------+
+                               |                    |                      |
+                               |                    |Res                   |
+                               |Res                 |                      |Res
+                               |               +----v------+               |
+                               |               |           |               |
+                               +--------------->           <---------------+
+                                               | Respond   |
+                                               |           |
+                                               +-----------+
 
 
-Convenient Helpers
--------------------------------
+## Installation
 
-Because Woute relies on ArrayPort to route the web requests, it is
-inconvenient to output the request not as an object but via individual
-ports (e.g. 'SESSIONID', 'HEADERS', 'BODY', etc) so that the user of
-this module must attach to each port for each handler in the proper
-order.
+    npm install --save noflo-woute
 
-Instead, two helpers are provided to convert the objects into packets
-via ports. These helpers may be applied after the routing is complete.
-For example:
 
-    '8080' -> LISTEN Woute(woute/Woute)
-    'a,b,c' -> ROUTES Woute()
-    Woute() OUT -> IN DecompressA(woute/Decompress) ...
-    Woute() OUT -> IN DecompressB(woute/Decompress) ...
-    Woute() OUT -> IN DecompressC(woute/Decompress) ...
+## Quick & Dirty Usage
 
-#### Decompress
+To use noflo-woute in its most basic form, you only need the `Matcher`
+component:
 
-The Decompress graph takes the output of Woute (i.e. the request object)
-and isolate each group into its own connection (less the group itself)
-via the corresponding port. Currently, these ports are supported:
+* Inport `MATCH`: *optional* takes a URL segment to match. Default to
+  always match
+* Inport `METHOD`: *optional* an HTTP method. Default to `GET`
+* Inport `IN`: takes a request/response pair produced by
+  [noflo-webserver](https://github.com/noflo/noflo-webserver)
+* Outport `OUT`: the request/repsonse pair if match is successful
+* Outport `FAIL`: if match is unsuccessful, most likely attached to
+  another matcher
 
-  * RESPONSE
-  * HEADERS
-  * TOKEN
-  * OUT
+Simply connect some matchers together like the abstract example shown
+above.
 
-And these ports are not available in Compress:
 
-  * QUERY
-  * URL
+## More Advanced Usage: Adapters
 
-The TOKEN port outputs the session ID whereas the OUT port emits the
-body of the request.
+Matchers are agnostic to the actual request/response, meaning that
+whoever handling a successfully matched case is handed the same thing
+that they would get from noflo-webserver. Two adapter components are
+there to help you to "split" the request into different parts so
+manipulation is easier: `woute/ToGroups` and `woute/ToPorts`.
 
-#### Compress
+Both adapters break the request/response object into these areas:
 
-The Compress graph does the opposite of Decompress. It takes the same
-four ports as in-ports and outputs an object that Woute then takes to
-respond to client.
+* `url`: ditto
+* `headers`: the HTTP headers broken down into pairs
+* `query`: the query string broken down into pairs
+* `body`: the body passed through as-is (i.e. always a string)
+* `request`: the request/response object
+
+`ToGroups` converts the outcoming request/response object into the
+listed areas grouped by the names. Groups are constructed and sent in
+the order of the list above. `ToPorts` converts the object into the
+areas via ports by those names.
+
+For instance, out comes from port `ToGroups` within a single connection:
+
+    BEGINGROUP: URL
+    DATA: /login
+    ENDGROUP: URL
+    BEGINGROUP: HEADERS
+    DATA: { "x-http-destination": "NoFlo Awesomeness" }
+    ENDGROUP: HEADERS
+    BEGINGROUP: QUERY
+    DATA: { this: "is sent", as: "an object" }
+    ENDGROUP: QUERY
+    BEGINGROUP: BODY
+    DATA: {"this":[{"is":"JSON","but":"is"},{"still":"sent"}],"as":"a string"}
+    ENDGROUP: BODY
+    BEGINGROUP: RESPONSE
+    DATA: <The response object>
+    ENDGROUP: RESPONSE
+
+For `ToPorts`, the same data packets would be sent to ports `URL`,
+`HEADERS`, `QUERY`, `BODY`, and `RESPONSE`, respectively. Both
+`ToGroups` and `ToPorts` retain the all groups emitted from
+noflo-webserver.
+
+### Preparing for response
+
+When you are done and are ready to send back a response, remember to
+feed your content to their counterparts: `woute/FromGroups` and
+`woute/FromPorts`. These two components take the disassembled data
+packets, apply them on a response object, and splice back into
+request/repsonse pair so it's ready to be sent to
+[webserver/SendResponse](https://github.com/noflo/noflo-webserver/blob/master/components/SendResponse.coffee).
+
+The components take these types of data packets:
+
+* status: the status code to set
+* headers: the response headers to be sent back
+* body: the body to be sent back
+* request: the request/response object
+
+### Which way is best?
+
+`ToPorts` makes the HTTP request much more manageable as it breaks down
+the main parts of an HTTP request into separate connections. However,
+there is a down side: you need to be careful when asynchronous operation
+is involved.
+
+Asynchronous operation "breaks" the stream of these connections,
+rendering `FromPorts` unable to splice them back into a request/response
+object. Yes, noflo-webserver does wrap the request around with a unique
+UUID, but noflo-woute ignores that. It is the responsibility of the
+programmer or a different package built on top of noflo-woute to handle
+asynchronicity.
+
+Also, `ToPorts` triggers the re-assembly of the request/response object
+as soon as it receives a request/response object because it would
+otherwise not when to apply the packets on the response object.
+
+`ToGroups` on the other hand puts everything within the same connection
+so there isn't any synchronicity problem as you pass the entire object
+around all at once. However, every time you need to find what you want
+and manipulate it, you need to weed through all the groups. Both
+approaches have pros and cons, hence the options.
+
+
+## Gotchas
+
+* In order to use the `BODY` port, you need to run the request through
+  [webserver/BodyParser](https://github.com/noflo/noflo-webserver/blob/master/components/BodyParser.coffee)
+* `FromPorts` and `FromGroups` expect the body to be a string. You must
+  JSONify or perform any conversion before feeding the body to the two
+  components.
+* Remember to apply any desired
+  [middleware](https://github.com/noflo/noflo-webserver/tree/master/components)
+  before passing the request/response object from webserver to any
+  matcher.
+
+
+## Examples
+
+### Echo Server
+
+Run the server:
+
+    > cd examples/echo_server
+    > npm install
+    > npm run-script main
+
+Get back exactly what you pass in:
+
+    > curl "http://localhost:1337/echo" -d '{"a":"b"}' -H "Content-Type: application/json"
+    {"a":"b"}
+
+Get back the string 'empty-body':
+
+    > curl "http://localhost:1337/empty-body" -d '{"a":"b"}' -H "Content-Type: application/json"
+    empty-body
+
+Print to console of incoming body, but get nothing in return:
+
+    > curl "http://localhost:1337/anything-here" -X POST -d '{"a":"b"}' -H "Content-Type: application/json"
+
+File not found:
+
+    > curl "http://localhost:1337/abc" -I
+    HTTP/1.1 404 Not Found
+    Date: Sat, 10 Aug 2013 08:35:04 GMT
+    Connection: keep-alive
+
+To look at how these work, read the [FBP code](https://github.com/kenhkan/noflo-woute/blob/master/examples/echo_server/graphs/main.fbp).

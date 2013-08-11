@@ -16,6 +16,13 @@ Our local additional tags
 ```coffeescript
 includeTag = require '../tags/include.coffee'
 
+```
+We include Jekyll-style filters by default
+
+```coffeescript
+jekFilters = require '../filter/jekyll.coffee'
+liquid.Template.registerFilter jekFilters
+
 class Template extends noflo.Component
   constructor: ->
     @includes = {}
