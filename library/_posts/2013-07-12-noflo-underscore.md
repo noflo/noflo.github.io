@@ -5,15 +5,14 @@
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"
     avatar: "http://www.gravatar.com/avatar/3db61a4a42000b4ff62648c0979e8920?s=23"
-  version: "0.0.3"
+  version: "0.0.4"
   repository: 
     type: "git"
     url: "https://github.com/kenhkan/noflo-underscore.git"
   layout: "library"
 
 ---
-Underscore.js Utilities as NoFlo Components [![Build Status](https://secure.travis-ci.org/kenhkan/noflo-underscore.png?branch=master)](https://travis-ci.org/kenhkan/noflo-underscore)
-===============================
+# Underscore.js Utilities as NoFlo Components <br/>[![Build Status](https://secure.travis-ci.org/kenhkan/noflo-underscore.png?branch=master)](https://travis-ci.org/kenhkan/noflo-underscore) [![Dependency Status](https://gemnasium.com/kenhkan/noflo-underscore.png)](https://gemnasium.com/kenhkan/noflo-underscore) [![NPM version](https://badge.fury.io/js/noflo-underscore.png)](http://badge.fury.io/js/noflo-underscore) [![Stories in Ready](https://badge.waffle.io/kenhkan/noflo-underscore.png)](http://waffle.io/kenhkan/noflo-underscore)
 
 This module contains simple proxies of
 [Underscore.js](http://underscorejs.org/) functions.
@@ -22,8 +21,7 @@ Feel free to contribute new components and graphs! I'll try to
 incorporate as soon as time allows.
 
 
-Usage
--------------------------------
+## Usage
 
 ### GroupBy ###
 
