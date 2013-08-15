@@ -63,7 +63,7 @@ $ cd my-noflo-example-app
 
 The first thing to do with your project is to create a `package.json` file into the project root. This is the file that is used by NPM for finding and installing the libraries your project needs.
 
-A basic `package.json` file could look like the following. Create one using a npm:
+A basic `package.json` file could look like the following. Create one using npm:
 
 ```bash
 npm init
