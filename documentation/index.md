@@ -63,13 +63,10 @@ $ cd my-noflo-example-app
 
 The first thing to do with your project is to create a `package.json` file into the project root. This is the file that is used by NPM for finding and installing the libraries your project needs.
 
-A basic `package.json` file could look like the following. Create one using a text editor:
+A basic `package.json` file could look like the following. Create one using a npm:
 
-```json
-{
-  "name": "my-noflo-example-app",
-  "version": "0.0.1"
-}
+```bash
+npm init
 ```
 
 Once the `package.json` file is in place, you're ready to install NoFlo. Do this by running:
