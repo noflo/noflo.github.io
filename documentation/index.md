@@ -8,7 +8,7 @@ NoFlo is a [Flow-Based Programming](http://en.wikipedia.org/wiki/Flow-based_prog
 
 NoFlo components react to incoming messages, or *packets*. When a component receives packets in its input ports it performs a predefined operation, and sends its result out as a packet to its output ports. There is no shared state, and the only way to communicate between components is by sending packets.
 
-NoFlo components are built as simple [CoffeeScript](http://coffeescript.org/) classes that define the input and output ports, and register various event listeners on them. When executed, NoFlo creates a live graph, or *network* out of a graph, instantiates the components used in the graph, and connects them together.
+NoFlo components are built as simple JavaScript or [CoffeeScript](http://coffeescript.org/) classes that define the input and output ports, and register various event listeners on them. When executed, NoFlo creates a live graph, or *network* out of a graph, instantiates the components used in the graph, and connects them together.
 
 NoFlo graphs can deal with multiple different input paradigms. The same flow can react to incoming HTTP requests, text messages, and changes in the file system, and can similarly output to different targets like writing to a database, responding to the HTTP requests, or updating a dashboard. It is simply a matter of choosing the components you want to use.
 
