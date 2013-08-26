@@ -5,7 +5,7 @@
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"
     avatar: "http://www.gravatar.com/avatar/3db61a4a42000b4ff62648c0979e8920?s=23"
-  version: "0.1.1"
+  version: "0.1.2"
   repository: 
     type: "git"
     url: "git://github.com/kenhkan/noflo-woute"

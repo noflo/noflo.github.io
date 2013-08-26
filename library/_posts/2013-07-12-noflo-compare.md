@@ -1,7 +1,7 @@
 ---
   title: "noflo-compare"
   description: "Performing Comparisons in NoFlo"
-  version: "0.1.2"
+  version: "0.2.0"
   author: 
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"

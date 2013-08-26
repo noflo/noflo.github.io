@@ -7,7 +7,6 @@
 
 ```coffeescript
 _ = require "underscore"
-_s = require "underscore.string"
 noflo = require "noflo"
 
 class GroupBy extends noflo.Component

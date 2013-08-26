@@ -21,6 +21,7 @@ highlight_libraries:
   - noflo-twitter
 libraries:
   - noflo/noflo-adapters
+  - kenhkan/noflo-automaton
   - noflo/noflo-basecamp
   - kenhkan/noflo-compare
   - noflo/noflo-core

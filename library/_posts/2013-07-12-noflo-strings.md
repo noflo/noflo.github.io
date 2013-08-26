@@ -1,7 +1,7 @@
 ---
   title: "noflo-strings"
   description: "String Utilities for NoFlo"
-  version: "0.1.1"
+  version: "0.1.2"
   author: 
     name: "Kenneth Kan"
     email: "kenhkan@gmail.com"
