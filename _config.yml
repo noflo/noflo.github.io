@@ -23,6 +23,8 @@ libraries:
   - noflo/noflo-adapters
   - kenhkan/noflo-automaton
   - noflo/noflo-basecamp
+  - kenhkan/noflo-cache
+  - robingl/noflo-calc
   - kenhkan/noflo-compare
   - noflo/noflo-core
   - noflo/noflo-couchdb
