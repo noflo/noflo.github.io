@@ -68,8 +68,10 @@ libraries:
   - noflo/noflo-yaml
 browser_libraries:
   - noflo/noflo-core
+  - noflo/noflo-css
   - noflo/noflo-dom
   - noflo/noflo-flow
+  - noflo/noflo-interaction
   - noflo/noflo-math
   - noflo/noflo-objects
   - noflo/noflo-physics
