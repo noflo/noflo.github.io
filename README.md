@@ -11,6 +11,11 @@ Install the dependencies with:
 
     $ npm install
 
+You also need some additional tools:
+
+    $ sudo gem install jekyll
+    $ sudo gem install sass --pre
+
 Then to develop the site, run:
 
     $ grunt dev
