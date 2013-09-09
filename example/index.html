@@ -14,6 +14,7 @@ categories:
 
       <div class="main">
         <div class="demos">
+          <h2>Examples for Node.js</h2>
           {% for example in site.categories['example'] %}
           {% if example.tags contains 'nodejs' %}
           <div class="demo">
@@ -41,8 +42,8 @@ categories:
           </div>
           {% endif %}
           {% endfor %}
-          <h2>Browser</h2>
           <hr />
+          <h2>Examples for web browsers</h2>
           {% for example in site.categories['example'] %}
           {% unless example.tags contains 'nodejs' %}
           <div class="demo">
