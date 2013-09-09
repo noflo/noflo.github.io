@@ -76,6 +76,7 @@ browser_libraries:
   - noflo/noflo-math
   - noflo/noflo-objects
   - noflo/noflo-physics
+  - noflo/noflo-routers
   - noflo/noflo-strings
   - d4tocchini/noflo-draggabilly
 exclude:
