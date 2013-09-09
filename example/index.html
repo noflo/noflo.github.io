@@ -14,7 +14,7 @@ categories:
 
       <div class="main">
         <div class="demos">
-          {% for example in site.categories['example'] reversed %}
+          {% for example in site.categories['example'] %}
           {% if example.tags contains 'nodejs' %}
           <div class="demo">
             <div class="demo__info span4">
@@ -44,7 +44,7 @@ categories:
           {% endfor %}
           <h2>Browser</h2>
           <hr />
-          {% for example in site.categories['example'] reversed %}
+          {% for example in site.categories['example'] %}
           {% unless example.tags contains 'nodejs' %}
           <div class="demo">
             <div class="demo__info span4">
