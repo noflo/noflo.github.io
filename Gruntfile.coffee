@@ -31,7 +31,7 @@ module.exports = ->
           cwd: '_site/css/'
           src: ['main.*'],
           dest: 'css/'
-        ]  
+        ]
     
     #imagemin:
     #  dist:
@@ -44,8 +44,6 @@ module.exports = ->
     #        dest: 'img/',
     #        ext: '.jpg'
     #    ]
-          
-        
 
     jekyll:
       dev:
@@ -120,7 +118,7 @@ module.exports = ->
     'build'
     'watch:noflo'
     'watch:jekyll'
-    'watch:sass'    
+    'watch:sass'
   ]
   @registerTask 'build', [
     'sass:src'
