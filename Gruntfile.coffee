@@ -64,7 +64,6 @@ module.exports = ->
       noflo:
         files: [
           '_docco/*.jst'
-          '_src/**'
         ]
         tasks: ['docco']
       jekyll:
@@ -77,10 +76,8 @@ module.exports = ->
           '**/*.css'
           '**/_posts/*.md'
           # Ignore the generated files
-          '!_site/**'
-          '!_src/**'
-          '!node_modules/**'
-          '!.git/**'
+          '!_site/*'
+          '!_src/*'
         ]
         tasks: ['jekyll']
       sass:
@@ -116,9 +113,7 @@ module.exports = ->
   @registerTask 'dev', [
     'connect:dev'
     'build'
-    'watch:noflo'
-    'watch:jekyll'
-    'watch:sass'
+    'watch'
   ]
   @registerTask 'build', [
     'sass:src'
