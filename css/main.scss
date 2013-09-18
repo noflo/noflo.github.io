@@ -434,7 +434,7 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
 \*------------------------------------*/
 .mobile-nav {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
