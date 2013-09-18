@@ -872,7 +872,6 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
 		margin-right: -20px;
 		padding-top: 100px;
 	}
-}
 
 	.promo__title {
 		width: 225px;
@@ -902,22 +901,6 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
 		padding: 15px 30px;
 		width: 240px;
 	}
-
-.btn-kickstarter {
-  background-image: none;
-  padding: 10px;
-
-  &:hover {
-    background-image: none;    
-  }
-
-  &.btn-white {
-    background-color: #ffffff;
-  }
-
-  &.btn-black {
-    background-color: #000000;
-  }
 
 }
 
@@ -1299,27 +1282,25 @@ blockquote {
 /*------------------------------------*\
     $Home - Kickstarter
 \*------------------------------------*/
-.kickstarter-panel {
+.theflo-panel {
   overflow: hidden;
-  height: 900px;
-  min-height: 900px;
+  height: 542px;
+  min-height: 542px;
   position: relative;
-  background-color: #eef2ea;
+  background-color: #000000;
+  color: #ffffff;
   background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-image: url(../img/kickstarter-k.png);
-  @include image-2x("../img/kickstarter-k@2.png", 545px, 540px);
-
+  background-position: center;
+  background-image: url(../img/theflo-bg.jpg);
+  @include image-2x("../img/theflo-bg@2.jpg", 931px, 542px);
   @include breakpoint(small) {
-    height: 750px;
-    min-height: 750px;
     margin-left: -20px;
     margin-right: -20px;
-    padding: 20px 20px 200px 20px;
   }
 
-  .sidebar {
-    padding-top: 120px;
+  .main {
+    padding-top: 80px;
+    text-align: center;
 
     @include breakpoint(small) {
       padding-top: 0;
@@ -1335,6 +1316,14 @@ blockquote {
 
     }
 
+    a {
+      color: #ffffff;
+    }
+
+    a.btn {
+      width: 200px;
+      padding: 10px;
+    }
   }
 
 }
@@ -1354,64 +1343,6 @@ blockquote {
   }
 
 }
-
-.kickstarter__screen {
-  position: absolute;
-  top: 25%;
-  right: -25%;
-  height: 100%;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-image: url(../img/diagrams/kickstarter-screen.png);
-  @include image-2x("../img/diagrams/kickstarter-screen@2.png", 1000px, 1140px);
-
-  img {
-    display: none;
-  }
-
-  @include breakpoint(small) {
-    height: 200px;
-    top: auto;
-    bottom: 0;
-  }
-
-}
-
-.kickstarter__video {
-  position: absolute;
-  top: 68px;
-  left: 30px;
-}
-
-.support-us-on-kickstarter {
-  float: right;
-  display: inline-block;
-  width: 125px;
-  height: 33px;
-  margin-top: 22px;
-  margin-left: 15px;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-image: url(../img/support-us-on-kickstarter.png);
-  @include image-2x("../img/support-us-on-kickstarter@2.png", 125px, 33px);
-  background-size: 125px 33px;
-  text-indent: -9999px;
-
-  @include breakpoint(medium) {
-    clear: both;
-    margin: 0 5px 15px 15px;
-  }
-
-  @include breakpoint(small) {
-    display: none;
-  }
-
-}
-
-
-
 
 
 /*------------------------------------*\
