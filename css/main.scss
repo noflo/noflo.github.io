@@ -1301,7 +1301,7 @@ blockquote {
   background-color: #000000;
   color: #ffffff;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center bottom;
   background-image: url(../img/theflo-bg.jpg);
   @include background-image-2x("../img/theflo-bg@2.jpg");
   @include background-cover;
