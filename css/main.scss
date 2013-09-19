@@ -186,6 +186,17 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
           background-size: cover;           /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
 }
 
+@mixin background-image-2x($image) {
+    @media (min--moz-device-pixel-ratio: 1.3),
+        (-o-min-device-pixel-ratio: 2.6/2),
+        (-webkit-min-device-pixel-ratio: 1.3),
+        (min-device-pixel-ratio: 1.3),
+        (min-resolution: 1.3dppx) {
+    /* on retina, use image that's scaled by 2 */
+    background-image: url($image);
+    }
+}
+
 @mixin image-2x($image, $width, $height) {
     @media (min--moz-device-pixel-ratio: 1.3),
         (-o-min-device-pixel-ratio: 2.6/2),
@@ -1291,13 +1302,18 @@ blockquote {
   color: #ffffff;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
   background-image: url(../img/theflo-bg.jpg);
-  @include image-2x("../img/theflo-bg@2.jpg", 931px, 542px);
+  @include background-image-2x("../img/theflo-bg@2.jpg");
+  @include background-cover;
   @include breakpoint(small) {
     margin-left: -20px;
     margin-right: -20px;
+    padding: 15px;
+    padding-top: 60px;
+    
   }
+    
+  background-size: cover !important;
 
   .main {
     padding-top: 80px;
@@ -1320,8 +1336,6 @@ blockquote {
       }
 
     }
-    
-
     
     p a {      
       color: hsl(211, 65%, 71%);
@@ -1494,7 +1508,7 @@ blockquote {
   @include background-cover;
   background-image: url(../img/part-of-noflo.jpg);
   @include image-2x("../img/part-of-noflo@2.jpg", 1360px, 600px);
-
+  
   @include breakpoint(small) {
     margin-left: -20px;
     margin-right: -20px;
