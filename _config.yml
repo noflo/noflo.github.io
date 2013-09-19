@@ -67,6 +67,7 @@ libraries:
   - noflo/noflo-xml
   - noflo/noflo-yaml
 browser_libraries:
+  - noflo/noflo-ajax
   - noflo/noflo-core
   - noflo/noflo-css
   - noflo/noflo-dom
