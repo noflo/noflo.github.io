@@ -103,7 +103,9 @@ that includes the following properties:</p>
 <li><code>id</code>: Identifier of the process in the network. Typically a string</li>
 <li><code>component</code>: Filename or path of a NoFlo component, or a component instance object</li>
 </ul>                            <div class="highlight"><pre>  <span class="nv">addNode: </span><span class="nf">(node, callback) -&gt;</span></pre></div>                                                  <p>Processes are treated as singletons by their identifier. If
-we already have a process with the given ID, return that.</p>                            <div class="highlight"><pre>    <span class="k">return</span> <span class="k">if</span> <span class="nx">@processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span>
+we already have a process with the given ID, return that.</p>                            <div class="highlight"><pre>    <span class="k">if</span> <span class="nx">@processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span>
+      <span class="nx">callback</span> <span class="nx">@processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="k">if</span> <span class="nx">callback</span>
+      <span class="k">return</span>
 
     <span class="nv">process =</span>
       <span class="nv">id: </span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span></pre></div>                                                  <p>No component defined, just register the process but don't start.</p>                            <div class="highlight"><pre>    <span class="nx">unless</span> <span class="nx">node</span><span class="p">.</span><span class="nx">component</span>
@@ -118,6 +120,7 @@ we already have a process with the given ID, return that.</p>                   
 
   <span class="nv">removeNode: </span><span class="nf">(node) -&gt;</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="nx">@processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span>
+    <span class="nx">@processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">].</span><span class="nx">component</span><span class="p">.</span><span class="nx">shutdown</span><span class="p">()</span>
     <span class="k">delete</span> <span class="nx">@processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span>
 
   <span class="nv">renameNode: </span><span class="nf">(oldId, newId) -&gt;</span>
@@ -287,4 +290,4 @@ when done</p>                            <div class="highlight"><pre>        <sp
 
 <span class="nv">exports.Network = </span><span class="nx">Network</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-09-04 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-09-19 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
