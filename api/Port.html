@@ -4,77 +4,78 @@ title: "Port API"
 categories:
   - api
 ---
-   <div class="row-fluid">     <div class="page-title documentation-page-title">       <div class="container">         <h1 class="page-title__title">API Documentation</h1>         <a href="https://github.com/noflo/noflo/blob/master/src/lib/Port.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>       </div>     </div>   </div>    <div class="row-fluid">     <div class="container documentation-main-container">       <div class="main">         <div class="sidebar span4">                    <nav>             <ul class="sidebar__nav">                                                                  <li>                   <a {% if page.url == '/api/ArrayPort.html' %}class="active" {% endif %}href="ArrayPort.html">                     ArrayPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/AsyncComponent.html' %}class="active" {% endif %}href="AsyncComponent.html">                     AsyncComponent                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Component.html' %}class="active" {% endif %}href="Component.html">                     Component                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/ComponentLoader.html' %}class="active" {% endif %}href="ComponentLoader.html">                     ComponentLoader                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Graph.html' %}class="active" {% endif %}href="Graph.html">                     Graph                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InternalSocket.html' %}class="active" {% endif %}href="InternalSocket.html">                     InternalSocket                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/LoggingComponent.html' %}class="active" {% endif %}href="LoggingComponent.html">                     LoggingComponent                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Network.html' %}class="active" {% endif %}href="Network.html">                     Network                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/NoFlo.html' %}class="active" {% endif %}href="NoFlo.html">                     NoFlo                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Port.html' %}class="active" {% endif %}href="Port.html">                     Port                   </a>                 </li>                                                                                              </ul>           </nav>                  </div>         <div class="content span8">           <h1>{{ page.title }}</h1>                                     <pre><code>NoFlo - Flow-Based Programming for Node.js
-(c) 2011 Henri Bergius, Nemein
+   <div class="row-fluid">     <div class="page-title documentation-page-title">       <div class="container">         <h1 class="page-title__title">API Documentation</h1>         <a href="https://github.com/noflo/noflo/blob/master/src/lib/Port.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>       </div>     </div>   </div>    <div class="row-fluid">     <div class="container documentation-main-container">       <div class="main">         <div class="sidebar span4">                    <nav>             <ul class="sidebar__nav">                                                                  <li>                   <a {% if page.url == '/api/ArrayPort.html' %}class="active" {% endif %}href="ArrayPort.html">                     ArrayPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/AsyncComponent.html' %}class="active" {% endif %}href="AsyncComponent.html">                     AsyncComponent                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Component.html' %}class="active" {% endif %}href="Component.html">                     Component                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/ComponentLoader.html' %}class="active" {% endif %}href="ComponentLoader.html">                     ComponentLoader                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Graph.html' %}class="active" {% endif %}href="Graph.html">                     Graph                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InternalSocket.html' %}class="active" {% endif %}href="InternalSocket.html">                     InternalSocket                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/LoggingComponent.html' %}class="active" {% endif %}href="LoggingComponent.html">                     LoggingComponent                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Network.html' %}class="active" {% endif %}href="Network.html">                     Network                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/NoFlo.html' %}class="active" {% endif %}href="NoFlo.html">                     NoFlo                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Port.html' %}class="active" {% endif %}href="Port.html">                     Port                   </a>                 </li>                                                                                              </ul>           </nav>                  </div>         <div class="content span8">           <h1>{{ page.title }}</h1>                                     <pre><code>NoFlo - Flow-Based Programming for JavaScript
+(c) 2013 The Grid
+(c) 2011-2012 Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license
 </code></pre>
 
-<p>Regular port for NoFlo components.</p>                            <div class="highlight"><pre><span class="k">if</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">isnt</span> <span class="s">&#39;undefined&#39;</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s">&#39;node&#39;</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span>
-  <span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;events&#39;</span>
+<p>Regular port for NoFlo components.</p>                            <div class="highlight"><pre><span class="k">if</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">isnt</span> <span class="s1">&#39;undefined&#39;</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span>
+  <span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span>
 <span class="k">else</span>
-  <span class="nv">EventEmitter = </span><span class="nx">require</span> <span class="s">&#39;emitter&#39;</span>
+  <span class="nv">EventEmitter = </span><span class="nx">require</span> <span class="s1">&#39;emitter&#39;</span>
 
 <span class="k">class</span> <span class="nx">Port</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
   <span class="nv">constructor: </span><span class="nf">(@type) -&gt;</span>
-    <span class="vi">@type = </span><span class="s">&#39;all&#39;</span> <span class="nx">unless</span> <span class="nx">@type</span>
+    <span class="vi">@type = </span><span class="s1">&#39;all&#39;</span> <span class="nx">unless</span> <span class="nx">@type</span>
     <span class="vi">@socket = </span><span class="kc">null</span>
     <span class="vi">@from = </span><span class="kc">null</span>
 
   <span class="nv">attach: </span><span class="nf">(socket) -&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@name</span><span class="si">}</span><span class="s">: Socket already attached </span><span class="si">#{</span><span class="nx">@socket</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="s"> - </span><span class="si">#{</span><span class="nx">socket</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">if</span> <span class="nx">@isAttached</span><span class="p">()</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@name}: Socket already attached #{@socket.getId()} - #{socket.getId()}&quot;</span> <span class="k">if</span> <span class="nx">@isAttached</span><span class="p">()</span>
     <span class="vi">@socket = </span><span class="nx">socket</span>
 
     <span class="nx">@attachSocket</span> <span class="nx">socket</span>
 
   <span class="nv">attachSocket: </span><span class="nf">(socket, localId = null) -&gt;</span>
-    <span class="nx">@emit</span> <span class="s">&quot;attach&quot;</span><span class="p">,</span> <span class="nx">socket</span>
+    <span class="nx">@emit</span> <span class="s2">&quot;attach&quot;</span><span class="p">,</span> <span class="nx">socket</span>
 
     <span class="vi">@from = </span><span class="nx">socket</span><span class="p">.</span><span class="nx">from</span>
     <span class="nx">socket</span><span class="p">.</span><span class="nx">setMaxListeners</span> <span class="mi">0</span> <span class="k">if</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">setMaxListeners</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s">&quot;connect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-      <span class="nx">@emit</span> <span class="s">&quot;connect&quot;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s">&quot;begingroup&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">@emit</span> <span class="s">&quot;begingroup&quot;</span><span class="p">,</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">localId</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s">&quot;data&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">@emit</span> <span class="s">&quot;data&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">localId</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s">&quot;endgroup&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">@emit</span> <span class="s">&quot;endgroup&quot;</span><span class="p">,</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">localId</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s">&quot;disconnect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-      <span class="nx">@emit</span> <span class="s">&quot;disconnect&quot;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s2">&quot;connect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
+      <span class="nx">@emit</span> <span class="s2">&quot;connect&quot;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s2">&quot;begingroup&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">=&gt;</span>
+      <span class="nx">@emit</span> <span class="s2">&quot;begingroup&quot;</span><span class="p">,</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">localId</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span>
+      <span class="nx">@emit</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">localId</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s2">&quot;endgroup&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">=&gt;</span>
+      <span class="nx">@emit</span> <span class="s2">&quot;endgroup&quot;</span><span class="p">,</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">localId</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s2">&quot;disconnect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
+      <span class="nx">@emit</span> <span class="s2">&quot;disconnect&quot;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span>
 
   <span class="nv">connect: </span><span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
     <span class="nx">do</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">connect</span>
 
   <span class="nv">beginGroup: </span><span class="nf">(group) -&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
 
     <span class="k">return</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">group</span> <span class="k">if</span> <span class="nx">@isConnected</span><span class="p">()</span>
 
-    <span class="nx">@socket</span><span class="p">.</span><span class="nx">once</span> <span class="s">&quot;connect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
+    <span class="nx">@socket</span><span class="p">.</span><span class="nx">once</span> <span class="s2">&quot;connect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
       <span class="nx">@socket</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">group</span>
     <span class="nx">do</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">connect</span>
 
   <span class="nv">send: </span><span class="nf">(data) -&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
 
     <span class="k">return</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span> <span class="k">if</span> <span class="nx">@isConnected</span><span class="p">()</span>
 
-    <span class="nx">@socket</span><span class="p">.</span><span class="nx">once</span> <span class="s">&quot;connect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
+    <span class="nx">@socket</span><span class="p">.</span><span class="nx">once</span> <span class="s2">&quot;connect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
       <span class="nx">@socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span>
     <span class="nx">do</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">connect</span>
 
   <span class="nv">endGroup: </span><span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
     <span class="nx">do</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">endGroup</span>
 
   <span class="nv">disconnect: </span><span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
     <span class="nx">@socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
 
   <span class="nv">detach: </span><span class="nf">(socket) -&gt;</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="nx">@isAttached</span> <span class="nx">socket</span>
-    <span class="nx">@emit</span> <span class="s">&quot;detach&quot;</span><span class="p">,</span> <span class="nx">@socket</span>
+    <span class="nx">@emit</span> <span class="s2">&quot;detach&quot;</span><span class="p">,</span> <span class="nx">@socket</span>
     <span class="vi">@from = </span><span class="kc">null</span>
     <span class="vi">@socket = </span><span class="kc">null</span>
 
@@ -88,4 +89,4 @@ NoFlo may be freely distributed under the MIT license
 
 <span class="nv">exports.Port = </span><span class="nx">Port</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-09-04 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Port.coffee">Port.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-09-26 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Port.coffee">Port.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
