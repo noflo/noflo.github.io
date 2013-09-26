@@ -78,6 +78,10 @@ module.exports = ->
           # Ignore the generated files
           '!_site/*'
           '!_src/*'
+          '!_site/**/*'
+          '!_src/**/*'
+          '!node_modules/**'
+          '!.git/**'
         ]
         tasks: ['jekyll']
       sass:
@@ -85,13 +89,13 @@ module.exports = ->
           'css/*.scss'
         ]
         tasks: ['sass:src']
-      ###
+
       siteSass:
         files: [
           '_site/css/*.scss'
         ]
         tasks: ['sass:site', 'copy:site2src']
-      ###
+
   @loadNpmTasks 'grunt-jekyll'
   @loadNpmTasks 'grunt-shell'
   @loadNpmTasks 'grunt-docco'
@@ -114,7 +118,10 @@ module.exports = ->
   @registerTask 'dev', [
     'connect:dev'
     'build'
-    'watch'
+    #'watch'
+    'watch:jekyll'
+    'watch:noflo'    
+    'watch:sass'
   ]
   @registerTask 'build', [
     'sass:src'
