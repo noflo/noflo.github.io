@@ -63,6 +63,7 @@ libraries:
   - robingl/noflo-twitter
   - kenhkan/noflo-underscore
   - noflo/noflo-webserver
+  - noflo/noflo-websocket
   - kenhkan/noflo-woute
   - noflo/noflo-xml
   - noflo/noflo-yaml
@@ -80,6 +81,7 @@ browser_libraries:
   - noflo/noflo-routers
   - noflo/noflo-strings
   - d4tocchini/noflo-draggabilly
+  - noflo/noflo-websocket
 exclude:
   - "node_modules"
   - "Gruntfile.coffee"
