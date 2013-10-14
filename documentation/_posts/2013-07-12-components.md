@@ -130,7 +130,7 @@ Here's a version of the Forwarder component from above that logs messages when i
 ```coffeescript
 noflo = require "noflo"
 
-class LoggingForwarder extends noflo.Component
+class LoggingForwarder extends noflo.LoggingComponent
   description: "This component receives data on a single input
   port and sends the same data out to the output port"
 
@@ -143,7 +143,7 @@ class LoggingForwarder extends noflo.Component
 
     @inPorts.in.on "data", (data) =>
       # Forward data when we receive it.
-      if @outports.out.isAttached()
+      if @outPorts.out.isAttached()
         @outPorts.out.send data
         return
       @sendLog
