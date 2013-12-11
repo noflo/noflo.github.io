@@ -25,26 +25,26 @@ connections and even address them separately.</p>                            <di
   <span class="nv">connect: </span><span class="nf">(socketId = null) -&gt;</span>
     <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
       <span class="nx">unless</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No sockets available&quot;</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
       <span class="nx">@sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="nf">(socket) -&gt;</span>
         <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
       <span class="k">return</span>
 
     <span class="nx">unless</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No socket &#39;#{socketId}&#39; available&quot;</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection &#39;#{socketId}&#39; available&quot;</span>
 
     <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">connect</span><span class="p">()</span>
 
   <span class="nv">beginGroup: </span><span class="nf">(group, socketId = null) -&gt;</span>
     <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
       <span class="nx">unless</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No sockets available&quot;</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
       <span class="nx">@sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span>
         <span class="nx">@beginGroup</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">index</span>
       <span class="k">return</span>
 
     <span class="nx">unless</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No socket &#39;#{socketId}&#39; available&quot;</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection &#39;#{socketId}&#39; available&quot;</span>
 
     <span class="k">return</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">beginGroup</span> <span class="nx">group</span> <span class="k">if</span> <span class="nx">@isConnected</span> <span class="nx">socketId</span>
 
@@ -55,13 +55,13 @@ connections and even address them separately.</p>                            <di
   <span class="nv">send: </span><span class="nf">(data, socketId = null) -&gt;</span>
     <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
       <span class="nx">unless</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No sockets available&quot;</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
       <span class="nx">@sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span>
         <span class="nx">@send</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">index</span>
       <span class="k">return</span>
 
     <span class="nx">unless</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No socket &#39;#{socketId}&#39; available&quot;</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection &#39;#{socketId}&#39; available&quot;</span>
 
     <span class="k">return</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">send</span> <span class="nx">data</span> <span class="k">if</span> <span class="nx">@isConnected</span> <span class="nx">socketId</span>
 
@@ -72,20 +72,20 @@ connections and even address them separately.</p>                            <di
   <span class="nv">endGroup: </span><span class="nf">(socketId = null) -&gt;</span>
     <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
       <span class="nx">unless</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No sockets available&quot;</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
       <span class="nx">@sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span>
         <span class="nx">@endGroup</span> <span class="nx">index</span>
       <span class="k">return</span>
 
     <span class="nx">unless</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No socket &#39;#{socketId}&#39; available&quot;</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection &#39;#{socketId}&#39; available&quot;</span>
 
     <span class="nx">do</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">endGroup</span>
 
   <span class="nv">disconnect: </span><span class="nf">(socketId = null) -&gt;</span>
     <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
       <span class="nx">unless</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No sockets available&quot;</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
       <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="nx">@sockets</span>
         <span class="nx">socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
       <span class="k">return</span>
@@ -112,10 +112,15 @@ connections and even address them separately.</p>                            <di
     <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">isConnected</span><span class="p">()</span>
 
   <span class="nv">isAttached: </span><span class="nf">(socketId) -&gt;</span>
-    <span class="k">return</span> <span class="kc">false</span> <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">undefined</span>
+    <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">undefined</span>
+      <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="k">return</span> <span class="kc">false</span>
     <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
     <span class="kc">false</span>
 
+  <span class="nv">canAttach: </span><span class="o">-&gt;</span>
+    <span class="kc">true</span>
+
 <span class="nv">exports.ArrayPort = </span><span class="nx">ArrayPort</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-09-26 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ArrayPort.coffee">ArrayPort.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-12-11 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ArrayPort.coffee">ArrayPort.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

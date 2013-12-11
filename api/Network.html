@@ -60,7 +60,10 @@ to NoFlo processes, and edges to connections between them.</p>                  
     <span class="nx">@graph</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;addInitial&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">iip</span><span class="p">)</span> <span class="o">=&gt;</span>
       <span class="nx">@addInitial</span> <span class="nx">iip</span>
     <span class="nx">@graph</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;removeInitial&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">iip</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">@removeInitial</span> <span class="nx">iip</span></pre></div>                                                  <p>Initialize a Component Loader for the network</p>                            <div class="highlight"><pre>    <span class="vi">@loader = </span><span class="k">new</span> <span class="nx">componentLoader</span><span class="p">.</span><span class="nx">ComponentLoader</span> <span class="nx">@baseDir</span></pre></div>                                                  <p>The uptime of the network is the current time minus the start-up
+      <span class="nx">@removeInitial</span> <span class="nx">iip</span></pre></div>                                                  <p>Initialize a Component Loader for the network</p>                            <div class="highlight"><pre>    <span class="k">if</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">componentLoader</span>
+      <span class="vi">@loader = </span><span class="nx">graph</span><span class="p">.</span><span class="nx">componentLoader</span>
+    <span class="k">else</span>
+      <span class="vi">@loader = </span><span class="k">new</span> <span class="nx">componentLoader</span><span class="p">.</span><span class="nx">ComponentLoader</span> <span class="nx">@baseDir</span></pre></div>                                                  <p>The uptime of the network is the current time minus the start-up
 time, in seconds.</p>                            <div class="highlight"><pre>  <span class="nv">uptime: </span><span class="o">-&gt;</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="o">-</span> <span class="nx">@startupDate</span></pre></div>                                                  <p>Emit a 'start' event on the first connection, and 'end' event when
 last connection has been closed</p>                            <div class="highlight"><pre>  <span class="nv">connectionCount: </span><span class="mi">0</span>
   <span class="nv">increaseConnections: </span><span class="o">-&gt;</span>
@@ -105,7 +108,12 @@ we already have a process with the given ID, return that.</p>                   
       <span class="nx">callback</span> <span class="nx">process</span> <span class="k">if</span> <span class="nx">callback</span>
       <span class="k">return</span></pre></div>                                                  <p>Load the component for the process.</p>                            <div class="highlight"><pre>    <span class="nx">@load</span> <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">,</span> <span class="p">(</span><span class="nx">instance</span><span class="p">)</span> <span class="o">=&gt;</span>
       <span class="nv">instance.nodeId = </span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
-      <span class="nv">process.component = </span><span class="nx">instance</span>
+      <span class="nv">process.component = </span><span class="nx">instance</span></pre></div>                                                  <p>Inform the ports of the node name</p>                            <div class="highlight"><pre>      <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">port</span> <span class="k">of</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span>
+        <span class="nv">port.node = </span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
+        <span class="nv">port.name = </span><span class="nx">name</span>
+      <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">port</span> <span class="k">of</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">outPorts</span>
+        <span class="nv">port.node = </span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
+        <span class="nv">port.name = </span><span class="nx">name</span>
 
       <span class="nx">@subscribeSubgraph</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">instance</span> <span class="k">if</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">isSubgraph</span><span class="p">()</span></pre></div>                                                  <p>Store and return the process instance</p>                            <div class="highlight"><pre>      <span class="nx">@processes</span><span class="p">[</span><span class="nx">process</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">process</span>
       <span class="nx">callback</span> <span class="nx">process</span> <span class="k">if</span> <span class="nx">callback</span>
@@ -117,8 +125,11 @@ we already have a process with the given ID, return that.</p>                   
 
   <span class="nv">renameNode: </span><span class="nf">(oldId, newId) -&gt;</span>
     <span class="nv">process = </span><span class="nx">@getNode</span> <span class="nx">oldId</span>
-    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">process</span>
-    <span class="nv">process.id = </span><span class="nx">newId</span>
+    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">process</span></pre></div>                                                  <p>Inform the process of its ID</p>                            <div class="highlight"><pre>    <span class="nv">process.id = </span><span class="nx">newId</span></pre></div>                                                  <p>Inform the ports of the node name</p>                            <div class="highlight"><pre>    <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">port</span> <span class="k">of</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span>
+      <span class="nv">port.node = </span><span class="nx">newId</span>
+    <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">port</span> <span class="k">of</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">outPorts</span>
+      <span class="nv">port.node = </span><span class="nx">newId</span>
+
     <span class="nx">@processes</span><span class="p">[</span><span class="nx">newId</span><span class="p">]</span> <span class="o">=</span> <span class="nx">process</span>
     <span class="k">delete</span> <span class="nx">@processes</span><span class="p">[</span><span class="nx">oldId</span><span class="p">]</span></pre></div>                                                  <p>Get process by its ID.</p>                            <div class="highlight"><pre>  <span class="nv">getNode: </span><span class="nf">(id) -&gt;</span>
     <span class="nx">@processes</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span>
@@ -294,4 +305,4 @@ when done</p>                            <div class="highlight"><pre>        <sp
 
 <span class="nv">exports.Network = </span><span class="nx">Network</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-09-26 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-12-11 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

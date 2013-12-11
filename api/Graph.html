@@ -25,7 +25,8 @@ also are the way to start a NoFlo network.</p>                            <div c
   <span class="nv">nodes: </span><span class="p">[]</span>
   <span class="nv">edges: </span><span class="p">[]</span>
   <span class="nv">initializers: </span><span class="p">[]</span>
-  <span class="nv">exports: </span><span class="p">[]</span></pre></div>                                                  <h2>Creating new graphs</h2>
+  <span class="nv">exports: </span><span class="p">[]</span>
+  <span class="nv">groups: </span><span class="p">[]</span></pre></div>                                                  <h2>Creating new graphs</h2>
 
 <p>Graphs are created by simply instantiating the Graph class
 and giving it a name:</p>
@@ -36,13 +37,31 @@ and giving it a name:</p>
     <span class="vi">@nodes = </span><span class="p">[]</span>
     <span class="vi">@edges = </span><span class="p">[]</span>
     <span class="vi">@initializers = </span><span class="p">[]</span>
-    <span class="vi">@exports = </span><span class="p">[]</span></pre></div>                                                  <h2>Exporting a port from subgraph</h2>
+    <span class="vi">@exports = </span><span class="p">[]</span>
+    <span class="vi">@groups = </span><span class="p">[]</span></pre></div>                                                  <h2>Exporting a port from subgraph</h2>
 
 <p>This allows subgraphs to expose a cleaner API by having reasonably
-named ports shown instead of all the free ports of the graph</p>                            <div class="highlight"><pre>  <span class="nv">addExport: </span><span class="nf">(privatePort, publicPort) -&gt;</span>
+named ports shown instead of all the free ports of the graph</p>                            <div class="highlight"><pre>  <span class="nv">addExport: </span><span class="nf">(privatePort, publicPort, metadata) -&gt;</span>
     <span class="nx">@exports</span><span class="p">.</span><span class="nx">push</span>
       <span class="nv">private: </span><span class="nx">privatePort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
-      <span class="nv">public: </span><span class="nx">publicPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span></pre></div>                                                  <h2>Adding a node to the graph</h2>
+      <span class="nv">public: </span><span class="nx">publicPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+      <span class="nv">metadata: </span><span class="nx">metadata</span>
+
+  <span class="nv">removeExport: </span><span class="nf">(publicPort) -&gt;</span>
+    <span class="k">for</span> <span class="nx">exported</span> <span class="k">in</span> <span class="nx">@exports</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">exported</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">public</span> <span class="o">is</span> <span class="nx">publicPort</span>
+      <span class="nx">@exports</span><span class="p">.</span><span class="nx">splice</span> <span class="nx">@exports</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">exported</span><span class="p">),</span> <span class="mi">1</span></pre></div>                                                  <h2>Grouping nodes in a graph</h2>                            <div class="highlight"><pre>  <span class="nv">addGroup: </span><span class="nf">(group, nodes, metadata) -&gt;</span>
+    <span class="nx">@groups</span><span class="p">.</span><span class="nx">push</span>
+      <span class="nv">name: </span><span class="nx">group</span>
+      <span class="nv">nodes: </span><span class="nx">nodes</span>
+      <span class="nv">metadata: </span><span class="nx">metadata</span>
+
+  <span class="nv">removeGroup: </span><span class="nf">(group) -&gt;</span>
+    <span class="k">for</span> <span class="nx">group</span> <span class="k">in</span> <span class="nx">@groups</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">group</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">group</span><span class="p">.</span><span class="nx">name</span> <span class="o">is</span> <span class="nx">group</span>
+      <span class="nx">@groups</span><span class="p">.</span><span class="nx">splice</span> <span class="nx">@groups</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">group</span><span class="p">),</span> <span class="mi">1</span></pre></div>                                                  <h2>Adding a node to the graph</h2>
 
 <p>Nodes are identified by an ID unique to the graph. Additionally,
 a node may contain information on what NoFlo component it is and
@@ -87,6 +106,18 @@ emitted.</p>                            <div class="highlight"><pre>  <span clas
       <span class="k">if</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
         <span class="nx">@removeInitial</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span><span class="p">,</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span>
 
+    <span class="k">for</span> <span class="nx">exported</span> <span class="k">in</span> <span class="nx">@exports</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">exported</span>
+      <span class="p">[</span><span class="nx">privateNode</span><span class="p">,</span> <span class="nx">privatePort</span><span class="p">]</span> <span class="o">=</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">private</span><span class="p">.</span><span class="nx">split</span> <span class="s1">&#39;.&#39;</span>
+      <span class="k">if</span> <span class="nx">privateNode</span> <span class="o">is</span> <span class="nx">id</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+        <span class="nx">@removeExport</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">public</span>
+
+    <span class="k">for</span> <span class="nx">group</span> <span class="k">in</span> <span class="nx">@groups</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">group</span>
+      <span class="nv">index = </span><span class="nx">group</span><span class="p">.</span><span class="nx">nodes</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">is</span> <span class="o">-</span><span class="mi">1</span>
+      <span class="k">continue</span> <span class="k">if</span> <span class="nx">index</span> <span class="o">is</span> <span class="o">-</span><span class="mi">1</span>
+      <span class="nx">group</span><span class="p">.</span><span class="nx">nodes</span><span class="p">.</span><span class="nx">splice</span> <span class="nx">index</span><span class="p">,</span> <span class="mi">1</span>
+
     <span class="k">if</span> <span class="o">-</span><span class="mi">1</span> <span class="o">isnt</span> <span class="nx">@nodes</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">node</span>
       <span class="nx">@nodes</span><span class="p">.</span><span class="nx">splice</span> <span class="nx">@nodes</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">node</span><span class="p">),</span> <span class="mi">1</span>
 
@@ -118,6 +149,18 @@ emitted.</p>                            <div class="highlight"><pre>  <span clas
       <span class="k">if</span> <span class="nx">iip</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">oldId</span>
         <span class="nv">iip.to.node = </span><span class="nx">newId</span>
 
+    <span class="k">for</span> <span class="nx">exported</span> <span class="k">in</span> <span class="nx">@exports</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">exported</span>
+      <span class="p">[</span><span class="nx">privateNode</span><span class="p">,</span> <span class="nx">privatePort</span><span class="p">]</span> <span class="o">=</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">private</span><span class="p">.</span><span class="nx">split</span> <span class="s1">&#39;.&#39;</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">privateNode</span> <span class="o">is</span> <span class="nx">oldId</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+      <span class="nv">exported.private = </span><span class="s2">&quot;#{newId.toLowerCase()}.#{privatePort}&quot;</span>
+
+    <span class="k">for</span> <span class="nx">group</span> <span class="k">in</span> <span class="nx">@groups</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">group</span>
+      <span class="nv">index = </span><span class="nx">group</span><span class="p">.</span><span class="nx">nodes</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">oldId</span><span class="p">)</span>
+      <span class="k">continue</span> <span class="k">if</span> <span class="nx">index</span> <span class="o">is</span> <span class="o">-</span><span class="mi">1</span>
+      <span class="nx">group</span><span class="p">.</span><span class="nx">nodes</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newId</span>
+
     <span class="nx">@emit</span> <span class="s1">&#39;renameNode&#39;</span><span class="p">,</span> <span class="nx">oldId</span><span class="p">,</span> <span class="nx">newId</span></pre></div>                                                  <h2>Connecting nodes</h2>
 
 <p>Nodes can be connected by adding edges between a node's outport
@@ -127,6 +170,8 @@ and another node's inport:</p>
 </code></pre>
 
 <p>Adding an edge will emit the <code>addEdge</code> event.</p>                            <div class="highlight"><pre>  <span class="nv">addEdge: </span><span class="nf">(outNode, outPort, inNode, inPort, metadata) -&gt;</span>
+    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">@getNode</span> <span class="nx">outNode</span>
+    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">@getNode</span> <span class="nx">inNode</span>
     <span class="nv">metadata = </span><span class="p">{}</span> <span class="nx">unless</span> <span class="nx">metadata</span>
     <span class="nv">edge =</span>
       <span class="nv">from:</span>
@@ -179,6 +224,7 @@ filenames to read, or network ports to listen to.</p>
 </code></pre>
 
 <p>Adding an IIP will emit a <code>addInitial</code> event.</p>                            <div class="highlight"><pre>  <span class="nv">addInitial: </span><span class="nf">(data, node, port, metadata) -&gt;</span>
+    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">@getNode</span> <span class="nx">node</span>
     <span class="nv">initializer =</span>
       <span class="nv">from:</span>
         <span class="nv">data: </span><span class="nx">data</span>
@@ -214,7 +260,11 @@ filenames to read, or network ports to listen to.</p>
       <span class="nx">dot</span> <span class="o">+=</span> <span class="s2">&quot;    #{cleanID(node.id)} [label=#{node.id} shape=box]\n&quot;</span>
 
     <span class="k">for</span> <span class="nx">initializer</span><span class="p">,</span> <span class="nx">id</span> <span class="k">in</span> <span class="nx">@initializers</span>
-      <span class="nx">dot</span> <span class="o">+=</span> <span class="s2">&quot;    data#{id} [label=\&quot;&#39;#{initializer.from.data}&#39;\&quot; shape=plaintext]\n&quot;</span>
+      <span class="k">if</span> <span class="k">typeof</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">data</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span>
+        <span class="nv">data = </span><span class="s1">&#39;Function&#39;</span>
+      <span class="k">else</span>
+        <span class="nv">data = </span><span class="nx">initializer</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">data</span>
+      <span class="nx">dot</span> <span class="o">+=</span> <span class="s2">&quot;    data#{id} [label=\&quot;&#39;#{data}&#39;\&quot; shape=plaintext]\n&quot;</span>
       <span class="nx">dot</span> <span class="o">+=</span> <span class="s2">&quot;    data#{id} -&gt; #{cleanID(initializer.to.node)}[headlabel=#{cleanPort(initializer.to.port)} labelfontcolor=blue labelfontsize=8.0]\n&quot;</span>
 
     <span class="k">for</span> <span class="nx">edge</span> <span class="k">in</span> <span class="nx">@edges</span>
@@ -238,17 +288,29 @@ filenames to read, or network ports to listen to.</p>
     <span class="nv">json =</span>
       <span class="nv">properties: </span><span class="p">{}</span>
       <span class="nv">exports: </span><span class="p">[]</span>
+      <span class="nv">groups: </span><span class="p">[]</span>
       <span class="nv">processes: </span><span class="p">{}</span>
       <span class="nv">connections: </span><span class="p">[]</span>
 
+    <span class="nv">json.properties.name = </span><span class="nx">@name</span> <span class="k">if</span> <span class="nx">@name</span>
     <span class="k">for</span> <span class="nx">property</span><span class="p">,</span> <span class="nx">value</span> <span class="k">of</span> <span class="nx">@properties</span>
       <span class="nx">json</span><span class="p">.</span><span class="nx">properties</span><span class="p">[</span><span class="nx">property</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span>
-    <span class="nv">json.properties.name = </span><span class="nx">@name</span> <span class="k">if</span> <span class="nx">@name</span>
 
     <span class="k">for</span> <span class="nx">exported</span> <span class="k">in</span> <span class="nx">@exports</span>
-      <span class="nx">json</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">push</span>
-        <span class="nv">private: </span><span class="nx">exported</span><span class="p">.</span><span class="nx">private</span>
+      <span class="nv">exportedData =</span>
         <span class="nv">public: </span><span class="nx">exported</span><span class="p">.</span><span class="nx">public</span>
+        <span class="nv">private: </span><span class="nx">exported</span><span class="p">.</span><span class="nx">private</span>
+      <span class="k">if</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">metadata</span>
+        <span class="nv">exportedData.metadata = </span><span class="nx">exported</span><span class="p">.</span><span class="nx">metadata</span>
+      <span class="nx">json</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">push</span> <span class="nx">exportedData</span>
+
+    <span class="k">for</span> <span class="nx">group</span> <span class="k">in</span> <span class="nx">@groups</span>
+      <span class="nv">groupData =</span>
+        <span class="nv">name: </span><span class="nx">group</span><span class="p">.</span><span class="nx">name</span>
+        <span class="nv">nodes: </span><span class="nx">group</span><span class="p">.</span><span class="nx">nodes</span>
+      <span class="k">if</span> <span class="nx">group</span><span class="p">.</span><span class="nx">metadata</span>
+        <span class="nv">groupData.metadata = </span><span class="nx">group</span><span class="p">.</span><span class="nx">metadata</span>
+      <span class="nx">json</span><span class="p">.</span><span class="nx">groups</span><span class="p">.</span><span class="nx">push</span> <span class="nx">groupData</span>
 
     <span class="k">for</span> <span class="nx">node</span> <span class="k">in</span> <span class="nx">@nodes</span>
       <span class="nx">json</span><span class="p">.</span><span class="nx">processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span>
@@ -310,7 +372,11 @@ filenames to read, or network ports to listen to.</p>
 
   <span class="k">if</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">exports</span>
     <span class="k">for</span> <span class="nx">exported</span> <span class="k">in</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">exports</span>
-      <span class="nx">graph</span><span class="p">.</span><span class="nx">addExport</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">private</span><span class="p">,</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">public</span>
+      <span class="nx">graph</span><span class="p">.</span><span class="nx">addExport</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">private</span><span class="p">,</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">public</span><span class="p">,</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">metadata</span>
+
+  <span class="k">if</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">groups</span>
+    <span class="k">for</span> <span class="nx">group</span> <span class="k">in</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">groups</span>
+      <span class="nx">graph</span><span class="p">.</span><span class="nx">addGroup</span> <span class="nx">group</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">group</span><span class="p">.</span><span class="nx">nodes</span><span class="p">,</span> <span class="nx">group</span><span class="p">.</span><span class="nx">metadata</span>
 
   <span class="nx">success</span> <span class="nx">graph</span>
 
@@ -334,4 +400,4 @@ filenames to read, or network ports to listen to.</p>
     <span class="nv">definition = </span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span> <span class="nx">data</span>
     <span class="nx">exports</span><span class="p">.</span><span class="nx">loadJSON</span> <span class="nx">definition</span><span class="p">,</span> <span class="nx">success</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-09-26 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Graph.coffee">Graph.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-12-11 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Graph.coffee">Graph.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

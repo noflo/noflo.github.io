@@ -20,9 +20,16 @@ NoFlo may be freely distributed under the MIT license
     <span class="vi">@type = </span><span class="s1">&#39;all&#39;</span> <span class="nx">unless</span> <span class="nx">@type</span>
     <span class="vi">@socket = </span><span class="kc">null</span>
     <span class="vi">@from = </span><span class="kc">null</span>
+    <span class="vi">@node = </span><span class="kc">null</span>
+    <span class="vi">@name = </span><span class="kc">null</span>
+
+  <span class="nv">getId: </span><span class="o">-&gt;</span>
+    <span class="nx">unless</span> <span class="nx">@node</span> <span class="o">and</span> <span class="nx">@name</span>
+      <span class="k">return</span> <span class="s1">&#39;Port&#39;</span>
+    <span class="s2">&quot;#{@node} #{@name.toUpperCase()}&quot;</span>
 
   <span class="nv">attach: </span><span class="nf">(socket) -&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@name}: Socket already attached #{@socket.getId()} - #{socket.getId()}&quot;</span> <span class="k">if</span> <span class="nx">@isAttached</span><span class="p">()</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: Socket already attached #{@socket.getId()} - #{socket.getId()}&quot;</span> <span class="k">if</span> <span class="nx">@isAttached</span><span class="p">()</span>
     <span class="vi">@socket = </span><span class="nx">socket</span>
 
     <span class="nx">@attachSocket</span> <span class="nx">socket</span>
@@ -44,11 +51,11 @@ NoFlo may be freely distributed under the MIT license
       <span class="nx">@emit</span> <span class="s2">&quot;disconnect&quot;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span>
 
   <span class="nv">connect: </span><span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
     <span class="nx">do</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">connect</span>
 
   <span class="nv">beginGroup: </span><span class="nf">(group) -&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
 
     <span class="k">return</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">group</span> <span class="k">if</span> <span class="nx">@isConnected</span><span class="p">()</span>
 
@@ -57,7 +64,7 @@ NoFlo may be freely distributed under the MIT license
     <span class="nx">do</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">connect</span>
 
   <span class="nv">send: </span><span class="nf">(data) -&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
 
     <span class="k">return</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span> <span class="k">if</span> <span class="nx">@isConnected</span><span class="p">()</span>
 
@@ -66,11 +73,11 @@ NoFlo may be freely distributed under the MIT license
     <span class="nx">do</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">connect</span>
 
   <span class="nv">endGroup: </span><span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
     <span class="nx">do</span> <span class="nx">@socket</span><span class="p">.</span><span class="nx">endGroup</span>
 
   <span class="nv">disconnect: </span><span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection available&quot;</span> <span class="nx">unless</span> <span class="nx">@socket</span>
     <span class="nx">@socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
 
   <span class="nv">detach: </span><span class="nf">(socket) -&gt;</span>
@@ -87,6 +94,11 @@ NoFlo may be freely distributed under the MIT license
   <span class="nv">isAttached: </span><span class="o">-&gt;</span>
     <span class="nx">@socket</span> <span class="o">isnt</span> <span class="kc">null</span>
 
+  <span class="nv">canAttach: </span><span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="nx">@isAttached</span><span class="p">()</span>
+      <span class="k">return</span> <span class="kc">false</span>
+    <span class="kc">true</span>
+
 <span class="nv">exports.Port = </span><span class="nx">Port</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-09-26 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Port.coffee">Port.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-12-11 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Port.coffee">Port.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

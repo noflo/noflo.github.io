@@ -16,7 +16,8 @@ NoFlo may be freely distributed under the MIT license
   <span class="nv">EventEmitter = </span><span class="nx">require</span> <span class="s1">&#39;emitter&#39;</span>
 
 <span class="k">class</span> <span class="nx">Component</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
-  <span class="nv">description: </span><span class="s2">&quot;&quot;</span>
+  <span class="nv">description: </span><span class="s1">&#39;&#39;</span>
+  <span class="nv">icon: </span><span class="kc">null</span>
 
   <span class="nv">getDescription: </span><span class="o">-&gt;</span> <span class="nx">@description</span>
 
@@ -24,8 +25,19 @@ NoFlo may be freely distributed under the MIT license
 
   <span class="nv">isSubgraph: </span><span class="o">-&gt;</span> <span class="kc">false</span>
 
+  <span class="nv">setIcon: </span><span class="nf">(@icon) -&gt;</span>
+    <span class="nx">@emit</span> <span class="s1">&#39;icon&#39;</span><span class="p">,</span> <span class="nx">@icon</span>
+  <span class="nv">getIcon: </span><span class="o">-&gt;</span> <span class="nx">@icon</span>
+
+  <span class="nv">error: </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span>
+    <span class="k">if</span> <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">error</span> <span class="o">and</span> <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
+      <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">send</span> <span class="nx">e</span>
+      <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
+      <span class="k">return</span>
+    <span class="k">throw</span> <span class="nx">e</span>
+
   <span class="nv">shutdown: </span><span class="o">-&gt;</span>
 
 <span class="nv">exports.Component = </span><span class="nx">Component</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-09-26 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee">Component.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-12-11 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee">Component.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
