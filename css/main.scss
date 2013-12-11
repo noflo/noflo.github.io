@@ -2144,6 +2144,12 @@ body pre {
 .kickstarter_video {
   background-color: #000000;
   text-align: center;
+  overflow: hidden;
+  margin-top: 72px;
+  @include breakpoint(small) {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
 }
 
 ul.backers {
@@ -2155,6 +2161,9 @@ ul.backers {
   li {
     display: inline-block;
     line-height: 72px;
-    width: 30%;
+    min-width: 30%;
+    white-space: nowrap;
+    margin-left: 8px;
+    margin-right: 8px;
   }
 }
