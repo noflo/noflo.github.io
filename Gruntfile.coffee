@@ -120,7 +120,7 @@ module.exports = ->
     'build'
     #'watch'
     'watch:jekyll'
-    'watch:noflo'    
+    'watch:noflo'
     'watch:sass'
   ]
   @registerTask 'build', [

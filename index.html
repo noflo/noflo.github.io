@@ -3,32 +3,24 @@ layout: default
 title: NoFlo | Flow-Based Programming for JavaScript
 ---
 
+  <!--
   <section class="row-fluid homepage-section">
-    <div class="theflo-panel">
-      <div class="container">
-        <div class="main">
-          <img src="{{ site.baseurl}}/img/kickstarter-funded.png" alt="Funded on Kickstarter" /> 
-          <h2>Thank You!</h2>
-          <p>Together we funded the NoFlo Development Environment <a href="http://www.kickstarter.com/projects/noflo/noflo-development-environment">on Kickstarter</a>.</p>
-
-          <p>Be first to be updated with progress and launch dates!</p>
-          <div class="call-to-actions">
-          <a href="#" class="btn btn-primary" id="prefinery_apply_link">Sign up for updates</a>
-          <!--a href="http://www.kickstarter.com/projects/noflo/noflo-development-environment" class="btn btn-primary">Watch the video</a-->
-          <a href="{{ site.baseurl }}/documentation/" class="btn btn-primary promo__button download-button">Get started now</a>
-        </div>
-      </div>
-      </div>
+    <div class="flowhub-promo">
+      <a class="flowhub-promo-logo" href="http://flowhub.io"><img src="{{ site.basedir }}/img/flowhub-logo.png" alt="Flowhub"></a>
+      <h1 class="flowhub-promo-title">Level Up!</h1>
+      <p class="flowhub-promo-text">The next evolution in the NoFlo Development Environment.<br />Focused on touch and motion.</p>
+      <a href="http://flowhub.io" class="btn btn-primary flowhub-promo-button download-button">Visit flowhub.io</a>
     </div>
   </section>
-  
-  <!--section class="row-fluid homepage-section">
+    -->
+
+  <section class="row-fluid homepage-section">
     <div class="promo">
       <h1 class="promo__title">{{ site.title }}</h1>
       <p class="promo__text">{{ site.tagline }}</p>
       <a href="{{ site.baseurl }}/documentation/" class="btn btn-primary promo__button download-button">Get started now</a>
     </div>
-  </section-->
+  </section>
 
   <section class="row-fluid homepage-section about-noflo">
     <div class="plain-title">
@@ -48,7 +40,7 @@ title: NoFlo | Flow-Based Programming for JavaScript
           <p>NoFlo is a JavaScript implementation of <a href="http://en.wikipedia.org/wiki/Flow-based_programming">Flow-Based Programming</a> (FBP). Separating the control flow of software from the actual software logic. Helping you organize large applications easier than traditional OOP paradigms, especially when importing and modifying large data sets.</p>
 
           <h3>NoFlo and Node.js</h3>
-          <p>FBP itself is not a new idea: it comes from a term IBM used in the 70s to define the concepts of more manageable business workflows. NoFlo, however, refreshes these concepts and brings them to <a href="http://nodejs.org/">Node.js</a> applications.</p>
+          <p>FBP itself is not a new idea: it comes from a term IBM used in the 70s to define the concepts of more manageable business workflows. NoFlo, however, refreshes these concepts and brings them to HTML5 and <a href="http://nodejs.org/">Node.js</a> applications.</p>
 
           <h3>NoFlo library</h3>
           <p>The MIT-licensed NoFlo library can either be used to run full flow-based applications or as a library for making complex workflows or asynchronous processes more manageable. It can also be used as an <a href="http://en.wikipedia.org/wiki/Extract,_transform,_load">Extract, Transform, Load (ETL)</a> tool in business applications.</p>
@@ -59,7 +51,18 @@ title: NoFlo | Flow-Based Programming for JavaScript
     </div>
   </section>
 
-  
+  <section class="row-fluid homepage-section">
+    <div class="video">
+      <h2>NoFlo Videos</h2>
+      <p>Featured: <a href="http://youtu.be/YJHT2vARAOQ">The origins of NoFlo</a></p>
+      <a href="http://youtu.be/YJHT2vARAOQ" class="video__play">Play Video</a>
+      <ul class="video-thumbnails">
+        <li><a href="http://vimeo.com/72065207"><img src="{{ site.basedir }}/img/bergie-cbase.jpg" alt="Introduction to Flow-Based Programming and NoFlo"></a></li>
+        <li><a href="http://vimeo.com/72238422"><img src="{{ site.basedir }}/img/paul-interview.jpg" alt="The origins of Flow-Based Programming with J Paul Morrison"></a></li>
+        <li><a href="http://vimeo.com/68601823"><img src="{{ site.basedir }}/img/leigh-interview.jpg" alt="Leigh Taylor chats about designing the NoFlo UI"></a></li>
+      </ul>
+    </div>
+  </section>
 
   <section class="row-fluid homepage-section">
     <div class="understanding-noflo">
@@ -83,11 +86,19 @@ title: NoFlo | Flow-Based Programming for JavaScript
   </section>
 
   <section class="row-fluid homepage-section">
-    <div class="video">
-      <h2>NoFlo Video</h2>
-      <p>The origins of NoFlo</p>
-      <a href="http://youtu.be/YJHT2vARAOQ" class="video__play">Play Video</a>
-      <p class="video__duration">4min</p>
+    <div class="theflo-panel">
+      <div class="container">
+        <div class="main">
+          <a href="/kickstarter/"><img src="{{ site.baseurl}}/img/kickstarter-funded.png" alt="Funded on Kickstarter" /></a>
+          <h2>Thank You!</h2>
+          <p>Together we funded the NoFlo Development Environment <a href="http://www.kickstarter.com/projects/noflo/noflo-development-environment">on Kickstarter</a>.</p>
+          <div class="call-to-actions">
+            <a href="{{ site.baseurl }}/kickstarter/" class="btn btn-primary" id="prefinery_apply_link">See our backers</a>
+          <a href="http://www.kickstarter.com/projects/noflo/noflo-development-environment" class="btn btn-primary">Watch the video</a>
+          <!--<a href="{{ site.baseurl }}/documentation/" class="btn btn-primary promo__button download-button">Get started now</a>-->
+        </div>
+      </div>
+      </div>
     </div>
   </section>
 
