@@ -1,4 +1,77 @@
 ---
-layout: redirect
-redirect: "http://www.kickstarter.com/projects/noflo/noflo-development-environment"
+layout: default
+title: Kickstarter Backers
 ---
+  <section class="row-fluid">
+    <div class="theflo-panel">
+      <div class="container">
+        <div class="main">
+          <img src="{{ site.baseurl}}/img/kickstarter-funded.png" alt="Funded on Kickstarter" /> 
+          <h2>Thank You!</h2>
+          <p>Together we funded the NoFlo Development Environment <a href="http://www.kickstarter.com/projects/noflo/noflo-development-environment">on Kickstarter</a>.</p>
+
+          <div class="call-to-actions">
+          <a href="http://www.kickstarter.com/projects/noflo/noflo-development-environment" class="btn btn-primary">Watch the video</a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <section class="row-fluid">
+    <div class="plain-title">
+      <div class="container">
+        <div class="span8 offset4">
+          <h1>Enterprise Backers</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="main">
+        <ul class="backers">
+          {% include enterprise_backers.html %}
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="row-fluid">
+    <div class="plain-title">
+      <div class="container">
+        <div class="span8 offset4">
+          <h1>Business Backers</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="main">
+        <ul class="backers">
+          {% include business_backers_logo.html %}
+        </ul>
+        <ul class="backers">
+          {% include business_backers.html %}
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="row-fluid">
+    <div class="plain-title">
+      <div class="container">
+        <div class="span8 offset4">
+          <h1>Individual Backers</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="main">
+        <ul class="backers">
+          {% include individual_backers.html %}
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="row-fluid">
+    <div class="kickstarter_video">
+      <div class="container">
+        <iframe width="800" height="600" src="http://www.kickstarter.com/projects/noflo/noflo-development-environment/widget/video.html" frameborder="0" scrolling="no"> </iframe>
+      </div>
+    </div>
+  </section>
