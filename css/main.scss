@@ -875,7 +875,7 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
 	background-position: 50%;
   @include background-cover;
 	background-image: url(../img/map-bg.jpg);
-  @include image-2x("../img/map-bg@2.jpg", 1360px, 760px);
+  @include background-image-2x("../img/map-bg@2.jpg");
 
 	@include breakpoint(small) {
 		height: 400px;
@@ -1278,7 +1278,7 @@ blockquote {
 	background-repeat: no-repeat;
 	@include background-cover;
 	background-image: url(../img/video-bg.jpg);
-  @include image-2x("../img/video-bg@2.jpg", 1360px, 600px);
+  @include background-image-2x("../img/video-bg@2.jpg");
 
 	@include breakpoint(small) {
 		margin-left: -20px;
@@ -1561,7 +1561,7 @@ blockquote {
   background-position: 50%;
   @include background-cover;
   background-image: url(../img/part-of-noflo.jpg);
-  @include image-2x("../img/part-of-noflo@2.jpg", 1360px, 600px);
+  @include background-image-2x("../img/part-of-noflo@2.jpg");
   
   @include breakpoint(small) {
     margin-left: -20px;
