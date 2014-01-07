@@ -1029,6 +1029,10 @@ p {
   line-height: 1.5;
 }
 
+ul ul {
+  margin-left: 36px;
+}
+
 li {
   list-style-position: inside;
   line-height: 1.5;
@@ -2024,6 +2028,11 @@ code {
   text-shadow: none;
   font-size: 11px;
   color: hsl(220, 20%, 20%);
+}
+h3 code {
+  font-size: 1em;
+  border: none;
+  padding: 0px;
 }
 
 body .sourcecode {
