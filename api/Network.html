@@ -115,7 +115,8 @@ we already have a process with the given ID, return that.</p>                   
         <span class="nv">port.node = </span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
         <span class="nv">port.name = </span><span class="nx">name</span>
 
-      <span class="nx">@subscribeSubgraph</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">instance</span> <span class="k">if</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">isSubgraph</span><span class="p">()</span></pre></div>                                                  <p>Store and return the process instance</p>                            <div class="highlight"><pre>      <span class="nx">@processes</span><span class="p">[</span><span class="nx">process</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">process</span>
+      <span class="nx">@subscribeSubgraph</span> <span class="nx">process</span> <span class="k">if</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">isSubgraph</span><span class="p">()</span>
+      <span class="nx">@subscribeNode</span> <span class="nx">process</span></pre></div>                                                  <p>Store and return the process instance</p>                            <div class="highlight"><pre>      <span class="nx">@processes</span><span class="p">[</span><span class="nx">process</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">process</span>
       <span class="nx">callback</span> <span class="nx">process</span> <span class="k">if</span> <span class="nx">callback</span>
 
   <span class="nv">removeNode: </span><span class="nf">(node) -&gt;</span>
@@ -161,29 +162,29 @@ when done</p>                            <div class="highlight"><pre>        <sp
 
     <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">outPorts</span><span class="p">[</span><span class="nx">port</span><span class="p">].</span><span class="nx">attach</span> <span class="nx">socket</span>
 
-  <span class="nv">subscribeSubgraph: </span><span class="nf">(nodeName, process) -&gt;</span>
-    <span class="nx">unless</span> <span class="nx">process</span><span class="p">.</span><span class="nx">isReady</span><span class="p">()</span>
-      <span class="nx">process</span><span class="p">.</span><span class="nx">once</span> <span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="o">=&gt;</span>
-        <span class="nx">@subscribeSubgraph</span> <span class="nx">nodeName</span><span class="p">,</span> <span class="nx">process</span>
+  <span class="nv">subscribeSubgraph: </span><span class="nf">(node) -&gt;</span>
+    <span class="nx">unless</span> <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">isReady</span><span class="p">()</span>
+      <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">once</span> <span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="o">=&gt;</span>
+        <span class="nx">@subscribeSubgraph</span> <span class="nx">node</span>
         <span class="k">return</span>
 
-    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">process</span><span class="p">.</span><span class="nx">network</span>
+    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span>
 
     <span class="nv">emitSub = </span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span>
       <span class="nx">do</span> <span class="nx">@increaseConnections</span> <span class="k">if</span> <span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;connect&#39;</span>
       <span class="nx">do</span> <span class="nx">@decreaseConnections</span> <span class="k">if</span> <span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;disconnect&#39;</span>
       <span class="nv">data = </span><span class="p">{}</span> <span class="nx">unless</span> <span class="nx">data</span>
       <span class="k">if</span> <span class="nx">data</span><span class="p">.</span><span class="nx">subgraph</span>
-        <span class="nv">data.subgraph = </span><span class="s2">&quot;#{nodeName}:#{data.subgraph}&quot;</span>
+        <span class="nv">data.subgraph = </span><span class="s2">&quot;#{node.id}:#{data.subgraph}&quot;</span>
       <span class="k">else</span>
-        <span class="nv">data.subgraph = </span><span class="nx">nodeName</span>
+        <span class="nv">data.subgraph = </span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
       <span class="nx">@emit</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">data</span>
 
-    <span class="nx">process</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="nx">data</span>
-    <span class="nx">process</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;begingroup&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;begingroup&#39;</span><span class="p">,</span> <span class="nx">data</span>
-    <span class="nx">process</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">data</span>
-    <span class="nx">process</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;endgroup&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;endgroup&#39;</span><span class="p">,</span> <span class="nx">data</span>
-    <span class="nx">process</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="nx">data</span></pre></div>                                                  <p>Subscribe to events from all connected sockets and re-emit them</p>                            <div class="highlight"><pre>  <span class="nv">subscribeSocket: </span><span class="nf">(socket) -&gt;</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="nx">data</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;begingroup&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;begingroup&#39;</span><span class="p">,</span> <span class="nx">data</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">data</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;endgroup&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;endgroup&#39;</span><span class="p">,</span> <span class="nx">data</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="nf">(data) -&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="nx">data</span></pre></div>                                                  <p>Subscribe to events from all connected sockets and re-emit them</p>                            <div class="highlight"><pre>  <span class="nv">subscribeSocket: </span><span class="nf">(socket) -&gt;</span>
     <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="o">=&gt;</span>
       <span class="nx">do</span> <span class="nx">@increaseConnections</span>
       <span class="nx">@emit</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span>
@@ -209,6 +210,13 @@ when done</p>                            <div class="highlight"><pre>        <sp
       <span class="nx">@emit</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span>
         <span class="nv">id: </span><span class="nx">socket</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span>
         <span class="nv">socket: </span><span class="nx">socket</span>
+
+  <span class="nv">subscribeNode: </span><span class="nf">(node) -&gt;</span>
+    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">getIcon</span>
+    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;icon&#39;</span><span class="p">,</span> <span class="o">=&gt;</span>
+      <span class="nx">@emit</span> <span class="s1">&#39;icon&#39;</span><span class="p">,</span>
+        <span class="nv">id: </span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
+        <span class="nv">icon: </span><span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">getIcon</span><span class="p">()</span>
 
   <span class="nv">addEdge: </span><span class="nf">(edge, callback) -&gt;</span>
     <span class="nv">socket = </span><span class="nx">internalSocket</span><span class="p">.</span><span class="nx">createSocket</span><span class="p">()</span>
@@ -305,4 +313,4 @@ when done</p>                            <div class="highlight"><pre>        <sp
 
 <span class="nv">exports.Network = </span><span class="nx">Network</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2013-12-11 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2014-01-07 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
