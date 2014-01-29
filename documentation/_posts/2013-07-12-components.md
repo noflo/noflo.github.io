@@ -29,9 +29,9 @@ class Forwarder extends noflo.Component
   constructor: ->
     # Register ports
     @inPorts =
-      in: new noflo.Port()
+      in: new noflo.Port 'all'
     @outPorts =
-      out: new noflo.Port()
+      out: new noflo.Port 'all'
 
     @inPorts.in.on "data", (data) =>
       # Forward data when we receive it.
@@ -47,7 +47,9 @@ exports.getComponent = -> new Forwarder()
 
 This example component register two ports: _in_ and _out_. When it receives data in the _in_ port, it opens the _out_ port and sends the same data there. When the _in_ connection closes, it will also close the _out_ connection. So basically this component would be a simple repeater.
 
-You can find more examples of components in the `components` folder shipping with NoFlo.
+The `exports.getComponent` function is used by NoFlo to create an instance of the component. See [Component Lifecycle](#lifecycle) for more information.
+
+You can find more examples of components in the [component library](/library/) section of this website.
 
 ### Subgraphs
 
@@ -83,6 +85,7 @@ Just like with components, it is possible to share subgraphs via NPM. You have t
 
 After this the subgraph is available as a "virtual component" with the name `spreadsheet/Parse` and can be used just like any other component. Subgraphs exported in this manner can be in either JSON or the `.fbp` format.
 
+<a id="design"></a>
 ### Some words on component design
 
 Components should aim to be reusable, to do one thing and do it well. This is why often it is a good idea to split functionality traditionally done in one function to multiple components. For example, counting lines in a text file could happen in the following way:
@@ -105,9 +108,21 @@ When discussing how to solve the unnecessary complexity of software, _Out of the
 
 Done this way, components represent the pure logic, and the control flow and state of the application is managed separately of them in the graph. This separation makes the system a lot simpler.
 
+<a id="lifecycle"></a>
+### Component lifecycle
+
+When NoFlo is being run, all components used in a NoFlo network (an instantiated graph) go through the following lifecycle steps:
+
+* _Instantiation_: component is instantiated for a node in the NoFlo graph, and its `constructor` method is called. At this stage a component should prepare its internal data structures and register listeners for the [events of its input ports](#portevents)
+* _Running_: component has received events on its input ports. Now the component can interact with those events and the external world, and optionally start transmitting [port events](#portevents) on its output ports
+* _Shutdown_: Normally a NoFlo network finishes when all components stop transmitting port events. It is however also possible to close a running NoFlo network. In this case the `shutdown` method of components gets called, allowing components to perform whatever cleanup needed, like unregistering event listeners on external objects, or closing network connections
+
+A running instance of a component in a NoFlo network is called a *process*. Before a process has received data it should be *inert*, merely listening to its input ports. Processes that need to start doing something when a network is started should be triggered to do so by sending them an Initial Information Packet.
+
+<a id="portevents"></a>
 ### Ports and events
 
-Being a flow-based programming environment, the main action in NoFlo happens through ports and their connections. At instantiation, NoFlo components should be *inert*, and merely prepare their internal data structures and set up listeners for their inut ports. All actions a component does should be triggered via input port events. There are several events that can be associated with ports:
+Being a flow-based programming environment, the main action in NoFlo happens through ports and their connections. All actions a component does should be triggered via input port events. There are several events that can be associated with ports:
 
 * _Attach_: there is a connection to the port
 * _Connect_: the port has started sending or receiving a data transmission
@@ -121,6 +136,54 @@ It depends on the nature of the component how these events may be handled. Most 
 
 When a port has no connections, meaning that it was initialized without a connection, or a _detach_ event has happened, it should do no operations regarding that port.
 
+### Port data types
+
+NoFlo is a flow-based programming environment for JavaScript, and JavaScript utilizes dynamic typing. Because of this, NoFlo component ports don't impose type safety, and the output of any port can be connected to the input of any other port. This means that any type checking or type conversions should be handled inside the components themselves.
+
+To aid users in designing graphs, it is however possible to annotate ports with the data type they expect to receive or transmit. This data type is given as a string to the constructor of `noflo.Port` and `noflo.ArrayPort`. For example:
+
+```coffeescript
+@inPorts =
+  in: new noflo.Port 'string'
+  options: new noflo.Port 'object'
+```
+
+The data types supported by NoFlo include:
+
+* _all_: the port can deal with any data type
+* _bang_: the port doesn't do anything with the contents of a data packet, only with the fact that a packet was sent
+* _string_
+* _boolean_
+* _number_
+* _int_
+* _object_
+* _array_
+
+<a id="icons"></a>
+### Component icons
+
+For use in visual editors like [Flowhub](http://flowhub.io/), components can provide an icon. The icons are based on the [Font Awesome icon set](http://fontawesome.io/icons/).
+
+A component that takes a picture could for instance use the [Camera icon](http://fontawesome.io/icon/camera/). The icons are declared using the `icon` property of the component:
+
+```coffeescript
+class TakePicture extends noflo.Component
+  description: "Take a photo with the computer's web camera"
+  icon: 'camera'
+```
+
+Icons can also be updated during runtime to reflect a changing state of the component. This is accomplished by calling the `setIcon` method of the component. For example, the *TakePicture* component above could temporarily set its icon when a picture has been taken to a [Picture icon](http://fontawesome.io/icon/picture-o/) and then change it back a bit later:
+
+```coffeescript
+@originalIcon = @getIcon()
+@setIcon 'picture-o'
+@timeout = setTimeout =>
+  @setIcon @originalIcon
+  @timeout = null
+, 200
+```
+
+<a id="logging"></a>
 ### Conveniently add logging to your components
 
 There are many ways to monitor the health of your flow based programmes, one way being to log important events from your components as they happen.  To help with this we provide a LoggingComponent base class which you can extend when you create your own components.  It will set up an initial outPorts data member with an out port named 'log'.  It also provides a convenience method for sending log messages.  When the log port is not attached, it will send the log messages to the console.
