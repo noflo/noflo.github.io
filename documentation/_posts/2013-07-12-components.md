@@ -107,7 +107,7 @@ Done this way, components represent the pure logic, and the control flow and sta
 
 ### Ports and events
 
-Being a flow-based programming environment, the main action in NoFlo happens through ports and their connections. There are several events that can be associated with ports:
+Being a flow-based programming environment, the main action in NoFlo happens through ports and their connections. At instantiation, NoFlo components should be *inert*, and merely prepare their internal data structures and set up listeners for their inut ports. All actions a component does should be triggered via input port events. There are several events that can be associated with ports:
 
 * _Attach_: there is a connection to the port
 * _Connect_: the port has started sending or receiving a data transmission
