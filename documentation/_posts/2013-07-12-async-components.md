@@ -3,7 +3,7 @@ layout: documentation
 title: Async Components
 ---
 
-Asynchronous components process data and send output some time later. The outputs are sent in the order that they are processed, which might be a different than the order recieved. To keep track of the in/out data correspondance, outputs are sent with a group marked with the input data.
+Asynchronous components process data and send output some time later. The outputs are sent in the order that they are processed, which might be a different than the order received. To keep track of the in/out data correspondence, outputs are sent with a group marked with the input data.
 
 To make it easier to build asynchronous components, there is an `AsyncComponent` class to extend. The constructor's `super` method takes the keys of the primary in and out port that will be asynchronous. `doAsync` is then called with each input.
 
