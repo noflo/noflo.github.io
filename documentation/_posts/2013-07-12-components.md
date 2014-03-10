@@ -51,6 +51,10 @@ The `exports.getComponent` function is used by NoFlo to create an instance of th
 
 You can find more examples of components in the [component library](/library/) section of this website.
 
+### Asynchronous components
+
+In addition to the regular `noflo.Component` baseclass, there is an additional `noflo.AsyncComponent` baseclass that helps in creating components that perform asynchronous operations in a consistent way. See the [Async Components](/documentation/async-components/) document for more information.
+
 ### Subgraphs
 
 A NoFlo graph may contain multiple subgraphs, managed by instances of the `Graph` component. Subgraphs are useful for packaging particular flows to be used as a "new component" by other flows. This allows building more advanced functionality by creating reusable graphs of connected components.
