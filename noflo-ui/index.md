@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: basic
 title: NoFlo UI Alpha testing
 ---
 
