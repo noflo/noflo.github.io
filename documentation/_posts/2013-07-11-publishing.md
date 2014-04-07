@@ -131,7 +131,7 @@ You can perform all the steps above manually, but there is also a [grunt-init pr
 Start by installing `grunt-init`:
 
 ```
-$ sudo npm install -g grunt-init
+$ npm install -g grunt-init
 ```
 
 Then you can clone the [grunt-init-noflo](https://github.com/noflo/grunt-init-noflo) template to your local directory:
