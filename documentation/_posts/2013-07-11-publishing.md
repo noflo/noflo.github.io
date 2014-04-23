@@ -82,6 +82,23 @@ Since NoFlo's Component Loader has to traverse the dependency graph to find all 
 
 Pushing this information to GitHub makes the component available. Use git tags to make new releases.
 
+## Maintaining component and graph lists
+
+It is possible to maintain the component and graph list in `package.json` and `component.json` manually, but this can become tedious. If you're using [Grunt](http://gruntjs.com/), there is a [grunt-noflo-manifest](https://github.com/noflo/grunt-noflo-manifest) that can be used to automate the maintenance of these lists.
+
+Install the plugin and configure it in your Gruntfile:
+
+```coffeescript
+# Updating the package manifest files
+noflo_manifest:
+  update:
+    files:
+      'component.json': ['graphs/*', 'components/*']
+      'package.json': ['graphs/*', 'components/*']
+```
+
+Make sure this task is run when needed, for example during the your testing phase.
+
 ## Cross-platform libraries
 
 NoFlo component libraries can either be specific to one platform, or available for both Node.js and the browser. For cross-platform libraries there are some different strategies for dealing with the platform differences.
