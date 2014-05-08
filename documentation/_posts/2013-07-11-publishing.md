@@ -155,7 +155,7 @@ Then you can clone the [grunt-init-noflo](https://github.com/noflo/grunt-init-no
 
 ```
 $ mkdir -p ~/.grunt-init
-$ git clone git@github.com:noflo/grunt-init-noflo.git ~/.grunt-init/noflo
+$ git clone https://github.com/noflo/grunt-init-noflo.git ~/.grunt-init/noflo
 ```
 
 After this you can create new NoFlo component libraries easily. Create an empty directory, and run:
