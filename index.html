@@ -58,7 +58,7 @@ title: NoFlo | Flow-Based Programming for JavaScript
       <a href="http://youtu.be/YJHT2vARAOQ" class="video__play">Play Video</a>
       <ul class="video-thumbnails">
         <li><a href="http://vimeo.com/72065207"><img src="{{ site.basedir }}/img/bergie-cbase.jpg" alt="Introduction to Flow-Based Programming and NoFlo"></a></li>
-        <li><a href="http://vimeo.com/72238422"><img src="{{ site.basedir }}/img/paul-interview.jpg" alt="The origins of Flow-Based Programming with J Paul Morrison"></a></li>
+        <li><a href="http://vimeo.com/72855695"><img src="{{ site.basedir }}/img/dan-lynch.jpg" alt="Flow-Based Programming is Why I am an Engineer"></a></li>
         <li><a href="http://vimeo.com/68601823"><img src="{{ site.basedir }}/img/leigh-interview.jpg" alt="Leigh Taylor chats about designing the NoFlo UI"></a></li>
       </ul>
     </div>
@@ -74,8 +74,8 @@ title: NoFlo | Flow-Based Programming for JavaScript
               in a graph. This makes it possible to split your problem in logical areas that make sense, 
               and to see how they connect with each other.</p>
 
-            <p>NoFlo applications can be designed using the DrawFBP tool, and visualized using the 
-              integrated web-based graph viewer.</p>
+              <p>NoFlo applications can be designed using the [Flowhub's](http://flowhub.io) integrated
+              web-based graph editor.</p>
           </div>
           <div class="understanding-noflo__image span10">
             <img src="./img/diagrams/screen-and-map.png" alt="" title="" />
@@ -102,35 +102,24 @@ title: NoFlo | Flow-Based Programming for JavaScript
     </div>
   </section>
 
-  <section class="row-fluid homepage-section significance-of-noflo">
-    <div class="container">
-      <div class="plain-title">
-        <h2>NoFlo and Flow-Based Programming</h2>
-        <h3>The significance of FBP.</h3>
-      </div>
-      <div class="main">
-        <div class="span7">
-          <p>"In computer science, flow-based programming (FBP) is a programming paradigm that defines applications as networks of "black box" processes, which exchange data across predefined connections by message passing, where the connections are specified externally to the processes. These black box processes can be reconnected endlessly to form different applications without having to be changed internally. FBP is thus naturally component-oriented..."</p>
-          <p><strong><a href="http://en.wikipedia.org/wiki/Flow-based_programming">Flow-Based Programming on Wikipedia</a></strong></p>
-
-          <p>"This is the Unix philosophy: Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface."</p>
-          <p><strong><a href="http://en.wikipedia.org/wiki/Unix_philosophy">Unix Philosophy</a></strong></p>
-
-          <p>"I thought of objects being like biological cells and/or individual computers on a network, only able to communicate with messages (so messaging came at the very beginning -- it 
-          took a while to see how to do messaging in a programming language efficiently enough to 
-          be useful)."</p>
-          <p><strong><a href="http://www.purl.org/stefan_ram/pub/doc_kay_oop_en">Alan Kay's original idea of object-oriented programming.</a></strong></p>
+  <section id="featured" class="row-fluid homepage-section">
+    <div class="who-uses-noflo">
+      <div class="container">
+        <div class="span2">
+          <h2>Component Libraries</h2>
+          <p>There are hundreds of <a href="{{ site.baseurl }}/library/">ready-made NoFlo components</a> available, including:</p>
         </div>
-        <div class="span5 fbp-book">
-          <p><strong>Flow-Based Programming, 2nd Edition</strong> <br /> 
-            by <a href="http://www.jpaulmorrison.com/">J. Paul Morrison</a></p>
-          <a href="http://www.amazon.com/gp/product/B004PLO66O/ref=as_li_ss_tl?ie=UTF8&amp;tag=bergiesweblog-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B004PLO66O" class="paperback">
-            <img src="./img/diagrams/book.png" alt="Flow-Based Programming, 2nd edition" title="Flow-Based Programming, 2nd edition" />
-          </a>
-          <ul class="book-sellers">
-            <li><a href="http://www.lulu.com/spotlight/paul_morrison" class="epub">ePub</a></li>
-            <li><a href="http://www.amazon.com/gp/product/B004PLO66O/ref=as_li_ss_tl?ie=UTF8&amp;tag=bergiesweblog-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B004PLO66O" class="paperback">Paperback</a></li>
-            <li><a href="http://www.amazon.com/gp/product/1451542321/ref=as_li_ss_tl?ie=UTF8&amp;tag=bergiesweblog-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1451542321" class="kindle">Kindle</a></li>
+        <div class="span9 offset1 who-uses-noflo__logos">
+          <ul>
+            {% for library in site.categories['library'] reversed %}
+              {% if site.highlight_libraries contains library.title %}
+            <li>
+              <a href="{{ site.baseurl }}{{ library.url }}">
+                <img src="{{ site.baseurl }}/img/library/{{ library.title}}.jpg" alt="{{ library.title }}" title="{{ library.title }}" />
+              </a>
+            </li>
+                {% endif %}
+              {% endfor %}
           </ul>
         </div>
       </div>
@@ -170,27 +159,4 @@ title: NoFlo | Flow-Based Programming for JavaScript
     </div>
   </section>
 
-  <section id="featured" class="row-fluid homepage-section">
-    <div class="who-uses-noflo">
-      <div class="container">
-        <div class="span2">
-          <h2>Component Libraries</h2>
-          <p>There are hundreds of <a href="{{ site.baseurl }}/library/">ready-made NoFlo components</a> available, including:</p>
-        </div>
-        <div class="span9 offset1 who-uses-noflo__logos">
-          <ul>
-            {% for library in site.categories['library'] reversed %}
-              {% if site.highlight_libraries contains library.title %}
-            <li>
-              <a href="{{ site.baseurl }}{{ library.url }}">
-                <img src="{{ site.baseurl }}/img/library/{{ library.title}}.jpg" alt="{{ library.title }}" title="{{ library.title }}" />
-              </a>
-            </li>
-                {% endif %}
-              {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
   {% include prefinery.html %}
