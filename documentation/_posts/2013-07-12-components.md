@@ -199,7 +199,10 @@ The data types supported by NoFlo include:
 
 There is a set of other attributes a port may have apart from its `datatype`:
 
-* `addressable`: this boolean flag makes turns the port into an _Array port_, giving a particular index for each connection attached to it (_default: `false`_);
+* `addressable`: this boolean flag makes turns the port into an _Array port_, giving a particular index for each connection attached to it (_default: `false`_); 
+Array ports have a third value on events with the socket index :
+  ```@inPorts.in.on 'data' , (event, payload, index ) -> ... ```
+
 * `buffered`: buffered ports save data in the buffer to be `read()` explicitly instead of passing it immediately to event handler (_default: `false`_);
 * `cached`: this option makes an output port re-send last emitted value when new connections are established (_default: `false`_);
 * `datatype`: string type name of data the port accepts, see above (_default: `all`_);
