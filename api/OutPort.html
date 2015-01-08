@@ -9,7 +9,7 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
 
-<p>Output Port (outport) implementation for NoFlo components</p>                            <div class="highlight"><pre><span class="nv">BasePort = </span><span class="nx">require</span> <span class="s">&#39;./BasePort&#39;</span>
+<p>Output Port (outport) implementation for NoFlo components</p>                            <div class="highlight"><pre><span class="nv">BasePort = </span><span class="nx">require</span> <span class="s1">&#39;./BasePort&#39;</span>
 
 <span class="k">class</span> <span class="nx">OutPort</span> <span class="k">extends</span> <span class="nx">BasePort</span>
   <span class="nv">constructor: </span><span class="nf">(options) -&gt;</span>
@@ -25,16 +25,16 @@ NoFlo may be freely distributed under the MIT license
     <span class="nv">sockets = </span><span class="nx">@getSockets</span> <span class="nx">socketId</span>
     <span class="nx">@checkRequired</span> <span class="nx">sockets</span>
     <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="nx">sockets</span>
-      <span class="k">continue</span> <span class="k">unless</span> <span class="nx">socket</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">socket</span>
       <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
 
   <span class="nv">beginGroup: </span><span class="nf">(group, socketId = null) -&gt;</span>
     <span class="nv">sockets = </span><span class="nx">@getSockets</span> <span class="nx">socketId</span>
     <span class="nx">@checkRequired</span> <span class="nx">sockets</span>
     <span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="nf">(socket) -&gt;</span>
-      <span class="k">return</span> <span class="k">unless</span> <span class="nx">socket</span>
+      <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
       <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">group</span> <span class="k">if</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">once</span> <span class="s">&#39;connect&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+      <span class="nx">socket</span><span class="p">.</span><span class="nx">once</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
         <span class="nx">socket</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">group</span>
       <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
 
@@ -44,9 +44,9 @@ NoFlo may be freely distributed under the MIT license
     <span class="k">if</span> <span class="nx">@isCaching</span><span class="p">()</span> <span class="o">and</span> <span class="nx">data</span> <span class="o">isnt</span> <span class="nx">@cache</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
       <span class="nx">@cache</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span> <span class="o">=</span> <span class="nx">data</span>
     <span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="nf">(socket) -&gt;</span>
-      <span class="k">return</span> <span class="k">unless</span> <span class="nx">socket</span>
+      <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
       <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span> <span class="k">if</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">once</span> <span class="s">&#39;connect&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+      <span class="nx">socket</span><span class="p">.</span><span class="nx">once</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
         <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span>
       <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
 
@@ -54,29 +54,29 @@ NoFlo may be freely distributed under the MIT license
     <span class="nv">sockets = </span><span class="nx">@getSockets</span> <span class="nx">socketId</span>
     <span class="nx">@checkRequired</span> <span class="nx">sockets</span>
     <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="nx">sockets</span>
-      <span class="k">continue</span> <span class="k">unless</span> <span class="nx">socket</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">socket</span>
       <span class="nx">socket</span><span class="p">.</span><span class="nx">endGroup</span><span class="p">()</span>
 
   <span class="nv">disconnect: </span><span class="nf">(socketId = null) -&gt;</span>
     <span class="nv">sockets = </span><span class="nx">@getSockets</span> <span class="nx">socketId</span>
     <span class="nx">@checkRequired</span> <span class="nx">sockets</span>
     <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="nx">sockets</span>
-      <span class="k">continue</span> <span class="k">unless</span> <span class="nx">socket</span>
+      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">socket</span>
       <span class="nx">socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
 
   <span class="nv">checkRequired: </span><span class="nf">(sockets) -&gt;</span>
     <span class="k">if</span> <span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span> <span class="o">and</span> <span class="nx">@isRequired</span><span class="p">()</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@getId</span><span class="p">()</span><span class="si">}</span><span class="s">: No connections available&quot;</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
 
   <span class="nv">getSockets: </span><span class="nf">(socketId) -&gt;</span></pre></div>                                                  <p>Addressable sockets affect only one connection at time</p>                            <div class="highlight"><pre>    <span class="k">if</span> <span class="nx">@isAddressable</span><span class="p">()</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@getId</span><span class="p">()</span><span class="si">}</span><span class="s"> Socket ID required&quot;</span> <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
-      <span class="k">return</span> <span class="p">[]</span> <span class="k">unless</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()} Socket ID required&quot;</span> <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
+      <span class="k">return</span> <span class="p">[]</span> <span class="nx">unless</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
       <span class="k">return</span> <span class="p">[</span><span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]]</span></pre></div>                                                  <p>Regular sockets affect all outbound connections</p>                            <div class="highlight"><pre>    <span class="nx">@sockets</span>
 
-  <span class="nv">isCaching: </span><span class="nf">-&gt;</span>
+  <span class="nv">isCaching: </span><span class="o">-&gt;</span>
     <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="nx">@options</span><span class="p">.</span><span class="nx">caching</span>
     <span class="kc">false</span>
 
 <span class="nv">module.exports = </span><span class="nx">OutPort</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2014-06-14 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee">OutPort.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2015-01-08 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee">OutPort.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

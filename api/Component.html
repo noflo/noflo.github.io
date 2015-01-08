@@ -10,39 +10,40 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
 
-<p>Baseclass for regular NoFlo components.</p>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;events&#39;</span>
+<p>Baseclass for regular NoFlo components.</p>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span>
 
-<span class="nv">ports = </span><span class="nx">require</span> <span class="s">&#39;./Ports&#39;</span>
+<span class="nv">ports = </span><span class="nx">require</span> <span class="s1">&#39;./Ports&#39;</span>
 
 <span class="k">class</span> <span class="nx">Component</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
-  <span class="nv">description: </span><span class="s">&#39;&#39;</span>
+  <span class="nv">description: </span><span class="s1">&#39;&#39;</span>
   <span class="nv">icon: </span><span class="kc">null</span>
+  <span class="nv">started: </span><span class="kc">false</span>
 
   <span class="nv">constructor: </span><span class="nf">(options) -&gt;</span>
-    <span class="nv">options = </span><span class="p">{}</span> <span class="k">unless</span> <span class="nx">options</span>
-    <span class="nv">options.inPorts = </span><span class="p">{}</span> <span class="k">unless</span> <span class="nx">options</span><span class="p">.</span><span class="nx">inPorts</span>
+    <span class="nv">options = </span><span class="p">{}</span> <span class="nx">unless</span> <span class="nx">options</span>
+    <span class="nv">options.inPorts = </span><span class="p">{}</span> <span class="nx">unless</span> <span class="nx">options</span><span class="p">.</span><span class="nx">inPorts</span>
     <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">inPorts</span> <span class="k">instanceof</span> <span class="nx">ports</span><span class="p">.</span><span class="nx">InPorts</span>
       <span class="vi">@inPorts = </span><span class="nx">options</span><span class="p">.</span><span class="nx">inPorts</span>
     <span class="k">else</span>
       <span class="vi">@inPorts = </span><span class="k">new</span> <span class="nx">ports</span><span class="p">.</span><span class="nx">InPorts</span> <span class="nx">options</span><span class="p">.</span><span class="nx">inPorts</span>
 
-    <span class="nv">options.outPorts = </span><span class="p">{}</span> <span class="k">unless</span> <span class="nx">options</span><span class="p">.</span><span class="nx">outPorts</span>
+    <span class="nv">options.outPorts = </span><span class="p">{}</span> <span class="nx">unless</span> <span class="nx">options</span><span class="p">.</span><span class="nx">outPorts</span>
     <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">outPorts</span> <span class="k">instanceof</span> <span class="nx">ports</span><span class="p">.</span><span class="nx">OutPorts</span>
       <span class="vi">@outPorts = </span><span class="nx">options</span><span class="p">.</span><span class="nx">outPorts</span>
     <span class="k">else</span>
       <span class="vi">@outPorts = </span><span class="k">new</span> <span class="nx">ports</span><span class="p">.</span><span class="nx">OutPorts</span> <span class="nx">options</span><span class="p">.</span><span class="nx">outPorts</span>
 
-  <span class="nv">getDescription: </span><span class="nf">-&gt;</span> <span class="nx">@description</span>
+  <span class="nv">getDescription: </span><span class="o">-&gt;</span> <span class="nx">@description</span>
 
-  <span class="nv">isReady: </span><span class="nf">-&gt;</span> <span class="kc">true</span>
+  <span class="nv">isReady: </span><span class="o">-&gt;</span> <span class="kc">true</span>
 
-  <span class="nv">isSubgraph: </span><span class="nf">-&gt;</span> <span class="kc">false</span>
+  <span class="nv">isSubgraph: </span><span class="o">-&gt;</span> <span class="kc">false</span>
 
   <span class="nv">setIcon: </span><span class="nf">(@icon) -&gt;</span>
-    <span class="nx">@emit</span> <span class="s">&#39;icon&#39;</span><span class="p">,</span> <span class="nx">@icon</span>
-  <span class="nv">getIcon: </span><span class="nf">-&gt;</span> <span class="nx">@icon</span>
+    <span class="nx">@emit</span> <span class="s1">&#39;icon&#39;</span><span class="p">,</span> <span class="nx">@icon</span>
+  <span class="nv">getIcon: </span><span class="o">-&gt;</span> <span class="nx">@icon</span>
 
-  <span class="nv">error: </span><span class="nf">(e, groups = [], errorPort = &#39;error&#39;) =&gt;</span>
+  <span class="nv">error: </span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nv">groups = </span><span class="p">[],</span> <span class="nv">errorPort = </span><span class="s1">&#39;error&#39;</span><span class="p">)</span> <span class="o">=&gt;</span>
     <span class="k">if</span> <span class="nx">@outPorts</span><span class="p">[</span><span class="nx">errorPort</span><span class="p">]</span> <span class="o">and</span> <span class="p">(</span><span class="nx">@outPorts</span><span class="p">[</span><span class="nx">errorPort</span><span class="p">].</span><span class="nx">isAttached</span><span class="p">()</span> <span class="o">or</span> <span class="o">not</span> <span class="nx">@outPorts</span><span class="p">[</span><span class="nx">errorPort</span><span class="p">].</span><span class="nx">isRequired</span><span class="p">())</span>
       <span class="nx">@outPorts</span><span class="p">[</span><span class="nx">errorPort</span><span class="p">].</span><span class="nx">beginGroup</span> <span class="nx">group</span> <span class="k">for</span> <span class="nx">group</span> <span class="k">in</span> <span class="nx">groups</span>
       <span class="nx">@outPorts</span><span class="p">[</span><span class="nx">errorPort</span><span class="p">].</span><span class="nx">send</span> <span class="nx">e</span>
@@ -51,8 +52,13 @@ NoFlo may be freely distributed under the MIT license
       <span class="k">return</span>
     <span class="k">throw</span> <span class="nx">e</span>
 
-  <span class="nv">shutdown: </span><span class="nf">-&gt;</span>
+  <span class="nv">shutdown: </span><span class="o">-&gt;</span>
+    <span class="vi">@started = </span><span class="kc">false</span></pre></div>                                                  <p>The startup function performs initialization for the component.</p>                            <div class="highlight"><pre>  <span class="nv">start: </span><span class="o">-&gt;</span>
+    <span class="vi">@started = </span><span class="kc">true</span>
+    <span class="nx">@started</span>
+
+  <span class="nv">isStarted: </span><span class="o">-&gt;</span> <span class="nx">@started</span>
 
 <span class="nv">exports.Component = </span><span class="nx">Component</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2014-06-14 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee">Component.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2015-01-08 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee">Component.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

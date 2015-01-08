@@ -8,16 +8,30 @@ categories:
 (c) 2013-2014 TheGrid (Rituwall Inc.)
 (c) 2011-2012 Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license
-</code></pre>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;events&#39;</span></pre></div>                                                  <h2>Internal Sockets</h2>
+</code></pre>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span></pre></div>                                                  <h2>Internal Sockets</h2>
 
 <p>The default communications mechanism between NoFlo processes is
 an <em>internal socket</em>, which is responsible for accepting information
 packets sent from processes' outports, and emitting corresponding
 events so that the packets can be caught to the inport of the
 connected process.</p>                            <div class="highlight"><pre><span class="k">class</span> <span class="nx">InternalSocket</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
-  <span class="nv">constructor: </span><span class="nf">-&gt;</span>
+  <span class="nv">regularEmitEvent: </span><span class="nf">(event, data) -&gt;</span>
+    <span class="nx">@emit</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">data</span>
+
+  <span class="nv">debugEmitEvent: </span><span class="nf">(event, data) -&gt;</span>
+    <span class="k">try</span>
+      <span class="nx">@emit</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">data</span>
+    <span class="k">catch</span> <span class="nx">error</span>
+      <span class="nx">@emit</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+        <span class="nv">id: </span><span class="nx">@to</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">id</span>
+        <span class="nv">error: </span><span class="nx">error</span>
+
+  <span class="nv">constructor: </span><span class="o">-&gt;</span>
     <span class="vi">@connected = </span><span class="kc">false</span>
-    <span class="vi">@groups = </span><span class="p">[]</span></pre></div>                                                  <h2>Socket connections</h2>
+    <span class="vi">@groups = </span><span class="p">[]</span>
+    <span class="vi">@dataDelegate = </span><span class="kc">null</span>
+    <span class="vi">@debug = </span><span class="kc">false</span>
+    <span class="vi">@emitEvent = </span><span class="nx">@regularEmitEvent</span></pre></div>                                                  <h2>Socket connections</h2>
 
 <p>Sockets that are attached to the ports of processes may be
 either connected or disconnected. The semantical meaning of
@@ -42,17 +56,17 @@ file or a database query.</p>
 
     # Otherwise, call same method recursively
     @readBuffer fd, position, size, buffer
-</code></pre>                            <div class="highlight"><pre>  <span class="nv">connect: </span><span class="nf">-&gt;</span>
+</code></pre>                            <div class="highlight"><pre>  <span class="nv">connect: </span><span class="o">-&gt;</span>
     <span class="k">return</span> <span class="k">if</span> <span class="nx">@connected</span>
     <span class="vi">@connected = </span><span class="kc">true</span>
-    <span class="nx">@emit</span> <span class="s">&#39;connect&#39;</span><span class="p">,</span> <span class="nx">@</span>
+    <span class="nx">@emitEvent</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="err">@</span>
 
-  <span class="nv">disconnect: </span><span class="nf">-&gt;</span>
-    <span class="k">return</span> <span class="k">unless</span> <span class="nx">@connected</span>
+  <span class="nv">disconnect: </span><span class="o">-&gt;</span>
+    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">@connected</span>
     <span class="vi">@connected = </span><span class="kc">false</span>
-    <span class="nx">@emit</span> <span class="s">&#39;disconnect&#39;</span><span class="p">,</span> <span class="nx">@</span>
+    <span class="nx">@emitEvent</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="err">@</span>
 
-  <span class="nv">isConnected: </span><span class="nf">-&gt;</span> <span class="nx">@connected</span></pre></div>                                                  <h2>Sending information packets</h2>
+  <span class="nv">isConnected: </span><span class="o">-&gt;</span> <span class="nx">@connected</span></pre></div>                                                  <h2>Sending information packets</h2>
 
 <p>The <em>send</em> method is used by a processe's outport to
 send information packets. The actual packet contents are
@@ -63,8 +77,9 @@ structure.</p>
 serialized or deserialized via JSON. This way the NoFlo networks
 can be constructed with more flexibility, as file buffers or
 message queues can be used as additional packet relay mechanisms.</p>                            <div class="highlight"><pre>  <span class="nv">send: </span><span class="nf">(data) -&gt;</span>
-    <span class="nx">@connect</span><span class="p">()</span> <span class="k">unless</span> <span class="nx">@connected</span>
-    <span class="nx">@emit</span> <span class="s">&#39;data&#39;</span><span class="p">,</span> <span class="nx">data</span></pre></div>                                                  <h2>Information Packet grouping</h2>
+    <span class="nx">@connect</span><span class="p">()</span> <span class="nx">unless</span> <span class="nx">@connected</span>
+    <span class="nv">data = </span><span class="nx">@dataDelegate</span><span class="p">()</span> <span class="k">if</span> <span class="nx">data</span> <span class="o">is</span> <span class="kc">undefined</span> <span class="o">and</span> <span class="k">typeof</span> <span class="nx">@dataDelegate</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span>
+    <span class="nx">@emitEvent</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">data</span></pre></div>                                                  <h2>Information Packet grouping</h2>
 
 <p>Processes sending data to sockets may also group the packets
 when necessary. This allows transmitting tree structures as
@@ -97,28 +112,41 @@ as packets like:</p>
 to pass received groupings onward if the data structures remain
 intact through the component's processing.</p>                            <div class="highlight"><pre>  <span class="nv">beginGroup: </span><span class="nf">(group) -&gt;</span>
     <span class="nx">@groups</span><span class="p">.</span><span class="nx">push</span> <span class="nx">group</span>
-    <span class="nx">@emit</span> <span class="s">&#39;begingroup&#39;</span><span class="p">,</span> <span class="nx">group</span>
+    <span class="nx">@emitEvent</span> <span class="s1">&#39;begingroup&#39;</span><span class="p">,</span> <span class="nx">group</span>
 
-  <span class="nv">endGroup: </span><span class="nf">-&gt;</span>
-    <span class="k">return</span> <span class="k">unless</span> <span class="nx">@groups</span><span class="p">.</span><span class="nx">length</span>
-    <span class="nx">@emit</span> <span class="s">&#39;endgroup&#39;</span><span class="p">,</span> <span class="nx">@groups</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span></pre></div>                                                  <h2>Socket identifiers</h2>
+  <span class="nv">endGroup: </span><span class="o">-&gt;</span>
+    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">@groups</span><span class="p">.</span><span class="nx">length</span>
+    <span class="nx">@emitEvent</span> <span class="s1">&#39;endgroup&#39;</span><span class="p">,</span> <span class="nx">@groups</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span></pre></div>                                                  <h2>Socket data delegation</h2>
+
+<p>Sockets have the option to receive data from a delegate function
+should the <code>send</code> method receive undefined for <code>data</code>.  This
+helps in the case of defaulting values.</p>                            <div class="highlight"><pre>  <span class="nv">setDataDelegate: </span><span class="nf">(delegate) -&gt;</span>
+    <span class="nx">unless</span> <span class="k">typeof</span> <span class="nx">delegate</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span>
+      <span class="k">throw</span> <span class="nb">Error</span> <span class="s1">&#39;A data delegate must be a function.&#39;</span>
+    <span class="vi">@dataDelegate = </span><span class="nx">delegate</span></pre></div>                                                  <h2>Socket debug mode</h2>
+
+<p>Sockets can catch exceptions happening in processes when data is
+sent to them. These errors can then be reported to the network for
+notification to the developer.</p>                            <div class="highlight"><pre>  <span class="nv">setDebug: </span><span class="nf">(active) -&gt;</span>
+    <span class="vi">@debug = </span><span class="nx">active</span>
+    <span class="vi">@emitEvent = </span><span class="k">if</span> <span class="nx">@debug</span> <span class="k">then</span> <span class="nx">@debugEmitEvent</span> <span class="k">else</span> <span class="nx">@regularEmitEvent</span></pre></div>                                                  <h2>Socket identifiers</h2>
 
 <p>Socket identifiers are mainly used for debugging purposes.
 Typical identifiers look like <em>ReadFile:OUT -> Display:IN</em>,
 but for sockets sending initial information packets to
-components may also loom like <em>DATA -> ReadFile:SOURCE</em>.</p>                            <div class="highlight"><pre>  <span class="nv">getId: </span><span class="nf">-&gt;</span>
+components may also loom like <em>DATA -> ReadFile:SOURCE</em>.</p>                            <div class="highlight"><pre>  <span class="nv">getId: </span><span class="o">-&gt;</span>
     <span class="nv">fromStr = </span><span class="nf">(from) -&gt;</span>
-      <span class="s">&quot;</span><span class="si">#{</span><span class="nx">from</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="s">() </span><span class="si">#{</span><span class="nx">from</span><span class="p">.</span><span class="nx">port</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span><span class="si">}</span><span class="s">&quot;</span>
+      <span class="s2">&quot;#{from.process.id}() #{from.port.toUpperCase()}&quot;</span>
     <span class="nv">toStr = </span><span class="nf">(to) -&gt;</span>
-      <span class="s">&quot;</span><span class="si">#{</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span><span class="si">}</span><span class="s"> </span><span class="si">#{</span><span class="nx">to</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="s">()&quot;</span>
+      <span class="s2">&quot;#{to.port.toUpperCase()} #{to.process.id}()&quot;</span>
 
-    <span class="k">return</span> <span class="s">&quot;UNDEFINED&quot;</span> <span class="k">unless</span> <span class="nx">@from</span> <span class="o">or</span> <span class="nx">@to</span>
-    <span class="k">return</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">fromStr</span><span class="p">(</span><span class="nx">@from</span><span class="p">)</span><span class="si">}</span><span class="s"> -&gt; ANON&quot;</span> <span class="k">if</span> <span class="nx">@from</span> <span class="o">and</span> <span class="o">not</span> <span class="nx">@to</span>
-    <span class="k">return</span> <span class="s">&quot;DATA -&gt; </span><span class="si">#{</span><span class="nx">toStr</span><span class="p">(</span><span class="nx">@to</span><span class="p">)</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">unless</span> <span class="nx">@from</span>
-    <span class="s">&quot;</span><span class="si">#{</span><span class="nx">fromStr</span><span class="p">(</span><span class="nx">@from</span><span class="p">)</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">#{</span><span class="nx">toStr</span><span class="p">(</span><span class="nx">@to</span><span class="p">)</span><span class="si">}</span><span class="s">&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;UNDEFINED&quot;</span> <span class="nx">unless</span> <span class="nx">@from</span> <span class="o">or</span> <span class="nx">@to</span>
+    <span class="k">return</span> <span class="s2">&quot;#{fromStr(@from)} -&gt; ANON&quot;</span> <span class="k">if</span> <span class="nx">@from</span> <span class="o">and</span> <span class="o">not</span> <span class="nx">@to</span>
+    <span class="k">return</span> <span class="s2">&quot;DATA -&gt; #{toStr(@to)}&quot;</span> <span class="nx">unless</span> <span class="nx">@from</span>
+    <span class="s2">&quot;#{fromStr(@from)} -&gt; #{toStr(@to)}&quot;</span>
 
 <span class="nv">exports.InternalSocket = </span><span class="nx">InternalSocket</span>
 
-<span class="nv">exports.createSocket = </span><span class="nf">-&gt;</span> <span class="k">new</span> <span class="nx">InternalSocket</span>
+<span class="nv">exports.createSocket = </span><span class="o">-&gt;</span> <span class="k">new</span> <span class="nx">InternalSocket</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2014-06-14 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InternalSocket.coffee">InternalSocket.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2015-01-08 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InternalSocket.coffee">InternalSocket.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

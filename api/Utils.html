@@ -10,18 +10,18 @@ NoFlo may be freely distributed under the MIT license
 </code></pre>
 
 <p>Generic object clone. From CS cookbook</p>                            <div class="highlight"><pre><span class="nv">clone = </span><span class="nf">(obj) -&gt;</span>
-  <span class="k">if</span> <span class="o">not</span> <span class="nx">obj</span><span class="o">?</span> <span class="o">or</span> <span class="k">typeof</span> <span class="nx">obj</span> <span class="o">isnt</span> <span class="s">&#39;object&#39;</span>
+  <span class="k">if</span> <span class="o">not</span> <span class="nx">obj</span><span class="o">?</span> <span class="o">or</span> <span class="k">typeof</span> <span class="nx">obj</span> <span class="o">isnt</span> <span class="s1">&#39;object&#39;</span>
     <span class="k">return</span> <span class="nx">obj</span>
 
   <span class="k">if</span> <span class="nx">obj</span> <span class="k">instanceof</span> <span class="nb">Date</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">getTime</span><span class="p">())</span>
 
   <span class="k">if</span> <span class="nx">obj</span> <span class="k">instanceof</span> <span class="nb">RegExp</span>
-    <span class="nv">flags = </span><span class="s">&#39;&#39;</span>
-    <span class="nx">flags</span> <span class="o">+=</span> <span class="s">&#39;g&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">global</span><span class="o">?</span>
-    <span class="nx">flags</span> <span class="o">+=</span> <span class="s">&#39;i&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">ignoreCase</span><span class="o">?</span>
-    <span class="nx">flags</span> <span class="o">+=</span> <span class="s">&#39;m&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">multiline</span><span class="o">?</span>
-    <span class="nx">flags</span> <span class="o">+=</span> <span class="s">&#39;y&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">sticky</span><span class="o">?</span>
+    <span class="nv">flags = </span><span class="s1">&#39;&#39;</span>
+    <span class="nx">flags</span> <span class="o">+=</span> <span class="s1">&#39;g&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">global</span><span class="o">?</span>
+    <span class="nx">flags</span> <span class="o">+=</span> <span class="s1">&#39;i&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">ignoreCase</span><span class="o">?</span>
+    <span class="nx">flags</span> <span class="o">+=</span> <span class="s1">&#39;m&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">multiline</span><span class="o">?</span>
+    <span class="nx">flags</span> <span class="o">+=</span> <span class="s1">&#39;y&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">sticky</span><span class="o">?</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">source</span><span class="p">,</span> <span class="nx">flags</span><span class="p">)</span>
 
   <span class="nv">newInstance = </span><span class="k">new</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">constructor</span><span class="p">()</span>
@@ -30,10 +30,10 @@ NoFlo may be freely distributed under the MIT license
     <span class="nx">newInstance</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">clone</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
 
   <span class="k">return</span> <span class="nx">newInstance</span></pre></div>                                                  <p>Guess language from filename</p>                            <div class="highlight"><pre><span class="nv">guessLanguageFromFilename = </span><span class="nf">(filename) -&gt;</span>
-  <span class="k">return</span> <span class="s">&#39;coffeescript&#39;</span> <span class="k">if</span> <span class="sr">/.*\.coffee$/</span><span class="p">.</span><span class="nx">test</span> <span class="nx">filename</span>
-  <span class="k">return</span> <span class="s">&#39;javascript&#39;</span>
+  <span class="k">return</span> <span class="s1">&#39;coffeescript&#39;</span> <span class="k">if</span> <span class="sr">/.*\.coffee$/</span><span class="p">.</span><span class="nx">test</span> <span class="nx">filename</span>
+  <span class="k">return</span> <span class="s1">&#39;javascript&#39;</span>
 
 <span class="nv">exports.clone = </span><span class="nx">clone</span>
 <span class="nv">exports.guessLanguageFromFilename = </span><span class="nx">guessLanguageFromFilename</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2014-06-14 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.coffee">Utils.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2015-01-08 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.coffee">Utils.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
