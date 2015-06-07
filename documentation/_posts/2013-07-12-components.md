@@ -34,7 +34,7 @@ exports.getComponent = ->
       when 'data'
         # Forward data when we receive it.
         # Note: send() will connect automatically if needed
-        component.outPorts.out.send data
+        component.outPorts.out.send payload
       when 'disconnect'
         # Disconnect output port when input port disconnects
         component.outPorts.out.disconnect()
