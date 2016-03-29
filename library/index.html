@@ -1,46 +1,8 @@
----
-layout: default
-title: Component Libraries
-categories:
- - library
----
-  <div class="row-fluid">
-    <div class="container">
-      <div class="plain-title">
-        <h1>Component Libraries</h1>
-        <h2>{{ site.tagline }}</h2>
-        <p>NoFlo enables creating software out of reusable building blocks, or components. This page lists the publicly available components libraries for NoFlo. In addition, you can <a href="{{ site.baseurl }}/documentation/components/">write your own</a>. <a href="{{ site.baseurl }}/component/">See all components</a>.</p>
-      </div>
-      <div class="main">
-        <div class="sidebar span4">
-          {% include noflo.html %}
-        </div>
-
-        <div class="content span8">
-          {% for library in site.categories['library'] reversed %}
-          <div class="library__item">
-            <div class="library__info">
-              {% if site.highlight_libraries contains library.title %}
-              <img src="{{ site.baseurl }}/img/library/{{ library.title}}.jpg" alt="{{ library.title }}" title="{{ library.title }}" class="library__logo" />
-              {% endif %}
-              <h3 class="library__title">
-                <a href="{{ site.baseurl}}{{ library.url }}">{{ library.title }}</a>
-                <span class="library__version">
-                  v{{ library.version}}
-                </span>
-              </h3>
-              {% if library.author.url %}
-              <img class="avatar" src="{{ library.author.avatar }}" />
-              <a class="library__author" href="{{ library.author.url }}">{{ library.author.name }}</a>
-              {% else %}
-              <img class="avatar" src="{{ library.author.avatar }}" />
-              <span class="library__author">{{ library.author.name }}</span>
-              {% endif %}
-            </div>
-            <p class="library__description">{{ library.description }}</p>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="canonical" href="https://www.npmjs.com/browse/depended/noflo"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="refresh" content="https://www.npmjs.com/browse/depended/noflo" />
+  </head>
+</html>
