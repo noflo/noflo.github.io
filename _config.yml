@@ -1,5 +1,6 @@
 title: NoFlo
-tagline: Visual Control Flows for JavaScript
+tagline: Flow-Based Programming for JavaScript
+version: 0.6.0
 markdown: redcarpet
 permalink: /:categories/:title/
 baseurl: ""
