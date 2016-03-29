@@ -19,7 +19,7 @@
                 <% var source = sources[i]; %>
                 <% if (path.basename(source) !== 'shell.coffee') { %>
                 <li>
-                  <a {% if page.url == '/api/<%= path.basename(destination(source)) %>' %}class="active" {% endif %}href="<%= path.basename(destination(source)) %>">
+                  <a {% if page.url == '/api/<%= path.basename(destination(source), path.extname(destination(source))) %>/index.html' %}class="active" {% endif %}href="/api/<%= path.basename(destination(source), path.extname(destination(source))) %>/">
                     <%= path.basename(source).replace('.coffee', '') %>
                   </a>
                 </li>

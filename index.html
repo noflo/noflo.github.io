@@ -2,7 +2,7 @@
 layout: default
 title: NoFlo | Flow-Based Programming for JavaScript
 ---
-
+  <!--
   <section class="row-fluid homepage-section">
     <div class="flowhub-promo">
       <a class="flowhub-promo-logo" href="http://flowhub.io"><img src="{{ site.basedir }}/img/flowhub-logo.png" alt="Flowhub"></a>
@@ -11,8 +11,8 @@ title: NoFlo | Flow-Based Programming for JavaScript
       <a href="http://flowhub.io" class="btn btn-primary flowhub-promo-button download-button">Try the beta</a>
     </div>
   </section>
+  -->
 
-  <!--
   <section class="row-fluid homepage-section">
     <div class="promo">
       <h1 class="promo__title">{{ site.title }}</h1>
@@ -20,13 +20,12 @@ title: NoFlo | Flow-Based Programming for JavaScript
       <a href="{{ site.baseurl }}/documentation/" class="btn btn-primary promo__button download-button">Get started now</a>
     </div>
   </section>
-  -->
 
   <section class="row-fluid homepage-section about-noflo">
     <div class="plain-title">
       <div class="container">
         <div class="span8 offset4">
-          <h1>About NoFlo</h1>
+          <h1>About {{ site.title }} {{ site.version }}</h1>
         </div>
       </div>
     </div>
@@ -45,7 +44,7 @@ title: NoFlo | Flow-Based Programming for JavaScript
           <h3>NoFlo library</h3>
           <p>The MIT-licensed NoFlo library can either be used to run full flow-based applications or as a library for making complex workflows or asynchronous processes more manageable. It can also be used as an <a href="http://en.wikipedia.org/wiki/Extract,_transform,_load">Extract, Transform, Load (ETL)</a> tool in business applications.</p>
 
-          <p>NoFlo has been written in <a href="http://coffeescript.org/">CoffeeScript</a> for simplicity.</p>
+          <p>NoFlo has been written in <a href="http://coffeescript.org/">CoffeeScript</a> for simplicity. Components can be written in any language that transpiles into JavaScript including ES6.</p>
         </div>
       </div>
     </div>
@@ -91,11 +90,10 @@ title: NoFlo | Flow-Based Programming for JavaScript
         <div class="main">
           <a href="/kickstarter/"><img src="{{ site.baseurl}}/img/kickstarter-funded.png" alt="Funded on Kickstarter" /></a>
           <h2>Thank You!</h2>
-          <p>Together we funded the NoFlo Development Environment <a href="http://www.kickstarter.com/projects/noflo/noflo-development-environment">on Kickstarter</a>.</p>
+          <p>Together we funded the NoFlo Development Environment &mdash; <a href="http://flowhub.io">Flowhub</a> &mdash; <a href="http://www.kickstarter.com/projects/noflo/noflo-development-environment">on Kickstarter</a>.</p>
           <div class="call-to-actions">
             <a href="{{ site.baseurl }}/kickstarter/" class="btn btn-primary">See our backers</a>
-          <a href="http://www.kickstarter.com/projects/noflo/noflo-development-environment" class="btn btn-primary">Watch the video</a>
-          <!--<a href="{{ site.baseurl }}/documentation/" class="btn btn-primary promo__button download-button">Get started now</a>-->
+          <a href="https://www.kickstarter.com/projects/noflo/noflo-development-environment/description" class="btn btn-primary">Watch the video</a>
         </div>
       </div>
       </div>
@@ -107,19 +105,17 @@ title: NoFlo | Flow-Based Programming for JavaScript
       <div class="container">
         <div class="span2">
           <h2>Component Libraries</h2>
-          <p>There are hundreds of <a href="{{ site.baseurl }}/library/">ready-made NoFlo components</a> available, including:</p>
+          <p>There are hundreds of <a href="https://www.npmjs.com/browse/depended/noflo">ready-made NoFlo components</a> available, including:</p>
         </div>
         <div class="span9 offset1 who-uses-noflo__logos">
           <ul>
-            {% for library in site.categories['library'] reversed %}
-              {% if site.highlight_libraries contains library.title %}
+            {% for library in site.highlight_libraries %}
             <li>
-              <a href="{{ site.baseurl }}{{ library.url }}">
-                <img src="{{ site.baseurl }}/img/library/{{ library.title}}.jpg" alt="{{ library.title }}" title="{{ library.title }}" />
+              <a href="https://www.npmjs.com/package/{{ library }}">
+                <img src="{{ site.baseurl }}/img/library/{{ library }}.jpg" alt="{{ library }}" title="{{ library }}" />
               </a>
             </li>
-                {% endif %}
-              {% endfor %}
+            {% endfor %}
           </ul>
         </div>
       </div>

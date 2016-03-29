@@ -84,17 +84,24 @@ Once the `package.json` file is in place, you're ready to install NoFlo. Do this
 $ npm install noflo --save
 ```
 
-NPM will fetch the latest release version of NoFlo and all its dependencies. Once this has finished, try that NoFlo works by running:
+NPM will fetch the latest release version of NoFlo and all its dependencies. If you want to run NoFlo on Node.js via command-line, you'll also want to grab [noflo-nodejs](https://npmjs.org/package/noflo-nodejs):
+
 
 ```bash
-$ ./node_modules/.bin/noflo -h
+$ npm install noflo-nodejs --save
+```
+
+Once this has finished, try that NoFlo works by running:
+
+```bash
+$ ./node_modules/.bin/noflo-nodejs -h
 ```
 
 ### Getting components
 
 The main NoFlo package gives you the environment for running flows. In addition you'll need the components that you'll be using in your graphs.
 
-There are {{ site.categories.component | size }} open source components available via [NoFlo Component Libraries](/library/) that you can install with NPM.
+There are hundreds of open source components available via [NoFlo Component Libraries](https://www.npmjs.com/browse/depended/noflo) that you can install with NPM.
 
 For example, to install the [filesystem components](/library/noflo-filesystem/), you can run:
 
@@ -109,12 +116,6 @@ $ npm install noflo-core --save
 ```
 
 Once NPM completes the components from that library will be available to your project. Your project can pull in components from as many NoFlo libraries as needed.
-
-You can see a list of components that are installed in your project with:
-
-```bash
-$ ./node_modules/.bin/noflo list .
-```
 
 ## Defining your first graph
 
@@ -143,7 +144,7 @@ Read(filesystem/ReadFile) OUT -> IN Display(core/Output)
 Once you've saved the file you can run the graph with NoFlo:
 
 ```bash
-$ ./node_modules/.bin/noflo graphs/ShowContents.fbp
+$ ./node_modules/.bin/noflo-nodejs --graph graphs/ShowContents.fbp --batch --register=false
 ```
 
 The contents of your `package.json` should be shown on the console.
@@ -153,7 +154,7 @@ The contents of your `package.json` should be shown on the console.
 If you want to see how the graph works internally, you can run NoFlo with the debugger:
 
 ```bash
-$ ./node_modules/.bin/noflo --debug graphs/ShowContents.fbp
+$ ./node_modules/.bin/noflo-nodejs --graph graphs/ShowContents.fbp --batch --register=false --debug
 ```
 
 This will show all the various events happening inside the graph:
@@ -186,7 +187,7 @@ Multiply PRODUCT -> IN Display(core/Output)
 If you run this with:
 
 ```bash
-$ ./node_modules/.bin/noflo graphs/Calculate.fbp
+$ ./node_modules/.bin/noflo-nodejs --graph graphs/Calculate.fbp --batch --register=false
 ```
 
 it will give the answer of `42`. Doing other mathematical operations with noflo-math is left as an exercise to the user.
