@@ -110,15 +110,13 @@ title: NoFlo | Flow-Based Programming for JavaScript
         </div>
         <div class="span9 offset1 who-uses-noflo__logos">
           <ul>
-            {% for library in site.categories['library'] reversed %}
-              {% if site.highlight_libraries contains library.title %}
+            {% for library in site.highlight_libraries %}
             <li>
-              <a href="https://www.npmjs.com/package/{{ library.url }}">
-                <img src="{{ site.baseurl }}/img/library/{{ library.title}}.jpg" alt="{{ library.title }}" title="{{ library.title }}" />
+              <a href="https://www.npmjs.com/package/{{ library }}">
+                <img src="{{ site.baseurl }}/img/library/{{ library }}.jpg" alt="{{ library }}" title="{{ library }}" />
               </a>
             </li>
-                {% endif %}
-              {% endfor %}
+            {% endfor %}
           </ul>
         </div>
       </div>
