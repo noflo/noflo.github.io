@@ -34,10 +34,7 @@ NoFlo may be freely distributed under the MIT license
     <span class="err">@</span><span class="nx">checkRequired</span> <span class="nx">sockets</span>
     <span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">-&gt;</span>
       <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
-      <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">group</span> <span class="k">if</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">once</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
-        <span class="nx">socket</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">group</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
+      <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">group</span>
 
   <span class="nv">send: </span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">sockets</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getSockets</span> <span class="nx">socketId</span>
@@ -46,10 +43,7 @@ NoFlo may be freely distributed under the MIT license
       <span class="err">@</span><span class="nx">cache</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span> <span class="o">=</span> <span class="nx">data</span>
     <span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">-&gt;</span>
       <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
-      <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span> <span class="k">if</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">once</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
-        <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
+      <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span>
 
   <span class="nv">endGroup: </span><span class="p">(</span><span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">sockets</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getSockets</span> <span class="nx">socketId</span>
@@ -66,8 +60,7 @@ NoFlo may be freely distributed under the MIT license
       <span class="nx">socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
 
   <span class="nv">sendIP: </span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="k">typeof</span> <span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;object&#39;</span> <span class="o">and</span>
-    <span class="nx">IP</span><span class="p">.</span><span class="nx">types</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">type</span><span class="p">).</span><span class="nx">type</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="nx">IP</span><span class="p">.</span><span class="nx">isIP</span> <span class="nx">type</span>
       <span class="nx">ip</span> <span class="o">=</span> <span class="nx">type</span>
       <span class="nx">socketId</span> <span class="o">=</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">index</span>
     <span class="k">else</span>
@@ -110,4 +103,4 @@ NoFlo may be freely distributed under the MIT license
 
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">OutPort</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-03-30 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee">OutPort.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-03-31 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee">OutPort.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

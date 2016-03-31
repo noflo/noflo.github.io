@@ -8,7 +8,8 @@ categories:
 (c) 2013-2016 TheGrid (Rituwall Inc.)
 (c) 2011-2012 Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license
-</code></pre>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span></pre></div>                                                  <h2>Internal Sockets</h2>
+</code></pre>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span>
+<span class="nx">IP</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./IP&#39;</span></pre></div>                                                  <h2>Internal Sockets</h2>
 
 <p>The default communications mechanism between NoFlo processes is
 an <em>internal socket</em>, which is responsible for accepting information
@@ -29,8 +30,7 @@ connected process.</p>                            <div class="highlight"><pre><s
         <span class="nv">metadata: </span><span class="err">@</span><span class="nx">metadata</span>
 
   <span class="nv">constructor: </span><span class="p">(</span><span class="err">@</span><span class="nx">metadata</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">connected</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="err">@</span><span class="nx">groups</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="err">@</span><span class="nx">brackets</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="err">@</span><span class="nx">dataDelegate</span> <span class="o">=</span> <span class="kc">null</span>
     <span class="err">@</span><span class="nx">debug</span> <span class="o">=</span> <span class="kc">false</span>
     <span class="err">@</span><span class="nx">emitEvent</span> <span class="o">=</span> <span class="err">@</span><span class="nx">regularEmitEvent</span></pre></div>                                                  <h2>Socket connections</h2>
@@ -59,16 +59,12 @@ file or a database query.</p>
     # Otherwise, call same method recursively
     @readBuffer fd, position, size, buffer
 </code></pre>                            <div class="highlight"><pre>  <span class="nv">connect: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="k">if</span> <span class="err">@</span><span class="nx">connected</span>
-    <span class="err">@</span><span class="nx">connected</span> <span class="o">=</span> <span class="kc">true</span>
-    <span class="err">@</span><span class="nx">emitEvent</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="err">@</span>
+    <span class="err">@</span><span class="nx">handleSocketEvent</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="kc">null</span>
 
   <span class="nv">disconnect: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">connected</span>
-    <span class="err">@</span><span class="nx">connected</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="err">@</span><span class="nx">emitEvent</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="err">@</span>
+    <span class="err">@</span><span class="nx">handleSocketEvent</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="kc">null</span>
 
-  <span class="nv">isConnected: </span><span class="o">-&gt;</span> <span class="err">@</span><span class="nx">connected</span></pre></div>                                                  <h2>Sending information packets</h2>
+  <span class="nv">isConnected: </span><span class="o">-&gt;</span> <span class="err">@</span><span class="nx">brackets</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span></pre></div>                                                  <h2>Sending information packets</h2>
 
 <p>The <em>send</em> method is used by a processe's outport to
 send information packets. The actual packet contents are
@@ -79,15 +75,16 @@ structure.</p>
 serialized or deserialized via JSON. This way the NoFlo networks
 can be constructed with more flexibility, as file buffers or
 message queues can be used as additional packet relay mechanisms.</p>                            <div class="highlight"><pre>  <span class="nv">send: </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">connect</span><span class="p">()</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">connected</span>
     <span class="nx">data</span> <span class="o">=</span> <span class="err">@</span><span class="nx">dataDelegate</span><span class="p">()</span> <span class="k">if</span> <span class="nx">data</span> <span class="o">is</span> <span class="kc">undefined</span> <span class="o">and</span> <span class="k">typeof</span> <span class="err">@</span><span class="nx">dataDelegate</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span>
-    <span class="err">@</span><span class="nx">emitEvent</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">data</span></pre></div>                                                  <h2>Sending information packets without open bracket</h2>
+    <span class="err">@</span><span class="nx">handleSocketEvent</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">data</span></pre></div>                                                  <h2>Sending information packets without open bracket</h2>
 
 <p>As <em>connect</em> event is considered as open bracket, it needs to be followed
 by a <em>disconnect</em> event or a closing bracket. In the new simplified
 sending semantics single IP objects can be sent without open/close brackets.</p>                            <div class="highlight"><pre>  <span class="nv">post: </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">data</span> <span class="o">=</span> <span class="err">@</span><span class="nx">dataDelegate</span><span class="p">()</span> <span class="k">if</span> <span class="nx">data</span> <span class="o">is</span> <span class="kc">undefined</span> <span class="o">and</span> <span class="k">typeof</span> <span class="err">@</span><span class="nx">dataDelegate</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span>
-    <span class="err">@</span><span class="nx">emitEvent</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">data</span></pre></div>                                                  <h2>Information Packet grouping</h2>
+    <span class="err">@</span><span class="nx">emitEvent</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="err">@</span> <span class="k">if</span> <span class="nx">data</span><span class="p">.</span><span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;data&#39;</span> <span class="o">and</span> <span class="err">@</span><span class="nx">brackets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
+    <span class="err">@</span><span class="nx">handleSocketEvent</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="kc">false</span>
+    <span class="err">@</span><span class="nx">emitEvent</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="err">@</span> <span class="k">if</span> <span class="nx">data</span><span class="p">.</span><span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;data&#39;</span> <span class="o">and</span> <span class="err">@</span><span class="nx">brackets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span></pre></div>                                                  <h2>Information Packet grouping</h2>
 
 <p>Processes sending data to sockets may also group the packets
 when necessary. This allows transmitting tree structures as
@@ -119,12 +116,10 @@ as packets like:</p>
 <p>Components are free to ignore groupings, but are recommended
 to pass received groupings onward if the data structures remain
 intact through the component's processing.</p>                            <div class="highlight"><pre>  <span class="nv">beginGroup: </span><span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">groups</span><span class="p">.</span><span class="nx">push</span> <span class="nx">group</span>
-    <span class="err">@</span><span class="nx">emitEvent</span> <span class="s1">&#39;begingroup&#39;</span><span class="p">,</span> <span class="nx">group</span>
+    <span class="err">@</span><span class="nx">handleSocketEvent</span> <span class="s1">&#39;begingroup&#39;</span><span class="p">,</span> <span class="nx">group</span>
 
   <span class="nv">endGroup: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">groups</span><span class="p">.</span><span class="nx">length</span>
-    <span class="err">@</span><span class="nx">emitEvent</span> <span class="s1">&#39;endgroup&#39;</span><span class="p">,</span> <span class="err">@</span><span class="nx">groups</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span></pre></div>                                                  <h2>Socket data delegation</h2>
+    <span class="err">@</span><span class="nx">handleSocketEvent</span> <span class="s1">&#39;endgroup&#39;</span></pre></div>                                                  <h2>Socket data delegation</h2>
 
 <p>Sockets have the option to receive data from a delegate function
 should the <code>send</code> method receive undefined for <code>data</code>.  This
@@ -153,8 +148,52 @@ components may also loom like <em>DATA -> ReadFile:SOURCE</em>.</p>             
     <span class="k">return</span> <span class="s2">&quot;DATA -&gt; #{toStr(@to)}&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">from</span>
     <span class="s2">&quot;#{fromStr(@from)} -&gt; #{toStr(@to)}&quot;</span>
 
+  <span class="nv">legacyToIp: </span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">payload</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div>                                                  <p>No need to wrap modern IP Objects</p>                            <div class="highlight"><pre>    <span class="k">return</span> <span class="nx">payload</span> <span class="k">if</span> <span class="nx">IP</span><span class="p">.</span><span class="nx">isIP</span> <span class="nx">payload</span></pre></div>                                                  <p>Wrap legacy events into appropriate IP objects</p>                            <div class="highlight"><pre>    <span class="k">switch</span> <span class="nx">event</span>
+      <span class="k">when</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="s1">&#39;begingroup&#39;</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">IP</span> <span class="s1">&#39;openBracket&#39;</span><span class="p">,</span> <span class="nx">payload</span>
+      <span class="k">when</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="s1">&#39;endgroup&#39;</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">IP</span> <span class="s1">&#39;closeBracket&#39;</span>
+      <span class="k">else</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">IP</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">payload</span>
+
+  <span class="nv">ipToLegacy: </span><span class="p">(</span><span class="nx">ip</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">switch</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">type</span>
+      <span class="k">when</span> <span class="s1">&#39;openBracket&#39;</span>
+        <span class="k">if</span> <span class="err">@</span><span class="nx">brackets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">1</span>
+          <span class="k">return</span> <span class="nx">legacy</span> <span class="o">=</span>
+            <span class="nv">event: </span><span class="s1">&#39;connect&#39;</span>
+            <span class="nv">payload: </span><span class="err">@</span>
+        <span class="k">return</span> <span class="nx">legacy</span> <span class="o">=</span>
+          <span class="nv">event: </span><span class="s1">&#39;begingroup&#39;</span>
+          <span class="nv">payload: </span><span class="nx">ip</span><span class="p">.</span><span class="nx">data</span>
+      <span class="k">when</span> <span class="s1">&#39;data&#39;</span>
+        <span class="k">return</span> <span class="nx">legacy</span> <span class="o">=</span>
+          <span class="nv">event: </span><span class="s1">&#39;data&#39;</span>
+          <span class="nv">payload: </span><span class="nx">ip</span><span class="p">.</span><span class="nx">data</span>
+      <span class="k">when</span> <span class="s1">&#39;closeBracket&#39;</span>
+        <span class="k">if</span> <span class="err">@</span><span class="nx">brackets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
+          <span class="k">return</span> <span class="nx">legacy</span> <span class="o">=</span>
+            <span class="nv">event: </span><span class="s1">&#39;disconnect&#39;</span>
+            <span class="nv">payload: </span><span class="err">@</span>
+        <span class="k">return</span> <span class="nx">legacy</span> <span class="o">=</span>
+          <span class="nv">event: </span><span class="s1">&#39;endgroup&#39;</span>
+          <span class="nv">payload: </span><span class="nx">ip</span><span class="p">.</span><span class="nx">data</span>
+
+  <span class="nv">handleSocketEvent: </span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">payload</span><span class="p">,</span> <span class="nx">autoConnect</span> <span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">ip</span> <span class="o">=</span> <span class="err">@</span><span class="nx">legacyToIp</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">payload</span></pre></div>                                                  <p>Handle state transitions</p>                            <div class="highlight"><pre>    <span class="k">if</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;data&#39;</span> <span class="o">and</span> <span class="err">@</span><span class="nx">brackets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span> <span class="o">and</span> <span class="nx">autoConnect</span></pre></div>                                                  <p>Connect before sending data</p>                            <div class="highlight"><pre>      <span class="err">@</span><span class="nx">handleSocketEvent</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="kc">null</span>
+
+    <span class="k">if</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;openBracket&#39;</span>
+      <span class="k">if</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">data</span> <span class="o">is</span> <span class="kc">null</span></pre></div>                                                  <p>If we're already connected, no need to connect again</p>                            <div class="highlight"><pre>        <span class="k">return</span> <span class="k">if</span> <span class="err">@</span><span class="nx">brackets</span><span class="p">.</span><span class="nx">length</span>
+      <span class="k">else</span>
+        <span class="k">if</span> <span class="err">@</span><span class="nx">brackets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span> <span class="o">and</span> <span class="nx">autoConnect</span></pre></div>                                                  <p>Connect before sending bracket</p>                            <div class="highlight"><pre>          <span class="err">@</span><span class="nx">handleSocketEvent</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="kc">null</span>
+      <span class="err">@</span><span class="nx">brackets</span><span class="p">.</span><span class="nx">push</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">data</span>
+
+    <span class="k">if</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;closeBracket&#39;</span></pre></div>                                                  <p>Last bracket was closed, we're disconnected
+If we were already disconnected, no need to disconnect again</p>                            <div class="highlight"><pre>      <span class="k">return</span> <span class="k">if</span> <span class="err">@</span><span class="nx">brackets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span></pre></div>                                                  <p>Add group name to bracket</p>                            <div class="highlight"><pre>      <span class="nx">ip</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="err">@</span><span class="nx">brackets</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span></pre></div>                                                  <p>Emit the IP Object</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">emitEvent</span> <span class="s1">&#39;ip&#39;</span><span class="p">,</span> <span class="nx">ip</span></pre></div>                                                  <p>Emit the legacy event</p>                            <div class="highlight"><pre>    <span class="nx">legacyEvent</span> <span class="o">=</span> <span class="err">@</span><span class="nx">ipToLegacy</span> <span class="nx">ip</span>
+    <span class="err">@</span><span class="nx">emitEvent</span> <span class="nx">legacyEvent</span><span class="p">.</span><span class="nx">event</span><span class="p">,</span> <span class="nx">legacyEvent</span><span class="p">.</span><span class="nx">payload</span>
+
 <span class="nx">exports</span><span class="p">.</span><span class="nx">InternalSocket</span> <span class="o">=</span> <span class="nx">InternalSocket</span>
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">createSocket</span> <span class="o">=</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nx">InternalSocket</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-03-30 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InternalSocket.coffee">InternalSocket.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-03-31 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InternalSocket.coffee">InternalSocket.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

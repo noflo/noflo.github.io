@@ -71,9 +71,9 @@ NoFlo may be freely distributed under the MIT license
   <span class="nv">listComponents: </span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="k">if</span> <span class="err">@</span><span class="nx">processing</span>
       <span class="err">@</span><span class="nx">once</span> <span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="o">=&gt;</span>
-        <span class="nx">callback</span> <span class="err">@</span><span class="nx">components</span>
+        <span class="nx">callback</span> <span class="kc">null</span><span class="p">,</span> <span class="err">@</span><span class="nx">components</span>
       <span class="k">return</span>
-    <span class="k">return</span> <span class="nx">callback</span> <span class="err">@</span><span class="nx">components</span> <span class="k">if</span> <span class="err">@</span><span class="nx">components</span>
+    <span class="k">return</span> <span class="nx">callback</span> <span class="kc">null</span><span class="p">,</span> <span class="err">@</span><span class="nx">components</span> <span class="k">if</span> <span class="err">@</span><span class="nx">components</span>
 
     <span class="err">@</span><span class="nx">ready</span> <span class="o">=</span> <span class="kc">false</span>
     <span class="err">@</span><span class="nx">processing</span> <span class="o">=</span> <span class="kc">true</span>
@@ -85,12 +85,13 @@ NoFlo may be freely distributed under the MIT license
       <span class="err">@</span><span class="nx">processing</span> <span class="o">=</span> <span class="kc">false</span>
       <span class="err">@</span><span class="nx">ready</span> <span class="o">=</span> <span class="kc">true</span>
       <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="kc">true</span>
-      <span class="nx">callback</span> <span class="err">@</span><span class="nx">components</span> <span class="k">if</span> <span class="nx">callback</span>
+      <span class="nx">callback</span> <span class="kc">null</span><span class="p">,</span> <span class="err">@</span><span class="nx">components</span> <span class="k">if</span> <span class="nx">callback</span>
     <span class="p">,</span> <span class="mi">1</span>
 
   <span class="nv">load: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">metadata</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">unless</span> <span class="err">@</span><span class="nx">ready</span>
-      <span class="err">@</span><span class="nx">listComponents</span> <span class="o">=&gt;</span>
+      <span class="err">@</span><span class="nx">listComponents</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
         <span class="err">@</span><span class="nx">load</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">metadata</span>
       <span class="k">return</span>
 
@@ -187,7 +188,8 @@ NoFlo may be freely distributed under the MIT license
 
   <span class="nv">setSource: </span><span class="p">(</span><span class="nx">packageId</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">source</span><span class="p">,</span> <span class="nx">language</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">unless</span> <span class="err">@</span><span class="nx">ready</span>
-      <span class="err">@</span><span class="nx">listComponents</span> <span class="o">=&gt;</span>
+      <span class="err">@</span><span class="nx">listComponents</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
         <span class="err">@</span><span class="nx">setSource</span> <span class="nx">packageId</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">source</span><span class="p">,</span> <span class="nx">language</span><span class="p">,</span> <span class="nx">callback</span>
       <span class="k">return</span>
 
@@ -216,7 +218,8 @@ NoFlo may be freely distributed under the MIT license
 
   <span class="nv">getSource: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">unless</span> <span class="err">@</span><span class="nx">ready</span>
-      <span class="err">@</span><span class="nx">listComponents</span> <span class="o">=&gt;</span>
+      <span class="err">@</span><span class="nx">listComponents</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
         <span class="err">@</span><span class="nx">getSource</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">callback</span>
       <span class="k">return</span>
 
@@ -266,4 +269,4 @@ NoFlo may be freely distributed under the MIT license
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">ComponentLoader</span> <span class="o">=</span> <span class="nx">ComponentLoader</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-03-30 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.coffee">ComponentLoader.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-03-31 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.coffee">ComponentLoader.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
