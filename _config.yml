@@ -1,6 +1,6 @@
 title: NoFlo
 tagline: Flow-Based Programming for JavaScript
-version: 0.7.1
+version: 0.7.2
 markdown: redcarpet
 permalink: /:categories/:title/
 baseurl: ""

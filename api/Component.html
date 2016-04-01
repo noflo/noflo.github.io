@@ -37,7 +37,7 @@ NoFlo may be freely distributed under the MIT license
       <span class="err">@</span><span class="nx">outPorts</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">outPorts</span>
     <span class="k">else</span>
       <span class="err">@</span><span class="nx">outPorts</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ports</span><span class="p">.</span><span class="nx">OutPorts</span> <span class="nx">options</span><span class="p">.</span><span class="nx">outPorts</span>
-    
+
     <span class="err">@</span><span class="nx">icon</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">icon</span> <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">icon</span>
     <span class="err">@</span><span class="nx">description</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">description</span> <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">description</span>
     <span class="err">@</span><span class="nx">ordered</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">ordered</span> <span class="k">if</span> <span class="s1">&#39;ordered&#39;</span> <span class="k">of</span> <span class="nx">options</span>
@@ -77,9 +77,10 @@ NoFlo may be freely distributed under the MIT license
       <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Component ports must be defined before process function&quot;</span>
     <span class="err">@</span><span class="nx">handle</span> <span class="o">=</span> <span class="nx">handle</span>
     <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">port</span> <span class="k">of</span> <span class="err">@</span><span class="nx">inPorts</span><span class="p">.</span><span class="nx">ports</span>
-      <span class="nx">port</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span> <span class="nx">unless</span> <span class="nx">port</span><span class="p">.</span><span class="nx">name</span>
-      <span class="nx">port</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;ip&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">ip</span><span class="p">)</span> <span class="o">=&gt;</span>
-        <span class="err">@</span><span class="nx">handleIP</span> <span class="nx">ip</span><span class="p">,</span> <span class="nx">port</span>
+      <span class="nx">do</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">port</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">port</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span> <span class="nx">unless</span> <span class="nx">port</span><span class="p">.</span><span class="nx">name</span>
+        <span class="nx">port</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;ip&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">ip</span><span class="p">)</span> <span class="o">=&gt;</span>
+          <span class="err">@</span><span class="nx">handleIP</span> <span class="nx">ip</span><span class="p">,</span> <span class="nx">port</span>
     <span class="err">@</span>
 
   <span class="nv">handleIP: </span><span class="p">(</span><span class="nx">ip</span><span class="p">,</span> <span class="nx">port</span><span class="p">)</span> <span class="o">-&gt;</span>
@@ -117,8 +118,8 @@ NoFlo may be freely distributed under the MIT license
   <span class="nv">getData: </span><span class="o">-&gt;</span>
     <span class="nx">ips</span> <span class="o">=</span> <span class="err">@</span><span class="nx">get</span><span class="p">.</span><span class="nx">apply</span> <span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span>
     <span class="k">if</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">1</span>
-      <span class="k">return</span> <span class="nx">ips</span><span class="p">.</span><span class="nx">data</span>
-    <span class="p">(</span><span class="nx">ip</span><span class="p">.</span><span class="nx">data</span> <span class="k">for</span> <span class="nx">ip</span> <span class="k">in</span> <span class="nx">ips</span><span class="p">)</span>
+      <span class="k">return</span> <span class="nx">ips</span><span class="o">?</span><span class="p">.</span><span class="nx">data</span> <span class="o">?</span> <span class="kc">undefined</span>
+    <span class="p">(</span><span class="nx">ip</span><span class="o">?</span><span class="p">.</span><span class="nx">data</span> <span class="o">?</span> <span class="kc">undefined</span> <span class="k">for</span> <span class="nx">ip</span> <span class="k">in</span> <span class="nx">ips</span><span class="p">)</span>
 
 <span class="nx">class</span> <span class="nx">ProcessOutput</span>
   <span class="nv">constructor: </span><span class="p">(</span><span class="err">@</span><span class="nx">ports</span><span class="p">,</span> <span class="err">@</span><span class="nx">ip</span><span class="p">,</span> <span class="err">@</span><span class="nx">nodeInstance</span><span class="p">,</span> <span class="err">@</span><span class="nx">result</span><span class="p">)</span> <span class="o">-&gt;</span>
@@ -183,4 +184,4 @@ NoFlo may be freely distributed under the MIT license
         <span class="err">@</span><span class="nx">nodeInstance</span><span class="p">.</span><span class="nx">outputQ</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
     <span class="err">@</span><span class="nx">nodeInstance</span><span class="p">.</span><span class="nx">load</span><span class="o">--</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-03-31 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee">Component.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-04-01 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee">Component.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
