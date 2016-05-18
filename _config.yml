@@ -90,3 +90,5 @@ exclude:
   - "npm-debug.log"
   - "package.json"
   - "docco.css"
+gems:
+  - jekyll-redirect-from
