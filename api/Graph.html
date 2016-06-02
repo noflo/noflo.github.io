@@ -20,6 +20,7 @@ connected to each other with edges.</p>
 <p>These graphs can be used for visualization and sketching, but
 also are the way to start a NoFlo network.</p>                            <div class="highlight"><pre><span class="nx">class</span> <span class="nx">Graph</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
   <span class="nv">name: </span><span class="s1">&#39;&#39;</span>
+  <span class="nv">caseSensitive: </span><span class="kc">false</span>
   <span class="nv">properties: </span><span class="p">{}</span>
   <span class="nv">nodes: </span><span class="p">[]</span>
   <span class="nv">edges: </span><span class="p">[]</span>
@@ -33,7 +34,7 @@ also are the way to start a NoFlo network.</p>                            <div c
 and giving it a name:</p>
 
 <pre><code>myGraph = new Graph 'My very cool graph'
-</code></pre>                            <div class="highlight"><pre>  <span class="nv">constructor: </span><span class="p">(</span><span class="err">@</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span>
+</code></pre>                            <div class="highlight"><pre>  <span class="nv">constructor: </span><span class="p">(</span><span class="err">@</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span>
     <span class="err">@</span><span class="nx">properties</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="err">@</span><span class="nx">nodes</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="err">@</span><span class="nx">edges</span> <span class="o">=</span> <span class="p">[]</span>
@@ -44,7 +45,12 @@ and giving it a name:</p>
     <span class="err">@</span><span class="nx">groups</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="err">@</span><span class="nx">transaction</span> <span class="o">=</span>
       <span class="nv">id: </span><span class="kc">null</span>
-      <span class="nv">depth: </span><span class="mi">0</span></pre></div>                                                  <h2>Group graph changes into transactions</h2>
+      <span class="nv">depth: </span><span class="mi">0</span>
+
+    <span class="err">@</span><span class="nx">caseSensitive</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">caseSensitive</span> <span class="o">or</span> <span class="kc">false</span>
+
+  <span class="nv">getPortName: </span><span class="p">(</span><span class="nx">port</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="err">@</span><span class="nx">caseSensitive</span> <span class="k">then</span> <span class="nx">port</span> <span class="k">else</span> <span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span></pre></div>                                                  <h2>Group graph changes into transactions</h2>
 
 <p>If no transaction is explicitly opened, each call to
 the graph API will implicitly create a transaction for that change</p>                            <div class="highlight"><pre>  <span class="nv">startTransaction: </span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">metadata</span><span class="p">)</span> <span class="o">-&gt;</span>
@@ -92,9 +98,9 @@ named ports shown instead of all the free ports of the graph</p>
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
 
     <span class="nx">exported</span> <span class="o">=</span>
-      <span class="nv">public: </span><span class="nx">publicPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+      <span class="nv">public: </span><span class="err">@</span><span class="nx">getPortName</span> <span class="nx">publicPort</span>
       <span class="nv">process: </span><span class="nx">nodeKey</span>
-      <span class="nv">port: </span><span class="nx">portKey</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+      <span class="nv">port: </span><span class="err">@</span><span class="nx">getPortName</span> <span class="nx">portKey</span>
       <span class="nv">metadata: </span><span class="nx">metadata</span>
     <span class="err">@</span><span class="nx">exports</span><span class="p">.</span><span class="nx">push</span> <span class="nx">exported</span>
     <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;addExport&#39;</span><span class="p">,</span> <span class="nx">exported</span>
@@ -102,7 +108,7 @@ named ports shown instead of all the free ports of the graph</p>
     <span class="err">@</span><span class="nx">checkTransactionEnd</span><span class="p">()</span>
 
   <span class="nv">removeExport: </span><span class="p">(</span><span class="nx">publicPort</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">publicPort</span> <span class="o">=</span> <span class="nx">publicPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">publicPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">publicPort</span>
     <span class="nx">found</span> <span class="o">=</span> <span class="kc">null</span>
     <span class="k">for</span> <span class="nx">exported</span><span class="p">,</span> <span class="nx">idx</span> <span class="k">in</span> <span class="err">@</span><span class="nx">exports</span>
       <span class="nx">found</span> <span class="o">=</span> <span class="nx">exported</span> <span class="k">if</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">public</span> <span class="o">is</span> <span class="nx">publicPort</span>
@@ -115,17 +121,17 @@ named ports shown instead of all the free ports of the graph</p>
 
   <span class="nv">addInport: </span><span class="p">(</span><span class="nx">publicPort</span><span class="p">,</span> <span class="nx">nodeKey</span><span class="p">,</span> <span class="nx">portKey</span><span class="p">,</span> <span class="nx">metadata</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div>                                                  <p>Check that node exists</p>                            <div class="highlight"><pre>    <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">nodeKey</span>
 
-    <span class="nx">publicPort</span> <span class="o">=</span> <span class="nx">publicPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">publicPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">publicPort</span>
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
     <span class="err">@</span><span class="nx">inports</span><span class="p">[</span><span class="nx">publicPort</span><span class="p">]</span> <span class="o">=</span>
       <span class="nv">process: </span><span class="nx">nodeKey</span>
-      <span class="nv">port: </span><span class="nx">portKey</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+      <span class="nv">port: </span><span class="err">@</span><span class="nx">getPortName</span> <span class="nx">portKey</span>
       <span class="nv">metadata: </span><span class="nx">metadata</span>
     <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;addInport&#39;</span><span class="p">,</span> <span class="nx">publicPort</span><span class="p">,</span> <span class="err">@</span><span class="nx">inports</span><span class="p">[</span><span class="nx">publicPort</span><span class="p">]</span>
     <span class="err">@</span><span class="nx">checkTransactionEnd</span><span class="p">()</span>
 
   <span class="nv">removeInport: </span><span class="p">(</span><span class="nx">publicPort</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">publicPort</span> <span class="o">=</span> <span class="nx">publicPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">publicPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">publicPort</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">inports</span><span class="p">[</span><span class="nx">publicPort</span><span class="p">]</span>
 
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
@@ -136,8 +142,8 @@ named ports shown instead of all the free ports of the graph</p>
     <span class="err">@</span><span class="nx">checkTransactionEnd</span><span class="p">()</span>
 
   <span class="nv">renameInport: </span><span class="p">(</span><span class="nx">oldPort</span><span class="p">,</span> <span class="nx">newPort</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">oldPort</span> <span class="o">=</span> <span class="nx">oldPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
-    <span class="nx">newPort</span> <span class="o">=</span> <span class="nx">newPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">oldPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">oldPort</span>
+    <span class="nx">newPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">newPort</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">inports</span><span class="p">[</span><span class="nx">oldPort</span><span class="p">]</span>
 
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
@@ -147,7 +153,7 @@ named ports shown instead of all the free ports of the graph</p>
     <span class="err">@</span><span class="nx">checkTransactionEnd</span><span class="p">()</span>
 
   <span class="nv">setInportMetadata: </span><span class="p">(</span><span class="nx">publicPort</span><span class="p">,</span> <span class="nx">metadata</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">publicPort</span> <span class="o">=</span> <span class="nx">publicPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">publicPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">publicPort</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">inports</span><span class="p">[</span><span class="nx">publicPort</span><span class="p">]</span>
 
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
@@ -163,18 +169,18 @@ named ports shown instead of all the free ports of the graph</p>
 
   <span class="nv">addOutport: </span><span class="p">(</span><span class="nx">publicPort</span><span class="p">,</span> <span class="nx">nodeKey</span><span class="p">,</span> <span class="nx">portKey</span><span class="p">,</span> <span class="nx">metadata</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div>                                                  <p>Check that node exists</p>                            <div class="highlight"><pre>    <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">nodeKey</span>
 
-    <span class="nx">publicPort</span> <span class="o">=</span> <span class="nx">publicPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">publicPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">publicPort</span>
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
     <span class="err">@</span><span class="nx">outports</span><span class="p">[</span><span class="nx">publicPort</span><span class="p">]</span> <span class="o">=</span>
       <span class="nv">process: </span><span class="nx">nodeKey</span>
-      <span class="nv">port: </span><span class="nx">portKey</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+      <span class="nv">port: </span><span class="err">@</span><span class="nx">getPortName</span> <span class="nx">portKey</span>
       <span class="nv">metadata: </span><span class="nx">metadata</span>
     <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;addOutport&#39;</span><span class="p">,</span> <span class="nx">publicPort</span><span class="p">,</span> <span class="err">@</span><span class="nx">outports</span><span class="p">[</span><span class="nx">publicPort</span><span class="p">]</span>
 
     <span class="err">@</span><span class="nx">checkTransactionEnd</span><span class="p">()</span>
 
   <span class="nv">removeOutport: </span><span class="p">(</span><span class="nx">publicPort</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">publicPort</span> <span class="o">=</span> <span class="nx">publicPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">publicPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">publicPort</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">outports</span><span class="p">[</span><span class="nx">publicPort</span><span class="p">]</span>
 
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
@@ -187,8 +193,8 @@ named ports shown instead of all the free ports of the graph</p>
     <span class="err">@</span><span class="nx">checkTransactionEnd</span><span class="p">()</span>
 
   <span class="nv">renameOutport: </span><span class="p">(</span><span class="nx">oldPort</span><span class="p">,</span> <span class="nx">newPort</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">oldPort</span> <span class="o">=</span> <span class="nx">oldPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
-    <span class="nx">newPort</span> <span class="o">=</span> <span class="nx">newPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">oldPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">oldPort</span>
+    <span class="nx">newPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">newPort</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">outports</span><span class="p">[</span><span class="nx">oldPort</span><span class="p">]</span>
 
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
@@ -198,7 +204,7 @@ named ports shown instead of all the free ports of the graph</p>
     <span class="err">@</span><span class="nx">checkTransactionEnd</span><span class="p">()</span>
 
   <span class="nv">setOutportMetadata: </span><span class="p">(</span><span class="nx">publicPort</span><span class="p">,</span> <span class="nx">metadata</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">publicPort</span> <span class="o">=</span> <span class="nx">publicPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">publicPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">publicPort</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">outports</span><span class="p">[</span><span class="nx">publicPort</span><span class="p">]</span>
 
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
@@ -311,7 +317,7 @@ emitted.</p>                            <div class="highlight"><pre>  <span clas
 
     <span class="nx">toRemove</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="nx">exported</span> <span class="k">in</span> <span class="err">@</span><span class="nx">exports</span>
-      <span class="k">if</span> <span class="nx">id</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">is</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">process</span>
+      <span class="k">if</span> <span class="err">@</span><span class="nx">getPortName</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">is</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">process</span>
         <span class="nx">toRemove</span><span class="p">.</span><span class="nx">push</span> <span class="nx">exported</span>
     <span class="k">for</span> <span class="nx">exported</span> <span class="k">in</span> <span class="nx">toRemove</span>
       <span class="err">@</span><span class="nx">removeExport</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">public</span>
@@ -418,8 +424,8 @@ myGraph.addEdgeIndex 'Read', 'out', null, 'Display', 'in', 2
 </code></pre>
 
 <p>Adding an edge will emit the <code>addEdge</code> event.</p>                            <div class="highlight"><pre>  <span class="nv">addEdge: </span><span class="p">(</span><span class="nx">outNode</span><span class="p">,</span> <span class="nx">outPort</span><span class="p">,</span> <span class="nx">inNode</span><span class="p">,</span> <span class="nx">inPort</span><span class="p">,</span> <span class="nx">metadata</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span>
-    <span class="nx">outPort</span> <span class="o">=</span> <span class="nx">outPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
-    <span class="nx">inPort</span> <span class="o">=</span> <span class="nx">inPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">outPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">outPort</span>
+    <span class="nx">inPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">inPort</span>
     <span class="k">for</span> <span class="nx">edge</span> <span class="k">in</span> <span class="err">@</span><span class="nx">edges</span></pre></div>                                                  <p>don't add a duplicate edge</p>                            <div class="highlight"><pre>      <span class="k">return</span> <span class="k">if</span> <span class="p">(</span><span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">outNode</span> <span class="o">and</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">port</span> <span class="o">is</span> <span class="nx">outPort</span> <span class="o">and</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">inNode</span> <span class="o">and</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span> <span class="o">is</span> <span class="nx">inPort</span><span class="p">)</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">outNode</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">inNode</span>
@@ -442,8 +448,8 @@ myGraph.addEdgeIndex 'Read', 'out', null, 'Display', 'in', 2
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">outNode</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">inNode</span>
 
-    <span class="nx">outPort</span> <span class="o">=</span> <span class="nx">outPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
-    <span class="nx">inPort</span> <span class="o">=</span> <span class="nx">inPort</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">outPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">outPort</span>
+    <span class="nx">inPort</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">inPort</span>
 
     <span class="nx">inIndex</span> <span class="o">=</span> <span class="kc">undefined</span> <span class="k">if</span> <span class="nx">inIndex</span> <span class="o">is</span> <span class="kc">null</span>
     <span class="nx">outIndex</span> <span class="o">=</span> <span class="kc">undefined</span> <span class="k">if</span> <span class="nx">outIndex</span> <span class="o">is</span> <span class="kc">null</span>
@@ -475,8 +481,8 @@ nodes and ports to disconnect.</p>
 
 <p>Removing a connection will emit the <code>removeEdge</code> event.</p>                            <div class="highlight"><pre>  <span class="nv">removeEdge: </span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">port</span><span class="p">,</span> <span class="nx">node2</span><span class="p">,</span> <span class="nx">port2</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
-    <span class="nx">port</span> <span class="o">=</span> <span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
-    <span class="nx">port2</span> <span class="o">=</span> <span class="nx">port2</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">port</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">port</span>
+    <span class="nx">port2</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">port2</span>
     <span class="nx">toRemove</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="nx">toKeep</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="nx">node2</span> <span class="o">and</span> <span class="nx">port2</span>
@@ -504,8 +510,8 @@ nodes and ports to disconnect.</p>
 
 <pre><code>myEdge = myGraph.getEdge 'Read', 'out', 'Write', 'in'
 </code></pre>                            <div class="highlight"><pre>  <span class="nv">getEdge: </span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">port</span><span class="p">,</span> <span class="nx">node2</span><span class="p">,</span> <span class="nx">port2</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">port</span> <span class="o">=</span> <span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
-    <span class="nx">port2</span> <span class="o">=</span> <span class="nx">port2</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">port</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">port</span>
+    <span class="nx">port2</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">port2</span>
     <span class="k">for</span> <span class="nx">edge</span><span class="p">,</span><span class="nx">index</span> <span class="k">in</span> <span class="err">@</span><span class="nx">edges</span>
       <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">edge</span>
       <span class="k">if</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">node</span> <span class="o">and</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">port</span> <span class="o">is</span> <span class="nx">port</span>
@@ -551,7 +557,7 @@ myGraph.addGraphInitialIndex 'somefile.txt', 'file', 2
 <p>Adding an IIP will emit a <code>addInitial</code> event.</p>                            <div class="highlight"><pre>  <span class="nv">addInitial: </span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">node</span><span class="p">,</span> <span class="nx">port</span><span class="p">,</span> <span class="nx">metadata</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">node</span>
 
-    <span class="nx">port</span> <span class="o">=</span> <span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">port</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">port</span>
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
     <span class="nx">initializer</span> <span class="o">=</span>
       <span class="nv">from:</span>
@@ -570,7 +576,7 @@ myGraph.addGraphInitialIndex 'somefile.txt', 'file', 2
     <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">node</span>
     <span class="nx">index</span> <span class="o">=</span> <span class="kc">undefined</span> <span class="k">if</span> <span class="nx">index</span> <span class="o">is</span> <span class="kc">null</span>
 
-    <span class="nx">port</span> <span class="o">=</span> <span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">port</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">port</span>
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
     <span class="nx">initializer</span> <span class="o">=</span>
       <span class="nv">from:</span>
@@ -609,7 +615,7 @@ the <code>removeGraphInitial</code> method.</p>
 </code></pre>
 
 <p>Remove an IIP will emit a <code>removeInitial</code> event.</p>                            <div class="highlight"><pre>  <span class="nv">removeInitial: </span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">port</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">port</span> <span class="o">=</span> <span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+    <span class="nx">port</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getPortName</span> <span class="nx">port</span>
     <span class="err">@</span><span class="nx">checkTransactionStart</span><span class="p">()</span>
 
     <span class="nx">toRemove</span> <span class="o">=</span> <span class="p">[]</span>
@@ -668,6 +674,7 @@ the <code>removeGraphInitial</code> method.</p>
 
   <span class="nv">toJSON: </span><span class="o">-&gt;</span>
     <span class="nx">json</span> <span class="o">=</span>
+      <span class="nv">caseSensitive: </span><span class="err">@</span><span class="nx">caseSensitive</span>
       <span class="nv">properties: </span><span class="p">{}</span>
       <span class="nv">inports: </span><span class="p">{}</span>
       <span class="nv">outports: </span><span class="p">{}</span>
@@ -731,16 +738,17 @@ the <code>removeGraphInitial</code> method.</p>
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">Graph</span> <span class="o">=</span> <span class="nx">Graph</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">createGraph</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">new</span> <span class="nx">Graph</span> <span class="nx">name</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">createGraph</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">new</span> <span class="nx">Graph</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">options</span>
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">loadJSON</span> <span class="o">=</span> <span class="p">(</span><span class="nx">definition</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">metadata</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span>
   <span class="nx">definition</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span> <span class="nx">definition</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">definition</span> <span class="o">is</span> <span class="s1">&#39;string&#39;</span>
   <span class="nx">definition</span><span class="p">.</span><span class="nx">properties</span> <span class="o">=</span> <span class="p">{}</span> <span class="nx">unless</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">properties</span>
   <span class="nx">definition</span><span class="p">.</span><span class="nx">processes</span> <span class="o">=</span> <span class="p">{}</span> <span class="nx">unless</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">processes</span>
   <span class="nx">definition</span><span class="p">.</span><span class="nx">connections</span> <span class="o">=</span> <span class="p">[]</span> <span class="nx">unless</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">connections</span>
+  <span class="nx">caseSensitive</span> <span class="o">=</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">caseSensitive</span> <span class="o">or</span> <span class="kc">false</span>
 
-  <span class="nx">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graph</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">name</span>
+  <span class="nx">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graph</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span><span class="nx">caseSensitive</span><span class="p">}</span>
 
   <span class="nx">graph</span><span class="p">.</span><span class="nx">startTransaction</span> <span class="s1">&#39;loadJSON&#39;</span><span class="p">,</span> <span class="nx">metadata</span>
   <span class="nx">properties</span> <span class="o">=</span> <span class="p">{}</span>
@@ -757,14 +765,14 @@ the <code>removeGraphInitial</code> method.</p>
     <span class="nx">metadata</span> <span class="o">=</span> <span class="k">if</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">metadata</span> <span class="k">then</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">metadata</span> <span class="k">else</span> <span class="p">{}</span>
     <span class="k">if</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">data</span> <span class="o">isnt</span> <span class="kc">undefined</span>
       <span class="k">if</span> <span class="k">typeof</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">index</span> <span class="o">is</span> <span class="s1">&#39;number&#39;</span>
-        <span class="nx">graph</span><span class="p">.</span><span class="nx">addInitialIndex</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="nx">metadata</span>
+        <span class="nx">graph</span><span class="p">.</span><span class="nx">addInitialIndex</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">getPortName</span><span class="p">(</span><span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">port</span><span class="p">),</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="nx">metadata</span>
       <span class="k">else</span>
-        <span class="nx">graph</span><span class="p">.</span><span class="nx">addInitial</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">metadata</span>
+        <span class="nx">graph</span><span class="p">.</span><span class="nx">addInitial</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">getPortName</span><span class="p">(</span><span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">port</span><span class="p">),</span> <span class="nx">metadata</span>
       <span class="k">continue</span>
     <span class="k">if</span> <span class="k">typeof</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">src</span><span class="p">.</span><span class="nx">index</span> <span class="o">is</span> <span class="s1">&#39;number&#39;</span> <span class="o">or</span> <span class="k">typeof</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">index</span> <span class="o">is</span> <span class="s1">&#39;number&#39;</span>
-      <span class="nx">graph</span><span class="p">.</span><span class="nx">addEdgeIndex</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">src</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">src</span><span class="p">.</span><span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">src</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="nx">metadata</span>
+      <span class="nx">graph</span><span class="p">.</span><span class="nx">addEdgeIndex</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">src</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">getPortName</span><span class="p">(</span><span class="nx">conn</span><span class="p">.</span><span class="nx">src</span><span class="p">.</span><span class="nx">port</span><span class="p">),</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">src</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">getPortName</span><span class="p">(</span><span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">port</span><span class="p">),</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="nx">metadata</span>
       <span class="k">continue</span>
-    <span class="nx">graph</span><span class="p">.</span><span class="nx">addEdge</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">src</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">src</span><span class="p">.</span><span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">metadata</span>
+    <span class="nx">graph</span><span class="p">.</span><span class="nx">addEdge</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">src</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">getPortName</span><span class="p">(</span><span class="nx">conn</span><span class="p">.</span><span class="nx">src</span><span class="p">.</span><span class="nx">port</span><span class="p">),</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">getPortName</span><span class="p">(</span><span class="nx">conn</span><span class="p">.</span><span class="nx">tgt</span><span class="p">.</span><span class="nx">port</span><span class="p">),</span> <span class="nx">metadata</span>
 
   <span class="k">if</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">exports</span> <span class="o">and</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">length</span>
     <span class="k">for</span> <span class="nx">exported</span> <span class="k">in</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">exports</span>
@@ -772,19 +780,19 @@ the <code>removeGraphInitial</code> method.</p>
         <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">split</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">2</span>
         <span class="nx">processId</span> <span class="o">=</span> <span class="nx">split</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="nx">portId</span> <span class="o">=</span> <span class="nx">split</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></pre></div>                                                  <p>Get properly cased process id</p>                            <div class="highlight"><pre>        <span class="k">for</span> <span class="nx">id</span> <span class="k">of</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">processes</span>
-          <span class="k">if</span> <span class="nx">id</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">is</span> <span class="nx">processId</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+          <span class="k">if</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">getPortName</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">is</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">getPortName</span><span class="p">(</span><span class="nx">processId</span><span class="p">)</span>
             <span class="nx">processId</span> <span class="o">=</span> <span class="nx">id</span>
       <span class="k">else</span>
         <span class="nx">processId</span> <span class="o">=</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">process</span>
-        <span class="nx">portId</span> <span class="o">=</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>
+        <span class="nx">portId</span> <span class="o">=</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">getPortName</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">port</span>
       <span class="nx">graph</span><span class="p">.</span><span class="nx">addExport</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">public</span><span class="p">,</span> <span class="nx">processId</span><span class="p">,</span> <span class="nx">portId</span><span class="p">,</span> <span class="nx">exported</span><span class="p">.</span><span class="nx">metadata</span>
 
   <span class="k">if</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">inports</span>
     <span class="k">for</span> <span class="nx">pub</span><span class="p">,</span> <span class="nx">priv</span> <span class="k">of</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">inports</span>
-      <span class="nx">graph</span><span class="p">.</span><span class="nx">addInport</span> <span class="nx">pub</span><span class="p">,</span> <span class="nx">priv</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">priv</span><span class="p">.</span><span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">priv</span><span class="p">.</span><span class="nx">metadata</span>
+      <span class="nx">graph</span><span class="p">.</span><span class="nx">addInport</span> <span class="nx">pub</span><span class="p">,</span> <span class="nx">priv</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">getPortName</span><span class="p">(</span><span class="nx">priv</span><span class="p">.</span><span class="nx">port</span><span class="p">),</span> <span class="nx">priv</span><span class="p">.</span><span class="nx">metadata</span>
   <span class="k">if</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">outports</span>
     <span class="k">for</span> <span class="nx">pub</span><span class="p">,</span> <span class="nx">priv</span> <span class="k">of</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">outports</span>
-      <span class="nx">graph</span><span class="p">.</span><span class="nx">addOutport</span> <span class="nx">pub</span><span class="p">,</span> <span class="nx">priv</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">priv</span><span class="p">.</span><span class="nx">port</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span> <span class="nx">priv</span><span class="p">.</span><span class="nx">metadata</span>
+      <span class="nx">graph</span><span class="p">.</span><span class="nx">addOutport</span> <span class="nx">pub</span><span class="p">,</span> <span class="nx">priv</span><span class="p">.</span><span class="nx">process</span><span class="p">,</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">getPortName</span><span class="p">(</span><span class="nx">priv</span><span class="p">.</span><span class="nx">port</span><span class="p">),</span> <span class="nx">priv</span><span class="p">.</span><span class="nx">metadata</span>
 
   <span class="k">if</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">groups</span>
     <span class="k">for</span> <span class="nx">group</span> <span class="k">in</span> <span class="nx">definition</span><span class="p">.</span><span class="nx">groups</span>
@@ -794,12 +802,12 @@ the <code>removeGraphInitial</code> method.</p>
 
   <span class="nx">callback</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">graph</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">loadFBP</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fbpData</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">loadFBP</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fbpData</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">metadata</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">caseSensitive</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span>
   <span class="k">try</span>
-    <span class="nx">definition</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fbp&#39;</span><span class="p">).</span><span class="nx">parse</span> <span class="nx">fbpData</span>
+    <span class="nx">definition</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fbp&#39;</span><span class="p">).</span><span class="nx">parse</span> <span class="nx">fbpData</span><span class="p">,</span> <span class="p">{</span><span class="nx">caseSensitive</span><span class="p">}</span>
   <span class="k">catch</span> <span class="nx">e</span>
     <span class="k">return</span> <span class="nx">callback</span> <span class="nx">e</span>
-  <span class="nx">exports</span><span class="p">.</span><span class="nx">loadJSON</span> <span class="nx">definition</span><span class="p">,</span> <span class="nx">callback</span>
+  <span class="nx">exports</span><span class="p">.</span><span class="nx">loadJSON</span> <span class="nx">definition</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">metadata</span>
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">loadHTTP</span> <span class="o">=</span> <span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
   <span class="nx">req</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span>
@@ -811,7 +819,7 @@ the <code>removeGraphInitial</code> method.</p>
   <span class="nx">req</span><span class="p">.</span><span class="nx">open</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span>
   <span class="nx">req</span><span class="p">.</span><span class="nx">send</span><span class="p">()</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">loadFile</span> <span class="o">=</span> <span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">metadata</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">loadFile</span> <span class="o">=</span> <span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">metadata</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">caseSensitive</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span>
   <span class="k">if</span> <span class="nx">platform</span><span class="p">.</span><span class="nx">isBrowser</span><span class="p">()</span>
     <span class="k">try</span></pre></div>                                                  <p>Graph exposed via Component packaging</p>                            <div class="highlight"><pre>      <span class="nx">definition</span> <span class="o">=</span> <span class="nx">require</span> <span class="nx">file</span>
     <span class="k">catch</span> <span class="nx">e</span></pre></div>                                                  <p>Graph available via HTTP</p>                            <div class="highlight"><pre>      <span class="nx">exports</span><span class="p">.</span><span class="nx">loadHTTP</span> <span class="nx">file</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span>
@@ -826,10 +834,10 @@ the <code>removeGraphInitial</code> method.</p>
     <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
 
     <span class="k">if</span> <span class="nx">file</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">).</span><span class="nx">pop</span><span class="p">()</span> <span class="o">is</span> <span class="s1">&#39;fbp&#39;</span>
-      <span class="k">return</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">loadFBP</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">callback</span>
+      <span class="k">return</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">loadFBP</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">caseSensitive</span>
 
     <span class="nx">definition</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span> <span class="nx">data</span>
-    <span class="nx">exports</span><span class="p">.</span><span class="nx">loadJSON</span> <span class="nx">definition</span><span class="p">,</span> <span class="nx">callback</span></pre></div>                                                  <p>remove everything in the graph</p>                            <div class="highlight"><pre><span class="nx">resetGraph</span> <span class="o">=</span> <span class="p">(</span><span class="nx">graph</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div>                                                  <p>Edges and similar first, to have control over the order
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">loadJSON</span> <span class="nx">definition</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="p">{}</span></pre></div>                                                  <p>remove everything in the graph</p>                            <div class="highlight"><pre><span class="nx">resetGraph</span> <span class="o">=</span> <span class="p">(</span><span class="nx">graph</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div>                                                  <p>Edges and similar first, to have control over the order
 If we'd do nodes first, it will implicitly delete edges
 Important to make journal transactions invertible</p>                            <div class="highlight"><pre>  <span class="k">for</span> <span class="nx">group</span> <span class="k">in</span> <span class="p">(</span><span class="nx">clone</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">groups</span><span class="p">).</span><span class="nx">reverse</span><span class="p">()</span>
     <span class="nx">graph</span><span class="p">.</span><span class="nx">removeGroup</span> <span class="nx">group</span><span class="p">.</span><span class="nx">name</span> <span class="k">if</span> <span class="nx">group</span><span class="o">?</span>
@@ -871,4 +879,4 @@ TODO: add option to ignore metadata</p>                            <div class="h
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">mergeResolveTheirs</span> <span class="o">=</span> <span class="nx">mergeResolveTheirsNaive</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-04-01 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Graph.coffee">Graph.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Graph.coffee">Graph.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

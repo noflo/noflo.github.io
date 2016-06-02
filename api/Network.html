@@ -12,8 +12,9 @@ NoFlo may be freely distributed under the MIT license
 <span class="nx">internalSocket</span> <span class="o">=</span> <span class="nx">require</span> <span class="s2">&quot;./InternalSocket&quot;</span>
 <span class="nx">graph</span> <span class="o">=</span> <span class="nx">require</span> <span class="s2">&quot;./Graph&quot;</span>
 <span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span>
+<span class="nx">platform</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./Platform&#39;</span>
 
-<span class="nx">unless</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./Platform&#39;</span><span class="p">).</span><span class="nx">isBrowser</span><span class="p">()</span>
+<span class="nx">unless</span> <span class="nx">platform</span><span class="p">.</span><span class="nx">isBrowser</span><span class="p">()</span>
   <span class="nx">componentLoader</span> <span class="o">=</span> <span class="nx">require</span> <span class="s2">&quot;./nodejs/ComponentLoader&quot;</span>
 <span class="k">else</span>
   <span class="nx">componentLoader</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./ComponentLoader&#39;</span></pre></div>                                                  <h2>The NoFlo network coordinator</h2>
@@ -39,32 +40,32 @@ and sending new IIPs.</p>                            <div class="highlight"><pre
     <span class="err">@</span><span class="nx">defaults</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="err">@</span><span class="nx">graph</span> <span class="o">=</span> <span class="nx">graph</span>
     <span class="err">@</span><span class="nx">started</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="err">@</span><span class="nx">debug</span> <span class="o">=</span> <span class="kc">true</span></pre></div>                                                  <p>On Node.js we default the baseDir for component loading to
-the current working directory</p>                            <div class="highlight"><pre>    <span class="k">if</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">isnt</span> <span class="s1">&#39;undefined&#39;</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="err">@</span><span class="nx">debug</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="err">@</span><span class="nx">connectionCount</span> <span class="o">=</span> <span class="mi">0</span></pre></div>                                                  <p>On Node.js we default the baseDir for component loading to
+the current working directory</p>                            <div class="highlight"><pre>    <span class="nx">unless</span> <span class="nx">platform</span><span class="p">.</span><span class="nx">isBrowser</span><span class="p">()</span>
       <span class="err">@</span><span class="nx">baseDir</span> <span class="o">=</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">baseDir</span> <span class="o">or</span> <span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">()</span></pre></div>                                                  <p>On browser we default the baseDir to the Component loading
 root</p>                            <div class="highlight"><pre>    <span class="k">else</span>
       <span class="err">@</span><span class="nx">baseDir</span> <span class="o">=</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">baseDir</span> <span class="o">or</span> <span class="s1">&#39;/&#39;</span></pre></div>                                                  <p>As most NoFlo networks are long-running processes, the
 network coordinator marks down the start-up time. This
-way we can calculate the uptime of the network.</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">startupDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span></pre></div>                                                  <p>Initialize a Component Loader for the network</p>                            <div class="highlight"><pre>    <span class="k">if</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">componentLoader</span>
+way we can calculate the uptime of the network.</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">startupDate</span> <span class="o">=</span> <span class="kc">null</span></pre></div>                                                  <p>Initialize a Component Loader for the network</p>                            <div class="highlight"><pre>    <span class="k">if</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">componentLoader</span>
       <span class="err">@</span><span class="nx">loader</span> <span class="o">=</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">componentLoader</span>
     <span class="k">else</span>
       <span class="err">@</span><span class="nx">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">componentLoader</span><span class="p">.</span><span class="nx">ComponentLoader</span> <span class="err">@</span><span class="nx">baseDir</span><span class="p">,</span> <span class="err">@</span><span class="nx">options</span></pre></div>                                                  <p>The uptime of the network is the current time minus the start-up
-time, in seconds.</p>                            <div class="highlight"><pre>  <span class="nv">uptime: </span><span class="o">-&gt;</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="o">-</span> <span class="err">@</span><span class="nx">startupDate</span></pre></div>                                                  <p>Emit a 'start' event on the first connection, and 'end' event when
-last connection has been closed</p>                            <div class="highlight"><pre>  <span class="nv">connectionCount: </span><span class="mi">0</span>
-  <span class="nv">increaseConnections: </span><span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">connectionCount</span> <span class="o">is</span> <span class="mi">0</span></pre></div>                                                  <p>First connection opened, execution has now started</p>                            <div class="highlight"><pre>      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;start&#39;</span><span class="p">,</span>
-        <span class="nv">start: </span><span class="err">@</span><span class="nx">startupDate</span>
+time, in seconds.</p>                            <div class="highlight"><pre>  <span class="nv">uptime: </span><span class="o">-&gt;</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">startupDate</span>
+    <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="o">-</span> <span class="err">@</span><span class="nx">startupDate</span></pre></div>                                                  <p>Emit a 'start' event on the first connection, and 'end' event when
+last connection has been closed</p>                            <div class="highlight"><pre>  <span class="nv">increaseConnections: </span><span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="err">@</span><span class="nx">connectionCount</span> <span class="o">is</span> <span class="mi">0</span></pre></div>                                                  <p>First connection opened, execution has now started</p>                            <div class="highlight"><pre>      <span class="err">@</span><span class="nx">setStarted</span> <span class="kc">true</span>
     <span class="err">@</span><span class="nx">connectionCount</span><span class="o">++</span>
   <span class="nv">decreaseConnections: </span><span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">connectionCount</span><span class="o">--</span></pre></div>                                                  <p>Last connection closed, execution has now ended</p>                            <div class="highlight"><pre>    <span class="k">if</span> <span class="err">@</span><span class="nx">connectionCount</span> <span class="o">is</span> <span class="mi">0</span>
-      <span class="nx">ender</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">debounce</span> <span class="o">=&gt;</span>
+    <span class="err">@</span><span class="nx">connectionCount</span><span class="o">--</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="err">@</span><span class="nx">connectionCount</span></pre></div>                                                  <p>Last connection closed, execution has now ended
+We do this in debounced way in case there is an in-flight operation still</p>                            <div class="highlight"><pre>    <span class="nx">unless</span> <span class="err">@</span><span class="nx">debouncedEnd</span>
+      <span class="err">@</span><span class="nx">debouncedEnd</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">debounce</span> <span class="o">=&gt;</span>
         <span class="k">return</span> <span class="k">if</span> <span class="err">@</span><span class="nx">connectionCount</span>
-        <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;end&#39;</span><span class="p">,</span>
-          <span class="nv">start: </span><span class="err">@</span><span class="nx">startupDate</span>
-          <span class="nv">end: </span><span class="k">new</span> <span class="nb">Date</span>
-          <span class="nv">uptime: </span><span class="err">@</span><span class="nx">uptime</span><span class="p">()</span>
-      <span class="p">,</span> <span class="mi">10</span>
-      <span class="nx">do</span> <span class="nx">ender</span></pre></div>                                                  <h2>Loading components</h2>
+        <span class="err">@</span><span class="nx">setStarted</span> <span class="kc">false</span>
+      <span class="p">,</span> <span class="mi">50</span>
+    <span class="nx">do</span> <span class="err">@</span><span class="nx">debouncedEnd</span></pre></div>                                                  <h2>Loading components</h2>
 
 <p>Components can be passed to the NoFlo network in two ways:</p>
 
@@ -445,6 +446,8 @@ TODO: hasDefault existence check is for backwards compatibility, clean
     <span class="nx">unless</span> <span class="nx">callback</span>
       <span class="nx">callback</span> <span class="o">=</span> <span class="o">-&gt;</span>
 
+    <span class="k">return</span> <span class="nx">callback</span><span class="p">()</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">length</span>
+
     <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="err">@</span><span class="nx">defaults</span></pre></div>                                                  <p>Don't send defaults if more than one socket is present on the port.
 This case should only happen when a subgraph is created as a component
 as its network is instantiated and its inputs are serialized before
@@ -452,7 +455,8 @@ a socket is attached from the "parent" graph.</p>                            <di
       <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
       <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span><span class="p">()</span>
       <span class="nx">socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
-      <span class="nx">do</span> <span class="nx">callback</span>
+
+    <span class="nx">do</span> <span class="nx">callback</span>
 
   <span class="nv">start: </span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
     <span class="nx">unless</span> <span class="nx">callback</span>
@@ -464,14 +468,28 @@ a socket is attached from the "parent" graph.</p>                            <di
       <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
       <span class="err">@</span><span class="nx">sendInitials</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
         <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
-        <span class="err">@</span><span class="nx">started</span> <span class="o">=</span> <span class="kc">true</span>
-        <span class="err">@</span><span class="nx">sendDefaults</span> <span class="nx">callback</span>
+        <span class="err">@</span><span class="nx">sendDefaults</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
+          <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
+          <span class="err">@</span><span class="nx">setStarted</span> <span class="kc">true</span>
+          <span class="nx">callback</span> <span class="kc">null</span>
 
   <span class="nv">stop: </span><span class="o">-&gt;</span></pre></div>                                                  <p>Disconnect all connections</p>                            <div class="highlight"><pre>    <span class="k">for</span> <span class="nx">connection</span> <span class="k">in</span> <span class="err">@</span><span class="nx">connections</span>
       <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
       <span class="nx">connection</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span></pre></div>                                                  <p>Tell processes to shut down</p>                            <div class="highlight"><pre>    <span class="k">for</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">process</span> <span class="k">of</span> <span class="err">@</span><span class="nx">processes</span>
       <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">shutdown</span><span class="p">()</span>
-    <span class="err">@</span><span class="nx">started</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="err">@</span><span class="nx">setStarted</span> <span class="kc">false</span>
+
+  <span class="nv">setStarted: </span><span class="p">(</span><span class="nx">started</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="err">@</span><span class="nx">started</span> <span class="o">is</span> <span class="nx">started</span>
+    <span class="nx">unless</span> <span class="nx">started</span></pre></div>                                                  <p>Ending the execution</p>                            <div class="highlight"><pre>      <span class="err">@</span><span class="nx">started</span> <span class="o">=</span> <span class="kc">false</span>
+      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;end&#39;</span><span class="p">,</span>
+        <span class="nv">start: </span><span class="err">@</span><span class="nx">startupDate</span>
+        <span class="nv">end: </span><span class="k">new</span> <span class="nb">Date</span>
+        <span class="nv">uptime: </span><span class="err">@</span><span class="nx">uptime</span><span class="p">()</span>
+      <span class="k">return</span></pre></div>                                                  <p>Starting the execution</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">startupDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">startupDate</span>
+    <span class="err">@</span><span class="nx">started</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;start&#39;</span><span class="p">,</span>
+      <span class="nv">start: </span><span class="err">@</span><span class="nx">startupDate</span>
 
   <span class="nv">getDebug: </span><span class="p">()</span> <span class="o">-&gt;</span>
     <span class="err">@</span><span class="nx">debug</span>
@@ -488,4 +506,4 @@ a socket is attached from the "parent" graph.</p>                            <di
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">Network</span> <span class="o">=</span> <span class="nx">Network</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-04-01 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
