@@ -3,6 +3,20 @@ layout: documentation
 title: Async Components
 ---
 
+# Async
+Asynchronous components process data and send output some time later. The outputs are sent in the order that they are processed, which might be a different than the order received.
+
+Previously, we used a dedicated class named `AsyncComponent` which would be extended.
+
+Now,
+
+(process api)[process api] is asynchronous by default.
+
+WirePattern can be used for async by setting the `async` property.
+```
+c.w
+```
+
 Asynchronous components process data and send output some time later. The outputs are sent in the order that they are processed, which might be a different than the order received. To keep track of the in/out data correspondence, outputs are sent with a group marked with the input data.
 
 To make it easier to build asynchronous components, there is an `AsyncComponent` class to extend. The constructor's `super` method takes the keys of the primary in and out port that will be asynchronous. `doAsync` is then called with each input.
@@ -24,7 +38,7 @@ class Measure extends noflo.AsyncComponent
       dimensions: new noflo.Port 'array'
       error: new noflo.Port 'object'
     super 'url', 'dimensions'
-    
+
   doAsync: (url, callback) ->
     image = new Image()
 

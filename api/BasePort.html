@@ -9,116 +9,116 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
 
-<p>Base port type used for options normalization</p>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span>
+<p>Base port type used for options normalization</p>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;events&#39;</span>
 
-<span class="nx">validTypes</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="s1">&#39;all&#39;</span>
-  <span class="s1">&#39;string&#39;</span>
-  <span class="s1">&#39;number&#39;</span>
-  <span class="s1">&#39;int&#39;</span>
-  <span class="s1">&#39;object&#39;</span>
-  <span class="s1">&#39;array&#39;</span>
-  <span class="s1">&#39;boolean&#39;</span>
-  <span class="s1">&#39;color&#39;</span>
-  <span class="s1">&#39;date&#39;</span>
-  <span class="s1">&#39;bang&#39;</span>
-  <span class="s1">&#39;function&#39;</span>
-  <span class="s1">&#39;buffer&#39;</span>
-  <span class="s1">&#39;stream&#39;</span>
+<span class="nv">validTypes = </span><span class="p">[</span>
+  <span class="s">&#39;all&#39;</span>
+  <span class="s">&#39;string&#39;</span>
+  <span class="s">&#39;number&#39;</span>
+  <span class="s">&#39;int&#39;</span>
+  <span class="s">&#39;object&#39;</span>
+  <span class="s">&#39;array&#39;</span>
+  <span class="s">&#39;boolean&#39;</span>
+  <span class="s">&#39;color&#39;</span>
+  <span class="s">&#39;date&#39;</span>
+  <span class="s">&#39;bang&#39;</span>
+  <span class="s">&#39;function&#39;</span>
+  <span class="s">&#39;buffer&#39;</span>
+  <span class="s">&#39;stream&#39;</span>
 <span class="p">]</span>
 
-<span class="nx">class</span> <span class="nx">BasePort</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
-  <span class="nv">constructor: </span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">handleOptions</span> <span class="nx">options</span>
-    <span class="err">@</span><span class="nx">sockets</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="err">@</span><span class="nx">node</span> <span class="o">=</span> <span class="kc">null</span>
-    <span class="err">@</span><span class="nx">name</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="k">class</span> <span class="nx">BasePort</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
+  <span class="nv">constructor: </span><span class="nf">(options) -&gt;</span>
+    <span class="nx">@handleOptions</span> <span class="nx">options</span>
+    <span class="vi">@sockets = </span><span class="p">[]</span>
+    <span class="vi">@node = </span><span class="kc">null</span>
+    <span class="vi">@name = </span><span class="kc">null</span>
 
-  <span class="nv">handleOptions: </span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">options</span> <span class="o">=</span> <span class="p">{}</span> <span class="nx">unless</span> <span class="nx">options</span>
-    <span class="nx">options</span><span class="p">.</span><span class="nx">datatype</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span> <span class="nx">unless</span> <span class="nx">options</span><span class="p">.</span><span class="nx">datatype</span>
-    <span class="nx">options</span><span class="p">.</span><span class="nx">required</span> <span class="o">=</span> <span class="kc">false</span> <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">required</span> <span class="o">is</span> <span class="kc">undefined</span>
+  <span class="nv">handleOptions: </span><span class="nf">(options) -&gt;</span>
+    <span class="nv">options = </span><span class="p">{}</span> <span class="k">unless</span> <span class="nx">options</span>
+    <span class="nv">options.datatype = </span><span class="s">&#39;all&#39;</span> <span class="k">unless</span> <span class="nx">options</span><span class="p">.</span><span class="nx">datatype</span>
+    <span class="nv">options.required = </span><span class="kc">false</span> <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">required</span> <span class="o">is</span> <span class="kc">undefined</span>
 
-    <span class="nx">options</span><span class="p">.</span><span class="nx">datatype</span> <span class="o">=</span> <span class="s1">&#39;int&#39;</span> <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">datatype</span> <span class="o">is</span> <span class="s1">&#39;integer&#39;</span>
+    <span class="nv">options.datatype = </span><span class="s">&#39;int&#39;</span> <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">datatype</span> <span class="o">is</span> <span class="s">&#39;integer&#39;</span>
     <span class="k">if</span> <span class="nx">validTypes</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">datatype</span><span class="p">)</span> <span class="o">is</span> <span class="o">-</span><span class="mi">1</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Invalid port datatype &#39;#{options.datatype}&#39; specified, valid are #{validTypes.join(&#39;, &#39;)}&quot;</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Invalid port datatype &#39;</span><span class="si">#{</span><span class="nx">options</span><span class="p">.</span><span class="nx">datatype</span><span class="si">}</span><span class="s">&#39; specified, valid are </span><span class="si">#{</span><span class="nx">validTypes</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s">&#39;, &#39;</span><span class="p">)</span><span class="si">}</span><span class="s">&quot;</span>
 
-    <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">type</span> <span class="o">and</span> <span class="nx">options</span><span class="p">.</span><span class="nx">type</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="o">is</span> <span class="o">-</span><span class="mi">1</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Invalid port type &#39;#{options.type}&#39; specified. Should be URL or MIME type&quot;</span>
+    <span class="k">if</span> <span class="nx">options</span><span class="p">.</span><span class="nx">type</span> <span class="o">and</span> <span class="nx">options</span><span class="p">.</span><span class="nx">type</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span> <span class="o">is</span> <span class="o">-</span><span class="mi">1</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Invalid port type &#39;</span><span class="si">#{</span><span class="nx">options</span><span class="p">.</span><span class="nx">type</span><span class="si">}</span><span class="s">&#39; specified. Should be URL or MIME type&quot;</span>
 
-    <span class="err">@</span><span class="nx">options</span> <span class="o">=</span> <span class="nx">options</span>
+    <span class="vi">@options = </span><span class="nx">options</span>
 
-  <span class="nv">getId: </span><span class="o">-&gt;</span>
-    <span class="nx">unless</span> <span class="err">@</span><span class="nx">node</span> <span class="o">and</span> <span class="err">@</span><span class="nx">name</span>
-      <span class="k">return</span> <span class="s1">&#39;Port&#39;</span>
-    <span class="s2">&quot;#{@node} #{@name.toUpperCase()}&quot;</span>
+  <span class="nv">getId: </span><span class="nf">-&gt;</span>
+    <span class="k">unless</span> <span class="nx">@node</span> <span class="o">and</span> <span class="nx">@name</span>
+      <span class="k">return</span> <span class="s">&#39;Port&#39;</span>
+    <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@node</span><span class="si">}</span><span class="s"> </span><span class="si">#{</span><span class="nx">@name</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span><span class="si">}</span><span class="s">&quot;</span>
 
-  <span class="nv">getDataType: </span><span class="o">-&gt;</span> <span class="err">@</span><span class="nx">options</span><span class="p">.</span><span class="nx">datatype</span>
-  <span class="nv">getDescription: </span><span class="o">-&gt;</span> <span class="err">@</span><span class="nx">options</span><span class="p">.</span><span class="nx">description</span>
+  <span class="nv">getDataType: </span><span class="nf">-&gt;</span> <span class="nx">@options</span><span class="p">.</span><span class="nx">datatype</span>
+  <span class="nv">getDescription: </span><span class="nf">-&gt;</span> <span class="nx">@options</span><span class="p">.</span><span class="nx">description</span>
 
-  <span class="nv">attach: </span><span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="o">not</span> <span class="err">@</span><span class="nx">isAddressable</span><span class="p">()</span> <span class="o">or</span> <span class="nx">index</span> <span class="o">is</span> <span class="kc">null</span>
-      <span class="nx">index</span> <span class="o">=</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span>
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="nx">socket</span>
-    <span class="err">@</span><span class="nx">attachSocket</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">isAddressable</span><span class="p">()</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;attach&#39;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span>
+  <span class="nv">attach: </span><span class="nf">(socket, index = null) -&gt;</span>
+    <span class="k">if</span> <span class="o">not</span> <span class="nx">@isAddressable</span><span class="p">()</span> <span class="o">or</span> <span class="nx">index</span> <span class="o">is</span> <span class="kc">null</span>
+      <span class="nv">index = </span><span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span>
+    <span class="nx">@sockets</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="nx">socket</span>
+    <span class="nx">@attachSocket</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span>
+    <span class="k">if</span> <span class="nx">@isAddressable</span><span class="p">()</span>
+      <span class="nx">@emit</span> <span class="s">&#39;attach&#39;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span>
       <span class="k">return</span>
-    <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;attach&#39;</span><span class="p">,</span> <span class="nx">socket</span>
+    <span class="nx">@emit</span> <span class="s">&#39;attach&#39;</span><span class="p">,</span> <span class="nx">socket</span>
 
-  <span class="nv">attachSocket: </span><span class="o">-&gt;</span>
+  <span class="nv">attachSocket: </span><span class="nf">-&gt;</span>
 
-  <span class="nv">detach: </span><span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">index</span> <span class="o">=</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">socket</span>
+  <span class="nv">detach: </span><span class="nf">(socket) -&gt;</span>
+    <span class="nv">index = </span><span class="nx">@sockets</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">socket</span>
     <span class="k">if</span> <span class="nx">index</span> <span class="o">is</span> <span class="o">-</span><span class="mi">1</span>
       <span class="k">return</span>
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">undefined</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">isAddressable</span><span class="p">()</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;detach&#39;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span>
+    <span class="nx">@sockets</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">undefined</span>
+    <span class="k">if</span> <span class="nx">@isAddressable</span><span class="p">()</span>
+      <span class="nx">@emit</span> <span class="s">&#39;detach&#39;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span>
       <span class="k">return</span>
-    <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;detach&#39;</span><span class="p">,</span> <span class="nx">socket</span>
+    <span class="nx">@emit</span> <span class="s">&#39;detach&#39;</span><span class="p">,</span> <span class="nx">socket</span>
 
-  <span class="nv">isAddressable: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="err">@</span><span class="nx">options</span><span class="p">.</span><span class="nx">addressable</span>
+  <span class="nv">isAddressable: </span><span class="nf">-&gt;</span>
+    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="nx">@options</span><span class="p">.</span><span class="nx">addressable</span>
     <span class="kc">false</span>
 
-  <span class="nv">isBuffered: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="err">@</span><span class="nx">options</span><span class="p">.</span><span class="nx">buffered</span>
+  <span class="nv">isBuffered: </span><span class="nf">-&gt;</span>
+    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="nx">@options</span><span class="p">.</span><span class="nx">buffered</span>
     <span class="kc">false</span>
 
-  <span class="nv">isRequired: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="err">@</span><span class="nx">options</span><span class="p">.</span><span class="nx">required</span>
+  <span class="nv">isRequired: </span><span class="nf">-&gt;</span>
+    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="nx">@options</span><span class="p">.</span><span class="nx">required</span>
     <span class="kc">false</span>
 
-  <span class="nv">isAttached: </span><span class="p">(</span><span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">isAddressable</span><span class="p">()</span> <span class="o">and</span> <span class="nx">socketId</span> <span class="o">isnt</span> <span class="kc">null</span>
-      <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
+  <span class="nv">isAttached: </span><span class="nf">(socketId = null) -&gt;</span>
+    <span class="k">if</span> <span class="nx">@isAddressable</span><span class="p">()</span> <span class="o">and</span> <span class="nx">socketId</span> <span class="o">isnt</span> <span class="kc">null</span>
+      <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
       <span class="k">return</span> <span class="kc">false</span>
-    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span>
+    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span>
     <span class="kc">false</span>
 
-  <span class="nv">listAttached: </span><span class="o">-&gt;</span>
-    <span class="nx">attached</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">idx</span> <span class="k">in</span> <span class="err">@</span><span class="nx">sockets</span>
-      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">socket</span>
+  <span class="nv">listAttached: </span><span class="nf">-&gt;</span>
+    <span class="nv">attached = </span><span class="p">[]</span>
+    <span class="k">for</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">idx</span> <span class="k">in</span> <span class="nx">@sockets</span>
+      <span class="k">continue</span> <span class="k">unless</span> <span class="nx">socket</span>
       <span class="nx">attached</span><span class="p">.</span><span class="nx">push</span> <span class="nx">idx</span>
     <span class="nx">attached</span>
 
-  <span class="nv">isConnected: </span><span class="p">(</span><span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">isAddressable</span><span class="p">()</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: Socket ID required&quot;</span> <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: Socket #{socketId} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="k">return</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">isConnected</span><span class="p">()</span>
+  <span class="nv">isConnected: </span><span class="nf">(socketId = null) -&gt;</span>
+    <span class="k">if</span> <span class="nx">@isAddressable</span><span class="p">()</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@getId</span><span class="p">()</span><span class="si">}</span><span class="s">: Socket ID required&quot;</span> <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@getId</span><span class="p">()</span><span class="si">}</span><span class="s">: Socket </span><span class="si">#{</span><span class="nx">socketId</span><span class="si">}</span><span class="s"> not available&quot;</span> <span class="k">unless</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
+      <span class="k">return</span> <span class="nx">@sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">isConnected</span><span class="p">()</span>
 
-    <span class="nx">connected</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
+    <span class="nv">connected = </span><span class="kc">false</span>
+    <span class="nx">@sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="nf">(socket) =&gt;</span>
+      <span class="k">return</span> <span class="k">unless</span> <span class="nx">socket</span>
       <span class="k">if</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
-        <span class="nx">connected</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="nv">connected = </span><span class="kc">true</span>
     <span class="k">return</span> <span class="nx">connected</span>
 
-  <span class="nv">canAttach: </span><span class="o">-&gt;</span> <span class="kc">true</span>
+  <span class="nv">canAttach: </span><span class="nf">-&gt;</span> <span class="kc">true</span>
 
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">BasePort</span>
+<span class="nv">module.exports = </span><span class="nx">BasePort</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.coffee">BasePort.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-14 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.coffee">BasePort.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

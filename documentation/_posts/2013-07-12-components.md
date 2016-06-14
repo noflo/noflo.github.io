@@ -2,6 +2,7 @@
 layout: documentation
 title: Components
 ---
+
 A component is the main ingredient of flow-based programming. Component is a CommonJS module providing a set of input and output port handlers. These ports are used for connecting components to each other.
 
 NoFlo processes (the boxes of a flow graph) are instances of a component, with the graph controlling connections between ports of components.
@@ -42,7 +43,6 @@ exports.getComponent = ->
 
   component # Return new instance
 ```
-
 ```javascript
 // File: components/Forwarder.js
 var noflo = require("noflo");
@@ -77,8 +77,16 @@ The `exports.getComponent` function is used by NoFlo to create an instance of th
 You can find more examples of components in the [component library](/library/) section of this website.
 
 ### Asynchronous components
+# Async
+Asynchronous components process data and send output some time later. The outputs are sent in the order that they are processed, which might be a different than the order received.
 
-In addition to the regular `noflo.Component` baseclass, there is an additional `noflo.AsyncComponent` baseclass that helps in creating components that perform asynchronous operations in a consistent way. See the [Async Components](/documentation/async-components/) document for more information.
+Previously, we used a dedicated class named `AsyncComponent` which would be extended.
+
+Now, [Process api](#Process) is asynchronous by default.
+
+WirePattern can be used for async by setting the `async` property. [WirePattern Async](/documentation/legacy/#async)
+
+
 
 ### Subgraphs
 
@@ -144,7 +152,7 @@ When NoFlo is being run, all components used in a NoFlo network (an instantiated
 
 * _Instantiation_: component is instantiated for a node in the NoFlo graph, and its `constructor` method is called. At this stage a component should prepare its internal data structures and register listeners for the [events of its input ports](#portevents)
 * _Running_: component has received events on its input ports. Now the component can interact with those events and the external world, and optionally start transmitting [port events](#portevents) on its output ports
-* _Shutdown_: Normally a NoFlo network finishes when all components stop transmitting port events. It is however also possible to close a running NoFlo network. In this case the `shutdown` method of components gets called, allowing components to perform whatever cleanup needed, like unregistering event listeners on external objects, or closing network connections
+* _Shutdown_: Normally a NoFlo network finishes when all components stop transmitting port events. It is however also possible to close a running NoFlo network. In this case the `shutdown` method of components gets called, allowing components to perform whatever cleanup needed, like unregistering event listeners on external objects, or closing network connections.
 
 A running instance of a component in a NoFlo network is called a *process*. Before a process has received data it should be *inert*, merely listening to its input ports. Processes that need to start doing something when a network is started should be triggered to do so by sending them an Initial Information Packet.
 
@@ -199,7 +207,7 @@ The data types supported by NoFlo include:
 
 There is a set of other attributes a port may have apart from its `datatype`:
 
-* `addressable`: this boolean flag makes turns the port into an _Array port_, giving a particular index for each connection attached to it (_default: `false`_); 
+* `addressable`: this boolean flag makes turns the port into an _Array port_, giving a particular index for each connection attached to it (_default: `false`_);
 Array ports have a third value on events with the socket index :
   ```@inPorts.in.on 'data' , (event, payload, index ) -> ... ```
 
@@ -211,6 +219,7 @@ Array ports have a third value on events with the socket index :
 * `values`: sets the list of accepted values for the port, if the value received is not in the list an error is thrown (_default: `null`_).
 
 Here is how multiple attributes can be combined together with event handlers:
+
 
 ```coffeescript
 component.inPorts.add 'id',
@@ -244,6 +253,83 @@ component.inPorts.add('user', {
 });
 ```
 
+This can alternatively be done using constructors explicitly.
+```coffeescript
+noflo = require 'noflo'
+
+component.inPorts = new noflo.inPorts
+  in:
+    datatype: 'int'
+    description: 'Request ID'
+  user:
+    datatype: 'object'
+    description: 'User data'
+    process: (event, payload) ->
+      # Do something with event and payload here
+      if event is 'data'
+        component.outPorts.out.send payload
+        component.outPorts.out.disconnect()
+```
+```javascript
+
+noflo = require('noflo');
+
+component.inPorts = new noflo.inPorts({
+  in: {
+    datatype: 'int',
+    description: 'Request ID'
+  },
+  user: {
+    datatype: 'object',
+    description: 'User data',
+    process: function(event, payload) {
+      if (event === 'data') {
+        component.outPorts.out.send(payload);
+        return component.outPorts.out.disconnect();
+      }
+    }
+  }
+});
+```
+
+The third way this can be done is passing in the ports as objects to the component constructor.
+```coffeescript
+c = new noflo.Component
+  icon: 'gear'
+  inPorts:
+    eh:
+      datatype: 'all'
+      required: true
+  outPorts:
+    canada:
+      datatype: 'object'
+      required: true
+    error:
+      datatype: 'object'
+```
+```javascript
+c = new noflo.Component({
+  icon: 'gear',
+  inPorts: {
+    magic: {
+      datatype: 'all',
+      required: true
+    }
+  },
+  outPorts: {
+    bird: {
+      datatype: 'object',
+      required: true
+    },
+    error: {
+      datatype: 'object'
+    }
+  }
+});
+```
+
+
+
 <a id="icons"></a>
 ### Component icons
 
@@ -255,14 +341,14 @@ A component that takes a picture could for instance use the [Camera icon](http:/
 # File: components/TakePicture.coffee
 exports.getComponent = ->
   component = new noflo.Component
-  component.description = "Take a photo with the computer's web camera"
+  component.description = 'Take a photo with the computer\'s web camera'
   component.icon = 'camera'
 ```
 ```javascript
 // File: components/TakePicture.js
 exports.getComponent = function() {
   var component = new noflo.Component();
-  component.description = "Take a photo with the computer's web camera";
+  component.description = 'Take a photo with the computer\'s web camera';
   component.icon = 'camera';
 ```
 

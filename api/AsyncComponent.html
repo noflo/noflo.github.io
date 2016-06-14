@@ -11,100 +11,100 @@ NoFlo may be freely distributed under the MIT license
 </code></pre>
 
 <p>Baseclass for components dealing with asynchronous I/O operations. Supports
-throttling.</p>                            <div class="highlight"><pre><span class="nx">port</span> <span class="o">=</span> <span class="nx">require</span> <span class="s2">&quot;./Port&quot;</span>
-<span class="nx">component</span> <span class="o">=</span> <span class="nx">require</span> <span class="s2">&quot;./Component&quot;</span>
+throttling.</p>                            <div class="highlight"><pre><span class="nv">port = </span><span class="nx">require</span> <span class="s">&quot;./Port&quot;</span>
+<span class="nv">component = </span><span class="nx">require</span> <span class="s">&quot;./Component&quot;</span>
 
-<span class="nx">class</span> <span class="nx">AsyncComponent</span> <span class="k">extends</span> <span class="nx">component</span><span class="p">.</span><span class="nx">Component</span>
+<span class="k">class</span> <span class="nx">AsyncComponent</span> <span class="k">extends</span> <span class="nx">component</span><span class="p">.</span><span class="nx">Component</span>
 
-  <span class="nv">constructor: </span><span class="p">(</span><span class="err">@</span><span class="nx">inPortName</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="err">@</span><span class="nx">outPortName</span><span class="o">=</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="err">@</span><span class="nx">errPortName</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">unless</span> <span class="err">@</span><span class="nx">inPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">inPortName</span><span class="p">]</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;no inPort named &#39;#{@inPortName}&#39;&quot;</span>
-    <span class="nx">unless</span> <span class="err">@</span><span class="nx">outPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">outPortName</span><span class="p">]</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;no outPort named &#39;#{@outPortName}&#39;&quot;</span>
+  <span class="nv">constructor: </span><span class="nf">(@inPortName=&quot;in&quot;, @outPortName=&quot;out&quot;, @errPortName=&quot;error&quot;) -&gt;</span>
+    <span class="k">unless</span> <span class="nx">@inPorts</span><span class="p">[</span><span class="nx">@inPortName</span><span class="p">]</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;no inPort named &#39;</span><span class="si">#{</span><span class="nx">@inPortName</span><span class="si">}</span><span class="s">&#39;&quot;</span>
+    <span class="k">unless</span> <span class="nx">@outPorts</span><span class="p">[</span><span class="nx">@outPortName</span><span class="p">]</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;no outPort named &#39;</span><span class="si">#{</span><span class="nx">@outPortName</span><span class="si">}</span><span class="s">&#39;&quot;</span>
 
-    <span class="err">@</span><span class="nx">load</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="err">@</span><span class="nx">q</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="err">@</span><span class="nx">errorGroups</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="vi">@load = </span><span class="mi">0</span>
+    <span class="vi">@q = </span><span class="p">[]</span>
+    <span class="vi">@errorGroups = </span><span class="p">[]</span>
 
-    <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">port</span><span class="p">.</span><span class="nx">Port</span><span class="p">()</span>
+    <span class="vi">@outPorts.load = </span><span class="k">new</span> <span class="nx">port</span><span class="p">.</span><span class="nx">Port</span><span class="p">()</span>
 
-    <span class="err">@</span><span class="nx">inPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">inPortName</span><span class="p">].</span><span class="kc">on</span> <span class="s2">&quot;begingroup&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="k">return</span> <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span> <span class="p">{</span> <span class="nv">name: </span><span class="s2">&quot;begingroup&quot;</span><span class="p">,</span> <span class="nv">data: </span><span class="nx">group</span> <span class="p">}</span> <span class="k">if</span> <span class="err">@</span><span class="nx">load</span> <span class="o">&gt;</span> <span class="mi">0</span>
-      <span class="err">@</span><span class="nx">errorGroups</span><span class="p">.</span><span class="nx">push</span> <span class="nx">group</span>
-      <span class="err">@</span><span class="nx">outPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">outPortName</span><span class="p">].</span><span class="nx">beginGroup</span> <span class="nx">group</span>
+    <span class="nx">@inPorts</span><span class="p">[</span><span class="nx">@inPortName</span><span class="p">].</span><span class="nx">on</span> <span class="s">&quot;begingroup&quot;</span><span class="p">,</span> <span class="nf">(group) =&gt;</span>
+      <span class="k">return</span> <span class="nx">@q</span><span class="p">.</span><span class="nx">push</span> <span class="p">{</span> <span class="nv">name: </span><span class="s">&quot;begingroup&quot;</span><span class="p">,</span> <span class="nv">data: </span><span class="nx">group</span> <span class="p">}</span> <span class="k">if</span> <span class="nx">@load</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="nx">@errorGroups</span><span class="p">.</span><span class="nx">push</span> <span class="nx">group</span>
+      <span class="nx">@outPorts</span><span class="p">[</span><span class="nx">@outPortName</span><span class="p">].</span><span class="nx">beginGroup</span> <span class="nx">group</span>
 
-    <span class="err">@</span><span class="nx">inPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">inPortName</span><span class="p">].</span><span class="kc">on</span> <span class="s2">&quot;endgroup&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-      <span class="k">return</span> <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span> <span class="p">{</span> <span class="nv">name: </span><span class="s2">&quot;endgroup&quot;</span> <span class="p">}</span> <span class="k">if</span> <span class="err">@</span><span class="nx">load</span> <span class="o">&gt;</span> <span class="mi">0</span>
-      <span class="err">@</span><span class="nx">errorGroups</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
-      <span class="err">@</span><span class="nx">outPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">outPortName</span><span class="p">].</span><span class="nx">endGroup</span><span class="p">()</span>
+    <span class="nx">@inPorts</span><span class="p">[</span><span class="nx">@inPortName</span><span class="p">].</span><span class="nx">on</span> <span class="s">&quot;endgroup&quot;</span><span class="p">,</span> <span class="nf">=&gt;</span>
+      <span class="k">return</span> <span class="nx">@q</span><span class="p">.</span><span class="nx">push</span> <span class="p">{</span> <span class="nv">name: </span><span class="s">&quot;endgroup&quot;</span> <span class="p">}</span> <span class="k">if</span> <span class="nx">@load</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="nx">@errorGroups</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
+      <span class="nx">@outPorts</span><span class="p">[</span><span class="nx">@outPortName</span><span class="p">].</span><span class="nx">endGroup</span><span class="p">()</span>
 
-    <span class="err">@</span><span class="nx">inPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">inPortName</span><span class="p">].</span><span class="kc">on</span> <span class="s2">&quot;disconnect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-      <span class="k">return</span> <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span> <span class="p">{</span> <span class="nv">name: </span><span class="s2">&quot;disconnect&quot;</span> <span class="p">}</span> <span class="k">if</span> <span class="err">@</span><span class="nx">load</span> <span class="o">&gt;</span> <span class="mi">0</span>
-      <span class="err">@</span><span class="nx">outPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">outPortName</span><span class="p">].</span><span class="nx">disconnect</span><span class="p">()</span>
-      <span class="err">@</span><span class="nx">errorGroups</span> <span class="o">=</span> <span class="p">[]</span>
-      <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">if</span> <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
+    <span class="nx">@inPorts</span><span class="p">[</span><span class="nx">@inPortName</span><span class="p">].</span><span class="nx">on</span> <span class="s">&quot;disconnect&quot;</span><span class="p">,</span> <span class="nf">=&gt;</span>
+      <span class="k">return</span> <span class="nx">@q</span><span class="p">.</span><span class="nx">push</span> <span class="p">{</span> <span class="nv">name: </span><span class="s">&quot;disconnect&quot;</span> <span class="p">}</span> <span class="k">if</span> <span class="nx">@load</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="nx">@outPorts</span><span class="p">[</span><span class="nx">@outPortName</span><span class="p">].</span><span class="nx">disconnect</span><span class="p">()</span>
+      <span class="vi">@errorGroups = </span><span class="p">[]</span>
+      <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
 
-    <span class="err">@</span><span class="nx">inPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">inPortName</span><span class="p">].</span><span class="kc">on</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="k">return</span> <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span> <span class="p">{</span> <span class="nv">name: </span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="nv">data: </span><span class="nx">data</span> <span class="p">}</span> <span class="k">if</span> <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-      <span class="err">@</span><span class="nx">processData</span> <span class="nx">data</span>
+    <span class="nx">@inPorts</span><span class="p">[</span><span class="nx">@inPortName</span><span class="p">].</span><span class="nx">on</span> <span class="s">&quot;data&quot;</span><span class="p">,</span> <span class="nf">(data) =&gt;</span>
+      <span class="k">return</span> <span class="nx">@q</span><span class="p">.</span><span class="nx">push</span> <span class="p">{</span> <span class="nv">name: </span><span class="s">&quot;data&quot;</span><span class="p">,</span> <span class="nv">data: </span><span class="nx">data</span> <span class="p">}</span> <span class="k">if</span> <span class="nx">@q</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="nx">@processData</span> <span class="nx">data</span>
 
-  <span class="nv">processData: </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">incrementLoad</span><span class="p">()</span>
-    <span class="err">@</span><span class="nx">doAsync</span> <span class="nx">data</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">error</span> <span class="nx">err</span><span class="p">,</span> <span class="err">@</span><span class="nx">errorGroups</span><span class="p">,</span> <span class="err">@</span><span class="nx">errPortName</span> <span class="k">if</span> <span class="nx">err</span>
-      <span class="err">@</span><span class="nx">decrementLoad</span><span class="p">()</span>
+  <span class="nv">processData: </span><span class="nf">(data) -&gt;</span>
+    <span class="nx">@incrementLoad</span><span class="p">()</span>
+    <span class="nx">@doAsync</span> <span class="nx">data</span><span class="p">,</span> <span class="nf">(err) =&gt;</span>
+      <span class="nx">@error</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">@errorGroups</span><span class="p">,</span> <span class="nx">@errPortName</span> <span class="k">if</span> <span class="nx">err</span>
+      <span class="nx">@decrementLoad</span><span class="p">()</span>
 
-  <span class="nv">incrementLoad: </span><span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">load</span><span class="o">++</span>
-    <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">send</span> <span class="err">@</span><span class="nx">load</span> <span class="k">if</span> <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
-    <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">if</span> <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
+  <span class="nv">incrementLoad: </span><span class="nf">-&gt;</span>
+    <span class="nx">@load</span><span class="o">++</span>
+    <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">send</span> <span class="nx">@load</span> <span class="k">if</span> <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
+    <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
 
-  <span class="nv">doAsync: </span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">callback</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;AsyncComponents must implement doAsync&quot;</span>
+  <span class="nv">doAsync: </span><span class="nf">(data, callback) -&gt;</span>
+    <span class="nx">callback</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;AsyncComponents must implement doAsync&quot;</span>
 
-  <span class="nv">decrementLoad: </span><span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;load cannot be negative&quot;</span> <span class="k">if</span> <span class="err">@</span><span class="nx">load</span> <span class="o">==</span> <span class="mi">0</span>
-    <span class="err">@</span><span class="nx">load</span><span class="o">--</span>
-    <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">send</span> <span class="err">@</span><span class="nx">load</span> <span class="k">if</span> <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
-    <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">if</span> <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
-    <span class="k">if</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">isnt</span> <span class="s1">&#39;undefined&#39;</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span></pre></div>                                                  <p>nextTick is faster than setTimeout on Node.js</p>                            <div class="highlight"><pre>      <span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span> <span class="o">=&gt;</span> <span class="err">@</span><span class="nx">processQueue</span><span class="p">()</span>
+  <span class="nv">decrementLoad: </span><span class="nf">-&gt;</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;load cannot be negative&quot;</span> <span class="k">if</span> <span class="nx">@load</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="nx">@load</span><span class="o">--</span>
+    <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">send</span> <span class="nx">@load</span> <span class="k">if</span> <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
+    <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
+    <span class="k">if</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">isnt</span> <span class="s">&#39;undefined&#39;</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s">&#39;node&#39;</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span></pre></div>                                                  <p>nextTick is faster than setTimeout on Node.js</p>                            <div class="highlight"><pre>      <span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span> <span class="nf">=&gt;</span> <span class="nx">@processQueue</span><span class="p">()</span>
     <span class="k">else</span>
-      <span class="nx">setTimeout</span> <span class="o">=&gt;</span>
-        <span class="nx">do</span> <span class="err">@</span><span class="nx">processQueue</span>
+      <span class="nx">setTimeout</span> <span class="nf">=&gt;</span>
+        <span class="nx">do</span> <span class="nx">@processQueue</span>
       <span class="p">,</span> <span class="mi">0</span>
 
-  <span class="nv">processQueue: </span><span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">load</span> <span class="o">&gt;</span> <span class="mi">0</span>
+  <span class="nv">processQueue: </span><span class="nf">-&gt;</span>
+    <span class="k">if</span> <span class="nx">@load</span> <span class="o">&gt;</span> <span class="mi">0</span>
       <span class="k">return</span>
-    <span class="nx">processedData</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="k">while</span> <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-      <span class="nx">event</span> <span class="o">=</span> <span class="err">@</span><span class="nx">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nv">processedData = </span><span class="kc">false</span>
+    <span class="k">while</span> <span class="nx">@q</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="nv">event = </span><span class="nx">@q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
       <span class="k">switch</span> <span class="nx">event</span><span class="p">.</span><span class="nx">name</span>
-        <span class="k">when</span> <span class="s2">&quot;begingroup&quot;</span>
+        <span class="k">when</span> <span class="s">&quot;begingroup&quot;</span>
           <span class="k">return</span> <span class="k">if</span> <span class="nx">processedData</span>
-          <span class="err">@</span><span class="nx">outPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">outPortName</span><span class="p">].</span><span class="nx">beginGroup</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span>
-          <span class="err">@</span><span class="nx">errorGroups</span><span class="p">.</span><span class="nx">push</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span>
-          <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
-        <span class="k">when</span> <span class="s2">&quot;endgroup&quot;</span>
+          <span class="nx">@outPorts</span><span class="p">[</span><span class="nx">@outPortName</span><span class="p">].</span><span class="nx">beginGroup</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span>
+          <span class="nx">@errorGroups</span><span class="p">.</span><span class="nx">push</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span>
+          <span class="nx">@q</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+        <span class="k">when</span> <span class="s">&quot;endgroup&quot;</span>
           <span class="k">return</span> <span class="k">if</span> <span class="nx">processedData</span>
-          <span class="err">@</span><span class="nx">outPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">outPortName</span><span class="p">].</span><span class="nx">endGroup</span><span class="p">()</span>
-          <span class="err">@</span><span class="nx">errorGroups</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
-          <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
-        <span class="k">when</span> <span class="s2">&quot;disconnect&quot;</span>
+          <span class="nx">@outPorts</span><span class="p">[</span><span class="nx">@outPortName</span><span class="p">].</span><span class="nx">endGroup</span><span class="p">()</span>
+          <span class="nx">@errorGroups</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
+          <span class="nx">@q</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+        <span class="k">when</span> <span class="s">&quot;disconnect&quot;</span>
           <span class="k">return</span> <span class="k">if</span> <span class="nx">processedData</span>
-          <span class="err">@</span><span class="nx">outPorts</span><span class="p">[</span><span class="err">@</span><span class="nx">outPortName</span><span class="p">].</span><span class="nx">disconnect</span><span class="p">()</span>
-          <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">if</span> <span class="err">@</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
-          <span class="err">@</span><span class="nx">errorGroups</span> <span class="o">=</span> <span class="p">[]</span>
-          <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
-        <span class="k">when</span> <span class="s2">&quot;data&quot;</span>
-          <span class="err">@</span><span class="nx">processData</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span>
-          <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
-          <span class="nx">processedData</span> <span class="o">=</span> <span class="kc">true</span>
+          <span class="nx">@outPorts</span><span class="p">[</span><span class="nx">@outPortName</span><span class="p">].</span><span class="nx">disconnect</span><span class="p">()</span>
+          <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@outPorts</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
+          <span class="vi">@errorGroups = </span><span class="p">[]</span>
+          <span class="nx">@q</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+        <span class="k">when</span> <span class="s">&quot;data&quot;</span>
+          <span class="nx">@processData</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span>
+          <span class="nx">@q</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+          <span class="nv">processedData = </span><span class="kc">true</span>
 
-  <span class="nv">shutdown: </span><span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">q</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="err">@</span><span class="nx">errorGroups</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="nv">shutdown: </span><span class="nf">-&gt;</span>
+    <span class="vi">@q = </span><span class="p">[]</span>
+    <span class="vi">@errorGroups = </span><span class="p">[]</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">AsyncComponent</span> <span class="o">=</span> <span class="nx">AsyncComponent</span>
+<span class="nv">exports.AsyncComponent = </span><span class="nx">AsyncComponent</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/AsyncComponent.coffee">AsyncComponent.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-14 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/AsyncComponent.coffee">AsyncComponent.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

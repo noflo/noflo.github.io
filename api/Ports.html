@@ -9,70 +9,70 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
 
-<p>Ports collection classes for NoFlo components</p>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span>
+<p>Ports collection classes for NoFlo components</p>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;events&#39;</span>
 
-<span class="nx">InPort</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./InPort&#39;</span>
-<span class="nx">OutPort</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./OutPort&#39;</span>
+<span class="nv">InPort = </span><span class="nx">require</span> <span class="s">&#39;./InPort&#39;</span>
+<span class="nv">OutPort = </span><span class="nx">require</span> <span class="s">&#39;./OutPort&#39;</span>
 
-<span class="nx">class</span> <span class="nx">Ports</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
+<span class="k">class</span> <span class="nx">Ports</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
   <span class="nv">model: </span><span class="nx">InPort</span>
-  <span class="nv">constructor: </span><span class="p">(</span><span class="nx">ports</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">ports</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">ports</span>
+  <span class="nv">constructor: </span><span class="nf">(ports) -&gt;</span>
+    <span class="vi">@ports = </span><span class="p">{}</span>
+    <span class="k">return</span> <span class="k">unless</span> <span class="nx">ports</span>
     <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">options</span> <span class="k">of</span> <span class="nx">ports</span>
-      <span class="err">@</span><span class="nx">add</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">options</span>
+      <span class="nx">@add</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">options</span>
 
-  <span class="nv">add: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">process</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">name</span> <span class="o">is</span> <span class="s1">&#39;add&#39;</span> <span class="o">or</span> <span class="nx">name</span> <span class="o">is</span> <span class="s1">&#39;remove&#39;</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s1">&#39;Add and remove are restricted port names&#39;</span>
+  <span class="nv">add: </span><span class="nf">(name, options, process) -&gt;</span>
+    <span class="k">if</span> <span class="nx">name</span> <span class="o">is</span> <span class="s">&#39;add&#39;</span> <span class="o">or</span> <span class="nx">name</span> <span class="o">is</span> <span class="s">&#39;remove&#39;</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&#39;Add and remove are restricted port names&#39;</span>
 
-    <span class="nx">unless</span> <span class="nx">name</span><span class="p">.</span><span class="nx">match</span> <span class="o">/^</span><span class="p">[</span><span class="nx">a</span><span class="o">-</span><span class="nx">z0</span><span class="o">-</span><span class="mi">9</span><span class="nx">_</span><span class="err">\</span><span class="p">.</span><span class="err">\</span><span class="o">/</span><span class="p">]</span><span class="o">+</span><span class="nx">$</span><span class="o">/</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port names can only contain lowercase alphanumeric characters and underscores. &#39;#{name}&#39; not allowed&quot;</span></pre></div>                                                  <p>Remove previous implementation</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">remove</span> <span class="nx">name</span> <span class="k">if</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="k">unless</span> <span class="nx">name</span><span class="p">.</span><span class="nx">match</span> <span class="sr">/^[a-z0-9_\.\/]+$/</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Port names can only contain lowercase alphanumeric characters and underscores. &#39;</span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s">&#39; not allowed&quot;</span></pre></div>                                                  <p>Remove previous implementation</p>                            <div class="highlight"><pre>    <span class="nx">@remove</span> <span class="nx">name</span> <span class="k">if</span> <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="k">typeof</span> <span class="nx">options</span> <span class="o">is</span> <span class="s1">&#39;object&#39;</span> <span class="o">and</span> <span class="nx">options</span><span class="p">.</span><span class="nx">canAttach</span>
-      <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">options</span>
+    <span class="k">if</span> <span class="k">typeof</span> <span class="nx">options</span> <span class="o">is</span> <span class="s">&#39;object&#39;</span> <span class="o">and</span> <span class="nx">options</span><span class="p">.</span><span class="nx">canAttach</span>
+      <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">options</span>
     <span class="k">else</span>
-      <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="err">@</span><span class="nx">model</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">process</span>
+      <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">@model</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">process</span>
 
-    <span class="err">@</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="nx">@</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
 
-    <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="nx">name</span>
+    <span class="nx">@emit</span> <span class="s">&#39;add&#39;</span><span class="p">,</span> <span class="nx">name</span>
 
-    <span class="err">@</span> <span class="c1"># chainable</span>
+    <span class="nx">@</span> <span class="c1"># chainable</span>
 
-  <span class="nv">remove: </span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not defined&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="k">delete</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="k">delete</span> <span class="err">@</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="nx">name</span>
+  <span class="nv">remove: </span><span class="nf">(name) -&gt;</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Port </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s"> not defined&quot;</span> <span class="k">unless</span> <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="k">delete</span> <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="k">delete</span> <span class="nx">@</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="nx">@emit</span> <span class="s">&#39;remove&#39;</span><span class="p">,</span> <span class="nx">name</span>
 
-    <span class="err">@</span> <span class="c1"># chainable</span>
+    <span class="nx">@</span> <span class="c1"># chainable</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">InPorts</span> <span class="o">=</span> <span class="nx">class</span> <span class="nx">InPorts</span> <span class="k">extends</span> <span class="nx">Ports</span>
-  <span class="kc">on</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="kc">on</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span>
-  <span class="nv">once: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">once</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span>
+<span class="nv">exports.InPorts = </span><span class="k">class</span> <span class="nx">InPorts</span> <span class="k">extends</span> <span class="nx">Ports</span>
+  <span class="kc">on</span><span class="o">:</span> <span class="nf">(name, event, callback) -&gt;</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Port </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s"> not available&quot;</span> <span class="k">unless</span> <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">on</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span>
+  <span class="nv">once: </span><span class="nf">(name, event, callback) -&gt;</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Port </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s"> not available&quot;</span> <span class="k">unless</span> <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">once</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">OutPorts</span> <span class="o">=</span> <span class="nx">class</span> <span class="nx">OutPorts</span> <span class="k">extends</span> <span class="nx">Ports</span>
+<span class="nv">exports.OutPorts = </span><span class="k">class</span> <span class="nx">OutPorts</span> <span class="k">extends</span> <span class="nx">Ports</span>
   <span class="nv">model: </span><span class="nx">OutPort</span>
 
-  <span class="nv">connect: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">connect</span> <span class="nx">socketId</span>
-  <span class="nv">beginGroup: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">beginGroup</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">socketId</span>
-  <span class="nv">send: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">send</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">socketId</span>
-  <span class="nv">endGroup: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">endGroup</span> <span class="nx">socketId</span>
-  <span class="nv">disconnect: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">disconnect</span> <span class="nx">socketId</span>
+  <span class="nv">connect: </span><span class="nf">(name, socketId) -&gt;</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Port </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s"> not available&quot;</span> <span class="k">unless</span> <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">connect</span> <span class="nx">socketId</span>
+  <span class="nv">beginGroup: </span><span class="nf">(name, group, socketId) -&gt;</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Port </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s"> not available&quot;</span> <span class="k">unless</span> <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">beginGroup</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">socketId</span>
+  <span class="nv">send: </span><span class="nf">(name, data, socketId) -&gt;</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Port </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s"> not available&quot;</span> <span class="k">unless</span> <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">send</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">socketId</span>
+  <span class="nv">endGroup: </span><span class="nf">(name, socketId) -&gt;</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Port </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s"> not available&quot;</span> <span class="k">unless</span> <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">endGroup</span> <span class="nx">socketId</span>
+  <span class="nv">disconnect: </span><span class="nf">(name, socketId) -&gt;</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Port </span><span class="si">#{</span><span class="nx">name</span><span class="si">}</span><span class="s"> not available&quot;</span> <span class="k">unless</span> <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="nx">@ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">disconnect</span> <span class="nx">socketId</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.coffee">Ports.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-14 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.coffee">Ports.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

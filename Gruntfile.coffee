@@ -13,17 +13,15 @@ module.exports = ->
     sass:
       src:
         options:
-          sourcemap: true
           style: 'compressed'
         files:
           'css/main.css': 'css/main.scss'
       site:
         options:
-          sourcemap: true
           style: 'compressed'
         files:
           '_site/css/main.css': '_site/css/main.scss'
-    
+
     copy:
       site2src:
         files: [
@@ -32,11 +30,11 @@ module.exports = ->
           src: ['main.*'],
           dest: 'css/'
         ]
-    
+
     #imagemin:
     #  dist:
     #    options:
-    #      optimizationLevel: 7        
+    #      optimizationLevel: 7
     #    files: [
     #        expand: true # only compressing jpg right now
     #        cwd: 'img-src/'

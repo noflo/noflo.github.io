@@ -10,117 +10,117 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
 
-<p>Regular port for NoFlo components.</p>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span>
+<p>Regular port for NoFlo components.</p>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;events&#39;</span>
 
-<span class="nx">class</span> <span class="nx">Port</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
-  <span class="nv">description: </span><span class="s1">&#39;&#39;</span>
+<span class="k">class</span> <span class="nx">Port</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
+  <span class="nv">description: </span><span class="s">&#39;&#39;</span>
   <span class="nv">required: </span><span class="kc">true</span>
-  <span class="nv">constructor: </span><span class="p">(</span><span class="err">@</span><span class="nx">type</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;all&#39;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">type</span>
-    <span class="err">@</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;int&#39;</span> <span class="k">if</span> <span class="err">@</span><span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;integer&#39;</span>
-    <span class="err">@</span><span class="nx">sockets</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="err">@</span><span class="nx">from</span> <span class="o">=</span> <span class="kc">null</span>
-    <span class="err">@</span><span class="nx">node</span> <span class="o">=</span> <span class="kc">null</span>
-    <span class="err">@</span><span class="nx">name</span> <span class="o">=</span> <span class="kc">null</span>
+  <span class="nv">constructor: </span><span class="nf">(@type) -&gt;</span>
+    <span class="vi">@type = </span><span class="s">&#39;all&#39;</span> <span class="k">unless</span> <span class="nx">@type</span>
+    <span class="vi">@type = </span><span class="s">&#39;int&#39;</span> <span class="k">if</span> <span class="nx">@type</span> <span class="o">is</span> <span class="s">&#39;integer&#39;</span>
+    <span class="vi">@sockets = </span><span class="p">[]</span>
+    <span class="vi">@from = </span><span class="kc">null</span>
+    <span class="vi">@node = </span><span class="kc">null</span>
+    <span class="vi">@name = </span><span class="kc">null</span>
 
-  <span class="nv">getId: </span><span class="o">-&gt;</span>
-    <span class="nx">unless</span> <span class="err">@</span><span class="nx">node</span> <span class="o">and</span> <span class="err">@</span><span class="nx">name</span>
-      <span class="k">return</span> <span class="s1">&#39;Port&#39;</span>
-    <span class="s2">&quot;#{@node} #{@name.toUpperCase()}&quot;</span>
+  <span class="nv">getId: </span><span class="nf">-&gt;</span>
+    <span class="k">unless</span> <span class="nx">@node</span> <span class="o">and</span> <span class="nx">@name</span>
+      <span class="k">return</span> <span class="s">&#39;Port&#39;</span>
+    <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@node</span><span class="si">}</span><span class="s"> </span><span class="si">#{</span><span class="nx">@name</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span><span class="si">}</span><span class="s">&quot;</span>
 
-  <span class="nv">getDataType: </span><span class="o">-&gt;</span> <span class="err">@</span><span class="nx">type</span>
-  <span class="nv">getDescription: </span><span class="o">-&gt;</span> <span class="err">@</span><span class="nx">description</span>
+  <span class="nv">getDataType: </span><span class="nf">-&gt;</span> <span class="nx">@type</span>
+  <span class="nv">getDescription: </span><span class="nf">-&gt;</span> <span class="nx">@description</span>
 
-  <span class="nv">attach: </span><span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">push</span> <span class="nx">socket</span>
-    <span class="err">@</span><span class="nx">attachSocket</span> <span class="nx">socket</span>
+  <span class="nv">attach: </span><span class="nf">(socket) -&gt;</span>
+    <span class="nx">@sockets</span><span class="p">.</span><span class="nx">push</span> <span class="nx">socket</span>
+    <span class="nx">@attachSocket</span> <span class="nx">socket</span>
 
-  <span class="nv">attachSocket: </span><span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">emit</span> <span class="s2">&quot;attach&quot;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span>
+  <span class="nv">attachSocket: </span><span class="nf">(socket, localId = null) -&gt;</span>
+    <span class="nx">@emit</span> <span class="s">&quot;attach&quot;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span>
 
-    <span class="err">@</span><span class="nx">from</span> <span class="o">=</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">from</span>
+    <span class="vi">@from = </span><span class="nx">socket</span><span class="p">.</span><span class="nx">from</span>
     <span class="nx">socket</span><span class="p">.</span><span class="nx">setMaxListeners</span> <span class="mi">0</span> <span class="k">if</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">setMaxListeners</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s2">&quot;connect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s2">&quot;connect&quot;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s2">&quot;begingroup&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s2">&quot;begingroup&quot;</span><span class="p">,</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">localId</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">localId</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s2">&quot;endgroup&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s2">&quot;endgroup&quot;</span><span class="p">,</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">localId</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s2">&quot;disconnect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s2">&quot;disconnect&quot;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span> <span class="s">&quot;connect&quot;</span><span class="p">,</span> <span class="nf">=&gt;</span>
+      <span class="nx">@emit</span> <span class="s">&quot;connect&quot;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span> <span class="s">&quot;begingroup&quot;</span><span class="p">,</span> <span class="nf">(group) =&gt;</span>
+      <span class="nx">@emit</span> <span class="s">&quot;begingroup&quot;</span><span class="p">,</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">localId</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span> <span class="s">&quot;data&quot;</span><span class="p">,</span> <span class="nf">(data) =&gt;</span>
+      <span class="nx">@emit</span> <span class="s">&quot;data&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">localId</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span> <span class="s">&quot;endgroup&quot;</span><span class="p">,</span> <span class="nf">(group) =&gt;</span>
+      <span class="nx">@emit</span> <span class="s">&quot;endgroup&quot;</span><span class="p">,</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">localId</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span> <span class="s">&quot;disconnect&quot;</span><span class="p">,</span> <span class="nf">=&gt;</span>
+      <span class="nx">@emit</span> <span class="s">&quot;disconnect&quot;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">localId</span>
 
-  <span class="nv">connect: </span><span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span> <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="err">@</span><span class="nx">sockets</span>
+  <span class="nv">connect: </span><span class="nf">-&gt;</span>
+    <span class="k">if</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@getId</span><span class="p">()</span><span class="si">}</span><span class="s">: No connections available&quot;</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span> <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="nx">@sockets</span>
 
-  <span class="nv">beginGroup: </span><span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
+  <span class="nv">beginGroup: </span><span class="nf">(group) -&gt;</span>
+    <span class="k">if</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@getId</span><span class="p">()</span><span class="si">}</span><span class="s">: No connections available&quot;</span>
 
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">@sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="nf">(socket) -&gt;</span>
       <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">group</span> <span class="k">if</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">once</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
+      <span class="nx">socket</span><span class="p">.</span><span class="nx">once</span> <span class="s">&#39;connect&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
         <span class="nx">socket</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">group</span>
       <span class="nx">do</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span>
 
-  <span class="nv">send: </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
+  <span class="nv">send: </span><span class="nf">(data) -&gt;</span>
+    <span class="k">if</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@getId</span><span class="p">()</span><span class="si">}</span><span class="s">: No connections available&quot;</span>
 
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">@sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="nf">(socket) -&gt;</span>
       <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span> <span class="k">if</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">once</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
+      <span class="nx">socket</span><span class="p">.</span><span class="nx">once</span> <span class="s">&#39;connect&#39;</span><span class="p">,</span> <span class="nf">-&gt;</span>
         <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span>
       <span class="nx">do</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span>
 
-  <span class="nv">endGroup: </span><span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="nx">endGroup</span><span class="p">()</span> <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="err">@</span><span class="nx">sockets</span>
+  <span class="nv">endGroup: </span><span class="nf">-&gt;</span>
+    <span class="k">if</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@getId</span><span class="p">()</span><span class="si">}</span><span class="s">: No connections available&quot;</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">endGroup</span><span class="p">()</span> <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="nx">@sockets</span>
 
-  <span class="nv">disconnect: </span><span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="err">@</span><span class="nx">sockets</span>
+  <span class="nv">disconnect: </span><span class="nf">-&gt;</span>
+    <span class="k">if</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">@getId</span><span class="p">()</span><span class="si">}</span><span class="s">: No connections available&quot;</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="nx">@sockets</span>
 
-  <span class="nv">detach: </span><span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="k">if</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
-    <span class="nx">socket</span> <span class="o">=</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="nx">unless</span> <span class="nx">socket</span>
-    <span class="nx">index</span> <span class="o">=</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">socket</span>
+  <span class="nv">detach: </span><span class="nf">(socket) -&gt;</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
+    <span class="nv">socket = </span><span class="nx">@sockets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">unless</span> <span class="nx">socket</span>
+    <span class="nv">index = </span><span class="nx">@sockets</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">socket</span>
     <span class="k">return</span> <span class="k">if</span> <span class="nx">index</span> <span class="o">is</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">isAddressable</span><span class="p">()</span>
-      <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">undefined</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;detach&#39;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span>
+    <span class="k">if</span> <span class="nx">@isAddressable</span><span class="p">()</span>
+      <span class="nx">@sockets</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span> <span class="o">=</span> <span class="kc">undefined</span>
+      <span class="nx">@emit</span> <span class="s">&#39;detach&#39;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span>
       <span class="k">return</span>
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">splice</span> <span class="nx">index</span><span class="p">,</span> <span class="mi">1</span>
-    <span class="err">@</span><span class="nx">emit</span> <span class="s2">&quot;detach&quot;</span><span class="p">,</span> <span class="nx">socket</span>
+    <span class="nx">@sockets</span><span class="p">.</span><span class="nx">splice</span> <span class="nx">index</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nx">@emit</span> <span class="s">&quot;detach&quot;</span><span class="p">,</span> <span class="nx">socket</span>
 
-  <span class="nv">isConnected: </span><span class="o">-&gt;</span>
-    <span class="nx">connected</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">=&gt;</span>
+  <span class="nv">isConnected: </span><span class="nf">-&gt;</span>
+    <span class="nv">connected = </span><span class="kc">false</span>
+    <span class="nx">@sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="nf">(socket) =&gt;</span>
       <span class="k">if</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
-        <span class="nx">connected</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="nv">connected = </span><span class="kc">true</span>
     <span class="nx">connected</span>
 
-  <span class="nv">isAddressable: </span><span class="o">-&gt;</span> <span class="kc">false</span>
-  <span class="nv">isRequired: </span><span class="o">-&gt;</span> <span class="err">@</span><span class="nx">required</span>
+  <span class="nv">isAddressable: </span><span class="nf">-&gt;</span> <span class="kc">false</span>
+  <span class="nv">isRequired: </span><span class="nf">-&gt;</span> <span class="nx">@required</span>
 
-  <span class="nv">isAttached: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+  <span class="nv">isAttached: </span><span class="nf">-&gt;</span>
+    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="nx">@sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
     <span class="kc">false</span>
 
-  <span class="nv">listAttached: </span><span class="o">-&gt;</span>
-    <span class="nx">attached</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">idx</span> <span class="k">in</span> <span class="err">@</span><span class="nx">sockets</span>
-      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">socket</span>
+  <span class="nv">listAttached: </span><span class="nf">-&gt;</span>
+    <span class="nv">attached = </span><span class="p">[]</span>
+    <span class="k">for</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">idx</span> <span class="k">in</span> <span class="nx">@sockets</span>
+      <span class="k">continue</span> <span class="k">unless</span> <span class="nx">socket</span>
       <span class="nx">attached</span><span class="p">.</span><span class="nx">push</span> <span class="nx">idx</span>
     <span class="nx">attached</span>
 
-  <span class="nv">canAttach: </span><span class="o">-&gt;</span> <span class="kc">true</span>
+  <span class="nv">canAttach: </span><span class="nf">-&gt;</span> <span class="kc">true</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">Port</span> <span class="o">=</span> <span class="nx">Port</span>
+<span class="nv">exports.Port = </span><span class="nx">Port</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Port.coffee">Port.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-14 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Port.coffee">Port.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
