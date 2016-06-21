@@ -7,7 +7,7 @@ title: Components
 - [lifecycle](#lifecycle)
 - [subgraphs](#subgraphs)
 - [design](#design)
-- Ports
+- [Ports](#ports)
   - [data types](#port-data-types)
   - [attributes](#port-attributes)
   - [events](#portevents)
@@ -28,60 +28,35 @@ Functionality a component provides:
 
 * List of inports (named inbound ports)
 * List of outports (named outbound ports)
-* Handler for component initialization that accepts configuration
-* Handler for connections for each inport
+* Handler for component initialization that accepts configuration (the `exports.getComponent = ->` that a componentLoader or graph will pass metadata to)
+* Handler for connections for each inport (proccess api)
 
 Minimal component written in NoFlo would look like the following:
 
 ```coffeescript
 # File: components/Forwarder.coffee
-noflo = require "noflo"
+noflo = require 'noflo'
 
 exports.getComponent = ->
   component = new noflo.Component
-  component.description = 'This component receives data on a single input
-  port and sends the same data out to the output port'
+    description: 'This component receives data on a single input
+    port and sends the same data out to the output port'
 
-  # Register ports and event handlers
-  component.inPorts.add 'in', datatype: 'all', (event, payload) ->
-    switch event
-      when 'data'
+    # Register ports
+    inPorts:
+      in:
+        datatype: 'all'
+    outPorts:
+      out:
+        datatype: 'all'
+
+    # Our event handler
+    process: (input, output) ->
+      if input.has 'in'
         # Forward data when we receive it.
-        # Note: send() will connect automatically if needed
-        component.outPorts.out.send payload
-      when 'disconnect'
-        # Disconnect output port when input port disconnects
-        component.outPorts.out.disconnect()
-  component.outPorts.add 'out', datatype: 'all'
-
-  component # Return new instance
+        output.sendDone out: payload
 ```
-```javascript
-// File: components/Forwarder.js
-var noflo = require("noflo");
 
-exports.getComponent = function() {
-  var component = new noflo.Component;
-  component.description = "This component receives data on a single input\
-  port and sends the same data out to the output port";
-
-  // Register ports and event handlers
-  component.inPorts.add('in', { datatype: 'all' }, function(event, payload) {
-    switch (event) {
-      case 'data':
-        // Forward data when we receive it.
-        // Note: send() will connect automatically if needed
-        return component.outPorts.out.send(data);
-      case 'disconnect':
-        // Disconnect output port when input port disconnects
-        return component.outPorts.out.disconnect();
-    }
-  });
-  component.outPorts.add('out', { datatype: 'all' });
-
-  return component; // Return new instance
-};
-```
 
 [animation]()
 
@@ -200,45 +175,30 @@ Array ports have a third value on events with the socket index :
 * `description`: provides human-readable description of the port displayed in documentation and in [Flowhub](http://flowhub.io) inspector;
 * `required`: indicates that a connection on the port is required for component's functioning (_default: `false`_);
 * `values`: sets the list of accepted values for the port, if the value received is not in the list an error is thrown (_default: `null`_).
-8 `control`: ports can be used to keep whatever the last packet that was sent to it.
+* `control`: ports can be used to keep whatever the last packet that was sent to it.
 
 
-Here is how multiple attributes can be combined together with event handlers:
-
-
+Here is how multiple attributes can be declared:
 ```coffeescript
 component.inPorts.add 'id',
   datatype: 'int'
   description: 'Request ID'
-
 component.inPorts.add 'user',
   datatype: 'object'
   description: 'User data'
-, (event, payload) ->
-  # Do something with event and payload here
-  if event is 'data'
-    component.outPorts.out.send payload
-    component.outPorts.out.disconnect()
 ```
 ```javascript
 component.inPorts.add('id', {
   datatype: 'int',
   description: 'Request ID'
 });
-
 component.inPorts.add('user', {
   datatype: 'object',
   description: 'User data'
-}, function (event, payload) {
-  // Do something with event and payload here
-  if (event === 'data') {
-    component.outPorts.out.send(payload);
-    component.outPorts.out.disconnect();
-  }
 });
 ```
 
-This can alternatively be done using constructors explicitly.
+This can alternatively be done using constructors explicitly:
 ```coffeescript
 noflo = require 'noflo'
 
@@ -249,14 +209,8 @@ component.inPorts = new noflo.inPorts
   user:
     datatype: 'object'
     description: 'User data'
-    process: (event, payload) ->
-      # Do something with event and payload here
-      if event is 'data'
-        component.outPorts.out.send payload
-        component.outPorts.out.disconnect()
 ```
 ```javascript
-
 noflo = require('noflo');
 
 component.inPorts = new noflo.inPorts({
@@ -266,13 +220,7 @@ component.inPorts = new noflo.inPorts({
   },
   user: {
     datatype: 'object',
-    description: 'User data',
-    process: function(event, payload) {
-      if (event === 'data') {
-        component.outPorts.out.send(payload);
-        return component.outPorts.out.disconnect();
-      }
-    }
+    description: 'User data'
   }
 });
 ```
@@ -312,8 +260,6 @@ c = new noflo.Component({
   }
 });
 ```
-
-
 
 <a id="icons"></a>
 ### Component icons

@@ -40,17 +40,21 @@
 - changing example link from [noflo-basecamp](https://github.com/noflo/noflo-basecamp) to [noflo-core](https://github.com/noflo/noflo-core) and [ingres-table](https://github.com/c-base/ingress-table)
 - change `component.json` link from depreciated in 2014, to latest
 
-# /glossary
+## /glossary
 - adding CommonJS link
 
 # canadianness
 
-# spec/
+## spec/
 - first round at fbp-spec, long error.
 
 ----------
 # 2016-06-21
 
-# /components & /process-api
+## /components & /process-api
 - moved port attributes from /process-api to /components/#port-attributes
+- adding IP info
+- reordering index
 
+## *
+- changing 'did you know' blocks from <blockquote> to jekyll styled <div>s

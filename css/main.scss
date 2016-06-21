@@ -128,7 +128,7 @@ $c8  : hsl(210, 68%, 70%); /* blue */
 $c9  : hsl(240, 68%, 70%); /* Purple */
 $c10 : hsl(270, 68%, 70%); /* Violet */
 $c11 : hsl(300, 68%, 70%); /* Pink */
-$c12 : hsl(330, 68%, 70%); 
+$c12 : hsl(330, 68%, 70%);
 
 $ProximaBoldStack: "proxima-nova-bold", "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosCnBold', "Helvetica", "Tahoma", "Geneva", "Arial Narrow", "Arial", Arial, sans-serif;
 $ProximaSemiboldStack: "proxima-nova-semibold", "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosCnBold', "Helvetica", "Tahoma", "Geneva", "Arial Narrow", "Arial", Arial, sans-serif;
@@ -160,12 +160,12 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
 
 @mixin clearfix {
     *zoom : 1;
-    
+
     &:before, &:after {
         display: table;
         content : "";
     }
-    
+
     &:after {
         clear: both;
     }
@@ -301,7 +301,7 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
     -ms-transition: background-color 300ms linear;
     transition: background-color 300ms linear;
   }
-  
+
 }
 
 .nav {
@@ -394,7 +394,7 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
   @include breakpoint(medium) {
     float: right;
   }
-  
+
 
   .nav {
 
@@ -584,9 +584,9 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
   height: 75px;
   padding: 25px 15px 25px 0;
   border-bottom: 4px solid $fadedblue;
-  
+
   .search__keywords {
-    
+
     float: left;
     width: 75%;
     height: 25px;
@@ -785,9 +785,9 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
     float: left;
     display: block;
   }
-  
+
 }
-  
+
   .dropdown-menu--github:before {
     left: auto;
     right: 4px;
@@ -840,7 +840,7 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
   padding-top: 30px;
   padding-bottom: 30px;
   background-color: #1e1f21;
-  
+
   border-top: 1px solid white;
 
   @include breakpoint(small) {
@@ -1176,7 +1176,7 @@ blockquote {
   .sidebar__nav {
     margin: 0;
     margin-bottom: 50px;
-    
+
     li {
       border-top: 1px solid #ededed;
       border-bottom: 1px solid #ffffff;
@@ -1268,7 +1268,7 @@ blockquote {
 \*------------------------------------*/
 .about-noflo {
   padding-bottom: 90px;
-  
+
 }
 
 
@@ -1372,9 +1372,9 @@ blockquote {
     margin-right: -20px;
     padding: 15px;
     padding-top: 60px;
-    
+
   }
-    
+
   background-size: cover !important;
 
   .main {
@@ -1384,11 +1384,11 @@ blockquote {
     @include breakpoint(small) {
       padding-top: 0;
     }
-    
+
     p, h2, h1 {
       text-shadow: 0 1px black;
     }
-    
+
     h2 {
       font-family: $ProximaLightStack;
       font-size: $thirty-six;
@@ -1398,8 +1398,8 @@ blockquote {
       }
 
     }
-    
-    p a {      
+
+    p a {
       color: hsl(211, 65%, 71%);
     }
 
@@ -1489,7 +1489,7 @@ blockquote {
 /*------------------------------------*\
     $Home - Significance of NoFlo
 \*------------------------------------*/
-.significance-of-noflo {  
+.significance-of-noflo {
   padding-top: 60px;
   padding-bottom: 120px;
 
@@ -1570,7 +1570,7 @@ blockquote {
   @include background-cover;
   background-image: url(../img/part-of-noflo.jpg);
   @include background-image-2x("../img/part-of-noflo@2.jpg");
-  
+
   @include breakpoint(small) {
     margin-left: -20px;
     margin-right: -20px;
@@ -1600,7 +1600,7 @@ blockquote {
     @include breakpoint(small) {
       display: none;
     }
-    
+
   }
 
 }
@@ -1615,7 +1615,7 @@ blockquote {
     background-repeat: no-repeat;
     background-position: 0 0;
     background-image: url(../img/diagrams/changelog-screen.png);
-    
+
     @include breakpoint(small) {
       height: 200px;
       top: auto;
@@ -1637,7 +1637,7 @@ blockquote {
     border-bottom: 1px solid  black;
     box-shadow: 0 1px hsl(220,20%,30%);
     box-shadow: 0 1px hsla(220,20%,40%,.5);
-    
+
     @include breakpoint(small) {
       float: left;
       width: 33.333333333%;
@@ -1666,7 +1666,7 @@ blockquote {
 
       @include breakpoint(small) {
         background-position: 50% 100%;
-        background-image: url(../img/white-arrow-down.png);       
+        background-image: url(../img/white-arrow-down.png);
       }
     }
 
@@ -1711,7 +1711,7 @@ blockquote {
     }
 
   }
-  
+
   ul {
     margin:0;
   }
@@ -1723,7 +1723,7 @@ blockquote {
   padding-left: 40px;
   border-left: 1px solid white;
   box-shadow: -1px 0px 0px hsl(220, 10%, 88%);
-  
+
   img {
     border: 2px solid white;
     box-shadow: 0 1px 1px hsl(220, 10%, 70%);
@@ -1755,18 +1755,18 @@ blockquote {
 .library__item {
   position: relative;
   float: left;
-  width: 100%;  
+  width: 100%;
   @include border-radius;
   border: 1px solid white;
   box-shadow: 0px 1px 1px 0px hsl(220, 10%, 75%);
   background-color: hsl(210, 10%, 98%);
-  
+
   overflow:hidden;
 
   padding: 15px;
   margin-bottom: 10px;
   h3 {
-    
+
   }
   .library__updated {
     display: inline-block;
@@ -1805,7 +1805,7 @@ blockquote {
   display: inline-block;
   font-size: $fourteen;
   color: #808080;
-  
+
   font-weight: normal;
   color: hsl(220,20%,70%);
   font-family: $ProximaLightStack;
@@ -1940,15 +1940,15 @@ blockquote {
   margin-bottom: 60px;
   margin-top: 15px;
   width: 100%;
-  .library__item {    
+  .library__item {
     width: 48%;
     margin-right: 2%;
     @include breakpoint(small) {
-      width: 100%;    
+      width: 100%;
     }
   }
-  
-  
+
+
 }
 
 
@@ -1973,7 +1973,7 @@ blockquote {
 }
 
 .demo__info {
-   
+
    p {
     padding-right: 30px;
    }
@@ -2014,7 +2014,7 @@ blockquote {
 }
 
 .demo__button {
-  
+
 
 }
 
@@ -2040,14 +2040,14 @@ h3 code {
 }
 
 body .sourcecode {
-  
+
 }
 
 body pre {
   margin: 20px 0 20px 0;
   //font-family: 'Monaco', Monaco, 'Bitstream Vera Sans Mono','Courier', monospace;
   //Monaco,Menlo,Consolas,"Courier New",monospace
-  font-family: 'Bitstream Vera Sans Mono', Courier, monospace !important;  
+  font-family: 'Bitstream Vera Sans Mono', Courier, monospace !important;
   font-weight: normal;
   font-size: 11px;
   color: hsl(220, 20%, 20%);
@@ -2060,7 +2060,7 @@ body pre {
   background-color: hsl(230, 8%, 92%);
   background-image: none;
   @include border-radius;
-  text-shadow: 0 1px white;  
+  text-shadow: 0 1px white;
   border: 1px solid white;
   border-bottom: 1px solid white;
   box-shadow: inset 0 2px 1px hsl(220, 10%, 80%);
@@ -2068,13 +2068,13 @@ body pre {
 
 .highlight {
   ::-moz-selection { background: hsl(230, 100%, 35%); }
-  ::selection      { background: hsl(230, 100%, 35%); } 
+  ::selection      { background: hsl(230, 100%, 35%); }
 }
 
-.highlight pre { 
+.highlight pre {
   background-color: hsl(230, 13%, 18%);
   background-image: none;
-  text-shadow: 0 1px black;  
+  text-shadow: 0 1px black;
   border: 1px solid black;
   border-bottom: 1px solid white;
   box-shadow: 0px -1px 1px 2px white;
@@ -2082,7 +2082,7 @@ body pre {
   color: #ffffff;
 }
 
- 
+
 .highlight pre {
   .c { color: hsl(220, 8%, 50%); } /* Comment */
   .err { color: red; } /* Error */
@@ -2179,4 +2179,57 @@ ul.backers {
     margin-left: 8px;
     margin-right: 8px;
   }
+}
+
+
+
+
+
+/*------------------------------------*\
+    $Notes
+\*------------------------------------*/
+.note {
+  margin: 30px 0;
+  margin-left: -30px;
+  padding: 20px 20px 24px;
+  padding-left: 50px;
+  -webkit-border-radius: 0 5px 5px 0;
+  -moz-border-radius: 0 5px 5px 0;
+  border-radius: 0 5px 5px 0;
+  position: relative;
+  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.2),inset 0 -1px 0 rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.2),inset 0 -1px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 1px 5px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.2),inset 0 -1px 0 rgba(0,0,0,0.3);
+  background-color: #7e6d42;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#7e6d42), to(#5c4e35));
+  background-image: -webkit-linear-gradient(top, #7e6d42 0%, #5c4e35 100%);
+  background-image: -moz-linear-gradient(top, #7e6d42 0%, #5c4e35 100%);
+  background-image: -o-linear-gradient(top, #7e6d42 0%, #5c4e35 100%);
+  background-image: linear-gradient(to bottom, #7e6d42 0%, #5c4e35 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7e6d42', endColorstr='#5c4e35',GradientType=0 );
+  color: white;
+}
+
+.note:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    border-color: transparent #222 #222 transparent;
+    border-style: solid;
+    border-width: 5px;
+    width: 0;
+    height: 0;
+}
+
+.note:after {
+    content: '\2605';
+    color: #fc0;
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
 }

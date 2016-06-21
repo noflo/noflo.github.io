@@ -8,27 +8,38 @@ The main idea behind process api is having all port stuff come into one place, a
 The way the process api works is it gets called for each event.
 If `done` does not get called, it keeps getting called, and the IPs that are passed to it keep getting appended to the buffer.
 
->
-> (did you know / helpful tricks box?) component.process returns instance of component
->
+<div class="note">
+`component.process` returns instance of component
+</div>
 
 -----------------------------
 ### Index
-- [ComponentStates](#component-states)
+- [Information Packets](#ips)
+- [Component States](#component-states)
   - [Preconditions](#preconditions)
   - [Processing](#processing)
     - [Getting](#getting)
     - [Sending](#sending)
   - [Done](#done)
-- [FiringPatterns](#firing-patterns)
-  - [FullStream](#full-stream)
-  - [PerPacket](#per-packet)
-  - [StreamHelpers](#stream-helpers)
-- [Ports](#ports)
+  - [Stream Helpers](#stream-helpers)
+- [Firing Patterns](#firing-patterns)
+  - [Full Stream](#full-stream)
+  - [Per Packet](#per-packet)
 - [Scope](#scope)
 - [Buffer](#buffer)
 - [Brackets](#brackets)
 - [BracketForwarding](#bracket-forwarding)
+
+----------
+
+# <a id="ips"></a> Information Packets (IPs)
+- Valid types: 'data', 'openBracket', 'closeBracket'
+- can be created using `noflo.IP`
+  - `new noflo.IP 'validType', 'data here'`
+  - `new noflo.IP 'data', 'canada', scope: 42, index: 2, clonable: true, owner: 'eh', groups: []`
+- can check if an object is an IP by using `noflo.IP.isIP(obj)`
+
+----------
 
 
 
@@ -58,9 +69,9 @@ hasHoldData = input.has 'hold', (ip) -> ip.type is 'data'
 
 # <a name="processing"></a>Processing
 
->
-> (did you know / helpful tricks box?) using `input.get` and `input.getData` will remove the item retreived using it from the buffer.
->
+<div class="note">
+using `input.get` and `input.getData` will remove the item retreived using it from the buffer.
+</div>
 
 # <a name="getting"></a>Getting
 
@@ -78,9 +89,9 @@ until data.type is 'data'
 ## GetData <a name="get-data"></a>
 If the port name is not passed in as an argument, it will try to retrieve from the `in` In Port. Meaning, `input.getData` is the same as `input.getData 'in'`
 
->
-> (did you know / helpful tricks box?) when you `input.get|getData` from a `control` port, it does not reset the `control` ports buffer because the data is meant to persist until new data is sent to that `control` port. `control` ports also only accept `data` ips. If it is sent bracket `IP`s, they will be dropped silently.
->
+<div class="note">
+when you `input.get|getData` from a `control` port, it does not reset the `control` ports buffer because the data is meant to persist until new data is sent to that `control` port. `control` ports also only accept `data` ips. If it is sent bracket `IP`s, they will be dropped silently.
+</div>
 
 - `input.getData` will accept port(s) as the parameter.
 - `input.getData` is a shortcut for `input.get(portname).data`
@@ -98,7 +109,7 @@ dataArray = input.getData 'in', 'eh'
 
 # <a name="sending"></a>Sending
 
-If you're taking something and `send`ing multiple things, you should bracketize it (wrap with an `openBracket` and `closeBracket`ß)
+If you're taking something and `send`ing multiple things, you should bracketize it (wrap with an `openBracket` and `closeBracket`)
 
 ```coffeescript
 output.send new noflo.IP 'openBracket', ''
@@ -119,9 +130,9 @@ output.sendDone out: 'data'
 
 When you are done processing your data, call `output.done()` (or `output.sendDone` if it makes sense for how you're using it.)
 
->
-> (did you know / helpful tricks box?) An Error can be send to `output.sendDone` or `output.done` which will send the Error to the `error` port. If there is not an `error` port defined, it will propogate back up, the same happens if you just throw an Error. @todo: EMMITS PROCESSERROR event `output.sendDone new Error('we have a problem')`
->
+<div class="note">
+An Error can be send to `output.sendDone` or `output.done` which will send the Error to the `error` port. If there is not an `error` port defined, it will propogate back up, the same happens if you just throw an Error. @todo: EMMITS PROCESSERROR event `output.sendDone new Error('we have a problem')`
+</div>
 =================================================
 
 
@@ -257,9 +268,9 @@ c.process (input, output) ->
 
 If you need to do something advanced and the [Get](#Get) and [Stream](#Stream) helpers cannot do what you need, you can read information right from the buffer. To do that easily, there are `input.buffer` helpers.
 
->
-> (did you know / helpful tricks box?) When you manually read from the buffer, it is not reset automatically, so you have to manually change the buffer when you are [finished processing and are done](#Done).
->
+<div class="note">
+When you manually read from the buffer, it is not reset automatically, so you have to manually change the buffer when you are [finished processing and are done](#Done).
+</div>
 
 #### To get the current buffer
 ```coffeescript
