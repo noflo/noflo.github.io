@@ -43,13 +43,14 @@
 # /glossary
 - adding CommonJS link
 
-
-
-/////
-
 # canadianness
 
 # spec/
 - first round at fbp-spec, long error.
 
+----------
+# 2016-06-21
+
+# /components & /process-api
+- moved port attributes from /process-api to /components/#port-attributes
 

@@ -7,7 +7,7 @@ title: Components
 - [lifecycle](#lifecycle)
 - [subgraphs](#subgraphs)
 - [design](#design)
-- Port
+- Ports
   - [data types](#port-data-types)
   - [attributes](#port-attributes)
   - [events](#portevents)
@@ -132,6 +132,11 @@ When NoFlo is being run, all components used in a NoFlo network (an instantiated
 
 A running instance of a component in a NoFlo network is called a *process*. Before a process has received data it should be *inert*, merely listening to its input ports. Processes that need to start doing something when a network is started should be triggered to do so by sending them an Initial Information Packet.
 
+
+------------
+<a id="ports"></a>
+# Ports
+
 <a id="portevents"></a>
 ### Ports and events
 
@@ -195,6 +200,8 @@ Array ports have a third value on events with the socket index :
 * `description`: provides human-readable description of the port displayed in documentation and in [Flowhub](http://flowhub.io) inspector;
 * `required`: indicates that a connection on the port is required for component's functioning (_default: `false`_);
 * `values`: sets the list of accepted values for the port, if the value received is not in the list an error is thrown (_default: `null`_).
+8 `control`: ports can be used to keep whatever the last packet that was sent to it.
+
 
 Here is how multiple attributes can be combined together with event handlers:
 

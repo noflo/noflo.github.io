@@ -332,14 +332,6 @@ An example usage would be to not reset one port buffer while you reset different
 ----------------------------------------
 
 
-# <a name="Ports">Ports</a>
-
-`control` ports can be used to keep whatever the last packet that was sent to it.
-# @TODO: other parts of
-
-----------------------------------------
-
-
 # <a name="Brackets">Brackets</a>
 ### Brackets are used to group things.
 
