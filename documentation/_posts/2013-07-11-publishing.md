@@ -21,7 +21,7 @@ Please refer to [the NPM documentation](https://npmjs.org/doc/developers.html) o
 
 If you're publishing FBP graphs in either [.json](https://github.com/bergie/noflo/blob/master/examples/linecount/count.json) or [.fbp](https://github.com/bergie/noflo/blob/master/examples/linecount/count.fbp) format, just provide them similarly with the `graphs` key. Components can be either in CoffeeScript or JavaScript, the NoFlo ComponentLoader will handle the coffee compilation transparently.
 
-For examples, check out [noflo-yaml](https://github.com/bergie/noflo-yaml) or [noflo-basecamp](https://github.com/bergie/noflo-basecamp).
+For examples, check out [noflo-yaml](https://github.com/bergie/noflo-yaml), [noflo-core](https://github.com/noflo/noflo-core), or [ingres-table](https://github.com/c-base/ingress-table).
 
 ### Listing installed components
 
@@ -41,7 +41,7 @@ This same information is also be exposed to the web-based [Flowhub](http://flowh
 
 ## Publishing your components for web browsers
 
-In addition to Node.js, NoFlo component libraries can also be published for use in web browsers using [Component.io](https://github.com/component/component). Just like with NPM's `package.json`, you need to provide [a `component.json` file](https://github.com/component/component/wiki/Spec#wiki-componentjson) in the root of your GitHub repository. The structure is very similar to NPM's format.
+In addition to Node.js, NoFlo component libraries can also be published for use in web browsers using [Component.io](https://github.com/component/component). Just like with NPM's `package.json`, you need to provide [a `component.json` file](https://github.com/componentjs/spec/blob/master/component.json/specifications.md) in the root of your GitHub repository. The structure is very similar to NPM's format.
 
 In Component.io dependencies are declared using GitHub repository names, so for example you can depend on NoFlo as `noflo/noflo`.
 

@@ -3,12 +3,25 @@ layout: documentation
 title: Components
 ---
 
-A component is the main ingredient of flow-based programming. Component is a CommonJS module providing a set of input and output port handlers. These ports are used for connecting components to each other.
+- [structure](#structure)
+- [lifecycle](#lifecycle)
+- [subgraphs](#subgraphs)
+- [design](#design)
+- Port
+  - [data types](#port-data-types)
+  - [attributes](#port-attributes)
+  - [events](#portevents)
 
+[picture](ingredient)
+
+A component is the main ingredient of flow-based programming. Component is a [CommonJS module])(http://requirejs.org/docs/commonjs.html) providing a set of input and output port handlers. These ports are used for connecting components to each other.
+
+[picture](box)
 NoFlo processes (the boxes of a flow graph) are instances of a component, with the graph controlling connections between ports of components.
 
 Since version 0.2.0, NoFlo has been able to utilize components shared via NPM packages. [Read the introductory blog post](http://bergie.iki.fi/blog/distributing-noflo-components/) to learn more.
 
+<a id="structure"></a>
 ### Structure of a component
 
 Functionality a component provides:
@@ -26,8 +39,8 @@ noflo = require "noflo"
 
 exports.getComponent = ->
   component = new noflo.Component
-  component.description = "This component receives data on a single input
-  port and sends the same data out to the output port"
+  component.description = 'This component receives data on a single input
+  port and sends the same data out to the output port'
 
   # Register ports and event handlers
   component.inPorts.add 'in', datatype: 'all', (event, payload) ->
@@ -70,57 +83,20 @@ exports.getComponent = function() {
 };
 ```
 
+[animation]()
+
 This example component register two ports: _in_ and _out_. When it receives data in the _in_ port, it opens the _out_ port and sends the same data there. When the _in_ connection closes, it will also close the _out_ connection. So basically this component would be a simple repeater.
 
 The `exports.getComponent` function is used by NoFlo to create an instance of the component. See [Component Lifecycle](#lifecycle) for more information.
 
 You can find more examples of components in the [component library](/library/) section of this website.
 
-### Asynchronous components
-# Async
-Asynchronous components process data and send output some time later. The outputs are sent in the order that they are processed, which might be a different than the order received.
 
-Previously, we used a dedicated class named `AsyncComponent` which would be extended.
+<a id="component-loader"></a>
+### Component Loader @TODO:
 
-Now, [Process api](#Process) is asynchronous by default.
-
-WirePattern can be used for async by setting the `async` property. [WirePattern Async](/documentation/legacy/#async)
-
-
-
-### Subgraphs
-
-A NoFlo graph may contain multiple subgraphs, managed by instances of the `Graph` component. Subgraphs are useful for packaging particular flows to be used as a "new component" by other flows. This allows building more advanced functionality by creating reusable graphs of connected components.
-
-The Graph component loads the graph given to it as a new NoFlo network, and looks for unattached ports in it. It then exposes these ports as its own inports or outports. This way a graph containing subgraphs can easily connect data between the main graph and the subgraph.
-
-Unattached ports from the subgraph will be available through naming `ProcessName.port` on the Graph component instance.
-
-Simple example, specifying what file a spreadsheet-parsing subgraph should run with:
-
-```coffeescript
-# Load a subgraph as a new process
-'examples/spreadsheet/parse.fbp' -> GRAPH Reader(Graph)
-# Send the filename to the component (subgraph)
-'somefile.xls' -> READ.SOURCE Reader()
-# Display the results
-Reader() ENTITIZE.OUT -> IN Display(Output)
-```
-
-Just like with components, it is possible to share subgraphs via NPM. You have to register them in your `package.json`, for example:
-
-```json
-{
-  "name": "noflo-spreadsheet",
-  "noflo": {
-    "graphs": {
-      "Parse": "./graphs/parse.fbp"
-    }
-  }
-}
-```
-
-After this the subgraph is available as a "virtual component" with the name `spreadsheet/Parse` and can be used just like any other component. Subgraphs exported in this manner can be in either JSON or the `.fbp` format.
+<a id="subgraphs"></a>
+### moved to [Subgraphs](/documentation/graphs/#subgraphs)
 
 <a id="design"></a>
 ### Some words on component design
@@ -173,6 +149,7 @@ It depends on the nature of the component how these events may be handled. Most 
 
 When a port has no connections, meaning that it was initialized without a connection, or a _detach_ event has happened, it should do no operations regarding that port.
 
+<a id="port-data-types"></a>
 ### Port data types
 
 NoFlo is a flow-based programming environment for JavaScript, and JavaScript utilizes dynamic typing. Because of this, NoFlo component ports don't impose type safety, and the output of any port can be connected to the input of any other port. This means that any type checking or type conversions should be handled inside the components themselves.
@@ -203,6 +180,7 @@ The data types supported by NoFlo include:
 * _function_
 * _buffer_
 
+<a id="port-attributes"></a>
 ### Port attributes
 
 There is a set of other attributes a port may have apart from its `datatype`:
