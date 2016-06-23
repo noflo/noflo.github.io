@@ -6,7 +6,7 @@ categories:
 weight: 1
 ---
 
-# 1) define our ports
+## 1) define our ports
 
 ```coffeescript
 noflo = require 'noflo'
@@ -56,7 +56,7 @@ exports.getComponent = ->
     return unless input.hasStream 'content'
 ```
 
-# 3) start processing
+## 3) start processing
 
 ```coffeescript
 noflo = require 'noflo'
@@ -138,4 +138,5 @@ exports.getComponent = ->
 
 [See the component](https://github.com/aretecode/canadianness/blob/master/components/DetermineEmotion.coffee)
 
-[Go to the next step]()
+- [previous step (Index)](/projects)
+- [next step (FindEhs)](/projects/find-ehs)

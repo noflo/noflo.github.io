@@ -36,7 +36,7 @@ exports.getComponent = ->
 ```
 
 
-# 2) define our process and the precondition
+## 2) define our process and the precondition
 
 
 ```coffeescript
@@ -71,7 +71,7 @@ exports.getComponent = ->
 ```
 
 
-# 3) start processing
+## 3) start processing
 
 
 ```coffeescript
@@ -184,5 +184,5 @@ exports.getComponent = ->
 
 [See the component](https://github.com/aretecode/canadianness/blob/master/components/WordScore.coffee)
 
-[Go to the next step]()
-
+- [previous step (FindEhs)](/projects/find-ehs)
+- [next step (Graphs)](/projects/graphs)

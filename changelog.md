@@ -127,7 +127,15 @@
 ## package.json
 - creating
 
-## Embedding
+## projects/embedding
 - creating
 - rewrite index of canadianness and document it
 - add ss example of flowtrace and instructions on using it
+
+## projects/summary
+- splitting from index of /projects
+
+## hidden
+- added async-components, fbp, json, and protocol back as files, then hid them from the documentation navigation
+
+

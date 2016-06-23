@@ -338,3 +338,6 @@ $ flowtrace-show <JSON-TRACE-LOCATION>
 ```
 
 <img src="/img/flowtrace.png" alt="flowtrace graph"/>
+
+- [previous step (Testing)](/projects/testing)
+- [next step (package.json)](/projects/package-json)

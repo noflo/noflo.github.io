@@ -8,6 +8,7 @@ weight: 8
 
 Since `JSON` does not support comments, we can break down the parts of package.json that are important to noflo here:
 
+```coffeescript
 {
   # name of your project
   # this is the namespace when you are loading components or graphs
@@ -50,3 +51,8 @@ Since `JSON` does not support comments, we can break down the parts of package.j
     "test": "./node_modules/.bin/grunt test"
   }
 }
+```
+
+- [previous step (Embedding)](/projects/embedding)
+- [next step (Summary)](/projects/summary)
+
