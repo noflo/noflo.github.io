@@ -106,3 +106,28 @@
 - make writing your own projects in its own folder
 - make initial layout for it
 
+----------
+# 2016-06-23
+
+## writing projects
+- adding page weights and sorting in order
+- adding links to the repo for each part and links to next part of the guide
+## FindEhs
+- expanding on FindEhs
+## graphs
+- linking to subgraphs docs
+
+## process-api
+- adding note about `control` ports dealing with only data
+
+## graphs
+- changing subraph punctuation
+- adding flowhub section
+
+## package.json
+- creating
+
+## Embedding
+- creating
+- rewrite index of canadianness and document it
+- add ss example of flowtrace and instructions on using it

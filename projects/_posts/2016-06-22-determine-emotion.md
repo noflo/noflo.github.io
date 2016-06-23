@@ -3,6 +3,7 @@ layout: projects
 title: Determine Emotion
 categories:
   - projects
+weight: 1
 ---
 
 # 1) define our ports
@@ -134,3 +135,7 @@ exports.getComponent = ->
 
     output.sendDone emotion: mode
 ```
+
+[See the component](https://github.com/aretecode/canadianness/blob/master/components/DetermineEmotion.coffee)
+
+[Go to the next step]()

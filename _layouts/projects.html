@@ -15,7 +15,11 @@ layout: default
         <div class="sidebar span4">
           <nav>
             <ul class="sidebar__nav">
-              {% for post in site.categories['projects'] %}
+              <li>
+                <a href="{{ site.baseurl }}/projects/"{% if page.url == '/projects/index.html' %} class="active"{% endif%}>Writing your own project</a>
+              </li>
+              {% assign posts = site.categories['projects'] | sort:"weight"  %}
+              {% for post in posts %}
               <li>
                 <a href="{{ site.baseurl }}{{ post.url }}"{% if post.url == page.url %} class="active"{% endif%}>{{ post.title }}</a>
               </li>

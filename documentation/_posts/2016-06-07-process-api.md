@@ -190,12 +190,16 @@ Say you were using a database query, querying a list of names from people
 ## <a name="BracketForwarding">BracketForwarding</a>
 [animation]()
 
+<div class="note">
+Brackets are automatically forwarded from 'in' inPort to outPorts 'out' and 'error' (if those ports exist).
+</div>
+
 Bracket forwarding is a way to pass on brackets so that you don't have to deal with brackets coming from that in port in the process function.
 
 If an inport receives an `openBracket`, `data`, and `closeBracket` and you are using `bracketForwarding`, you can get the `data`, process it and send stuff out, and what you send out will be wrapped in the `openBracket` and `closeBracket`.
 
 <div class="note">
-Brackets are automatically forwarded from 'in' inPort to outPorts 'out' and 'error' (if they exist).
+Control ports are not wrapped with brackets, they only deal with data.
 </div>
 
 

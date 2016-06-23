@@ -3,6 +3,7 @@ layout: projects
 title: Word Score
 categories:
   - projects
+weight: 3
 ---
 
 
@@ -180,3 +181,8 @@ exports.getComponent = ->
     # since there is only one outport it will know which one we mean
     output.sendDone score: score
 ```
+
+[See the component](https://github.com/aretecode/canadianness/blob/master/components/WordScore.coffee)
+
+[Go to the next step]()
+
