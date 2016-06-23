@@ -7,7 +7,7 @@ title: Components
 - [lifecycle](#lifecycle)
 - [subgraphs](#subgraphs)
 - [design](#design)
-- [Ports](#ports)
+- [ports](#ports)
   - [data types](#port-data-types)
   - [attributes](#port-attributes)
   - [events](#portevents)
@@ -124,6 +124,7 @@ Being a flow-based programming environment, the main action in NoFlo happens thr
 * _EndGroup_: A particular grouped stream of data ends
 * _Disconnect_: end of data transmission
 * _Detach_: A connection to the port has been removed
+* _IP_: An Information Packet has been sent, could be with a type of `data`, `openBracket`, or `closeBracket`. This is the modern way, and usually the only thing that should be listened for.
 
 It depends on the nature of the component how these events may be handled. Most typical components do operations on a whole transmission, meaning that they should wait for the _disconnect_ event on inports before they act, but some components can also act on single _data_ packets coming in.
 
@@ -148,7 +149,7 @@ component.inPorts.add('options', { datatype: 'object' });
 The data types supported by NoFlo include:
 
 * _all_: the port can deal with any data type
-* _bang_: the port doesn't do anything with the contents of a data packet, only with the fact that a packet was sent
+* _bang_: the port doesn't do anything with the contents of a data packet, only with the fact that a packet was sent, so any datatype can be sent to a bang port
 * _string_
 * _boolean_
 * _number_

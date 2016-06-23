@@ -2233,3 +2233,36 @@ ul.backers {
     font-weight: 700;
     text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
 }
+
+
+/*------------------------------------*\
+    $Table
+\*------------------------------------*/
+
+table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+table th {
+  font-weight: bold;
+}
+
+table th,
+table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+

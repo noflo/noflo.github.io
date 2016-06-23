@@ -58,3 +58,51 @@
 
 ## *
 - changing 'did you know' blocks from <blockquote> to jekyll styled <div>s
+
+## /debugging
+- created
+
+## /testing
+- removed for now, should it just reference writing-projects guide?
+
+## process-api
+- fix component-states header link
+- use destructuring when getData with multiple
+- changing xml of per packet to be flow order same as full stream
+
+----------
+# 2016-06-22
+
+## /process-api
+- changing null brackets to use default
+- fix scope header
+- expand scope content
+
+## /writing-projects
+- linking to noflo-core & InternalSockets
+
+## /process-api -> /testing
+- moving bracket forwarding example so it will be replaced with an animation into testing to be used as component loading example
+
+## /components#portevents
+- added IP
+
+## config
+- added redcarpet extension
+
+## css
+- added table styles
+
+## legacy
+- table md
+- translation extension
+
+## graphs
+- fixing json anchor
+- change blockquote to notes div
+- make order of code (js, cs) consistent
+
+## writing projects
+- make writing your own projects in its own folder
+- make initial layout for it
+
