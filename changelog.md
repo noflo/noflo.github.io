@@ -138,4 +138,19 @@
 ## hidden
 - added async-components, fbp, json, and protocol back as files, then hid them from the documentation navigation
 
+----------
+# 2016-06-24
+
+## graphs
+- screenshots
+
+## testing
+- codeblock highlighting
+
+## publishing
+- add publishing NPM with Travis guide
+- remove old parts
+- add index
+
+
 

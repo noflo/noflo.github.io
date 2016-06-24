@@ -13,9 +13,8 @@ Now,
 (process api)[process api] is asynchronous by default.
 
 WirePattern can be used for async by setting the `async` property.
-```
-c.w
-```
+
+-----------
 
 Asynchronous components process data and send output some time later. The outputs are sent in the order that they are processed, which might be a different than the order received. To keep track of the in/out data correspondence, outputs are sent with a group marked with the input data.
 

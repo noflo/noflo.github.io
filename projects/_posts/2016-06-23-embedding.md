@@ -7,7 +7,7 @@ weight: 9
 ---
 
 ## 1) the same as our tests, if we want to run in the browser
-```
+```coffeescript
 noflo = require 'noflo'
 unless noflo.isBrowser()
   baseDir = __dirname
