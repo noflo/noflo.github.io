@@ -336,8 +336,45 @@ when the flowtrace has been written, we can copy and paste the location of that 
 ```
 $ flowtrace-show <JSON-TRACE-LOCATION>
 ```
-
 <img src="/img/flowtrace.png" alt="flowtrace graph"/>
+
+
+## 7) Shorter
+### now that you know how to do it yourself, if you choose, you can use a library to achieve the same thing more easily, [fbp-spec](https://github.com/trustmaster/noflo-tester)
+
+```
+Tester = require 'noflo-tester'
+
+canadianness = (args, cb) ->
+  spellingData = args['spelling']
+  wordsData = args['words']
+  # debugging [optional]
+  debug = args['debug'] or false
+  contentData = args['content']
+
+  ness = new Tester 'canadianness/Canadianness', trace: true
+  ness.start (err, instance) ->
+    return throw err if err
+
+    # using noflo-tester, you can
+    # [receive from multiple outports](https://github.com/trustmaster/noflo-tester#receiving-from-multiple-output-ports)
+    scoreData = null
+    emotionData = null
+    ness.receive
+      score: (data) ->
+        scoreData = data
+      remainder: (data) ->
+        emotionData = data
+    .then ->
+      cb emotionData, scoreData
+
+    # send the data
+    # send an object to Tester, the properties are the ports
+    ness.send
+      words: wordsData
+      spelling: spellingData
+      content: contentData
+```
 
 - [previous step (Testing)](/projects/testing)
 - [next step (package.json)](/projects/package-json)
