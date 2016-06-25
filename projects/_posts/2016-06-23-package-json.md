@@ -53,6 +53,8 @@ Since `JSON` does not support comments, we can break down the parts of package.j
 }
 ```
 
+also check out [Auto-deploying to NPM using Travis](/documentation/publishing/#auto-deploying-to-npm-using-travis)
+
 - [previous step (Embedding)](/projects/embedding)
 - [next step (Summary)](/projects/summary)
 

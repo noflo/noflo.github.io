@@ -146,11 +146,33 @@
 
 ## testing
 - codeblock highlighting
+- adding notes about noflo requirements for using special cases
 
 ## publishing
 - add publishing NPM with Travis guide
 - remove old parts
 - add index
 
+## glossary
+- add ip
 
+## nav
+change `components` link from https://www.npmjs.com/browse/keyword/noflo to https://https://npmjs.com/browse/depended/noflo so it shows in order of recent and used
 
+## testing
+- adding component loading inline and link to it from bracket pooling
+
+## process-api
+- testing & fixing the buffer example
+
+----------
+# 2016-06-25
+
+## process-api
+- changed todo to processerror in #done
+
+## projects/#word-score
+- updating
+
+## legacy
+- formatting

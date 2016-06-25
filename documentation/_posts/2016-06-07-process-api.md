@@ -43,39 +43,51 @@ component.process returns instance of component
 
 
 
-=================================================
+
+
+
+
+
+
+
+
+
+
 # <a id="component-states"></a> Component States
 
 ----------------------------------------
 
-# <a id="preconditions"></a> Preconditions
+## <a id="preconditions"></a> Preconditions
 
 this will check if it has a packet
+
 ```coffeescript
 input.has 'portname'
 ```
 
 using multiple arguments will check they all have packets
+
 ```coffeescript
 input.has 'portname', 'secondportname'
 ```
 
 one thing to note about input.has is that it will check for any packet type (openBracket, data, closeBracket) so when we just want the data for example, we can filter the data using a callback.
+
 ```coffeescript
 hasHoldData = input.has 'hold', (ip) -> ip.type is 'data'
 ```
 
 ----------------------------------------
 
-# <a name="processing"></a>Processing
+## <a name="processing"></a>Processing
 
 <div class="note">
 using `input.get` and `input.getData` will remove the item retreived using it from the buffer.
 </div>
 
-# <a name="getting"></a>Getting
+## <a name="getting"></a>Getting
 
-## Get <a name="get"></a>
+### Get <a name="get"></a>
 `input.get` will get the IP for that port. When the first IP is openBracket, it will get the date from that, if the first IP is data, it will get the data from that.
 
 Since it removes it from the buffer each time, you can repeatedly call it until you have what you need, for example:
@@ -86,7 +98,7 @@ until data.type is 'data'
   data.get 'in'
 ```
 
-## GetData <a name="get-data"></a>
+### GetData <a name="get-data"></a>
 If the port name is not passed in as an argument, it will try to retrieve from the `in` In Port. Meaning, `input.getData` is the same as `input.getData 'in'`
 
 <div class="note">
@@ -107,7 +119,7 @@ Passing in multiple ports will give an array of the data (using [destructuring](
 [canada, eh] = input.getData 'canada', 'eh'
 ```
 
-# <a name="sending"></a>Sending
+## <a name="sending"></a>Sending
 
 If you're taking something and `send`ing multiple things, you should bracketize it (wrap with an `openBracket` and `closeBracket`)
 
@@ -126,68 +138,40 @@ output.sendDone out: 'data'
 ```
 
 ----------------------------------------
-### <a name="done">Done</a>
+## <a name="done">Done</a>
 
 When you are done processing your data, call `output.done()` (or `output.sendDone` if it makes sense for how you're using it.)
 
 <div class="note">
-An Error can be send to `output.sendDone` or `output.done` which will send the Error to the `error` port. If there is not an `error` port defined, it will propogate back up, the same happens if you just throw an Error. @todo: EMMITS PROCESSERROR event `output.sendDone new Error('we have a problem')`
+An Error can be send to `output.sendDone` or `output.done` which will send the Error to the `error` port. If there is not an `error` port defined, it will propogate back up, the same happens if you just throw an Error. `output.sendDone new Error('we have a problem')` In the future, it may emit a proccesserror.
 </div>
-=================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 ----------------------------------------
 
 
-# <a name="Brackets">Brackets</a>
+# <a name="Brackets"></a>Brackets
 ### Brackets are used to group things.
 
-Say you were using a database query, querying a list of names from people
-#### @TODO: this would also be one component connected to another so a graph example could be used or attach manually
-```coffeescript
-  noflo = require 'noflo'
-  fetchPeople = ->
-    component = new noflo.Component
-      inPorts:
-        requestid:
-          type: 'string'
-        amount:
-          type: 'int'
-          description: 'amount of people to fetch'
-      outPorts:
-        out:
-          datatype: 'object'
-          description: 'bracket collection of people selected'
-      process: (input, output) ->
-        requestid = input.getData 'requestid'
-        output.send out: new noflo.IP 'openBracket', requestid
-
-        # imaginarily fetching from a db, could send db connection in through a port
-        result = ['john', 'sue']
-        for data in result
-          output.send out: data
-
-        output.send out: new noflo.IP 'closeBracket', requestid
-
-  log = ->
-    component = new noflo.Component
-      inPorts:
-        in:
-          type: 'all'
-          description: 'data to log'
-    c.process (input, output) ->
-      return unless input.hasStream 'in'
-      console.log input.getStream 'in'
-      output.done()
-
-
-  # @TODO: connect getPeople and log and test eh
-```
-
-
-
-## <a name="BracketForwarding">BracketForwarding</a>
+## <a name="BracketForwarding"></a>BracketForwarding
 [animation]()
 
 <div class="note">
@@ -202,7 +186,7 @@ If an inport receives an `openBracket`, `data`, and `closeBracket` and you are u
 Control ports are not wrapped with brackets, they only deal with data.
 </div>
 
-
+An example of bracket forwarding can be found in [Loading Components inline](/documentation/testing/#loading-components-inline)
 
 -----------------------------------------------------
 
@@ -371,6 +355,8 @@ input.buffer.filter portname, (ip) -> ip.type is 'data'
 An example usage would be to not reset one port buffer while you reset different one and trigger on every IP.
 
 ```coffeescript
+noflo = require 'noflo'
+
 exports.getComponent = ->
   c = new noflo.Component
     icon: 'gear'
@@ -388,13 +374,14 @@ exports.getComponent = ->
       stream = input.getStream 'eh'
       streamData = stream.filter (ip) -> ip.type is 'data'
 
-      output = 'ehs=' + streamData.length
+      data = 'ehs=' + streamData.length
       if input.has 'igloo'
         igloos = input.buffer.find 'igloo', (ip) -> ip.type is 'data'
         for igloo in igloos
-          output += '&' + igloo.data
+          data += '&' + igloo.data
 
-      output.sendDone canada: output
+      console.log data
+      output.sendDone canada: data
 
 c = exports.getComponent()
 eh = new noflo.internalSocket.createSocket()
@@ -410,7 +397,14 @@ igloo.send 'cold'
 igloo.send 'message'
 eh.send 'eh'
 eh.send new noflo.IP 'closeBracket'
+
+# @TODO: NEEDS A FIX
+eh.send new noflo.IP 'closeBracket'
+
 eh.send new noflo.IP 'openBracket'
 eh.send '...eh...'
+eh.send new noflo.IP 'closeBracket'
+
+# @TODO: NEEDS A FIX
 eh.send new noflo.IP 'closeBracket'
 ```

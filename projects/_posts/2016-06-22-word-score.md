@@ -108,11 +108,11 @@ exports.getComponent = ->
     return unless input.has 'list', 'content', (ip) -> ip.type is 'data'
 
     # get the data
-    #content = input.getData 'content'
-    #list = input.getData 'list'
+    # content = input.getData 'content'
+    # list = input.getData 'list'
     # @TODO: temporary hack since getData does not behave as one expects, change when fixed
-    content = ((input.getStream(null, 'content').filter (ip) -> ip.type is 'data').map (ip) -> ip.data)[0]
-    list = input.getStream(null, 'list')[0].data
+    content = ((input.getStream('content').filter (ip) -> ip.type is 'data').map (ip) -> ip.data)[0]
+    list = input.getStream('list')[0].data
 
     # our base score we will send out
     score = 0
@@ -120,56 +120,44 @@ exports.getComponent = ->
     # splits content into an array of words
     contents = tokenizer.tokenize content
 
-    # simplify
-    # ----------------------
-
+    # if the list has the word in it, return the score
+    # otherwise, 0 points
     wordScore = (word) ->
       if list[word]?
         return list[word]
       else
         return 0
 
-    getItemAsArray = (comparison) ->
-      data = comparison
-      if data.indexOf(' ') >= 0
-        data = data.split " "
-      else
-        data = [data]
-      return data
-
     # go through each of the comparisons in the list
     # if it is Canadian: 1, American: -1, British: .5, None: 0
     spellingScore = (word) ->
       for comparison in list
-        american = getItemAsArray comparison["American"]
-        canadian = getItemAsArray comparison["Canadian"]
-        british = getItemAsArray comparison["British"]
-
-        if word not in american
-          if word in canadian
+        if word not in comparison["American"]
+          if word in comparison["Canadian"]
             return 1
-          else if word in british
+          else if word in comparison["British"]
             return 0.5
         else
           return -1
 
       return 0
 
-    isSpelling = ->
-      return if list[0]?["Canadian"]? then true else false
-
-    if isSpelling()
+    # if it has this, it is a spelling list
+    if list[0]?["Canadian"]?
       scoringFunction = spellingScore
+    # otherwise it is an object list of words with scores
     else
       scoringFunction = wordScore
 
-    # -------------------------
-
+    # use this to singularize and pluralize each word
     nounInflector = new natural.NounInflector()
-    for data in contents
-      plural = nounInflector.pluralize(data)
-      singular = nounInflector.singularize(data)
 
+    # go through each item in contents
+    for data in contents
+      plural = nounInflector.pluralize data
+      singular = nounInflector.singularize data
+
+      # if it is already plural or singular do not use it
       if plural isnt data
         score += scoringFunction plural
       if singular isnt data
