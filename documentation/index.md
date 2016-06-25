@@ -103,13 +103,13 @@ The main NoFlo package gives you the environment for running flows. In addition 
 
 There are hundreds of open source components available via [NoFlo Component Libraries](https://www.npmjs.com/browse/depended/noflo) that you can install with NPM.
 
-For example, to install the [filesystem components](/library/noflo-filesystem/), you can run:
+For example, to install the [filesystem components](https://www.npmjs.com/package/noflo-filesystem/), you can run:
 
 ```bash
 $ npm install noflo-filesystem --save
 ```
 
-We should also install [noflo-core](/library/noflo-core/), which provides various general utility components:
+We should also install [noflo-core](https://www.npmjs.com/package/noflo-core), which provides various general utility components:
 
 ```bash
 $ npm install noflo-core --save
@@ -168,7 +168,7 @@ Looking at this is useful in order to understand how information flows through a
 
 ## Building a simple calculator
 
-NoFlo has a [wealth of components](/library/) available. One such example is the [noflo-math](/library/noflo-math/), which can be used for performing simple calculations.
+NoFlo has a [wealth of components](/library/) available. One such example is the [noflo-math](https://www.npmjs.com/package/noflo-math), which can be used for performing simple calculations.
 
 Install it with:
 

@@ -2,73 +2,63 @@
 layout: documentation
 title: Components
 ---
-A component is the main ingredient of flow-based programming. Component is a CommonJS module providing a set of input and output port handlers. These ports are used for connecting components to each other.
 
+- [structure](#structure)
+- [lifecycle](#lifecycle)
+- [subgraphs](#subgraphs)
+- [design](#design)
+- [ports](#ports)
+  - [data types](#port-data-types)
+  - [attributes](#port-attributes)
+  - [events](#portevents)
+
+[picture](ingredient)
+
+A component is the main ingredient of flow-based programming. Component is a [CommonJS module])(http://requirejs.org/docs/commonjs.html) providing a set of input and output port handlers. These ports are used for connecting components to each other.
+
+[picture](box)
 NoFlo processes (the boxes of a flow graph) are instances of a component, with the graph controlling connections between ports of components.
 
 Since version 0.2.0, NoFlo has been able to utilize components shared via NPM packages. [Read the introductory blog post](http://bergie.iki.fi/blog/distributing-noflo-components/) to learn more.
 
+<a id="structure"></a>
 ### Structure of a component
 
 Functionality a component provides:
 
 * List of inports (named inbound ports)
 * List of outports (named outbound ports)
-* Handler for component initialization that accepts configuration
-* Handler for connections for each inport
+* Handler for component initialization that accepts configuration (the `exports.getComponent = ->` that a componentLoader or graph will pass metadata to)
+* Handler for connections for each inport (proccess api)
 
 Minimal component written in NoFlo would look like the following:
 
 ```coffeescript
 # File: components/Forwarder.coffee
-noflo = require "noflo"
+noflo = require 'noflo'
 
 exports.getComponent = ->
   component = new noflo.Component
-  component.description = "This component receives data on a single input
-  port and sends the same data out to the output port"
+    description: 'This component receives data on a single input
+    port and sends the same data out to the output port'
 
-  # Register ports and event handlers
-  component.inPorts.add 'in', datatype: 'all', (event, payload) ->
-    switch event
-      when 'data'
+    # Register ports
+    inPorts:
+      in:
+        datatype: 'all'
+    outPorts:
+      out:
+        datatype: 'all'
+
+    # Our event handler
+    process: (input, output) ->
+      if input.has 'in'
         # Forward data when we receive it.
-        # Note: send() will connect automatically if needed
-        component.outPorts.out.send payload
-      when 'disconnect'
-        # Disconnect output port when input port disconnects
-        component.outPorts.out.disconnect()
-  component.outPorts.add 'out', datatype: 'all'
-
-  component # Return new instance
+        output.sendDone out: payload
 ```
 
-```javascript
-// File: components/Forwarder.js
-var noflo = require("noflo");
 
-exports.getComponent = function() {
-  var component = new noflo.Component;
-  component.description = "This component receives data on a single input\
-  port and sends the same data out to the output port";
-
-  // Register ports and event handlers
-  component.inPorts.add('in', { datatype: 'all' }, function(event, payload) {
-    switch (event) {
-      case 'data':
-        // Forward data when we receive it.
-        // Note: send() will connect automatically if needed
-        return component.outPorts.out.send(data);
-      case 'disconnect':
-        // Disconnect output port when input port disconnects
-        return component.outPorts.out.disconnect();
-    }
-  });
-  component.outPorts.add('out', { datatype: 'all' });
-
-  return component; // Return new instance
-};
-```
+[animation]()
 
 This example component register two ports: _in_ and _out_. When it receives data in the _in_ port, it opens the _out_ port and sends the same data there. When the _in_ connection closes, it will also close the _out_ connection. So basically this component would be a simple repeater.
 
@@ -76,43 +66,12 @@ The `exports.getComponent` function is used by NoFlo to create an instance of th
 
 You can find more examples of components in the [component library](/library/) section of this website.
 
-### Asynchronous components
 
-In addition to the regular `noflo.Component` baseclass, there is an additional `noflo.AsyncComponent` baseclass that helps in creating components that perform asynchronous operations in a consistent way. See the [Async Components](/documentation/async-components/) document for more information.
+<a id="component-loader"></a>
+### Component Loader @TODO:
 
-### Subgraphs
-
-A NoFlo graph may contain multiple subgraphs, managed by instances of the `Graph` component. Subgraphs are useful for packaging particular flows to be used as a "new component" by other flows. This allows building more advanced functionality by creating reusable graphs of connected components.
-
-The Graph component loads the graph given to it as a new NoFlo network, and looks for unattached ports in it. It then exposes these ports as its own inports or outports. This way a graph containing subgraphs can easily connect data between the main graph and the subgraph.
-
-Unattached ports from the subgraph will be available through naming `ProcessName.port` on the Graph component instance.
-
-Simple example, specifying what file a spreadsheet-parsing subgraph should run with:
-
-```coffeescript
-# Load a subgraph as a new process
-'examples/spreadsheet/parse.fbp' -> GRAPH Reader(Graph)
-# Send the filename to the component (subgraph)
-'somefile.xls' -> READ.SOURCE Reader()
-# Display the results
-Reader() ENTITIZE.OUT -> IN Display(Output)
-```
-
-Just like with components, it is possible to share subgraphs via NPM. You have to register them in your `package.json`, for example:
-
-```json
-{
-  "name": "noflo-spreadsheet",
-  "noflo": {
-    "graphs": {
-      "Parse": "./graphs/parse.fbp"
-    }
-  }
-}
-```
-
-After this the subgraph is available as a "virtual component" with the name `spreadsheet/Parse` and can be used just like any other component. Subgraphs exported in this manner can be in either JSON or the `.fbp` format.
+<a id="subgraphs"></a>
+### moved to [Subgraphs](/documentation/graphs/#subgraphs)
 
 <a id="design"></a>
 ### Some words on component design
@@ -144,9 +103,14 @@ When NoFlo is being run, all components used in a NoFlo network (an instantiated
 
 * _Instantiation_: component is instantiated for a node in the NoFlo graph, and its `constructor` method is called. At this stage a component should prepare its internal data structures and register listeners for the [events of its input ports](#portevents)
 * _Running_: component has received events on its input ports. Now the component can interact with those events and the external world, and optionally start transmitting [port events](#portevents) on its output ports
-* _Shutdown_: Normally a NoFlo network finishes when all components stop transmitting port events. It is however also possible to close a running NoFlo network. In this case the `shutdown` method of components gets called, allowing components to perform whatever cleanup needed, like unregistering event listeners on external objects, or closing network connections
+* _Shutdown_: Normally a NoFlo network finishes when all components stop transmitting port events. It is however also possible to close a running NoFlo network. In this case the `shutdown` method of components gets called, allowing components to perform whatever cleanup needed, like unregistering event listeners on external objects, or closing network connections.
 
 A running instance of a component in a NoFlo network is called a *process*. Before a process has received data it should be *inert*, merely listening to its input ports. Processes that need to start doing something when a network is started should be triggered to do so by sending them an Initial Information Packet.
+
+
+------------
+<a id="ports"></a>
+# Ports
 
 <a id="portevents"></a>
 ### Ports and events
@@ -160,11 +124,13 @@ Being a flow-based programming environment, the main action in NoFlo happens thr
 * _EndGroup_: A particular grouped stream of data ends
 * _Disconnect_: end of data transmission
 * _Detach_: A connection to the port has been removed
+* _IP_: An Information Packet has been sent, could be with a type of `data`, `openBracket`, or `closeBracket`. This is the modern way, and usually the only thing that should be listened for.
 
 It depends on the nature of the component how these events may be handled. Most typical components do operations on a whole transmission, meaning that they should wait for the _disconnect_ event on inports before they act, but some components can also act on single _data_ packets coming in.
 
 When a port has no connections, meaning that it was initialized without a connection, or a _detach_ event has happened, it should do no operations regarding that port.
 
+<a id="port-data-types"></a>
 ### Port data types
 
 NoFlo is a flow-based programming environment for JavaScript, and JavaScript utilizes dynamic typing. Because of this, NoFlo component ports don't impose type safety, and the output of any port can be connected to the input of any other port. This means that any type checking or type conversions should be handled inside the components themselves.
@@ -183,7 +149,7 @@ component.inPorts.add('options', { datatype: 'object' });
 The data types supported by NoFlo include:
 
 * _all_: the port can deal with any data type
-* _bang_: the port doesn't do anything with the contents of a data packet, only with the fact that a packet was sent
+* _bang_: the port doesn't do anything with the contents of a data packet, only with the fact that a packet was sent, so any datatype can be sent to a bang port
 * _string_
 * _boolean_
 * _number_
@@ -195,11 +161,12 @@ The data types supported by NoFlo include:
 * _function_
 * _buffer_
 
+<a id="port-attributes"></a>
 ### Port attributes
 
 There is a set of other attributes a port may have apart from its `datatype`:
 
-* `addressable`: this boolean flag makes turns the port into an _Array port_, giving a particular index for each connection attached to it (_default: `false`_); 
+* `addressable`: this boolean flag makes turns the port into an _Array port_, giving a particular index for each connection attached to it (_default: `false`_);
 Array ports have a third value on events with the socket index :
   ```@inPorts.in.on 'data' , (event, payload, index ) -> ... ```
 
@@ -209,37 +176,88 @@ Array ports have a third value on events with the socket index :
 * `description`: provides human-readable description of the port displayed in documentation and in [Flowhub](http://flowhub.io) inspector;
 * `required`: indicates that a connection on the port is required for component's functioning (_default: `false`_);
 * `values`: sets the list of accepted values for the port, if the value received is not in the list an error is thrown (_default: `null`_).
+* `control`: ports can be used to keep whatever the last packet that was sent to it.
 
-Here is how multiple attributes can be combined together with event handlers:
 
+Here is how multiple attributes can be declared:
 ```coffeescript
 component.inPorts.add 'id',
   datatype: 'int'
   description: 'Request ID'
-
 component.inPorts.add 'user',
   datatype: 'object'
   description: 'User data'
-, (event, payload) ->
-  # Do something with event and payload here
-  if event is 'data'
-    component.outPorts.out.send payload
-    component.outPorts.out.disconnect()
 ```
 ```javascript
 component.inPorts.add('id', {
   datatype: 'int',
   description: 'Request ID'
 });
-
 component.inPorts.add('user', {
   datatype: 'object',
   description: 'User data'
-}, function (event, payload) {
-  // Do something with event and payload here
-  if (event === 'data') {
-    component.outPorts.out.send(payload);
-    component.outPorts.out.disconnect();
+});
+```
+
+This can alternatively be done using constructors explicitly:
+```coffeescript
+noflo = require 'noflo'
+
+component.inPorts = new noflo.inPorts
+  in:
+    datatype: 'int'
+    description: 'Request ID'
+  user:
+    datatype: 'object'
+    description: 'User data'
+```
+```javascript
+noflo = require('noflo');
+
+component.inPorts = new noflo.inPorts({
+  in: {
+    datatype: 'int',
+    description: 'Request ID'
+  },
+  user: {
+    datatype: 'object',
+    description: 'User data'
+  }
+});
+```
+
+The third way this can be done is passing in the ports as objects to the component constructor.
+```coffeescript
+c = new noflo.Component
+  icon: 'gear'
+  inPorts:
+    eh:
+      datatype: 'all'
+      required: true
+  outPorts:
+    canada:
+      datatype: 'object'
+      required: true
+    error:
+      datatype: 'object'
+```
+```javascript
+c = new noflo.Component({
+  icon: 'gear',
+  inPorts: {
+    magic: {
+      datatype: 'all',
+      required: true
+    }
+  },
+  outPorts: {
+    bird: {
+      datatype: 'object',
+      required: true
+    },
+    error: {
+      datatype: 'object'
+    }
   }
 });
 ```
@@ -255,14 +273,14 @@ A component that takes a picture could for instance use the [Camera icon](http:/
 # File: components/TakePicture.coffee
 exports.getComponent = ->
   component = new noflo.Component
-  component.description = "Take a photo with the computer's web camera"
+  component.description = 'Take a photo with the computer\'s web camera'
   component.icon = 'camera'
 ```
 ```javascript
 // File: components/TakePicture.js
 exports.getComponent = function() {
   var component = new noflo.Component();
-  component.description = "Take a photo with the computer's web camera";
+  component.description = 'Take a photo with the computer\'s web camera';
   component.icon = 'camera';
 ```
 

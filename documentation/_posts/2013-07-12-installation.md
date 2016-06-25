@@ -24,4 +24,4 @@ Then you can install everything needed by a simple:
 $ npm link
 ```
 
-NoFlo is available from [GitHub](https://github.com/bergie/noflo) under the MIT license.
+NoFlo is available from [GitHub](https://github.com/noflo/noflo) under the MIT license.
