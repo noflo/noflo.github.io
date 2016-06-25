@@ -1,0 +1,36 @@
+---
+layout: default
+---
+  <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">Writing your own project</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+          <nav>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="{{ site.baseurl }}/projects/"{% if page.url == '/projects/index.html' %} class="active"{% endif%}>Writing your own project</a>
+              </li>
+              {% assign posts = site.categories['projects'] | sort:"weight"  %}
+              {% for post in posts %}
+              <li>
+                <a href="{{ site.baseurl }}{{ post.url }}"{% if post.url == page.url %} class="active"{% endif%}>{{ post.title }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        </div>
+        <div class="content span8">
+          <h1>{{ page.title }}</h1>
+          {{ content }}
+        </div>
+      </div>
+    </div>
+  </div>

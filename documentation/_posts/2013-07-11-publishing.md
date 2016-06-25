@@ -2,110 +2,42 @@
 layout: documentation
 title: Publishing component libraries
 ---
+
+- [Publishing components for Node.js](#publishing-your-components-for-node-js)
+
+- [Publishing components for Web Browsers](#publishing-your-components-for-web-browsers)
+
+- [Auto-deploying to NPM using Travis](#auto-deploying-to-npm-using-travis)
+
+- [Cross-platform libraries](#cross-platform-libraries)
+  - [Platform annotations in souce code](#platform-annotations-in-source-code)
+  - [Components that work on both platforms](#components-that-work-on-both-platforms)
+  - [Platform annotations in source code](#platform-annotations-in-source-code)
+
+- [Bootstrapping your library](#bootstrapping-your-library)
+
 Developers can simply publish their own components independently without having to send pull requests to the main NoFlo repository. The same mechanism can also be used when publishing more traditional Node.js libraries to include the NoFlo components utilizing that library.
 
-## Publishing your components for Node.js
+There are situations where a component only makes sense for a particular platform. For example, DOM manipulation is typically only useful in the browser, and only Node.js can serve HTTP.
 
-Please refer to [the NPM documentation](https://npmjs.org/doc/developers.html) on how to publish packages in general. To publish NoFlo components, you simply need to amend the `package.json` file with the NoFlo metadata to register the components you're providing, like this:
+## Publishing your components for Node.js <a id="publishing-your-components-for-node-js"></a>
+Please refer to [the NPM documentation](https://npmjs.org/doc/developers.html) on how to publish packages in general.
 
-```json
-{
-  "noflo": {
-    "components": {
-      "ParseYaml": "./components/ParseYaml.coffee",
-      "ToYaml": "./components/ToYaml.coffee"
-    }
-  },
-}
-```
+## Publishing your components for web browsers <a id="publishing-your-components-for-web-browsers"></a>
 
-If you're publishing FBP graphs in either [.json](https://github.com/bergie/noflo/blob/master/examples/linecount/count.json) or [.fbp](https://github.com/bergie/noflo/blob/master/examples/linecount/count.fbp) format, just provide them similarly with the `graphs` key. Components can be either in CoffeeScript or JavaScript, the NoFlo ComponentLoader will handle the coffee compilation transparently.
-
-For examples, check out [noflo-yaml](https://github.com/bergie/noflo-yaml) or [noflo-basecamp](https://github.com/bergie/noflo-basecamp).
-
-### Listing installed components
-
-An additional benefit for this new structure is that now the NoFlo ComponentLoader can provide a list of installed components, which is also available on the noflo command-line. For example:
-
-    $ noflo list ../noflo-webserver
-    GroupByPacket (/home/bergie/Projects/noflo/src/components/GroupByPacket.coffee)
-    Inports: in
-    Outports: out
-    ...
-    Server (/home/bergie/Projects/noflo-webserver/components/Server.coffee)
-    This component receives a port and host, and initializes a HTTP server for that combination. It sends out a request/response pair for each HTTP request it receives
-    Inports: listen
-    Outports: request
-
-This same information is also be exposed to the web-based [Flowhub](http://flowhub.io) user interface using the [Component Protocol](http://noflojs.org/documentation/protocol/#component).
-
-## Publishing your components for web browsers
-
-In addition to Node.js, NoFlo component libraries can also be published for use in web browsers using [Component.io](https://github.com/component/component). Just like with NPM's `package.json`, you need to provide [a `component.json` file](https://github.com/component/component/wiki/Spec#wiki-componentjson) in the root of your GitHub repository. The structure is very similar to NPM's format.
-
-In Component.io dependencies are declared using GitHub repository names, so for example you can depend on NoFlo as `noflo/noflo`.
-
-The `component.json` needs to have a `noflo` key just like with NPM above:
-
-```json
-{
-  "noflo": {
-    "components": {
-      "ParseYaml": "components/ParseYaml.coffee",
-      "ToYaml": "components/ToYaml.coffee"
-    }
-  },
-}
-```
-
-The declaration can also refer to graphs in the JSON format. In `component.json` you also have to list the files in the `script` array. Component.io also requires an `index.js` file to be present in your repository, but it can be left empty if you don't actually use it to expose a non-NoFlo API to your library.
-
-```json
-{
-  "scripts": [
-    "components/ParseYaml.coffee",
-    "components/ToYaml.coffee",
-    "index.js"
-  ],
-}
-```
-
-Since NoFlo's Component Loader has to traverse the dependency graph to find all browser components you also need to expose the `component.json` in the package. Do this via the `json` array:
-
-```json
-{
-  "json": [
-    "component.json"
-  ],
-}
-```
+In addition to Node.js, NoFlo component libraries can also be published for use in web browsers
 
 Pushing this information to GitHub makes the component available. Use git tags to make new releases.
 
-## Maintaining component and graph lists
 
-It is possible to maintain the component and graph list in `package.json` and `component.json` manually, but this can become tedious. If you're using [Grunt](http://gruntjs.com/), there is a [grunt-noflo-manifest](https://github.com/noflo/grunt-noflo-manifest) that can be used to automate the maintenance of these lists.
 
-Install the plugin and configure it in your Gruntfile:
-
-```coffeescript
-# Updating the package manifest files
-noflo_manifest:
-  update:
-    files:
-      'component.json': ['graphs/*', 'components/*']
-      'package.json': ['graphs/*', 'components/*']
-```
-
-Make sure this task is run when needed, for example during the your testing phase.
-
-## Cross-platform libraries
+## Cross-platform libraries <a id="cross-platform-libraries"></a>
 
 NoFlo component libraries can either be specific to one platform, or available for both Node.js and the browser. For cross-platform libraries there are some different strategies for dealing with the platform differences.
 
-### Components that work on both platforms
+### Components that work on both platforms <components-that-work-on-both-platforms"></a>
 
-The ideal setup is that a component would work the same way in both Node.js and the browser. In that case, simply declare it in the `noflo` `components` section of both `package.json` and `component.json`.
+The ideal setup is that a component would work the same way in both Node.js and the browser.
 
 Since there are some differences between the environment, including different third-party libraries available, you can perform platform checks in runtime with:
 
@@ -116,15 +48,7 @@ else
   # Do something specific to Node.js
 ```
 
-### Platform-specific components
-
-There are situations where a component only makes sense for a particular platform. For example, DOM manipulation is typically only useful in the browser, and only Node.js can serve HTTP.
-
-In this case just declare the component in the relevant package file (`package.json` or `component.json`) and it will only appear in the correct environment.
-
-If you want to have the same component API (name, ports) available for both platforms, but with different implementations, just point the same `component` key in the two package files to a different `.coffee` file.
-
-#### Platform annotations in source code
+## Platform annotations in source code <a id="platform-annotations-in-source-code"></a>
 
 For future tooling purposes, and especially [Flowhub](http://flowhub.io), it is also useful to annotate platform-specific components as such.
 
@@ -141,7 +65,34 @@ The possible values for the `@runtime` annotation include:
 * `noflo-gnome` for GNOME desktop components
 * `microflo` for microcontroller components
 
-## Bootstrapping your library
+## Auto-deploying to NPM using Travis <a id="auto-deploying-to-npm-using-travis"></a>
+[npm deployment on travis](https://docs.travis-ci.com/user/deployment/npm)
+
+### 1) Have the required gems installed
+```
+$ sudo gem install json
+$ sudo gem install travis
+```
+
+### 2) log into npm
+```
+npm login
+```
+
+### 3) copy auth token
+```
+cat ~/.npmrc | grep _auth
+```
+You'll get ~ `‘//registry.npmjs.org/:_authToken=12aaeee1-1ee2-101a-1a11-1111aaaa1b23’.` copy the part after `‘_authToken=’`, in this case it is `12aaeee1-1ee2-101a-1a11-1111aaaa1b23`
+
+### 4)
+```
+travis setup npm
+```
+enter the information it asks for, the npm API key is the one from step 3.
+
+
+## Bootstrapping your library <a id="bootstrapping-your-library"></a>
 
 You can perform all the steps above manually, but there is also a [grunt-init project scaffold](http://gruntjs.com/project-scaffolding) for NoFlo libraries.
 

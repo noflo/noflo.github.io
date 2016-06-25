@@ -1,14 +1,22 @@
 {
   "name": "noflojs-org",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noflo/noflo.github.io.git"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-jekyll": "~0.3.8",
+    "grunt-jekyll": "~0.4.4",
     "grunt-contrib-connect": "~0.3.0",
     "grunt-contrib-watch": "~0.5.1",
     "grunt-contrib-sass": "~0.4.1",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-shell": "~0.3.1",
     "grunt-docco": "~0.2.0"
+  },
+  "dependencies": {
+    "grunt": "^0.4.5"
   }
 }

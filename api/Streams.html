@@ -9,162 +9,162 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
 
-<p>High-level wrappers for FBP substreams processing.</p>                                                  <p>Wraps an object to be used in Substreams</p>                            <div class="highlight"><pre><span class="nx">class</span> <span class="nx">IP</span>
-  <span class="nv">constructor: </span><span class="p">(</span><span class="err">@</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">sendTo: </span><span class="p">(</span><span class="nx">port</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">port</span><span class="p">.</span><span class="nx">send</span> <span class="err">@</span><span class="nx">data</span>
-  <span class="nv">getValue: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="err">@</span><span class="nx">data</span>
-  <span class="nv">toObject: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="err">@</span><span class="nx">data</span>
+<p>High-level wrappers for FBP substreams processing.</p>                                                  <p>Wraps an object to be used in Substreams</p>                            <div class="highlight"><pre><span class="k">class</span> <span class="nx">IP</span>
+  <span class="nv">constructor: </span><span class="nf">(@data) -&gt;</span>
+  <span class="nv">sendTo: </span><span class="nf">(port) -&gt;</span>
+    <span class="nx">port</span><span class="p">.</span><span class="nx">send</span> <span class="nx">@data</span>
+  <span class="nv">getValue: </span><span class="nf">-&gt;</span>
+    <span class="k">return</span> <span class="nx">@data</span>
+  <span class="nv">toObject: </span><span class="nf">-&gt;</span>
+    <span class="k">return</span> <span class="nx">@data</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">IP</span> <span class="o">=</span> <span class="nx">IP</span></pre></div>                                                  <p>Substream contains groups and data packets as a tree structure</p>                            <div class="highlight"><pre><span class="nx">class</span> <span class="nx">Substream</span>
-  <span class="nv">constructor: </span><span class="p">(</span><span class="err">@</span><span class="nx">key</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">value</span> <span class="o">=</span> <span class="p">[]</span>
-  <span class="nv">push: </span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">value</span><span class="p">.</span><span class="nx">push</span> <span class="nx">value</span>
-  <span class="nv">sendTo: </span><span class="p">(</span><span class="nx">port</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">port</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="err">@</span><span class="nx">key</span>
-    <span class="k">for</span> <span class="nx">ip</span> <span class="k">in</span> <span class="err">@</span><span class="nx">value</span>
+<span class="nv">exports.IP = </span><span class="nx">IP</span></pre></div>                                                  <p>Substream contains groups and data packets as a tree structure</p>                            <div class="highlight"><pre><span class="k">class</span> <span class="nx">Substream</span>
+  <span class="nv">constructor: </span><span class="nf">(@key) -&gt;</span>
+    <span class="vi">@value = </span><span class="p">[]</span>
+  <span class="nv">push: </span><span class="nf">(value) -&gt;</span>
+    <span class="nx">@value</span><span class="p">.</span><span class="nx">push</span> <span class="nx">value</span>
+  <span class="nv">sendTo: </span><span class="nf">(port) -&gt;</span>
+    <span class="nx">port</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">@key</span>
+    <span class="k">for</span> <span class="nx">ip</span> <span class="k">in</span> <span class="nx">@value</span>
       <span class="k">if</span> <span class="nx">ip</span> <span class="k">instanceof</span> <span class="nx">Substream</span> <span class="o">or</span> <span class="nx">ip</span> <span class="k">instanceof</span> <span class="nx">IP</span>
         <span class="nx">ip</span><span class="p">.</span><span class="nx">sendTo</span> <span class="nx">port</span>
       <span class="k">else</span>
         <span class="nx">port</span><span class="p">.</span><span class="nx">send</span> <span class="nx">ip</span>
     <span class="nx">port</span><span class="p">.</span><span class="nx">endGroup</span><span class="p">()</span>
-  <span class="nv">getKey: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="err">@</span><span class="nx">key</span>
-  <span class="nv">getValue: </span><span class="o">-&gt;</span>
-    <span class="k">switch</span> <span class="err">@</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span>
+  <span class="nv">getKey: </span><span class="nf">-&gt;</span>
+    <span class="k">return</span> <span class="nx">@key</span>
+  <span class="nv">getValue: </span><span class="nf">-&gt;</span>
+    <span class="k">switch</span> <span class="nx">@value</span><span class="p">.</span><span class="nx">length</span>
       <span class="k">when</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="kc">null</span>
       <span class="k">when</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="k">typeof</span> <span class="err">@</span><span class="nx">value</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getValue</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span>
-          <span class="k">if</span> <span class="err">@</span><span class="nx">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nx">Substream</span>
-            <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="nx">obj</span><span class="p">[</span><span class="err">@</span><span class="nx">value</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="nx">value</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getValue</span><span class="p">()</span>
+        <span class="k">if</span> <span class="k">typeof</span> <span class="nx">@value</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getValue</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span>
+          <span class="k">if</span> <span class="nx">@value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">instanceof</span> <span class="nx">Substream</span>
+            <span class="nv">obj = </span><span class="p">{}</span>
+            <span class="nx">obj</span><span class="p">[</span><span class="nx">@value</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">@value</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getValue</span><span class="p">()</span>
             <span class="k">return</span> <span class="nx">obj</span>
           <span class="k">else</span>
-            <span class="k">return</span> <span class="err">@</span><span class="nx">value</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getValue</span><span class="p">()</span>
+            <span class="k">return</span> <span class="nx">@value</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getValue</span><span class="p">()</span>
         <span class="k">else</span>
-          <span class="k">return</span> <span class="err">@</span><span class="nx">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+          <span class="k">return</span> <span class="nx">@value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
       <span class="k">else</span>
-        <span class="nx">res</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="nx">hasKeys</span> <span class="o">=</span> <span class="kc">false</span>
-        <span class="k">for</span> <span class="nx">ip</span> <span class="k">in</span> <span class="err">@</span><span class="nx">value</span>
-          <span class="nx">val</span> <span class="o">=</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">getValue</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span> <span class="k">then</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">getValue</span><span class="p">()</span> <span class="k">else</span> <span class="nx">ip</span>
+        <span class="nv">res = </span><span class="p">[]</span>
+        <span class="nv">hasKeys = </span><span class="kc">false</span>
+        <span class="k">for</span> <span class="nx">ip</span> <span class="k">in</span> <span class="nx">@value</span>
+          <span class="nv">val = </span><span class="k">if</span> <span class="k">typeof</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">getValue</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span> <span class="k">then</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">getValue</span><span class="p">()</span> <span class="k">else</span> <span class="nx">ip</span>
           <span class="k">if</span> <span class="nx">ip</span> <span class="k">instanceof</span> <span class="nx">Substream</span>
-            <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="nv">obj = </span><span class="p">{}</span>
             <span class="nx">obj</span><span class="p">[</span><span class="nx">ip</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">getValue</span><span class="p">()</span>
             <span class="nx">res</span><span class="p">.</span><span class="nx">push</span> <span class="nx">obj</span>
           <span class="k">else</span>
             <span class="nx">res</span><span class="p">.</span><span class="nx">push</span> <span class="nx">val</span>
         <span class="k">return</span> <span class="nx">res</span>
-  <span class="nv">toObject: </span><span class="o">-&gt;</span>
-    <span class="nx">obj</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="nx">obj</span><span class="p">[</span><span class="err">@</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getValue</span><span class="p">()</span>
+  <span class="nv">toObject: </span><span class="nf">-&gt;</span>
+    <span class="nv">obj = </span><span class="p">{}</span>
+    <span class="nx">obj</span><span class="p">[</span><span class="nx">@key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">@getValue</span><span class="p">()</span>
     <span class="k">return</span> <span class="nx">obj</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">Substream</span> <span class="o">=</span> <span class="nx">Substream</span></pre></div>                                                  <p>StreamSender sends FBP substreams atomically.
-Supports buffering for preordered output.</p>                            <div class="highlight"><pre><span class="nx">class</span> <span class="nx">StreamSender</span>
-  <span class="nv">constructor: </span><span class="p">(</span><span class="err">@</span><span class="nx">port</span><span class="p">,</span> <span class="err">@</span><span class="nx">ordered</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">q</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="err">@</span><span class="nx">resetCurrent</span><span class="p">()</span>
-    <span class="err">@</span><span class="nx">resolved</span> <span class="o">=</span> <span class="kc">false</span>
-  <span class="nv">resetCurrent: </span><span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">level</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="err">@</span><span class="nx">current</span> <span class="o">=</span> <span class="kc">null</span>
-    <span class="err">@</span><span class="nx">stack</span> <span class="o">=</span> <span class="p">[]</span>
-  <span class="nv">beginGroup: </span><span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">level</span><span class="o">++</span>
-    <span class="nx">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Substream</span> <span class="nx">group</span>
-    <span class="err">@</span><span class="nx">stack</span><span class="p">.</span><span class="nx">push</span> <span class="nx">stream</span>
-    <span class="err">@</span><span class="nx">current</span> <span class="o">=</span> <span class="nx">stream</span>
-    <span class="k">return</span> <span class="err">@</span>
-  <span class="nv">endGroup: </span><span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">level</span><span class="o">--</span> <span class="k">if</span> <span class="err">@</span><span class="nx">level</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="nx">value</span> <span class="o">=</span> <span class="err">@</span><span class="nx">stack</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">level</span> <span class="o">is</span> <span class="mi">0</span>
-      <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span> <span class="nx">value</span>
-      <span class="err">@</span><span class="nx">resetCurrent</span><span class="p">()</span>
+<span class="nv">exports.Substream = </span><span class="nx">Substream</span></pre></div>                                                  <p>StreamSender sends FBP substreams atomically.
+Supports buffering for preordered output.</p>                            <div class="highlight"><pre><span class="k">class</span> <span class="nx">StreamSender</span>
+  <span class="nv">constructor: </span><span class="nf">(@port, @ordered = false) -&gt;</span>
+    <span class="vi">@q = </span><span class="p">[]</span>
+    <span class="nx">@resetCurrent</span><span class="p">()</span>
+    <span class="vi">@resolved = </span><span class="kc">false</span>
+  <span class="nv">resetCurrent: </span><span class="nf">-&gt;</span>
+    <span class="vi">@level = </span><span class="mi">0</span>
+    <span class="vi">@current = </span><span class="kc">null</span>
+    <span class="vi">@stack = </span><span class="p">[]</span>
+  <span class="nv">beginGroup: </span><span class="nf">(group) -&gt;</span>
+    <span class="nx">@level</span><span class="o">++</span>
+    <span class="nv">stream = </span><span class="k">new</span> <span class="nx">Substream</span> <span class="nx">group</span>
+    <span class="nx">@stack</span><span class="p">.</span><span class="nx">push</span> <span class="nx">stream</span>
+    <span class="vi">@current = </span><span class="nx">stream</span>
+    <span class="k">return</span> <span class="nx">@</span>
+  <span class="nv">endGroup: </span><span class="nf">-&gt;</span>
+    <span class="nx">@level</span><span class="o">--</span> <span class="k">if</span> <span class="nx">@level</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="nv">value = </span><span class="nx">@stack</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nx">@level</span> <span class="o">is</span> <span class="mi">0</span>
+      <span class="nx">@q</span><span class="p">.</span><span class="nx">push</span> <span class="nx">value</span>
+      <span class="nx">@resetCurrent</span><span class="p">()</span>
     <span class="k">else</span>
-      <span class="nx">parent</span> <span class="o">=</span> <span class="err">@</span><span class="nx">stack</span><span class="p">[</span><span class="err">@</span><span class="nx">stack</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+      <span class="nv">parent = </span><span class="nx">@stack</span><span class="p">[</span><span class="nx">@stack</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
       <span class="nx">parent</span><span class="p">.</span><span class="nx">push</span> <span class="nx">value</span>
-      <span class="err">@</span><span class="nx">current</span> <span class="o">=</span> <span class="nx">parent</span>
-    <span class="k">return</span> <span class="err">@</span>
-  <span class="nv">send: </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">level</span> <span class="o">is</span> <span class="mi">0</span>
-      <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span> <span class="k">new</span> <span class="nx">IP</span> <span class="nx">data</span>
+      <span class="vi">@current = </span><span class="nx">parent</span>
+    <span class="k">return</span> <span class="nx">@</span>
+  <span class="nv">send: </span><span class="nf">(data) -&gt;</span>
+    <span class="k">if</span> <span class="nx">@level</span> <span class="o">is</span> <span class="mi">0</span>
+      <span class="nx">@q</span><span class="p">.</span><span class="nx">push</span> <span class="k">new</span> <span class="nx">IP</span> <span class="nx">data</span>
     <span class="k">else</span>
-      <span class="err">@</span><span class="nx">current</span><span class="p">.</span><span class="nx">push</span> <span class="k">new</span> <span class="nx">IP</span> <span class="nx">data</span>
-    <span class="k">return</span> <span class="err">@</span>
-  <span class="nv">done: </span><span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">ordered</span>
-      <span class="err">@</span><span class="nx">resolved</span> <span class="o">=</span> <span class="kc">true</span>
+      <span class="nx">@current</span><span class="p">.</span><span class="nx">push</span> <span class="k">new</span> <span class="nx">IP</span> <span class="nx">data</span>
+    <span class="k">return</span> <span class="nx">@</span>
+  <span class="nv">done: </span><span class="nf">-&gt;</span>
+    <span class="k">if</span> <span class="nx">@ordered</span>
+      <span class="vi">@resolved = </span><span class="kc">true</span>
     <span class="k">else</span>
-      <span class="err">@</span><span class="nx">flush</span><span class="p">()</span>
-    <span class="k">return</span> <span class="err">@</span>
-  <span class="nv">disconnect: </span><span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span> <span class="kc">null</span> <span class="c1"># disconnect packet</span>
-    <span class="k">return</span> <span class="err">@</span>
-  <span class="nv">flush: </span><span class="o">-&gt;</span></pre></div>                                                  <p>Flush the buffers</p>                            <div class="highlight"><pre>    <span class="nx">res</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-      <span class="k">for</span> <span class="nx">ip</span> <span class="k">in</span> <span class="err">@</span><span class="nx">q</span>
+      <span class="nx">@flush</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nx">@</span>
+  <span class="nv">disconnect: </span><span class="nf">-&gt;</span>
+    <span class="nx">@q</span><span class="p">.</span><span class="nx">push</span> <span class="kc">null</span> <span class="c1"># disconnect packet</span>
+    <span class="k">return</span> <span class="nx">@</span>
+  <span class="nv">flush: </span><span class="nf">-&gt;</span></pre></div>                                                  <p>Flush the buffers</p>                            <div class="highlight"><pre>    <span class="nv">res = </span><span class="kc">false</span>
+    <span class="k">if</span> <span class="nx">@q</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="k">for</span> <span class="nx">ip</span> <span class="k">in</span> <span class="nx">@q</span>
         <span class="k">if</span> <span class="nx">ip</span> <span class="o">is</span> <span class="kc">null</span>
-          <span class="err">@</span><span class="nx">port</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">if</span> <span class="err">@</span><span class="nx">port</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
+          <span class="nx">@port</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span> <span class="k">if</span> <span class="nx">@port</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
         <span class="k">else</span>
-          <span class="nx">ip</span><span class="p">.</span><span class="nx">sendTo</span> <span class="err">@</span><span class="nx">port</span>
-      <span class="nx">res</span> <span class="o">=</span> <span class="kc">true</span>
-    <span class="err">@</span><span class="nx">q</span> <span class="o">=</span> <span class="p">[]</span>
+          <span class="nx">ip</span><span class="p">.</span><span class="nx">sendTo</span> <span class="nx">@port</span>
+      <span class="nv">res = </span><span class="kc">true</span>
+    <span class="vi">@q = </span><span class="p">[]</span>
     <span class="k">return</span> <span class="nx">res</span>
-  <span class="nv">isAttached: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="err">@</span><span class="nx">port</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
+  <span class="nv">isAttached: </span><span class="nf">-&gt;</span>
+    <span class="k">return</span> <span class="nx">@port</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">StreamSender</span> <span class="o">=</span> <span class="nx">StreamSender</span></pre></div>                                                  <p>StreamReceiver wraps an inport and reads entire
-substreams as single objects.</p>                            <div class="highlight"><pre><span class="nx">class</span> <span class="nx">StreamReceiver</span>
-  <span class="nv">constructor: </span><span class="p">(</span><span class="err">@</span><span class="nx">port</span><span class="p">,</span> <span class="err">@</span><span class="nx">buffered</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="err">@</span><span class="nx">process</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">q</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="err">@</span><span class="nx">resetCurrent</span><span class="p">()</span>
-    <span class="err">@</span><span class="nx">port</span><span class="p">.</span><span class="nx">process</span> <span class="o">=</span> <span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">payload</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span>
+<span class="nv">exports.StreamSender = </span><span class="nx">StreamSender</span></pre></div>                                                  <p>StreamReceiver wraps an inport and reads entire
+substreams as single objects.</p>                            <div class="highlight"><pre><span class="k">class</span> <span class="nx">StreamReceiver</span>
+  <span class="nv">constructor: </span><span class="nf">(@port, @buffered = false, @process = null) -&gt;</span>
+    <span class="vi">@q = </span><span class="p">[]</span>
+    <span class="nx">@resetCurrent</span><span class="p">()</span>
+    <span class="vi">@port.process = </span><span class="nf">(event, payload, index) =&gt;</span>
       <span class="k">switch</span> <span class="nx">event</span>
-        <span class="k">when</span> <span class="s1">&#39;connect&#39;</span>
-          <span class="err">@</span><span class="nx">process</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="nx">index</span> <span class="k">if</span> <span class="k">typeof</span> <span class="err">@</span><span class="nx">process</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span>
-        <span class="k">when</span> <span class="s1">&#39;begingroup&#39;</span>
-          <span class="err">@</span><span class="nx">level</span><span class="o">++</span>
-          <span class="nx">stream</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Substream</span> <span class="nx">payload</span>
-          <span class="k">if</span> <span class="err">@</span><span class="nx">level</span> <span class="o">is</span> <span class="mi">1</span>
-            <span class="err">@</span><span class="nx">root</span> <span class="o">=</span> <span class="nx">stream</span>
-            <span class="err">@</span><span class="nx">parent</span> <span class="o">=</span> <span class="kc">null</span>
+        <span class="k">when</span> <span class="s">&#39;connect&#39;</span>
+          <span class="nx">@process</span> <span class="s">&#39;connect&#39;</span><span class="p">,</span> <span class="nx">index</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">@process</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span>
+        <span class="k">when</span> <span class="s">&#39;begingroup&#39;</span>
+          <span class="nx">@level</span><span class="o">++</span>
+          <span class="nv">stream = </span><span class="k">new</span> <span class="nx">Substream</span> <span class="nx">payload</span>
+          <span class="k">if</span> <span class="nx">@level</span> <span class="o">is</span> <span class="mi">1</span>
+            <span class="vi">@root = </span><span class="nx">stream</span>
+            <span class="vi">@parent = </span><span class="kc">null</span>
           <span class="k">else</span>
-            <span class="err">@</span><span class="nx">parent</span> <span class="o">=</span> <span class="err">@</span><span class="nx">current</span>
-          <span class="err">@</span><span class="nx">current</span> <span class="o">=</span> <span class="nx">stream</span>
-        <span class="k">when</span> <span class="s1">&#39;endgroup&#39;</span>
-          <span class="err">@</span><span class="nx">level</span><span class="o">--</span> <span class="k">if</span> <span class="err">@</span><span class="nx">level</span> <span class="o">&gt;</span> <span class="mi">0</span>
-          <span class="k">if</span> <span class="err">@</span><span class="nx">level</span> <span class="o">is</span> <span class="mi">0</span>
-            <span class="k">if</span> <span class="err">@</span><span class="nx">buffered</span>
-              <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span> <span class="err">@</span><span class="nx">root</span>
-              <span class="err">@</span><span class="nx">process</span> <span class="s1">&#39;readable&#39;</span><span class="p">,</span> <span class="nx">index</span>
+            <span class="vi">@parent = </span><span class="nx">@current</span>
+          <span class="vi">@current = </span><span class="nx">stream</span>
+        <span class="k">when</span> <span class="s">&#39;endgroup&#39;</span>
+          <span class="nx">@level</span><span class="o">--</span> <span class="k">if</span> <span class="nx">@level</span> <span class="o">&gt;</span> <span class="mi">0</span>
+          <span class="k">if</span> <span class="nx">@level</span> <span class="o">is</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="nx">@buffered</span>
+              <span class="nx">@q</span><span class="p">.</span><span class="nx">push</span> <span class="nx">@root</span>
+              <span class="nx">@process</span> <span class="s">&#39;readable&#39;</span><span class="p">,</span> <span class="nx">index</span>
             <span class="k">else</span>
-              <span class="err">@</span><span class="nx">process</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="err">@</span><span class="nx">root</span><span class="p">,</span> <span class="nx">index</span> <span class="k">if</span> <span class="k">typeof</span> <span class="err">@</span><span class="nx">process</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span>
-            <span class="err">@</span><span class="nx">resetCurrent</span><span class="p">()</span>
+              <span class="nx">@process</span> <span class="s">&#39;data&#39;</span><span class="p">,</span> <span class="nx">@root</span><span class="p">,</span> <span class="nx">index</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">@process</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span>
+            <span class="nx">@resetCurrent</span><span class="p">()</span>
           <span class="k">else</span>
-            <span class="err">@</span><span class="nx">parent</span><span class="p">.</span><span class="nx">push</span> <span class="err">@</span><span class="nx">current</span>
-            <span class="err">@</span><span class="nx">current</span> <span class="o">=</span> <span class="err">@</span><span class="nx">parent</span>
-        <span class="k">when</span> <span class="s1">&#39;data&#39;</span>
-          <span class="k">if</span> <span class="err">@</span><span class="nx">level</span> <span class="o">is</span> <span class="mi">0</span>
-            <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span> <span class="k">new</span> <span class="nx">IP</span> <span class="nx">payload</span>
+            <span class="nx">@parent</span><span class="p">.</span><span class="nx">push</span> <span class="nx">@current</span>
+            <span class="vi">@current = </span><span class="nx">@parent</span>
+        <span class="k">when</span> <span class="s">&#39;data&#39;</span>
+          <span class="k">if</span> <span class="nx">@level</span> <span class="o">is</span> <span class="mi">0</span>
+            <span class="nx">@q</span><span class="p">.</span><span class="nx">push</span> <span class="k">new</span> <span class="nx">IP</span> <span class="nx">payload</span>
           <span class="k">else</span>
-            <span class="err">@</span><span class="nx">current</span><span class="p">.</span><span class="nx">push</span> <span class="k">new</span> <span class="nx">IP</span> <span class="nx">payload</span>
-        <span class="k">when</span> <span class="s1">&#39;disconnect&#39;</span>
-          <span class="err">@</span><span class="nx">process</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="nx">index</span> <span class="k">if</span> <span class="k">typeof</span> <span class="err">@</span><span class="nx">process</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span>
-  <span class="nv">resetCurrent: </span><span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">level</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="err">@</span><span class="nx">root</span> <span class="o">=</span> <span class="kc">null</span>
-    <span class="err">@</span><span class="nx">current</span> <span class="o">=</span> <span class="kc">null</span>
-    <span class="err">@</span><span class="nx">parent</span> <span class="o">=</span> <span class="kc">null</span>
-  <span class="nv">read: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="kc">undefined</span> <span class="k">if</span> <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="err">@</span><span class="nx">q</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+            <span class="nx">@current</span><span class="p">.</span><span class="nx">push</span> <span class="k">new</span> <span class="nx">IP</span> <span class="nx">payload</span>
+        <span class="k">when</span> <span class="s">&#39;disconnect&#39;</span>
+          <span class="nx">@process</span> <span class="s">&#39;disconnect&#39;</span><span class="p">,</span> <span class="nx">index</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">@process</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span>
+  <span class="nv">resetCurrent: </span><span class="nf">-&gt;</span>
+    <span class="vi">@level = </span><span class="mi">0</span>
+    <span class="vi">@root = </span><span class="kc">null</span>
+    <span class="vi">@current = </span><span class="kc">null</span>
+    <span class="vi">@parent = </span><span class="kc">null</span>
+  <span class="nv">read: </span><span class="nf">-&gt;</span>
+    <span class="k">return</span> <span class="kc">undefined</span> <span class="k">if</span> <span class="nx">@q</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="nx">@q</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">StreamReceiver</span> <span class="o">=</span> <span class="nx">StreamReceiver</span>
+<span class="nv">exports.StreamReceiver = </span><span class="nx">StreamReceiver</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Streams.coffee">Streams.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-15 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Streams.coffee">Streams.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

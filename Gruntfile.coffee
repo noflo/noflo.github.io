@@ -13,17 +13,15 @@ module.exports = ->
     sass:
       src:
         options:
-          sourcemap: true
           style: 'compressed'
         files:
           'css/main.css': 'css/main.scss'
       site:
         options:
-          sourcemap: true
           style: 'compressed'
         files:
           '_site/css/main.css': '_site/css/main.scss'
-    
+
     copy:
       site2src:
         files: [
@@ -32,18 +30,6 @@ module.exports = ->
           src: ['main.*'],
           dest: 'css/'
         ]
-    
-    #imagemin:
-    #  dist:
-    #    options:
-    #      optimizationLevel: 7        
-    #    files: [
-    #        expand: true # only compressing jpg right now
-    #        cwd: 'img-src/'
-    #        src: ['**/*.jpg']
-    #        dest: 'img/',
-    #        ext: '.jpg'
-    #    ]
 
     jekyll:
       dev:
@@ -103,12 +89,7 @@ module.exports = ->
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-contrib-sass'
   @loadNpmTasks 'grunt-contrib-copy'
-  #@loadNpmTasks 'grunt-contrib-imagemin'
 
-  #@registerTask 'img', [
-  #  'copy:img'
-  #  'imagemin:dist'
-  #]
   @registerTask 'chrome', [
     'connect:dev'
     'build'
@@ -118,7 +99,6 @@ module.exports = ->
   @registerTask 'dev', [
     'connect:dev'
     'build'
-    #'watch'
     'watch:jekyll'
     'watch:noflo'
     'watch:sass'
@@ -126,7 +106,7 @@ module.exports = ->
   @registerTask 'build', [
     'sass:src'
     'shell:gitclone'
-    'docco'
+    #'docco'
     'jekyll'
   ]
   @registerTask 'default', ['dev']

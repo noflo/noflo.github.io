@@ -21,6 +21,8 @@ You also need some additional tools:
 
     $ sudo gem install jekyll
     $ sudo gem install sass --pre
+    $ sudo gem install jekyll-redirect-from
+    $ sudo gem install recarpet
 
 Then to develop the site, run:
 

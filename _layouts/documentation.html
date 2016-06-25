@@ -20,6 +20,7 @@ layout: default
                 <a href="{{ site.baseurl }}/documentation/"{% if page.url == '/documentation/index.html' %} class="active"{% endif%}>Getting Started with NoFlo</a>
               </li>
               {% for post in site.categories['documentation'] %}
+              {% if post.url == '/documentation/protocol/' or post.url == '/documentation/fbp/' or post.url == '/documentation/json/' or post.url == '/documentation/async-components/' %}{% continue %}{% endif %}
               <li>
                 <a href="{{ site.baseurl }}{{ post.url }}"{% if post.url == page.url %} class="active"{% endif%}>{{ post.title }}</a>
               </li>
