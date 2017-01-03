@@ -34,16 +34,17 @@ we need a way to detect which we're on.</p>                            <div clas
 NoFlo components.</p>
 
 <p>Node.js version of the Component Loader finds components and graphs by traversing
-the NPM dependency tree from a given root directory on the file system.</p>                            <div class="highlight"><pre><span class="nx">unless</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">isBrowser</span><span class="p">()</span>
-  <span class="nx">exports</span><span class="p">.</span><span class="nx">ComponentLoader</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./nodejs/ComponentLoader&#39;</span><span class="p">).</span><span class="nx">ComponentLoader</span></pre></div>                                                  <p>Browser version of the Component Loader finds components and graphs by traversing
+the NPM dependency tree from a given root directory on the file system.</p>
+
+<p>Browser version of the Component Loader finds components and graphs by traversing
 the <a href="http://component.io/">Component</a> dependency tree from a given Component package
-name.</p>                            <div class="highlight"><pre><span class="k">else</span>
-  <span class="nx">exports</span><span class="p">.</span><span class="nx">ComponentLoader</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./ComponentLoader&#39;</span><span class="p">).</span><span class="nx">ComponentLoader</span></pre></div>                                                  <h3>Component baseclasses</h3>
+name.</p>                            <div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">ComponentLoader</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./ComponentLoader&#39;</span><span class="p">).</span><span class="nx">ComponentLoader</span></pre></div>                                                  <h3>Component baseclasses</h3>
 
 <p>These baseclasses can be used for defining NoFlo components.</p>                            <div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">Component</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./Component&#39;</span><span class="p">).</span><span class="nx">Component</span>
 <span class="nx">exports</span><span class="p">.</span><span class="nx">AsyncComponent</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./AsyncComponent&#39;</span><span class="p">).</span><span class="nx">AsyncComponent</span></pre></div>                                                  <h3>Component helpers</h3>
 
-<p>These helpers aid in providing specific behavior in components with minimal overhead.</p>                            <div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">helpers</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./Helpers&#39;</span></pre></div>                                                  <h3>NoFlo ports</h3>
+<p>These helpers aid in providing specific behavior in components with minimal overhead.</p>                            <div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">helpers</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./Helpers&#39;</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">streams</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./Streams&#39;</span></pre></div>                                                  <h3>NoFlo ports</h3>
 
 <p>These classes are used for instantiating ports on NoFlo components.</p>                            <div class="highlight"><pre><span class="nx">ports</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./Ports&#39;</span>
 <span class="nx">exports</span><span class="p">.</span><span class="nx">InPorts</span> <span class="o">=</span> <span class="nx">ports</span><span class="p">.</span><span class="nx">InPorts</span>
@@ -125,4 +126,4 @@ definition file.</p>
 <p>NoFlo graph files can be saved back into the filesystem with this method.</p>                            <div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">saveFile</span> <span class="o">=</span> <span class="p">(</span><span class="nx">graph</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
   <span class="nx">exports</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">save</span> <span class="nx">file</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="nx">callback</span> <span class="nx">file</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.coffee">NoFlo.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2017-01-03 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.coffee">NoFlo.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 

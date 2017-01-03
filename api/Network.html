@@ -13,11 +13,7 @@ NoFlo may be freely distributed under the MIT license
 <span class="nx">graph</span> <span class="o">=</span> <span class="nx">require</span> <span class="s2">&quot;./Graph&quot;</span>
 <span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span>
 <span class="nx">platform</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./Platform&#39;</span>
-
-<span class="nx">unless</span> <span class="nx">platform</span><span class="p">.</span><span class="nx">isBrowser</span><span class="p">()</span>
-  <span class="nx">componentLoader</span> <span class="o">=</span> <span class="nx">require</span> <span class="s2">&quot;./nodejs/ComponentLoader&quot;</span>
-<span class="k">else</span>
-  <span class="nx">componentLoader</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./ComponentLoader&#39;</span></pre></div>                                                  <h2>The NoFlo network coordinator</h2>
+<span class="nx">componentLoader</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./ComponentLoader&#39;</span></pre></div>                                                  <h2>The NoFlo network coordinator</h2>
 
 <p>NoFlo networks consist of processes connected to each other
 via sockets attached from outports to inports.</p>
@@ -506,4 +502,4 @@ a socket is attached from the "parent" graph.</p>                            <di
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">Network</span> <span class="o">=</span> <span class="nx">Network</span>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2016-06-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+</pre></div>                                   <p><small>This page contains documentation generated automatically on 2017-01-03 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
