@@ -130,4 +130,7 @@ module.exports = ->
     'docco'
     'jekyll'
   ]
+  @registerTask 'test', [
+    'build'
+  ]
   @registerTask 'default', ['dev']
