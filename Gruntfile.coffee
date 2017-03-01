@@ -55,6 +55,7 @@ module.exports = ->
         options:
           output: 'api/'
           template: '_docco/docco.jst'
+          css: ''
 
     shell:
       gitclone:
