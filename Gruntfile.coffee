@@ -48,6 +48,7 @@ module.exports = ->
     jekyll:
       dev:
         options: {}
+        bundleExec: true
 
     docco:
       noflo:

@@ -4,5 +4,4 @@ node_js:
 dist: trusty
 before_script:
 - npm install -g grunt-cli
-- gem install jekyll
-- gem install sass
+- bundle install
