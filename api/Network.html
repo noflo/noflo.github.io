@@ -4,502 +4,1133 @@ title: "Network API"
 categories:
   - api
 ---
-   <div class="row-fluid">     <div class="page-title documentation-page-title">       <div class="container">         <h1 class="page-title__title">API Documentation</h1>         <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>       </div>     </div>   </div>    <div class="row-fluid">     <div class="container documentation-main-container">       <div class="main">         <div class="sidebar span4">                    <nav>             <ul class="sidebar__nav">                                                                  <li>                   <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">                     ArrayPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">                     AsyncComponent                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">                     BasePort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Component/index.html' %}class="active" {% endif %}href="/api/Component/">                     Component                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/ComponentLoader/index.html' %}class="active" {% endif %}href="/api/ComponentLoader/">                     ComponentLoader                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Graph/index.html' %}class="active" {% endif %}href="/api/Graph/">                     Graph                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">                     Helpers                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">                     IP                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InPort/index.html' %}class="active" {% endif %}href="/api/InPort/">                     InPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">                     InternalSocket                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Journal/index.html' %}class="active" {% endif %}href="/api/Journal/">                     Journal                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Network/index.html' %}class="active" {% endif %}href="/api/Network/">                     Network                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/NoFlo/index.html' %}class="active" {% endif %}href="/api/NoFlo/">                     NoFlo                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/OutPort/index.html' %}class="active" {% endif %}href="/api/OutPort/">                     OutPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Platform/index.html' %}class="active" {% endif %}href="/api/Platform/">                     Platform                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">                     Port                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">                     Ports                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">                     Streams                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">                     Utils                   </a>                 </li>                                             </ul>           </nav>                  </div>         <div class="content span8">           <h1>{{ page.title }}</h1>                                     <pre><code>NoFlo - Flow-Based Programming for JavaScript
-(c) 2013-2016 TheGrid (Rituwall Inc.)
-(c) 2011-2012 Henri Bergius, Nemein
-NoFlo may be freely distributed under the MIT license
-</code></pre>                            <div class="highlight"><pre><span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span> <span class="s2">&quot;underscore&quot;</span>
-<span class="nx">internalSocket</span> <span class="o">=</span> <span class="nx">require</span> <span class="s2">&quot;./InternalSocket&quot;</span>
-<span class="nx">graph</span> <span class="o">=</span> <span class="nx">require</span> <span class="s2">&quot;./Graph&quot;</span>
-<span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span>
-<span class="nx">platform</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./Platform&#39;</span>
-<span class="nx">componentLoader</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./ComponentLoader&#39;</span></pre></div>                                                  <h2>The NoFlo network coordinator</h2>
+  <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
 
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
+                    ArrayPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
+                    AsyncComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Component/index.html' %}class="active" {% endif %}href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ComponentLoader/index.html' %}class="active" {% endif %}href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">
+                    Helpers
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/InPort/index.html' %}class="active" {% endif %}href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Network/index.html' %}class="active" {% endif %}href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/NoFlo/index.html' %}class="active" {% endif %}href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/OutPort/index.html' %}class="active" {% endif %}href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Platform/index.html' %}class="active" {% endif %}href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
+                    Port
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
+                    Streams
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>{{ page.title }}</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2013</span><span class="hljs-number">-2017</span> Flowhub UG
+(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
+NoFlo may be freely distributed under the MIT license
+</code></pre>
+            
+              <div class='highlight'><pre>internalSocket = <span class="hljs-built_in">require</span> <span class="hljs-string">"./InternalSocket"</span>
+graph = <span class="hljs-built_in">require</span> <span class="hljs-string">"fbp-graph"</span>
+{EventEmitter} = <span class="hljs-built_in">require</span> <span class="hljs-string">'events'</span>
+platform = <span class="hljs-built_in">require</span> <span class="hljs-string">'./Platform'</span>
+componentLoader = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ComponentLoader'</span>
+utils = <span class="hljs-built_in">require</span> <span class="hljs-string">'./Utils'</span></pre></div>
+            
+          
+            
+            <h2 id="the-noflo-network-coordinator">The NoFlo network coordinator</h2>
 <p>NoFlo networks consist of processes connected to each other
 via sockets attached from outports to inports.</p>
-
 <p>The role of the network coordinator is to take a graph and
 instantiate all the necessary processes from the designated
 components, attach sockets between them, and handle the sending
-of Initial Information Packets.</p>                            <div class="highlight"><pre><span class="nx">class</span> <span class="nx">Network</span> <span class="k">extends</span> <span class="nx">EventEmitter</span></pre></div>                                                  <p>Processes contains all the instantiated components for this network</p>                            <div class="highlight"><pre>  <span class="nv">processes: </span><span class="p">{}</span></pre></div>                                                  <p>Connections contains all the socket connections in the network</p>                            <div class="highlight"><pre>  <span class="nv">connections: </span><span class="p">[]</span></pre></div>                                                  <p>Initials contains all Initial Information Packets (IIPs)</p>                            <div class="highlight"><pre>  <span class="nv">initials: </span><span class="p">[]</span></pre></div>                                                  <p>Container to hold sockets that will be sending default data.</p>                            <div class="highlight"><pre>  <span class="nv">defaults: </span><span class="p">[]</span></pre></div>                                                  <p>The Graph this network is instantiated with</p>                            <div class="highlight"><pre>  <span class="nv">graph: </span><span class="kc">null</span></pre></div>                                                  <p>Start-up timestamp for the network, used for calculating uptime</p>                            <div class="highlight"><pre>  <span class="nv">startupDate: </span><span class="kc">null</span>
-  <span class="nv">portBuffer: </span><span class="p">{}</span></pre></div>                                                  <p>All NoFlo networks are instantiated with a graph. Upon instantiation
+of Initial Information Packets.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Network</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span></span></pre></div>
+            
+          
+            
+            <p>Processes contains all the instantiated components for this network</p>
+
+            
+              <div class='highlight'><pre>  processes: {}</pre></div>
+            
+          
+            
+            <p>Connections contains all the socket connections in the network</p>
+
+            
+              <div class='highlight'><pre>  connections: []</pre></div>
+            
+          
+            
+            <p>Initials contains all Initial Information Packets (IIPs)</p>
+
+            
+              <div class='highlight'><pre>  initials: []</pre></div>
+            
+          
+            
+            <p>Container to hold sockets that will be sending default data.</p>
+
+            
+              <div class='highlight'><pre>  defaults: []</pre></div>
+            
+          
+            
+            <p>The Graph this network is instantiated with</p>
+
+            
+              <div class='highlight'><pre>  graph: <span class="hljs-literal">null</span></pre></div>
+            
+          
+            
+            <p>Start-up timestamp for the network, used for calculating uptime</p>
+
+            
+              <div class='highlight'><pre>  startupDate: <span class="hljs-literal">null</span></pre></div>
+            
+          
+            
+            <p>All NoFlo networks are instantiated with a graph. Upon instantiation
 they will load all the needed components, instantiate them, and
 set up the defined connections and IIPs.</p>
-
 <p>The network will also listen to graph changes and modify itself
 accordingly, including removing connections, adding new nodes,
-and sending new IIPs.</p>                            <div class="highlight"><pre>  <span class="nv">constructor: </span><span class="p">(</span><span class="nx">graph</span><span class="p">,</span> <span class="err">@</span><span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">processes</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="err">@</span><span class="nx">connections</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="err">@</span><span class="nx">initials</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="err">@</span><span class="nx">nextInitials</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="err">@</span><span class="nx">defaults</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="err">@</span><span class="nx">graph</span> <span class="o">=</span> <span class="nx">graph</span>
-    <span class="err">@</span><span class="nx">started</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="err">@</span><span class="nx">debug</span> <span class="o">=</span> <span class="kc">true</span>
-    <span class="err">@</span><span class="nx">connectionCount</span> <span class="o">=</span> <span class="mi">0</span></pre></div>                                                  <p>On Node.js we default the baseDir for component loading to
-the current working directory</p>                            <div class="highlight"><pre>    <span class="nx">unless</span> <span class="nx">platform</span><span class="p">.</span><span class="nx">isBrowser</span><span class="p">()</span>
-      <span class="err">@</span><span class="nx">baseDir</span> <span class="o">=</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">baseDir</span> <span class="o">or</span> <span class="nx">process</span><span class="p">.</span><span class="nx">cwd</span><span class="p">()</span></pre></div>                                                  <p>On browser we default the baseDir to the Component loading
-root</p>                            <div class="highlight"><pre>    <span class="k">else</span>
-      <span class="err">@</span><span class="nx">baseDir</span> <span class="o">=</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">baseDir</span> <span class="o">or</span> <span class="s1">&#39;/&#39;</span></pre></div>                                                  <p>As most NoFlo networks are long-running processes, the
+and sending new IIPs.</p>
+
+            
+              <div class='highlight'><pre>  constructor: <span class="hljs-function"><span class="hljs-params">(graph, @options = {})</span> -&gt;</span>
+    @processes = {}
+    @connections = []
+    @initials = []
+    @nextInitials = []
+    @defaults = []
+    @graph = graph
+    @started = <span class="hljs-literal">false</span>
+    @debug = <span class="hljs-literal">true</span>
+    @eventBuffer = []</pre></div>
+            
+          
+            
+            <p>On Node.js we default the baseDir for component loading to
+the current working directory</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">unless</span> platform.isBrowser()
+      @baseDir = graph.baseDir <span class="hljs-keyword">or</span> process.cwd()</pre></div>
+            
+          
+            
+            <p>On browser we default the baseDir to the Component loading
+root</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">else</span>
+      @baseDir = graph.baseDir <span class="hljs-keyword">or</span> <span class="hljs-string">'/'</span></pre></div>
+            
+          
+            
+            <p>As most NoFlo networks are long-running processes, the
 network coordinator marks down the start-up time. This
-way we can calculate the uptime of the network.</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">startupDate</span> <span class="o">=</span> <span class="kc">null</span></pre></div>                                                  <p>Initialize a Component Loader for the network</p>                            <div class="highlight"><pre>    <span class="k">if</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">componentLoader</span>
-      <span class="err">@</span><span class="nx">loader</span> <span class="o">=</span> <span class="nx">graph</span><span class="p">.</span><span class="nx">componentLoader</span>
-    <span class="k">else</span>
-      <span class="err">@</span><span class="nx">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">componentLoader</span><span class="p">.</span><span class="nx">ComponentLoader</span> <span class="err">@</span><span class="nx">baseDir</span><span class="p">,</span> <span class="err">@</span><span class="nx">options</span></pre></div>                                                  <p>The uptime of the network is the current time minus the start-up
-time, in seconds.</p>                            <div class="highlight"><pre>  <span class="nv">uptime: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="mi">0</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">startupDate</span>
-    <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="o">-</span> <span class="err">@</span><span class="nx">startupDate</span></pre></div>                                                  <p>Emit a 'start' event on the first connection, and 'end' event when
-last connection has been closed</p>                            <div class="highlight"><pre>  <span class="nv">increaseConnections: </span><span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">connectionCount</span> <span class="o">is</span> <span class="mi">0</span></pre></div>                                                  <p>First connection opened, execution has now started</p>                            <div class="highlight"><pre>      <span class="err">@</span><span class="nx">setStarted</span> <span class="kc">true</span>
-    <span class="err">@</span><span class="nx">connectionCount</span><span class="o">++</span>
-  <span class="nv">decreaseConnections: </span><span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">connectionCount</span><span class="o">--</span>
-    <span class="k">return</span> <span class="k">if</span> <span class="err">@</span><span class="nx">connectionCount</span></pre></div>                                                  <p>Last connection closed, execution has now ended
-We do this in debounced way in case there is an in-flight operation still</p>                            <div class="highlight"><pre>    <span class="nx">unless</span> <span class="err">@</span><span class="nx">debouncedEnd</span>
-      <span class="err">@</span><span class="nx">debouncedEnd</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">debounce</span> <span class="o">=&gt;</span>
-        <span class="k">return</span> <span class="k">if</span> <span class="err">@</span><span class="nx">connectionCount</span>
-        <span class="err">@</span><span class="nx">setStarted</span> <span class="kc">false</span>
-      <span class="p">,</span> <span class="mi">50</span>
-    <span class="nx">do</span> <span class="err">@</span><span class="nx">debouncedEnd</span></pre></div>                                                  <h2>Loading components</h2>
+way we can calculate the uptime of the network.</p>
 
+            
+              <div class='highlight'><pre>    @startupDate = <span class="hljs-literal">null</span></pre></div>
+            
+          
+            
+            <p>Initialize a Component Loader for the network</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> graph.componentLoader
+      @loader = graph.componentLoader
+    <span class="hljs-keyword">else</span>
+      @loader = <span class="hljs-keyword">new</span> componentLoader.ComponentLoader @baseDir, @options</pre></div>
+            
+          
+            
+            <p>The uptime of the network is the current time minus the start-up
+time, in seconds.</p>
+
+            
+              <div class='highlight'><pre>  uptime: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span> <span class="hljs-keyword">unless</span> @startupDate
+    <span class="hljs-keyword">new</span> Date() - @startupDate
+
+  getActiveProcesses: <span class="hljs-function">-&gt;</span>
+    active = []
+    <span class="hljs-keyword">return</span> active <span class="hljs-keyword">unless</span> @started
+    <span class="hljs-keyword">for</span> name, process <span class="hljs-keyword">of</span> @processes
+      <span class="hljs-keyword">if</span> process.component.load &gt; <span class="hljs-number">0</span></pre></div>
+            
+          
+            
+            <p>Modern component with load</p>
+
+            
+              <div class='highlight'><pre>        active.push name
+      <span class="hljs-keyword">if</span> process.component.__openConnections &gt; <span class="hljs-number">0</span></pre></div>
+            
+          
+            
+            <p>Legacy component</p>
+
+            
+              <div class='highlight'><pre>        active.push name
+    <span class="hljs-keyword">return</span> active
+
+  bufferedEmit: <span class="hljs-function"><span class="hljs-params">(event, payload)</span> -&gt;</span></pre></div>
+            
+          
+            
+            <p>Errors get emitted immediately, like does network end</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> event <span class="hljs-keyword">in</span> [<span class="hljs-string">'error'</span>, <span class="hljs-string">'process-error'</span>, <span class="hljs-string">'end'</span>]
+      @emit event, payload
+      <span class="hljs-keyword">return</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> @isStarted() <span class="hljs-keyword">and</span> event <span class="hljs-keyword">isnt</span> <span class="hljs-string">'end'</span>
+      @eventBuffer.push
+        type: event
+        payload: payload
+      <span class="hljs-keyword">return</span>
+
+    @emit event, payload
+
+    <span class="hljs-keyword">if</span> event <span class="hljs-keyword">is</span> <span class="hljs-string">'start'</span></pre></div>
+            
+          
+            
+            <p>Once network has started we can send the IP-related events</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">for</span> ev <span class="hljs-keyword">in</span> @eventBuffer
+        @emit ev.type, ev.payload
+      @eventBuffer = []</pre></div>
+            
+          
+            
+            <h2 id="loading-components">Loading components</h2>
 <p>Components can be passed to the NoFlo network in two ways:</p>
-
 <ul>
 <li>As direct, instantiated JavaScript objects</li>
 <li>As filenames</li>
-</ul>                            <div class="highlight"><pre>  <span class="nv">load: </span><span class="p">(</span><span class="nx">component</span><span class="p">,</span> <span class="nx">metadata</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">loader</span><span class="p">.</span><span class="nx">load</span> <span class="nx">component</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">metadata</span></pre></div>                                                  <h2>Add a process to the network</h2>
+</ul>
 
+            
+              <div class='highlight'><pre>  load: <span class="hljs-function"><span class="hljs-params">(component, metadata, callback)</span> -&gt;</span>
+    @loader.load component, callback, metadata</pre></div>
+            
+          
+            
+            <h2 id="add-a-process-to-the-network">Add a process to the network</h2>
 <p>Processes can be added to a network at either start-up time
 or later. The processes are added with a node definition object
 that includes the following properties:</p>
-
 <ul>
 <li><code>id</code>: Identifier of the process in the network. Typically a string</li>
 <li><code>component</code>: Filename or path of a NoFlo component, or a component instance object</li>
-</ul>                            <div class="highlight"><pre>  <span class="nv">addNode: </span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div>                                                  <p>Processes are treated as singletons by their identifier. If
-we already have a process with the given ID, return that.</p>                            <div class="highlight"><pre>    <span class="k">if</span> <span class="err">@</span><span class="nx">processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span>
-      <span class="nx">callback</span> <span class="kc">null</span><span class="p">,</span> <span class="err">@</span><span class="nx">processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="k">if</span> <span class="nx">callback</span>
-      <span class="k">return</span>
+</ul>
 
-    <span class="nx">process</span> <span class="o">=</span>
-      <span class="nv">id: </span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span></pre></div>                                                  <p>No component defined, just register the process but don't start.</p>                            <div class="highlight"><pre>    <span class="nx">unless</span> <span class="nx">node</span><span class="p">.</span><span class="nx">component</span>
-      <span class="err">@</span><span class="nx">processes</span><span class="p">[</span><span class="nx">process</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">process</span>
-      <span class="nx">callback</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">process</span> <span class="k">if</span> <span class="nx">callback</span>
-      <span class="k">return</span></pre></div>                                                  <p>Load the component for the process.</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">load</span> <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">,</span> <span class="nx">node</span><span class="p">.</span><span class="nx">metadata</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">instance</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
-      <span class="nx">instance</span><span class="p">.</span><span class="nx">nodeId</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
-      <span class="nx">process</span><span class="p">.</span><span class="nx">component</span> <span class="o">=</span> <span class="nx">instance</span></pre></div>                                                  <p>Inform the ports of the node name</p>                            <div class="highlight"><pre>      <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">port</span> <span class="k">of</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span>
-        <span class="k">continue</span> <span class="k">if</span> <span class="o">not</span> <span class="nx">port</span> <span class="o">or</span> <span class="k">typeof</span> <span class="nx">port</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span> <span class="o">or</span> <span class="o">not</span> <span class="nx">port</span><span class="p">.</span><span class="nx">canAttach</span>
-        <span class="nx">port</span><span class="p">.</span><span class="nx">node</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
-        <span class="nx">port</span><span class="p">.</span><span class="nx">nodeInstance</span> <span class="o">=</span> <span class="nx">instance</span>
-        <span class="nx">port</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>
+            
+              <div class='highlight'><pre>  addNode: <span class="hljs-function"><span class="hljs-params">(node, callback)</span> -&gt;</span></pre></div>
+            
+          
+            
+            <p>Processes are treated as singletons by their identifier. If
+we already have a process with the given ID, return that.</p>
 
-      <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">port</span> <span class="k">of</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">outPorts</span>
-        <span class="k">continue</span> <span class="k">if</span> <span class="o">not</span> <span class="nx">port</span> <span class="o">or</span> <span class="k">typeof</span> <span class="nx">port</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span> <span class="o">or</span> <span class="o">not</span> <span class="nx">port</span><span class="p">.</span><span class="nx">canAttach</span>
-        <span class="nx">port</span><span class="p">.</span><span class="nx">node</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
-        <span class="nx">port</span><span class="p">.</span><span class="nx">nodeInstance</span> <span class="o">=</span> <span class="nx">instance</span>
-        <span class="nx">port</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> @processes[node.id]
+      callback <span class="hljs-literal">null</span>, @processes[node.id]
+      <span class="hljs-keyword">return</span>
 
-      <span class="err">@</span><span class="nx">subscribeSubgraph</span> <span class="nx">process</span> <span class="k">if</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">isSubgraph</span><span class="p">()</span>
+    process =
+      id: node.id</pre></div>
+            
+          
+            
+            <p>No component defined, just register the process but don’t start.</p>
 
-      <span class="err">@</span><span class="nx">subscribeNode</span> <span class="nx">process</span></pre></div>                                                  <p>Store and return the process instance</p>                            <div class="highlight"><pre>      <span class="err">@</span><span class="nx">processes</span><span class="p">[</span><span class="nx">process</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="nx">process</span>
-      <span class="nx">callback</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">process</span> <span class="k">if</span> <span class="nx">callback</span>
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">unless</span> node.component
+      @processes[process.id] = process
+      callback <span class="hljs-literal">null</span>, process
+      <span class="hljs-keyword">return</span></pre></div>
+            
+          
+            
+            <p>Load the component for the process.</p>
 
-  <span class="nv">removeNode: </span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">unless</span> <span class="err">@</span><span class="nx">processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span>
-      <span class="k">return</span> <span class="nx">callback</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Node #{node.id} not found&quot;</span>
-    <span class="err">@</span><span class="nx">processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">].</span><span class="nx">component</span><span class="p">.</span><span class="nx">shutdown</span><span class="p">()</span>
-    <span class="k">delete</span> <span class="err">@</span><span class="nx">processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span>
-    <span class="nx">callback</span> <span class="kc">null</span> <span class="k">if</span> <span class="nx">callback</span>
+            
+              <div class='highlight'><pre>    @load node.component, node.metadata, <span class="hljs-function"><span class="hljs-params">(err, instance)</span> =&gt;</span>
+      <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
+      instance.nodeId = node.id
+      process.component = instance
+      process.componentName = node.component</pre></div>
+            
+          
+            
+            <p>Inform the ports of the node name
+FIXME: direct process.component.inPorts/outPorts access is only for legacy compat</p>
 
-  <span class="nv">renameNode: </span><span class="p">(</span><span class="nx">oldId</span><span class="p">,</span> <span class="nx">newId</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">process</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">oldId</span>
-    <span class="k">return</span> <span class="nx">callback</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Process #{oldId} not found&quot;</span> <span class="nx">unless</span> <span class="nx">process</span></pre></div>                                                  <p>Inform the process of its ID</p>                            <div class="highlight"><pre>    <span class="nx">process</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">newId</span></pre></div>                                                  <p>Inform the ports of the node name</p>                            <div class="highlight"><pre>    <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">port</span> <span class="k">of</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span>
-      <span class="nx">port</span><span class="p">.</span><span class="nx">node</span> <span class="o">=</span> <span class="nx">newId</span>
-    <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">port</span> <span class="k">of</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">outPorts</span>
-      <span class="nx">port</span><span class="p">.</span><span class="nx">node</span> <span class="o">=</span> <span class="nx">newId</span>
+            
+              <div class='highlight'><pre>      inPorts = process.component.inPorts.ports <span class="hljs-keyword">or</span> process.component.inPorts
+      outPorts = process.component.outPorts.ports <span class="hljs-keyword">or</span> process.component.outPorts
+      <span class="hljs-keyword">for</span> name, port <span class="hljs-keyword">of</span> inPorts
+        port.node = node.id
+        port.nodeInstance = instance
+        port.name = name
 
-    <span class="err">@</span><span class="nx">processes</span><span class="p">[</span><span class="nx">newId</span><span class="p">]</span> <span class="o">=</span> <span class="nx">process</span>
-    <span class="k">delete</span> <span class="err">@</span><span class="nx">processes</span><span class="p">[</span><span class="nx">oldId</span><span class="p">]</span>
-    <span class="nx">callback</span> <span class="kc">null</span> <span class="k">if</span> <span class="nx">callback</span></pre></div>                                                  <p>Get process by its ID.</p>                            <div class="highlight"><pre>  <span class="nv">getNode: </span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">processes</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span>
+      <span class="hljs-keyword">for</span> name, port <span class="hljs-keyword">of</span> outPorts
+        port.node = node.id
+        port.nodeInstance = instance
+        port.name = name
 
-  <span class="nv">connect: </span><span class="p">(</span><span class="nx">done</span> <span class="o">=</span> <span class="o">-&gt;</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div>                                                  <p>Wrap the future which will be called when done in a function and return
-it</p>                            <div class="highlight"><pre>    <span class="nx">callStack</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="nx">serialize</span> <span class="o">=</span> <span class="p">(</span><span class="nx">next</span><span class="p">,</span> <span class="nx">add</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="o">=&gt;</span></pre></div>                                                  <p>Add either a Node, an Initial, or an Edge and move on to the next one
-when done</p>                            <div class="highlight"><pre>        <span class="k">this</span><span class="p">[</span><span class="s2">&quot;add#{type}&quot;</span><span class="p">]</span> <span class="nx">add</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">-&gt;</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
-          <span class="k">return</span> <span class="nx">done</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
-          <span class="nx">callStack</span><span class="o">++</span>
-          <span class="k">if</span> <span class="nx">callStack</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">is</span> <span class="mi">0</span>
-            <span class="nx">setTimeout</span> <span class="o">-&gt;</span>
-              <span class="nx">next</span> <span class="nx">type</span>
-            <span class="p">,</span> <span class="mi">0</span>
-            <span class="k">return</span>
-          <span class="nx">next</span> <span class="nx">type</span></pre></div>                                                  <p>Subscribe to graph changes when everything else is done</p>                            <div class="highlight"><pre>    <span class="nx">subscribeGraph</span> <span class="o">=</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">subscribeGraph</span><span class="p">()</span>
-      <span class="nx">done</span><span class="p">()</span></pre></div>                                                  <p>Serialize default socket creation then call callback when done</p>                            <div class="highlight"><pre>    <span class="nx">setDefaults</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">reduceRight</span> <span class="err">@</span><span class="nx">graph</span><span class="p">.</span><span class="nx">nodes</span><span class="p">,</span> <span class="nx">serialize</span><span class="p">,</span> <span class="nx">subscribeGraph</span></pre></div>                                                  <p>Serialize initializers then call defaults.</p>                            <div class="highlight"><pre>    <span class="nx">initializers</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">reduceRight</span> <span class="err">@</span><span class="nx">graph</span><span class="p">.</span><span class="nx">initializers</span><span class="p">,</span> <span class="nx">serialize</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="nx">setDefaults</span> <span class="s2">&quot;Defaults&quot;</span></pre></div>                                                  <p>Serialize edge creators then call the initializers.</p>                            <div class="highlight"><pre>    <span class="nx">edges</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">reduceRight</span> <span class="err">@</span><span class="nx">graph</span><span class="p">.</span><span class="nx">edges</span><span class="p">,</span> <span class="nx">serialize</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="nx">initializers</span> <span class="s2">&quot;Initial&quot;</span></pre></div>                                                  <p>Serialize node creators then call the edge creators</p>                            <div class="highlight"><pre>    <span class="nx">nodes</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">reduceRight</span> <span class="err">@</span><span class="nx">graph</span><span class="p">.</span><span class="nx">nodes</span><span class="p">,</span> <span class="nx">serialize</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="nx">edges</span> <span class="s2">&quot;Edge&quot;</span></pre></div>                                                  <p>Start with node creators</p>                            <div class="highlight"><pre>    <span class="nx">nodes</span> <span class="s2">&quot;Node&quot;</span>
+      @subscribeSubgraph process <span class="hljs-keyword">if</span> instance.isSubgraph()
 
-  <span class="nv">connectPort: </span><span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">process</span><span class="p">,</span> <span class="nx">port</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">inbound</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">inbound</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">to</span> <span class="o">=</span>
-        <span class="nv">process: </span><span class="nx">process</span>
-        <span class="nv">port: </span><span class="nx">port</span>
-        <span class="nv">index: </span><span class="nx">index</span>
+      @subscribeNode process</pre></div>
+            
+          
+            
+            <p>Store and return the process instance</p>
 
-      <span class="nx">unless</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">[</span><span class="nx">port</span><span class="p">]</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No inport &#39;#{port}&#39; defined in process #{process.id} (#{socket.getId()})&quot;</span>
-        <span class="k">return</span>
-      <span class="k">if</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">[</span><span class="nx">port</span><span class="p">].</span><span class="nx">isAddressable</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">[</span><span class="nx">port</span><span class="p">].</span><span class="nx">attach</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span>
-      <span class="k">return</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">[</span><span class="nx">port</span><span class="p">].</span><span class="nx">attach</span> <span class="nx">socket</span>
+            
+              <div class='highlight'><pre>      @processes[process.id] = process
+      callback <span class="hljs-literal">null</span>, process
 
-    <span class="nx">socket</span><span class="p">.</span><span class="nx">from</span> <span class="o">=</span>
-      <span class="nv">process: </span><span class="nx">process</span>
-      <span class="nv">port: </span><span class="nx">port</span>
-      <span class="nv">index: </span><span class="nx">index</span>
+  removeNode: <span class="hljs-function"><span class="hljs-params">(node, callback)</span> -&gt;</span>
+    <span class="hljs-keyword">unless</span> @processes[node.id]
+      <span class="hljs-keyword">return</span> callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Node <span class="hljs-subst">#{node.id}</span> not found"</span>
+    @processes[node.id].component.shutdown (err) =&gt;
+      <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
+      <span class="hljs-keyword">delete</span> @processes[node.id]
+      callback <span class="hljs-literal">null</span>
 
-    <span class="nx">unless</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">outPorts</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">outPorts</span><span class="p">[</span><span class="nx">port</span><span class="p">]</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No outport &#39;#{port}&#39; defined in process #{process.id} (#{socket.getId()})&quot;</span>
-      <span class="k">return</span>
+  renameNode: <span class="hljs-function"><span class="hljs-params">(oldId, newId, callback)</span> -&gt;</span>
+    process = @getNode oldId
+    <span class="hljs-keyword">return</span> callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Process <span class="hljs-subst">#{oldId}</span> not found"</span> <span class="hljs-keyword">unless</span> process</pre></div>
+            
+          
+            
+            <p>Inform the process of its ID</p>
 
-    <span class="k">if</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">outPorts</span><span class="p">[</span><span class="nx">port</span><span class="p">].</span><span class="nx">isAddressable</span><span class="p">()</span>
-      <span class="k">return</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">outPorts</span><span class="p">[</span><span class="nx">port</span><span class="p">].</span><span class="nx">attach</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span>
-    <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">outPorts</span><span class="p">[</span><span class="nx">port</span><span class="p">].</span><span class="nx">attach</span> <span class="nx">socket</span>
+            
+              <div class='highlight'><pre>    process.id = newId</pre></div>
+            
+          
+            
+            <p>Inform the ports of the node name
+FIXME: direct process.component.inPorts/outPorts access is only for legacy compat</p>
 
-  <span class="nv">subscribeGraph: </span><span class="o">-&gt;</span></pre></div>                                                  <p>A NoFlo graph may change after network initialization.
+            
+              <div class='highlight'><pre>    inPorts = process.component.inPorts.ports <span class="hljs-keyword">or</span> process.component.inPorts
+    outPorts = process.component.outPorts.ports <span class="hljs-keyword">or</span> process.component.outPorts
+    <span class="hljs-keyword">for</span> name, port <span class="hljs-keyword">of</span> inPorts
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> port
+      port.node = newId
+    <span class="hljs-keyword">for</span> name, port <span class="hljs-keyword">of</span> outPorts
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> port
+      port.node = newId
+
+    @processes[newId] = process
+    <span class="hljs-keyword">delete</span> @processes[oldId]
+    callback <span class="hljs-literal">null</span></pre></div>
+            
+          
+            
+            <p>Get process by its ID.</p>
+
+            
+              <div class='highlight'><pre>  getNode: <span class="hljs-function"><span class="hljs-params">(id)</span> -&gt;</span>
+    @processes[id]
+
+  connect: <span class="hljs-function"><span class="hljs-params">(done = -&gt;)</span> -&gt;</span></pre></div>
+            
+          
+            
+            <p>Wrap the future which will be called when done in a function and return
+it</p>
+
+            
+              <div class='highlight'><pre>    callStack = <span class="hljs-number">0</span>
+<span class="hljs-function">    <span class="hljs-title">serialize</span> = <span class="hljs-params">(next, add)</span> =&gt;</span>
+      (type) =&gt;</pre></div>
+            
+          
+            
+            <p>Add either a Node, an Initial, or an Edge and move on to the next one
+when done</p>
+
+            
+              <div class='highlight'><pre>        <span class="hljs-keyword">this</span>[<span class="hljs-string">"add<span class="hljs-subst">#{type}</span>"</span>] add, <span class="hljs-function"><span class="hljs-params">(err)</span> -&gt;</span>
+          <span class="hljs-keyword">return</span> done err <span class="hljs-keyword">if</span> err
+          callStack++
+          <span class="hljs-keyword">if</span> callStack % <span class="hljs-number">100</span> <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+            setTimeout -&gt;
+              next type
+            , <span class="hljs-number">0</span>
+            <span class="hljs-keyword">return</span>
+          next type</pre></div>
+            
+          
+            
+            <p>Subscribe to graph changes when everything else is done</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-function">    <span class="hljs-title">subscribeGraph</span> = =&gt;</span>
+      @subscribeGraph()
+      done()</pre></div>
+            
+          
+            
+            <p>Serialize default socket creation then call callback when done</p>
+
+            
+              <div class='highlight'><pre>    setDefaults = utils.reduceRight @graph.nodes, serialize, subscribeGraph</pre></div>
+            
+          
+            
+            <p>Serialize initializers then call defaults.</p>
+
+            
+              <div class='highlight'><pre>    initializers = utils.reduceRight @graph.initializers, serialize, <span class="hljs-function">-&gt;</span> setDefaults <span class="hljs-string">"Defaults"</span></pre></div>
+            
+          
+            
+            <p>Serialize edge creators then call the initializers.</p>
+
+            
+              <div class='highlight'><pre>    edges = utils.reduceRight @graph.edges, serialize, <span class="hljs-function">-&gt;</span> initializers <span class="hljs-string">"Initial"</span></pre></div>
+            
+          
+            
+            <p>Serialize node creators then call the edge creators</p>
+
+            
+              <div class='highlight'><pre>    nodes = utils.reduceRight @graph.nodes, serialize, <span class="hljs-function">-&gt;</span> edges <span class="hljs-string">"Edge"</span></pre></div>
+            
+          
+            
+            <p>Start with node creators</p>
+
+            
+              <div class='highlight'><pre>    nodes <span class="hljs-string">"Node"</span>
+
+  connectPort: <span class="hljs-function"><span class="hljs-params">(socket, process, port, index, inbound)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> inbound
+      socket.to =
+        process: process
+        port: port
+        index: index
+
+      <span class="hljs-keyword">unless</span> process.component.inPorts <span class="hljs-keyword">and</span> process.component.inPorts[port]
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"No inport '<span class="hljs-subst">#{port}</span>' defined in process <span class="hljs-subst">#{process.id}</span> (<span class="hljs-subst">#{socket.getId()}</span>)"</span>
+        <span class="hljs-keyword">return</span>
+      <span class="hljs-keyword">if</span> process.component.inPorts[port].isAddressable()
+        <span class="hljs-keyword">return</span> process.component.inPorts[port].attach socket, index
+      <span class="hljs-keyword">return</span> process.component.inPorts[port].attach socket
+
+    socket.<span class="hljs-keyword">from</span> =
+      process: process
+      port: port
+      index: index
+
+    <span class="hljs-keyword">unless</span> process.component.outPorts <span class="hljs-keyword">and</span> process.component.outPorts[port]
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"No outport '<span class="hljs-subst">#{port}</span>' defined in process <span class="hljs-subst">#{process.id}</span> (<span class="hljs-subst">#{socket.getId()}</span>)"</span>
+      <span class="hljs-keyword">return</span>
+
+    <span class="hljs-keyword">if</span> process.component.outPorts[port].isAddressable()
+      <span class="hljs-keyword">return</span> process.component.outPorts[port].attach socket, index
+    process.component.outPorts[port].attach socket
+
+  subscribeGraph: <span class="hljs-function">-&gt;</span></pre></div>
+            
+          
+            
+            <p>A NoFlo graph may change after network initialization.
 For this, the network subscribes to the change events from
 the graph.</p>
-
 <p>In graph we talk about nodes and edges. Nodes correspond
-to NoFlo processes, and edges to connections between them.</p>                            <div class="highlight"><pre>    <span class="nx">graphOps</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="nx">processing</span> <span class="o">=</span> <span class="kc">false</span>
-    <span class="nx">registerOp</span> <span class="o">=</span> <span class="p">(</span><span class="nx">op</span><span class="p">,</span> <span class="nx">details</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="nx">graphOps</span><span class="p">.</span><span class="nx">push</span>
-        <span class="nv">op: </span><span class="nx">op</span>
-        <span class="nv">details: </span><span class="nx">details</span>
-    <span class="nx">processOps</span> <span class="o">=</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="k">if</span> <span class="nx">err</span>
-        <span class="k">throw</span> <span class="nx">err</span> <span class="k">if</span> <span class="err">@</span><span class="nx">listeners</span><span class="p">(</span><span class="s1">&#39;process-error&#39;</span><span class="p">).</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
-        <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;process-error&#39;</span><span class="p">,</span> <span class="nx">err</span>
+to NoFlo processes, and edges to connections between them.</p>
 
-      <span class="nx">unless</span> <span class="nx">graphOps</span><span class="p">.</span><span class="nx">length</span>
-        <span class="nx">processing</span> <span class="o">=</span> <span class="kc">false</span>
-        <span class="k">return</span>
-      <span class="nx">processing</span> <span class="o">=</span> <span class="kc">true</span>
-      <span class="nx">op</span> <span class="o">=</span> <span class="nx">graphOps</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
-      <span class="nx">cb</span> <span class="o">=</span> <span class="nx">processOps</span>
-      <span class="k">switch</span> <span class="nx">op</span><span class="p">.</span><span class="nx">op</span>
-        <span class="k">when</span> <span class="s1">&#39;renameNode&#39;</span>
-          <span class="err">@</span><span class="nx">renameNode</span> <span class="nx">op</span><span class="p">.</span><span class="nx">details</span><span class="p">.</span><span class="nx">from</span><span class="p">,</span> <span class="nx">op</span><span class="p">.</span><span class="nx">details</span><span class="p">.</span><span class="nx">to</span><span class="p">,</span> <span class="nx">cb</span>
-        <span class="k">else</span>
-          <span class="err">@</span><span class="p">[</span><span class="nx">op</span><span class="p">.</span><span class="nx">op</span><span class="p">]</span> <span class="nx">op</span><span class="p">.</span><span class="nx">details</span><span class="p">,</span> <span class="nx">cb</span>
+            
+              <div class='highlight'><pre>    graphOps = []
+    processing = <span class="hljs-literal">false</span>
+<span class="hljs-function">    <span class="hljs-title">registerOp</span> = <span class="hljs-params">(op, details)</span> -&gt;</span>
+      graphOps.push
+        op: op
+        details: details
+<span class="hljs-function">    <span class="hljs-title">processOps</span> = <span class="hljs-params">(err)</span> =&gt;</span>
+      <span class="hljs-keyword">if</span> err
+        <span class="hljs-keyword">throw</span> err <span class="hljs-keyword">if</span> @listeners(<span class="hljs-string">'process-error'</span>).length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+        @bufferedEmit <span class="hljs-string">'process-error'</span>, err
 
-    <span class="err">@</span><span class="nx">graph</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;addNode&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">registerOp</span> <span class="s1">&#39;addNode&#39;</span><span class="p">,</span> <span class="nx">node</span>
-      <span class="nx">do</span> <span class="nx">processOps</span> <span class="nx">unless</span> <span class="nx">processing</span>
-    <span class="err">@</span><span class="nx">graph</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;removeNode&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">registerOp</span> <span class="s1">&#39;removeNode&#39;</span><span class="p">,</span> <span class="nx">node</span>
-      <span class="nx">do</span> <span class="nx">processOps</span> <span class="nx">unless</span> <span class="nx">processing</span>
-    <span class="err">@</span><span class="nx">graph</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;renameNode&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">oldId</span><span class="p">,</span> <span class="nx">newId</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">registerOp</span> <span class="s1">&#39;renameNode&#39;</span><span class="p">,</span>
-        <span class="nv">from: </span><span class="nx">oldId</span>
-        <span class="nv">to: </span><span class="nx">newId</span>
-      <span class="nx">do</span> <span class="nx">processOps</span> <span class="nx">unless</span> <span class="nx">processing</span>
-    <span class="err">@</span><span class="nx">graph</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;addEdge&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">edge</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">registerOp</span> <span class="s1">&#39;addEdge&#39;</span><span class="p">,</span> <span class="nx">edge</span>
-      <span class="nx">do</span> <span class="nx">processOps</span> <span class="nx">unless</span> <span class="nx">processing</span>
-    <span class="err">@</span><span class="nx">graph</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;removeEdge&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">edge</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">registerOp</span> <span class="s1">&#39;removeEdge&#39;</span><span class="p">,</span> <span class="nx">edge</span>
-      <span class="nx">do</span> <span class="nx">processOps</span> <span class="nx">unless</span> <span class="nx">processing</span>
-    <span class="err">@</span><span class="nx">graph</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;addInitial&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">iip</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">registerOp</span> <span class="s1">&#39;addInitial&#39;</span><span class="p">,</span> <span class="nx">iip</span>
-      <span class="nx">do</span> <span class="nx">processOps</span> <span class="nx">unless</span> <span class="nx">processing</span>
-    <span class="err">@</span><span class="nx">graph</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;removeInitial&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">iip</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="nx">registerOp</span> <span class="s1">&#39;removeInitial&#39;</span><span class="p">,</span> <span class="nx">iip</span>
-      <span class="nx">do</span> <span class="nx">processOps</span> <span class="nx">unless</span> <span class="nx">processing</span>
+      <span class="hljs-keyword">unless</span> graphOps.length
+        processing = <span class="hljs-literal">false</span>
+        <span class="hljs-keyword">return</span>
+      processing = <span class="hljs-literal">true</span>
+      op = graphOps.shift()
+      cb = processOps
+      <span class="hljs-keyword">switch</span> op.op
+        <span class="hljs-keyword">when</span> <span class="hljs-string">'renameNode'</span>
+          @renameNode op.details.<span class="hljs-keyword">from</span>, op.details.to, cb
+        <span class="hljs-keyword">else</span>
+          @[op.op] op.details, cb
 
-  <span class="nv">subscribeSubgraph: </span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">unless</span> <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">isReady</span><span class="p">()</span>
-      <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">once</span> <span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="o">=&gt;</span>
-        <span class="err">@</span><span class="nx">subscribeSubgraph</span> <span class="nx">node</span>
-      <span class="k">return</span>
+    @graph.<span class="hljs-literal">on</span> <span class="hljs-string">'addNode'</span>, <span class="hljs-function"><span class="hljs-params">(node)</span> -&gt;</span>
+      registerOp <span class="hljs-string">'addNode'</span>, node
+      <span class="hljs-keyword">do</span> processOps <span class="hljs-keyword">unless</span> processing
+    @graph.<span class="hljs-literal">on</span> <span class="hljs-string">'removeNode'</span>, <span class="hljs-function"><span class="hljs-params">(node)</span> -&gt;</span>
+      registerOp <span class="hljs-string">'removeNode'</span>, node
+      <span class="hljs-keyword">do</span> processOps <span class="hljs-keyword">unless</span> processing
+    @graph.<span class="hljs-literal">on</span> <span class="hljs-string">'renameNode'</span>, <span class="hljs-function"><span class="hljs-params">(oldId, newId)</span> -&gt;</span>
+      registerOp <span class="hljs-string">'renameNode'</span>,
+        from: oldId
+        to: newId
+      <span class="hljs-keyword">do</span> processOps <span class="hljs-keyword">unless</span> processing
+    @graph.<span class="hljs-literal">on</span> <span class="hljs-string">'addEdge'</span>, <span class="hljs-function"><span class="hljs-params">(edge)</span> -&gt;</span>
+      registerOp <span class="hljs-string">'addEdge'</span>, edge
+      <span class="hljs-keyword">do</span> processOps <span class="hljs-keyword">unless</span> processing
+    @graph.<span class="hljs-literal">on</span> <span class="hljs-string">'removeEdge'</span>, <span class="hljs-function"><span class="hljs-params">(edge)</span> -&gt;</span>
+      registerOp <span class="hljs-string">'removeEdge'</span>, edge
+      <span class="hljs-keyword">do</span> processOps <span class="hljs-keyword">unless</span> processing
+    @graph.<span class="hljs-literal">on</span> <span class="hljs-string">'addInitial'</span>, <span class="hljs-function"><span class="hljs-params">(iip)</span> -&gt;</span>
+      registerOp <span class="hljs-string">'addInitial'</span>, iip
+      <span class="hljs-keyword">do</span> processOps <span class="hljs-keyword">unless</span> processing
+    @graph.<span class="hljs-literal">on</span> <span class="hljs-string">'removeInitial'</span>, <span class="hljs-function"><span class="hljs-params">(iip)</span> -&gt;</span>
+      registerOp <span class="hljs-string">'removeInitial'</span>, iip
+      <span class="hljs-keyword">do</span> processOps <span class="hljs-keyword">unless</span> processing
 
-    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span>
+  subscribeSubgraph: <span class="hljs-function"><span class="hljs-params">(node)</span> -&gt;</span>
+    <span class="hljs-keyword">unless</span> node.component.isReady()
+      node.component.once <span class="hljs-string">'ready'</span>, <span class="hljs-function">=&gt;</span>
+        @subscribeSubgraph node
+      <span class="hljs-keyword">return</span>
 
-    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">setDebug</span> <span class="err">@</span><span class="nx">debug</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> node.component.network
 
-    <span class="nx">emitSub</span> <span class="o">=</span> <span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="k">if</span> <span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;process-error&#39;</span> <span class="o">and</span> <span class="err">@</span><span class="nx">listeners</span><span class="p">(</span><span class="s1">&#39;process-error&#39;</span><span class="p">).</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
-        <span class="k">throw</span> <span class="nx">data</span>
-      <span class="nx">do</span> <span class="err">@</span><span class="nx">increaseConnections</span> <span class="k">if</span> <span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;connect&#39;</span>
-      <span class="nx">do</span> <span class="err">@</span><span class="nx">decreaseConnections</span> <span class="k">if</span> <span class="nx">type</span> <span class="o">is</span> <span class="s1">&#39;disconnect&#39;</span>
-      <span class="nx">data</span> <span class="o">=</span> <span class="p">{}</span> <span class="nx">unless</span> <span class="nx">data</span>
-      <span class="k">if</span> <span class="nx">data</span><span class="p">.</span><span class="nx">subgraph</span>
-        <span class="nx">unless</span> <span class="nx">data</span><span class="p">.</span><span class="nx">subgraph</span><span class="p">.</span><span class="nx">unshift</span>
-          <span class="nx">data</span><span class="p">.</span><span class="nx">subgraph</span> <span class="o">=</span> <span class="p">[</span><span class="nx">data</span><span class="p">.</span><span class="nx">subgraph</span><span class="p">]</span>
-        <span class="nx">data</span><span class="p">.</span><span class="nx">subgraph</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">subgraph</span><span class="p">.</span><span class="nx">unshift</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
-      <span class="k">else</span>
-        <span class="nx">data</span><span class="p">.</span><span class="nx">subgraph</span> <span class="o">=</span> <span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">data</span>
+    node.component.network.setDebug @debug
+<span class="hljs-function">
+    <span class="hljs-title">emitSub</span> = <span class="hljs-params">(type, data)</span> =&gt;</span>
+      <span class="hljs-keyword">if</span> type <span class="hljs-keyword">is</span> <span class="hljs-string">'process-error'</span> <span class="hljs-keyword">and</span> @listeners(<span class="hljs-string">'process-error'</span>).length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+        <span class="hljs-keyword">throw</span> data.error <span class="hljs-keyword">if</span> data.id <span class="hljs-keyword">and</span> data.metadata <span class="hljs-keyword">and</span> data.error
+        <span class="hljs-keyword">throw</span> data
+      data = {} <span class="hljs-keyword">unless</span> data
+      <span class="hljs-keyword">if</span> data.subgraph
+        <span class="hljs-keyword">unless</span> data.subgraph.unshift
+          data.subgraph = [data.subgraph]
+        data.subgraph = data.subgraph.unshift node.id
+      <span class="hljs-keyword">else</span>
+        data.subgraph = [node.id]
+      @bufferedEmit type, data
 
-    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="nx">data</span>
-    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;begingroup&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;begingroup&#39;</span><span class="p">,</span> <span class="nx">data</span>
-    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">data</span>
-    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;endgroup&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;endgroup&#39;</span><span class="p">,</span> <span class="nx">data</span>
-    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">emitSub</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="nx">data</span>
-    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;process-error&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="nx">emitSub</span> <span class="s1">&#39;process-error&#39;</span><span class="p">,</span> <span class="nx">data</span></pre></div>                                                  <p>Subscribe to events from all connected sockets and re-emit them</p>                            <div class="highlight"><pre>  <span class="nv">subscribeSocket: </span><span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="o">=&gt;</span>
-      <span class="nx">do</span> <span class="err">@</span><span class="nx">increaseConnections</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;connect&#39;</span><span class="p">,</span>
-        <span class="nv">id: </span><span class="nx">socket</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span>
-        <span class="nv">socket: </span><span class="nx">socket</span>
-        <span class="nv">metadata: </span><span class="nx">socket</span><span class="p">.</span><span class="nx">metadata</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;begingroup&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;begingroup&#39;</span><span class="p">,</span>
-        <span class="nv">id: </span><span class="nx">socket</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span>
-        <span class="nv">socket: </span><span class="nx">socket</span>
-        <span class="nv">group: </span><span class="nx">group</span>
-        <span class="nv">metadata: </span><span class="nx">socket</span><span class="p">.</span><span class="nx">metadata</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span>
-        <span class="nv">id: </span><span class="nx">socket</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span>
-        <span class="nv">socket: </span><span class="nx">socket</span>
-        <span class="nv">data: </span><span class="nx">data</span>
-        <span class="nv">metadata: </span><span class="nx">socket</span><span class="p">.</span><span class="nx">metadata</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;endgroup&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">group</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;endgroup&#39;</span><span class="p">,</span>
-        <span class="nv">id: </span><span class="nx">socket</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span>
-        <span class="nv">socket: </span><span class="nx">socket</span>
-        <span class="nv">group: </span><span class="nx">group</span>
-        <span class="nv">metadata: </span><span class="nx">socket</span><span class="p">.</span><span class="nx">metadata</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="o">=&gt;</span>
-      <span class="nx">do</span> <span class="err">@</span><span class="nx">decreaseConnections</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;disconnect&#39;</span><span class="p">,</span>
-        <span class="nv">id: </span><span class="nx">socket</span><span class="p">.</span><span class="nx">getId</span><span class="p">()</span>
-        <span class="nv">socket: </span><span class="nx">socket</span>
-        <span class="nv">metadata: </span><span class="nx">socket</span><span class="p">.</span><span class="nx">metadata</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="k">throw</span> <span class="nx">event</span> <span class="k">if</span> <span class="err">@</span><span class="nx">listeners</span><span class="p">(</span><span class="s1">&#39;process-error&#39;</span><span class="p">).</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;process-error&#39;</span><span class="p">,</span> <span class="nx">event</span>
+    node.component.network.<span class="hljs-literal">on</span> <span class="hljs-string">'connect'</span>, <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span> emitSub <span class="hljs-string">'connect'</span>, data
+    node.component.network.<span class="hljs-literal">on</span> <span class="hljs-string">'begingroup'</span>, <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span> emitSub <span class="hljs-string">'begingroup'</span>, data
+    node.component.network.<span class="hljs-literal">on</span> <span class="hljs-string">'data'</span>, <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span> emitSub <span class="hljs-string">'data'</span>, data
+    node.component.network.<span class="hljs-literal">on</span> <span class="hljs-string">'endgroup'</span>, <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span> emitSub <span class="hljs-string">'endgroup'</span>, data
+    node.component.network.<span class="hljs-literal">on</span> <span class="hljs-string">'disconnect'</span>, <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span> emitSub <span class="hljs-string">'disconnect'</span>, data
+    node.component.network.<span class="hljs-literal">on</span> <span class="hljs-string">'ip'</span>, <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span> emitSub <span class="hljs-string">'ip'</span>, data
+    node.component.network.<span class="hljs-literal">on</span> <span class="hljs-string">'process-error'</span>, <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span>
+      emitSub <span class="hljs-string">'process-error'</span>, data</pre></div>
+            
+          
+            
+            <p>Subscribe to events from all connected sockets and re-emit them</p>
 
-  <span class="nv">subscribeNode: </span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">getIcon</span>
-    <span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="kc">on</span> <span class="s1">&#39;icon&#39;</span><span class="p">,</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;icon&#39;</span><span class="p">,</span>
-        <span class="nv">id: </span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
-        <span class="nv">icon: </span><span class="nx">node</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">getIcon</span><span class="p">()</span>
+            
+              <div class='highlight'><pre>  subscribeSocket: <span class="hljs-function"><span class="hljs-params">(socket, source)</span> -&gt;</span>
+    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'ip'</span>, <span class="hljs-function"><span class="hljs-params">(ip)</span> =&gt;</span>
+      @bufferedEmit <span class="hljs-string">'ip'</span>,
+        id: socket.getId()
+        type: ip.type
+        socket: socket
+        data: ip.data
+        metadata: socket.metadata
+    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'connect'</span>, <span class="hljs-function">=&gt;</span>
+      <span class="hljs-keyword">if</span> source <span class="hljs-keyword">and</span> source.component.isLegacy()</pre></div>
+            
+          
+            
+            <p>Handle activation for legacy components</p>
 
-  <span class="nv">addEdge: </span><span class="p">(</span><span class="nx">edge</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">socket</span> <span class="o">=</span> <span class="nx">internalSocket</span><span class="p">.</span><span class="nx">createSocket</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">metadata</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="nx">setDebug</span> <span class="err">@</span><span class="nx">debug</span>
+            
+              <div class='highlight'><pre>        source.component.__openConnections = <span class="hljs-number">0</span> <span class="hljs-keyword">unless</span> source.component.__openConnections
+        source.component.__openConnections++
+      @bufferedEmit <span class="hljs-string">'connect'</span>,
+        id: socket.getId()
+        socket: socket
+        metadata: socket.metadata
+    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'begingroup'</span>, <span class="hljs-function"><span class="hljs-params">(group)</span> =&gt;</span>
+      @bufferedEmit <span class="hljs-string">'begingroup'</span>,
+        id: socket.getId()
+        socket: socket
+        group: group
+        metadata: socket.metadata
+    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'data'</span>, <span class="hljs-function"><span class="hljs-params">(data)</span> =&gt;</span>
+      @bufferedEmit <span class="hljs-string">'data'</span>,
+        id: socket.getId()
+        socket: socket
+        data: data
+        metadata: socket.metadata
+    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'endgroup'</span>, <span class="hljs-function"><span class="hljs-params">(group)</span> =&gt;</span>
+      @bufferedEmit <span class="hljs-string">'endgroup'</span>,
+        id: socket.getId()
+        socket: socket
+        group: group
+        metadata: socket.metadata
+    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'disconnect'</span>, <span class="hljs-function">=&gt;</span>
+      @bufferedEmit <span class="hljs-string">'disconnect'</span>,
+        id: socket.getId()
+        socket: socket
+        metadata: socket.metadata
+      <span class="hljs-keyword">if</span> source <span class="hljs-keyword">and</span> source.component.isLegacy()</pre></div>
+            
+          
+            
+            <p>Handle deactivation for legacy components</p>
 
-    <span class="nx">from</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">node</span>
-    <span class="nx">unless</span> <span class="nx">from</span>
-      <span class="k">return</span> <span class="nx">callback</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No process defined for outbound node #{edge.from.node}&quot;</span>
-    <span class="nx">unless</span> <span class="nx">from</span><span class="p">.</span><span class="nx">component</span>
-      <span class="k">return</span> <span class="nx">callback</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No component defined for outbound node #{edge.from.node}&quot;</span>
-    <span class="nx">unless</span> <span class="nx">from</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">isReady</span><span class="p">()</span>
-      <span class="nx">from</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">once</span> <span class="s2">&quot;ready&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-        <span class="err">@</span><span class="nx">addEdge</span> <span class="nx">edge</span><span class="p">,</span> <span class="nx">callback</span>
+            
+              <div class='highlight'><pre>        source.component.__openConnections--
+        <span class="hljs-keyword">if</span> source.component.__openConnections &lt; <span class="hljs-number">0</span>
+          source.component.__openConnections = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">if</span> source.component.__openConnections <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+          @checkIfFinished()
+    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'error'</span>, <span class="hljs-function"><span class="hljs-params">(event)</span> =&gt;</span>
+      <span class="hljs-keyword">if</span> @listeners(<span class="hljs-string">'process-error'</span>).length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+        <span class="hljs-keyword">throw</span> event.error <span class="hljs-keyword">if</span> event.id <span class="hljs-keyword">and</span> event.metadata <span class="hljs-keyword">and</span> event.error
+        <span class="hljs-keyword">throw</span> event
+      @bufferedEmit <span class="hljs-string">'process-error'</span>, event
 
-      <span class="k">return</span>
+  subscribeNode: <span class="hljs-function"><span class="hljs-params">(node)</span> -&gt;</span>
+    node.component.<span class="hljs-literal">on</span> <span class="hljs-string">'deactivate'</span>, <span class="hljs-function"><span class="hljs-params">(load)</span> =&gt;</span>
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> load &gt; <span class="hljs-number">0</span>
+      @checkIfFinished()
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> node.component.getIcon
+    node.component.<span class="hljs-literal">on</span> <span class="hljs-string">'icon'</span>, <span class="hljs-function">=&gt;</span>
+      @bufferedEmit <span class="hljs-string">'icon'</span>,
+        id: node.id
+        icon: node.component.getIcon()
 
-    <span class="nx">to</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span>
-    <span class="nx">unless</span> <span class="nx">to</span>
-      <span class="k">return</span> <span class="nx">callback</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No process defined for inbound node #{edge.to.node}&quot;</span>
-    <span class="nx">unless</span> <span class="nx">to</span><span class="p">.</span><span class="nx">component</span>
-      <span class="k">return</span> <span class="nx">callback</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No component defined for inbound node #{edge.to.node}&quot;</span>
-    <span class="nx">unless</span> <span class="nx">to</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">isReady</span><span class="p">()</span>
-      <span class="nx">to</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">once</span> <span class="s2">&quot;ready&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-        <span class="err">@</span><span class="nx">addEdge</span> <span class="nx">edge</span><span class="p">,</span> <span class="nx">callback</span>
+  addEdge: <span class="hljs-function"><span class="hljs-params">(edge, callback)</span> -&gt;</span>
+    socket = internalSocket.createSocket edge.metadata
+    socket.setDebug @debug
 
-      <span class="k">return</span></pre></div>                                                  <p>Subscribe to events from the socket</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">subscribeSocket</span> <span class="nx">socket</span>
+    <span class="hljs-keyword">from</span> = @getNode edge.<span class="hljs-keyword">from</span>.node
+    <span class="hljs-keyword">unless</span> <span class="hljs-keyword">from</span>
+      <span class="hljs-keyword">return</span> callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"No process defined for outbound node <span class="hljs-subst">#{edge.<span class="hljs-keyword">from</span>.node}</span>"</span>
+    <span class="hljs-keyword">unless</span> <span class="hljs-keyword">from</span>.component
+      <span class="hljs-keyword">return</span> callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"No component defined for outbound node <span class="hljs-subst">#{edge.<span class="hljs-keyword">from</span>.node}</span>"</span>
+    <span class="hljs-keyword">unless</span> <span class="hljs-keyword">from</span>.component.isReady()
+      <span class="hljs-keyword">from</span>.component.once <span class="hljs-string">"ready"</span>, <span class="hljs-function">=&gt;</span>
+        @addEdge edge, callback
 
-    <span class="err">@</span><span class="nx">connectPort</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">to</span><span class="p">,</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span><span class="p">,</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="kc">true</span>
-    <span class="err">@</span><span class="nx">connectPort</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">from</span><span class="p">,</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">port</span><span class="p">,</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span>
+      <span class="hljs-keyword">return</span>
 
-    <span class="err">@</span><span class="nx">connections</span><span class="p">.</span><span class="nx">push</span> <span class="nx">socket</span>
-    <span class="nx">callback</span><span class="p">()</span> <span class="k">if</span> <span class="nx">callback</span>
+    to = @getNode edge.to.node
+    <span class="hljs-keyword">unless</span> to
+      <span class="hljs-keyword">return</span> callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"No process defined for inbound node <span class="hljs-subst">#{edge.to.node}</span>"</span>
+    <span class="hljs-keyword">unless</span> to.component
+      <span class="hljs-keyword">return</span> callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"No component defined for inbound node <span class="hljs-subst">#{edge.to.node}</span>"</span>
+    <span class="hljs-keyword">unless</span> to.component.isReady()
+      to.component.once <span class="hljs-string">"ready"</span>, <span class="hljs-function">=&gt;</span>
+        @addEdge edge, callback
 
-  <span class="nv">removeEdge: </span><span class="p">(</span><span class="nx">edge</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">for</span> <span class="nx">connection</span> <span class="k">in</span> <span class="err">@</span><span class="nx">connections</span>
-      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">connection</span>
-      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">id</span> <span class="o">and</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span> <span class="o">is</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span>
-      <span class="nx">connection</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">[</span><span class="nx">connection</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span><span class="p">].</span><span class="nx">detach</span> <span class="nx">connection</span>
-      <span class="k">if</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">node</span>
-        <span class="k">if</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">from</span> <span class="o">and</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">id</span> <span class="o">and</span> <span class="nx">edge</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">port</span> <span class="o">is</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">port</span>
-          <span class="nx">connection</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">outPorts</span><span class="p">[</span><span class="nx">connection</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">port</span><span class="p">].</span><span class="nx">detach</span> <span class="nx">connection</span>
-      <span class="err">@</span><span class="nx">connections</span><span class="p">.</span><span class="nx">splice</span> <span class="err">@</span><span class="nx">connections</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">connection</span><span class="p">),</span> <span class="mi">1</span>
-      <span class="nx">do</span> <span class="nx">callback</span> <span class="k">if</span> <span class="nx">callback</span>
+      <span class="hljs-keyword">return</span></pre></div>
+            
+          
+            
+            <p>Subscribe to events from the socket</p>
 
-  <span class="nv">addDefaults: </span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+            
+              <div class='highlight'><pre>    @subscribeSocket socket, <span class="hljs-keyword">from</span>
 
-    <span class="nx">process</span> <span class="o">=</span> <span class="err">@</span><span class="nx">processes</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span>
+    @connectPort socket, to, edge.to.port, edge.to.index, <span class="hljs-literal">true</span>
+    @connectPort socket, <span class="hljs-keyword">from</span>, edge.<span class="hljs-keyword">from</span>.port, edge.<span class="hljs-keyword">from</span>.index, <span class="hljs-literal">false</span>
 
-    <span class="nx">unless</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">isReady</span><span class="p">()</span>
-      <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">setMaxListeners</span> <span class="mi">0</span> <span class="k">if</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">setMaxListeners</span>
-      <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">once</span> <span class="s2">&quot;ready&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-        <span class="err">@</span><span class="nx">addDefaults</span> <span class="nx">process</span><span class="p">,</span> <span class="nx">callback</span>
-      <span class="k">return</span>
+    @connections.push socket
+    callback()
 
-    <span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">port</span> <span class="k">of</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">.</span><span class="nx">ports</span></pre></div>                                                  <p>Attach a socket to any defaulted inPorts as long as they aren't already attached.
+  removeEdge: <span class="hljs-function"><span class="hljs-params">(edge, callback)</span> -&gt;</span>
+    <span class="hljs-keyword">for</span> connection <span class="hljs-keyword">in</span> @connections
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> connection
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> edge.to.node <span class="hljs-keyword">is</span> connection.to.process.id <span class="hljs-keyword">and</span> edge.to.port <span class="hljs-keyword">is</span> connection.to.port
+      connection.to.process.component.inPorts[connection.to.port].detach connection
+      <span class="hljs-keyword">if</span> edge.<span class="hljs-keyword">from</span>.node
+        <span class="hljs-keyword">if</span> connection.<span class="hljs-keyword">from</span> <span class="hljs-keyword">and</span> edge.<span class="hljs-keyword">from</span>.node <span class="hljs-keyword">is</span> connection.<span class="hljs-keyword">from</span>.process.id <span class="hljs-keyword">and</span> edge.<span class="hljs-keyword">from</span>.port <span class="hljs-keyword">is</span> connection.<span class="hljs-keyword">from</span>.port
+          connection.<span class="hljs-keyword">from</span>.process.component.outPorts[connection.<span class="hljs-keyword">from</span>.port].detach connection
+      @connections.splice @connections.indexOf(connection), <span class="hljs-number">1</span>
+      <span class="hljs-keyword">do</span> callback
+
+  addDefaults: <span class="hljs-function"><span class="hljs-params">(node, callback)</span> -&gt;</span>
+
+    process = @processes[node.id]
+
+    <span class="hljs-keyword">unless</span> process.component.isReady()
+      process.component.setMaxListeners <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> process.component.setMaxListeners
+      process.component.once <span class="hljs-string">"ready"</span>, <span class="hljs-function">=&gt;</span>
+        @addDefaults process, callback
+      <span class="hljs-keyword">return</span>
+
+    <span class="hljs-keyword">for</span> key, port <span class="hljs-keyword">of</span> process.component.inPorts.ports</pre></div>
+            
+          
+            
+            <p>Attach a socket to any defaulted inPorts as long as they aren’t already attached.
 TODO: hasDefault existence check is for backwards compatibility, clean
-      up when legacy ports are removed.</p>                            <div class="highlight"><pre>      <span class="k">if</span> <span class="k">typeof</span> <span class="nx">port</span><span class="p">.</span><span class="nx">hasDefault</span> <span class="o">is</span> <span class="s1">&#39;function&#39;</span> <span class="o">and</span> <span class="nx">port</span><span class="p">.</span><span class="nx">hasDefault</span><span class="p">()</span> <span class="o">and</span> <span class="o">not</span> <span class="nx">port</span><span class="p">.</span><span class="nx">isAttached</span><span class="p">()</span>
-        <span class="nx">socket</span> <span class="o">=</span> <span class="nx">internalSocket</span><span class="p">.</span><span class="nx">createSocket</span><span class="p">()</span>
-        <span class="nx">socket</span><span class="p">.</span><span class="nx">setDebug</span> <span class="err">@</span><span class="nx">debug</span></pre></div>                                                  <p>Subscribe to events from the socket</p>                            <div class="highlight"><pre>        <span class="err">@</span><span class="nx">subscribeSocket</span> <span class="nx">socket</span>
+      up when legacy ports are removed.</p>
 
-        <span class="err">@</span><span class="nx">connectPort</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">process</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="kc">true</span>
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> port.hasDefault <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span> <span class="hljs-keyword">and</span> port.hasDefault() <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> port.isAttached()
+        socket = internalSocket.createSocket()
+        socket.setDebug @debug</pre></div>
+            
+          
+            
+            <p>Subscribe to events from the socket</p>
 
-        <span class="err">@</span><span class="nx">connections</span><span class="p">.</span><span class="nx">push</span> <span class="nx">socket</span>
+            
+              <div class='highlight'><pre>        @subscribeSocket socket
 
-        <span class="err">@</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">push</span> <span class="nx">socket</span>
+        @connectPort socket, process, key, <span class="hljs-literal">undefined</span>, <span class="hljs-literal">true</span>
 
-    <span class="nx">callback</span><span class="p">()</span> <span class="k">if</span> <span class="nx">callback</span>
+        @connections.push socket
 
-  <span class="nv">addInitial: </span><span class="p">(</span><span class="nx">initializer</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">socket</span> <span class="o">=</span> <span class="nx">internalSocket</span><span class="p">.</span><span class="nx">createSocket</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">metadata</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="nx">setDebug</span> <span class="err">@</span><span class="nx">debug</span></pre></div>                                                  <p>Subscribe to events from the socket</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">subscribeSocket</span> <span class="nx">socket</span>
+        @defaults.push socket
 
-    <span class="nx">to</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getNode</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span>
-    <span class="nx">unless</span> <span class="nx">to</span>
-      <span class="k">return</span> <span class="nx">callback</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;No process defined for inbound node #{initializer.to.node}&quot;</span>
+    callback()
 
-    <span class="nx">unless</span> <span class="nx">to</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">isReady</span><span class="p">()</span> <span class="o">or</span> <span class="nx">to</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">[</span><span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span><span class="p">]</span>
-      <span class="nx">to</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">setMaxListeners</span> <span class="mi">0</span> <span class="k">if</span> <span class="nx">to</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">setMaxListeners</span>
-      <span class="nx">to</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">once</span> <span class="s2">&quot;ready&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-        <span class="err">@</span><span class="nx">addInitial</span> <span class="nx">initializer</span><span class="p">,</span> <span class="nx">callback</span>
-      <span class="k">return</span>
+  addInitial: <span class="hljs-function"><span class="hljs-params">(initializer, callback)</span> -&gt;</span>
+    socket = internalSocket.createSocket initializer.metadata
+    socket.setDebug @debug</pre></div>
+            
+          
+            
+            <p>Subscribe to events from the socket</p>
 
-    <span class="err">@</span><span class="nx">connectPort</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">to</span><span class="p">,</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span><span class="p">,</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="kc">true</span>
+            
+              <div class='highlight'><pre>    @subscribeSocket socket
 
-    <span class="err">@</span><span class="nx">connections</span><span class="p">.</span><span class="nx">push</span> <span class="nx">socket</span>
+    to = @getNode initializer.to.node
+    <span class="hljs-keyword">unless</span> to
+      <span class="hljs-keyword">return</span> callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"No process defined for inbound node <span class="hljs-subst">#{initializer.to.node}</span>"</span>
 
-    <span class="nx">init</span> <span class="o">=</span>
-      <span class="nv">socket: </span><span class="nx">socket</span>
-      <span class="nv">data: </span><span class="nx">initializer</span><span class="p">.</span><span class="nx">from</span><span class="p">.</span><span class="nx">data</span>
-    <span class="err">@</span><span class="nx">initials</span><span class="p">.</span><span class="nx">push</span> <span class="nx">init</span>
-    <span class="err">@</span><span class="nx">nextInitials</span><span class="p">.</span><span class="nx">push</span> <span class="nx">init</span>
+    <span class="hljs-keyword">unless</span> to.component.isReady() <span class="hljs-keyword">or</span> to.component.inPorts[initializer.to.port]
+      to.component.setMaxListeners <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> to.component.setMaxListeners
+      to.component.once <span class="hljs-string">"ready"</span>, <span class="hljs-function">=&gt;</span>
+        @addInitial initializer, callback
+      <span class="hljs-keyword">return</span>
 
-    <span class="nx">do</span> <span class="err">@</span><span class="nx">sendInitials</span> <span class="k">if</span> <span class="err">@</span><span class="nx">isStarted</span><span class="p">()</span>
+    @connectPort socket, to, initializer.to.port, initializer.to.index, <span class="hljs-literal">true</span>
 
-    <span class="nx">callback</span><span class="p">()</span> <span class="k">if</span> <span class="nx">callback</span>
+    @connections.push socket
 
-  <span class="nv">removeInitial: </span><span class="p">(</span><span class="nx">initializer</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">for</span> <span class="nx">connection</span> <span class="k">in</span> <span class="err">@</span><span class="nx">connections</span>
-      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">connection</span>
-      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">node</span> <span class="o">is</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">id</span> <span class="o">and</span> <span class="nx">initializer</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span> <span class="o">is</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span>
-      <span class="nx">connection</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">[</span><span class="nx">connection</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span><span class="p">].</span><span class="nx">detach</span> <span class="nx">connection</span>
-      <span class="err">@</span><span class="nx">connections</span><span class="p">.</span><span class="nx">splice</span> <span class="err">@</span><span class="nx">connections</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">connection</span><span class="p">),</span> <span class="mi">1</span>
+    init =
+      socket: socket
+      data: initializer.<span class="hljs-keyword">from</span>.data
+    @initials.push init
+    @nextInitials.push init
 
-      <span class="k">for</span> <span class="nx">init</span> <span class="k">in</span> <span class="err">@</span><span class="nx">initials</span>
-        <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">init</span>
-        <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">init</span><span class="p">.</span><span class="nx">socket</span> <span class="o">is</span> <span class="nx">connection</span>
-        <span class="err">@</span><span class="nx">initials</span><span class="p">.</span><span class="nx">splice</span> <span class="err">@</span><span class="nx">initials</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">init</span><span class="p">),</span> <span class="mi">1</span>
-      <span class="k">for</span> <span class="nx">init</span> <span class="k">in</span> <span class="err">@</span><span class="nx">nextInitials</span>
-        <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">init</span>
-        <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">init</span><span class="p">.</span><span class="nx">socket</span> <span class="o">is</span> <span class="nx">connection</span>
-        <span class="err">@</span><span class="nx">nextInitials</span><span class="p">.</span><span class="nx">splice</span> <span class="err">@</span><span class="nx">nextInitials</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">init</span><span class="p">),</span> <span class="mi">1</span>
+    <span class="hljs-keyword">do</span> @sendInitials <span class="hljs-keyword">if</span> @isStarted()
 
-    <span class="nx">do</span> <span class="nx">callback</span> <span class="k">if</span> <span class="nx">callback</span>
+    callback()
 
-  <span class="nv">sendInitial: </span><span class="p">(</span><span class="nx">initial</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">initial</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
-    <span class="nx">initial</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">initial</span><span class="p">.</span><span class="nx">data</span>
-    <span class="nx">initial</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
+  removeInitial: <span class="hljs-function"><span class="hljs-params">(initializer, callback)</span> -&gt;</span>
+    <span class="hljs-keyword">for</span> connection <span class="hljs-keyword">in</span> @connections
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> connection
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> initializer.to.node <span class="hljs-keyword">is</span> connection.to.process.id <span class="hljs-keyword">and</span> initializer.to.port <span class="hljs-keyword">is</span> connection.to.port
+      connection.to.process.component.inPorts[connection.to.port].detach connection
+      @connections.splice @connections.indexOf(connection), <span class="hljs-number">1</span>
 
-  <span class="nv">sendInitials: </span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">unless</span> <span class="nx">callback</span>
-      <span class="nx">callback</span> <span class="o">=</span> <span class="o">-&gt;</span>
+      <span class="hljs-keyword">for</span> init <span class="hljs-keyword">in</span> @initials
+        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> init
+        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> init.socket <span class="hljs-keyword">is</span> connection
+        @initials.splice @initials.indexOf(init), <span class="hljs-number">1</span>
+      <span class="hljs-keyword">for</span> init <span class="hljs-keyword">in</span> @nextInitials
+        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> init
+        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> init.socket <span class="hljs-keyword">is</span> connection
+        @nextInitials.splice @nextInitials.indexOf(init), <span class="hljs-number">1</span>
 
-    <span class="nx">send</span> <span class="o">=</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">sendInitial</span> <span class="nx">initial</span> <span class="k">for</span> <span class="nx">initial</span> <span class="k">in</span> <span class="err">@</span><span class="nx">initials</span>
-      <span class="err">@</span><span class="nx">initials</span> <span class="o">=</span> <span class="p">[]</span>
-      <span class="nx">do</span> <span class="nx">callback</span>
+    <span class="hljs-keyword">do</span> callback
 
-    <span class="k">if</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">isnt</span> <span class="s1">&#39;undefined&#39;</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span> <span class="o">and</span> <span class="nx">process</span><span class="p">.</span><span class="nx">execPath</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span></pre></div>                                                  <p>nextTick is faster on Node.js</p>                            <div class="highlight"><pre>      <span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span> <span class="nx">send</span>
-    <span class="k">else</span>
-      <span class="nx">setTimeout</span> <span class="nx">send</span><span class="p">,</span> <span class="mi">0</span>
+  sendInitial: <span class="hljs-function"><span class="hljs-params">(initial)</span> -&gt;</span>
+    initial.socket.connect()
+    initial.socket.send initial.data
+    initial.socket.disconnect()
 
-  <span class="nv">isStarted: </span><span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">started</span>
+  sendInitials: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
+    <span class="hljs-keyword">unless</span> callback
+<span class="hljs-function">      <span class="hljs-title">callback</span> = -&gt;</span>
+<span class="hljs-function">
+    <span class="hljs-title">send</span> = =&gt;</span>
+      @sendInitial initial <span class="hljs-keyword">for</span> initial <span class="hljs-keyword">in</span> @initials
+      @initials = []
+      <span class="hljs-keyword">do</span> callback
 
-  <span class="nv">isRunning: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="kc">false</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">started</span>
-    <span class="err">@</span><span class="nx">connectionCount</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> process <span class="hljs-keyword">isnt</span> <span class="hljs-string">'undefined'</span> <span class="hljs-keyword">and</span> process.execPath <span class="hljs-keyword">and</span> process.execPath.indexOf(<span class="hljs-string">'node'</span>) <span class="hljs-keyword">isnt</span> <span class="hljs-number">-1</span></pre></div>
+            
+          
+            
+            <p>nextTick is faster on Node.js</p>
 
-  <span class="nv">startComponents: </span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">unless</span> <span class="nx">callback</span>
-      <span class="nx">callback</span> <span class="o">=</span> <span class="o">-&gt;</span></pre></div>                                                  <p>Perform any startup routines necessary for every component.</p>                            <div class="highlight"><pre>    <span class="k">for</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">process</span> <span class="k">of</span> <span class="err">@</span><span class="nx">processes</span>
-      <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
-    <span class="nx">do</span> <span class="nx">callback</span>
+            
+              <div class='highlight'><pre>      process.nextTick send
+    <span class="hljs-keyword">else</span>
+      setTimeout send, <span class="hljs-number">0</span>
 
-  <span class="nv">sendDefaults: </span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">unless</span> <span class="nx">callback</span>
-      <span class="nx">callback</span> <span class="o">=</span> <span class="o">-&gt;</span>
+  isStarted: <span class="hljs-function">-&gt;</span>
+    @started
 
-    <span class="k">return</span> <span class="nx">callback</span><span class="p">()</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">length</span>
+  isRunning: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">unless</span> @started
+    <span class="hljs-keyword">return</span> @getActiveProcesses().length &gt; <span class="hljs-number">0</span>
 
-    <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="err">@</span><span class="nx">defaults</span></pre></div>                                                  <p>Don't send defaults if more than one socket is present on the port.
+  startComponents: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
+    <span class="hljs-keyword">unless</span> callback
+<span class="hljs-function">      <span class="hljs-title">callback</span> = -&gt;</span></pre></div>
+            
+          
+            
+            <p>Emit start event when all processes are started</p>
+
+            
+              <div class='highlight'><pre>    count = <span class="hljs-number">0</span>
+    length = <span class="hljs-keyword">if</span> @processes <span class="hljs-keyword">then</span> Object.keys(@processes).length <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
+<span class="hljs-function">    <span class="hljs-title">onProcessStart</span> = <span class="hljs-params">(err)</span> -&gt;</span>
+      <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
+      count++
+      callback() <span class="hljs-keyword">if</span> count <span class="hljs-keyword">is</span> length</pre></div>
+            
+          
+            
+            <p>Perform any startup routines necessary for every component.</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> callback() <span class="hljs-keyword">unless</span> @processes <span class="hljs-keyword">and</span> Object.keys(@processes).length
+    <span class="hljs-keyword">for</span> id, process <span class="hljs-keyword">of</span> @processes
+      <span class="hljs-keyword">if</span> process.component.isStarted()
+        onProcessStart()
+        <span class="hljs-keyword">continue</span>
+      <span class="hljs-keyword">if</span> process.component.start.length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+        platform.deprecated <span class="hljs-string">'component.start method without callback is deprecated'</span>
+        process.component.start()
+        onProcessStart()
+        <span class="hljs-keyword">continue</span>
+      process.component.start onProcessStart
+
+  sendDefaults: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
+    <span class="hljs-keyword">unless</span> callback
+<span class="hljs-function">      <span class="hljs-title">callback</span> = -&gt;</span>
+
+    <span class="hljs-keyword">return</span> callback() <span class="hljs-keyword">unless</span> @defaults.length
+
+    <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> @defaults</pre></div>
+            
+          
+            
+            <p>Don’t send defaults if more than one socket is present on the port.
 This case should only happen when a subgraph is created as a component
 as its network is instantiated and its inputs are serialized before
-a socket is attached from the "parent" graph.</p>                            <div class="highlight"><pre>      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">[</span><span class="nx">socket</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">port</span><span class="p">].</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">1</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span><span class="p">()</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
+a socket is attached from the “parent” graph.</p>
 
-    <span class="nx">do</span> <span class="nx">callback</span>
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> socket.to.process.component.inPorts[socket.to.port].sockets.length <span class="hljs-keyword">is</span> <span class="hljs-number">1</span>
+      socket.connect()
+      socket.send()
+      socket.disconnect()
 
-  <span class="nv">start: </span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">unless</span> <span class="nx">callback</span>
-      <span class="nx">callback</span> <span class="o">=</span> <span class="o">-&gt;</span>
+    <span class="hljs-keyword">do</span> callback
 
-    <span class="nx">do</span> <span class="err">@</span><span class="nx">stop</span> <span class="k">if</span> <span class="err">@</span><span class="nx">started</span>
-    <span class="err">@</span><span class="nx">initials</span> <span class="o">=</span> <span class="err">@</span><span class="nx">nextInitials</span><span class="p">.</span><span class="nx">slice</span> <span class="mi">0</span>
-    <span class="err">@</span><span class="nx">startComponents</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
-      <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
-      <span class="err">@</span><span class="nx">sendInitials</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
-        <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
-        <span class="err">@</span><span class="nx">sendDefaults</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span>
-          <span class="k">return</span> <span class="nx">callback</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span>
-          <span class="err">@</span><span class="nx">setStarted</span> <span class="kc">true</span>
-          <span class="nx">callback</span> <span class="kc">null</span>
+  start: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
+    <span class="hljs-keyword">unless</span> callback
+      platform.deprecated <span class="hljs-string">'Calling network.start() without callback is deprecated'</span>
+<span class="hljs-function">      <span class="hljs-title">callback</span> = -&gt;</span>
 
-  <span class="nv">stop: </span><span class="o">-&gt;</span></pre></div>                                                  <p>Disconnect all connections</p>                            <div class="highlight"><pre>    <span class="k">for</span> <span class="nx">connection</span> <span class="k">in</span> <span class="err">@</span><span class="nx">connections</span>
-      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">connection</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
-      <span class="nx">connection</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span></pre></div>                                                  <p>Tell processes to shut down</p>                            <div class="highlight"><pre>    <span class="k">for</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">process</span> <span class="k">of</span> <span class="err">@</span><span class="nx">processes</span>
-      <span class="nx">process</span><span class="p">.</span><span class="nx">component</span><span class="p">.</span><span class="nx">shutdown</span><span class="p">()</span>
-    <span class="err">@</span><span class="nx">setStarted</span> <span class="kc">false</span>
+    @abortDebounce = <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @debouncedEnd
 
-  <span class="nv">setStarted: </span><span class="p">(</span><span class="nx">started</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="k">if</span> <span class="err">@</span><span class="nx">started</span> <span class="o">is</span> <span class="nx">started</span>
-    <span class="nx">unless</span> <span class="nx">started</span></pre></div>                                                  <p>Ending the execution</p>                            <div class="highlight"><pre>      <span class="err">@</span><span class="nx">started</span> <span class="o">=</span> <span class="kc">false</span>
-      <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;end&#39;</span><span class="p">,</span>
-        <span class="nv">start: </span><span class="err">@</span><span class="nx">startupDate</span>
-        <span class="nv">end: </span><span class="k">new</span> <span class="nb">Date</span>
-        <span class="nv">uptime: </span><span class="err">@</span><span class="nx">uptime</span><span class="p">()</span>
-      <span class="k">return</span></pre></div>                                                  <p>Starting the execution</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">startupDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">startupDate</span>
-    <span class="err">@</span><span class="nx">started</span> <span class="o">=</span> <span class="kc">true</span>
-    <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;start&#39;</span><span class="p">,</span>
-      <span class="nv">start: </span><span class="err">@</span><span class="nx">startupDate</span>
+    <span class="hljs-keyword">if</span> @started
+      @stop (err) =&gt;
+        <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
+        @start callback
+      <span class="hljs-keyword">return</span>
 
-  <span class="nv">getDebug: </span><span class="p">()</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">debug</span>
+    @initials = @nextInitials.slice <span class="hljs-number">0</span>
+    @eventBuffer = []
+    @startComponents (err) =&gt;
+      <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
+      @sendInitials (err) =&gt;
+        <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
+        @sendDefaults (err) =&gt;
+          <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
+          @setStarted <span class="hljs-literal">true</span>
+          callback <span class="hljs-literal">null</span>
 
-  <span class="nv">setDebug: </span><span class="p">(</span><span class="nx">active</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="k">if</span> <span class="nx">active</span> <span class="o">==</span> <span class="err">@</span><span class="nx">debug</span>
-    <span class="err">@</span><span class="nx">debug</span> <span class="o">=</span> <span class="nx">active</span>
+  stop: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
+    <span class="hljs-keyword">unless</span> callback
+      platform.deprecated <span class="hljs-string">'Calling network.stop() without callback is deprecated'</span>
+<span class="hljs-function">      <span class="hljs-title">callback</span> = -&gt;</span>
 
-    <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="err">@</span><span class="nx">connections</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">setDebug</span> <span class="nx">active</span>
-    <span class="k">for</span> <span class="nx">processId</span><span class="p">,</span> <span class="nx">process</span> <span class="k">of</span> <span class="err">@</span><span class="nx">processes</span>
-      <span class="nx">instance</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">component</span>
-      <span class="nx">instance</span><span class="p">.</span><span class="nx">network</span><span class="p">.</span><span class="nx">setDebug</span> <span class="nx">active</span> <span class="k">if</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">isSubgraph</span><span class="p">()</span>
+    @abortDebounce = <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @debouncedEnd
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">Network</span> <span class="o">=</span> <span class="nx">Network</span>
+    <span class="hljs-keyword">return</span> callback <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> @started</pre></div>
+            
+          
+            
+            <p>Disconnect all connections</p>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2017-01-03 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">for</span> connection <span class="hljs-keyword">in</span> @connections
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> connection.isConnected()
+      connection.disconnect()</pre></div>
+            
+          
+            
+            <p>Emit stop event when all processes are stopped</p>
+
+            
+              <div class='highlight'><pre>    count = <span class="hljs-number">0</span>
+    length = <span class="hljs-keyword">if</span> @processes <span class="hljs-keyword">then</span> Object.keys(@processes).length <span class="hljs-keyword">else</span> <span class="hljs-number">0</span>
+<span class="hljs-function">    <span class="hljs-title">onProcessEnd</span> = <span class="hljs-params">(err)</span> =&gt;</span>
+      <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
+      count++
+      <span class="hljs-keyword">if</span> count <span class="hljs-keyword">is</span> length
+        @setStarted <span class="hljs-literal">false</span>
+        callback()
+    <span class="hljs-keyword">unless</span> @processes <span class="hljs-keyword">and</span> Object.keys(@processes).length
+      @setStarted <span class="hljs-literal">false</span>
+      <span class="hljs-keyword">return</span> callback()</pre></div>
+            
+          
+            
+            <p>Tell processes to shut down</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">for</span> id, process <span class="hljs-keyword">of</span> @processes
+      <span class="hljs-keyword">unless</span> process.component.isStarted()
+        onProcessEnd()
+        <span class="hljs-keyword">continue</span>
+      <span class="hljs-keyword">if</span> process.component.shutdown.length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+        platform.deprecated <span class="hljs-string">'component.shutdown method without callback is deprecated'</span>
+        process.component.shutdown()
+        onProcessEnd()
+        <span class="hljs-keyword">continue</span>
+      process.component.shutdown onProcessEnd
+
+  setStarted: <span class="hljs-function"><span class="hljs-params">(started)</span> -&gt;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> @started <span class="hljs-keyword">is</span> started
+    <span class="hljs-keyword">unless</span> started</pre></div>
+            
+          
+            
+            <p>Ending the execution</p>
+
+            
+              <div class='highlight'><pre>      @started = <span class="hljs-literal">false</span>
+      @bufferedEmit <span class="hljs-string">'end'</span>,
+        start: @startupDate
+        end: <span class="hljs-keyword">new</span> Date
+        uptime: @uptime()
+      <span class="hljs-keyword">return</span></pre></div>
+            
+          
+            
+            <p>Starting the execution</p>
+
+            
+              <div class='highlight'><pre>    @startupDate = <span class="hljs-keyword">new</span> Date <span class="hljs-keyword">unless</span> @startupDate
+    @started = <span class="hljs-literal">true</span>
+    @bufferedEmit <span class="hljs-string">'start'</span>,
+      start: @startupDate
+
+  checkIfFinished: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> @isRunning()
+    <span class="hljs-keyword">delete</span> @abortDebounce
+    <span class="hljs-keyword">unless</span> @debouncedEnd
+      @debouncedEnd = utils.debounce =&gt;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> @abortDebounce
+        @setStarted <span class="hljs-literal">false</span>
+      , <span class="hljs-number">50</span>
+    <span class="hljs-keyword">do</span> @debouncedEnd
+
+  getDebug: <span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span>
+    @debug
+
+  setDebug: <span class="hljs-function"><span class="hljs-params">(active)</span> -&gt;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> active == @debug
+    @debug = active
+
+    <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> @connections
+      socket.setDebug active
+    <span class="hljs-keyword">for</span> processId, process <span class="hljs-keyword">of</span> @processes
+      instance = process.component
+      instance.network.setDebug active <span class="hljs-keyword">if</span> instance.isSubgraph()
+
+exports.Network = Network</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically on 2017-03-01 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>

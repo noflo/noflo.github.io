@@ -4,75 +4,295 @@ title: "Ports API"
 categories:
   - api
 ---
-   <div class="row-fluid">     <div class="page-title documentation-page-title">       <div class="container">         <h1 class="page-title__title">API Documentation</h1>         <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>       </div>     </div>   </div>    <div class="row-fluid">     <div class="container documentation-main-container">       <div class="main">         <div class="sidebar span4">                    <nav>             <ul class="sidebar__nav">                                                                  <li>                   <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">                     ArrayPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">                     AsyncComponent                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">                     BasePort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Component/index.html' %}class="active" {% endif %}href="/api/Component/">                     Component                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/ComponentLoader/index.html' %}class="active" {% endif %}href="/api/ComponentLoader/">                     ComponentLoader                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Graph/index.html' %}class="active" {% endif %}href="/api/Graph/">                     Graph                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">                     Helpers                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">                     IP                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InPort/index.html' %}class="active" {% endif %}href="/api/InPort/">                     InPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">                     InternalSocket                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Journal/index.html' %}class="active" {% endif %}href="/api/Journal/">                     Journal                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Network/index.html' %}class="active" {% endif %}href="/api/Network/">                     Network                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/NoFlo/index.html' %}class="active" {% endif %}href="/api/NoFlo/">                     NoFlo                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/OutPort/index.html' %}class="active" {% endif %}href="/api/OutPort/">                     OutPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Platform/index.html' %}class="active" {% endif %}href="/api/Platform/">                     Platform                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">                     Port                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">                     Ports                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">                     Streams                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">                     Utils                   </a>                 </li>                                             </ul>           </nav>                  </div>         <div class="content span8">           <h1>{{ page.title }}</h1>                                     <pre><code>NoFlo - Flow-Based Programming for JavaScript
-(c) 2014 TheGrid (Rituwall Inc.)
+  <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
+                    ArrayPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
+                    AsyncComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Component/index.html' %}class="active" {% endif %}href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ComponentLoader/index.html' %}class="active" {% endif %}href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">
+                    Helpers
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/InPort/index.html' %}class="active" {% endif %}href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Network/index.html' %}class="active" {% endif %}href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/NoFlo/index.html' %}class="active" {% endif %}href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/OutPort/index.html' %}class="active" {% endif %}href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Platform/index.html' %}class="active" {% endif %}href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
+                    Port
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
+                    Streams
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>{{ page.title }}</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license
-</code></pre>
+</code></pre><p>Ports collection classes for NoFlo components</p>
 
-<p>Ports collection classes for NoFlo components</p>                            <div class="highlight"><pre><span class="p">{</span><span class="nx">EventEmitter</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;events&#39;</span>
+            
+              <div class='highlight'><pre>{EventEmitter} = <span class="hljs-built_in">require</span> <span class="hljs-string">'events'</span>
 
-<span class="nx">InPort</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./InPort&#39;</span>
-<span class="nx">OutPort</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./OutPort&#39;</span>
+InPort = <span class="hljs-built_in">require</span> <span class="hljs-string">'./InPort'</span>
+OutPort = <span class="hljs-built_in">require</span> <span class="hljs-string">'./OutPort'</span>
 
-<span class="nx">class</span> <span class="nx">Ports</span> <span class="k">extends</span> <span class="nx">EventEmitter</span>
-  <span class="nv">model: </span><span class="nx">InPort</span>
-  <span class="nv">constructor: </span><span class="p">(</span><span class="nx">ports</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">ports</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">return</span> <span class="nx">unless</span> <span class="nx">ports</span>
-    <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">options</span> <span class="k">of</span> <span class="nx">ports</span>
-      <span class="err">@</span><span class="nx">add</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">options</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ports</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span></span>
+  model: InPort
+  constructor: <span class="hljs-function"><span class="hljs-params">(ports)</span> -&gt;</span>
+    @ports = {}
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> ports
+    <span class="hljs-keyword">for</span> name, options <span class="hljs-keyword">of</span> ports
+      @add name, options
 
-  <span class="nv">add: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">process</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">name</span> <span class="o">is</span> <span class="s1">&#39;add&#39;</span> <span class="o">or</span> <span class="nx">name</span> <span class="o">is</span> <span class="s1">&#39;remove&#39;</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s1">&#39;Add and remove are restricted port names&#39;</span>
+  add: <span class="hljs-function"><span class="hljs-params">(name, options, process)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> name <span class="hljs-keyword">is</span> <span class="hljs-string">'add'</span> <span class="hljs-keyword">or</span> name <span class="hljs-keyword">is</span> <span class="hljs-string">'remove'</span>
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'Add and remove are restricted port names'</span>
 
-    <span class="nx">unless</span> <span class="nx">name</span><span class="p">.</span><span class="nx">match</span> <span class="o">/^</span><span class="p">[</span><span class="nx">a</span><span class="o">-</span><span class="nx">z0</span><span class="o">-</span><span class="mi">9</span><span class="nx">_</span><span class="err">\</span><span class="p">.</span><span class="err">\</span><span class="o">/</span><span class="p">]</span><span class="o">+</span><span class="nx">$</span><span class="o">/</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port names can only contain lowercase alphanumeric characters and underscores. &#39;#{name}&#39; not allowed&quot;</span></pre></div>                                                  <p>Remove previous implementation</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">remove</span> <span class="nx">name</span> <span class="k">if</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="hljs-keyword">unless</span> name.match <span class="hljs-regexp">/^[a-z0-9_\.\/]+$/</span>
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Port names can only contain lowercase alphanumeric characters and underscores. '<span class="hljs-subst">#{name}</span>' not allowed"</span></pre></div>
+            
+          
+            
+            <p>Remove previous implementation</p>
 
-    <span class="k">if</span> <span class="k">typeof</span> <span class="nx">options</span> <span class="o">is</span> <span class="s1">&#39;object&#39;</span> <span class="o">and</span> <span class="nx">options</span><span class="p">.</span><span class="nx">canAttach</span>
-      <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">options</span>
-    <span class="k">else</span>
-      <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="err">@</span><span class="nx">model</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">process</span>
+            
+              <div class='highlight'><pre>    @remove name <span class="hljs-keyword">if</span> @ports[name]
 
-    <span class="err">@</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> options <span class="hljs-keyword">is</span> <span class="hljs-string">'object'</span> <span class="hljs-keyword">and</span> options.canAttach
+      @ports[name] = options
+    <span class="hljs-keyword">else</span>
+      @ports[name] = <span class="hljs-keyword">new</span> @model options, process
 
-    <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="nx">name</span>
+    @[name] = @ports[name]
 
-    <span class="err">@</span> <span class="c1"># chainable</span>
+    @emit <span class="hljs-string">'add'</span>, name
 
-  <span class="nv">remove: </span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not defined&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="k">delete</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="k">delete</span> <span class="err">@</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">emit</span> <span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="nx">name</span>
+    @ <span class="hljs-comment"># chainable</span>
 
-    <span class="err">@</span> <span class="c1"># chainable</span>
+  remove: <span class="hljs-function"><span class="hljs-params">(name)</span> -&gt;</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Port <span class="hljs-subst">#{name}</span> not defined"</span> <span class="hljs-keyword">unless</span> @ports[name]
+    <span class="hljs-keyword">delete</span> @ports[name]
+    <span class="hljs-keyword">delete</span> @[name]
+    @emit <span class="hljs-string">'remove'</span>, name
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">InPorts</span> <span class="o">=</span> <span class="nx">class</span> <span class="nx">InPorts</span> <span class="k">extends</span> <span class="nx">Ports</span>
-  <span class="kc">on</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="kc">on</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span>
-  <span class="nv">once: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">once</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">callback</span>
+    @ <span class="hljs-comment"># chainable</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">OutPorts</span> <span class="o">=</span> <span class="nx">class</span> <span class="nx">OutPorts</span> <span class="k">extends</span> <span class="nx">Ports</span>
-  <span class="nv">model: </span><span class="nx">OutPort</span>
+exports.InPorts = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPorts</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ports</span></span>
+  on: <span class="hljs-function"><span class="hljs-params">(name, event, callback)</span> -&gt;</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Port <span class="hljs-subst">#{name}</span> not available"</span> <span class="hljs-keyword">unless</span> @ports[name]
+    @ports[name].<span class="hljs-literal">on</span> event, callback
+  once: <span class="hljs-function"><span class="hljs-params">(name, event, callback)</span> -&gt;</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Port <span class="hljs-subst">#{name}</span> not available"</span> <span class="hljs-keyword">unless</span> @ports[name]
+    @ports[name].once event, callback
 
-  <span class="nv">connect: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">connect</span> <span class="nx">socketId</span>
-  <span class="nv">beginGroup: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">beginGroup</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">socketId</span>
-  <span class="nv">send: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">send</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">socketId</span>
-  <span class="nv">endGroup: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">endGroup</span> <span class="nx">socketId</span>
-  <span class="nv">disconnect: </span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Port #{name} not available&quot;</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">ports</span><span class="p">[</span><span class="nx">name</span><span class="p">].</span><span class="nx">disconnect</span> <span class="nx">socketId</span>
+exports.OutPorts = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPorts</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ports</span></span>
+  model: OutPort
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2017-01-03 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.coffee">Ports.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+  connect: <span class="hljs-function"><span class="hljs-params">(name, socketId)</span> -&gt;</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Port <span class="hljs-subst">#{name}</span> not available"</span> <span class="hljs-keyword">unless</span> @ports[name]
+    @ports[name].connect socketId
+  beginGroup: <span class="hljs-function"><span class="hljs-params">(name, group, socketId)</span> -&gt;</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Port <span class="hljs-subst">#{name}</span> not available"</span> <span class="hljs-keyword">unless</span> @ports[name]
+    @ports[name].beginGroup group, socketId
+  send: <span class="hljs-function"><span class="hljs-params">(name, data, socketId)</span> -&gt;</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Port <span class="hljs-subst">#{name}</span> not available"</span> <span class="hljs-keyword">unless</span> @ports[name]
+    @ports[name].send data, socketId
+  endGroup: <span class="hljs-function"><span class="hljs-params">(name, socketId)</span> -&gt;</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Port <span class="hljs-subst">#{name}</span> not available"</span> <span class="hljs-keyword">unless</span> @ports[name]
+    @ports[name].endGroup socketId
+  disconnect: <span class="hljs-function"><span class="hljs-params">(name, socketId)</span> -&gt;</span>
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Port <span class="hljs-subst">#{name}</span> not available"</span> <span class="hljs-keyword">unless</span> @ports[name]
+    @ports[name].disconnect socketId</pre></div>
+            
+          
+            
+            <p>Port name normalization:
+returns object containing keys name and index for ports names in
+format <code>portname</code> or <code>portname[index]</code>.</p>
+
+            
+              <div class='highlight'><pre>exports.normalizePortName = <span class="hljs-function"><span class="hljs-params">(name)</span> -&gt;</span>
+  port =
+    name: name</pre></div>
+            
+          
+            
+            <p>Regular port</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">return</span> port <span class="hljs-keyword">if</span> name.indexOf(<span class="hljs-string">'['</span>) <span class="hljs-keyword">is</span> <span class="hljs-number">-1</span></pre></div>
+            
+          
+            
+            <p>Addressable port with index</p>
+
+            
+              <div class='highlight'><pre>  matched = name.match <span class="hljs-regexp">/(.*)\[([0-9]+)\]/</span>
+  <span class="hljs-keyword">return</span> name <span class="hljs-keyword">unless</span> matched?.length
+  port.name = matched[<span class="hljs-number">1</span>]
+  port.index = matched[<span class="hljs-number">2</span>]
+  <span class="hljs-keyword">return</span> port</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically on 2017-03-01 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.coffee">Ports.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>

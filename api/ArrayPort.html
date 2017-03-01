@@ -4,123 +4,309 @@ title: "ArrayPort API"
 categories:
   - api
 ---
-   <div class="row-fluid">     <div class="page-title documentation-page-title">       <div class="container">         <h1 class="page-title__title">API Documentation</h1>         <a href="https://github.com/noflo/noflo/blob/master/src/lib/ArrayPort.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>       </div>     </div>   </div>    <div class="row-fluid">     <div class="container documentation-main-container">       <div class="main">         <div class="sidebar span4">                    <nav>             <ul class="sidebar__nav">                                                                  <li>                   <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">                     ArrayPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">                     AsyncComponent                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">                     BasePort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Component/index.html' %}class="active" {% endif %}href="/api/Component/">                     Component                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/ComponentLoader/index.html' %}class="active" {% endif %}href="/api/ComponentLoader/">                     ComponentLoader                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Graph/index.html' %}class="active" {% endif %}href="/api/Graph/">                     Graph                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">                     Helpers                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">                     IP                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InPort/index.html' %}class="active" {% endif %}href="/api/InPort/">                     InPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">                     InternalSocket                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Journal/index.html' %}class="active" {% endif %}href="/api/Journal/">                     Journal                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Network/index.html' %}class="active" {% endif %}href="/api/Network/">                     Network                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/NoFlo/index.html' %}class="active" {% endif %}href="/api/NoFlo/">                     NoFlo                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/OutPort/index.html' %}class="active" {% endif %}href="/api/OutPort/">                     OutPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Platform/index.html' %}class="active" {% endif %}href="/api/Platform/">                     Platform                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">                     Port                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">                     Ports                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">                     Streams                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">                     Utils                   </a>                 </li>                                             </ul>           </nav>                  </div>         <div class="content span8">           <h1>{{ page.title }}</h1>                                     <pre><code>NoFlo - Flow-Based Programming for JavaScript
-(c) 2013-2014 TheGrid (Rituwall Inc.)
-(c) 2011-2012 Henri Bergius, Nemein
+  <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/ArrayPort.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
+                    ArrayPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
+                    AsyncComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Component/index.html' %}class="active" {% endif %}href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ComponentLoader/index.html' %}class="active" {% endif %}href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">
+                    Helpers
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/InPort/index.html' %}class="active" {% endif %}href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Network/index.html' %}class="active" {% endif %}href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/NoFlo/index.html' %}class="active" {% endif %}href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/OutPort/index.html' %}class="active" {% endif %}href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Platform/index.html' %}class="active" {% endif %}href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
+                    Port
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
+                    Streams
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>{{ page.title }}</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2013</span><span class="hljs-number">-2017</span> Flowhub UG
+(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license
-</code></pre>
+</code></pre><p>ArrayPorts are similar to regular ports except that they’re able to handle multiple
+connections and even address them separately.</p>
 
-<p>ArrayPorts are similar to regular ports except that they're able to handle multiple
-connections and even address them separately.</p>                            <div class="highlight"><pre><span class="nx">port</span> <span class="o">=</span> <span class="nx">require</span> <span class="s2">&quot;./Port&quot;</span>
+            
+              <div class='highlight'><pre>port = <span class="hljs-built_in">require</span> <span class="hljs-string">"./Port"</span>
+platform = <span class="hljs-built_in">require</span> <span class="hljs-string">'./Platform'</span>
 
-<span class="nx">class</span> <span class="nx">ArrayPort</span> <span class="k">extends</span> <span class="nx">port</span><span class="p">.</span><span class="nx">Port</span>
-  <span class="nv">constructor: </span><span class="p">(</span><span class="err">@</span><span class="nx">type</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">super</span> <span class="err">@</span><span class="nx">type</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">port</span>.<span class="hljs-title">Port</span></span>
+  constructor: <span class="hljs-function"><span class="hljs-params">(@type)</span> -&gt;</span>
+    platform.deprecated <span class="hljs-string">'noflo.ArrayPort is deprecated. Please port to noflo.InPort/noflo.OutPort and use addressable: true'</span>
+    <span class="hljs-keyword">super</span> @type
 
-  <span class="nv">attach: </span><span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">socketId</span> <span class="o">=</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span> <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span> <span class="o">=</span> <span class="nx">socket</span>
-    <span class="err">@</span><span class="nx">attachSocket</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">socketId</span>
+  attach: <span class="hljs-function"><span class="hljs-params">(socket, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    socketId = @sockets.length <span class="hljs-keyword">if</span> socketId <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
+    @sockets[socketId] = socket
+    @attachSocket socket, socketId
 
-  <span class="nv">connect: </span><span class="p">(</span><span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
-      <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
-      <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">-&gt;</span>
-        <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
-        <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
-      <span class="k">return</span>
+  connect: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> socketId <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
+      <span class="hljs-keyword">unless</span> @sockets.length
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: No connections available"</span>
+      @sockets.forEach (socket) -&gt;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> socket
+        socket.connect()
+      <span class="hljs-keyword">return</span>
 
-    <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection &#39;#{socketId}&#39; available&quot;</span>
+    <span class="hljs-keyword">unless</span> @sockets[socketId]
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: No connection '<span class="hljs-subst">#{socketId}</span>' available"</span>
 
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">connect</span><span class="p">()</span>
+    @sockets[socketId].connect()
 
-  <span class="nv">beginGroup: </span><span class="p">(</span><span class="nx">group</span><span class="p">,</span> <span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
-      <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
-      <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span>
-        <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
-        <span class="err">@</span><span class="nx">beginGroup</span> <span class="nx">group</span><span class="p">,</span> <span class="nx">index</span>
-      <span class="k">return</span>
+  beginGroup: <span class="hljs-function"><span class="hljs-params">(group, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> socketId <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
+      <span class="hljs-keyword">unless</span> @sockets.length
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: No connections available"</span>
+      @sockets.forEach (socket, index) =&gt;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> socket
+        @beginGroup group, index
+      <span class="hljs-keyword">return</span>
 
-    <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection &#39;#{socketId}&#39; available&quot;</span>
+    <span class="hljs-keyword">unless</span> @sockets[socketId]
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: No connection '<span class="hljs-subst">#{socketId}</span>' available"</span>
 
-    <span class="k">return</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">beginGroup</span> <span class="nx">group</span> <span class="k">if</span> <span class="err">@</span><span class="nx">isConnected</span> <span class="nx">socketId</span>
+    <span class="hljs-keyword">return</span> @sockets[socketId].beginGroup group <span class="hljs-keyword">if</span> @isConnected socketId
 
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">once</span> <span class="s2">&quot;connect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">beginGroup</span> <span class="nx">group</span>
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">connect</span><span class="p">()</span>
+    @sockets[socketId].once <span class="hljs-string">"connect"</span>, <span class="hljs-function">=&gt;</span>
+      @sockets[socketId].beginGroup group
+    @sockets[socketId].connect()
 
-  <span class="nv">send: </span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
-      <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
-      <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span>
-        <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
-        <span class="err">@</span><span class="nx">send</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">index</span>
-      <span class="k">return</span>
+  send: <span class="hljs-function"><span class="hljs-params">(data, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> socketId <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
+      <span class="hljs-keyword">unless</span> @sockets.length
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: No connections available"</span>
+      @sockets.forEach (socket, index) =&gt;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> socket
+        @send data, index
+      <span class="hljs-keyword">return</span>
 
-    <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection &#39;#{socketId}&#39; available&quot;</span>
+    <span class="hljs-keyword">unless</span> @sockets[socketId]
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: No connection '<span class="hljs-subst">#{socketId}</span>' available"</span>
 
-    <span class="k">return</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">send</span> <span class="nx">data</span> <span class="k">if</span> <span class="err">@</span><span class="nx">isConnected</span> <span class="nx">socketId</span>
+    <span class="hljs-keyword">return</span> @sockets[socketId].send data <span class="hljs-keyword">if</span> @isConnected socketId
 
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">once</span> <span class="s2">&quot;connect&quot;</span><span class="p">,</span> <span class="o">=&gt;</span>
-      <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">send</span> <span class="nx">data</span>
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">connect</span><span class="p">()</span>
+    @sockets[socketId].once <span class="hljs-string">"connect"</span>, <span class="hljs-function">=&gt;</span>
+      @sockets[socketId].send data
+    @sockets[socketId].connect()
 
-  <span class="nv">endGroup: </span><span class="p">(</span><span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
-      <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
-      <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span>
-        <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
-        <span class="err">@</span><span class="nx">endGroup</span> <span class="nx">index</span>
-      <span class="k">return</span>
+  endGroup: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> socketId <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
+      <span class="hljs-keyword">unless</span> @sockets.length
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: No connections available"</span>
+      @sockets.forEach (socket, index) =&gt;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> socket
+        @endGroup index
+      <span class="hljs-keyword">return</span>
 
-    <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connection &#39;#{socketId}&#39; available&quot;</span>
+    <span class="hljs-keyword">unless</span> @sockets[socketId]
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: No connection '<span class="hljs-subst">#{socketId}</span>' available"</span>
 
-    <span class="nx">do</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">endGroup</span>
+    <span class="hljs-keyword">do</span> @sockets[socketId].endGroup
 
-  <span class="nv">disconnect: </span><span class="p">(</span><span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
-      <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
-      <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="err">@</span><span class="nx">sockets</span>
-        <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
-        <span class="nx">socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
-      <span class="k">return</span>
+  disconnect: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> socketId <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
+      <span class="hljs-keyword">unless</span> @sockets.length
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: No connections available"</span>
+      <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> @sockets
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> socket
+        socket.disconnect()
+      <span class="hljs-keyword">return</span>
 
-    <span class="k">return</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">disconnect</span><span class="p">()</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> @sockets[socketId]
+    @sockets[socketId].disconnect()
 
-  <span class="nv">isConnected: </span><span class="p">(</span><span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
-      <span class="nx">connected</span> <span class="o">=</span> <span class="kc">false</span>
-      <span class="err">@</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">=&gt;</span>
-        <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
-        <span class="k">if</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">isConnected</span><span class="p">()</span>
-          <span class="nx">connected</span> <span class="o">=</span> <span class="kc">true</span>
-      <span class="k">return</span> <span class="nx">connected</span>
+  isConnected: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> socketId <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
+      connected = <span class="hljs-literal">false</span>
+      @sockets.forEach (socket) -&gt;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> socket
+        <span class="hljs-keyword">if</span> socket.isConnected()
+          connected = <span class="hljs-literal">true</span>
+      <span class="hljs-keyword">return</span> connected
 
-    <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="k">return</span> <span class="kc">false</span>
-    <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">].</span><span class="nx">isConnected</span><span class="p">()</span>
+    <span class="hljs-keyword">unless</span> @sockets[socketId]
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+    @sockets[socketId].isConnected()
 
-  <span class="nv">isAddressable: </span><span class="o">-&gt;</span> <span class="kc">true</span>
+  isAddressable: <span class="hljs-function">-&gt;</span> <span class="hljs-literal">true</span>
 
-  <span class="nv">isAttached: </span><span class="p">(</span><span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">undefined</span>
-      <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="err">@</span><span class="nx">sockets</span>
-        <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="nx">socket</span>
-      <span class="k">return</span> <span class="kc">false</span>
-    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-    <span class="kc">false</span>
+  isAttached: <span class="hljs-function"><span class="hljs-params">(socketId)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> socketId <span class="hljs-keyword">is</span> <span class="hljs-literal">undefined</span>
+      <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> @sockets
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> socket
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @sockets[socketId]
+    <span class="hljs-literal">false</span>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">ArrayPort</span> <span class="o">=</span> <span class="nx">ArrayPort</span>
-
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2017-01-03 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ArrayPort.coffee">ArrayPort.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+exports.ArrayPort = ArrayPort</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically on 2017-03-01 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ArrayPort.coffee">ArrayPort.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -4,36 +4,411 @@ title: "Utils API"
 categories:
   - api
 ---
-   <div class="row-fluid">     <div class="page-title documentation-page-title">       <div class="container">         <h1 class="page-title__title">API Documentation</h1>         <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>       </div>     </div>   </div>    <div class="row-fluid">     <div class="container documentation-main-container">       <div class="main">         <div class="sidebar span4">                    <nav>             <ul class="sidebar__nav">                                                                  <li>                   <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">                     ArrayPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">                     AsyncComponent                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">                     BasePort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Component/index.html' %}class="active" {% endif %}href="/api/Component/">                     Component                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/ComponentLoader/index.html' %}class="active" {% endif %}href="/api/ComponentLoader/">                     ComponentLoader                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Graph/index.html' %}class="active" {% endif %}href="/api/Graph/">                     Graph                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">                     Helpers                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">                     IP                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InPort/index.html' %}class="active" {% endif %}href="/api/InPort/">                     InPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">                     InternalSocket                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Journal/index.html' %}class="active" {% endif %}href="/api/Journal/">                     Journal                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Network/index.html' %}class="active" {% endif %}href="/api/Network/">                     Network                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/NoFlo/index.html' %}class="active" {% endif %}href="/api/NoFlo/">                     NoFlo                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/OutPort/index.html' %}class="active" {% endif %}href="/api/OutPort/">                     OutPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Platform/index.html' %}class="active" {% endif %}href="/api/Platform/">                     Platform                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">                     Port                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">                     Ports                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">                     Streams                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">                     Utils                   </a>                 </li>                                             </ul>           </nav>                  </div>         <div class="content span8">           <h1>{{ page.title }}</h1>                                     <pre><code>NoFlo - Flow-Based Programming for JavaScript
-(c) 2014 TheGrid (Rituwall Inc.)
+  <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
+                    ArrayPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
+                    AsyncComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Component/index.html' %}class="active" {% endif %}href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ComponentLoader/index.html' %}class="active" {% endif %}href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">
+                    Helpers
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/InPort/index.html' %}class="active" {% endif %}href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Network/index.html' %}class="active" {% endif %}href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/NoFlo/index.html' %}class="active" {% endif %}href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/OutPort/index.html' %}class="active" {% endif %}href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Platform/index.html' %}class="active" {% endif %}href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
+                    Port
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
+                    Streams
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>{{ page.title }}</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license
-</code></pre>
+</code></pre><p>Generic object clone. From CS cookbook</p>
 
-<p>Generic object clone. From CS cookbook</p>                            <div class="highlight"><pre><span class="nx">clone</span> <span class="o">=</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="o">not</span> <span class="nx">obj</span><span class="o">?</span> <span class="o">or</span> <span class="k">typeof</span> <span class="nx">obj</span> <span class="o">isnt</span> <span class="s1">&#39;object&#39;</span>
-    <span class="k">return</span> <span class="nx">obj</span>
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">clone</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> obj? <span class="hljs-keyword">or</span> <span class="hljs-keyword">typeof</span> obj <span class="hljs-keyword">isnt</span> <span class="hljs-string">'object'</span>
+    <span class="hljs-keyword">return</span> obj
 
-  <span class="k">if</span> <span class="nx">obj</span> <span class="k">instanceof</span> <span class="nb">Date</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">getTime</span><span class="p">())</span>
+  <span class="hljs-keyword">if</span> obj <span class="hljs-keyword">instanceof</span> Date
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Date(obj.getTime())
 
-  <span class="k">if</span> <span class="nx">obj</span> <span class="k">instanceof</span> <span class="nb">RegExp</span>
-    <span class="nx">flags</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="nx">flags</span> <span class="o">+=</span> <span class="s1">&#39;g&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">global</span><span class="o">?</span>
-    <span class="nx">flags</span> <span class="o">+=</span> <span class="s1">&#39;i&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">ignoreCase</span><span class="o">?</span>
-    <span class="nx">flags</span> <span class="o">+=</span> <span class="s1">&#39;m&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">multiline</span><span class="o">?</span>
-    <span class="nx">flags</span> <span class="o">+=</span> <span class="s1">&#39;y&#39;</span> <span class="k">if</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">sticky</span><span class="o">?</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">source</span><span class="p">,</span> <span class="nx">flags</span><span class="p">)</span>
+  <span class="hljs-keyword">if</span> obj <span class="hljs-keyword">instanceof</span> RegExp
+    flags = <span class="hljs-string">''</span>
+    flags += <span class="hljs-string">'g'</span> <span class="hljs-keyword">if</span> obj.<span class="hljs-built_in">global</span>?
+    flags += <span class="hljs-string">'i'</span> <span class="hljs-keyword">if</span> obj.ignoreCase?
+    flags += <span class="hljs-string">'m'</span> <span class="hljs-keyword">if</span> obj.multiline?
+    flags += <span class="hljs-string">'y'</span> <span class="hljs-keyword">if</span> obj.sticky?
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> RegExp(obj.source, flags)
 
-  <span class="nx">newInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">constructor</span><span class="p">()</span>
+  newInstance = <span class="hljs-keyword">new</span> obj.constructor()
 
-  <span class="k">for</span> <span class="nx">key</span> <span class="k">of</span> <span class="nx">obj</span>
-    <span class="nx">newInstance</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">clone</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+  <span class="hljs-keyword">for</span> key <span class="hljs-keyword">of</span> obj
+    newInstance[key] = clone obj[key]
 
-  <span class="k">return</span> <span class="nx">newInstance</span></pre></div>                                                  <p>Guess language from filename</p>                            <div class="highlight"><pre><span class="nx">guessLanguageFromFilename</span> <span class="o">=</span> <span class="p">(</span><span class="nx">filename</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">return</span> <span class="s1">&#39;coffeescript&#39;</span> <span class="k">if</span> <span class="sr">/.*\.coffee$/</span><span class="p">.</span><span class="nx">test</span> <span class="nx">filename</span>
-  <span class="k">return</span> <span class="s1">&#39;javascript&#39;</span>
+  <span class="hljs-keyword">return</span> newInstance</pre></div>
+            
+          
+            
+            <p>Guess language from filename</p>
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">clone</span> <span class="o">=</span> <span class="nx">clone</span>
-<span class="nx">exports</span><span class="p">.</span><span class="nx">guessLanguageFromFilename</span> <span class="o">=</span> <span class="nx">guessLanguageFromFilename</span>
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">guessLanguageFromFilename</span> = <span class="hljs-params">(filename)</span> -&gt;</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'coffeescript'</span> <span class="hljs-keyword">if</span> <span class="hljs-regexp">/.*\.coffee$/</span>.test filename
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'javascript'</span>
+<span class="hljs-function">
+<span class="hljs-title">isArray</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
+  <span class="hljs-keyword">return</span> Array.isArray(obj) <span class="hljs-keyword">if</span> Array.isArray
+  <span class="hljs-keyword">return</span> Object.prototype.toString.call(arg) == <span class="hljs-string">'[object Array]'</span>
+<span class="hljs-function">
+<span class="hljs-title">isObject</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
+  type = <span class="hljs-keyword">typeof</span>(obj)
+  type == <span class="hljs-string">'function'</span> <span class="hljs-keyword">or</span> type == <span class="hljs-string">'object'</span> <span class="hljs-keyword">and</span> ! !obj
+<span class="hljs-function">
+<span class="hljs-title">unique</span> = <span class="hljs-params">(array)</span> -&gt;</span>
+  output = {}
+  output[array[key]] = array[key] <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> [<span class="hljs-number">0.</span>..array.length]
+  value <span class="hljs-keyword">for</span> key, value <span class="hljs-keyword">of</span> output</pre></div>
+            
+          
+            
+            <p>the following functions are from <a href="http://underscorejs.org/docs/underscore.html">http://underscorejs.org/docs/underscore.html</a>
+Underscore.js 1.8.3 <a href="http://underscorejs.org">http://underscorejs.org</a>
+(c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters &amp; Editors
+Underscore may be freely distributed under the MIT license.</p>
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2017-01-03 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.coffee">Utils.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+            
+          
+            
+            <p>Internal function that returns an efficient (for current engines)
+version of the passed-in callback,
+to be repeatedly applied in other Underscore functions.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">optimizeCb</span> = <span class="hljs-params">(func, context, argCount)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> context == <span class="hljs-literal">undefined</span>
+    <span class="hljs-keyword">return</span> func
+  <span class="hljs-keyword">switch</span> (<span class="hljs-keyword">if</span> argCount == <span class="hljs-literal">null</span> <span class="hljs-keyword">then</span> <span class="hljs-number">3</span> <span class="hljs-keyword">else</span> argCount)
+    <span class="hljs-keyword">when</span> <span class="hljs-number">1</span>
+      <span class="hljs-keyword">return</span> (value) -&gt;
+        func.call context, value
+    <span class="hljs-keyword">when</span> <span class="hljs-number">2</span>
+      <span class="hljs-keyword">return</span> (value, other) -&gt;
+        func.call context, value, other
+    <span class="hljs-keyword">when</span> <span class="hljs-number">3</span>
+      <span class="hljs-keyword">return</span> (value, index, collection) -&gt;
+        func.call context, value, index, collection
+    <span class="hljs-keyword">when</span> <span class="hljs-number">4</span>
+      <span class="hljs-keyword">return</span> (accumulator, value, index, collection) -&gt;
+        func.call context, accumulator, value, index, collection
+  -&gt;
+    func.apply context, arguments</pre></div>
+            
+          
+            
+            <p>Create a reducing function iterating left or right.
+Optimized iterator function as using arguments.length in the main function
+will deoptimize the, see #1991.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">createReduce</span> = <span class="hljs-params">(dir)</span> -&gt;</span>
+<span class="hljs-function">  <span class="hljs-title">iterator</span> = <span class="hljs-params">(obj, iteratee, memo, keys, index, length)</span> -&gt;</span>
+    <span class="hljs-keyword">while</span> index &gt;= <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> index &lt; length
+      currentKey = <span class="hljs-keyword">if</span> keys <span class="hljs-keyword">then</span> keys[index] <span class="hljs-keyword">else</span> index
+      memo = iteratee(memo, obj[currentKey], currentKey, obj)
+      index += dir
+    memo
+
+  <span class="hljs-keyword">return</span> (obj, iteratee, memo, context) -&gt;
+    iteratee = optimizeCb(iteratee, context, <span class="hljs-number">4</span>)
+    keys = Object.keys obj
+    length = (keys <span class="hljs-keyword">or</span> obj).length
+    index = <span class="hljs-keyword">if</span> dir &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">then</span> <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> length - <span class="hljs-number">1</span>
+    <span class="hljs-keyword">if</span> arguments.length &lt; <span class="hljs-number">3</span>
+      memo = obj[<span class="hljs-keyword">if</span> keys <span class="hljs-keyword">then</span> keys[index] <span class="hljs-keyword">else</span> index]
+      index += dir
+    iterator obj, iteratee, memo, keys, index, length
+
+reduceRight = createReduce(<span class="hljs-number">-1</span>)</pre></div>
+            
+          
+            
+            <p>Returns a function, that, as long as it continues to be invoked,
+will not be triggered.
+The function will be called after it stops being called for N milliseconds.
+If immediate is passed, trigger the function on the leading edge,
+instead of the trailing.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">debounce</span> = <span class="hljs-params">(func, wait, immediate)</span> -&gt;</span>
+  timeout = <span class="hljs-literal">undefined</span>
+  args = <span class="hljs-literal">undefined</span>
+  context = <span class="hljs-literal">undefined</span>
+  timestamp = <span class="hljs-literal">undefined</span>
+  result = <span class="hljs-literal">undefined</span>
+<span class="hljs-function">
+  <span class="hljs-title">later</span> = -&gt;</span>
+    last = Date.now - timestamp
+    <span class="hljs-keyword">if</span> last &lt; wait <span class="hljs-keyword">and</span> last &gt;= <span class="hljs-number">0</span>
+      timeout = setTimeout(later, wait - last)
+    <span class="hljs-keyword">else</span>
+      timeout = <span class="hljs-literal">null</span>
+      <span class="hljs-keyword">if</span> !immediate
+        result = func.apply(context, args)
+        <span class="hljs-keyword">if</span> !timeout
+          context = args = <span class="hljs-literal">null</span>
+    <span class="hljs-keyword">return</span>
+
+  -&gt;
+    context = <span class="hljs-keyword">this</span>
+    args = arguments
+    timestamp = Date.now
+    callNow = immediate <span class="hljs-keyword">and</span> !timeout
+    <span class="hljs-keyword">if</span> !timeout
+      timeout = setTimeout(later, wait)
+    <span class="hljs-keyword">if</span> callNow
+      result = func.apply(context, args)
+      context = args = <span class="hljs-literal">null</span>
+    result</pre></div>
+            
+          
+            
+            <p> Retrieve the names of an object’s own properties.
+Delegates to ECMAScript 5‘s native Object.keys</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">getKeys</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> !isObject obj
+    <span class="hljs-keyword">return</span> []
+  <span class="hljs-keyword">if</span> Object.keys
+    <span class="hljs-keyword">return</span> Object.keys(obj)
+  keys = []
+  <span class="hljs-keyword">for</span> key <span class="hljs-keyword">of</span> obj
+    <span class="hljs-keyword">if</span> obj.has key
+      keys.push key
+  keys</pre></div>
+            
+          
+            
+            <p>Retrieve the values of an object’s properties.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">getValues</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
+  keys = getKeys obj
+  length = keys.length
+  values = Array(length)
+  i = <span class="hljs-number">0</span>
+  <span class="hljs-keyword">while</span> i &lt; length
+    values[i] = obj[keys[i]]
+    i++
+  values</pre></div>
+            
+          
+            
+            <p>Determine if the array or object contains a given item (using ===).
+Aliased as includes and include.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">contains</span> = <span class="hljs-params">(obj, item, fromIndex)</span> -&gt;</span>
+  <span class="hljs-keyword">if</span> !isArray obj
+    obj = getValues obj
+  <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> fromIndex != <span class="hljs-string">'number'</span> <span class="hljs-keyword">or</span> guard
+    fromIndex = <span class="hljs-number">0</span>
+  obj.indexOf(item) &gt;= <span class="hljs-number">0</span></pre></div>
+            
+          
+            
+            <p>Produce an array that contains every item
+shared between all the passed-in arrays.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">intersection</span> = <span class="hljs-params">(array)</span> -&gt;</span>
+  result = []
+  argsLength = arguments.length
+  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> [<span class="hljs-number">0.</span>.array.length]
+    item = array[i]
+    <span class="hljs-keyword">continue</span> <span class="hljs-keyword">if</span> contains result, item
+
+    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> [<span class="hljs-number">1.</span>.argsLength]
+      <span class="hljs-keyword">break</span> <span class="hljs-keyword">if</span> !contains arguments[j], item
+
+    result.push item <span class="hljs-keyword">if</span> j <span class="hljs-keyword">is</span> argsLength
+  result
+
+exports.clone = clone
+exports.guessLanguageFromFilename = guessLanguageFromFilename
+exports.optimizeCb = optimizeCb
+exports.reduceRight = reduceRight
+exports.debounce = debounce
+exports.unique = unique
+exports.intersection = intersection
+exports.getValues = getValues</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically on 2017-03-01 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.coffee">Utils.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -4,103 +4,302 @@ title: "OutPort API"
 categories:
   - api
 ---
-   <div class="row-fluid">     <div class="page-title documentation-page-title">       <div class="container">         <h1 class="page-title__title">API Documentation</h1>         <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>       </div>     </div>   </div>    <div class="row-fluid">     <div class="container documentation-main-container">       <div class="main">         <div class="sidebar span4">                    <nav>             <ul class="sidebar__nav">                                                                  <li>                   <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">                     ArrayPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">                     AsyncComponent                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">                     BasePort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Component/index.html' %}class="active" {% endif %}href="/api/Component/">                     Component                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/ComponentLoader/index.html' %}class="active" {% endif %}href="/api/ComponentLoader/">                     ComponentLoader                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Graph/index.html' %}class="active" {% endif %}href="/api/Graph/">                     Graph                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">                     Helpers                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">                     IP                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InPort/index.html' %}class="active" {% endif %}href="/api/InPort/">                     InPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">                     InternalSocket                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Journal/index.html' %}class="active" {% endif %}href="/api/Journal/">                     Journal                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Network/index.html' %}class="active" {% endif %}href="/api/Network/">                     Network                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/NoFlo/index.html' %}class="active" {% endif %}href="/api/NoFlo/">                     NoFlo                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/OutPort/index.html' %}class="active" {% endif %}href="/api/OutPort/">                     OutPort                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Platform/index.html' %}class="active" {% endif %}href="/api/Platform/">                     Platform                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">                     Port                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">                     Ports                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">                     Streams                   </a>                 </li>                                                                                   <li>                   <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">                     Utils                   </a>                 </li>                                             </ul>           </nav>                  </div>         <div class="content span8">           <h1>{{ page.title }}</h1>                                     <pre><code>NoFlo - Flow-Based Programming for JavaScript
-(c) 2014-2016 TheGrid (Rituwall Inc.)
+  <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
+                    ArrayPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
+                    AsyncComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Component/index.html' %}class="active" {% endif %}href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ComponentLoader/index.html' %}class="active" {% endif %}href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">
+                    Helpers
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/InPort/index.html' %}class="active" {% endif %}href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Network/index.html' %}class="active" {% endif %}href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/NoFlo/index.html' %}class="active" {% endif %}href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/OutPort/index.html' %}class="active" {% endif %}href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Platform/index.html' %}class="active" {% endif %}href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
+                    Port
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
+                    Streams
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>{{ page.title }}</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license
-</code></pre>
+</code></pre><p>Output Port (outport) implementation for NoFlo components</p>
 
-<p>Output Port (outport) implementation for NoFlo components</p>                            <div class="highlight"><pre><span class="nx">BasePort</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./BasePort&#39;</span>
-<span class="nx">IP</span> <span class="o">=</span> <span class="nx">require</span> <span class="s1">&#39;./IP&#39;</span>
+            
+              <div class='highlight'><pre>BasePort = <span class="hljs-built_in">require</span> <span class="hljs-string">'./BasePort'</span>
+IP = <span class="hljs-built_in">require</span> <span class="hljs-string">'./IP'</span>
 
-<span class="nx">class</span> <span class="nx">OutPort</span> <span class="k">extends</span> <span class="nx">BasePort</span>
-  <span class="nv">constructor: </span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">cache</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">super</span> <span class="nx">options</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span></span>
+  constructor: <span class="hljs-function"><span class="hljs-params">(options)</span> -&gt;</span>
+    @cache = {}
+    <span class="hljs-keyword">super</span> options
 
-  <span class="nv">attach: </span><span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">super</span> <span class="nx">socket</span><span class="p">,</span> <span class="nx">index</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">isCaching</span><span class="p">()</span> <span class="o">and</span> <span class="err">@</span><span class="nx">cache</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span><span class="o">?</span>
-      <span class="err">@</span><span class="nx">send</span> <span class="err">@</span><span class="nx">cache</span><span class="p">[</span><span class="nx">index</span><span class="p">],</span> <span class="nx">index</span>
+  attach: <span class="hljs-function"><span class="hljs-params">(socket, index = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    <span class="hljs-keyword">super</span> socket, index
+    <span class="hljs-keyword">if</span> @isCaching() <span class="hljs-keyword">and</span> @cache[index]?
+      @send @cache[index], index
 
-  <span class="nv">connect: </span><span class="p">(</span><span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">sockets</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getSockets</span> <span class="nx">socketId</span>
-    <span class="err">@</span><span class="nx">checkRequired</span> <span class="nx">sockets</span>
-    <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="nx">sockets</span>
-      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">socket</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
+  connect: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    sockets = @getSockets socketId
+    @checkRequired sockets
+    <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> sockets
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> socket
+      socket.connect()
 
-  <span class="nv">beginGroup: </span><span class="p">(</span><span class="nx">group</span><span class="p">,</span> <span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">sockets</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getSockets</span> <span class="nx">socketId</span>
-    <span class="err">@</span><span class="nx">checkRequired</span> <span class="nx">sockets</span>
-    <span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
-      <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">beginGroup</span> <span class="nx">group</span>
+  beginGroup: <span class="hljs-function"><span class="hljs-params">(group, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    sockets = @getSockets socketId
+    @checkRequired sockets
+    sockets.forEach (socket) -&gt;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> socket
+      <span class="hljs-keyword">return</span> socket.beginGroup group
 
-  <span class="nv">send: </span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">sockets</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getSockets</span> <span class="nx">socketId</span>
-    <span class="err">@</span><span class="nx">checkRequired</span> <span class="nx">sockets</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">isCaching</span><span class="p">()</span> <span class="o">and</span> <span class="nx">data</span> <span class="o">isnt</span> <span class="err">@</span><span class="nx">cache</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="err">@</span><span class="nx">cache</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span> <span class="o">=</span> <span class="nx">data</span>
-    <span class="nx">sockets</span><span class="p">.</span><span class="nx">forEach</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="k">return</span> <span class="nx">unless</span> <span class="nx">socket</span>
-      <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span> <span class="nx">data</span>
+  send: <span class="hljs-function"><span class="hljs-params">(data, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    sockets = @getSockets socketId
+    @checkRequired sockets
+    <span class="hljs-keyword">if</span> @isCaching() <span class="hljs-keyword">and</span> data <span class="hljs-keyword">isnt</span> @cache[socketId]
+      @cache[socketId] = data
+    sockets.forEach (socket) -&gt;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> socket
+      <span class="hljs-keyword">return</span> socket.send data
 
-  <span class="nv">endGroup: </span><span class="p">(</span><span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">sockets</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getSockets</span> <span class="nx">socketId</span>
-    <span class="err">@</span><span class="nx">checkRequired</span> <span class="nx">sockets</span>
-    <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="nx">sockets</span>
-      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">socket</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">endGroup</span><span class="p">()</span>
+  endGroup: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    sockets = @getSockets socketId
+    @checkRequired sockets
+    <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> sockets
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> socket
+      socket.endGroup()
 
-  <span class="nv">disconnect: </span><span class="p">(</span><span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">sockets</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getSockets</span> <span class="nx">socketId</span>
-    <span class="err">@</span><span class="nx">checkRequired</span> <span class="nx">sockets</span>
-    <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="nx">sockets</span>
-      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">socket</span>
-      <span class="nx">socket</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
+  disconnect: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    sockets = @getSockets socketId
+    @checkRequired sockets
+    <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> sockets
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> socket
+      socket.disconnect()
 
-  <span class="nv">sendIP: </span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">IP</span><span class="p">.</span><span class="nx">isIP</span> <span class="nx">type</span>
-      <span class="nx">ip</span> <span class="o">=</span> <span class="nx">type</span>
-      <span class="nx">socketId</span> <span class="o">=</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">index</span>
-    <span class="k">else</span>
-      <span class="nx">ip</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">IP</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">options</span>
-    <span class="nx">sockets</span> <span class="o">=</span> <span class="err">@</span><span class="nx">getSockets</span> <span class="nx">socketId</span>
-    <span class="err">@</span><span class="nx">checkRequired</span> <span class="nx">sockets</span>
-    <span class="k">if</span> <span class="err">@</span><span class="nx">isCaching</span><span class="p">()</span> <span class="o">and</span> <span class="nx">data</span> <span class="o">isnt</span> <span class="err">@</span><span class="nx">cache</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span><span class="o">?</span><span class="p">.</span><span class="nx">data</span>
-      <span class="err">@</span><span class="nx">cache</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span> <span class="o">=</span> <span class="nx">ip</span>
-    <span class="nx">pristine</span> <span class="o">=</span> <span class="kc">true</span>
-    <span class="k">for</span> <span class="nx">socket</span> <span class="k">in</span> <span class="nx">sockets</span>
-      <span class="k">continue</span> <span class="nx">unless</span> <span class="nx">socket</span>
-      <span class="k">if</span> <span class="nx">pristine</span>
-        <span class="nx">socket</span><span class="p">.</span><span class="nx">post</span> <span class="nx">ip</span>
-        <span class="nx">pristine</span> <span class="o">=</span> <span class="kc">false</span>
-      <span class="k">else</span>
-        <span class="nx">socket</span><span class="p">.</span><span class="nx">post</span> <span class="k">if</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">clonable</span> <span class="k">then</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">clone</span><span class="p">()</span> <span class="k">else</span> <span class="nx">ip</span>
-    <span class="err">@</span>
+  sendIP: <span class="hljs-function"><span class="hljs-params">(type, data, options, socketId, autoConnect = <span class="hljs-literal">true</span>)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> IP.isIP type
+      ip = type
+      socketId = ip.index
+    <span class="hljs-keyword">else</span>
+      ip = <span class="hljs-keyword">new</span> IP type, data, options
+    sockets = @getSockets socketId
+    @checkRequired sockets
+    <span class="hljs-keyword">if</span> @isCaching() <span class="hljs-keyword">and</span> data <span class="hljs-keyword">isnt</span> @cache[socketId]?.data
+      @cache[socketId] = ip
+    pristine = <span class="hljs-literal">true</span>
+    <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> sockets
+      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> socket
+      <span class="hljs-keyword">if</span> pristine
+        socket.post ip, autoConnect
+        pristine = <span class="hljs-literal">false</span>
+      <span class="hljs-keyword">else</span>
+        ip = ip.clone() <span class="hljs-keyword">if</span> ip.clonable
+        socket.post ip, autoConnect
+    @
 
-  <span class="nv">openBracket: </span><span class="p">(</span><span class="nx">data</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">sendIP</span> <span class="s1">&#39;openBracket&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">socketId</span>
+  openBracket: <span class="hljs-function"><span class="hljs-params">(data = <span class="hljs-literal">null</span>, options = {}, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    @sendIP <span class="hljs-string">'openBracket'</span>, data, options, socketId
 
-  <span class="nv">data: </span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">sendIP</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">socketId</span>
+  data: <span class="hljs-function"><span class="hljs-params">(data, options = {}, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    @sendIP <span class="hljs-string">'data'</span>, data, options, socketId
 
-  <span class="nv">closeBracket: </span><span class="p">(</span><span class="nx">data</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">socketId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="err">@</span><span class="nx">sendIP</span> <span class="s1">&#39;closeBracket&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">socketId</span>
+  closeBracket: <span class="hljs-function"><span class="hljs-params">(data = <span class="hljs-literal">null</span>, options = {}, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
+    @sendIP <span class="hljs-string">'closeBracket'</span>, data, options, socketId
 
-  <span class="nv">checkRequired: </span><span class="p">(</span><span class="nx">sockets</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">sockets</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">0</span> <span class="o">and</span> <span class="err">@</span><span class="nx">isRequired</span><span class="p">()</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()}: No connections available&quot;</span>
+  checkRequired: <span class="hljs-function"><span class="hljs-params">(sockets)</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> sockets.length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> @isRequired()
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: No connections available"</span>
 
-  <span class="nv">getSockets: </span><span class="p">(</span><span class="nx">socketId</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div>                                                  <p>Addressable sockets affect only one connection at time</p>                            <div class="highlight"><pre>    <span class="k">if</span> <span class="err">@</span><span class="nx">isAddressable</span><span class="p">()</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;#{@getId()} Socket ID required&quot;</span> <span class="k">if</span> <span class="nx">socketId</span> <span class="o">is</span> <span class="kc">null</span>
-      <span class="k">return</span> <span class="p">[]</span> <span class="nx">unless</span> <span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]</span>
-      <span class="k">return</span> <span class="p">[</span><span class="err">@</span><span class="nx">sockets</span><span class="p">[</span><span class="nx">socketId</span><span class="p">]]</span></pre></div>                                                  <p>Regular sockets affect all outbound connections</p>                            <div class="highlight"><pre>    <span class="err">@</span><span class="nx">sockets</span>
+  getSockets: <span class="hljs-function"><span class="hljs-params">(socketId)</span> -&gt;</span></pre></div>
+            
+          
+            
+            <p>Addressable sockets affect only one connection at time</p>
 
-  <span class="nv">isCaching: </span><span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="kc">true</span> <span class="k">if</span> <span class="err">@</span><span class="nx">options</span><span class="p">.</span><span class="nx">caching</span>
-    <span class="kc">false</span>
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> @isAddressable()
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span> Socket ID required"</span> <span class="hljs-keyword">if</span> socketId <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
+      <span class="hljs-keyword">return</span> [] <span class="hljs-keyword">unless</span> @sockets[socketId]
+      <span class="hljs-keyword">return</span> [@sockets[socketId]]</pre></div>
+            
+          
+            
+            <p>Regular sockets affect all outbound connections</p>
 
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">OutPort</span>
+            
+              <div class='highlight'><pre>    @sockets
 
-</pre></div>                                   <p><small>This page contains documentation generated automatically on 2017-01-03 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee">OutPort.coffee</a> file.</small></p>         </div>       </div>     </div>   </div> 
+  isCaching: <span class="hljs-function">-&gt;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @options.caching
+    <span class="hljs-literal">false</span>
+
+<span class="hljs-built_in">module</span>.exports = OutPort</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically on 2017-03-01 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee">OutPort.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
