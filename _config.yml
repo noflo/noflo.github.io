@@ -1,6 +1,6 @@
 title: NoFlo
 tagline: Flow-Based Programming for JavaScript
-version: 0.8.0
+version: 0.8.1
 permalink: /:categories/:title/
 baseurl: ""
 repository:

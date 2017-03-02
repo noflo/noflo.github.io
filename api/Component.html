@@ -295,7 +295,9 @@ at shutdown</p>
 
             
               <div class='highlight'><pre>      inPorts = @inPorts.ports <span class="hljs-keyword">or</span> @inPorts
-      inPort.clear() <span class="hljs-keyword">for</span> inPort <span class="hljs-keyword">in</span> inPorts</pre></div>
+      <span class="hljs-keyword">for</span> portName, inPort <span class="hljs-keyword">of</span> inPorts
+        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> <span class="hljs-keyword">typeof</span> inPort.clear <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
+        inPort.clear()</pre></div>
             
           
             
@@ -1258,7 +1260,7 @@ last running process function.</p>
     @nodeInstance.deactivate @context</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically on 2017-03-01 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee">Component.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically on 2017-03-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee">Component.coffee</a> file.</small></p>
         </div>
       </div>
     </div>
