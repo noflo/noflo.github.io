@@ -10,5 +10,11 @@
     "grunt-contrib-copy": "~1.0.0",
     "grunt-shell": "~2.1.0",
     "grunt-docco": "~0.5.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "noflo": "^0.8.1"
   }
 }

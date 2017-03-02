@@ -1,7 +1,6 @@
 title: NoFlo
 tagline: Flow-Based Programming for JavaScript
-version: 0.8.0
-markdown: redcarpet
+version: 0.8.1
 permalink: /:categories/:title/
 baseurl: ""
 repository:
@@ -90,5 +89,7 @@ exclude:
   - "npm-debug.log"
   - "package.json"
   - "docco.css"
+  - "Gemfile"
+  - "Gemfile.lock"
 gems:
   - jekyll-redirect-from

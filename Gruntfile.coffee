@@ -48,18 +48,15 @@ module.exports = ->
     jekyll:
       dev:
         options: {}
+        bundleExec: true
 
     docco:
       noflo:
-        src: ['_src/src/lib/*.coffee']
+        src: ['node_modules/noflo/src/lib/*.coffee']
         options:
           output: 'api/'
           template: '_docco/docco.jst'
           css: ''
-
-    shell:
-      gitclone:
-        command: 'git clone git://github.com/noflo/noflo.git _src'
 
     watch:
       noflo:
@@ -98,7 +95,6 @@ module.exports = ->
         tasks: ['sass:site', 'copy:site2src']
 
   @loadNpmTasks 'grunt-jekyll'
-  @loadNpmTasks 'grunt-shell'
   @loadNpmTasks 'grunt-docco'
   @loadNpmTasks 'grunt-contrib-connect'
   @loadNpmTasks 'grunt-contrib-watch'
@@ -126,8 +122,10 @@ module.exports = ->
   ]
   @registerTask 'build', [
     'sass:src'
-    'shell:gitclone'
     'docco'
     'jekyll'
+  ]
+  @registerTask 'test', [
+    'build'
   ]
   @registerTask 'default', ['dev']

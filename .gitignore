@@ -44,3 +44,5 @@ _site
 # Docco documentation tweaks
 docco.css
 api/shell.html
+
+Gemfile.lock
