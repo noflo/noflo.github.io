@@ -1,206 +1,275 @@
 ---
-layout: documentation
 title: Components
+layout: documentation
 ---
-- [Structure](#structure)
-- [Lifecycle](#lifecycle)
-- [Design](#design)
-- [Ports](#ports)
-  - [data types](#port-data-types)
-  - [attributes](#port-attributes)
-  - [events](#portevents)
+- [Component API](#component-api)
+  - [The process function](#the-process-function)
+  - [Handling preconditions](#handling-preconditions)
+  - [Processing packets](#processing-packets)
+  - [Sending packets](#sending-packets)
+- [Component lifecycle](#component-lifecycle)
+  - [Generator components](#generator-components)
 
-A component is the main ingredient of flow-based programming. Component is a JavaScript module providing a set of input and output port handlers. These ports are used for connecting components to each other.
+-------------
+NoFlo programs consist of graphs where different nodes are connected together. These nodes can themselves be graphs, or they can be components written in JavaScript.
 
-NoFlo processes (the boxes of a flow graph) are instances of a component, with the graph controlling connections between ports of components.
+A NoFlo component is simply a [JavaScript module](https://www.sitepoint.com/understanding-module-exports-exports-node-js/) that provides a certain interface that allows NoFlo to run it.
 
-Since version 0.2.0, NoFlo has been able to utilize components shared via NPM packages. [Read the introductory blog post](http://bergie.iki.fi/blog/distributing-noflo-components/) to learn more.
+## Component API
 
-<a id="structure"></a>
-### Structure of a component
-
-Functionality a component provides:
-
-* List of inports (named inbound ports)
-* List of outports (named outbound ports)
-* Handler for component initialization that accepts configuration (the `exports.getComponent = ->` that a componentLoader or graph will pass metadata to)
-* Handler for connections for each inport (proccess api)
-
-Minimal NoFlo component written in CoffeeScript would look like the following:
-
-```coffeescript
-# File: components/Forwarder.coffee
-noflo = require 'noflo'
-
-exports.getComponent = ->
-  component = new noflo.Component
-    description: 'This component receives data on a single input
-    port and sends the same data out to the output port'
-
-    # Register ports
-    inPorts:
-      in:
-        datatype: 'all'
-    outPorts:
-      out:
-        datatype: 'all'
-
-    # Our event handler
-    process: (input, output) ->
-      return unless input.hasData 'in'
-      # Forward data when we receive it.
-      payload = input.getData 'in'
-      output.sendDone out: payload
-```
-
-This example component register two ports: _in_ and _out_. When it receives data in the _in_ port, it opens the _out_ port and sends the same data there. When the _in_ connection closes, it will also close the _out_ connection. So basically this component would be a simple repeater.
-
-The `exports.getComponent` function is used by NoFlo to create an instance of the component. See [Component Lifecycle](#lifecycle) for more information.
-
-You can find more examples of components in the [component library](/library/) section of this website.
-
-<a id="design"></a>
-### Some words on component design
-
-Components should aim to be reusable, to do one thing and do it well. This is why often it is a good idea to split functionality traditionally done in one function to multiple components. For example, counting lines in a text file could happen in the following way:
-
-* Filename is sent to a _Read File_ component
-* _Read File_ reads it and sends the contents onwards to _Split String_ component
-* _Split String_ splits the contents by newlines, and sends each line separately to a _Count_ component
-* _Count_ counts the number of packets it received, and sends the total to a _Output_ component
-* _Output_ displays the number
-
-This way the whole logic of the application is in the graph, in how the components are wired together. And each of the components is easily reusable for other purposes.
-
-If a component requires configuration, the good approach is to set sensible defaults in the component, and to allow them to be overridden via an input port. This method of configuration allows the settings to be kept in the graph itself, or for example to be read from a file or database, depending on the needs of the application.
-
-The components should not depend on a particular global state, either, but instead attempt to keep the input and output ports their sole interface to the external world. There may be some exceptions, like a component that listens for HTTP requests or Redis pub-sub messages, but even in these cases the server, or subscription should be set up by the component itself.
-
-When discussing how to solve the unnecessary complexity of software, _Out of the Tar Pit_ promotes an approach quite similar to the one discussed here:
-
-> The first thing that we’re doing is to advocate separating out all complexity of any kind from the pure logic of the system (which - having nothing to do with either state or control - we’re not really considering part of the complexity).
-
-Done this way, components represent the pure logic, and the control flow and state of the application is managed separately of them in the graph. This separation makes the system a lot simpler.
-
-<a id="lifecycle"></a>
-### Component lifecycle
-
-When NoFlo is being run, all components used in a NoFlo network (an instantiated graph) go through the following lifecycle steps:
-
-* _Instantiation_: component is instantiated for a node in the NoFlo graph, and its `constructor` method is called. At this stage a component should prepare its internal data structures and register listeners for the [events of its input ports](#portevents)
-* _Running_: component has received events on its input ports. Now the component can interact with those events and the external world, and optionally start transmitting [port events](#portevents) on its output ports
-* _Shutdown_: Normally a NoFlo network finishes when all components stop transmitting port events. It is however also possible to close a running NoFlo network. In this case the `shutdown` method of components gets called, allowing components to perform whatever cleanup needed, like unregistering event listeners on external objects, or closing network connections.
-
-A running instance of a component in a NoFlo network is called a *process*. Before a process has received data it should be *inert*, merely listening to its input ports. Processes that need to start doing something when a network is started should be triggered to do so by sending them an Initial Information Packet.
-
-
-------------
-<a id="ports"></a>
-# Ports
-
-<a id="portevents"></a>
-### Ports and events
-
-Being a flow-based programming environment, the main action in NoFlo happens through ports and their connections. All actions a component does should be triggered via input port events. There are several events that can be associated with ports:
-
-* _Attach_: there is a connection to the port
-* _Connect_: the port has started sending or receiving a data transmission
-* _BeginGroup_: the data stream after this event is associated with a given named group. Components may or may not utilize this information
-* _Data_: an individual data packet in a transmission. There might be multiple depending on how a component operates
-* _EndGroup_: A particular grouped stream of data ends
-* _Disconnect_: end of data transmission
-* _Detach_: A connection to the port has been removed
-* _IP_: An Information Packet has been sent, could be with a type of `data`, `openBracket`, or `closeBracket`. This is the modern way, and usually the only thing that should be listened for.
-
-It depends on the nature of the component how these events may be handled. Most typical components do operations on a whole transmission, meaning that they should wait for the _disconnect_ event on inports before they act, but some components can also act on single _data_ packets coming in.
-
-When a port has no connections, meaning that it was initialized without a connection, or a _detach_ event has happened, it should do no operations regarding that port.
-
-<a id="port-data-types"></a>
-### Port data types
-
-NoFlo is a flow-based programming environment for JavaScript, and JavaScript utilizes dynamic typing. Because of this, NoFlo component ports don't impose type safety, and the output of any port can be connected to the input of any other port. This means that any type checking or type conversions should be handled inside the components themselves.
-
-To aid users in designing graphs, it is however possible to annotate ports with the data type they expect to receive or transmit. This data type is given as a string value of the `datatype` attribute when adding a port to a component. For example:
-
-```coffeescript
-component.inPorts.add 'in', datatype: 'string'
-component.inPorts.add 'options', datatype: 'object'
-```
-```javascript
-component.inPorts.add('in', { datatype: 'string' });
-component.inPorts.add('options', { datatype: 'object' });
-```
-
-The data types supported by NoFlo include:
-
-* _all_: the port can deal with any data type
-* _bang_: the port doesn't do anything with the contents of a data packet, only with the fact that a packet was sent, so any datatype can be sent to a bang port
-* _string_
-* _boolean_
-* _number_
-* _int_
-* _object_
-* _array_
-* _color_
-* _date_
-* _function_
-* _buffer_
-
-<a id="port-attributes"></a>
-### Port attributes
-
-There is a set of other attributes a port may have apart from its `datatype`:
-
-* `addressable`: this boolean flag makes turns the port into an _Array port_, giving a particular index for each connection attached to it (_default: `false`_);
-Array ports have a third value on events with the socket index :
-  ```javascript
-  @inPorts.in.on 'data' , (event, payload, index ) -> ...
-  ```
-
-* `buffered`: buffered ports save data in the buffer to be `read()` explicitly instead of passing it immediately to event handler (_default: `false`_);
-* `cached`: this option makes an output port re-send last emitted value when new connections are established (_default: `false`_);
-* `datatype`: string type name of data the port accepts, see above (_default: `all`_);
-* `description`: provides human-readable description of the port displayed in documentation and in [Flowhub](http://flowhub.io) inspector;
-* `required`: indicates that a connection on the port is required for component's functioning (_default: `false`_);
-* `values`: sets the list of accepted values for the port, if the value received is not in the list an error is thrown (_default: `null`_).
-* `control`: ports can be used to keep whatever the last packet that was sent to it.
-
-Here is how multiple attributes can be declared:
+So, how does a NoFlo component written in JavaScript look like?
 
 ```javascript
-component.inPorts.add('id', {
-  datatype: 'int',
-  description: 'Request ID'
-});
-component.inPorts.add('user', {
-  datatype: 'object',
-  description: 'User data'
+// Load the NoFlo interface
+var noflo = require('noflo');
+// Also load any other dependencies you have
+var fs = require('fs');
+
+// Implement the getComponent function that NoFlo's component loader
+// uses to instantiate components to the program
+exports.getComponent = function () {
+  // Start by instantiating a component
+  var c = new noflo.Component();
+
+  // Provide some metadata, including icon for visual editors
+  c.description = 'Reads a file from the filesystem';
+  c.icon = 'file';
+
+  // Declare the ports you want your component to have, including
+  // their data types
+  c.inPorts.add('in', {
+    datatype: 'string'
+  });
+  c.outPorts.add('out', {
+    datatype: 'string'
+  });
+  c.outPorts.add('error', {
+    datatype: 'object'
+  });
+
+  // Implement the processing function that gets called when the
+  // inport buffers have packets available
+  c.process(function (input, output) {
+    // Precondition: check that the "in" port has a data packet.
+    // Not necessary for single-inport components but added here
+    // for the sake of demonstration
+    if (!input.hasData('in')) {
+      return;
+    }
+
+    // Since the preconditions matched, we can read from the inport
+    // buffer and start processing
+    var filePath = input.getData('in');
+    fs.readFile(filePath, 'utf-8', (err, contents) {
+      // In case of errors we can just pass the error to the "error"
+      // outport
+      if (err) {
+        output.done(err);
+        return;
+      }
+
+      // Send the file contents to the "out" port
+      output.send({
+        out: contents
+      });
+      // Tell NoFlo we've finished processing
+      output.done();
+    });
+  });
+
+  // Finally return to component to the loader
+  return c;
+}
+```
+
+### The process function
+
+NoFlo components call their processing function whenever they've received packets to any of their regular inports.
+
+In general any new information packets received by the component cause the `process` function to trigger. However, there are some exceptions:
+
+* Non-triggering ports don't cause the function to be called
+* Ports that have been set to forward brackets don't cause the function to be called on bracket IPs, only on data
+
+### Handling preconditions
+
+When the processing function is called, the first job is to determine if the component has received enough data to act. These "[firing rules](http://ptolemy.eecs.berkeley.edu/papers/97/dataflow/)" can be used for checking things like:
+
+* When having multiple inports, do all of them contain data packets?
+* If multiple input packets are to be processed together, are all of them available?
+* If receiving a [stream of packets](http://jpaulmorrison.com/fbp/substrs.shtml) is the complete stream available?
+* Any input synchronization needs in general
+
+The NoFlo component input handler provides methods for checking the contents of the input buffer. Each of these return a boolean if the conditions are matched:
+
+* `input.has('portname')` whether an input buffer contains packets of any type
+* `input.hasData('portname')` whether an input buffer contains data packets
+* `input.hasStream('portname')` whether an input buffer contains at least one complete stream of packets
+
+For convenience, `has` and `hasData` can be used to check multiple ports at the same time. For example:
+
+```javascript
+// Fail precondition check unless both inports have a data packet
+if (!input.hasData('in1', 'in2')) return;
+```
+
+For more complex checking it is also possible to pass a validation function to the `has` method. This function will get called for each information packet in the port(s) buffer:
+
+```javascript
+// We want to process only when color is green
+var validator = function (packet) {
+  if (packet.data.color === 'green') {
+    return true;
+  }
+  return false;
+}
+// Run all packets in in1 and in2 through the validator to
+// check that our firing conditions are met
+if (!input.has('in1', 'in2', validator)) return;
+```
+
+The firing rules should be checked in the beginning of the processing function before we start actually reading packets from the buffer. At that stage you can simply finish the run with a `return`.
+
+### Processing packets
+
+Once your preconditions have been met, it is time to read packets from the buffers and start doing work with them.
+
+For reading packets there are equivalent `get` functions to the `has` functions used above:
+
+* `input.get('portname')` read the first packet from the port's buffer
+* `input.getData('portname')` read the first data packet, discarding preceding bracket IPs if any
+* `input.getStream('portname')` read a whole stream of packets from the port's buffer
+
+For `get` and `getStream` you receive whole [IP objects](https://noflojs.org/api/IP/). For convenience, `getData` returns just the data payload of the data packet.
+
+When you have read the packets you want to work with, the next step is to do whatever your component is supposed to do. Do some simple data processing, call some remote API function, or whatever. NoFlo doesn't really care whether this is done synchronously or asynchronously.
+
+**Note:** once you read packets from an inport, the component activates. After this it is necessary to finish the process by calling `output.done()` when you're done.
+
+### Sending packets
+
+While the component is active, it can send packets to any number of outports using the `output.send` method. This method accepts a map of port names and information packets.
+
+```javascript
+output.send({
+  out1: new noflo.IP('data', "some data"),
+  out2: new noflo.IP('data', [1, 2, 3])
 });
 ```
 
-<a id="icons"></a>
-### Component icons
+For data packets you can also just send the data as-is, and NoFlo will wrap it to an information packet.
 
-For use in visual editors like [Flowhub](http://flowhub.io/), components can provide an icon. The icons are based on the [Font Awesome icon set](http://fontawesome.io/icons/), but without the `fa-` prefix.
-
-A component that takes a picture could for instance use the [Camera icon](http://fontawesome.io/icon/camera/). The icons are declared using the `icon` property of the component:
+Once you've finished processing, simply call `output.done()` to deactivate the component. There is also a convenience method that is a combination of `send` and `done`. This is useful for simple components:
 
 ```javascript
-// File: components/TakePicture.js
-exports.getComponent = function() {
-  var component = new noflo.Component();
-  component.description = 'Take a photo with the computer\'s web camera';
-  component.icon = 'camera';
+c.process(function (input, output) {
+  var data = input.getData('in');
+  // We just add one to the number we received and send it out
+  output.sendDone({
+    out: data + 1
+  });
+});
 ```
 
-Icons can also be updated during runtime to reflect a changing state of the component. This is accomplished by calling the `setIcon` method of the component. For example, the *TakePicture* component above could temporarily set its icon when a picture has been taken to a [Picture icon](http://fontawesome.io/icon/picture-o/) and then change it back a bit later:
+In normal situations there packets are transmitted immediately. However, when working on individual packets that are part of a stream, NoFlo components keep an output buffer to ensure that packets from the stream are transmitted in original order.
+
+## Component lifecycle
+
+In addition to making input processing easier, the other big aspect of the Process API is to help formalize NoFlo's component and program lifecycle.
+
+![NoFlo program lifecycle](https://s3.eu-central-1.amazonaws.com/bergie-iki-fi/a17b8582-fc33-11e5-9826-a722b90913ce.png)
+
+The component lifecycle is quite similar to the program lifecycle shown above. There are three states:
+
+* Initialized: the component has been instantiated in a NoFlo graph
+* Activated: the component has read some data from inport buffers and is processing it
+* Deactivated: all processing has finished
+
+Once all components in a NoFlo network have deactivated, the whole program is finished.
+
+Components are only allowed to do work and send packets when they're activated. They shouldn't do any work before receiving input packets, and should not send anything after deactivating.
+
+### Generator components
+
+Regular NoFlo components only send data associated with input packets they've received. One exception is generators, a class of components that can send packets whenever something happens.
+
+Some examples of generators include:
+
+* Network servers that listen to requests
+* Components that wait for user input like mouse clicks or text entry
+* Timer loops
+
+The same rules of "only send when activated" apply also to generators. However, they can utilize the processing context to self-activate as needed:
 
 ```javascript
-component.originalIcon = component.getIcon();
-component.setIcon('picture-o');
-component.timeout = setTimeout(function() {
-  component.setIcon(component.originalIcon);
-  component.timeout = null;
-}, 200);
+exports.getComponent = function () {
+  var c = new noflo.Component();
+  c.inPorts.add('start', { datatype: 'bang' });
+  c.inPorts.add('stop', { datatype: 'bang' });
+  c.outPorts.add('out', { datatype: 'bang' });
+  // Generators generally want to send data immediately and
+  // not buffer
+  c.autoOrdering = false;
+
+  // Helper function for clearing a running timer loop
+  var cleanup = function () {
+    // Clear the timer
+    clearInterval(c.timer.interval);
+    // Then deactivate the long-running context
+    c.timer.deactivate();
+    c.timer = null;
+  }
+
+  // Receive the context together with input and output
+  c.process(function (input, output, context) {
+    if (input.hasData('start')) {
+      // We've received a packet to the "start" port
+      // Stop the previous interval and deactivate it, if any
+      if (c.timer) {
+        cleanup();
+      }
+      // Activate the context by reading the packet
+      input.getData('start');
+      // Set the activated context to component so it can
+      // be deactivated from the outside
+      c.timer = context
+      // Start generating packets
+      c.timer.interval = setInterval(function () {
+        // Send a packet
+        output.send({
+          out: true
+        });
+      }, 100);
+      // Since we keep the generator running we don't
+      // call done here
+    }
+
+    if (input.hasData('stop')) {
+      // We've received a packet to the "stop" port
+      input.getData('stop');
+      if (!c.timer) {
+        // No timers running, we can just finish here
+        output.done();
+        return;
+      }
+      // Stop the interval and deactivate
+      cleanup();
+      // Also call done for this one
+      output.done();
+    }
+  });
+
+  // We also may need to clear the timer at network shutdown
+  c.tearDown = function (callback) {
+    if (c.timer) {
+      // Stop the interval and deactivate
+      cleanup();
+    }
+    c.emit('end');
+    c.started = false;
+    callback();
+  }
+
+  return c;
+}
 ```
