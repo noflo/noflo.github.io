@@ -28,3 +28,4 @@ exclude:
   - "docco.css"
   - "Gemfile"
   - "Gemfile.lock"
+  - "vendor"
