@@ -2,21 +2,16 @@
 layout: documentation
 title: Components
 ---
-
-- [structure](#structure)
-- [lifecycle](#lifecycle)
-- [subgraphs](#subgraphs)
-- [design](#design)
-- [ports](#ports)
+- [Structure](#structure)
+- [Lifecycle](#lifecycle)
+- [Design](#design)
+- [Ports](#ports)
   - [data types](#port-data-types)
   - [attributes](#port-attributes)
   - [events](#portevents)
 
-[picture](ingredient)
+A component is the main ingredient of flow-based programming. Component is a JavaScript module providing a set of input and output port handlers. These ports are used for connecting components to each other.
 
-A component is the main ingredient of flow-based programming. Component is a [CommonJS module])(http://requirejs.org/docs/commonjs.html) providing a set of input and output port handlers. These ports are used for connecting components to each other.
-
-[picture](box)
 NoFlo processes (the boxes of a flow graph) are instances of a component, with the graph controlling connections between ports of components.
 
 Since version 0.2.0, NoFlo has been able to utilize components shared via NPM packages. [Read the introductory blog post](http://bergie.iki.fi/blog/distributing-noflo-components/) to learn more.
@@ -31,7 +26,7 @@ Functionality a component provides:
 * Handler for component initialization that accepts configuration (the `exports.getComponent = ->` that a componentLoader or graph will pass metadata to)
 * Handler for connections for each inport (proccess api)
 
-Minimal component written in NoFlo would look like the following:
+Minimal NoFlo component written in CoffeeScript would look like the following:
 
 ```coffeescript
 # File: components/Forwarder.coffee
@@ -52,26 +47,17 @@ exports.getComponent = ->
 
     # Our event handler
     process: (input, output) ->
-      if input.has 'in'
-        # Forward data when we receive it.
-        output.sendDone out: payload
+      return unless input.hasData 'in'
+      # Forward data when we receive it.
+      payload = input.getData 'in'
+      output.sendDone out: payload
 ```
-
-
-[animation]()
 
 This example component register two ports: _in_ and _out_. When it receives data in the _in_ port, it opens the _out_ port and sends the same data there. When the _in_ connection closes, it will also close the _out_ connection. So basically this component would be a simple repeater.
 
 The `exports.getComponent` function is used by NoFlo to create an instance of the component. See [Component Lifecycle](#lifecycle) for more information.
 
 You can find more examples of components in the [component library](/library/) section of this website.
-
-
-<a id="component-loader"></a>
-### Component Loader @TODO:
-
-<a id="subgraphs"></a>
-### moved to [Subgraphs](/documentation/graphs/#subgraphs)
 
 <a id="design"></a>
 ### Some words on component design
@@ -168,7 +154,9 @@ There is a set of other attributes a port may have apart from its `datatype`:
 
 * `addressable`: this boolean flag makes turns the port into an _Array port_, giving a particular index for each connection attached to it (_default: `false`_);
 Array ports have a third value on events with the socket index :
-  ```@inPorts.in.on 'data' , (event, payload, index ) -> ... ```
+  ```javascript
+  @inPorts.in.on 'data' , (event, payload, index ) -> ...
+  ```
 
 * `buffered`: buffered ports save data in the buffer to be `read()` explicitly instead of passing it immediately to event handler (_default: `false`_);
 * `cached`: this option makes an output port re-send last emitted value when new connections are established (_default: `false`_);
@@ -178,16 +166,8 @@ Array ports have a third value on events with the socket index :
 * `values`: sets the list of accepted values for the port, if the value received is not in the list an error is thrown (_default: `null`_).
 * `control`: ports can be used to keep whatever the last packet that was sent to it.
 
-
 Here is how multiple attributes can be declared:
-```coffeescript
-component.inPorts.add 'id',
-  datatype: 'int'
-  description: 'Request ID'
-component.inPorts.add 'user',
-  datatype: 'object'
-  description: 'User data'
-```
+
 ```javascript
 component.inPorts.add('id', {
   datatype: 'int',
@@ -199,69 +179,6 @@ component.inPorts.add('user', {
 });
 ```
 
-This can alternatively be done using constructors explicitly:
-```coffeescript
-noflo = require 'noflo'
-
-component.inPorts = new noflo.inPorts
-  in:
-    datatype: 'int'
-    description: 'Request ID'
-  user:
-    datatype: 'object'
-    description: 'User data'
-```
-```javascript
-noflo = require('noflo');
-
-component.inPorts = new noflo.inPorts({
-  in: {
-    datatype: 'int',
-    description: 'Request ID'
-  },
-  user: {
-    datatype: 'object',
-    description: 'User data'
-  }
-});
-```
-
-The third way this can be done is passing in the ports as objects to the component constructor.
-```coffeescript
-c = new noflo.Component
-  icon: 'gear'
-  inPorts:
-    eh:
-      datatype: 'all'
-      required: true
-  outPorts:
-    canada:
-      datatype: 'object'
-      required: true
-    error:
-      datatype: 'object'
-```
-```javascript
-c = new noflo.Component({
-  icon: 'gear',
-  inPorts: {
-    magic: {
-      datatype: 'all',
-      required: true
-    }
-  },
-  outPorts: {
-    bird: {
-      datatype: 'object',
-      required: true
-    },
-    error: {
-      datatype: 'object'
-    }
-  }
-});
-```
-
 <a id="icons"></a>
 ### Component icons
 
@@ -269,13 +186,6 @@ For use in visual editors like [Flowhub](http://flowhub.io/), components can pro
 
 A component that takes a picture could for instance use the [Camera icon](http://fontawesome.io/icon/camera/). The icons are declared using the `icon` property of the component:
 
-```coffeescript
-# File: components/TakePicture.coffee
-exports.getComponent = ->
-  component = new noflo.Component
-  component.description = 'Take a photo with the computer\'s web camera'
-  component.icon = 'camera'
-```
 ```javascript
 // File: components/TakePicture.js
 exports.getComponent = function() {
@@ -286,14 +196,6 @@ exports.getComponent = function() {
 
 Icons can also be updated during runtime to reflect a changing state of the component. This is accomplished by calling the `setIcon` method of the component. For example, the *TakePicture* component above could temporarily set its icon when a picture has been taken to a [Picture icon](http://fontawesome.io/icon/picture-o/) and then change it back a bit later:
 
-```coffeescript
-component.originalIcon = component.getIcon()
-component.setIcon 'picture-o'
-component.timeout = setTimeout =>
-  component.setIcon component.originalIcon
-  component.timeout = null
-, 200
-```
 ```javascript
 component.originalIcon = component.getIcon();
 component.setIcon('picture-o');
