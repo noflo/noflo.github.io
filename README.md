@@ -16,11 +16,7 @@ Feel free to send pull requests. Local site development is handled using [Grunt]
 Install the dependencies with:
 
     $ npm install
-
-You also need some additional tools:
-
-    $ sudo gem install jekyll
-    $ sudo gem install sass --pre
+    $ bundle install --path vendor/bundle
 
 Then to develop the site, run:
 
