@@ -91,5 +91,3 @@ exclude:
   - "docco.css"
   - "Gemfile"
   - "Gemfile.lock"
-gems:
-  - jekyll-redirect-from

@@ -46,3 +46,5 @@ docco.css
 api/shell.html
 
 Gemfile.lock
+vendor/bundle
+.bundle

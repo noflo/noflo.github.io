@@ -15,12 +15,14 @@ module.exports = ->
         options:
           sourcemap: true
           style: 'compressed'
+          bundleExec: true
         files:
           'css/main.css': 'css/main.scss'
       site:
         options:
           sourcemap: true
           style: 'compressed'
+          bundleExec: true
         files:
           '_site/css/main.css': '_site/css/main.scss'
     
@@ -47,8 +49,8 @@ module.exports = ->
 
     jekyll:
       dev:
-        options: {}
-        bundleExec: true
+        options:
+          bundleExec: true
 
     docco:
       noflo:
