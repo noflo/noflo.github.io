@@ -1,0 +1,3 @@
+[submodule "projects/canadianness"]
+	path = projects/canadianness
+	url = https://github.com/noflo/canadianness.git
