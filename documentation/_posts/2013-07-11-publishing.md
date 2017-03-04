@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Publishing component libraries
+title: Publishing modules
 ---
 
 - [Publishing components for Node.js](#publishing-your-components-for-node-js)
