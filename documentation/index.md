@@ -4,11 +4,21 @@ title: Getting started with NoFlo
 categories:
  - documentation
 ---
+- [Using NoFlo](#using-noflo)
+  - [Activation mode](#activation-model)
+- [Creating a NoFlo project](#creating-a-noflo-project)
+  - [Project folder](#project-folder)
+  - [Installing NoFlo](#installing-noflo)
+  - [Getting components](#getting-components)
+  - [Defining a graph](#defining-a-graph)
+  - [Debugging the graph](#debugging-the-graph)
+- [Example: Building a simple calculator](#building-a-simple-calculator)
+
 NoFlo is a [Flow-Based Programming](http://en.wikipedia.org/wiki/Flow-based_programming) environment for JavaScript. In flow-based programs, the logic of your software is defined as a *graph*. The *nodes* of the graph are instances of NoFlo components, and the *edges* define the connections between them.
 
-NoFlo components react to incoming messages, or *packets*. When a component receives packets in its input ports it performs a predefined operation, and sends its result out as a packet to its output ports. There is no shared state, and the only way to communicate between components is by sending packets.
+NoFlo components react to incoming messages, or *information packets*. When a component receives packets in its input ports it performs a predefined operation, and sends its result out as a packet to its output ports. There is no shared state, and the only way to communicate between components is by sending packets.
 
-NoFlo components are built as simple JavaScript or [CoffeeScript](http://coffeescript.org/) classes that define the input and output ports, and register various event listeners on them. When executed, NoFlo creates a live graph, or *network* out of a graph, instantiates the components used in the graph, and connects them together.
+NoFlo components are built as simple JavaScript or [CoffeeScript](http://coffeescript.org/) objects that define the input and output ports, and register various event listeners on them. When executed, NoFlo creates a live graph, or *network* out of a graph definition, instantiates the components used in the graph, and connects them together.
 
 NoFlo graphs can deal with multiple different input paradigms. The same flow can react to incoming HTTP requests, text messages, and changes in the file system, and can similarly output to different targets like writing to a database, responding to the HTTP requests, or updating a dashboard. It is simply a matter of choosing the components you want to use.
 
@@ -22,7 +32,7 @@ NoFlo graphs can deal with multiple different input paradigms. The same flow can
 
 There are two ways to run your flow-based programs with NoFlo. If your whole application is based on flows, you can simply have NoFlo execute and run it. Flow-based programs done in this way are called *independent* graphs. You can run them with the `noflo` command that ships with the NoFlo package.
 
-The other option is to *embed* NoFlo graphs into your existing JavaScript application by using it as a regular Node.js library. This is useful when you already have an existing system where you want to automate some parts as their own flows, or to add new functionality.
+The other option is to *embed* NoFlo graphs into your existing JavaScript application by using it as a regular NPM module. This is useful when you already have an existing system where you want to automate some parts as their own flows, or to add new functionality.
 
 Examples of embedded usage of NoFlo include handling billing processes or routing incoming SMS or email within an existing Node.js web application.
 
@@ -117,7 +127,7 @@ $ npm install noflo-core --save
 
 Once NPM completes the components from that library will be available to your project. Your project can pull in components from as many NoFlo libraries as needed.
 
-## Defining your first graph
+## Defining a graph
 
 All NoFlo programs are built as graphs, which define the nodes and components used, and connections between them.
 

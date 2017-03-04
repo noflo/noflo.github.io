@@ -4,16 +4,12 @@ title: Publishing modules
 ---
 
 - [Publishing components for Node.js](#publishing-your-components-for-node-js)
-
 - [Publishing components for Web Browsers](#publishing-your-components-for-web-browsers)
-
 - [Auto-deploying to NPM using Travis](#auto-deploying-to-npm-using-travis)
-
 - [Cross-platform libraries](#cross-platform-libraries)
   - [Platform annotations in souce code](#platform-annotations-in-source-code)
   - [Components that work on both platforms](#components-that-work-on-both-platforms)
   - [Platform annotations in source code](#platform-annotations-in-source-code)
-
 - [Bootstrapping your library](#bootstrapping-your-library)
 
 Developers can simply publish their own components independently without having to send pull requests to the main NoFlo repository. The same mechanism can also be used when publishing more traditional Node.js libraries to include the NoFlo components utilizing that library.
