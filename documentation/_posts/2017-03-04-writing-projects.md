@@ -1,5 +1,5 @@
 ---
 layout: redirect
-title: Writing projects
+title: Tutorial
 redirect: "/projects/"
 ---
