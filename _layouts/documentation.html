@@ -22,7 +22,11 @@ layout: default
               {% for post in site.categories['documentation'] %}
               {% if post.url == '/documentation/protocol/' or post.url == '/documentation/fbp/' or post.url == '/documentation/json/' or post.url == '/documentation/async-components/' %}{% continue %}{% endif %}
               <li>
+                {% if post.redirect %}
+                <a href="{{ site.baseurl }}{{ post.redirect }}">{{ post.title }}</a>
+                {% else %}
                 <a href="{{ site.baseurl }}{{ post.url }}"{% if post.url == page.url %} class="active"{% endif%}>{{ post.title }}</a>
+                {% endif %}
               </li>
               {% endfor %}
             </ul>
