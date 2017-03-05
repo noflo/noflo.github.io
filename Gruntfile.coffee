@@ -59,13 +59,25 @@ module.exports = ->
           output: 'api/'
           template: '_docco/docco.jst'
           css: ''
+      tutorials:
+        src: ['./projects/canadianness/components/*.coffee']
+        options:
+          output: '_includes/tutorials/canadianess'
+          template: '_docco/tutorials.jst'
+          css: ''
 
     watch:
       noflo:
         files: [
-          '_docco/*.jst'
+          '_docco/docco.jst'
         ]
-        tasks: ['docco']
+        tasks: ['docco:noflo']
+      tutorial:
+        files: [
+          '_docco/tutorial.jst'
+          './projects/canadianness/components/*.coffee'
+        ]
+        tasks: ['docco:tutorials', 'jekyll']
       jekyll:
         files: [
           '_config.yml'
@@ -117,7 +129,7 @@ module.exports = ->
   @registerTask 'dev', [
     'connect:dev'
     'build'
-    #'watch'
+    'watch:tutorial'
     'watch:jekyll'
     'watch:noflo'
     'watch:sass'

@@ -48,3 +48,4 @@ api/shell.html
 Gemfile.lock
 vendor/bundle
 .bundle
+_includes/tutorials
