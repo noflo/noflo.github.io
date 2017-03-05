@@ -8,6 +8,7 @@ layout: documentation
   - [Processing packets](#processing-packets)
   - [Sending packets](#sending-packets)
 - [Component lifecycle](#component-lifecycle)
+  - [Setup and teardown](#setup-and-teardown)
   - [Generator components](#generator-components)
 
 -------------
@@ -175,9 +176,9 @@ In normal situations there packets are transmitted immediately. However, when wo
 
 ## Component lifecycle
 
-In addition to making input processing easier, the other big aspect of the Process API is to help formalize NoFlo's component and program lifecycle.
+The following diagram shows the lifecycle of a NoFlo program:
 
-![NoFlo program lifecycle](https://s3.eu-central-1.amazonaws.com/bergie-iki-fi/a17b8582-fc33-11e5-9826-a722b90913ce.png)
+![NoFlo program lifecycle](/img/network-lifecycle.png)
 
 The component lifecycle is quite similar to the program lifecycle shown above. There are three states:
 
@@ -188,6 +189,14 @@ The component lifecycle is quite similar to the program lifecycle shown above. T
 Once all components in a NoFlo network have deactivated, the whole program is finished.
 
 Components are only allowed to do work and send packets when they're activated. They shouldn't do any work before receiving input packets, and should not send anything after deactivating.
+
+### Setup and teardown
+
+If your component needs to do anything special at start-up or shutdown, you can implement the following methods for the component:
+
+`component.setUp(callback)` called when network starts. Component can do self-initialization but should not send anything at this stage.
+
+`component.tearDown(callback)` called when network stops. Stateful components can clean their state at this point, and generators should stop generating (remove event listeners, shut down socket connections, etc).
 
 ### Generator components
 
