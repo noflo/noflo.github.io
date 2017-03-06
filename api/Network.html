@@ -33,6 +33,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/AsCallback/index.html' %}class="active" {% endif %}href="/api/AsCallback/">
+                    AsCallback
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
                     AsyncComponent
                   </a>
@@ -193,7 +202,8 @@ graph = <span class="hljs-built_in">require</span> <span class="hljs-string">"fb
 {EventEmitter} = <span class="hljs-built_in">require</span> <span class="hljs-string">'events'</span>
 platform = <span class="hljs-built_in">require</span> <span class="hljs-string">'./Platform'</span>
 componentLoader = <span class="hljs-built_in">require</span> <span class="hljs-string">'./ComponentLoader'</span>
-utils = <span class="hljs-built_in">require</span> <span class="hljs-string">'./Utils'</span></pre></div>
+utils = <span class="hljs-built_in">require</span> <span class="hljs-string">'./Utils'</span>
+IP = <span class="hljs-built_in">require</span> <span class="hljs-string">'./IP'</span></pre></div>
             
           
             
@@ -915,9 +925,8 @@ TODO: hasDefault existence check is for backwards compatibility, clean
     <span class="hljs-keyword">do</span> callback
 
   sendInitial: <span class="hljs-function"><span class="hljs-params">(initial)</span> -&gt;</span>
-    initial.socket.connect()
-    initial.socket.send initial.data
-    initial.socket.disconnect()
+    initial.socket.post <span class="hljs-keyword">new</span> IP <span class="hljs-string">'data'</span>, initial.data,
+      initial: <span class="hljs-literal">true</span>
 
   sendInitials: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
     <span class="hljs-keyword">unless</span> callback
