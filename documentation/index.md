@@ -22,12 +22,6 @@ NoFlo components are built as simple JavaScript or [CoffeeScript](http://coffees
 
 NoFlo graphs can deal with multiple different input paradigms. The same flow can react to incoming HTTP requests, text messages, and changes in the file system, and can similarly output to different targets like writing to a database, responding to the HTTP requests, or updating a dashboard. It is simply a matter of choosing the components you want to use.
 
-## Video tutorial: Creating a web server
-
-<iframe src="//player.vimeo.com/video/79814291?color=ffffff" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
-[Leo Zovic briefly introduces noflo -- Toronto FBP Meeting 1](https://vimeo.com/79814291)
-
 ## Using NoFlo
 
 There are two ways to run your flow-based programs with NoFlo. If your whole application is based on flows, you can simply have NoFlo execute and run it. Flow-based programs done in this way are called *independent* graphs. You can run them with the `noflo` command that ships with the NoFlo package.
@@ -131,7 +125,7 @@ Once NPM completes the components from that library will be available to your pr
 
 All NoFlo programs are built as graphs, which define the nodes and components used, and connections between them.
 
-NoFlo graphs can be either defined in a [JSON file format](/documentation/json/) or using the [`.fbp` domain-specific language](/documentation/fbp/). For brevity, this guide uses the `.fbp` syntax.
+NoFlo graphs can be either defined in a [JSON file format](/documentation/graphs/#json) or using the [`.fbp` domain-specific language](/documentation/graphs/#fbp). For brevity, this guide uses the `.fbp` syntax.
 
 Our first graph can be a simple one. Since we already have the file system components available, we can implement a graph that reads a file, and outputs its contents on the screen.
 
