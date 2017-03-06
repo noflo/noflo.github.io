@@ -12,6 +12,7 @@ categories:
   - [Getting components](#getting-components)
   - [Defining a graph](#defining-a-graph)
   - [Debugging the graph](#debugging-the-graph)
+  - [Running NoFlo in the browser](#running-noflo-in-the-browser)
 - [Example: Building a simple calculator](#building-a-simple-calculator)
 
 NoFlo is a [Flow-Based Programming](http://en.wikipedia.org/wiki/Flow-based_programming) environment for JavaScript. In flow-based programs, the logic of your software is defined as a *graph*. The *nodes* of the graph are instances of NoFlo components, and the *edges* define the connections between them.
@@ -169,6 +170,31 @@ This will show all the various events happening inside the graph:
 * Connections being closed
 
 Looking at this is useful in order to understand how information flows through a NoFlo network.
+
+### Running NoFlo in the browser
+
+NoFlo projects can also run in web browsers. You can use the [webpack](https://webpack.js.org) tool create a browser-runnable build of a NoFlo project.
+
+In nutshell, making a browser build of a NoFlo project involves the following steps:
+
+1. Find all installed browser-compatible components using the [fbp-manifest](https://github.com/flowbased/fbp-manifest) tool
+2. Generate a custom NoFlo component loader that requires all the component files and registers them for NoFlo to load
+3. Configure and run webpack with the application entry point, replacing NoFlo's standard component loader with the generated custom one
+
+To automate these steps we have **[grunt-noflo-browser](https://github.com/noflo/grunt-noflo-browser)**, a plugin for the [Grunt](https://gruntjs.com) task runner that we use for build automation.
+
+#### Project scaffolding
+
+For faster project setup, we have a template for creating NoFlo browser applications: **[noflo-browser-app](https://github.com/noflo/noflo-browser-app)**. To use it, follow these steps:
+
+* Fork the project
+* Import the repository in [Flowhub](http://app.flowhub.io)
+* Make changes, synchronize to GitHub
+* If you need additional modules, use `npm install --add`
+
+The project contains a fully working build setup, including [Travis CI](https://travis-ci.org) compatible test automation. If you supply Travis CI a GitHub access token, all tagged versions of your app will automatically get published to [GitHub Pages](https://pages.github.com).
+
+More details for using the template can be found from the [project README](https://github.com/noflo/noflo-browser-app/#readme).
 
 ## Building a simple calculator
 
