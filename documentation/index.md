@@ -137,7 +137,7 @@ $ mkdir graphs
 
 Create a new file in that folder called `ShowContents.fbp` and open it in your favorite text editor. Paste in the following contents:
 
-```coffeescript
+```fbp
 # In the graph we first need to define the nodes and the connections between them
 Read(filesystem/ReadFile) OUT -> IN Display(core/Output)
 
@@ -182,7 +182,7 @@ $ npm install noflo-math --save
 
 Now we can build a simple calculator. For example, to multiply numbers we can create the following graph at `graphs/Calculate.fbp`:
 
-```coffeescript
+```fbp
 '6' -> MULTIPLICAND Multiply(math/Multiply)
 '7' -> MULTIPLIER Multiply
 Multiply PRODUCT -> IN Display(core/Output)
