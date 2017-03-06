@@ -3,9 +3,6 @@ layout: projects
 title: "Tutorial: Data transformation"
 ---
 
--------------------------
-## Project steps:
-
 ### Initial:
 - [Idea](#idea)
 - [Requirements](#requirements)
@@ -124,22 +121,6 @@ TODO: move into overall arch or project definition
 
 # Overall architecture
 
-## Emotion
-
-This can be its own graph loaded inside of the main graph as a [subgraph](/documentation/graphs/#subgraphs) so the whole operation can be represented as a box:
-
-```FBP
-# (string)
-INPORT=FINDEHS.CONTENT:CONTENT
-# (string)
-OUTPORT=DetermineEmotion.EMOTION:EMOTION
-
-FindEhs(FindEhs) MATCHES -> CONTENT DetermineEmotion(DetermineEmotion)
-```
-
-[See the graph](https://github.com/aretecode/canadianness/blob/master/graphs/Emotion.fbp)
-<img src="/img/emotion.png" alt="noflo canadianness emotion graph"/>
-
 ## Canadianness
 
 ### Real graph implementation of pseudo code:
@@ -174,7 +155,23 @@ CanadianScore SCORE -> AUGEND Add
 [See the graph](https://github.com/aretecode/canadianness/blob/master/graphs/Canadianness.fbp)
 <img src="/img/canadianness.png" alt="noflo canadianness graph"/>
 
-## Writing tests
+## Emotion
+
+This can be its own graph loaded inside of the main graph as a [subgraph](/documentation/graphs/#subgraphs) so the whole operation can be represented as a box:
+
+```FBP
+# (string)
+INPORT=FINDEHS.CONTENT:CONTENT
+# (string)
+OUTPORT=DetermineEmotion.EMOTION:EMOTION
+
+FindEhs(FindEhs) MATCHES -> CONTENT DetermineEmotion(DetermineEmotion)
+```
+
+[See the graph](https://github.com/aretecode/canadianness/blob/master/graphs/Emotion.fbp)
+<img src="/img/emotion.png" alt="noflo canadianness emotion graph"/>
+
+# Writing tests
 
 First in line for testing, we have [fbp-spec](https://github.com/flowbased/fbp-spec)
 
@@ -220,13 +217,13 @@ cases:
       equals: 'eh'
 ```
 
-## Implement components
+# Implement components
 
-### DetermineEmotion
+## DetermineEmotion
 
 {% include tutorials/canadianness/DetermineEmotion.html %}
 
-### FindWords
+## FindWords
 
 {% include tutorials/canadianness/FindWords.html %}
 
@@ -234,6 +231,6 @@ cases:
 
 {% include tutorials/canadianness/WordScore.html %}
 
-## Providing a JavaScript API
+# Providing a JavaScript API
 
 TODO: write
