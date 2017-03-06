@@ -224,15 +224,15 @@ cases:
 
 ### DetermineEmotion
 
-{% include tutorials/canadianess/DetermineEmotion.html %}
+{% include tutorials/canadianness/DetermineEmotion.html %}
 
 ### FindWords
 
-{% include tutorials/canadianess/FindWords.html %}
+{% include tutorials/canadianness/FindWords.html %}
 
 ## WordScore
 
-{% include tutorials/canadianess/WordScore.html %}
+{% include tutorials/canadianness/WordScore.html %}
 
 ## Providing a JavaScript API
 
