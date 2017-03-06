@@ -206,6 +206,12 @@ Install it with:
 $ npm install noflo-math --save
 ```
 
+We also want the [noflo-core](https://www.npmjs.com/package/noflo-core) to write to standard out:
+
+```bash
+$ npm install noflo-core --save
+```
+
 Now we can build a simple calculator. For example, to multiply numbers we can create the following graph at `graphs/Calculate.fbp`:
 
 ```fbp
