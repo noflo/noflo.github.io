@@ -129,10 +129,7 @@ module.exports = ->
   @registerTask 'dev', [
     'connect:dev'
     'build'
-    'watch:tutorial'
-    'watch:jekyll'
-    'watch:noflo'
-    'watch:sass'
+    'watch'
   ]
   @registerTask 'build', [
     'sass:src'
