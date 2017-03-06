@@ -1,5 +1,5 @@
 ---
 layout: redirect
-title: Tutorial: Data transformations
+title: "Tutorial: Data transformations"
 redirect: "/tutorial/canadianness/"
 ---
