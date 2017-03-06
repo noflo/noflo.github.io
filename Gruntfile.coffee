@@ -74,7 +74,7 @@ module.exports = ->
         tasks: ['docco:noflo']
       tutorial:
         files: [
-          '_docco/tutorial.jst'
+          '_docco/tutorials.jst'
           './projects/canadianness/components/*.coffee'
         ]
         tasks: ['docco:tutorials', 'jekyll']
