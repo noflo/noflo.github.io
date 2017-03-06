@@ -33,6 +33,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/AsCallback/index.html' %}class="active" {% endif %}href="/api/AsCallback/">
+                    AsCallback
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
                     AsyncComponent
                   </a>
@@ -321,6 +330,7 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
     @buffer = []
     @indexedBuffer = {} <span class="hljs-keyword">if</span> @isAddressable()
     @scopedBuffer = {}
+    @iipBuffer = <span class="hljs-keyword">if</span> @isAddressable() <span class="hljs-keyword">then</span> {} <span class="hljs-keyword">else</span> []
 
   prepareBufferForIP: <span class="hljs-function"><span class="hljs-params">(ip)</span> -&gt;</span>
     <span class="hljs-keyword">if</span> @isAddressable()
@@ -328,11 +338,16 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
         @scopedBuffer[ip.scope] = [] <span class="hljs-keyword">unless</span> ip.scope <span class="hljs-keyword">of</span> @scopedBuffer
         @scopedBuffer[ip.scope][ip.index] = [] <span class="hljs-keyword">unless</span> ip.index <span class="hljs-keyword">of</span> @scopedBuffer[ip.scope]
         <span class="hljs-keyword">return</span> @scopedBuffer[ip.scope][ip.index]
+      <span class="hljs-keyword">if</span> ip.initial
+        @iipBuffer[ip.index] = [] <span class="hljs-keyword">unless</span> ip.index <span class="hljs-keyword">of</span> @iipBuffer
+        <span class="hljs-keyword">return</span> @iipBuffer[ip.index]
       @indexedBuffer[ip.index] = [] <span class="hljs-keyword">unless</span> ip.index <span class="hljs-keyword">of</span> @indexedBuffer
       <span class="hljs-keyword">return</span> @indexedBuffer[ip.index]
     <span class="hljs-keyword">if</span> ip.scope?
       @scopedBuffer[ip.scope] = [] <span class="hljs-keyword">unless</span> ip.scope <span class="hljs-keyword">of</span> @scopedBuffer
       <span class="hljs-keyword">return</span> @scopedBuffer[ip.scope]
+    <span class="hljs-keyword">if</span> ip.initial
+      <span class="hljs-keyword">return</span> @iipBuffer
     <span class="hljs-keyword">return</span> @buffer
 
   validateData: <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span>
@@ -362,18 +377,28 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'Contains query is only possible on buffered ports'</span>
     @buffer.filter(<span class="hljs-function"><span class="hljs-params">(packet)</span> -&gt;</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> packet.event <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span>).length
 
-  getBuffer: <span class="hljs-function"><span class="hljs-params">(scope, idx)</span> -&gt;</span>
+  getBuffer: <span class="hljs-function"><span class="hljs-params">(scope, idx, initial = <span class="hljs-literal">false</span>)</span> -&gt;</span>
     <span class="hljs-keyword">if</span> @isAddressable()
       <span class="hljs-keyword">if</span> scope?
         <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> scope <span class="hljs-keyword">of</span> @scopedBuffer
         <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> idx <span class="hljs-keyword">of</span> @scopedBuffer[scope]
         <span class="hljs-keyword">return</span> @scopedBuffer[scope][idx]
+      <span class="hljs-keyword">if</span> initial
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> idx <span class="hljs-keyword">of</span> @iipBuffer
+        <span class="hljs-keyword">return</span> @iipBuffer[idx]
       <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> idx <span class="hljs-keyword">of</span> @indexedBuffer
       <span class="hljs-keyword">return</span> @indexedBuffer[idx]
     <span class="hljs-keyword">if</span> scope?
       <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> scope <span class="hljs-keyword">of</span> @scopedBuffer
       <span class="hljs-keyword">return</span> @scopedBuffer[scope]
-    <span class="hljs-keyword">return</span> @buffer</pre></div>
+    <span class="hljs-keyword">if</span> initial
+      <span class="hljs-keyword">return</span> @iipBuffer
+    <span class="hljs-keyword">return</span> @buffer
+
+  getFromBuffer: <span class="hljs-function"><span class="hljs-params">(scope, idx, initial = <span class="hljs-literal">false</span>)</span> -&gt;</span>
+    buf = @getBuffer scope, idx, initial
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> buf?.length
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> @options.control <span class="hljs-keyword">then</span> buf[buf.length - <span class="hljs-number">1</span>] <span class="hljs-keyword">else</span> buf.shift()</pre></div>
             
           
             
@@ -381,9 +406,25 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
 
             
               <div class='highlight'><pre>  get: <span class="hljs-function"><span class="hljs-params">(scope, idx)</span> -&gt;</span>
-    buf = @getBuffer scope, idx
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> buf?.length
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> @options.control <span class="hljs-keyword">then</span> buf[buf.length - <span class="hljs-number">1</span>] <span class="hljs-keyword">else</span> buf.shift()</pre></div>
+    res = @getFromBuffer scope, idx
+    <span class="hljs-keyword">return</span> res <span class="hljs-keyword">if</span> res <span class="hljs-keyword">isnt</span> <span class="hljs-literal">undefined</span></pre></div>
+            
+          
+            
+            <p>Try to find an IIP instead</p>
+
+            
+              <div class='highlight'><pre>    @getFromBuffer <span class="hljs-literal">null</span>, idx, <span class="hljs-literal">true</span>
+
+  hasIPinBuffer: <span class="hljs-function"><span class="hljs-params">(scope, idx, validate, initial = <span class="hljs-literal">false</span>)</span> -&gt;</span>
+    buf = @getBuffer scope, idx, initial
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">unless</span> buf?.length
+    <span class="hljs-keyword">for</span> packet <span class="hljs-keyword">in</span> buf
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> validate packet
+    <span class="hljs-literal">false</span>
+
+  hasIIP: <span class="hljs-function"><span class="hljs-params">(idx, validate)</span> -&gt;</span>
+    @hasIPinBuffer <span class="hljs-literal">null</span>, idx, validate, <span class="hljs-literal">true</span></pre></div>
             
           
             
@@ -394,10 +435,8 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
     <span class="hljs-keyword">unless</span> @isAddressable()
       validate = idx
       idx = <span class="hljs-literal">null</span>
-    buf = @getBuffer scope, idx
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">unless</span> buf?.length
-    <span class="hljs-keyword">for</span> packet <span class="hljs-keyword">in</span> buf
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> validate packet
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @hasIPinBuffer scope, idx, validate
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @hasIIP idx, validate
     <span class="hljs-literal">false</span></pre></div>
             
           
@@ -429,7 +468,7 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
 <span class="hljs-built_in">module</span>.exports = InPort</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically on 2017-03-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InPort.coffee">InPort.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InPort.coffee">InPort.coffee</a> file.</small></p>
         </div>
       </div>
     </div>

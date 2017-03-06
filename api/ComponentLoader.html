@@ -33,6 +33,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/AsCallback/index.html' %}class="active" {% endif %}href="/api/AsCallback/">
+                    AsCallback
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
                     AsyncComponent
                   </a>
@@ -358,12 +367,13 @@ registerLoader = <span class="hljs-built_in">require</span> <span class="hljs-st
       graphSocket = internalSocket.createSocket()
       graph.loader = @
       graph.baseDir = @baseDir
-      graph.inPorts.graph.attach graphSocket
-      graphSocket.send component
-      graphSocket.disconnect()
       graph.inPorts.remove <span class="hljs-string">'graph'</span>
-      @setIcon name, graph
-      callback <span class="hljs-literal">null</span>, graph
+      graph.setGraph component, <span class="hljs-function"><span class="hljs-params">(err)</span> =&gt;</span>
+        <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
+        @setIcon name, graph
+        callback <span class="hljs-literal">null</span>, graph
+      <span class="hljs-keyword">return</span>
+    <span class="hljs-keyword">return</span>
 
   setIcon: <span class="hljs-function"><span class="hljs-params">(name, instance)</span> -&gt;</span></pre></div>
             
@@ -452,7 +462,7 @@ registerLoader = <span class="hljs-built_in">require</span> <span class="hljs-st
 exports.ComponentLoader = ComponentLoader</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically on 2017-03-02 from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.coffee">ComponentLoader.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.coffee">ComponentLoader.coffee</a> file.</small></p>
         </div>
       </div>
     </div>

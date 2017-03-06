@@ -4,25 +4,30 @@ title: Getting started with NoFlo
 categories:
  - documentation
 ---
+- [Using NoFlo](#using-noflo)
+  - [Activation mode](#activation-model)
+- [Creating a NoFlo project](#creating-a-noflo-project)
+  - [Project folder](#project-folder)
+  - [Installing NoFlo](#installing-noflo)
+  - [Getting components](#getting-components)
+  - [Defining a graph](#defining-a-graph)
+  - [Debugging the graph](#debugging-the-graph)
+  - [Running NoFlo in the browser](#running-noflo-in-the-browser)
+- [Example: Building a simple calculator](#building-a-simple-calculator)
+
 NoFlo is a [Flow-Based Programming](http://en.wikipedia.org/wiki/Flow-based_programming) environment for JavaScript. In flow-based programs, the logic of your software is defined as a *graph*. The *nodes* of the graph are instances of NoFlo components, and the *edges* define the connections between them.
 
-NoFlo components react to incoming messages, or *packets*. When a component receives packets in its input ports it performs a predefined operation, and sends its result out as a packet to its output ports. There is no shared state, and the only way to communicate between components is by sending packets.
+NoFlo components react to incoming messages, or *information packets*. When a component receives packets in its input ports it performs a predefined operation, and sends its result out as a packet to its output ports. There is no shared state, and the only way to communicate between components is by sending packets.
 
-NoFlo components are built as simple JavaScript or [CoffeeScript](http://coffeescript.org/) classes that define the input and output ports, and register various event listeners on them. When executed, NoFlo creates a live graph, or *network* out of a graph, instantiates the components used in the graph, and connects them together.
+NoFlo components are built as simple JavaScript or [CoffeeScript](http://coffeescript.org/) objects that define the input and output ports, and register various event listeners on them. When executed, NoFlo creates a live graph, or *network* out of a graph definition, instantiates the components used in the graph, and connects them together.
 
 NoFlo graphs can deal with multiple different input paradigms. The same flow can react to incoming HTTP requests, text messages, and changes in the file system, and can similarly output to different targets like writing to a database, responding to the HTTP requests, or updating a dashboard. It is simply a matter of choosing the components you want to use.
-
-## Video tutorial: Creating a web server
-
-<iframe src="//player.vimeo.com/video/79814291?color=ffffff" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
-[Leo Zovic briefly introduces noflo -- Toronto FBP Meeting 1](https://vimeo.com/79814291)
 
 ## Using NoFlo
 
 There are two ways to run your flow-based programs with NoFlo. If your whole application is based on flows, you can simply have NoFlo execute and run it. Flow-based programs done in this way are called *independent* graphs. You can run them with the `noflo` command that ships with the NoFlo package.
 
-The other option is to *embed* NoFlo graphs into your existing JavaScript application by using it as a regular Node.js library. This is useful when you already have an existing system where you want to automate some parts as their own flows, or to add new functionality.
+The other option is to *embed* NoFlo graphs into your existing JavaScript application by using it as a regular NPM module. This is useful when you already have an existing system where you want to automate some parts as their own flows, or to add new functionality.
 
 Examples of embedded usage of NoFlo include handling billing processes or routing incoming SMS or email within an existing Node.js web application.
 
@@ -101,15 +106,15 @@ $ ./node_modules/.bin/noflo-nodejs -h
 
 The main NoFlo package gives you the environment for running flows. In addition you'll need the components that you'll be using in your graphs.
 
-There are hundreds of open source components available via [NoFlo Component Libraries](https://www.npmjs.com/browse/depended/noflo) that you can install with NPM.
+There are hundreds of open source components available via [NoFlo Component Libraries](https://www.npmjs.com/browse/keyword/noflo) that you can install with NPM.
 
-For example, to install the [filesystem components](/library/noflo-filesystem/), you can run:
+For example, to install the [filesystem components](https://www.npmjs.com/package/noflo-filesystem/), you can run:
 
 ```bash
 $ npm install noflo-filesystem --save
 ```
 
-We should also install [noflo-core](/library/noflo-core/), which provides various general utility components:
+We should also install [noflo-core](https://www.npmjs.com/package/noflo-core), which provides various general utility components:
 
 ```bash
 $ npm install noflo-core --save
@@ -117,11 +122,11 @@ $ npm install noflo-core --save
 
 Once NPM completes the components from that library will be available to your project. Your project can pull in components from as many NoFlo libraries as needed.
 
-## Defining your first graph
+## Defining a graph
 
 All NoFlo programs are built as graphs, which define the nodes and components used, and connections between them.
 
-NoFlo graphs can be either defined in a [JSON file format](/documentation/json/) or using the [`.fbp` domain-specific language](/documentation/fbp/). For brevity, this guide uses the `.fbp` syntax.
+NoFlo graphs can be either defined in a [JSON file format](/documentation/graphs/#json) or using the [`.fbp` domain-specific language](/documentation/graphs/#fbp). For brevity, this guide uses the `.fbp` syntax.
 
 Our first graph can be a simple one. Since we already have the file system components available, we can implement a graph that reads a file, and outputs its contents on the screen.
 
@@ -133,7 +138,7 @@ $ mkdir graphs
 
 Create a new file in that folder called `ShowContents.fbp` and open it in your favorite text editor. Paste in the following contents:
 
-```coffeescript
+```fbp
 # In the graph we first need to define the nodes and the connections between them
 Read(filesystem/ReadFile) OUT -> IN Display(core/Output)
 
@@ -166,9 +171,34 @@ This will show all the various events happening inside the graph:
 
 Looking at this is useful in order to understand how information flows through a NoFlo network.
 
+### Running NoFlo in the browser
+
+NoFlo projects can also run in web browsers. You can use the [webpack](https://webpack.js.org) tool create a browser-runnable build of a NoFlo project.
+
+In nutshell, making a browser build of a NoFlo project involves the following steps:
+
+1. Find all installed browser-compatible components using the [fbp-manifest](https://github.com/flowbased/fbp-manifest) tool
+2. Generate a custom NoFlo component loader that requires all the component files and registers them for NoFlo to load
+3. Configure and run webpack with the application entry point, replacing NoFlo's standard component loader with the generated custom one
+
+To automate these steps we have **[grunt-noflo-browser](https://github.com/noflo/grunt-noflo-browser)**, a plugin for the [Grunt](https://gruntjs.com) task runner that we use for build automation.
+
+#### Project scaffolding
+
+For faster project setup, we have a template for creating NoFlo browser applications: **[noflo-browser-app](https://github.com/noflo/noflo-browser-app)**. To use it, follow these steps:
+
+* Fork the project
+* Import the repository in [Flowhub](http://app.flowhub.io)
+* Make changes, synchronize to GitHub
+* If you need additional modules, use `npm install --add`
+
+The project contains a fully working build setup, including [Travis CI](https://travis-ci.org) compatible test automation. If you supply Travis CI a GitHub access token, all tagged versions of your app will automatically get published to [GitHub Pages](https://pages.github.com).
+
+More details for using the template can be found from the [project README](https://github.com/noflo/noflo-browser-app/#readme).
+
 ## Building a simple calculator
 
-NoFlo has a [wealth of components](/library/) available. One such example is the [noflo-math](/library/noflo-math/), which can be used for performing simple calculations.
+NoFlo has a [wealth of components](/library/) available. One such example is the [noflo-math](https://www.npmjs.com/package/noflo-math), which can be used for performing simple calculations.
 
 Install it with:
 
@@ -176,9 +206,15 @@ Install it with:
 $ npm install noflo-math --save
 ```
 
+We also want the [noflo-core](https://www.npmjs.com/package/noflo-core) to write to standard out:
+
+```bash
+$ npm install noflo-core --save
+```
+
 Now we can build a simple calculator. For example, to multiply numbers we can create the following graph at `graphs/Calculate.fbp`:
 
-```coffeescript
+```fbp
 '6' -> MULTIPLICAND Multiply(math/Multiply)
 '7' -> MULTIPLIER Multiply
 Multiply PRODUCT -> IN Display(core/Output)

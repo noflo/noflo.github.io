@@ -17,11 +17,16 @@ layout: default
           <nav>
             <ul class="sidebar__nav">
               <li>
-                <a href="{{ site.baseurl }}/documentation/"{% if page.url == '/documentation/index.html' %} class="active"{% endif%}>Getting Started with NoFlo</a>
+                <a href="{{ site.baseurl }}/documentation/"{% if page.url == '/documentation/index.html' %} class="active"{% endif%}>Getting started</a>
               </li>
               {% for post in site.categories['documentation'] %}
+              {% if post.skip_nav %}{% continue %}{% endif %}
               <li>
+                {% if post.redirect %}
+                <a href="{{ site.baseurl }}{{ post.redirect }}">{{ post.title }}</a>
+                {% else %}
                 <a href="{{ site.baseurl }}{{ post.url }}"{% if post.url == page.url %} class="active"{% endif%}>{{ post.title }}</a>
+                {% endif %}
               </li>
               {% endfor %}
             </ul>
