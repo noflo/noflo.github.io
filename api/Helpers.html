@@ -587,6 +587,8 @@ Process API to handle it.</p>
     platform.deprecated <span class="hljs-string">'noflo.helpers.WirePattern postpone and resume are deprecated. Please port to Process API'</span>
   <span class="hljs-keyword">unless</span> config.async
     platform.deprecated <span class="hljs-string">'noflo.helpers.WirePattern synchronous is deprecated. Please port to Process API'</span>
+  <span class="hljs-keyword">unless</span> config.error <span class="hljs-keyword">is</span> <span class="hljs-string">'error'</span>
+    platform.deprecated <span class="hljs-string">'noflo.helpers.WirePattern custom error port name is deprecated. Please switch to "error" or port to WirePattern'</span>
   <span class="hljs-keyword">return</span></pre></div>
             
           
@@ -694,7 +696,7 @@ Process API to handle it.</p>
       component.inPorts[port].detach tempSocket
 <span class="hljs-function">
 <span class="hljs-title">populateParams</span> = <span class="hljs-params">(config, input)</span> -&gt;</span>
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> config.params.length
+  <span class="hljs-keyword">return</span> {} <span class="hljs-keyword">unless</span> config.params.length
   params = {}
   <span class="hljs-keyword">for</span> paramPort <span class="hljs-keyword">in</span> config.params
     <span class="hljs-keyword">if</span> input.ports[paramPort].isAddressable()
