@@ -278,6 +278,7 @@ and sending new IIPs.</p>
     @defaults = []
     @graph = graph
     @started = <span class="hljs-literal">false</span>
+    @stopped = <span class="hljs-literal">true</span>
     @debug = <span class="hljs-literal">true</span>
     @eventBuffer = []</pre></div>
             
@@ -902,7 +903,24 @@ TODO: hasDefault existence check is for backwards compatibility, clean
     @initials.push init
     @nextInitials.push init
 
-    <span class="hljs-keyword">do</span> @sendInitials <span class="hljs-keyword">if</span> @isStarted()
+    <span class="hljs-keyword">if</span> @isRunning()</pre></div>
+            
+          
+            
+            <p>Network is running now, send initials immediately</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">do</span> @sendInitials
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> @isStopped()</pre></div>
+            
+          
+            
+            <p>Network has finished but hasn’t been stopped, set
+started and set</p>
+
+            
+              <div class='highlight'><pre>      @setStarted <span class="hljs-literal">true</span>
+      <span class="hljs-keyword">do</span> @sendInitials
 
     callback()
 
@@ -950,6 +968,8 @@ TODO: hasDefault existence check is for backwards compatibility, clean
 
   isStarted: <span class="hljs-function">-&gt;</span>
     @started
+  isStopped: <span class="hljs-function">-&gt;</span>
+    @stopped
 
   isRunning: <span class="hljs-function">-&gt;</span>
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">unless</span> @started
@@ -1042,7 +1062,9 @@ a socket is attached from the “parent” graph.</p>
 
     @abortDebounce = <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @debouncedEnd
 
-    <span class="hljs-keyword">return</span> callback <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> @started</pre></div>
+    <span class="hljs-keyword">unless</span> @started
+      @stopped = <span class="hljs-literal">true</span>
+      <span class="hljs-keyword">return</span> callback <span class="hljs-literal">null</span></pre></div>
             
           
             
@@ -1065,9 +1087,11 @@ a socket is attached from the “parent” graph.</p>
       count++
       <span class="hljs-keyword">if</span> count <span class="hljs-keyword">is</span> length
         @setStarted <span class="hljs-literal">false</span>
+        @stopped = <span class="hljs-literal">true</span>
         callback()
     <span class="hljs-keyword">unless</span> @processes <span class="hljs-keyword">and</span> Object.keys(@processes).length
       @setStarted <span class="hljs-literal">false</span>
+      @stopped = <span class="hljs-literal">true</span>
       <span class="hljs-keyword">return</span> callback()</pre></div>
             
           
@@ -1109,6 +1133,7 @@ a socket is attached from the “parent” graph.</p>
             
               <div class='highlight'><pre>    @startupDate = <span class="hljs-keyword">new</span> Date <span class="hljs-keyword">unless</span> @startupDate
     @started = <span class="hljs-literal">true</span>
+    @stopped = <span class="hljs-literal">false</span>
     @bufferedEmit <span class="hljs-string">'start'</span>,
       start: @startupDate
 
