@@ -255,6 +255,24 @@ IP = <span class="hljs-built_in">require</span> <span class="hljs-string">'./IP'
       ip = <span class="hljs-keyword">new</span> IP type, data, options
     sockets = @getSockets socketId
     @checkRequired sockets
+
+    <span class="hljs-keyword">if</span> ip.datatype <span class="hljs-keyword">is</span> <span class="hljs-string">'all'</span></pre></div>
+            
+          
+            
+            <p>Stamp non-specific IP objects with port datatype</p>
+
+            
+              <div class='highlight'><pre>      ip.datatype = @getDataType()
+    <span class="hljs-keyword">if</span> @getSchema() <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> ip.schema</pre></div>
+            
+          
+            
+            <p>Stamp non-specific IP objects with port schema</p>
+
+            
+              <div class='highlight'><pre>      ip.schema = @getSchema()
+
     <span class="hljs-keyword">if</span> @isCaching() <span class="hljs-keyword">and</span> data <span class="hljs-keyword">isnt</span> @cache[socketId]?.data
       @cache[socketId] = ip
     pristine = <span class="hljs-literal">true</span>

@@ -231,8 +231,11 @@ validTypes = [
     <span class="hljs-keyword">if</span> validTypes.indexOf(options.datatype) <span class="hljs-keyword">is</span> <span class="hljs-number">-1</span>
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Invalid port datatype '<span class="hljs-subst">#{options.datatype}</span>' specified, valid are <span class="hljs-subst">#{validTypes.join(<span class="hljs-string">', '</span>)}</span>"</span>
 
-    <span class="hljs-keyword">if</span> options.type <span class="hljs-keyword">and</span> options.type.indexOf(<span class="hljs-string">'/'</span>) <span class="hljs-keyword">is</span> <span class="hljs-number">-1</span>
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Invalid port type '<span class="hljs-subst">#{options.type}</span>' specified. Should be URL or MIME type"</span>
+    <span class="hljs-keyword">if</span> options.type <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> options.schema
+      options.schema = options.type
+      <span class="hljs-keyword">delete</span> options.type
+    <span class="hljs-keyword">if</span> options.schema <span class="hljs-keyword">and</span> options.schema.indexOf(<span class="hljs-string">'/'</span>) <span class="hljs-keyword">is</span> <span class="hljs-number">-1</span>
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Invalid port schema '<span class="hljs-subst">#{options.schema}</span>' specified. Should be URL or MIME type"</span>
 
     @options = options
 
@@ -242,6 +245,7 @@ validTypes = [
     <span class="hljs-string">"<span class="hljs-subst">#{@node}</span> <span class="hljs-subst">#{@name.toUpperCase()}</span>"</span>
 
   getDataType: <span class="hljs-function">-&gt;</span> @options.datatype
+  getSchema: <span class="hljs-function">-&gt;</span> @options.schema <span class="hljs-keyword">or</span> <span class="hljs-literal">null</span>
   getDescription: <span class="hljs-function">-&gt;</span> @options.description
 
   attach: <span class="hljs-function"><span class="hljs-params">(socket, index = <span class="hljs-literal">null</span>)</span> -&gt;</span>

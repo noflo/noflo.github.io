@@ -213,6 +213,7 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
 
     options.buffered ?= <span class="hljs-literal">false</span>
     options.control ?= <span class="hljs-literal">false</span>
+    options.scoped ?= <span class="hljs-literal">true</span>
     options.triggering ?= <span class="hljs-literal">true</span>
 
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> process <span class="hljs-keyword">and</span> options <span class="hljs-keyword">and</span> options.process
@@ -273,6 +274,22 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> @options.control <span class="hljs-keyword">and</span> ip.type <span class="hljs-keyword">isnt</span> <span class="hljs-string">'data'</span>
     ip.owner = @nodeInstance
     ip.index = id <span class="hljs-keyword">if</span> @isAddressable()
+    <span class="hljs-keyword">if</span> ip.datatype <span class="hljs-keyword">is</span> <span class="hljs-string">'all'</span></pre></div>
+            
+          
+            
+            <p>Stamp non-specific IP objects with port datatype</p>
+
+            
+              <div class='highlight'><pre>      ip.datatype = @getDataType()
+    <span class="hljs-keyword">if</span> @getSchema() <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> ip.schema</pre></div>
+            
+          
+            
+            <p>Stamp non-specific IP objects with port schema</p>
+
+            
+              <div class='highlight'><pre>      ip.schema = @getSchema()
 
     buf = @prepareBufferForIP ip
     buf.push ip
@@ -334,7 +351,7 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
 
   prepareBufferForIP: <span class="hljs-function"><span class="hljs-params">(ip)</span> -&gt;</span>
     <span class="hljs-keyword">if</span> @isAddressable()
-      <span class="hljs-keyword">if</span> ip.scope?
+      <span class="hljs-keyword">if</span> ip.scope? <span class="hljs-keyword">and</span> @options.scoped
         @scopedBuffer[ip.scope] = [] <span class="hljs-keyword">unless</span> ip.scope <span class="hljs-keyword">of</span> @scopedBuffer
         @scopedBuffer[ip.scope][ip.index] = [] <span class="hljs-keyword">unless</span> ip.index <span class="hljs-keyword">of</span> @scopedBuffer[ip.scope]
         <span class="hljs-keyword">return</span> @scopedBuffer[ip.scope][ip.index]
@@ -343,7 +360,7 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
         <span class="hljs-keyword">return</span> @iipBuffer[ip.index]
       @indexedBuffer[ip.index] = [] <span class="hljs-keyword">unless</span> ip.index <span class="hljs-keyword">of</span> @indexedBuffer
       <span class="hljs-keyword">return</span> @indexedBuffer[ip.index]
-    <span class="hljs-keyword">if</span> ip.scope?
+    <span class="hljs-keyword">if</span> ip.scope? <span class="hljs-keyword">and</span> @options.scoped
       @scopedBuffer[ip.scope] = [] <span class="hljs-keyword">unless</span> ip.scope <span class="hljs-keyword">of</span> @scopedBuffer
       <span class="hljs-keyword">return</span> @scopedBuffer[ip.scope]
     <span class="hljs-keyword">if</span> ip.initial
@@ -379,7 +396,7 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
 
   getBuffer: <span class="hljs-function"><span class="hljs-params">(scope, idx, initial = <span class="hljs-literal">false</span>)</span> -&gt;</span>
     <span class="hljs-keyword">if</span> @isAddressable()
-      <span class="hljs-keyword">if</span> scope?
+      <span class="hljs-keyword">if</span> scope? <span class="hljs-keyword">and</span> @options.scoped
         <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> scope <span class="hljs-keyword">of</span> @scopedBuffer
         <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> idx <span class="hljs-keyword">of</span> @scopedBuffer[scope]
         <span class="hljs-keyword">return</span> @scopedBuffer[scope][idx]
@@ -388,7 +405,7 @@ platform = <span class="hljs-built_in">require</span> <span class="hljs-string">
         <span class="hljs-keyword">return</span> @iipBuffer[idx]
       <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> idx <span class="hljs-keyword">of</span> @indexedBuffer
       <span class="hljs-keyword">return</span> @indexedBuffer[idx]
-    <span class="hljs-keyword">if</span> scope?
+    <span class="hljs-keyword">if</span> scope? <span class="hljs-keyword">and</span> @options.scoped
       <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> scope <span class="hljs-keyword">of</span> @scopedBuffer
       <span class="hljs-keyword">return</span> @scopedBuffer[scope]
     <span class="hljs-keyword">if</span> initial
