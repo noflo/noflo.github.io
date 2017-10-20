@@ -589,7 +589,7 @@ when done</p>
             
               <div class='highlight'><pre>    nodes <span class="hljs-string">"Node"</span>
 
-  connectPort: <span class="hljs-function"><span class="hljs-params">(socket, process, port, index, inbound)</span> -&gt;</span>
+  connectPort: <span class="hljs-function"><span class="hljs-params">(socket, process, port, index, inbound, callback)</span> -&gt;</span>
     <span class="hljs-keyword">if</span> inbound
       socket.to =
         process: process
@@ -597,11 +597,15 @@ when done</p>
         index: index
 
       <span class="hljs-keyword">unless</span> process.component.inPorts <span class="hljs-keyword">and</span> process.component.inPorts[port]
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"No inport '<span class="hljs-subst">#{port}</span>' defined in process <span class="hljs-subst">#{process.id}</span> (<span class="hljs-subst">#{socket.getId()}</span>)"</span>
+        callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"No inport '<span class="hljs-subst">#{port}</span>' defined in process <span class="hljs-subst">#{process.id}</span> (<span class="hljs-subst">#{socket.getId()}</span>)"</span>
         <span class="hljs-keyword">return</span>
       <span class="hljs-keyword">if</span> process.component.inPorts[port].isAddressable()
-        <span class="hljs-keyword">return</span> process.component.inPorts[port].attach socket, index
-      <span class="hljs-keyword">return</span> process.component.inPorts[port].attach socket
+        process.component.inPorts[port].attach socket, index
+        <span class="hljs-keyword">do</span> callback
+        <span class="hljs-keyword">return</span>
+      process.component.inPorts[port].attach socket
+      <span class="hljs-keyword">do</span> callback
+      <span class="hljs-keyword">return</span>
 
     socket.<span class="hljs-keyword">from</span> =
       process: process
@@ -609,12 +613,16 @@ when done</p>
       index: index
 
     <span class="hljs-keyword">unless</span> process.component.outPorts <span class="hljs-keyword">and</span> process.component.outPorts[port]
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"No outport '<span class="hljs-subst">#{port}</span>' defined in process <span class="hljs-subst">#{process.id}</span> (<span class="hljs-subst">#{socket.getId()}</span>)"</span>
+      callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"No outport '<span class="hljs-subst">#{port}</span>' defined in process <span class="hljs-subst">#{process.id}</span> (<span class="hljs-subst">#{socket.getId()}</span>)"</span>
       <span class="hljs-keyword">return</span>
 
     <span class="hljs-keyword">if</span> process.component.outPorts[port].isAddressable()
-      <span class="hljs-keyword">return</span> process.component.outPorts[port].attach socket, index
+      process.component.outPorts[port].attach socket, index
+      <span class="hljs-keyword">do</span> callback
+      <span class="hljs-keyword">return</span>
     process.component.outPorts[port].attach socket
+    <span class="hljs-keyword">do</span> callback
+    <span class="hljs-keyword">return</span>
 
   subscribeGraph: <span class="hljs-function">-&gt;</span></pre></div>
             
@@ -817,11 +825,13 @@ to NoFlo processes, and edges to connections between them.</p>
             
               <div class='highlight'><pre>    @subscribeSocket socket, <span class="hljs-keyword">from</span>
 
-    @connectPort socket, to, edge.to.port, edge.to.index, <span class="hljs-literal">true</span>
-    @connectPort socket, <span class="hljs-keyword">from</span>, edge.<span class="hljs-keyword">from</span>.port, edge.<span class="hljs-keyword">from</span>.index, <span class="hljs-literal">false</span>
+    @connectPort socket, to, edge.to.port, edge.to.index, <span class="hljs-literal">true</span>, <span class="hljs-function"><span class="hljs-params">(err)</span> =&gt;</span>
+      <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
+      @connectPort socket, <span class="hljs-keyword">from</span>, edge.<span class="hljs-keyword">from</span>.port, edge.<span class="hljs-keyword">from</span>.index, <span class="hljs-literal">false</span>, <span class="hljs-function"><span class="hljs-params">(err)</span> =&gt;</span>
+        <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
 
-    @connections.push socket
-    callback()
+        @connections.push socket
+        callback()
 
   removeEdge: <span class="hljs-function"><span class="hljs-params">(edge, callback)</span> -&gt;</span>
     <span class="hljs-keyword">for</span> connection <span class="hljs-keyword">in</span> @connections
@@ -835,7 +845,6 @@ to NoFlo processes, and edges to connections between them.</p>
       <span class="hljs-keyword">do</span> callback
 
   addDefaults: <span class="hljs-function"><span class="hljs-params">(node, callback)</span> -&gt;</span>
-
     process = @processes[node.id]
 
     <span class="hljs-keyword">unless</span> process.component.isReady()
@@ -864,7 +873,7 @@ TODO: hasDefault existence check is for backwards compatibility, clean
             
               <div class='highlight'><pre>        @subscribeSocket socket
 
-        @connectPort socket, process, key, <span class="hljs-literal">undefined</span>, <span class="hljs-literal">true</span>
+        @connectPort socket, process, key, <span class="hljs-literal">undefined</span>, <span class="hljs-literal">true</span>, <span class="hljs-function">-&gt;</span>
 
         @connections.push socket
 
@@ -893,25 +902,26 @@ TODO: hasDefault existence check is for backwards compatibility, clean
         @addInitial initializer, callback
       <span class="hljs-keyword">return</span>
 
-    @connectPort socket, to, initializer.to.port, initializer.to.index, <span class="hljs-literal">true</span>
+    @connectPort socket, to, initializer.to.port, initializer.to.index, <span class="hljs-literal">true</span>, <span class="hljs-function"><span class="hljs-params">(err)</span> =&gt;</span>
+      <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
 
-    @connections.push socket
+      @connections.push socket
 
-    init =
-      socket: socket
-      data: initializer.<span class="hljs-keyword">from</span>.data
-    @initials.push init
-    @nextInitials.push init
+      init =
+        socket: socket
+        data: initializer.<span class="hljs-keyword">from</span>.data
+      @initials.push init
+      @nextInitials.push init
 
-    <span class="hljs-keyword">if</span> @isRunning()</pre></div>
+      <span class="hljs-keyword">if</span> @isRunning()</pre></div>
             
           
             
             <p>Network is running now, send initials immediately</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">do</span> @sendInitials
-    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> @isStopped()</pre></div>
+              <div class='highlight'><pre>        <span class="hljs-keyword">do</span> @sendInitials
+      <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> @isStopped()</pre></div>
             
           
             
@@ -919,10 +929,10 @@ TODO: hasDefault existence check is for backwards compatibility, clean
 started and set</p>
 
             
-              <div class='highlight'><pre>      @setStarted <span class="hljs-literal">true</span>
-      <span class="hljs-keyword">do</span> @sendInitials
+              <div class='highlight'><pre>        @setStarted <span class="hljs-literal">true</span>
+        <span class="hljs-keyword">do</span> @sendInitials
 
-    callback()
+      callback()
 
   removeInitial: <span class="hljs-function"><span class="hljs-params">(initializer, callback)</span> -&gt;</span>
     <span class="hljs-keyword">for</span> connection <span class="hljs-keyword">in</span> @connections

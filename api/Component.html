@@ -693,8 +693,8 @@ the keys so that they get added in correct order</p>
 
   processOutputQueue: <span class="hljs-function">-&gt;</span>
     <span class="hljs-keyword">while</span> @outputQ.length &gt; <span class="hljs-number">0</span>
-      result = @outputQ[<span class="hljs-number">0</span>]
-      <span class="hljs-keyword">break</span> <span class="hljs-keyword">unless</span> result.__resolved
+      <span class="hljs-keyword">break</span> <span class="hljs-keyword">unless</span> @outputQ[<span class="hljs-number">0</span>].__resolved
+      result = @outputQ.shift()
       @addBracketForwards result
       <span class="hljs-keyword">for</span> port, ips <span class="hljs-keyword">of</span> result
         <span class="hljs-keyword">continue</span> <span class="hljs-keyword">if</span> port.indexOf(<span class="hljs-string">'__'</span>) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
@@ -722,7 +722,6 @@ the keys so that they get added in correct order</p>
           <span class="hljs-keyword">else</span>
             debugSend <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> sending <span class="hljs-subst">#{portIdentifier}</span> DATA"</span>
           @outPorts[port].sendIP ip
-      @outputQ.shift()
 
   activate: <span class="hljs-function"><span class="hljs-params">(context)</span> -&gt;</span>
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> context.activated <span class="hljs-comment"># prevent double activation</span>
