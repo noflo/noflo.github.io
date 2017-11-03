@@ -24,26 +24,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
-                    ArrayPort
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/AsCallback/index.html' %}class="active" {% endif %}href="/api/AsCallback/">
                     AsCallback
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
-                    AsyncComponent
                   </a>
                 </li>
                 
@@ -150,26 +132,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
-                    Port
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
                     Ports
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
-                    Streams
                   </a>
                 </li>
                 
@@ -194,127 +158,183 @@ categories:
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license
-</code></pre><p>Base port type used for options normalization</p>
-
-            
-              <div class='highlight'><pre>{EventEmitter} = <span class="hljs-built_in">require</span> <span class="hljs-string">'events'</span>
-
-validTypes = [
-  <span class="hljs-string">'all'</span>
-  <span class="hljs-string">'string'</span>
-  <span class="hljs-string">'number'</span>
-  <span class="hljs-string">'int'</span>
-  <span class="hljs-string">'object'</span>
-  <span class="hljs-string">'array'</span>
-  <span class="hljs-string">'boolean'</span>
-  <span class="hljs-string">'color'</span>
-  <span class="hljs-string">'date'</span>
-  <span class="hljs-string">'bang'</span>
-  <span class="hljs-string">'function'</span>
-  <span class="hljs-string">'buffer'</span>
-  <span class="hljs-string">'stream'</span>
-]
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BasePort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span></span>
-  constructor: <span class="hljs-function"><span class="hljs-params">(options)</span> -&gt;</span>
-    @handleOptions options
-    @sockets = []
-    @node = <span class="hljs-literal">null</span>
-    @name = <span class="hljs-literal">null</span>
-
-  handleOptions: <span class="hljs-function"><span class="hljs-params">(options)</span> -&gt;</span>
-    options = {} <span class="hljs-keyword">unless</span> options
-    options.datatype = <span class="hljs-string">'all'</span> <span class="hljs-keyword">unless</span> options.datatype
-    options.required = <span class="hljs-literal">false</span> <span class="hljs-keyword">if</span> options.required <span class="hljs-keyword">is</span> <span class="hljs-literal">undefined</span>
-
-    options.datatype = <span class="hljs-string">'int'</span> <span class="hljs-keyword">if</span> options.datatype <span class="hljs-keyword">is</span> <span class="hljs-string">'integer'</span>
-    <span class="hljs-keyword">if</span> validTypes.indexOf(options.datatype) <span class="hljs-keyword">is</span> <span class="hljs-number">-1</span>
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Invalid port datatype '<span class="hljs-subst">#{options.datatype}</span>' specified, valid are <span class="hljs-subst">#{validTypes.join(<span class="hljs-string">', '</span>)}</span>"</span>
-
-    <span class="hljs-keyword">if</span> options.type <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> options.schema
-      options.schema = options.type
-      <span class="hljs-keyword">delete</span> options.type
-    <span class="hljs-keyword">if</span> options.schema <span class="hljs-keyword">and</span> options.schema.indexOf(<span class="hljs-string">'/'</span>) <span class="hljs-keyword">is</span> <span class="hljs-number">-1</span>
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Invalid port schema '<span class="hljs-subst">#{options.schema}</span>' specified. Should be URL or MIME type"</span>
-
-    @options = options
-
-  getId: <span class="hljs-function">-&gt;</span>
-    <span class="hljs-keyword">unless</span> @node <span class="hljs-keyword">and</span> @name
-      <span class="hljs-keyword">return</span> <span class="hljs-string">'Port'</span>
-    <span class="hljs-string">"<span class="hljs-subst">#{@node}</span> <span class="hljs-subst">#{@name.toUpperCase()}</span>"</span>
-
-  getDataType: <span class="hljs-function">-&gt;</span> @options.datatype
-  getSchema: <span class="hljs-function">-&gt;</span> @options.schema <span class="hljs-keyword">or</span> <span class="hljs-literal">null</span>
-  getDescription: <span class="hljs-function">-&gt;</span> @options.description
-
-  attach: <span class="hljs-function"><span class="hljs-params">(socket, index = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> @isAddressable() <span class="hljs-keyword">or</span> index <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
-      index = @sockets.length
-    @sockets[index] = socket
-    @attachSocket socket, index
-    <span class="hljs-keyword">if</span> @isAddressable()
-      @emit <span class="hljs-string">'attach'</span>, socket, index
-      <span class="hljs-keyword">return</span>
-    @emit <span class="hljs-string">'attach'</span>, socket
-
-  attachSocket: <span class="hljs-function">-&gt;</span>
-
-  detach: <span class="hljs-function"><span class="hljs-params">(socket)</span> -&gt;</span>
-    index = @sockets.indexOf socket
-    <span class="hljs-keyword">if</span> index <span class="hljs-keyword">is</span> <span class="hljs-number">-1</span>
-      <span class="hljs-keyword">return</span>
-    @sockets[index] = <span class="hljs-literal">undefined</span>
-    <span class="hljs-keyword">if</span> @isAddressable()
-      @emit <span class="hljs-string">'detach'</span>, socket, index
-      <span class="hljs-keyword">return</span>
-    @emit <span class="hljs-string">'detach'</span>, socket
-
-  isAddressable: <span class="hljs-function">-&gt;</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @options.addressable
-    <span class="hljs-literal">false</span>
-
-  isBuffered: <span class="hljs-function">-&gt;</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @options.buffered
-    <span class="hljs-literal">false</span>
-
-  isRequired: <span class="hljs-function">-&gt;</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @options.required
-    <span class="hljs-literal">false</span>
-
-  isAttached: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> @isAddressable() <span class="hljs-keyword">and</span> socketId <span class="hljs-keyword">isnt</span> <span class="hljs-literal">null</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @sockets[socketId]
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @sockets.length
-    <span class="hljs-literal">false</span>
-
-  listAttached: <span class="hljs-function">-&gt;</span>
-    attached = []
-    <span class="hljs-keyword">for</span> socket, idx <span class="hljs-keyword">in</span> @sockets
-      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> socket
-      attached.push idx
-    attached
-
-  isConnected: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> @isAddressable()
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: Socket ID required"</span> <span class="hljs-keyword">if</span> socketId <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: Socket <span class="hljs-subst">#{socketId}</span> not available"</span> <span class="hljs-keyword">unless</span> @sockets[socketId]
-      <span class="hljs-keyword">return</span> @sockets[socketId].isConnected()
-
-    connected = <span class="hljs-literal">false</span>
-    @sockets.forEach (socket) -&gt;
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> socket
-      <span class="hljs-keyword">if</span> socket.isConnected()
-        connected = <span class="hljs-literal">true</span>
-    <span class="hljs-keyword">return</span> connected
-
-  canAttach: <span class="hljs-function">-&gt;</span> <span class="hljs-literal">true</span>
-
-<span class="hljs-built_in">module</span>.exports = BasePort</pre></div>
+</code></pre>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.coffee">BasePort.coffee</a> file.</small></p>
+            
+            <p>Base port type used for options normalization</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-keyword">var</span> BasePort, EventEmitter, validTypes;
+
+({EventEmitter} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>));
+
+validTypes = [<span class="hljs-string">'all'</span>, <span class="hljs-string">'string'</span>, <span class="hljs-string">'number'</span>, <span class="hljs-string">'int'</span>, <span class="hljs-string">'object'</span>, <span class="hljs-string">'array'</span>, <span class="hljs-string">'boolean'</span>, <span class="hljs-string">'color'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'bang'</span>, <span class="hljs-string">'function'</span>, <span class="hljs-string">'buffer'</span>, <span class="hljs-string">'stream'</span>];
+
+BasePort = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BasePort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+  <span class="hljs-keyword">constructor</span>(options) {
+    <span class="hljs-keyword">super</span>();
+    <span class="hljs-keyword">this</span>.handleOptions(options);
+    <span class="hljs-keyword">this</span>.sockets = [];
+    <span class="hljs-keyword">this</span>.node = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">this</span>.name = <span class="hljs-literal">null</span>;
+  }
+
+  handleOptions(options) {
+    <span class="hljs-keyword">if</span> (!options) {
+      options = {};
+    }
+    <span class="hljs-keyword">if</span> (!options.datatype) {
+      options.datatype = <span class="hljs-string">'all'</span>;
+    }
+    <span class="hljs-keyword">if</span> (options.required === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) {
+      options.required = <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">if</span> (options.datatype === <span class="hljs-string">'integer'</span>) {
+      options.datatype = <span class="hljs-string">'int'</span>;
+    }
+    <span class="hljs-keyword">if</span> (validTypes.indexOf(options.datatype) === <span class="hljs-number">-1</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port datatype '<span class="hljs-subst">${options.datatype}</span>' specified, valid are <span class="hljs-subst">${validTypes.join(<span class="hljs-string">', '</span>)}</span>`</span>);
+    }
+    <span class="hljs-keyword">if</span> (options.type &amp;&amp; !options.schema) {
+      options.schema = options.type;
+      <span class="hljs-keyword">delete</span> options.type;
+    }
+    <span class="hljs-keyword">if</span> (options.schema &amp;&amp; options.schema.indexOf(<span class="hljs-string">'/'</span>) === <span class="hljs-number">-1</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port schema '<span class="hljs-subst">${options.schema}</span>' specified. Should be URL or MIME type`</span>);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.options = options;
+  }
+
+  getId() {
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span>.node &amp;&amp; <span class="hljs-keyword">this</span>.name)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'Port'</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.node}</span> <span class="hljs-subst">${<span class="hljs-keyword">this</span>.name.toUpperCase()}</span>`</span>;
+  }
+
+  getDataType() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.options.datatype;
+  }
+
+  getSchema() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.options.schema || <span class="hljs-literal">null</span>;
+  }
+
+  getDescription() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.options.description;
+  }
+
+  attach(socket, index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.isAddressable() || index === <span class="hljs-literal">null</span>) {
+      index = <span class="hljs-keyword">this</span>.sockets.length;
+    }
+    <span class="hljs-keyword">this</span>.sockets[index] = socket;
+    <span class="hljs-keyword">this</span>.attachSocket(socket, index);
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isAddressable()) {
+      <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'attach'</span>, socket, index);
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'attach'</span>, socket);
+  }
+
+  attachSocket() {}
+
+  detach(socket) {
+    <span class="hljs-keyword">var</span> index;
+    index = <span class="hljs-keyword">this</span>.sockets.indexOf(socket);
+    <span class="hljs-keyword">if</span> (index === <span class="hljs-number">-1</span>) {
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">this</span>.sockets[index] = <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isAddressable()) {
+      <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'detach'</span>, socket, index);
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'detach'</span>, socket);
+  }
+
+  isAddressable() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.options.addressable) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+  isBuffered() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.options.buffered) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+  isRequired() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.options.required) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+  isAttached(socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isAddressable() &amp;&amp; socketId !== <span class="hljs-literal">null</span>) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.sockets[socketId]) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.sockets.length) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+  listAttached() {
+    <span class="hljs-keyword">var</span> attached, i, idx, len, ref, socket;
+    attached = [];
+    ref = <span class="hljs-keyword">this</span>.sockets;
+    <span class="hljs-keyword">for</span> (idx = i = <span class="hljs-number">0</span>, len = ref.length; i &lt; len; idx = ++i) {
+      socket = ref[idx];
+      <span class="hljs-keyword">if</span> (!socket) {
+        <span class="hljs-keyword">continue</span>;
+      }
+      attached.push(idx);
+    }
+    <span class="hljs-keyword">return</span> attached;
+  }
+
+  isConnected(socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">var</span> connected;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isAddressable()) {
+      <span class="hljs-keyword">if</span> (socketId === <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.getId()}</span>: Socket ID required`</span>);
+      }
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.sockets[socketId]) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.getId()}</span>: Socket <span class="hljs-subst">${socketId}</span> not available`</span>);
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.sockets[socketId].isConnected();
+    }
+    connected = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">this</span>.sockets.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">socket</span>) </span>{
+      <span class="hljs-keyword">if</span> (!socket) {
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">if</span> (socket.isConnected()) {
+        <span class="hljs-keyword">return</span> connected = <span class="hljs-literal">true</span>;
+      }
+    });
+    <span class="hljs-keyword">return</span> connected;
+  }
+
+  canAttach() {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  }
+
+};
+
+<span class="hljs-built_in">module</span>.exports = BasePort;</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.js">BasePort.js</a> file.</small></p>
         </div>
       </div>
     </div>

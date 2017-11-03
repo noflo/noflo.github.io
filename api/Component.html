@@ -24,26 +24,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
-                    ArrayPort
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/AsCallback/index.html' %}class="active" {% endif %}href="/api/AsCallback/">
                     AsCallback
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
-                    AsyncComponent
                   </a>
                 </li>
                 
@@ -150,26 +132,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
-                    Port
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
                     Ports
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
-                    Streams
                   </a>
                 </li>
                 
@@ -195,79 +159,130 @@ categories:
 (c) <span class="hljs-number">2013</span><span class="hljs-number">-2017</span> Flowhub UG
 (c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license
-</code></pre><p>Baseclass for regular NoFlo components.</p>
+</code></pre>
+            
+          
+            
+            <p>Baseclass for regular NoFlo components.</p>
 
             
-              <div class='highlight'><pre>{EventEmitter} = <span class="hljs-built_in">require</span> <span class="hljs-string">'events'</span>
+              <div class='highlight'><pre><span class="hljs-keyword">var</span> Component, EventEmitter, IP, ProcessContext, ProcessInput, ProcessOutput, debug, debugBrackets, debugSend, ports,
+  boundMethodCheck = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">instance, Constructor</span>) </span>{ <span class="hljs-keyword">if</span> (!(instance <span class="hljs-keyword">instanceof</span> Constructor)) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Bound instance method accessed before binding'</span>); } };
 
-ports = <span class="hljs-built_in">require</span> <span class="hljs-string">'./Ports'</span>
-IP = <span class="hljs-built_in">require</span> <span class="hljs-string">'./IP'</span>
+({EventEmitter} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>));
 
-debug = <span class="hljs-built_in">require</span>(<span class="hljs-string">'debug'</span>) <span class="hljs-string">'noflo:component'</span>
-debugBrackets = <span class="hljs-built_in">require</span>(<span class="hljs-string">'debug'</span>) <span class="hljs-string">'noflo:component:brackets'</span>
-debugSend = <span class="hljs-built_in">require</span>(<span class="hljs-string">'debug'</span>) <span class="hljs-string">'noflo:component:send'</span>
+ports = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Ports'</span>);
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Component</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span></span>
-  description: <span class="hljs-string">''</span>
-  icon: <span class="hljs-literal">null</span>
+IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./IP'</span>);
 
-  constructor: <span class="hljs-function"><span class="hljs-params">(options)</span> -&gt;</span>
-    options = {} <span class="hljs-keyword">unless</span> options
-    options.inPorts = {} <span class="hljs-keyword">unless</span> options.inPorts
-    <span class="hljs-keyword">if</span> options.inPorts <span class="hljs-keyword">instanceof</span> ports.InPorts
-      @inPorts = options.inPorts
-    <span class="hljs-keyword">else</span>
-      @inPorts = <span class="hljs-keyword">new</span> ports.InPorts options.inPorts
+debug = <span class="hljs-built_in">require</span>(<span class="hljs-string">'debug'</span>)(<span class="hljs-string">'noflo:component'</span>);
 
-    options.outPorts = {} <span class="hljs-keyword">unless</span> options.outPorts
-    <span class="hljs-keyword">if</span> options.outPorts <span class="hljs-keyword">instanceof</span> ports.OutPorts
-      @outPorts = options.outPorts
-    <span class="hljs-keyword">else</span>
-      @outPorts = <span class="hljs-keyword">new</span> ports.OutPorts options.outPorts
+debugBrackets = <span class="hljs-built_in">require</span>(<span class="hljs-string">'debug'</span>)(<span class="hljs-string">'noflo:component:brackets'</span>);
 
-    @icon = options.icon <span class="hljs-keyword">if</span> options.icon
-    @description = options.description <span class="hljs-keyword">if</span> options.description
+debugSend = <span class="hljs-built_in">require</span>(<span class="hljs-string">'debug'</span>)(<span class="hljs-string">'noflo:component:send'</span>);
 
-    @started = <span class="hljs-literal">false</span>
-    @load = <span class="hljs-number">0</span>
-    @ordered = options.ordered ? <span class="hljs-literal">false</span>
-    @autoOrdering = options.autoOrdering ? <span class="hljs-literal">null</span>
-    @outputQ = []
-    @bracketContext =
-      in: {}
-      out: {}
-    @activateOnInput = options.activateOnInput ? <span class="hljs-literal">true</span>
-    @forwardBrackets = in: [<span class="hljs-string">'out'</span>, <span class="hljs-string">'error'</span>]
+Component = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Component</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+    <span class="hljs-keyword">constructor</span>(options) {
+      <span class="hljs-keyword">var</span> ref, ref1, ref2;
+      <span class="hljs-keyword">super</span>();
+      <span class="hljs-keyword">this</span>.error = <span class="hljs-keyword">this</span>.error.bind(<span class="hljs-keyword">this</span>);
+      <span class="hljs-keyword">if</span> (!options) {
+        options = {};
+      }
+      <span class="hljs-keyword">if</span> (!options.inPorts) {
+        options.inPorts = {};
+      }
+      <span class="hljs-keyword">if</span> (options.inPorts <span class="hljs-keyword">instanceof</span> ports.InPorts) {
+        <span class="hljs-keyword">this</span>.inPorts = options.inPorts;
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">this</span>.inPorts = <span class="hljs-keyword">new</span> ports.InPorts(options.inPorts);
+      }
+      <span class="hljs-keyword">if</span> (!options.outPorts) {
+        options.outPorts = {};
+      }
+      <span class="hljs-keyword">if</span> (options.outPorts <span class="hljs-keyword">instanceof</span> ports.OutPorts) {
+        <span class="hljs-keyword">this</span>.outPorts = options.outPorts;
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">this</span>.outPorts = <span class="hljs-keyword">new</span> ports.OutPorts(options.outPorts);
+      }
+      <span class="hljs-keyword">if</span> (options.icon) {
+        <span class="hljs-keyword">this</span>.icon = options.icon;
+      }
+      <span class="hljs-keyword">if</span> (options.description) {
+        <span class="hljs-keyword">this</span>.description = options.description;
+      }
+      <span class="hljs-keyword">this</span>.started = <span class="hljs-literal">false</span>;
+      <span class="hljs-keyword">this</span>.load = <span class="hljs-number">0</span>;
+      <span class="hljs-keyword">this</span>.ordered = (ref = options.ordered) != <span class="hljs-literal">null</span> ? ref : <span class="hljs-literal">false</span>;
+      <span class="hljs-keyword">this</span>.autoOrdering = (ref1 = options.autoOrdering) != <span class="hljs-literal">null</span> ? ref1 : <span class="hljs-literal">null</span>;
+      <span class="hljs-keyword">this</span>.outputQ = [];
+      <span class="hljs-keyword">this</span>.bracketContext = {
+        <span class="hljs-attr">in</span>: {},
+        <span class="hljs-attr">out</span>: {}
+      };
+      <span class="hljs-keyword">this</span>.activateOnInput = (ref2 = options.activateOnInput) != <span class="hljs-literal">null</span> ? ref2 : <span class="hljs-literal">true</span>;
+      <span class="hljs-keyword">this</span>.forwardBrackets = {
+        <span class="hljs-attr">in</span>: [<span class="hljs-string">'out'</span>, <span class="hljs-string">'error'</span>]
+      };
+      <span class="hljs-keyword">if</span> (<span class="hljs-string">'forwardBrackets'</span> <span class="hljs-keyword">in</span> options) {
+        <span class="hljs-keyword">this</span>.forwardBrackets = options.forwardBrackets;
+      }
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options.process === <span class="hljs-string">'function'</span>) {
+        <span class="hljs-keyword">this</span>.process(options.process);
+      }
+    }
 
-    <span class="hljs-keyword">if</span> <span class="hljs-string">'forwardBrackets'</span> <span class="hljs-keyword">of</span> options
-      @forwardBrackets = options.forwardBrackets
+    getDescription() {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.description;
+    }
 
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> options.process <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
-      @process options.process
+    isReady() {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
 
-  getDescription: <span class="hljs-function">-&gt;</span> @description
+    isSubgraph() {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
 
-  isReady: <span class="hljs-function">-&gt;</span> <span class="hljs-literal">true</span>
+    setIcon(icon) {
+      <span class="hljs-keyword">this</span>.icon = icon;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'icon'</span>, <span class="hljs-keyword">this</span>.icon);
+    }
 
-  isSubgraph: <span class="hljs-function">-&gt;</span> <span class="hljs-literal">false</span>
+    getIcon() {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.icon;
+    }
 
-  setIcon: <span class="hljs-function"><span class="hljs-params">(@icon)</span> -&gt;</span>
-    @emit <span class="hljs-string">'icon'</span>, @icon
-  getIcon: <span class="hljs-function">-&gt;</span> @icon
-
-  error: <span class="hljs-function"><span class="hljs-params">(e, groups = [], errorPort = <span class="hljs-string">'error'</span>, scope = <span class="hljs-literal">null</span>)</span> =&gt;</span>
-    <span class="hljs-keyword">if</span> @outPorts[errorPort] <span class="hljs-keyword">and</span> (@outPorts[errorPort].isAttached() <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> @outPorts[errorPort].isRequired())
-      @outPorts[errorPort].openBracket group, scope: scope <span class="hljs-keyword">for</span> group <span class="hljs-keyword">in</span> groups
-      @outPorts[errorPort].data e, scope: scope
-      @outPorts[errorPort].closeBracket group, scope: scope <span class="hljs-keyword">for</span> group <span class="hljs-keyword">in</span> groups</pre></div>
+    error(e, groups = [], errorPort = <span class="hljs-string">'error'</span>, scope = <span class="hljs-literal">null</span>) {
+      <span class="hljs-keyword">var</span> group, i, j, len1, len2;
+      boundMethodCheck(<span class="hljs-keyword">this</span>, Component);
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.outPorts[errorPort] &amp;&amp; (<span class="hljs-keyword">this</span>.outPorts[errorPort].isAttached() || !<span class="hljs-keyword">this</span>.outPorts[errorPort].isRequired())) {
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = groups.length; i &lt; len1; i++) {
+          group = groups[i];
+          <span class="hljs-keyword">this</span>.outPorts[errorPort].openBracket(group, {
+            <span class="hljs-attr">scope</span>: scope
+          });
+        }
+        <span class="hljs-keyword">this</span>.outPorts[errorPort].data(e, {
+          <span class="hljs-attr">scope</span>: scope
+        });
+        <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>, len2 = groups.length; j &lt; len2; j++) {
+          group = groups[j];
+          <span class="hljs-keyword">this</span>.outPorts[errorPort].closeBracket(group, {
+            <span class="hljs-attr">scope</span>: scope
+          });
+        }
+        <span class="hljs-keyword">return</span>;
+      }</pre></div>
             
           
             
             <p>@outPorts[errorPort].disconnect()</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">return</span>
-    <span class="hljs-keyword">throw</span> e</pre></div>
+              <div class='highlight'><pre>      <span class="hljs-keyword">throw</span> e;
+    }</pre></div>
             
           
             
@@ -275,8 +290,9 @@ debugSend = <span class="hljs-built_in">require</span>(<span class="hljs-string"
 at start-up</p>
 
             
-              <div class='highlight'><pre>  setUp: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
-    <span class="hljs-keyword">do</span> callback</pre></div>
+              <div class='highlight'><pre>    setUp(callback) {
+      callback();
+    }</pre></div>
             
           
             
@@ -284,153 +300,219 @@ at start-up</p>
 at shutdown</p>
 
             
-              <div class='highlight'><pre>  tearDown: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
-    <span class="hljs-keyword">do</span> callback
+              <div class='highlight'><pre>    tearDown(callback) {
+      callback();
+    }
 
-  start: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
-    <span class="hljs-keyword">return</span> callback() <span class="hljs-keyword">if</span> @isStarted()
-    @setUp (err) =&gt;
-      <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
-      @started = <span class="hljs-literal">true</span>
-      @emit <span class="hljs-string">'start'</span>
-      callback <span class="hljs-literal">null</span>
+    start(callback) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isStarted()) {
+        <span class="hljs-keyword">return</span> callback();
+      }
+      <span class="hljs-keyword">this</span>.setUp(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err) {
+          <span class="hljs-keyword">return</span> callback(err);
+        }
+        <span class="hljs-keyword">this</span>.started = <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'start'</span>);
+        callback(<span class="hljs-literal">null</span>);
+      });
+    }
 
-  shutdown: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
-<span class="hljs-function">    <span class="hljs-title">finalize</span> = =&gt;</span></pre></div>
+    shutdown(callback) {
+      <span class="hljs-keyword">var</span> finalize;
+      finalize = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">var</span> inPort, inPorts, portName;</pre></div>
             
           
             
             <p>Clear contents of inport buffers</p>
 
             
-              <div class='highlight'><pre>      inPorts = @inPorts.ports <span class="hljs-keyword">or</span> @inPorts
-      <span class="hljs-keyword">for</span> portName, inPort <span class="hljs-keyword">of</span> inPorts
-        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> <span class="hljs-keyword">typeof</span> inPort.clear <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
-        inPort.clear()</pre></div>
+              <div class='highlight'><pre>        inPorts = <span class="hljs-keyword">this</span>.inPorts.ports || <span class="hljs-keyword">this</span>.inPorts;
+        <span class="hljs-keyword">for</span> (portName <span class="hljs-keyword">in</span> inPorts) {
+          inPort = inPorts[portName];
+          <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> inPort.clear !== <span class="hljs-string">'function'</span>) {
+            <span class="hljs-keyword">continue</span>;
+          }
+          inPort.clear();
+        }</pre></div>
             
           
             
             <p>Clear bracket context</p>
 
             
-              <div class='highlight'><pre>      @bracketContext =
-        in: {}
-        out: {}
-      <span class="hljs-keyword">return</span> callback() <span class="hljs-keyword">unless</span> @isStarted()
-      @started = <span class="hljs-literal">false</span>
-      @emit <span class="hljs-string">'end'</span>
-      callback()</pre></div>
+              <div class='highlight'><pre>        <span class="hljs-keyword">this</span>.bracketContext = {
+          <span class="hljs-attr">in</span>: {},
+          <span class="hljs-attr">out</span>: {}
+        };
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.isStarted()) {
+          <span class="hljs-keyword">return</span> callback();
+        }
+        <span class="hljs-keyword">this</span>.started = <span class="hljs-literal">false</span>;
+        <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'end'</span>);
+        callback();
+      };</pre></div>
             
           
             
             <p>Tell the component that it is time to shut down</p>
 
             
-              <div class='highlight'><pre>    @tearDown (err) =&gt;
-      <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
-      <span class="hljs-keyword">if</span> @load &gt; <span class="hljs-number">0</span></pre></div>
+              <div class='highlight'><pre>      <span class="hljs-keyword">this</span>.tearDown(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        <span class="hljs-keyword">var</span> checkLoad;
+        <span class="hljs-keyword">if</span> (err) {
+          <span class="hljs-keyword">return</span> callback(err);
+        }
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.load &gt; <span class="hljs-number">0</span>) {</pre></div>
             
           
             
             <p>Some in-flight processes, wait for them to finish</p>
 
             
-              <div class='highlight'><pre><span class="hljs-function">        <span class="hljs-title">checkLoad</span> = <span class="hljs-params">(load)</span> -&gt;</span>
-          <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> load &gt; <span class="hljs-number">0</span>
-          @removeListener <span class="hljs-string">'deactivate'</span>, checkLoad
-          finalize()
-        @on <span class="hljs-string">'deactivate'</span>, checkLoad
-        <span class="hljs-keyword">return</span>
-      finalize()
+              <div class='highlight'><pre>          checkLoad = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">load</span>) </span>{
+            <span class="hljs-keyword">if</span> (load &gt; <span class="hljs-number">0</span>) {
+              <span class="hljs-keyword">return</span>;
+            }
+            <span class="hljs-keyword">this</span>.removeListener(<span class="hljs-string">'deactivate'</span>, checkLoad);
+            finalize();
+          };
+          <span class="hljs-keyword">this</span>.on(<span class="hljs-string">'deactivate'</span>, checkLoad);
+          <span class="hljs-keyword">return</span>;
+        }
+        finalize();
+      });
+    }
 
-  isStarted: <span class="hljs-function">-&gt;</span> @started</pre></div>
+    isStarted() {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.started;
+    }</pre></div>
             
           
             
             <p>Ensures braket forwarding map is correct for the existing ports</p>
 
             
-              <div class='highlight'><pre>  prepareForwarding: <span class="hljs-function">-&gt;</span>
-    <span class="hljs-keyword">for</span> inPort, outPorts <span class="hljs-keyword">of</span> @forwardBrackets
-      <span class="hljs-keyword">unless</span> inPort <span class="hljs-keyword">of</span> @inPorts.ports
-        <span class="hljs-keyword">delete</span> @forwardBrackets[inPort]
-        <span class="hljs-keyword">continue</span>
-      tmp = []
-      <span class="hljs-keyword">for</span> outPort <span class="hljs-keyword">in</span> outPorts
-        tmp.push outPort <span class="hljs-keyword">if</span> outPort <span class="hljs-keyword">of</span> @outPorts.ports
-      <span class="hljs-keyword">if</span> tmp.length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
-        <span class="hljs-keyword">delete</span> @forwardBrackets[inPort]
-      <span class="hljs-keyword">else</span>
-        @forwardBrackets[inPort] = tmp
+              <div class='highlight'><pre>    prepareForwarding() {
+      <span class="hljs-keyword">var</span> i, inPort, len1, outPort, outPorts, ref, results, tmp;
+      ref = <span class="hljs-keyword">this</span>.forwardBrackets;
+      results = [];
+      <span class="hljs-keyword">for</span> (inPort <span class="hljs-keyword">in</span> ref) {
+        outPorts = ref[inPort];
+        <span class="hljs-keyword">if</span> (!(inPort <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.inPorts.ports)) {
+          <span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>.forwardBrackets[inPort];
+          <span class="hljs-keyword">continue</span>;
+        }
+        tmp = [];
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = outPorts.length; i &lt; len1; i++) {
+          outPort = outPorts[i];
+          <span class="hljs-keyword">if</span> (outPort <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.outPorts.ports) {
+            tmp.push(outPort);
+          }
+        }
+        <span class="hljs-keyword">if</span> (tmp.length === <span class="hljs-number">0</span>) {
+          results.push(<span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>.forwardBrackets[inPort]);
+        } <span class="hljs-keyword">else</span> {
+          results.push(<span class="hljs-keyword">this</span>.forwardBrackets[inPort] = tmp);
+        }
+      }
+      <span class="hljs-keyword">return</span> results;
+    }
 
-  isLegacy: <span class="hljs-function">-&gt;</span></pre></div>
+    isLegacy() {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.handle) {</pre></div>
             
           
             
             <p>Process API</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">if</span> @handle</pre></div>
-            
-          
-            
-            <p>WirePattern</p>
-
-            
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">if</span> @_wpData</pre></div>
+              <div class='highlight'><pre>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }</pre></div>
             
           
             
             <p>Legacy</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-literal">true</span></pre></div>
+              <div class='highlight'><pre>      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }</pre></div>
             
           
             
             <p>Sets process handler function</p>
 
             
-              <div class='highlight'><pre>  process: <span class="hljs-function"><span class="hljs-params">(handle)</span> -&gt;</span>
-    <span class="hljs-keyword">unless</span> <span class="hljs-keyword">typeof</span> handle <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Process handler must be a function"</span>
-    <span class="hljs-keyword">unless</span> @inPorts
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Component ports must be defined before process function"</span>
-    @prepareForwarding()
-    @handle = handle
-    <span class="hljs-keyword">for</span> name, port <span class="hljs-keyword">of</span> @inPorts.ports
-      <span class="hljs-keyword">do</span> (name, port) =&gt;
-        port.name = name <span class="hljs-keyword">unless</span> port.name
-        port.<span class="hljs-literal">on</span> <span class="hljs-string">'ip'</span>, <span class="hljs-function"><span class="hljs-params">(ip)</span> =&gt;</span>
-          @handleIP ip, port
-    @
+              <div class='highlight'><pre>    process(handle) {
+      <span class="hljs-keyword">var</span> fn, name, port, ref;
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> handle !== <span class="hljs-string">'function'</span>) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"Process handler must be a function"</span>);
+      }
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.inPorts) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"Component ports must be defined before process function"</span>);
+      }
+      <span class="hljs-keyword">this</span>.prepareForwarding();
+      <span class="hljs-keyword">this</span>.handle = handle;
+      ref = <span class="hljs-keyword">this</span>.inPorts.ports;
+      fn = <span class="hljs-function">(<span class="hljs-params">name, port</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (!port.name) {
+          port.name = name;
+        }
+        <span class="hljs-keyword">return</span> port.on(<span class="hljs-string">'ip'</span>, (ip) =&gt; {
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.handleIP(ip, port);
+        });
+      };
+      <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> ref) {
+        port = ref[name];
+        fn(name, port);
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
 
-  isForwardingInport: <span class="hljs-function"><span class="hljs-params">(port)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> port <span class="hljs-keyword">is</span> <span class="hljs-string">'string'</span>
-      portName = port
-    <span class="hljs-keyword">else</span>
-      portName = port.name
-    <span class="hljs-keyword">if</span> portName <span class="hljs-keyword">of</span> @forwardBrackets
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
-    <span class="hljs-literal">false</span>
+    isForwardingInport(port) {
+      <span class="hljs-keyword">var</span> portName;
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> port === <span class="hljs-string">'string'</span>) {
+        portName = port;
+      } <span class="hljs-keyword">else</span> {
+        portName = port.name;
+      }
+      <span class="hljs-keyword">if</span> (portName <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.forwardBrackets) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
 
-  isForwardingOutport: <span class="hljs-function"><span class="hljs-params">(inport, outport)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> inport <span class="hljs-keyword">is</span> <span class="hljs-string">'string'</span>
-      inportName = inport
-    <span class="hljs-keyword">else</span>
-      inportName = inport.name
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> outport <span class="hljs-keyword">is</span> <span class="hljs-string">'string'</span>
-      outportName = outport
-    <span class="hljs-keyword">else</span>
-      outportName = outport.name
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">unless</span> @forwardBrackets[inportName]
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @forwardBrackets[inportName].indexOf(outportName) <span class="hljs-keyword">isnt</span> <span class="hljs-number">-1</span>
-    <span class="hljs-literal">false</span>
+    isForwardingOutport(inport, outport) {
+      <span class="hljs-keyword">var</span> inportName, outportName;
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> inport === <span class="hljs-string">'string'</span>) {
+        inportName = inport;
+      } <span class="hljs-keyword">else</span> {
+        inportName = inport.name;
+      }
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> outport === <span class="hljs-string">'string'</span>) {
+        outportName = outport;
+      } <span class="hljs-keyword">else</span> {
+        outportName = outport.name;
+      }
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.forwardBrackets[inportName]) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.forwardBrackets[inportName].indexOf(outportName) !== <span class="hljs-number">-1</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
 
-  isOrdered: <span class="hljs-function">-&gt;</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @ordered
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @autoOrdering
-    <span class="hljs-literal">false</span></pre></div>
+    isOrdered() {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.ordered) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.autoOrdering) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }</pre></div>
             
           
             
@@ -439,17 +521,18 @@ so that firing pattern preconditions can be checked and component can do
 processing as needed.</p>
 
             
-              <div class='highlight'><pre>  handleIP: <span class="hljs-function"><span class="hljs-params">(ip, port)</span> -&gt;</span>
-    <span class="hljs-keyword">unless</span> port.options.triggering</pre></div>
+              <div class='highlight'><pre>    handleIP(ip, port) {
+      <span class="hljs-keyword">var</span> buf, context, dataPackets, e, input, output, result;
+      <span class="hljs-keyword">if</span> (!port.options.triggering) {
+        <span class="hljs-keyword">return</span>;
+      }</pre></div>
             
           
             
             <p>If port is non-triggering, we can skip the process function call</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">return</span>
-
-    <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'openBracket'</span> <span class="hljs-keyword">and</span> @autoOrdering <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> @ordered</pre></div>
+              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'openBracket'</span> &amp;&amp; <span class="hljs-keyword">this</span>.autoOrdering === <span class="hljs-literal">null</span> &amp;&amp; !<span class="hljs-keyword">this</span>.ordered) {</pre></div>
             
           
             
@@ -457,8 +540,9 @@ processing as needed.</p>
 auto-ordering is disabled</p>
 
             
-              <div class='highlight'><pre>      debug <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> port '<span class="hljs-subst">#{port.name}</span>' entered auto-ordering mode"</span>
-      @autoOrdering = <span class="hljs-literal">true</span></pre></div>
+              <div class='highlight'><pre>        debug(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> port '<span class="hljs-subst">${port.name}</span>' entered auto-ordering mode`</span>);
+        <span class="hljs-keyword">this</span>.autoOrdering = <span class="hljs-literal">true</span>;
+      }</pre></div>
             
           
             
@@ -466,9 +550,8 @@ auto-ordering is disabled</p>
 to be queued to be kept in order</p>
 
             
-              <div class='highlight'><pre>    result = {}
-
-    <span class="hljs-keyword">if</span> @isForwardingInport port</pre></div>
+              <div class='highlight'><pre>      result = {};
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isForwardingInport(port)) {</pre></div>
             
           
             
@@ -476,16 +559,16 @@ to be queued to be kept in order</p>
 so that brackets can be sent as part of the output, and closed after.</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'openBracket'</span></pre></div>
+              <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'openBracket'</span>) {
+          <span class="hljs-keyword">return</span>;
+        }</pre></div>
             
           
             
             <p>For forwarding ports openBrackets don’t fire</p>
 
             
-              <div class='highlight'><pre>        <span class="hljs-keyword">return</span>
-
-      <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'closeBracket'</span></pre></div>
+              <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'closeBracket'</span>) {</pre></div>
             
           
             
@@ -497,25 +580,31 @@ C. We’ve queued the results from all in-flight processes and
    new closeBracket arrives</p>
 
             
-              <div class='highlight'><pre>        buf = port.getBuffer ip.scope, ip.index
-        dataPackets = buf.filter (ip) -&gt; ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span>
-        <span class="hljs-keyword">if</span> @outputQ.length &gt;= @load <span class="hljs-keyword">and</span> dataPackets.length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
-          <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> buf[<span class="hljs-number">0</span>] <span class="hljs-keyword">is</span> ip</pre></div>
+              <div class='highlight'><pre>          buf = port.getBuffer(ip.scope, ip.index);
+          dataPackets = buf.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ip</span>) </span>{
+            <span class="hljs-keyword">return</span> ip.type === <span class="hljs-string">'data'</span>;
+          });
+          <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.outputQ.length &gt;= <span class="hljs-keyword">this</span>.load &amp;&amp; dataPackets.length === <span class="hljs-number">0</span>) {
+            <span class="hljs-keyword">if</span> (buf[<span class="hljs-number">0</span>] !== ip) {
+              <span class="hljs-keyword">return</span>;
+            }</pre></div>
             
           
             
             <p>Remove from buffer</p>
 
             
-              <div class='highlight'><pre>          port.get ip.scope, ip.index
-          context = @getBracketContext(<span class="hljs-string">'in'</span>, port.name, ip.scope, ip.index).pop()
-          context.closeIp = ip
-          debugBrackets <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> closeBracket-C from '<span class="hljs-subst">#{context.source}</span>' to <span class="hljs-subst">#{context.ports}</span>: '<span class="hljs-subst">#{ip.data}</span>'"</span>
-          result =
-            __resolved: <span class="hljs-literal">true</span>
-            __bracketClosingAfter: [context]
-          @outputQ.push result
-          <span class="hljs-keyword">do</span> @processOutputQueue</pre></div>
+              <div class='highlight'><pre>            port.get(ip.scope, ip.index);
+            context = <span class="hljs-keyword">this</span>.getBracketContext(<span class="hljs-string">'in'</span>, port.name, ip.scope, ip.index).pop();
+            context.closeIp = ip;
+            debugBrackets(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> closeBracket-C from '<span class="hljs-subst">${context.source}</span>' to <span class="hljs-subst">${context.ports}</span>: '<span class="hljs-subst">${ip.data}</span>'`</span>);
+            result = {
+              <span class="hljs-attr">__resolved</span>: <span class="hljs-literal">true</span>,
+              <span class="hljs-attr">__bracketClosingAfter</span>: [context]
+            };
+            <span class="hljs-keyword">this</span>.outputQ.push(result);
+            <span class="hljs-keyword">this</span>.processOutputQueue();
+          }</pre></div>
             
           
             
@@ -523,82 +612,114 @@ C. We’ve queued the results from all in-flight processes and
 firing</p>
 
             
-              <div class='highlight'><pre>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> dataPackets.length</pre></div>
+              <div class='highlight'><pre>          <span class="hljs-keyword">if</span> (!dataPackets.length) {
+            <span class="hljs-keyword">return</span>;
+          }
+        }
+      }</pre></div>
             
           
             
             <p>Prepare the input/output pair</p>
 
             
-              <div class='highlight'><pre>    context = <span class="hljs-keyword">new</span> ProcessContext ip, @, port, result
-    input = <span class="hljs-keyword">new</span> ProcessInput @inPorts, context
-    output = <span class="hljs-keyword">new</span> ProcessOutput @outPorts, context
-    <span class="hljs-keyword">try</span></pre></div>
+              <div class='highlight'><pre>      context = <span class="hljs-keyword">new</span> ProcessContext(ip, <span class="hljs-keyword">this</span>, port, result);
+      input = <span class="hljs-keyword">new</span> ProcessInput(<span class="hljs-keyword">this</span>.inPorts, context);
+      output = <span class="hljs-keyword">new</span> ProcessOutput(<span class="hljs-keyword">this</span>.outPorts, context);
+      <span class="hljs-keyword">try</span> {</pre></div>
             
           
             
             <p>Call the processing function</p>
 
             
-              <div class='highlight'><pre>      @handle input, output, context
-    <span class="hljs-keyword">catch</span> e
-      @deactivate context
-      output.sendDone e
+              <div class='highlight'><pre>        <span class="hljs-keyword">this</span>.handle(input, output, context);
+      } <span class="hljs-keyword">catch</span> (error1) {
+        e = error1;
+        <span class="hljs-keyword">this</span>.deactivate(context);
+        output.sendDone(e);
+      }
+      <span class="hljs-keyword">if</span> (context.activated) {
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">if</span> (port.isAddressable()) {
+        debug(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> packet on '<span class="hljs-subst">${port.name}</span>[<span class="hljs-subst">${ip.index}</span>]' didn't match preconditions: <span class="hljs-subst">${ip.type}</span>`</span>);
+        <span class="hljs-keyword">return</span>;
+      }
+      debug(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> packet on '<span class="hljs-subst">${port.name}</span>' didn't match preconditions: <span class="hljs-subst">${ip.type}</span>`</span>);
+    }
 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> context.activated
-    <span class="hljs-keyword">if</span> port.isAddressable()
-      debug <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> packet on '<span class="hljs-subst">#{port.name}</span>[<span class="hljs-subst">#{ip.index}</span>]' didn't match preconditions: <span class="hljs-subst">#{ip.type}</span>"</span>
-      <span class="hljs-keyword">return</span>
-    debug <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> packet on '<span class="hljs-subst">#{port.name}</span>' didn't match preconditions: <span class="hljs-subst">#{ip.type}</span>"</span>
-    <span class="hljs-keyword">return</span>
-
-  getBracketContext: <span class="hljs-function"><span class="hljs-params">(type, port, scope, idx)</span> -&gt;</span>
-    {name, index} = ports.normalizePortName port
-    index = idx <span class="hljs-keyword">if</span> idx?
-    portsList = <span class="hljs-keyword">if</span> type <span class="hljs-keyword">is</span> <span class="hljs-string">'in'</span> <span class="hljs-keyword">then</span> @inPorts <span class="hljs-keyword">else</span> @outPorts
-    <span class="hljs-keyword">if</span> portsList[name].isAddressable()
-      port = <span class="hljs-string">"<span class="hljs-subst">#{name}</span>[<span class="hljs-subst">#{index}</span>]"</span></pre></div>
+    getBracketContext(type, port, scope, idx) {
+      <span class="hljs-keyword">var</span> index, name, portsList;
+      ({name, index} = ports.normalizePortName(port));
+      <span class="hljs-keyword">if</span> (idx != <span class="hljs-literal">null</span>) {
+        index = idx;
+      }
+      portsList = type === <span class="hljs-string">'in'</span> ? <span class="hljs-keyword">this</span>.inPorts : <span class="hljs-keyword">this</span>.outPorts;
+      <span class="hljs-keyword">if</span> (portsList[name].isAddressable()) {
+        port = <span class="hljs-string">`<span class="hljs-subst">${name}</span>[<span class="hljs-subst">${index}</span>]`</span>;
+      }
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.bracketContext[type][port]) {</pre></div>
             
           
             
             <p>Ensure we have a bracket context for the current scope</p>
 
             
-              <div class='highlight'><pre>    @bracketContext[type][port] = {} <span class="hljs-keyword">unless</span> @bracketContext[type][port]
-    @bracketContext[type][port][scope] = [] <span class="hljs-keyword">unless</span> @bracketContext[type][port][scope]
-    <span class="hljs-keyword">return</span> @bracketContext[type][port][scope]
+              <div class='highlight'><pre>        <span class="hljs-keyword">this</span>.bracketContext[type][port] = {};
+      }
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.bracketContext[type][port][scope]) {
+        <span class="hljs-keyword">this</span>.bracketContext[type][port][scope] = [];
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.bracketContext[type][port][scope];
+    }
 
-  addToResult: <span class="hljs-function"><span class="hljs-params">(result, port, ip, before = <span class="hljs-literal">false</span>)</span> -&gt;</span>
-    {name, index} = ports.normalizePortName port
-    method = <span class="hljs-keyword">if</span> before <span class="hljs-keyword">then</span> <span class="hljs-string">'unshift'</span> <span class="hljs-keyword">else</span> <span class="hljs-string">'push'</span>
-    <span class="hljs-keyword">if</span> @outPorts[name].isAddressable()
-      idx = <span class="hljs-keyword">if</span> index <span class="hljs-keyword">then</span> parseInt(index) <span class="hljs-keyword">else</span> ip.index
-      result[name] = {} <span class="hljs-keyword">unless</span> result[name]
-      result[name][idx] = [] <span class="hljs-keyword">unless</span> result[name][idx]
-      ip.index = idx
-      result[name][idx][method] ip
-      <span class="hljs-keyword">return</span>
-    result[name] = [] <span class="hljs-keyword">unless</span> result[name]
-    result[name][method] ip
+    addToResult(result, port, ip, before = <span class="hljs-literal">false</span>) {
+      <span class="hljs-keyword">var</span> idx, index, method, name;
+      ({name, index} = ports.normalizePortName(port));
+      method = before ? <span class="hljs-string">'unshift'</span> : <span class="hljs-string">'push'</span>;
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.outPorts[name].isAddressable()) {
+        idx = index ? <span class="hljs-built_in">parseInt</span>(index) : ip.index;
+        <span class="hljs-keyword">if</span> (!result[name]) {
+          result[name] = {};
+        }
+        <span class="hljs-keyword">if</span> (!result[name][idx]) {
+          result[name][idx] = [];
+        }
+        ip.index = idx;
+        result[name][idx][method](ip);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">if</span> (!result[name]) {
+        result[name] = [];
+      }
+      <span class="hljs-keyword">return</span> result[name][method](ip);
+    }
 
-  getForwardableContexts: <span class="hljs-function"><span class="hljs-params">(inport, outport, contexts)</span> -&gt;</span>
-    {name, index} = ports.normalizePortName outport
-    forwardable = []
-    contexts.forEach (ctx, idx) =&gt;</pre></div>
+    getForwardableContexts(inport, outport, contexts) {
+      <span class="hljs-keyword">var</span> forwardable, index, name;
+      ({name, index} = ports.normalizePortName(outport));
+      forwardable = [];
+      contexts.forEach(<span class="hljs-function">(<span class="hljs-params">ctx, idx</span>) =&gt;</span> {
+        <span class="hljs-keyword">var</span> outContext;</pre></div>
             
           
             
             <p>No forwarding to this outport</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> @isForwardingOutport inport, name</pre></div>
+              <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.isForwardingOutport(inport, name)) {
+          <span class="hljs-keyword">return</span>;
+        }</pre></div>
             
           
             
             <p>We have already forwarded this context to this outport</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> ctx.ports.indexOf(outport) <span class="hljs-keyword">is</span> <span class="hljs-number">-1</span></pre></div>
+              <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (ctx.ports.indexOf(outport) !== <span class="hljs-number">-1</span>) {
+          <span class="hljs-keyword">return</span>;
+        }</pre></div>
             
           
             
@@ -606,23 +727,37 @@ firing</p>
 inport</p>
 
             
-              <div class='highlight'><pre>      outContext = @getBracketContext(<span class="hljs-string">'out'</span>, name, ctx.ip.scope, index)[idx]
-      <span class="hljs-keyword">if</span> outContext
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> outContext.ip.data <span class="hljs-keyword">is</span> ctx.ip.data <span class="hljs-keyword">and</span> outContext.ports.indexOf(outport) <span class="hljs-keyword">isnt</span> <span class="hljs-number">-1</span>
-      forwardable.push ctx
-    <span class="hljs-keyword">return</span> forwardable
+              <div class='highlight'><pre>        outContext = <span class="hljs-keyword">this</span>.getBracketContext(<span class="hljs-string">'out'</span>, name, ctx.ip.scope, index)[idx];
+        <span class="hljs-keyword">if</span> (outContext) {
+          <span class="hljs-keyword">if</span> (outContext.ip.data === ctx.ip.data &amp;&amp; outContext.ports.indexOf(outport) !== <span class="hljs-number">-1</span>) {
+            <span class="hljs-keyword">return</span>;
+          }
+        }
+        <span class="hljs-keyword">return</span> forwardable.push(ctx);
+      });
+      <span class="hljs-keyword">return</span> forwardable;
+    }
 
-  addBracketForwards: <span class="hljs-function"><span class="hljs-params">(result)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> result.__bracketClosingBefore?.length
-      <span class="hljs-keyword">for</span> context <span class="hljs-keyword">in</span> result.__bracketClosingBefore
-        debugBrackets <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> closeBracket-A from '<span class="hljs-subst">#{context.source}</span>' to <span class="hljs-subst">#{context.ports}</span>: '<span class="hljs-subst">#{context.closeIp.data}</span>'"</span>
-        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> context.ports.length
-        <span class="hljs-keyword">for</span> port <span class="hljs-keyword">in</span> context.ports
-          ipClone = context.closeIp.clone()
-          @addToResult result, port, ipClone, <span class="hljs-literal">true</span>
-          @getBracketContext(<span class="hljs-string">'out'</span>, port, ipClone.scope).pop()
-
-    <span class="hljs-keyword">if</span> result.__bracketContext</pre></div>
+    addBracketForwards(result) {
+      <span class="hljs-keyword">var</span> context, i, ipClone, j, k, l, len1, len2, len3, len4, port, ref, ref1, ref2, ref3, ref4, ref5;
+      <span class="hljs-keyword">if</span> ((ref = result.__bracketClosingBefore) != <span class="hljs-literal">null</span> ? ref.length : <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) {
+        ref1 = result.__bracketClosingBefore;
+        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = ref1.length; i &lt; len1; i++) {
+          context = ref1[i];
+          debugBrackets(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> closeBracket-A from '<span class="hljs-subst">${context.source}</span>' to <span class="hljs-subst">${context.ports}</span>: '<span class="hljs-subst">${context.closeIp.data}</span>'`</span>);
+          <span class="hljs-keyword">if</span> (!context.ports.length) {
+            <span class="hljs-keyword">continue</span>;
+          }
+          ref2 = context.ports;
+          <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>, len2 = ref2.length; j &lt; len2; j++) {
+            port = ref2[j];
+            ipClone = context.closeIp.clone();
+            <span class="hljs-keyword">this</span>.addToResult(result, port, ipClone, <span class="hljs-literal">true</span>);
+            <span class="hljs-keyword">this</span>.getBracketContext(<span class="hljs-string">'out'</span>, port, ipClone.scope).pop();
+          }
+        }
+      }
+      <span class="hljs-keyword">if</span> (result.__bracketContext) {</pre></div>
             
           
             
@@ -630,154 +765,280 @@ inport</p>
 the keys so that they get added in correct order</p>
 
             
-              <div class='highlight'><pre>      Object.keys(result.__bracketContext).reverse().forEach (inport) =&gt;
-        context = result.__bracketContext[inport]
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> context.length
-        <span class="hljs-keyword">for</span> outport, ips <span class="hljs-keyword">of</span> result
-          <span class="hljs-keyword">continue</span> <span class="hljs-keyword">if</span> outport.indexOf(<span class="hljs-string">'__'</span>) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
-          <span class="hljs-keyword">if</span> @outPorts[outport].isAddressable()
-            <span class="hljs-keyword">for</span> idx, idxIps <span class="hljs-keyword">of</span> ips</pre></div>
+              <div class='highlight'><pre>        <span class="hljs-built_in">Object</span>.keys(result.__bracketContext).reverse().forEach(<span class="hljs-function">(<span class="hljs-params">inport</span>) =&gt;</span> {
+          <span class="hljs-keyword">var</span> ctx, datas, forwardedOpens, idx, idxIps, ip, ips, k, l, len3, len4, len5, m, outport, portIdentifier, results, unforwarded;
+          context = result.__bracketContext[inport];
+          <span class="hljs-keyword">if</span> (!context.length) {
+            <span class="hljs-keyword">return</span>;
+          }
+          results = [];
+          <span class="hljs-keyword">for</span> (outport <span class="hljs-keyword">in</span> result) {
+            ips = result[outport];
+            <span class="hljs-keyword">if</span> (outport.indexOf(<span class="hljs-string">'__'</span>) === <span class="hljs-number">0</span>) {
+              <span class="hljs-keyword">continue</span>;
+            }
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.outPorts[outport].isAddressable()) {
+              <span class="hljs-keyword">for</span> (idx <span class="hljs-keyword">in</span> ips) {
+                idxIps = ips[idx];</pre></div>
             
           
             
             <p>Don’t register indexes we’re only sending brackets to</p>
 
             
-              <div class='highlight'><pre>              datas = idxIps.filter (ip) -&gt; ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span>
-              <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> datas.length
-              portIdentifier = <span class="hljs-string">"<span class="hljs-subst">#{outport}</span>[<span class="hljs-subst">#{idx}</span>]"</span>
-              unforwarded = @getForwardableContexts inport, portIdentifier, context
-              <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> unforwarded.length
-              forwardedOpens = []
-              <span class="hljs-keyword">for</span> ctx <span class="hljs-keyword">in</span> unforwarded
-                debugBrackets <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> openBracket from '<span class="hljs-subst">#{inport}</span>' to '<span class="hljs-subst">#{portIdentifier}</span>': '<span class="hljs-subst">#{ctx.ip.data}</span>'"</span>
-                ipClone = ctx.ip.clone()
-                ipClone.index = parseInt idx
-                forwardedOpens.push ipClone
-                ctx.ports.push portIdentifier
-                @getBracketContext(<span class="hljs-string">'out'</span>, outport, ctx.ip.scope, idx).push ctx
-              forwardedOpens.reverse()
-              @addToResult result, outport, ip, <span class="hljs-literal">true</span> <span class="hljs-keyword">for</span> ip <span class="hljs-keyword">in</span> forwardedOpens
-            <span class="hljs-keyword">continue</span></pre></div>
+              <div class='highlight'><pre>                datas = idxIps.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ip</span>) </span>{
+                  <span class="hljs-keyword">return</span> ip.type === <span class="hljs-string">'data'</span>;
+                });
+                <span class="hljs-keyword">if</span> (!datas.length) {
+                  <span class="hljs-keyword">continue</span>;
+                }
+                portIdentifier = <span class="hljs-string">`<span class="hljs-subst">${outport}</span>[<span class="hljs-subst">${idx}</span>]`</span>;
+                unforwarded = <span class="hljs-keyword">this</span>.getForwardableContexts(inport, portIdentifier, context);
+                <span class="hljs-keyword">if</span> (!unforwarded.length) {
+                  <span class="hljs-keyword">continue</span>;
+                }
+                forwardedOpens = [];
+                <span class="hljs-keyword">for</span> (k = <span class="hljs-number">0</span>, len3 = unforwarded.length; k &lt; len3; k++) {
+                  ctx = unforwarded[k];
+                  debugBrackets(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> openBracket from '<span class="hljs-subst">${inport}</span>' to '<span class="hljs-subst">${portIdentifier}</span>': '<span class="hljs-subst">${ctx.ip.data}</span>'`</span>);
+                  ipClone = ctx.ip.clone();
+                  ipClone.index = <span class="hljs-built_in">parseInt</span>(idx);
+                  forwardedOpens.push(ipClone);
+                  ctx.ports.push(portIdentifier);
+                  <span class="hljs-keyword">this</span>.getBracketContext(<span class="hljs-string">'out'</span>, outport, ctx.ip.scope, idx).push(ctx);
+                }
+                forwardedOpens.reverse();
+                <span class="hljs-keyword">for</span> (l = <span class="hljs-number">0</span>, len4 = forwardedOpens.length; l &lt; len4; l++) {
+                  ip = forwardedOpens[l];
+                  <span class="hljs-keyword">this</span>.addToResult(result, outport, ip, <span class="hljs-literal">true</span>);
+                }
+              }
+              <span class="hljs-keyword">continue</span>;
+            }</pre></div>
             
           
             
             <p>Don’t register ports we’re only sending brackets to</p>
 
             
-              <div class='highlight'><pre>          datas = ips.filter (ip) -&gt; ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span>
-          <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> datas.length
-          unforwarded = @getForwardableContexts inport, outport, context
-          <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> unforwarded.length
-          forwardedOpens = []
-          <span class="hljs-keyword">for</span> ctx <span class="hljs-keyword">in</span> unforwarded
-            debugBrackets <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> openBracket from '<span class="hljs-subst">#{inport}</span>' to '<span class="hljs-subst">#{outport}</span>': '<span class="hljs-subst">#{ctx.ip.data}</span>'"</span>
-            forwardedOpens.push ctx.ip.clone()
-            ctx.ports.push outport
-            @getBracketContext(<span class="hljs-string">'out'</span>, outport, ctx.ip.scope).push ctx
-          forwardedOpens.reverse()
-          @addToResult result, outport, ip, <span class="hljs-literal">true</span> <span class="hljs-keyword">for</span> ip <span class="hljs-keyword">in</span> forwardedOpens
+              <div class='highlight'><pre>            datas = ips.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ip</span>) </span>{
+              <span class="hljs-keyword">return</span> ip.type === <span class="hljs-string">'data'</span>;
+            });
+            <span class="hljs-keyword">if</span> (!datas.length) {
+              <span class="hljs-keyword">continue</span>;
+            }
+            unforwarded = <span class="hljs-keyword">this</span>.getForwardableContexts(inport, outport, context);
+            <span class="hljs-keyword">if</span> (!unforwarded.length) {
+              <span class="hljs-keyword">continue</span>;
+            }
+            forwardedOpens = [];
+            <span class="hljs-keyword">for</span> (m = <span class="hljs-number">0</span>, len5 = unforwarded.length; m &lt; len5; m++) {
+              ctx = unforwarded[m];
+              debugBrackets(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> openBracket from '<span class="hljs-subst">${inport}</span>' to '<span class="hljs-subst">${outport}</span>': '<span class="hljs-subst">${ctx.ip.data}</span>'`</span>);
+              forwardedOpens.push(ctx.ip.clone());
+              ctx.ports.push(outport);
+              <span class="hljs-keyword">this</span>.getBracketContext(<span class="hljs-string">'out'</span>, outport, ctx.ip.scope).push(ctx);
+            }
+            forwardedOpens.reverse();
+            results.push((<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+              <span class="hljs-keyword">var</span> len6, n, results1;
+              results1 = [];
+              <span class="hljs-keyword">for</span> (n = <span class="hljs-number">0</span>, len6 = forwardedOpens.length; n &lt; len6; n++) {
+                ip = forwardedOpens[n];
+                results1.push(<span class="hljs-keyword">this</span>.addToResult(result, outport, ip, <span class="hljs-literal">true</span>));
+              }
+              <span class="hljs-keyword">return</span> results1;
+            }).call(<span class="hljs-keyword">this</span>));
+          }
+          <span class="hljs-keyword">return</span> results;
+        });
+      }
+      <span class="hljs-keyword">if</span> ((ref3 = result.__bracketClosingAfter) != <span class="hljs-literal">null</span> ? ref3.length : <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) {
+        ref4 = result.__bracketClosingAfter;
+        <span class="hljs-keyword">for</span> (k = <span class="hljs-number">0</span>, len3 = ref4.length; k &lt; len3; k++) {
+          context = ref4[k];
+          debugBrackets(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> closeBracket-B from '<span class="hljs-subst">${context.source}</span>' to <span class="hljs-subst">${context.ports}</span>: '<span class="hljs-subst">${context.closeIp.data}</span>'`</span>);
+          <span class="hljs-keyword">if</span> (!context.ports.length) {
+            <span class="hljs-keyword">continue</span>;
+          }
+          ref5 = context.ports;
+          <span class="hljs-keyword">for</span> (l = <span class="hljs-number">0</span>, len4 = ref5.length; l &lt; len4; l++) {
+            port = ref5[l];
+            ipClone = context.closeIp.clone();
+            <span class="hljs-keyword">this</span>.addToResult(result, port, ipClone, <span class="hljs-literal">false</span>);
+            <span class="hljs-keyword">this</span>.getBracketContext(<span class="hljs-string">'out'</span>, port, ipClone.scope).pop();
+          }
+        }
+      }
+      <span class="hljs-keyword">delete</span> result.__bracketClosingBefore;
+      <span class="hljs-keyword">delete</span> result.__bracketContext;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">delete</span> result.__bracketClosingAfter;
+    }
 
-    <span class="hljs-keyword">if</span> result.__bracketClosingAfter?.length
-      <span class="hljs-keyword">for</span> context <span class="hljs-keyword">in</span> result.__bracketClosingAfter
-        debugBrackets <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> closeBracket-B from '<span class="hljs-subst">#{context.source}</span>' to <span class="hljs-subst">#{context.ports}</span>: '<span class="hljs-subst">#{context.closeIp.data}</span>'"</span>
-        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> context.ports.length
-        <span class="hljs-keyword">for</span> port <span class="hljs-keyword">in</span> context.ports
-          ipClone = context.closeIp.clone()
-          @addToResult result, port, ipClone, <span class="hljs-literal">false</span>
-          @getBracketContext(<span class="hljs-string">'out'</span>, port, ipClone.scope).pop()
+    processOutputQueue() {
+      <span class="hljs-keyword">var</span> idx, idxIps, ip, ips, port, portIdentifier, result, results;
+      results = [];
+      <span class="hljs-keyword">while</span> (<span class="hljs-keyword">this</span>.outputQ.length &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.outputQ[<span class="hljs-number">0</span>].__resolved) {
+          <span class="hljs-keyword">break</span>;
+        }
+        result = <span class="hljs-keyword">this</span>.outputQ.shift();
+        <span class="hljs-keyword">this</span>.addBracketForwards(result);
+        results.push((<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+          <span class="hljs-keyword">var</span> i, len1, results1;
+          results1 = [];
+          <span class="hljs-keyword">for</span> (port <span class="hljs-keyword">in</span> result) {
+            ips = result[port];
+            <span class="hljs-keyword">if</span> (port.indexOf(<span class="hljs-string">'__'</span>) === <span class="hljs-number">0</span>) {
+              <span class="hljs-keyword">continue</span>;
+            }
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.outPorts.ports[port].isAddressable()) {
+              <span class="hljs-keyword">for</span> (idx <span class="hljs-keyword">in</span> ips) {
+                idxIps = ips[idx];
+                idx = <span class="hljs-built_in">parseInt</span>(idx);
+                <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.outPorts.ports[port].isAttached(idx)) {
+                  <span class="hljs-keyword">continue</span>;
+                }
+                <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = idxIps.length; i &lt; len1; i++) {
+                  ip = idxIps[i];
+                  portIdentifier = <span class="hljs-string">`<span class="hljs-subst">${port}</span>[<span class="hljs-subst">${ip.index}</span>]`</span>;
+                  <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'openBracket'</span>) {
+                    debugSend(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> sending <span class="hljs-subst">${portIdentifier}</span> &lt; '<span class="hljs-subst">${ip.data}</span>'`</span>);
+                  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'closeBracket'</span>) {
+                    debugSend(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> sending <span class="hljs-subst">${portIdentifier}</span> &gt; '<span class="hljs-subst">${ip.data}</span>'`</span>);
+                  } <span class="hljs-keyword">else</span> {
+                    debugSend(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> sending <span class="hljs-subst">${portIdentifier}</span> DATA`</span>);
+                  }
+                  <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.outPorts[port].options.scoped) {
+                    ip.scope = <span class="hljs-literal">null</span>;
+                  }
+                  <span class="hljs-keyword">this</span>.outPorts[port].sendIP(ip);
+                }
+              }
+              <span class="hljs-keyword">continue</span>;
+            }
+            <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.outPorts.ports[port].isAttached()) {
+              <span class="hljs-keyword">continue</span>;
+            }
+            results1.push((<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+              <span class="hljs-keyword">var</span> j, len2, results2;
+              results2 = [];
+              <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>, len2 = ips.length; j &lt; len2; j++) {
+                ip = ips[j];
+                portIdentifier = port;
+                <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'openBracket'</span>) {
+                  debugSend(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> sending <span class="hljs-subst">${portIdentifier}</span> &lt; '<span class="hljs-subst">${ip.data}</span>'`</span>);
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'closeBracket'</span>) {
+                  debugSend(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> sending <span class="hljs-subst">${portIdentifier}</span> &gt; '<span class="hljs-subst">${ip.data}</span>'`</span>);
+                } <span class="hljs-keyword">else</span> {
+                  debugSend(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> sending <span class="hljs-subst">${portIdentifier}</span> DATA`</span>);
+                }
+                <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.outPorts[port].options.scoped) {
+                  ip.scope = <span class="hljs-literal">null</span>;
+                }
+                results2.push(<span class="hljs-keyword">this</span>.outPorts[port].sendIP(ip));
+              }
+              <span class="hljs-keyword">return</span> results2;
+            }).call(<span class="hljs-keyword">this</span>));
+          }
+          <span class="hljs-keyword">return</span> results1;
+        }).call(<span class="hljs-keyword">this</span>));
+      }
+      <span class="hljs-keyword">return</span> results;
+    }
 
-    <span class="hljs-keyword">delete</span> result.__bracketClosingBefore
-    <span class="hljs-keyword">delete</span> result.__bracketContext
-    <span class="hljs-keyword">delete</span> result.__bracketClosingAfter
+    activate(context) {
+      <span class="hljs-keyword">if</span> (context.activated) { <span class="hljs-comment">// prevent double activation</span>
+        <span class="hljs-keyword">return</span>;
+      }
+      context.activated = <span class="hljs-literal">true</span>;
+      context.deactivated = <span class="hljs-literal">false</span>;
+      <span class="hljs-keyword">this</span>.load++;
+      <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'activate'</span>, <span class="hljs-keyword">this</span>.load);
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.ordered || <span class="hljs-keyword">this</span>.autoOrdering) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.outputQ.push(context.result);
+      }
+    }
 
-  processOutputQueue: <span class="hljs-function">-&gt;</span>
-    <span class="hljs-keyword">while</span> @outputQ.length &gt; <span class="hljs-number">0</span>
-      <span class="hljs-keyword">break</span> <span class="hljs-keyword">unless</span> @outputQ[<span class="hljs-number">0</span>].__resolved
-      result = @outputQ.shift()
-      @addBracketForwards result
-      <span class="hljs-keyword">for</span> port, ips <span class="hljs-keyword">of</span> result
-        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">if</span> port.indexOf(<span class="hljs-string">'__'</span>) <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
-        <span class="hljs-keyword">if</span> @outPorts.ports[port].isAddressable()
-          <span class="hljs-keyword">for</span> idx, idxIps <span class="hljs-keyword">of</span> ips
-            idx = parseInt idx
-            <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> @outPorts.ports[port].isAttached idx
-            <span class="hljs-keyword">for</span> ip <span class="hljs-keyword">in</span> idxIps
-              portIdentifier = <span class="hljs-string">"<span class="hljs-subst">#{port}</span>[<span class="hljs-subst">#{ip.index}</span>]"</span>
-              <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'openBracket'</span>
-                debugSend <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> sending <span class="hljs-subst">#{portIdentifier}</span> &lt; '<span class="hljs-subst">#{ip.data}</span>'"</span>
-              <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'closeBracket'</span>
-                debugSend <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> sending <span class="hljs-subst">#{portIdentifier}</span> &gt; '<span class="hljs-subst">#{ip.data}</span>'"</span>
-              <span class="hljs-keyword">else</span>
-                debugSend <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> sending <span class="hljs-subst">#{portIdentifier}</span> DATA"</span>
-              @outPorts[port].sendIP ip
-          <span class="hljs-keyword">continue</span>
-        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> @outPorts.ports[port].isAttached()
-        <span class="hljs-keyword">for</span> ip <span class="hljs-keyword">in</span> ips
-          portIdentifier = port
-          <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'openBracket'</span>
-            debugSend <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> sending <span class="hljs-subst">#{portIdentifier}</span> &lt; '<span class="hljs-subst">#{ip.data}</span>'"</span>
-          <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'closeBracket'</span>
-            debugSend <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> sending <span class="hljs-subst">#{portIdentifier}</span> &gt; '<span class="hljs-subst">#{ip.data}</span>'"</span>
-          <span class="hljs-keyword">else</span>
-            debugSend <span class="hljs-string">"<span class="hljs-subst">#{@nodeId}</span> sending <span class="hljs-subst">#{portIdentifier}</span> DATA"</span>
-          @outPorts[port].sendIP ip
+    deactivate(context) {
+      <span class="hljs-keyword">if</span> (context.deactivated) { <span class="hljs-comment">// prevent double deactivation</span>
+        <span class="hljs-keyword">return</span>;
+      }
+      context.deactivated = <span class="hljs-literal">true</span>;
+      context.activated = <span class="hljs-literal">false</span>;
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isOrdered()) {
+        <span class="hljs-keyword">this</span>.processOutputQueue();
+      }
+      <span class="hljs-keyword">this</span>.load--;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'deactivate'</span>, <span class="hljs-keyword">this</span>.load);
+    }
 
-  activate: <span class="hljs-function"><span class="hljs-params">(context)</span> -&gt;</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> context.activated <span class="hljs-comment"># prevent double activation</span>
-    context.activated = <span class="hljs-literal">true</span>
-    context.deactivated = <span class="hljs-literal">false</span>
-    @load++
-    @emit <span class="hljs-string">'activate'</span>, @load
-    <span class="hljs-keyword">if</span> @ordered <span class="hljs-keyword">or</span> @autoOrdering
-      @outputQ.push context.result
+  };
 
-  deactivate: <span class="hljs-function"><span class="hljs-params">(context)</span> -&gt;</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> context.deactivated <span class="hljs-comment"># prevent double deactivation</span>
-    context.deactivated = <span class="hljs-literal">true</span>
-    context.activated = <span class="hljs-literal">false</span>
-    <span class="hljs-keyword">if</span> @isOrdered()
-      @processOutputQueue()
-    @load--
-    @emit <span class="hljs-string">'deactivate'</span>, @load
+  Component.prototype.description = <span class="hljs-string">''</span>;
 
-exports.Component = Component
+  Component.prototype.icon = <span class="hljs-literal">null</span>;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessContext</span></span>
-  constructor: <span class="hljs-function"><span class="hljs-params">(@ip, @nodeInstance, @port, @result)</span> -&gt;</span>
-    @scope = @ip.scope
-    @activated = <span class="hljs-literal">false</span>
-    @deactivated = <span class="hljs-literal">false</span>
-  activate: <span class="hljs-function">-&gt;</span></pre></div>
+  <span class="hljs-keyword">return</span> Component;
+
+})();
+
+exports.Component = Component;
+
+ProcessContext = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessContext</span> </span>{
+  <span class="hljs-keyword">constructor</span>(ip1, nodeInstance, port1, result1) {
+    <span class="hljs-keyword">this</span>.ip = ip1;
+    <span class="hljs-keyword">this</span>.nodeInstance = nodeInstance;
+    <span class="hljs-keyword">this</span>.port = port1;
+    <span class="hljs-keyword">this</span>.result = result1;
+    <span class="hljs-keyword">this</span>.scope = <span class="hljs-keyword">this</span>.ip.scope;
+    <span class="hljs-keyword">this</span>.activated = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">this</span>.deactivated = <span class="hljs-literal">false</span>;
+  }
+
+  activate() {</pre></div>
             
           
             
             <p>Push a new result value if previous has been sent already</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> @result.__resolved <span class="hljs-keyword">or</span> @nodeInstance.outputQ.indexOf(@result) <span class="hljs-keyword">is</span> <span class="hljs-number">-1</span>
-      @result = {}
-    @nodeInstance.activate @
-  deactivate: <span class="hljs-function">-&gt;</span>
-    @result.__resolved = <span class="hljs-literal">true</span> <span class="hljs-keyword">unless</span> @result.__resolved
-    @nodeInstance.deactivate @
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.result.__resolved || <span class="hljs-keyword">this</span>.nodeInstance.outputQ.indexOf(<span class="hljs-keyword">this</span>.result) === <span class="hljs-number">-1</span>) {
+      <span class="hljs-keyword">this</span>.result = {};
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.nodeInstance.activate(<span class="hljs-keyword">this</span>);
+  }
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessInput</span></span>
-  constructor: <span class="hljs-function"><span class="hljs-params">(@ports, @context)</span> -&gt;</span>
-    @nodeInstance = @context.nodeInstance
-    @ip = @context.ip
-    @port = @context.port
-    @result = @context.result
-    @scope = @context.scope</pre></div>
+  deactivate() {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.result.__resolved) {
+      <span class="hljs-keyword">this</span>.result.__resolved = <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.nodeInstance.deactivate(<span class="hljs-keyword">this</span>);
+  }
+
+};
+
+ProcessInput = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessInput</span> </span>{
+  <span class="hljs-keyword">constructor</span>(ports1, context1) {
+    <span class="hljs-keyword">this</span>.ports = ports1;
+    <span class="hljs-keyword">this</span>.context = context1;
+    <span class="hljs-keyword">this</span>.nodeInstance = <span class="hljs-keyword">this</span>.context.nodeInstance;
+    <span class="hljs-keyword">this</span>.ip = <span class="hljs-keyword">this</span>.context.ip;
+    <span class="hljs-keyword">this</span>.port = <span class="hljs-keyword">this</span>.context.port;
+    <span class="hljs-keyword">this</span>.result = <span class="hljs-keyword">this</span>.context.result;
+    <span class="hljs-keyword">this</span>.scope = <span class="hljs-keyword">this</span>.context.scope;
+  }</pre></div>
             
           
             
             <p>When preconditions are met, set component state to <code>activated</code></p>
 
             
-              <div class='highlight'><pre>  activate: <span class="hljs-function">-&gt;</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> @context.activated
-    <span class="hljs-keyword">if</span> @nodeInstance.isOrdered()</pre></div>
+              <div class='highlight'><pre>  activate() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.context.activated) {
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.nodeInstance.isOrdered()) {</pre></div>
             
           
             
@@ -785,12 +1046,15 @@ exports.Component = Component
 so that it can be send when the order comes up</p>
 
             
-              <div class='highlight'><pre>      @result.__resolved = <span class="hljs-literal">false</span>
-    @nodeInstance.activate @context
-    <span class="hljs-keyword">if</span> @port.isAddressable()
-      debug <span class="hljs-string">"<span class="hljs-subst">#{@nodeInstance.nodeId}</span> packet on '<span class="hljs-subst">#{@port.name}</span>[<span class="hljs-subst">#{@ip.index}</span>]' caused activation <span class="hljs-subst">#{@nodeInstance.load}</span>: <span class="hljs-subst">#{@ip.type}</span>"</span>
-    <span class="hljs-keyword">else</span>
-      debug <span class="hljs-string">"<span class="hljs-subst">#{@nodeInstance.nodeId}</span> packet on '<span class="hljs-subst">#{@port.name}</span>' caused activation <span class="hljs-subst">#{@nodeInstance.load}</span>: <span class="hljs-subst">#{@ip.type}</span>"</span></pre></div>
+              <div class='highlight'><pre>      <span class="hljs-keyword">this</span>.result.__resolved = <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">this</span>.nodeInstance.activate(<span class="hljs-keyword">this</span>.context);
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.port.isAddressable()) {
+      <span class="hljs-keyword">return</span> debug(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeInstance.nodeId}</span> packet on '<span class="hljs-subst">${<span class="hljs-keyword">this</span>.port.name}</span>[<span class="hljs-subst">${<span class="hljs-keyword">this</span>.ip.index}</span>]' caused activation <span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeInstance.load}</span>: <span class="hljs-subst">${<span class="hljs-keyword">this</span>.ip.type}</span>`</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">return</span> debug(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeInstance.nodeId}</span> packet on '<span class="hljs-subst">${<span class="hljs-keyword">this</span>.port.name}</span>' caused activation <span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeInstance.load}</span>: <span class="hljs-subst">${<span class="hljs-keyword">this</span>.ip.type}</span>`</span>);
+    }
+  }</pre></div>
             
           
             
@@ -799,13 +1063,24 @@ so that it can be send when the order comes up</p>
 useful mainly for addressable ports</p>
 
             
-              <div class='highlight'><pre>  attached: <span class="hljs-function"><span class="hljs-params">(args...)</span> -&gt;</span>
-    args = [<span class="hljs-string">'in'</span>] <span class="hljs-keyword">unless</span> args.length
-    res = []
-    <span class="hljs-keyword">for</span> port <span class="hljs-keyword">in</span> args
-      res.push @ports[port].listAttached()
-    <span class="hljs-keyword">return</span> res.pop() <span class="hljs-keyword">if</span> args.length <span class="hljs-keyword">is</span> <span class="hljs-number">1</span>
-    res</pre></div>
+              <div class='highlight'><pre>  attached(...args) {
+    <span class="hljs-keyword">var</span> i, len1, port, res;
+    <span class="hljs-keyword">if</span> (!args.length) {
+      args = [<span class="hljs-string">'in'</span>];
+    }
+    res = [];
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = args.length; i &lt; len1; i++) {
+      port = args[i];
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.ports[port]) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Node <span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeInstance.nodeId}</span> has no port '<span class="hljs-subst">${port}</span>'`</span>);
+      }
+      res.push(<span class="hljs-keyword">this</span>.ports[port].listAttached());
+    }
+    <span class="hljs-keyword">if</span> (args.length === <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">return</span> res.pop();
+    }
+    <span class="hljs-keyword">return</span> res;
+  }</pre></div>
             
           
             
@@ -822,154 +1097,221 @@ Passing a validation callback as a last argument allows more selective
 checking of packets.</p>
 
             
-              <div class='highlight'><pre>  has: <span class="hljs-function"><span class="hljs-params">(args...)</span> -&gt;</span>
-    args = [<span class="hljs-string">'in'</span>] <span class="hljs-keyword">unless</span> args.length
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> args[args.length - <span class="hljs-number">1</span>] <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
-      validate = args.pop()
-    <span class="hljs-keyword">else</span>
-<span class="hljs-function">      <span class="hljs-title">validate</span> = -&gt;</span> <span class="hljs-literal">true</span>
-    <span class="hljs-keyword">for</span> port <span class="hljs-keyword">in</span> args
-      <span class="hljs-keyword">if</span> Array.isArray port
-        <span class="hljs-keyword">unless</span> @ports[port[<span class="hljs-number">0</span>]].isAddressable()
-          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Non-addressable ports, access must be with string <span class="hljs-subst">#{port[<span class="hljs-number">0</span>]}</span>"</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">unless</span> @ports[port[<span class="hljs-number">0</span>]].has @scope, port[<span class="hljs-number">1</span>], validate
-        <span class="hljs-keyword">continue</span>
-      <span class="hljs-keyword">if</span> @ports[port].isAddressable()
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"For addressable ports, access must be with array [<span class="hljs-subst">#{port}</span>, idx]"</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">unless</span> @ports[port].has @scope, validate
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span></pre></div>
+              <div class='highlight'><pre>  has(...args) {
+    <span class="hljs-keyword">var</span> i, len1, port, validate;
+    <span class="hljs-keyword">if</span> (!args.length) {
+      args = [<span class="hljs-string">'in'</span>];
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> args[args.length - <span class="hljs-number">1</span>] === <span class="hljs-string">'function'</span>) {
+      validate = args.pop();
+    } <span class="hljs-keyword">else</span> {
+      validate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      };
+    }
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = args.length; i &lt; len1; i++) {
+      port = args[i];
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(port)) {
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.ports[port[<span class="hljs-number">0</span>]]) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Node <span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeInstance.nodeId}</span> has no port '<span class="hljs-subst">${port[<span class="hljs-number">0</span>]}</span>'`</span>);
+        }
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.ports[port[<span class="hljs-number">0</span>]].isAddressable()) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Non-addressable ports, access must be with string <span class="hljs-subst">${port[<span class="hljs-number">0</span>]}</span>`</span>);
+        }
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.ports[port[<span class="hljs-number">0</span>]].has(<span class="hljs-keyword">this</span>.scope, port[<span class="hljs-number">1</span>], validate)) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">continue</span>;
+      }
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.ports[port]) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Node <span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeInstance.nodeId}</span> has no port '<span class="hljs-subst">${port}</span>'`</span>);
+      }
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.ports[port].isAddressable()) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`For addressable ports, access must be with array [<span class="hljs-subst">${port}</span>, idx]`</span>);
+      }
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.ports[port].has(<span class="hljs-keyword">this</span>.scope, validate)) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  }</pre></div>
             
           
             
             <p>Returns true if the ports contain data packets</p>
 
             
-              <div class='highlight'><pre>  hasData: <span class="hljs-function"><span class="hljs-params">(args...)</span> -&gt;</span>
-    args = [<span class="hljs-string">'in'</span>] <span class="hljs-keyword">unless</span> args.length
-    args.push (ip) -&gt; ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span>
-    <span class="hljs-keyword">return</span> @has.apply @, args</pre></div>
+              <div class='highlight'><pre>  hasData(...args) {
+    <span class="hljs-keyword">if</span> (!args.length) {
+      args = [<span class="hljs-string">'in'</span>];
+    }
+    args.push(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ip</span>) </span>{
+      <span class="hljs-keyword">return</span> ip.type === <span class="hljs-string">'data'</span>;
+    });
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.has.apply(<span class="hljs-keyword">this</span>, args);
+  }</pre></div>
             
           
             
             <p>Returns true if a port has a complete stream in its input buffer.</p>
 
             
-              <div class='highlight'><pre>  hasStream: <span class="hljs-function"><span class="hljs-params">(args...)</span> -&gt;</span>
-    args = [<span class="hljs-string">'in'</span>] <span class="hljs-keyword">unless</span> args.length
-
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> args[args.length - <span class="hljs-number">1</span>] <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
-      validateStream = args.pop()
-    <span class="hljs-keyword">else</span>
-<span class="hljs-function">      <span class="hljs-title">validateStream</span> = -&gt;</span> <span class="hljs-literal">true</span>
-
-    <span class="hljs-keyword">for</span> port <span class="hljs-keyword">in</span> args
-      portBrackets = []
-      dataBrackets = []
-      hasData = <span class="hljs-literal">false</span>
-<span class="hljs-function">      <span class="hljs-title">validate</span> = <span class="hljs-params">(ip)</span> -&gt;</span>
-        <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'openBracket'</span>
-          portBrackets.push ip.data
-          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
-        <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span></pre></div>
+              <div class='highlight'><pre>  hasStream(...args) {
+    <span class="hljs-keyword">var</span> dataBrackets, hasData, i, len1, port, portBrackets, validate, validateStream;
+    <span class="hljs-keyword">if</span> (!args.length) {
+      args = [<span class="hljs-string">'in'</span>];
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> args[args.length - <span class="hljs-number">1</span>] === <span class="hljs-string">'function'</span>) {
+      validateStream = args.pop();
+    } <span class="hljs-keyword">else</span> {
+      validateStream = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      };
+    }
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = args.length; i &lt; len1; i++) {
+      port = args[i];
+      portBrackets = [];
+      dataBrackets = [];
+      hasData = <span class="hljs-literal">false</span>;
+      validate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ip</span>) </span>{
+        <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'openBracket'</span>) {
+          portBrackets.push(ip.data);
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'data'</span>) {</pre></div>
             
           
             
             <p>Run the stream validation callback</p>
 
             
-              <div class='highlight'><pre>          hasData = validateStream ip, portBrackets</pre></div>
+              <div class='highlight'><pre>          hasData = validateStream(ip, portBrackets);
+          <span class="hljs-keyword">if</span> (!portBrackets.length) {</pre></div>
             
           
             
             <p>Data IP on its own is a valid stream</p>
 
             
-              <div class='highlight'><pre>          <span class="hljs-keyword">return</span> hasData <span class="hljs-keyword">unless</span> portBrackets.length</pre></div>
+              <div class='highlight'><pre>            <span class="hljs-keyword">return</span> hasData;
+          }</pre></div>
             
           
             
             <p>Otherwise we need to check for complete stream</p>
 
             
-              <div class='highlight'><pre>          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
-        <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'closeBracket'</span>
-          portBrackets.pop()
-          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">if</span> portBrackets.length
-          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">unless</span> hasData
-          <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">unless</span> @has port, validate
-    <span class="hljs-literal">true</span></pre></div>
+              <div class='highlight'><pre>          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'closeBracket'</span>) {
+          portBrackets.pop();
+          <span class="hljs-keyword">if</span> (portBrackets.length) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+          }
+          <span class="hljs-keyword">if</span> (!hasData) {
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+          }
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+      };
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.has(port, validate)) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  }</pre></div>
             
           
             
             <h2 id="input-processing">Input processing</h2>
-<p>Once preconditions have been met, the processing function can read from
+
+            
+          
+            
+            <p>Once preconditions have been met, the processing function can read from
 the input buffers. Reading packets sets the component as “activated”.</p>
-<p>Fetches IP object(s) for port(s)</p>
 
-            
-              <div class='highlight'><pre>  get: <span class="hljs-function"><span class="hljs-params">(args...)</span> -&gt;</span>
-    @activate()
-    args = [<span class="hljs-string">'in'</span>] <span class="hljs-keyword">unless</span> args.length
-    res = []
-    <span class="hljs-keyword">for</span> port <span class="hljs-keyword">in</span> args
-      <span class="hljs-keyword">if</span> Array.isArray port
-        [portname, idx] = port
-        <span class="hljs-keyword">unless</span> @ports[portname].isAddressable()
-          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'Non-addressable ports, access must be with string portname'</span>
-      <span class="hljs-keyword">else</span>
-        portname = port
-        <span class="hljs-keyword">if</span> @ports[portname].isAddressable()
-          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'For addressable ports, access must be with array [portname, idx]'</span>
-      <span class="hljs-keyword">if</span> @nodeInstance.isForwardingInport portname
-        ip = @__getForForwarding portname, idx
-        res.push ip
-        <span class="hljs-keyword">continue</span>
-      ip = @ports[portname].get @scope, idx
-      res.push ip
-
-    <span class="hljs-keyword">if</span> args.length <span class="hljs-keyword">is</span> <span class="hljs-number">1</span> <span class="hljs-keyword">then</span> res[<span class="hljs-number">0</span>] <span class="hljs-keyword">else</span> res
-
-  __getForForwarding: <span class="hljs-function"><span class="hljs-params">(port, idx)</span> -&gt;</span>
-    prefix = []
-    dataIp = <span class="hljs-literal">null</span></pre></div>
             
           
             
-            <p>Read IPs until we hit data</p>
+            <p>Fetches IP object(s) for port(s)</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">loop</span></pre></div>
+              <div class='highlight'><pre>  get(...args) {
+    <span class="hljs-keyword">var</span> i, idx, ip, len1, port, portname, res;
+    <span class="hljs-keyword">this</span>.activate();
+    <span class="hljs-keyword">if</span> (!args.length) {
+      args = [<span class="hljs-string">'in'</span>];
+    }
+    res = [];
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = args.length; i &lt; len1; i++) {
+      port = args[i];
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(port)) {
+        [portname, idx] = port;
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.ports[portname].isAddressable()) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Non-addressable ports, access must be with string portname'</span>);
+        }
+      } <span class="hljs-keyword">else</span> {
+        portname = port;
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.ports[portname].isAddressable()) {
+          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'For addressable ports, access must be with array [portname, idx]'</span>);
+        }
+      }
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.nodeInstance.isForwardingInport(portname)) {
+        ip = <span class="hljs-keyword">this</span>.__getForForwarding(portname, idx);
+        res.push(ip);
+        <span class="hljs-keyword">continue</span>;
+      }
+      ip = <span class="hljs-keyword">this</span>.ports[portname].get(<span class="hljs-keyword">this</span>.scope, idx);
+      res.push(ip);
+    }
+    <span class="hljs-keyword">if</span> (args.length === <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">return</span> res[<span class="hljs-number">0</span>];
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">return</span> res;
+    }
+  }
+
+  __getForForwarding(port, idx) {
+    <span class="hljs-keyword">var</span> context, dataIp, i, ip, len1, prefix;
+    prefix = [];
+    dataIp = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {</pre></div>
             
           
             
-            <p>Read next packet</p>
+            <p>Read next packet
+Read IPs until we hit data</p>
 
             
-              <div class='highlight'><pre>      ip = @ports[port].get @scope, idx</pre></div>
+              <div class='highlight'><pre>      ip = <span class="hljs-keyword">this</span>.ports[port].get(<span class="hljs-keyword">this</span>.scope, idx);
+      <span class="hljs-keyword">if</span> (!ip) {</pre></div>
             
           
             
             <p>Stop at the end of the buffer</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">break</span> <span class="hljs-keyword">unless</span> ip
-      <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span></pre></div>
+              <div class='highlight'><pre>        <span class="hljs-keyword">break</span>;
+      }
+      <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'data'</span>) {</pre></div>
             
           
             
             <p>Hit the data IP, stop here</p>
 
             
-              <div class='highlight'><pre>        dataIp = ip
-        <span class="hljs-keyword">break</span></pre></div>
+              <div class='highlight'><pre>        dataIp = ip;
+        <span class="hljs-keyword">break</span>;
+      }</pre></div>
             
           
             
             <p>Keep track of bracket closings and openings before</p>
 
             
-              <div class='highlight'><pre>      prefix.push ip</pre></div>
+              <div class='highlight'><pre>      prefix.push(ip);
+    }</pre></div>
             
           
             
@@ -978,31 +1320,39 @@ and be added to result so they can be forwarded correctly to ports that
 need them</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">for</span> ip <span class="hljs-keyword">in</span> prefix
-      <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'closeBracket'</span></pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = prefix.length; i &lt; len1; i++) {
+      ip = prefix[i];
+      <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'closeBracket'</span>) {
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.result.__bracketClosingBefore) {</pre></div>
             
           
             
             <p>Bracket closings before data should remove bracket context</p>
 
             
-              <div class='highlight'><pre>        @result.__bracketClosingBefore = [] <span class="hljs-keyword">unless</span> @result.__bracketClosingBefore
-        context = @nodeInstance.getBracketContext(<span class="hljs-string">'in'</span>, port, @scope, idx).pop()
-        context.closeIp = ip
-        @result.__bracketClosingBefore.push context
-        <span class="hljs-keyword">continue</span>
-      <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'openBracket'</span></pre></div>
+              <div class='highlight'><pre>          <span class="hljs-keyword">this</span>.result.__bracketClosingBefore = [];
+        }
+        context = <span class="hljs-keyword">this</span>.nodeInstance.getBracketContext(<span class="hljs-string">'in'</span>, port, <span class="hljs-keyword">this</span>.scope, idx).pop();
+        context.closeIp = ip;
+        <span class="hljs-keyword">this</span>.result.__bracketClosingBefore.push(context);
+        <span class="hljs-keyword">continue</span>;
+      }
+      <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'openBracket'</span>) {</pre></div>
             
           
             
             <p>Bracket openings need to go to bracket context</p>
 
             
-              <div class='highlight'><pre>        @nodeInstance.getBracketContext(<span class="hljs-string">'in'</span>, port, @scope, idx).push
-          ip: ip
-          ports: []
-          source: port
-        <span class="hljs-keyword">continue</span></pre></div>
+              <div class='highlight'><pre>        <span class="hljs-keyword">this</span>.nodeInstance.getBracketContext(<span class="hljs-string">'in'</span>, port, <span class="hljs-keyword">this</span>.scope, idx).push({
+          <span class="hljs-attr">ip</span>: ip,
+          <span class="hljs-attr">ports</span>: [],
+          <span class="hljs-attr">source</span>: port
+        });
+        <span class="hljs-keyword">continue</span>;
+      }
+    }
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.result.__bracketContext) {</pre></div>
             
           
             
@@ -1010,8 +1360,9 @@ need them</p>
 to ports we can also add the surrounding brackets</p>
 
             
-              <div class='highlight'><pre>    @result.__bracketContext = {} <span class="hljs-keyword">unless</span> @result.__bracketContext
-    @result.__bracketContext[port] = @nodeInstance.getBracketContext(<span class="hljs-string">'in'</span>, port, @scope, idx).slice <span class="hljs-number">0</span></pre></div>
+              <div class='highlight'><pre>      <span class="hljs-keyword">this</span>.result.__bracketContext = {};
+    }
+    <span class="hljs-keyword">this</span>.result.__bracketContext[port] = <span class="hljs-keyword">this</span>.nodeInstance.getBracketContext(<span class="hljs-string">'in'</span>, port, <span class="hljs-keyword">this</span>.scope, idx).slice(<span class="hljs-number">0</span>);</pre></div>
             
           
             
@@ -1019,20 +1370,24 @@ to ports we can also add the surrounding brackets</p>
 be added to result for done() to read them from</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> dataIp</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> dataIp;
+  }</pre></div>
             
           
             
             <p>Fetches <code>data</code> property of IP object(s) for given port(s)</p>
 
             
-              <div class='highlight'><pre>  getData: <span class="hljs-function"><span class="hljs-params">(args...)</span> -&gt;</span>
-    args = [<span class="hljs-string">'in'</span>] <span class="hljs-keyword">unless</span> args.length
-
-    datas = []
-    <span class="hljs-keyword">for</span> port <span class="hljs-keyword">in</span> args
-      packet = @get port
-      <span class="hljs-keyword">unless</span> packet?</pre></div>
+              <div class='highlight'><pre>  getData(...args) {
+    <span class="hljs-keyword">var</span> datas, i, len1, packet, port;
+    <span class="hljs-keyword">if</span> (!args.length) {
+      args = [<span class="hljs-string">'in'</span>];
+    }
+    datas = [];
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = args.length; i &lt; len1; i++) {
+      port = args[i];
+      packet = <span class="hljs-keyword">this</span>.get(port);
+      <span class="hljs-keyword">if</span> (packet == <span class="hljs-literal">null</span>) {</pre></div>
             
           
             
@@ -1041,123 +1396,174 @@ multiple ports, if one is null we still return it
 so the indexes are correct.</p>
 
             
-              <div class='highlight'><pre>        datas.push packet
-        <span class="hljs-keyword">continue</span>
-
-      <span class="hljs-keyword">until</span> packet.type <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span>
-        packet = @get port
-        <span class="hljs-keyword">break</span> <span class="hljs-keyword">unless</span> packet
-
-      datas.push packet.data
-
-    <span class="hljs-keyword">return</span> datas.pop() <span class="hljs-keyword">if</span> args.length <span class="hljs-keyword">is</span> <span class="hljs-number">1</span>
-    datas</pre></div>
+              <div class='highlight'><pre>        datas.push(packet);
+        <span class="hljs-keyword">continue</span>;
+      }
+      <span class="hljs-keyword">while</span> (packet.type !== <span class="hljs-string">'data'</span>) {
+        packet = <span class="hljs-keyword">this</span>.get(port);
+        <span class="hljs-keyword">if</span> (!packet) {
+          <span class="hljs-keyword">break</span>;
+        }
+      }
+      datas.push(packet.data);
+    }
+    <span class="hljs-keyword">if</span> (args.length === <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">return</span> datas.pop();
+    }
+    <span class="hljs-keyword">return</span> datas;
+  }</pre></div>
             
           
             
             <p>Fetches a complete data stream from the buffer.</p>
 
             
-              <div class='highlight'><pre>  getStream: <span class="hljs-function"><span class="hljs-params">(args...)</span> -&gt;</span>
-    args = [<span class="hljs-string">'in'</span>] <span class="hljs-keyword">unless</span> args.length
-    datas = []
-    <span class="hljs-keyword">for</span> port <span class="hljs-keyword">in</span> args
-      portBrackets = []
-      portPackets = []
-      hasData = <span class="hljs-literal">false</span>
-      ip = @get port
-      datas.push <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> ip
-      <span class="hljs-keyword">while</span> ip
-        <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'openBracket'</span>
-          <span class="hljs-keyword">unless</span> portBrackets.length</pre></div>
+              <div class='highlight'><pre>  getStream(...args) {
+    <span class="hljs-keyword">var</span> datas, hasData, i, ip, len1, port, portBrackets, portPackets;
+    <span class="hljs-keyword">if</span> (!args.length) {
+      args = [<span class="hljs-string">'in'</span>];
+    }
+    datas = [];
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = args.length; i &lt; len1; i++) {
+      port = args[i];
+      portBrackets = [];
+      portPackets = [];
+      hasData = <span class="hljs-literal">false</span>;
+      ip = <span class="hljs-keyword">this</span>.get(port);
+      <span class="hljs-keyword">if</span> (!ip) {
+        datas.push(<span class="hljs-keyword">void</span> <span class="hljs-number">0</span>);
+      }
+      <span class="hljs-keyword">while</span> (ip) {
+        <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'openBracket'</span>) {
+          <span class="hljs-keyword">if</span> (!portBrackets.length) {</pre></div>
             
           
             
             <p>First openBracket in stream, drop previous</p>
 
             
-              <div class='highlight'><pre>            portPackets = []
-            hasData = <span class="hljs-literal">false</span>
-          portBrackets.push ip.data
-          portPackets.push ip
-        <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span>
-          portPackets.push ip
-          hasData = <span class="hljs-literal">true</span></pre></div>
+              <div class='highlight'><pre>            portPackets = [];
+            hasData = <span class="hljs-literal">false</span>;
+          }
+          portBrackets.push(ip.data);
+          portPackets.push(ip);
+        }
+        <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'data'</span>) {
+          portPackets.push(ip);
+          hasData = <span class="hljs-literal">true</span>;
+          <span class="hljs-keyword">if</span> (!portBrackets.length) {</pre></div>
             
           
             
             <p>Unbracketed data packet is a valid stream</p>
 
             
-              <div class='highlight'><pre>          <span class="hljs-keyword">break</span> <span class="hljs-keyword">unless</span> portBrackets.length
-        <span class="hljs-keyword">if</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'closeBracket'</span>
-          portPackets.push ip
-          portBrackets.pop()
-          <span class="hljs-keyword">if</span> hasData <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> portBrackets.length</pre></div>
+              <div class='highlight'><pre>            <span class="hljs-keyword">break</span>;
+          }
+        }
+        <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'closeBracket'</span>) {
+          portPackets.push(ip);
+          portBrackets.pop();
+          <span class="hljs-keyword">if</span> (hasData &amp;&amp; !portBrackets.length) {</pre></div>
             
           
             
             <p>Last close bracket finishes stream if there was data inside</p>
 
             
-              <div class='highlight'><pre>            <span class="hljs-keyword">break</span>
-        ip = @get port
-      datas.push portPackets
+              <div class='highlight'><pre>            <span class="hljs-keyword">break</span>;
+          }
+        }
+        ip = <span class="hljs-keyword">this</span>.get(port);
+      }
+      datas.push(portPackets);
+    }
+    <span class="hljs-keyword">if</span> (args.length === <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">return</span> datas.pop();
+    }
+    <span class="hljs-keyword">return</span> datas;
+  }
 
-    <span class="hljs-keyword">return</span> datas.pop() <span class="hljs-keyword">if</span> args.length <span class="hljs-keyword">is</span> <span class="hljs-number">1</span>
-    datas
+};
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessOutput</span></span>
-  constructor: <span class="hljs-function"><span class="hljs-params">(@ports, @context)</span> -&gt;</span>
-    @nodeInstance = @context.nodeInstance
-    @ip = @context.ip
-    @result = @context.result
-    @scope = @context.scope</pre></div>
+ProcessOutput = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessOutput</span> </span>{
+  <span class="hljs-keyword">constructor</span>(ports1, context1) {
+    <span class="hljs-keyword">this</span>.ports = ports1;
+    <span class="hljs-keyword">this</span>.context = context1;
+    <span class="hljs-keyword">this</span>.nodeInstance = <span class="hljs-keyword">this</span>.context.nodeInstance;
+    <span class="hljs-keyword">this</span>.ip = <span class="hljs-keyword">this</span>.context.ip;
+    <span class="hljs-keyword">this</span>.result = <span class="hljs-keyword">this</span>.context.result;
+    <span class="hljs-keyword">this</span>.scope = <span class="hljs-keyword">this</span>.context.scope;
+  }</pre></div>
             
           
             
             <p>Checks if a value is an Error</p>
 
             
-              <div class='highlight'><pre>  isError: <span class="hljs-function"><span class="hljs-params">(err)</span> -&gt;</span>
-    err <span class="hljs-keyword">instanceof</span> Error <span class="hljs-keyword">or</span>
-    Array.isArray(err) <span class="hljs-keyword">and</span> err.length &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> err[<span class="hljs-number">0</span>] <span class="hljs-keyword">instanceof</span> Error</pre></div>
+              <div class='highlight'><pre>  isError(err) {
+    <span class="hljs-keyword">return</span> err <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Error</span> || <span class="hljs-built_in">Array</span>.isArray(err) &amp;&amp; err.length &gt; <span class="hljs-number">0</span> &amp;&amp; err[<span class="hljs-number">0</span>] <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Error</span>;
+  }</pre></div>
             
           
             
             <p>Sends an error object</p>
 
             
-              <div class='highlight'><pre>  error: <span class="hljs-function"><span class="hljs-params">(err)</span> -&gt;</span>
-    multiple = Array.isArray err
-    err = [err] <span class="hljs-keyword">unless</span> multiple
-    <span class="hljs-keyword">if</span> <span class="hljs-string">'error'</span> <span class="hljs-keyword">of</span> @ports <span class="hljs-keyword">and</span>
-    (@ports.error.isAttached() <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> @ports.error.isRequired())
-      @sendIP <span class="hljs-string">'error'</span>, <span class="hljs-keyword">new</span> IP <span class="hljs-string">'openBracket'</span> <span class="hljs-keyword">if</span> multiple
-      @sendIP <span class="hljs-string">'error'</span>, e <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> err
-      @sendIP <span class="hljs-string">'error'</span>, <span class="hljs-keyword">new</span> IP <span class="hljs-string">'closeBracket'</span> <span class="hljs-keyword">if</span> multiple
-    <span class="hljs-keyword">else</span>
-      <span class="hljs-keyword">throw</span> e <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> err</pre></div>
+              <div class='highlight'><pre>  error(err) {
+    <span class="hljs-keyword">var</span> e, i, j, len1, len2, multiple, results;
+    multiple = <span class="hljs-built_in">Array</span>.isArray(err);
+    <span class="hljs-keyword">if</span> (!multiple) {
+      err = [err];
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-string">'error'</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.ports &amp;&amp; (<span class="hljs-keyword">this</span>.ports.error.isAttached() || !<span class="hljs-keyword">this</span>.ports.error.isRequired())) {
+      <span class="hljs-keyword">if</span> (multiple) {
+        <span class="hljs-keyword">this</span>.sendIP(<span class="hljs-string">'error'</span>, <span class="hljs-keyword">new</span> IP(<span class="hljs-string">'openBracket'</span>));
+      }
+      <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = err.length; i &lt; len1; i++) {
+        e = err[i];
+        <span class="hljs-keyword">this</span>.sendIP(<span class="hljs-string">'error'</span>, e);
+      }
+      <span class="hljs-keyword">if</span> (multiple) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.sendIP(<span class="hljs-string">'error'</span>, <span class="hljs-keyword">new</span> IP(<span class="hljs-string">'closeBracket'</span>));
+      }
+    } <span class="hljs-keyword">else</span> {
+      results = [];
+      <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>, len2 = err.length; j &lt; len2; j++) {
+        e = err[j];
+        <span class="hljs-keyword">throw</span> e;
+      }
+      <span class="hljs-keyword">return</span> results;
+    }
+  }</pre></div>
             
           
             
             <p>Sends a single IP object to a port</p>
 
             
-              <div class='highlight'><pre>  sendIP: <span class="hljs-function"><span class="hljs-params">(port, packet)</span> -&gt;</span>
-    <span class="hljs-keyword">unless</span> IP.isIP packet
-      ip = <span class="hljs-keyword">new</span> IP <span class="hljs-string">'data'</span>, packet
-    <span class="hljs-keyword">else</span>
-      ip = packet
-    ip.scope = @scope <span class="hljs-keyword">if</span> @scope <span class="hljs-keyword">isnt</span> <span class="hljs-literal">null</span> <span class="hljs-keyword">and</span> ip.scope <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
-
-    <span class="hljs-keyword">if</span> @nodeInstance.outPorts[port].isAddressable() <span class="hljs-keyword">and</span> ip.index <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'Sending packets to addressable ports requires specifying index'</span>
-
-    <span class="hljs-keyword">if</span> @nodeInstance.isOrdered()
-      @nodeInstance.addToResult @result, port, ip
-      <span class="hljs-keyword">return</span>
-    @nodeInstance.outPorts[port].sendIP ip</pre></div>
+              <div class='highlight'><pre>  sendIP(port, packet) {
+    <span class="hljs-keyword">var</span> ip;
+    <span class="hljs-keyword">if</span> (!IP.isIP(packet)) {
+      ip = <span class="hljs-keyword">new</span> IP(<span class="hljs-string">'data'</span>, packet);
+    } <span class="hljs-keyword">else</span> {
+      ip = packet;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.scope !== <span class="hljs-literal">null</span> &amp;&amp; ip.scope === <span class="hljs-literal">null</span>) {
+      ip.scope = <span class="hljs-keyword">this</span>.scope;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.nodeInstance.outPorts[port].isAddressable() &amp;&amp; ip.index === <span class="hljs-literal">null</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Sending packets to addressable ports requires specifying index'</span>);
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.nodeInstance.isOrdered()) {
+      <span class="hljs-keyword">this</span>.nodeInstance.addToResult(<span class="hljs-keyword">this</span>.result, port, ip);
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.nodeInstance.outPorts[port].options.scoped) {
+      ip.scope = <span class="hljs-literal">null</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.nodeInstance.outPorts[port].sendIP(ip);
+  }</pre></div>
             
           
             
@@ -1165,34 +1571,47 @@ so the indexes are correct.</p>
 or sends Error or a list of Errors if passed such</p>
 
             
-              <div class='highlight'><pre>  send: <span class="hljs-function"><span class="hljs-params">(outputMap)</span> -&gt;</span>
-    <span class="hljs-keyword">return</span> @error outputMap <span class="hljs-keyword">if</span> @isError outputMap
-
-    componentPorts = []
-    mapIsInPorts = <span class="hljs-literal">false</span>
-    <span class="hljs-keyword">for</span> port <span class="hljs-keyword">in</span> Object.keys @ports.ports
-      componentPorts.push port <span class="hljs-keyword">if</span> port <span class="hljs-keyword">isnt</span> <span class="hljs-string">'error'</span> <span class="hljs-keyword">and</span> port <span class="hljs-keyword">isnt</span> <span class="hljs-string">'ports'</span> <span class="hljs-keyword">and</span> port <span class="hljs-keyword">isnt</span> <span class="hljs-string">'_callbacks'</span>
-      <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> mapIsInPorts <span class="hljs-keyword">and</span> outputMap? <span class="hljs-keyword">and</span> <span class="hljs-keyword">typeof</span> outputMap <span class="hljs-keyword">is</span> <span class="hljs-string">'object'</span> <span class="hljs-keyword">and</span> Object.keys(outputMap).indexOf(port) <span class="hljs-keyword">isnt</span> <span class="hljs-number">-1</span>
-        mapIsInPorts = <span class="hljs-literal">true</span>
-
-    <span class="hljs-keyword">if</span> componentPorts.length <span class="hljs-keyword">is</span> <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> mapIsInPorts
-      @sendIP componentPorts[<span class="hljs-number">0</span>], outputMap
-      <span class="hljs-keyword">return</span>
-
-    <span class="hljs-keyword">if</span> componentPorts.length &gt; <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> mapIsInPorts
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'Port must be specified for sending output'</span>
-
-    <span class="hljs-keyword">for</span> port, packet <span class="hljs-keyword">of</span> outputMap
-      @sendIP port, packet</pre></div>
+              <div class='highlight'><pre>  send(outputMap) {
+    <span class="hljs-keyword">var</span> componentPorts, i, len1, mapIsInPorts, packet, port, ref, results;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isError(outputMap)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.error(outputMap);
+    }
+    componentPorts = [];
+    mapIsInPorts = <span class="hljs-literal">false</span>;
+    ref = <span class="hljs-built_in">Object</span>.keys(<span class="hljs-keyword">this</span>.ports.ports);
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len1 = ref.length; i &lt; len1; i++) {
+      port = ref[i];
+      <span class="hljs-keyword">if</span> (port !== <span class="hljs-string">'error'</span> &amp;&amp; port !== <span class="hljs-string">'ports'</span> &amp;&amp; port !== <span class="hljs-string">'_callbacks'</span>) {
+        componentPorts.push(port);
+      }
+      <span class="hljs-keyword">if</span> (!mapIsInPorts &amp;&amp; (outputMap != <span class="hljs-literal">null</span>) &amp;&amp; <span class="hljs-keyword">typeof</span> outputMap === <span class="hljs-string">'object'</span> &amp;&amp; <span class="hljs-built_in">Object</span>.keys(outputMap).indexOf(port) !== <span class="hljs-number">-1</span>) {
+        mapIsInPorts = <span class="hljs-literal">true</span>;
+      }
+    }
+    <span class="hljs-keyword">if</span> (componentPorts.length === <span class="hljs-number">1</span> &amp;&amp; !mapIsInPorts) {
+      <span class="hljs-keyword">this</span>.sendIP(componentPorts[<span class="hljs-number">0</span>], outputMap);
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (componentPorts.length &gt; <span class="hljs-number">1</span> &amp;&amp; !mapIsInPorts) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Port must be specified for sending output'</span>);
+    }
+    results = [];
+    <span class="hljs-keyword">for</span> (port <span class="hljs-keyword">in</span> outputMap) {
+      packet = outputMap[port];
+      results.push(<span class="hljs-keyword">this</span>.sendIP(port, packet));
+    }
+    <span class="hljs-keyword">return</span> results;
+  }</pre></div>
             
           
             
             <p>Sends the argument via <code>send()</code> and marks activation as <code>done()</code></p>
 
             
-              <div class='highlight'><pre>  sendDone: <span class="hljs-function"><span class="hljs-params">(outputMap)</span> -&gt;</span>
-    @send outputMap
-    @done()</pre></div>
+              <div class='highlight'><pre>  sendDone(outputMap) {
+    <span class="hljs-keyword">this</span>.send(outputMap);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.done();
+  }</pre></div>
             
           
             
@@ -1201,45 +1620,65 @@ keeping all IP metadata received from <code>in</code>,
 or modifying it if <code>options</code> is provided</p>
 
             
-              <div class='highlight'><pre>  pass: <span class="hljs-function"><span class="hljs-params">(data, options = {})</span> -&gt;</span>
-    <span class="hljs-keyword">unless</span> <span class="hljs-string">'out'</span> <span class="hljs-keyword">of</span> @ports
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'output.pass() requires port "out" to be present'</span>
-    <span class="hljs-keyword">for</span> key, val <span class="hljs-keyword">of</span> options
-      @ip[key] = val
-    @ip.data = data
-    @sendIP <span class="hljs-string">'out'</span>, @ip
-    @done()</pre></div>
+              <div class='highlight'><pre>  pass(data, options = {}) {
+    <span class="hljs-keyword">var</span> key, val;
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'out'</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.ports)) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'output.pass() requires port "out" to be present'</span>);
+    }
+    <span class="hljs-keyword">for</span> (key <span class="hljs-keyword">in</span> options) {
+      val = options[key];
+      <span class="hljs-keyword">this</span>.ip[key] = val;
+    }
+    <span class="hljs-keyword">this</span>.ip.data = data;
+    <span class="hljs-keyword">this</span>.sendIP(<span class="hljs-string">'out'</span>, <span class="hljs-keyword">this</span>.ip);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.done();
+  }</pre></div>
             
           
             
             <p>Finishes process activation gracefully</p>
 
             
-              <div class='highlight'><pre>  done: <span class="hljs-function"><span class="hljs-params">(error)</span> -&gt;</span>
-    @result.__resolved = <span class="hljs-literal">true</span>
-    @nodeInstance.activate @context
-    @error error <span class="hljs-keyword">if</span> error
-<span class="hljs-function">
-    <span class="hljs-title">isLast</span> = =&gt;</span></pre></div>
+              <div class='highlight'><pre>  done(error) {
+    <span class="hljs-keyword">var</span> buf, context, contexts, ctx, ip, isLast, nodeContext, port, ref;
+    <span class="hljs-keyword">this</span>.result.__resolved = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">this</span>.nodeInstance.activate(<span class="hljs-keyword">this</span>.context);
+    <span class="hljs-keyword">if</span> (error) {
+      <span class="hljs-keyword">this</span>.error(error);
+    }
+    isLast = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      <span class="hljs-keyword">var</span> len, load, pos, resultsOnly;</pre></div>
             
           
             
             <p>We only care about real output sets with processing data</p>
 
             
-              <div class='highlight'><pre>      resultsOnly = @nodeInstance.outputQ.filter (q) -&gt;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">unless</span> q.__resolved
-        <span class="hljs-keyword">if</span> Object.keys(q).length <span class="hljs-keyword">is</span> <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> q.__bracketClosingAfter
-          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
-        <span class="hljs-literal">true</span>
-      pos = resultsOnly.indexOf @result
-      len = resultsOnly.length
-      load = @nodeInstance.load
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> pos <span class="hljs-keyword">is</span> len - <span class="hljs-number">1</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> pos <span class="hljs-keyword">is</span> <span class="hljs-number">-1</span> <span class="hljs-keyword">and</span> load <span class="hljs-keyword">is</span> len + <span class="hljs-number">1</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> len &lt;= <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> load <span class="hljs-keyword">is</span> <span class="hljs-number">1</span>
-      <span class="hljs-literal">false</span>
-    <span class="hljs-keyword">if</span> @nodeInstance.isOrdered() <span class="hljs-keyword">and</span> isLast()</pre></div>
+              <div class='highlight'><pre>      resultsOnly = <span class="hljs-keyword">this</span>.nodeInstance.outputQ.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">q</span>) </span>{
+        <span class="hljs-keyword">if</span> (!q.__resolved) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Object</span>.keys(q).length === <span class="hljs-number">2</span> &amp;&amp; q.__bracketClosingAfter) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      });
+      pos = resultsOnly.indexOf(<span class="hljs-keyword">this</span>.result);
+      len = resultsOnly.length;
+      load = <span class="hljs-keyword">this</span>.nodeInstance.load;
+      <span class="hljs-keyword">if</span> (pos === len - <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+      <span class="hljs-keyword">if</span> (pos === <span class="hljs-number">-1</span> &amp;&amp; load === len + <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+      <span class="hljs-keyword">if</span> (len &lt;= <span class="hljs-number">1</span> &amp;&amp; load === <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    };
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.nodeInstance.isOrdered() &amp;&amp; isLast()) {
+      ref = <span class="hljs-keyword">this</span>.nodeInstance.bracketContext.in;</pre></div>
             
           
             
@@ -1248,27 +1687,42 @@ dangling closeBrackets in buffer since we’re the
 last running process function.</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">for</span> port, contexts <span class="hljs-keyword">of</span> @nodeInstance.bracketContext.<span class="hljs-keyword">in</span>
-        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> contexts[@scope]
-        nodeContext = contexts[@scope]
-        <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> nodeContext.length
-        context = nodeContext[nodeContext.length - <span class="hljs-number">1</span>]
-        buf = @nodeInstance.inPorts[context.source].getBuffer context.ip.scope, context.ip.index
-        <span class="hljs-keyword">loop</span>
-          <span class="hljs-keyword">break</span> <span class="hljs-keyword">unless</span> buf.length
-          <span class="hljs-keyword">break</span> <span class="hljs-keyword">unless</span> buf[<span class="hljs-number">0</span>].type <span class="hljs-keyword">is</span> <span class="hljs-string">'closeBracket'</span>
-          ip = @nodeInstance.inPorts[context.source].get context.ip.scope, context.ip.index
-          ctx = nodeContext.pop()
-          ctx.closeIp = ip
-          @result.__bracketClosingAfter = [] <span class="hljs-keyword">unless</span> @result.__bracketClosingAfter
-          @result.__bracketClosingAfter.push ctx
+              <div class='highlight'><pre>      <span class="hljs-keyword">for</span> (port <span class="hljs-keyword">in</span> ref) {
+        contexts = ref[port];
+        <span class="hljs-keyword">if</span> (!contexts[<span class="hljs-keyword">this</span>.scope]) {
+          <span class="hljs-keyword">continue</span>;
+        }
+        nodeContext = contexts[<span class="hljs-keyword">this</span>.scope];
+        <span class="hljs-keyword">if</span> (!nodeContext.length) {
+          <span class="hljs-keyword">continue</span>;
+        }
+        context = nodeContext[nodeContext.length - <span class="hljs-number">1</span>];
+        buf = <span class="hljs-keyword">this</span>.nodeInstance.inPorts[context.source].getBuffer(context.ip.scope, context.ip.index);
+        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+          <span class="hljs-keyword">if</span> (!buf.length) {
+            <span class="hljs-keyword">break</span>;
+          }
+          <span class="hljs-keyword">if</span> (buf[<span class="hljs-number">0</span>].type !== <span class="hljs-string">'closeBracket'</span>) {
+            <span class="hljs-keyword">break</span>;
+          }
+          ip = <span class="hljs-keyword">this</span>.nodeInstance.inPorts[context.source].get(context.ip.scope, context.ip.index);
+          ctx = nodeContext.pop();
+          ctx.closeIp = ip;
+          <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.result.__bracketClosingAfter) {
+            <span class="hljs-keyword">this</span>.result.__bracketClosingAfter = [];
+          }
+          <span class="hljs-keyword">this</span>.result.__bracketClosingAfter.push(ctx);
+        }
+      }
+    }
+    debug(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeInstance.nodeId}</span> finished processing <span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeInstance.load}</span>`</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.nodeInstance.deactivate(<span class="hljs-keyword">this</span>.context);
+  }
 
-    debug <span class="hljs-string">"<span class="hljs-subst">#{@nodeInstance.nodeId}</span> finished processing <span class="hljs-subst">#{@nodeInstance.load}</span>"</span>
-
-    @nodeInstance.deactivate @context</pre></div>
+};</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee">Component.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.js">Component.js</a> file.</small></p>
         </div>
       </div>
     </div>

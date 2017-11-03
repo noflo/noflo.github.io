@@ -24,26 +24,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
-                    ArrayPort
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/AsCallback/index.html' %}class="active" {% endif %}href="/api/AsCallback/">
                     AsCallback
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
-                    AsyncComponent
                   </a>
                 </li>
                 
@@ -150,26 +132,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
-                    Port
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
                     Ports
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
-                    Streams
                   </a>
                 </li>
                 
@@ -194,298 +158,336 @@ categories:
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license
-</code></pre><p>Input Port (inport) implementation for NoFlo components</p>
+</code></pre>
+            
+          
+            
+            <p>Input Port (inport) implementation for NoFlo components</p>
 
             
-              <div class='highlight'><pre>BasePort = <span class="hljs-built_in">require</span> <span class="hljs-string">'./BasePort'</span>
-IP = <span class="hljs-built_in">require</span> <span class="hljs-string">'./IP'</span>
-platform = <span class="hljs-built_in">require</span> <span class="hljs-string">'./Platform'</span>
+              <div class='highlight'><pre><span class="hljs-keyword">var</span> BasePort, IP, InPort, platform;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span></span>
-  constructor: <span class="hljs-function"><span class="hljs-params">(options, process)</span> -&gt;</span>
-    @process = <span class="hljs-literal">null</span>
+BasePort = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./BasePort'</span>);
 
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> process <span class="hljs-keyword">and</span> <span class="hljs-keyword">typeof</span> options <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
-      process = options
-      options = {}
+IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./IP'</span>);
 
-    options ?= {}
+platform = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Platform'</span>);
 
-    options.buffered ?= <span class="hljs-literal">false</span>
-    options.control ?= <span class="hljs-literal">false</span>
-    options.scoped ?= <span class="hljs-literal">true</span>
-    options.triggering ?= <span class="hljs-literal">true</span>
-
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> process <span class="hljs-keyword">and</span> options <span class="hljs-keyword">and</span> options.process
-      process = options.process
-      <span class="hljs-keyword">delete</span> options.process
-
-    <span class="hljs-keyword">if</span> process
-      platform.deprecated <span class="hljs-string">'InPort process callback is deprecated. Please use Process API or the InPort handle option'</span>
-      <span class="hljs-keyword">unless</span> <span class="hljs-keyword">typeof</span> process <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'process must be a function'</span>
-      @process = process
-
-    <span class="hljs-keyword">if</span> options.handle
-      platform.deprecated <span class="hljs-string">'InPort handle callback is deprecated. Please use Process API'</span>
-      <span class="hljs-keyword">unless</span> <span class="hljs-keyword">typeof</span> options.handle <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'handle must be a function'</span>
-      @handle = options.handle
-      <span class="hljs-keyword">delete</span> options.handle
-
-    <span class="hljs-keyword">super</span> options
-
-    @prepareBuffer()</pre></div>
+InPort = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
+  <span class="hljs-keyword">constructor</span>(options = {}) {
+    <span class="hljs-keyword">if</span> (options.control == <span class="hljs-literal">null</span>) {
+      options.control = <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">if</span> (options.scoped == <span class="hljs-literal">null</span>) {
+      options.scoped = <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">if</span> (options.triggering == <span class="hljs-literal">null</span>) {
+      options.triggering = <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">if</span> (options.process) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'InPort process callback is deprecated. Please use Process API'</span>);
+      <span class="hljs-keyword">delete</span> options.process;
+    }
+    <span class="hljs-keyword">if</span> (options.handle) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'InPort handle callback is deprecated. Please use Process API'</span>);
+      <span class="hljs-keyword">delete</span> options.handle;
+    }
+    <span class="hljs-keyword">super</span>(options);
+    <span class="hljs-keyword">this</span>.prepareBuffer();
+  }</pre></div>
             
           
             
             <p>Assign a delegate for retrieving data should this inPort</p>
 
             
-              <div class='highlight'><pre>  attachSocket: <span class="hljs-function"><span class="hljs-params">(socket, localId = <span class="hljs-literal">null</span>)</span> -&gt;</span></pre></div>
+              <div class='highlight'><pre>  attachSocket(socket, localId = <span class="hljs-literal">null</span>) {</pre></div>
             
           
             
             <p>have a default value.</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> @hasDefault()
-      <span class="hljs-keyword">if</span> @handle
-        socket.setDataDelegate =&gt; <span class="hljs-keyword">new</span> IP <span class="hljs-string">'data'</span>, @options.<span class="hljs-keyword">default</span>
-      <span class="hljs-keyword">else</span>
-        socket.setDataDelegate =&gt; @options.<span class="hljs-keyword">default</span>
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.hasDefault()) {
+      socket.setDataDelegate(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.options.default;
+      });
+    }
+    socket.on(<span class="hljs-string">'connect'</span>, () =&gt; {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.handleSocketEvent(<span class="hljs-string">'connect'</span>, socket, localId);
+    });
+    socket.on(<span class="hljs-string">'begingroup'</span>, (group) =&gt; {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.handleSocketEvent(<span class="hljs-string">'begingroup'</span>, group, localId);
+    });
+    socket.on(<span class="hljs-string">'data'</span>, (data) =&gt; {
+      <span class="hljs-keyword">this</span>.validateData(data);
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.handleSocketEvent(<span class="hljs-string">'data'</span>, data, localId);
+    });
+    socket.on(<span class="hljs-string">'endgroup'</span>, (group) =&gt; {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.handleSocketEvent(<span class="hljs-string">'endgroup'</span>, group, localId);
+    });
+    socket.on(<span class="hljs-string">'disconnect'</span>, () =&gt; {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.handleSocketEvent(<span class="hljs-string">'disconnect'</span>, socket, localId);
+    });
+    <span class="hljs-keyword">return</span> socket.on(<span class="hljs-string">'ip'</span>, (ip) =&gt; {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.handleIP(ip, localId);
+    });
+  }
 
-    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'connect'</span>, <span class="hljs-function">=&gt;</span>
-      @handleSocketEvent <span class="hljs-string">'connect'</span>, socket, localId
-    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'begingroup'</span>, <span class="hljs-function"><span class="hljs-params">(group)</span> =&gt;</span>
-      @handleSocketEvent <span class="hljs-string">'begingroup'</span>, group, localId
-    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'data'</span>, <span class="hljs-function"><span class="hljs-params">(data)</span> =&gt;</span>
-      @validateData data
-      @handleSocketEvent <span class="hljs-string">'data'</span>, data, localId
-    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'endgroup'</span>, <span class="hljs-function"><span class="hljs-params">(group)</span> =&gt;</span>
-      @handleSocketEvent <span class="hljs-string">'endgroup'</span>, group, localId
-    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'disconnect'</span>, <span class="hljs-function">=&gt;</span>
-      @handleSocketEvent <span class="hljs-string">'disconnect'</span>, socket, localId
-    socket.<span class="hljs-literal">on</span> <span class="hljs-string">'ip'</span>, <span class="hljs-function"><span class="hljs-params">(ip)</span> =&gt;</span>
-      @handleIP ip, localId
-
-  handleIP: <span class="hljs-function"><span class="hljs-params">(ip, id)</span> -&gt;</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> @process
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> @options.control <span class="hljs-keyword">and</span> ip.type <span class="hljs-keyword">isnt</span> <span class="hljs-string">'data'</span>
-    ip.owner = @nodeInstance
-    ip.index = id <span class="hljs-keyword">if</span> @isAddressable()
-    <span class="hljs-keyword">if</span> ip.datatype <span class="hljs-keyword">is</span> <span class="hljs-string">'all'</span></pre></div>
+  handleIP(ip, id) {
+    <span class="hljs-keyword">var</span> buf;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.options.control &amp;&amp; ip.type !== <span class="hljs-string">'data'</span>) {
+      <span class="hljs-keyword">return</span>;
+    }
+    ip.owner = <span class="hljs-keyword">this</span>.nodeInstance;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isAddressable()) {
+      ip.index = id;
+    }
+    <span class="hljs-keyword">if</span> (ip.datatype === <span class="hljs-string">'all'</span>) {</pre></div>
             
           
             
             <p>Stamp non-specific IP objects with port datatype</p>
 
             
-              <div class='highlight'><pre>      ip.datatype = @getDataType()
-    <span class="hljs-keyword">if</span> @getSchema() <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> ip.schema</pre></div>
+              <div class='highlight'><pre>      ip.datatype = <span class="hljs-keyword">this</span>.getDataType();
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.getSchema() &amp;&amp; !ip.schema) {</pre></div>
             
           
             
             <p>Stamp non-specific IP objects with port schema</p>
 
             
-              <div class='highlight'><pre>      ip.schema = @getSchema()
+              <div class='highlight'><pre>      ip.schema = <span class="hljs-keyword">this</span>.getSchema();
+    }
+    buf = <span class="hljs-keyword">this</span>.prepareBufferForIP(ip);
+    buf.push(ip);
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.options.control &amp;&amp; buf.length &gt; <span class="hljs-number">1</span>) {
+      buf.shift();
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'ip'</span>, ip, id);
+  }
 
-    buf = @prepareBufferForIP ip
-    buf.push ip
-    buf.shift() <span class="hljs-keyword">if</span> @options.control <span class="hljs-keyword">and</span> buf.length &gt; <span class="hljs-number">1</span>
-
-    <span class="hljs-keyword">if</span> @handle
-      @handle ip, @nodeInstance
-
-    @emit <span class="hljs-string">'ip'</span>, ip, id
-
-  handleSocketEvent: <span class="hljs-function"><span class="hljs-params">(event, payload, id)</span> -&gt;</span></pre></div>
-            
-          
-            
-            <p>Handle buffering the old way</p>
-
-            
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> @isBuffered()
-      @buffer.push
-        event: event
-        payload: payload
-        id: id</pre></div>
-            
-          
-            
-            <p>Notify receiver</p>
-
-            
-              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> @isAddressable()
-        @process event, id, @nodeInstance <span class="hljs-keyword">if</span> @process
-        @emit event, id
-      <span class="hljs-keyword">else</span>
-        @process event, @nodeInstance <span class="hljs-keyword">if</span> @process
-        @emit event
-      <span class="hljs-keyword">return</span>
-
-    <span class="hljs-keyword">if</span> @process
-      <span class="hljs-keyword">if</span> @isAddressable()
-        @process event, payload, id, @nodeInstance
-      <span class="hljs-keyword">else</span>
-        @process event, payload, @nodeInstance</pre></div>
+  handleSocketEvent(event, payload, id) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isAddressable()) {</pre></div>
             
           
             
             <p>Emit port event</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> @emit event, payload, id <span class="hljs-keyword">if</span> @isAddressable()
-    @emit event, payload
+              <div class='highlight'><pre>      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.emit(event, payload, id);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.emit(event, payload);
+  }
 
-  hasDefault: <span class="hljs-function">-&gt;</span>
-    <span class="hljs-keyword">return</span> @options.<span class="hljs-keyword">default</span> <span class="hljs-keyword">isnt</span> <span class="hljs-literal">undefined</span>
+  hasDefault() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.options.default !== <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+  }
 
-  prepareBuffer: <span class="hljs-function">-&gt;</span>
-    @buffer = []
-    @indexedBuffer = {} <span class="hljs-keyword">if</span> @isAddressable()
-    @scopedBuffer = {}
-    @iipBuffer = <span class="hljs-keyword">if</span> @isAddressable() <span class="hljs-keyword">then</span> {} <span class="hljs-keyword">else</span> []
+  prepareBuffer() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isAddressable()) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.options.scoped) {
+        <span class="hljs-keyword">this</span>.scopedBuffer = {};
+      }
+      <span class="hljs-keyword">this</span>.indexedBuffer = {};
+      <span class="hljs-keyword">this</span>.iipBuffer = {};
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.options.scoped) {
+      <span class="hljs-keyword">this</span>.scopedBuffer = {};
+    }
+    <span class="hljs-keyword">this</span>.iipBuffer = [];
+    <span class="hljs-keyword">this</span>.buffer = [];
+  }
 
-  prepareBufferForIP: <span class="hljs-function"><span class="hljs-params">(ip)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> @isAddressable()
-      <span class="hljs-keyword">if</span> ip.scope? <span class="hljs-keyword">and</span> @options.scoped
-        @scopedBuffer[ip.scope] = [] <span class="hljs-keyword">unless</span> ip.scope <span class="hljs-keyword">of</span> @scopedBuffer
-        @scopedBuffer[ip.scope][ip.index] = [] <span class="hljs-keyword">unless</span> ip.index <span class="hljs-keyword">of</span> @scopedBuffer[ip.scope]
-        <span class="hljs-keyword">return</span> @scopedBuffer[ip.scope][ip.index]
-      <span class="hljs-keyword">if</span> ip.initial
-        @iipBuffer[ip.index] = [] <span class="hljs-keyword">unless</span> ip.index <span class="hljs-keyword">of</span> @iipBuffer
-        <span class="hljs-keyword">return</span> @iipBuffer[ip.index]
-      @indexedBuffer[ip.index] = [] <span class="hljs-keyword">unless</span> ip.index <span class="hljs-keyword">of</span> @indexedBuffer
-      <span class="hljs-keyword">return</span> @indexedBuffer[ip.index]
-    <span class="hljs-keyword">if</span> ip.scope? <span class="hljs-keyword">and</span> @options.scoped
-      @scopedBuffer[ip.scope] = [] <span class="hljs-keyword">unless</span> ip.scope <span class="hljs-keyword">of</span> @scopedBuffer
-      <span class="hljs-keyword">return</span> @scopedBuffer[ip.scope]
-    <span class="hljs-keyword">if</span> ip.initial
-      <span class="hljs-keyword">return</span> @iipBuffer
-    <span class="hljs-keyword">return</span> @buffer
+  prepareBufferForIP(ip) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isAddressable()) {
+      <span class="hljs-keyword">if</span> ((ip.scope != <span class="hljs-literal">null</span>) &amp;&amp; <span class="hljs-keyword">this</span>.options.scoped) {
+        <span class="hljs-keyword">if</span> (!(ip.scope <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.scopedBuffer)) {
+          <span class="hljs-keyword">this</span>.scopedBuffer[ip.scope] = [];
+        }
+        <span class="hljs-keyword">if</span> (!(ip.index <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.scopedBuffer[ip.scope])) {
+          <span class="hljs-keyword">this</span>.scopedBuffer[ip.scope][ip.index] = [];
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.scopedBuffer[ip.scope][ip.index];
+      }
+      <span class="hljs-keyword">if</span> (ip.initial) {
+        <span class="hljs-keyword">if</span> (!(ip.index <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.iipBuffer)) {
+          <span class="hljs-keyword">this</span>.iipBuffer[ip.index] = [];
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.iipBuffer[ip.index];
+      }
+      <span class="hljs-keyword">if</span> (!(ip.index <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.indexedBuffer)) {
+        <span class="hljs-keyword">this</span>.indexedBuffer[ip.index] = [];
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.indexedBuffer[ip.index];
+    }
+    <span class="hljs-keyword">if</span> ((ip.scope != <span class="hljs-literal">null</span>) &amp;&amp; <span class="hljs-keyword">this</span>.options.scoped) {
+      <span class="hljs-keyword">if</span> (!(ip.scope <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.scopedBuffer)) {
+        <span class="hljs-keyword">this</span>.scopedBuffer[ip.scope] = [];
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.scopedBuffer[ip.scope];
+    }
+    <span class="hljs-keyword">if</span> (ip.initial) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.iipBuffer;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.buffer;
+  }
 
-  validateData: <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> @options.values
-    <span class="hljs-keyword">if</span> @options.values.indexOf(data) <span class="hljs-keyword">is</span> <span class="hljs-number">-1</span>
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Invalid data='<span class="hljs-subst">#{data}</span>' received, not in [<span class="hljs-subst">#{@options.values}</span>]"</span></pre></div>
-            
-          
-            
-            <p>Returns the next packet in the (legacy) buffer</p>
+  validateData(data) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.options.values) {
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.options.values.indexOf(data) === <span class="hljs-number">-1</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid data='<span class="hljs-subst">${data}</span>' received, not in [<span class="hljs-subst">${<span class="hljs-keyword">this</span>.options.values}</span>]`</span>);
+    }
+  }
 
-            
-              <div class='highlight'><pre>  receive: <span class="hljs-function">-&gt;</span>
-    platform.deprecated <span class="hljs-string">'InPort.receive is deprecated. Use InPort.get instead'</span>
-    <span class="hljs-keyword">unless</span> @isBuffered()
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'Receive is only possible on buffered ports'</span>
-    @buffer.shift()</pre></div>
-            
-          
-            
-            <p>Returns the number of data packets in a (legacy) buffered inport</p>
+  getBuffer(scope, idx, initial = <span class="hljs-literal">false</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isAddressable()) {
+      <span class="hljs-keyword">if</span> ((scope != <span class="hljs-literal">null</span>) &amp;&amp; <span class="hljs-keyword">this</span>.options.scoped) {
+        <span class="hljs-keyword">if</span> (!(scope <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.scopedBuffer)) {
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+        }
+        <span class="hljs-keyword">if</span> (!(idx <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.scopedBuffer[scope])) {
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.scopedBuffer[scope][idx];
+      }
+      <span class="hljs-keyword">if</span> (initial) {
+        <span class="hljs-keyword">if</span> (!(idx <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.iipBuffer)) {
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.iipBuffer[idx];
+      }
+      <span class="hljs-keyword">if</span> (!(idx <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.indexedBuffer)) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.indexedBuffer[idx];
+    }
+    <span class="hljs-keyword">if</span> ((scope != <span class="hljs-literal">null</span>) &amp;&amp; <span class="hljs-keyword">this</span>.options.scoped) {
+      <span class="hljs-keyword">if</span> (!(scope <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.scopedBuffer)) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.scopedBuffer[scope];
+    }
+    <span class="hljs-keyword">if</span> (initial) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.iipBuffer;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.buffer;
+  }
 
-            
-              <div class='highlight'><pre>  contains: <span class="hljs-function">-&gt;</span>
-    platform.deprecated <span class="hljs-string">'InPort.contains is deprecated. Use InPort.has instead'</span>
-    <span class="hljs-keyword">unless</span> @isBuffered()
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'Contains query is only possible on buffered ports'</span>
-    @buffer.filter(<span class="hljs-function"><span class="hljs-params">(packet)</span> -&gt;</span> <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> packet.event <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span>).length
-
-  getBuffer: <span class="hljs-function"><span class="hljs-params">(scope, idx, initial = <span class="hljs-literal">false</span>)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> @isAddressable()
-      <span class="hljs-keyword">if</span> scope? <span class="hljs-keyword">and</span> @options.scoped
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> scope <span class="hljs-keyword">of</span> @scopedBuffer
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> idx <span class="hljs-keyword">of</span> @scopedBuffer[scope]
-        <span class="hljs-keyword">return</span> @scopedBuffer[scope][idx]
-      <span class="hljs-keyword">if</span> initial
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> idx <span class="hljs-keyword">of</span> @iipBuffer
-        <span class="hljs-keyword">return</span> @iipBuffer[idx]
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> idx <span class="hljs-keyword">of</span> @indexedBuffer
-      <span class="hljs-keyword">return</span> @indexedBuffer[idx]
-    <span class="hljs-keyword">if</span> scope? <span class="hljs-keyword">and</span> @options.scoped
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> scope <span class="hljs-keyword">of</span> @scopedBuffer
-      <span class="hljs-keyword">return</span> @scopedBuffer[scope]
-    <span class="hljs-keyword">if</span> initial
-      <span class="hljs-keyword">return</span> @iipBuffer
-    <span class="hljs-keyword">return</span> @buffer
-
-  getFromBuffer: <span class="hljs-function"><span class="hljs-params">(scope, idx, initial = <span class="hljs-literal">false</span>)</span> -&gt;</span>
-    buf = @getBuffer scope, idx, initial
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span> <span class="hljs-keyword">unless</span> buf?.length
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> @options.control <span class="hljs-keyword">then</span> buf[buf.length - <span class="hljs-number">1</span>] <span class="hljs-keyword">else</span> buf.shift()</pre></div>
+  getFromBuffer(scope, idx, initial = <span class="hljs-literal">false</span>) {
+    <span class="hljs-keyword">var</span> buf;
+    buf = <span class="hljs-keyword">this</span>.getBuffer(scope, idx, initial);
+    <span class="hljs-keyword">if</span> (!(buf != <span class="hljs-literal">null</span> ? buf.length : <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.options.control) {
+      <span class="hljs-keyword">return</span> buf[buf.length - <span class="hljs-number">1</span>];
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">return</span> buf.shift();
+    }
+  }</pre></div>
             
           
             
             <p>Fetches a packet from the port</p>
 
             
-              <div class='highlight'><pre>  get: <span class="hljs-function"><span class="hljs-params">(scope, idx)</span> -&gt;</span>
-    res = @getFromBuffer scope, idx
-    <span class="hljs-keyword">return</span> res <span class="hljs-keyword">if</span> res <span class="hljs-keyword">isnt</span> <span class="hljs-literal">undefined</span></pre></div>
+              <div class='highlight'><pre>  get(scope, idx) {
+    <span class="hljs-keyword">var</span> res;
+    res = <span class="hljs-keyword">this</span>.getFromBuffer(scope, idx);
+    <span class="hljs-keyword">if</span> (res !== <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span> res;
+    }</pre></div>
             
           
             
             <p>Try to find an IIP instead</p>
 
             
-              <div class='highlight'><pre>    @getFromBuffer <span class="hljs-literal">null</span>, idx, <span class="hljs-literal">true</span>
+              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.getFromBuffer(<span class="hljs-literal">null</span>, idx, <span class="hljs-literal">true</span>);
+  }
 
-  hasIPinBuffer: <span class="hljs-function"><span class="hljs-params">(scope, idx, validate, initial = <span class="hljs-literal">false</span>)</span> -&gt;</span>
-    buf = @getBuffer scope, idx, initial
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">unless</span> buf?.length
-    <span class="hljs-keyword">for</span> packet <span class="hljs-keyword">in</span> buf
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> validate packet
-    <span class="hljs-literal">false</span>
+  hasIPinBuffer(scope, idx, validate, initial = <span class="hljs-literal">false</span>) {
+    <span class="hljs-keyword">var</span> buf, i, len, packet;
+    buf = <span class="hljs-keyword">this</span>.getBuffer(scope, idx, initial);
+    <span class="hljs-keyword">if</span> (!(buf != <span class="hljs-literal">null</span> ? buf.length : <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = buf.length; i &lt; len; i++) {
+      packet = buf[i];
+      <span class="hljs-keyword">if</span> (validate(packet)) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
 
-  hasIIP: <span class="hljs-function"><span class="hljs-params">(idx, validate)</span> -&gt;</span>
-    @hasIPinBuffer <span class="hljs-literal">null</span>, idx, validate, <span class="hljs-literal">true</span></pre></div>
+  hasIIP(idx, validate) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.hasIPinBuffer(<span class="hljs-literal">null</span>, idx, validate, <span class="hljs-literal">true</span>);
+  }</pre></div>
             
           
             
             <p>Returns true if port contains packet(s) matching the validator</p>
 
             
-              <div class='highlight'><pre>  has: <span class="hljs-function"><span class="hljs-params">(scope, idx, validate)</span> -&gt;</span>
-    <span class="hljs-keyword">unless</span> @isAddressable()
-      validate = idx
-      idx = <span class="hljs-literal">null</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @hasIPinBuffer scope, idx, validate
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @hasIIP idx, validate
-    <span class="hljs-literal">false</span></pre></div>
+              <div class='highlight'><pre>  has(scope, idx, validate) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.isAddressable()) {
+      validate = idx;
+      idx = <span class="hljs-literal">null</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.hasIPinBuffer(scope, idx, validate)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.hasIIP(idx, validate)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }</pre></div>
             
           
             
             <p>Returns the number of data packets in an inport</p>
 
             
-              <div class='highlight'><pre>  length: <span class="hljs-function"><span class="hljs-params">(scope, idx)</span> -&gt;</span>
-    buf = @getBuffer scope, idx
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span> <span class="hljs-keyword">unless</span> buf
-    <span class="hljs-keyword">return</span> buf.length</pre></div>
+              <div class='highlight'><pre>  length(scope, idx) {
+    <span class="hljs-keyword">var</span> buf;
+    buf = <span class="hljs-keyword">this</span>.getBuffer(scope, idx);
+    <span class="hljs-keyword">if</span> (!buf) {
+      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">return</span> buf.length;
+  }</pre></div>
             
           
             
             <p>Tells if buffer has packets or not</p>
 
             
-              <div class='highlight'><pre>  ready: <span class="hljs-function"><span class="hljs-params">(scope, idx)</span> -&gt;</span>
-    <span class="hljs-keyword">return</span> @length(scope) &gt; <span class="hljs-number">0</span></pre></div>
+              <div class='highlight'><pre>  ready(scope, idx) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.length(scope) &gt; <span class="hljs-number">0</span>;
+  }</pre></div>
             
           
             
             <p>Clears inport buffers</p>
 
             
-              <div class='highlight'><pre>  clear: <span class="hljs-function">-&gt;</span>
-    @prepareBuffer()
+              <div class='highlight'><pre>  clear() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.prepareBuffer();
+  }
 
-<span class="hljs-built_in">module</span>.exports = InPort</pre></div>
+};
+
+<span class="hljs-built_in">module</span>.exports = InPort;</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InPort.coffee">InPort.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InPort.js">InPort.js</a> file.</small></p>
         </div>
       </div>
     </div>
