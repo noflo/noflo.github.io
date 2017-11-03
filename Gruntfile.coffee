@@ -54,7 +54,7 @@ module.exports = ->
 
     docco:
       noflo:
-        src: ['node_modules/noflo/src/lib/*.coffee']
+        src: ['node_modules/noflo/lib/*.js']
         options:
           output: 'api/'
           template: '_docco/docco.jst'

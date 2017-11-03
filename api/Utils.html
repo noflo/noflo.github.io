@@ -24,26 +24,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
-                    ArrayPort
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/AsCallback/index.html' %}class="active" {% endif %}href="/api/AsCallback/">
                     AsCallback
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
-                    AsyncComponent
                   </a>
                 </li>
                 
@@ -150,26 +132,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
-                    Port
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
                     Ports
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
-                    Streams
                   </a>
                 </li>
                 
@@ -194,52 +158,28 @@ categories:
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license
-</code></pre><p>Generic object clone. From CS cookbook</p>
-
-            
-              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">clone</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
-  <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> obj? <span class="hljs-keyword">or</span> <span class="hljs-keyword">typeof</span> obj <span class="hljs-keyword">isnt</span> <span class="hljs-string">'object'</span>
-    <span class="hljs-keyword">return</span> obj
-
-  <span class="hljs-keyword">if</span> obj <span class="hljs-keyword">instanceof</span> Date
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Date(obj.getTime())
-
-  <span class="hljs-keyword">if</span> obj <span class="hljs-keyword">instanceof</span> RegExp
-    flags = <span class="hljs-string">''</span>
-    flags += <span class="hljs-string">'g'</span> <span class="hljs-keyword">if</span> obj.<span class="hljs-built_in">global</span>?
-    flags += <span class="hljs-string">'i'</span> <span class="hljs-keyword">if</span> obj.ignoreCase?
-    flags += <span class="hljs-string">'m'</span> <span class="hljs-keyword">if</span> obj.multiline?
-    flags += <span class="hljs-string">'y'</span> <span class="hljs-keyword">if</span> obj.sticky?
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> RegExp(obj.source, flags)
-
-  newInstance = <span class="hljs-keyword">new</span> obj.constructor()
-
-  <span class="hljs-keyword">for</span> key <span class="hljs-keyword">of</span> obj
-    newInstance[key] = clone obj[key]
-
-  <span class="hljs-keyword">return</span> newInstance</pre></div>
+</code></pre>
             
           
             
             <p>Guess language from filename</p>
 
             
-              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">guessLanguageFromFilename</span> = <span class="hljs-params">(filename)</span> -&gt;</span>
-  <span class="hljs-keyword">return</span> <span class="hljs-string">'coffeescript'</span> <span class="hljs-keyword">if</span> <span class="hljs-regexp">/.*\.coffee$/</span>.test filename
-  <span class="hljs-keyword">return</span> <span class="hljs-string">'javascript'</span>
-<span class="hljs-function">
-<span class="hljs-title">isArray</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
-  <span class="hljs-keyword">return</span> Array.isArray(obj) <span class="hljs-keyword">if</span> Array.isArray
-  <span class="hljs-keyword">return</span> Object.prototype.toString.call(arg) == <span class="hljs-string">'[object Array]'</span>
-<span class="hljs-function">
-<span class="hljs-title">isObject</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
-  type = <span class="hljs-keyword">typeof</span>(obj)
-  type == <span class="hljs-string">'function'</span> <span class="hljs-keyword">or</span> type == <span class="hljs-string">'object'</span> <span class="hljs-keyword">and</span> ! !obj
-<span class="hljs-function">
-<span class="hljs-title">unique</span> = <span class="hljs-params">(array)</span> -&gt;</span>
-  output = {}
-  output[array[key]] = array[key] <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> [<span class="hljs-number">0.</span>..array.length]
-  value <span class="hljs-keyword">for</span> key, value <span class="hljs-keyword">of</span> output</pre></div>
+              <div class='highlight'><pre><span class="hljs-keyword">var</span> createReduce, debounce, guessLanguageFromFilename, isArray, optimizeCb, reduceRight;
+
+guessLanguageFromFilename = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">filename</span>) </span>{
+  <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/.*\.coffee$/</span>.test(filename)) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'coffeescript'</span>;
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'javascript'</span>;
+};
+
+isArray = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj</span>) </span>{
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.isArray(obj);
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.prototype.toString.call(arg) === <span class="hljs-string">'[object Array]'</span>;
+};</pre></div>
             
           
             
@@ -256,24 +196,32 @@ version of the passed-in callback,
 to be repeatedly applied in other Underscore functions.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">optimizeCb</span> = <span class="hljs-params">(func, context, argCount)</span> -&gt;</span>
-  <span class="hljs-keyword">if</span> context == <span class="hljs-literal">undefined</span>
-    <span class="hljs-keyword">return</span> func
-  <span class="hljs-keyword">switch</span> (<span class="hljs-keyword">if</span> argCount == <span class="hljs-literal">null</span> <span class="hljs-keyword">then</span> <span class="hljs-number">3</span> <span class="hljs-keyword">else</span> argCount)
-    <span class="hljs-keyword">when</span> <span class="hljs-number">1</span>
-      <span class="hljs-keyword">return</span> (value) -&gt;
-        func.call context, value
-    <span class="hljs-keyword">when</span> <span class="hljs-number">2</span>
-      <span class="hljs-keyword">return</span> (value, other) -&gt;
-        func.call context, value, other
-    <span class="hljs-keyword">when</span> <span class="hljs-number">3</span>
-      <span class="hljs-keyword">return</span> (value, index, collection) -&gt;
-        func.call context, value, index, collection
-    <span class="hljs-keyword">when</span> <span class="hljs-number">4</span>
-      <span class="hljs-keyword">return</span> (accumulator, value, index, collection) -&gt;
-        func.call context, accumulator, value, index, collection
-  -&gt;
-    func.apply context, arguments</pre></div>
+              <div class='highlight'><pre>optimizeCb = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">func, context, argCount</span>) </span>{
+  <span class="hljs-keyword">if</span> (context === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> func;
+  }
+  <span class="hljs-keyword">switch</span> ((argCount === <span class="hljs-literal">null</span> ? <span class="hljs-number">3</span> : argCount)) {
+    <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>{
+        <span class="hljs-keyword">return</span> func.call(context, value);
+      };
+    <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value, other</span>) </span>{
+        <span class="hljs-keyword">return</span> func.call(context, value, other);
+      };
+    <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value, index, collection</span>) </span>{
+        <span class="hljs-keyword">return</span> func.call(context, value, index, collection);
+      };
+    <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:
+      <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">accumulator, value, index, collection</span>) </span>{
+        <span class="hljs-keyword">return</span> func.call(context, accumulator, value, index, collection);
+      };
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> func.apply(context, <span class="hljs-built_in">arguments</span>);
+  };
+};</pre></div>
             
           
             
@@ -282,25 +230,32 @@ Optimized iterator function as using arguments.length in the main function
 will deoptimize the, see #1991.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">createReduce</span> = <span class="hljs-params">(dir)</span> -&gt;</span>
-<span class="hljs-function">  <span class="hljs-title">iterator</span> = <span class="hljs-params">(obj, iteratee, memo, keys, index, length)</span> -&gt;</span>
-    <span class="hljs-keyword">while</span> index &gt;= <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> index &lt; length
-      currentKey = <span class="hljs-keyword">if</span> keys <span class="hljs-keyword">then</span> keys[index] <span class="hljs-keyword">else</span> index
-      memo = iteratee(memo, obj[currentKey], currentKey, obj)
-      index += dir
-    memo
+              <div class='highlight'><pre>createReduce = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">dir</span>) </span>{
+  <span class="hljs-keyword">var</span> iterator;
+  iterator = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj, iteratee, memo, keys, index, length</span>) </span>{
+    <span class="hljs-keyword">var</span> currentKey;
+    <span class="hljs-keyword">while</span> (index &gt;= <span class="hljs-number">0</span> &amp;&amp; index &lt; length) {
+      currentKey = keys ? keys[index] : index;
+      memo = iteratee(memo, obj[currentKey], currentKey, obj);
+      index += dir;
+    }
+    <span class="hljs-keyword">return</span> memo;
+  };
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj, iteratee, memo, context</span>) </span>{
+    <span class="hljs-keyword">var</span> index, keys, length;
+    iteratee = optimizeCb(iteratee, context, <span class="hljs-number">4</span>);
+    keys = <span class="hljs-built_in">Object</span>.keys(obj);
+    length = (keys || obj).length;
+    index = dir &gt; <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : length - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">arguments</span>.length &lt; <span class="hljs-number">3</span>) {
+      memo = obj[keys ? keys[index] : index];
+      index += dir;
+    }
+    <span class="hljs-keyword">return</span> iterator(obj, iteratee, memo, keys, index, length);
+  };
+};
 
-  <span class="hljs-keyword">return</span> (obj, iteratee, memo, context) -&gt;
-    iteratee = optimizeCb(iteratee, context, <span class="hljs-number">4</span>)
-    keys = Object.keys obj
-    length = (keys <span class="hljs-keyword">or</span> obj).length
-    index = <span class="hljs-keyword">if</span> dir &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">then</span> <span class="hljs-number">0</span> <span class="hljs-keyword">else</span> length - <span class="hljs-number">1</span>
-    <span class="hljs-keyword">if</span> arguments.length &lt; <span class="hljs-number">3</span>
-      memo = obj[<span class="hljs-keyword">if</span> keys <span class="hljs-keyword">then</span> keys[index] <span class="hljs-keyword">else</span> index]
-      index += dir
-    iterator obj, iteratee, memo, keys, index, length
-
-reduceRight = createReduce(<span class="hljs-number">-1</span>)</pre></div>
+reduceRight = createReduce(<span class="hljs-number">-1</span>);</pre></div>
             
           
             
@@ -311,112 +266,55 @@ If immediate is passed, trigger the function on the leading edge,
 instead of the trailing.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">debounce</span> = <span class="hljs-params">(func, wait, immediate)</span> -&gt;</span>
-  timeout = <span class="hljs-literal">undefined</span>
-  args = <span class="hljs-literal">undefined</span>
-  context = <span class="hljs-literal">undefined</span>
-  timestamp = <span class="hljs-literal">undefined</span>
-  result = <span class="hljs-literal">undefined</span>
-<span class="hljs-function">
-  <span class="hljs-title">later</span> = -&gt;</span>
-    last = Date.now - timestamp
-    <span class="hljs-keyword">if</span> last &lt; wait <span class="hljs-keyword">and</span> last &gt;= <span class="hljs-number">0</span>
-      timeout = setTimeout(later, wait - last)
-    <span class="hljs-keyword">else</span>
-      timeout = <span class="hljs-literal">null</span>
-      <span class="hljs-keyword">if</span> !immediate
-        result = func.apply(context, args)
-        <span class="hljs-keyword">if</span> !timeout
-          context = args = <span class="hljs-literal">null</span>
-    <span class="hljs-keyword">return</span>
+              <div class='highlight'><pre>debounce = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">func, wait, immediate</span>) </span>{
+  <span class="hljs-keyword">var</span> args, context, later, result, timeout, timestamp;
+  timeout = <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+  args = <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+  context = <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+  timestamp = <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+  result = <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
+  later = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> last;
+    last = <span class="hljs-built_in">Date</span>.now - timestamp;
+    <span class="hljs-keyword">if</span> (last &lt; wait &amp;&amp; last &gt;= <span class="hljs-number">0</span>) {
+      timeout = setTimeout(later, wait - last);
+    } <span class="hljs-keyword">else</span> {
+      timeout = <span class="hljs-literal">null</span>;
+      <span class="hljs-keyword">if</span> (!immediate) {
+        result = func.apply(context, args);
+        <span class="hljs-keyword">if</span> (!timeout) {
+          context = args = <span class="hljs-literal">null</span>;
+        }
+      }
+    }
+  };
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> callNow;
+    context = <span class="hljs-keyword">this</span>;
+    args = <span class="hljs-built_in">arguments</span>;
+    timestamp = <span class="hljs-built_in">Date</span>.now;
+    callNow = immediate &amp;&amp; !timeout;
+    <span class="hljs-keyword">if</span> (!timeout) {
+      timeout = setTimeout(later, wait);
+    }
+    <span class="hljs-keyword">if</span> (callNow) {
+      result = func.apply(context, args);
+      context = args = <span class="hljs-literal">null</span>;
+    }
+    <span class="hljs-keyword">return</span> result;
+  };
+};
 
-  -&gt;
-    context = <span class="hljs-keyword">this</span>
-    args = arguments
-    timestamp = Date.now
-    callNow = immediate <span class="hljs-keyword">and</span> !timeout
-    <span class="hljs-keyword">if</span> !timeout
-      timeout = setTimeout(later, wait)
-    <span class="hljs-keyword">if</span> callNow
-      result = func.apply(context, args)
-      context = args = <span class="hljs-literal">null</span>
-    result</pre></div>
+exports.guessLanguageFromFilename = guessLanguageFromFilename;
+
+exports.reduceRight = reduceRight;
+
+exports.debounce = debounce;
+
+exports.isArray = isArray;</pre></div>
             
           
-            
-            <p> Retrieve the names of an object’s own properties.
-Delegates to ECMAScript 5‘s native Object.keys</p>
-
-            
-              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">getKeys</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
-  <span class="hljs-keyword">if</span> !isObject obj
-    <span class="hljs-keyword">return</span> []
-  <span class="hljs-keyword">if</span> Object.keys
-    <span class="hljs-keyword">return</span> Object.keys(obj)
-  keys = []
-  <span class="hljs-keyword">for</span> key <span class="hljs-keyword">of</span> obj
-    <span class="hljs-keyword">if</span> obj.has key
-      keys.push key
-  keys</pre></div>
-            
-          
-            
-            <p>Retrieve the values of an object’s properties.</p>
-
-            
-              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">getValues</span> = <span class="hljs-params">(obj)</span> -&gt;</span>
-  keys = getKeys obj
-  length = keys.length
-  values = Array(length)
-  i = <span class="hljs-number">0</span>
-  <span class="hljs-keyword">while</span> i &lt; length
-    values[i] = obj[keys[i]]
-    i++
-  values</pre></div>
-            
-          
-            
-            <p>Determine if the array or object contains a given item (using ===).
-Aliased as includes and include.</p>
-
-            
-              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">contains</span> = <span class="hljs-params">(obj, item, fromIndex)</span> -&gt;</span>
-  <span class="hljs-keyword">if</span> !isArray obj
-    obj = getValues obj
-  <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> fromIndex != <span class="hljs-string">'number'</span> <span class="hljs-keyword">or</span> guard
-    fromIndex = <span class="hljs-number">0</span>
-  obj.indexOf(item) &gt;= <span class="hljs-number">0</span></pre></div>
-            
-          
-            
-            <p>Produce an array that contains every item
-shared between all the passed-in arrays.</p>
-
-            
-              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">intersection</span> = <span class="hljs-params">(array)</span> -&gt;</span>
-  result = []
-  argsLength = arguments.length
-  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> [<span class="hljs-number">0.</span>.array.length]
-    item = array[i]
-    <span class="hljs-keyword">continue</span> <span class="hljs-keyword">if</span> contains result, item
-
-    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> [<span class="hljs-number">1.</span>.argsLength]
-      <span class="hljs-keyword">break</span> <span class="hljs-keyword">if</span> !contains arguments[j], item
-
-    result.push item <span class="hljs-keyword">if</span> j <span class="hljs-keyword">is</span> argsLength
-  result
-
-exports.clone = clone
-exports.guessLanguageFromFilename = guessLanguageFromFilename
-exports.optimizeCb = optimizeCb
-exports.reduceRight = reduceRight
-exports.debounce = debounce
-exports.unique = unique
-exports.intersection = intersection
-exports.getValues = getValues</pre></div>
-            
-          
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.coffee">Utils.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.js">Utils.js</a> file.</small></p>
         </div>
       </div>
     </div>

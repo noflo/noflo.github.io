@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "<%= title.replace('.coffee', '') %> API"
+title: "<%= title.replace('.js', '') %> API"
 categories:
   - api
 ---
@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/<%= title %>" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/<%= title.replace('.js', '.coffee') %>" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@ categories:
                 <% if (path.basename(source) !== 'shell.coffee') { %>
                 <li>
                   <a {% if page.url == '/api/<%= path.basename(destination(source), path.extname(destination(source))) %>/index.html' %}class="active" {% endif %}href="/api/<%= path.basename(destination(source), path.extname(destination(source))) %>/">
-                    <%= path.basename(source).replace('.coffee', '') %>
+                    <%= path.basename(source).replace('.js', '') %>
                   </a>
                 </li>
                 <% } %>

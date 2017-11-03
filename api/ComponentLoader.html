@@ -24,26 +24,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
-                    ArrayPort
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/AsCallback/index.html' %}class="active" {% endif %}href="/api/AsCallback/">
                     AsCallback
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
-                    AsyncComponent
                   </a>
                 </li>
                 
@@ -150,26 +132,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
-                    Port
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
                     Ports
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
-                    Streams
                   </a>
                 </li>
                 
@@ -195,274 +159,372 @@ categories:
 (c) <span class="hljs-number">2013</span><span class="hljs-number">-2017</span> Flowhub UG
 (c) <span class="hljs-number">2013</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license
-</code></pre><p>This is the browser version of the ComponentLoader.</p>
+</code></pre>
+            
+          
+            
+            <p>This is the browser version of the ComponentLoader.</p>
 
             
-              <div class='highlight'><pre>internalSocket = <span class="hljs-built_in">require</span> <span class="hljs-string">'./InternalSocket'</span>
-fbpGraph = <span class="hljs-built_in">require</span> <span class="hljs-string">'fbp-graph'</span>
-{EventEmitter} = <span class="hljs-built_in">require</span> <span class="hljs-string">'events'</span>
-registerLoader = <span class="hljs-built_in">require</span> <span class="hljs-string">'./loader/register'</span>
+              <div class='highlight'><pre><span class="hljs-keyword">var</span> ComponentLoader, EventEmitter, fbpGraph, internalSocket, platform, registerLoader;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ComponentLoader</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span></span>
-  constructor: <span class="hljs-function"><span class="hljs-params">(@baseDir, @options = {})</span> -&gt;</span>
-    @components = <span class="hljs-literal">null</span>
-    @libraryIcons = {}
-    @processing = <span class="hljs-literal">false</span>
-    @ready = <span class="hljs-literal">false</span>
-    @setMaxListeners <span class="hljs-number">0</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> @setMaxListeners <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
+internalSocket = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./InternalSocket'</span>);
 
-  getModulePrefix: <span class="hljs-function"><span class="hljs-params">(name)</span> -&gt;</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-string">''</span> <span class="hljs-keyword">unless</span> name
-    <span class="hljs-keyword">return</span> <span class="hljs-string">''</span> <span class="hljs-keyword">if</span> name <span class="hljs-keyword">is</span> <span class="hljs-string">'noflo'</span>
-    name = name.replace <span class="hljs-regexp">/\@[a-z\-]+\//</span>, <span class="hljs-string">''</span> <span class="hljs-keyword">if</span> name[<span class="hljs-number">0</span>] <span class="hljs-keyword">is</span> <span class="hljs-string">'@'</span>
-    name.replace <span class="hljs-string">'noflo-'</span>, <span class="hljs-string">''</span>
+fbpGraph = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fbp-graph'</span>);
 
-  listComponents: <span class="hljs-function"><span class="hljs-params">(callback)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> @processing
-      @once <span class="hljs-string">'ready'</span>, <span class="hljs-function">=&gt;</span>
-        callback <span class="hljs-literal">null</span>, @components
-      <span class="hljs-keyword">return</span>
-    <span class="hljs-keyword">return</span> callback <span class="hljs-literal">null</span>, @components <span class="hljs-keyword">if</span> @components
+({EventEmitter} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>));
 
-    @ready = <span class="hljs-literal">false</span>
-    @processing = <span class="hljs-literal">true</span>
+registerLoader = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./loader/register'</span>);
 
-    @components = {}
-    registerLoader.register @, <span class="hljs-function"><span class="hljs-params">(err)</span> =&gt;</span>
-      <span class="hljs-keyword">if</span> err
-        <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> callback
-        <span class="hljs-keyword">throw</span> err
-      @processing = <span class="hljs-literal">false</span>
-      @ready = <span class="hljs-literal">true</span>
-      @emit <span class="hljs-string">'ready'</span>, <span class="hljs-literal">true</span>
-      callback <span class="hljs-literal">null</span>, @components <span class="hljs-keyword">if</span> callback
-    <span class="hljs-keyword">return</span>
+platform = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Platform'</span>);
 
-  load: <span class="hljs-function"><span class="hljs-params">(name, callback, metadata)</span> -&gt;</span>
-    <span class="hljs-keyword">unless</span> @ready
-      @listComponents (err) =&gt;
-        <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
-        @load name, callback, metadata
-      <span class="hljs-keyword">return</span>
+ComponentLoader = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ComponentLoader</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+  <span class="hljs-keyword">constructor</span>(baseDir, options = {}) {
+    <span class="hljs-keyword">super</span>();
+    <span class="hljs-keyword">this</span>.baseDir = baseDir;
+    <span class="hljs-keyword">this</span>.options = options;
+    <span class="hljs-keyword">this</span>.components = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">this</span>.libraryIcons = {};
+    <span class="hljs-keyword">this</span>.processing = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">this</span>.ready = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">this</span>.setMaxListeners === <span class="hljs-string">'function'</span>) {
+      <span class="hljs-keyword">this</span>.setMaxListeners(<span class="hljs-number">0</span>);
+    }
+  }
 
-    component = @components[name]
-    <span class="hljs-keyword">unless</span> component</pre></div>
+  getModulePrefix(name) {
+    <span class="hljs-keyword">if</span> (!name) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">''</span>;
+    }
+    <span class="hljs-keyword">if</span> (name === <span class="hljs-string">'noflo'</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">''</span>;
+    }
+    <span class="hljs-keyword">if</span> (name[<span class="hljs-number">0</span>] === <span class="hljs-string">'@'</span>) {
+      name = name.replace(<span class="hljs-regexp">/\@[a-z\-]+\//</span>, <span class="hljs-string">''</span>);
+    }
+    <span class="hljs-keyword">return</span> name.replace(<span class="hljs-string">'noflo-'</span>, <span class="hljs-string">''</span>);
+  }
+
+  listComponents(callback) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.processing) {
+      <span class="hljs-keyword">this</span>.once(<span class="hljs-string">'ready'</span>, () =&gt; {
+        <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, <span class="hljs-keyword">this</span>.components);
+      });
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.components) {
+      <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, <span class="hljs-keyword">this</span>.components);
+    }
+    <span class="hljs-keyword">this</span>.ready = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">this</span>.processing = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">this</span>.components = {};
+    registerLoader.register(<span class="hljs-keyword">this</span>, (err) =&gt; {
+      <span class="hljs-keyword">if</span> (err) {
+        <span class="hljs-keyword">if</span> (callback) {
+          <span class="hljs-keyword">return</span> callback(err);
+        }
+        <span class="hljs-keyword">throw</span> err;
+      }
+      <span class="hljs-keyword">this</span>.processing = <span class="hljs-literal">false</span>;
+      <span class="hljs-keyword">this</span>.ready = <span class="hljs-literal">true</span>;
+      <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'ready'</span>, <span class="hljs-literal">true</span>);
+      <span class="hljs-keyword">if</span> (callback) {
+        <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, <span class="hljs-keyword">this</span>.components);
+      }
+    });
+  }
+
+  load(name, callback, metadata) {
+    <span class="hljs-keyword">var</span> component, componentName;
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.ready) {
+      <span class="hljs-keyword">this</span>.listComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err) {
+          <span class="hljs-keyword">return</span> callback(err);
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.load(name, callback, metadata);
+      });
+      <span class="hljs-keyword">return</span>;
+    }
+    component = <span class="hljs-keyword">this</span>.components[name];
+    <span class="hljs-keyword">if</span> (!component) {</pre></div>
             
           
             
             <p>Try an alias</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">for</span> componentName <span class="hljs-keyword">of</span> @components
-        <span class="hljs-keyword">if</span> componentName.split(<span class="hljs-string">'/'</span>)[<span class="hljs-number">1</span>] <span class="hljs-keyword">is</span> name
-          component = @components[componentName]
-          <span class="hljs-keyword">break</span>
-      <span class="hljs-keyword">unless</span> component</pre></div>
+              <div class='highlight'><pre>      <span class="hljs-keyword">for</span> (componentName <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.components) {
+        <span class="hljs-keyword">if</span> (componentName.split(<span class="hljs-string">'/'</span>)[<span class="hljs-number">1</span>] === name) {
+          component = <span class="hljs-keyword">this</span>.components[componentName];
+          <span class="hljs-keyword">break</span>;
+        }
+      }
+      <span class="hljs-keyword">if</span> (!component) {</pre></div>
             
           
             
             <p>Failure to load</p>
 
             
-              <div class='highlight'><pre>        callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Component <span class="hljs-subst">#{name}</span> not available with base <span class="hljs-subst">#{@baseDir}</span>"</span>
-        <span class="hljs-keyword">return</span>
-
-    <span class="hljs-keyword">if</span> @isGraph component
-      <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> process <span class="hljs-keyword">isnt</span> <span class="hljs-string">'undefined'</span> <span class="hljs-keyword">and</span> process.execPath <span class="hljs-keyword">and</span> process.execPath.indexOf(<span class="hljs-string">'node'</span>) <span class="hljs-keyword">isnt</span> <span class="hljs-number">-1</span></pre></div>
+              <div class='highlight'><pre>        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Component <span class="hljs-subst">${name}</span> not available with base <span class="hljs-subst">${<span class="hljs-keyword">this</span>.baseDir}</span>`</span>));
+        <span class="hljs-keyword">return</span>;
+      }
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isGraph(component)) {
+      <span class="hljs-keyword">if</span> (!platform.isBrowser()) {</pre></div>
             
           
             
             <p>nextTick is faster on Node.js</p>
 
             
-              <div class='highlight'><pre>        process.nextTick =&gt;
-          @loadGraph name, component, callback, metadata
-      <span class="hljs-keyword">else</span>
-        setTimeout =&gt;
-          @loadGraph name, component, callback, metadata
-        , <span class="hljs-number">0</span>
-      <span class="hljs-keyword">return</span>
-
-    @createComponent name, component, metadata, <span class="hljs-function"><span class="hljs-params">(err, instance)</span> =&gt;</span>
-      <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
-      <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> instance
-        callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Component <span class="hljs-subst">#{name}</span> could not be loaded."</span>
-        <span class="hljs-keyword">return</span>
-
-      instance.baseDir = @baseDir <span class="hljs-keyword">if</span> name <span class="hljs-keyword">is</span> <span class="hljs-string">'Graph'</span>
-      instance.componentName = name <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> name <span class="hljs-keyword">is</span> <span class="hljs-string">'string'</span>
-
-      @setIcon name, instance
-      callback <span class="hljs-literal">null</span>, instance</pre></div>
+              <div class='highlight'><pre>        process.nextTick(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.loadGraph(name, component, callback, metadata);
+        });
+      } <span class="hljs-keyword">else</span> {
+        setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.loadGraph(name, component, callback, metadata);
+        }, <span class="hljs-number">0</span>);
+      }
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.createComponent(name, component, metadata, (err, instance) =&gt; {
+      <span class="hljs-keyword">if</span> (err) {
+        <span class="hljs-keyword">return</span> callback(err);
+      }
+      <span class="hljs-keyword">if</span> (!instance) {
+        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Component <span class="hljs-subst">${name}</span> could not be loaded.`</span>));
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">if</span> (name === <span class="hljs-string">'Graph'</span>) {
+        instance.baseDir = <span class="hljs-keyword">this</span>.baseDir;
+      }
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> name === <span class="hljs-string">'string'</span>) {
+        instance.componentName = name;
+      }
+      <span class="hljs-keyword">if</span> (instance.isLegacy()) {
+        platform.deprecated(<span class="hljs-string">`Component <span class="hljs-subst">${name}</span> uses legacy NoFlo APIs. Please port to Process API`</span>);
+      }
+      <span class="hljs-keyword">this</span>.setIcon(name, instance);
+      <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, instance);
+    });
+  }</pre></div>
             
           
             
             <p>Creates an instance of a component.</p>
 
             
-              <div class='highlight'><pre>  createComponent: <span class="hljs-function"><span class="hljs-params">(name, component, metadata, callback)</span> -&gt;</span>
-    implementation = component
-    <span class="hljs-keyword">unless</span> implementation
-      <span class="hljs-keyword">return</span> callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Component <span class="hljs-subst">#{name}</span> not available"</span></pre></div>
+              <div class='highlight'><pre>  createComponent(name, component, metadata, callback) {
+    <span class="hljs-keyword">var</span> implementation, instance;
+    implementation = component;
+    <span class="hljs-keyword">if</span> (!implementation) {
+      <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Component <span class="hljs-subst">${name}</span> not available`</span>));
+    }</pre></div>
             
           
             
             <p>If a string was specified, attempt to <code>require</code> it.</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> implementation <span class="hljs-keyword">is</span> <span class="hljs-string">'string'</span>
-      <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> registerLoader.dynamicLoad <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
-        registerLoader.dynamicLoad name, implementation, metadata, callback
-        <span class="hljs-keyword">return</span>
-      <span class="hljs-keyword">return</span> callback Error <span class="hljs-string">"Dynamic loading of <span class="hljs-subst">#{implementation}</span> for component <span class="hljs-subst">#{name}</span> not available on this platform."</span></pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> implementation === <span class="hljs-string">'string'</span>) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> registerLoader.dynamicLoad === <span class="hljs-string">'function'</span>) {
+        registerLoader.dynamicLoad(name, implementation, metadata, callback);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">return</span> callback(<span class="hljs-built_in">Error</span>(<span class="hljs-string">`Dynamic loading of <span class="hljs-subst">${implementation}</span> for component <span class="hljs-subst">${name}</span> not available on this platform.`</span>));
+    }</pre></div>
             
           
             
             <p>Attempt to create the component instance using the <code>getComponent</code> method.</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> implementation.getComponent <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
-      instance = implementation.getComponent metadata</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> implementation.getComponent === <span class="hljs-string">'function'</span>) {
+      instance = implementation.getComponent(metadata);</pre></div>
             
           
             
             <p>Attempt to create a component using a factory function.</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> implementation <span class="hljs-keyword">is</span> <span class="hljs-string">'function'</span>
-      instance = implementation metadata
-    <span class="hljs-keyword">else</span>
-      callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">"Invalid type <span class="hljs-subst">#{<span class="hljs-keyword">typeof</span>(implementation)}</span> for component <span class="hljs-subst">#{name}</span>."</span>
-      <span class="hljs-keyword">return</span>
+              <div class='highlight'><pre>    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> implementation === <span class="hljs-string">'function'</span>) {
+      instance = implementation(metadata);
+    } <span class="hljs-keyword">else</span> {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid type <span class="hljs-subst">${<span class="hljs-keyword">typeof</span> implementation}</span> for component <span class="hljs-subst">${name}</span>.`</span>));
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, instance);
+  }
 
-    callback <span class="hljs-literal">null</span>, instance
-
-  isGraph: <span class="hljs-function"><span class="hljs-params">(cPath)</span> -&gt;</span></pre></div>
+  isGraph(cPath) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> cPath === <span class="hljs-string">'object'</span> &amp;&amp; cPath <span class="hljs-keyword">instanceof</span> fbpGraph.Graph) {</pre></div>
             
           
             
             <p>Live graph instance</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> cPath <span class="hljs-keyword">is</span> <span class="hljs-string">'object'</span> <span class="hljs-keyword">and</span> cPath <span class="hljs-keyword">instanceof</span> fbpGraph.Graph</pre></div>
+              <div class='highlight'><pre>      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> cPath === <span class="hljs-string">'object'</span> &amp;&amp; cPath.processes &amp;&amp; cPath.connections) {</pre></div>
             
           
             
             <p>Graph JSON definition</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span> cPath <span class="hljs-keyword">is</span> <span class="hljs-string">'object'</span> <span class="hljs-keyword">and</span> cPath.processes <span class="hljs-keyword">and</span> cPath.connections
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">unless</span> <span class="hljs-keyword">typeof</span> cPath <span class="hljs-keyword">is</span> <span class="hljs-string">'string'</span></pre></div>
+              <div class='highlight'><pre>      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> cPath !== <span class="hljs-string">'string'</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }</pre></div>
             
           
             
             <p>Graph file path</p>
 
             
-              <div class='highlight'><pre>    cPath.indexOf(<span class="hljs-string">'.fbp'</span>) <span class="hljs-keyword">isnt</span> <span class="hljs-number">-1</span> <span class="hljs-keyword">or</span> cPath.indexOf(<span class="hljs-string">'.json'</span>) <span class="hljs-keyword">isnt</span> <span class="hljs-number">-1</span>
+              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> cPath.indexOf(<span class="hljs-string">'.fbp'</span>) !== <span class="hljs-number">-1</span> || cPath.indexOf(<span class="hljs-string">'.json'</span>) !== <span class="hljs-number">-1</span>;
+  }
 
-  loadGraph: <span class="hljs-function"><span class="hljs-params">(name, component, callback, metadata)</span> -&gt;</span>
-    @createComponent name, @components[<span class="hljs-string">'Graph'</span>], metadata, <span class="hljs-function"><span class="hljs-params">(err, graph)</span> =&gt;</span>
-      <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
-      graphSocket = internalSocket.createSocket()
-      graph.loader = @
-      graph.baseDir = @baseDir
-      graph.inPorts.remove <span class="hljs-string">'graph'</span>
-      graph.setGraph component, <span class="hljs-function"><span class="hljs-params">(err)</span> =&gt;</span>
-        <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
-        @setIcon name, graph
-        callback <span class="hljs-literal">null</span>, graph
-      <span class="hljs-keyword">return</span>
-    <span class="hljs-keyword">return</span>
+  loadGraph(name, component, callback, metadata) {
+    <span class="hljs-keyword">this</span>.createComponent(name, <span class="hljs-keyword">this</span>.components[<span class="hljs-string">'Graph'</span>], metadata, (err, graph) =&gt; {
+      <span class="hljs-keyword">var</span> graphSocket;
+      <span class="hljs-keyword">if</span> (err) {
+        <span class="hljs-keyword">return</span> callback(err);
+      }
+      graphSocket = internalSocket.createSocket();
+      graph.loader = <span class="hljs-keyword">this</span>;
+      graph.baseDir = <span class="hljs-keyword">this</span>.baseDir;
+      graph.inPorts.remove(<span class="hljs-string">'graph'</span>);
+      graph.setGraph(component, (err) =&gt; {
+        <span class="hljs-keyword">if</span> (err) {
+          <span class="hljs-keyword">return</span> callback(err);
+        }
+        <span class="hljs-keyword">this</span>.setIcon(name, graph);
+        <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, graph);
+      });
+    });
+  }
 
-  setIcon: <span class="hljs-function"><span class="hljs-params">(name, instance)</span> -&gt;</span></pre></div>
+  setIcon(name, instance) {
+    <span class="hljs-keyword">var</span> componentName, library;</pre></div>
             
           
             
             <p>See if component has an icon</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> instance.getIcon <span class="hljs-keyword">or</span> instance.getIcon()</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!instance.getIcon || instance.getIcon()) {
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
             
           
             
             <p>See if library has an icon</p>
 
             
-              <div class='highlight'><pre>    [library, componentName] = name.split <span class="hljs-string">'/'</span>
-    <span class="hljs-keyword">if</span> componentName <span class="hljs-keyword">and</span> @getLibraryIcon library
-      instance.setIcon @getLibraryIcon library
-      <span class="hljs-keyword">return</span></pre></div>
+              <div class='highlight'><pre>    [library, componentName] = name.split(<span class="hljs-string">'/'</span>);
+    <span class="hljs-keyword">if</span> (componentName &amp;&amp; <span class="hljs-keyword">this</span>.getLibraryIcon(library)) {
+      instance.setIcon(<span class="hljs-keyword">this</span>.getLibraryIcon(library));
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
             
           
             
             <p>See if instance is a subgraph</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> instance.isSubgraph()
-      instance.setIcon <span class="hljs-string">'sitemap'</span>
-      <span class="hljs-keyword">return</span>
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (instance.isSubgraph()) {
+      instance.setIcon(<span class="hljs-string">'sitemap'</span>);
+      <span class="hljs-keyword">return</span>;
+    }
+    instance.setIcon(<span class="hljs-string">'square'</span>);
+  }
 
-    instance.setIcon <span class="hljs-string">'square'</span>
-    <span class="hljs-keyword">return</span>
+  getLibraryIcon(prefix) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.libraryIcons[prefix]) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.libraryIcons[prefix];
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+  }
 
-  getLibraryIcon: <span class="hljs-function"><span class="hljs-params">(prefix)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> @libraryIcons[prefix]
-      <span class="hljs-keyword">return</span> @libraryIcons[prefix]
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>
+  setLibraryIcon(prefix, icon) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.libraryIcons[prefix] = icon;
+  }
 
-  setLibraryIcon: <span class="hljs-function"><span class="hljs-params">(prefix, icon)</span> -&gt;</span>
-    @libraryIcons[prefix] = icon
+  normalizeName(packageId, name) {
+    <span class="hljs-keyword">var</span> fullName, prefix;
+    prefix = <span class="hljs-keyword">this</span>.getModulePrefix(packageId);
+    fullName = <span class="hljs-string">`<span class="hljs-subst">${prefix}</span>/<span class="hljs-subst">${name}</span>`</span>;
+    <span class="hljs-keyword">if</span> (!packageId) {
+      fullName = name;
+    }
+    <span class="hljs-keyword">return</span> fullName;
+  }
 
-  normalizeName: <span class="hljs-function"><span class="hljs-params">(packageId, name)</span> -&gt;</span>
-    prefix = @getModulePrefix packageId
-    fullName = <span class="hljs-string">"<span class="hljs-subst">#{prefix}</span>/<span class="hljs-subst">#{name}</span>"</span>
-    fullName = name <span class="hljs-keyword">unless</span> packageId
-    fullName
+  registerComponent(packageId, name, cPath, callback) {
+    <span class="hljs-keyword">var</span> fullName;
+    fullName = <span class="hljs-keyword">this</span>.normalizeName(packageId, name);
+    <span class="hljs-keyword">this</span>.components[fullName] = cPath;
+    <span class="hljs-keyword">if</span> (callback) {
+      <span class="hljs-keyword">return</span> callback();
+    }
+  }
 
-  registerComponent: <span class="hljs-function"><span class="hljs-params">(packageId, name, cPath, callback)</span> -&gt;</span>
-    fullName = @normalizeName packageId, name
-    @components[fullName] = cPath
-    <span class="hljs-keyword">do</span> callback <span class="hljs-keyword">if</span> callback
+  registerGraph(packageId, name, gPath, callback) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.registerComponent(packageId, name, gPath, callback);
+  }
 
-  registerGraph: <span class="hljs-function"><span class="hljs-params">(packageId, name, gPath, callback)</span> -&gt;</span>
-    @registerComponent packageId, name, gPath, callback
+  registerLoader(loader, callback) {
+    <span class="hljs-keyword">return</span> loader(<span class="hljs-keyword">this</span>, callback);
+  }
 
-  registerLoader: <span class="hljs-function"><span class="hljs-params">(loader, callback)</span> -&gt;</span>
-    loader @, callback
+  setSource(packageId, name, source, language, callback) {
+    <span class="hljs-keyword">if</span> (!registerLoader.setSource) {
+      <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'setSource not allowed'</span>));
+    }
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.ready) {
+      <span class="hljs-keyword">this</span>.listComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err) {
+          <span class="hljs-keyword">return</span> callback(err);
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.setSource(packageId, name, source, language, callback);
+      });
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">return</span> registerLoader.setSource(<span class="hljs-keyword">this</span>, packageId, name, source, language, callback);
+  }
 
-  setSource: <span class="hljs-function"><span class="hljs-params">(packageId, name, source, language, callback)</span> -&gt;</span>
-    <span class="hljs-keyword">unless</span> registerLoader.setSource
-      <span class="hljs-keyword">return</span> callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">'setSource not allowed'</span>
+  getSource(name, callback) {
+    <span class="hljs-keyword">if</span> (!registerLoader.getSource) {
+      <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'getSource not allowed'</span>));
+    }
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.ready) {
+      <span class="hljs-keyword">this</span>.listComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err) {
+          <span class="hljs-keyword">return</span> callback(err);
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.getSource(name, callback);
+      });
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">return</span> registerLoader.getSource(<span class="hljs-keyword">this</span>, name, callback);
+  }
 
-    <span class="hljs-keyword">unless</span> @ready
-      @listComponents (err) =&gt;
-        <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
-        @setSource packageId, name, source, language, callback
-      <span class="hljs-keyword">return</span>
+  clear() {
+    <span class="hljs-keyword">this</span>.components = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">this</span>.ready = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.processing = <span class="hljs-literal">false</span>;
+  }
 
-    registerLoader.setSource @, packageId, name, source, language, callback
+};
 
-  getSource: <span class="hljs-function"><span class="hljs-params">(name, callback)</span> -&gt;</span>
-    <span class="hljs-keyword">unless</span> registerLoader.getSource
-      <span class="hljs-keyword">return</span> callback <span class="hljs-keyword">new</span> Error <span class="hljs-string">'getSource not allowed'</span>
-    <span class="hljs-keyword">unless</span> @ready
-      @listComponents (err) =&gt;
-        <span class="hljs-keyword">return</span> callback err <span class="hljs-keyword">if</span> err
-        @getSource name, callback
-      <span class="hljs-keyword">return</span>
-
-    registerLoader.getSource @, name, callback
-
-  clear: <span class="hljs-function">-&gt;</span>
-    @components = <span class="hljs-literal">null</span>
-    @ready = <span class="hljs-literal">false</span>
-    @processing = <span class="hljs-literal">false</span>
-
-exports.ComponentLoader = ComponentLoader</pre></div>
+exports.ComponentLoader = ComponentLoader;</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.coffee">ComponentLoader.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.js">ComponentLoader.js</a> file.</small></p>
         </div>
       </div>
     </div>

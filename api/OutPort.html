@@ -24,26 +24,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
-                    ArrayPort
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/AsCallback/index.html' %}class="active" {% endif %}href="/api/AsCallback/">
                     AsCallback
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
-                    AsyncComponent
                   </a>
                 </li>
                 
@@ -150,26 +132,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
-                    Port
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
                     Ports
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
-                    Streams
                   </a>
                 </li>
                 
@@ -194,138 +158,213 @@ categories:
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license
-</code></pre><p>Output Port (outport) implementation for NoFlo components</p>
+</code></pre>
+            
+          
+            
+            <p>Output Port (outport) implementation for NoFlo components</p>
 
             
-              <div class='highlight'><pre>BasePort = <span class="hljs-built_in">require</span> <span class="hljs-string">'./BasePort'</span>
-IP = <span class="hljs-built_in">require</span> <span class="hljs-string">'./IP'</span>
+              <div class='highlight'><pre><span class="hljs-keyword">var</span> BasePort, IP, OutPort;
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span></span>
-  constructor: <span class="hljs-function"><span class="hljs-params">(options)</span> -&gt;</span>
-    @cache = {}
-    <span class="hljs-keyword">super</span> options
+BasePort = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./BasePort'</span>);
 
-  attach: <span class="hljs-function"><span class="hljs-params">(socket, index = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    <span class="hljs-keyword">super</span> socket, index
-    <span class="hljs-keyword">if</span> @isCaching() <span class="hljs-keyword">and</span> @cache[index]?
-      @send @cache[index], index
+IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./IP'</span>);
 
-  connect: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    sockets = @getSockets socketId
-    @checkRequired sockets
-    <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> sockets
-      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> socket
-      socket.connect()
+OutPort = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
+  <span class="hljs-keyword">constructor</span>(options = {}) {
+    <span class="hljs-keyword">if</span> (options.scoped == <span class="hljs-literal">null</span>) {
+      options.scoped = <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">super</span>(options);
+    <span class="hljs-keyword">this</span>.cache = {};
+  }
 
-  beginGroup: <span class="hljs-function"><span class="hljs-params">(group, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    sockets = @getSockets socketId
-    @checkRequired sockets
-    sockets.forEach (socket) -&gt;
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> socket
-      <span class="hljs-keyword">return</span> socket.beginGroup group
+  attach(socket, index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">super</span>.attach(socket, index);
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isCaching() &amp;&amp; (<span class="hljs-keyword">this</span>.cache[index] != <span class="hljs-literal">null</span>)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.send(<span class="hljs-keyword">this</span>.cache[index], index);
+    }
+  }
 
-  send: <span class="hljs-function"><span class="hljs-params">(data, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    sockets = @getSockets socketId
-    @checkRequired sockets
-    <span class="hljs-keyword">if</span> @isCaching() <span class="hljs-keyword">and</span> data <span class="hljs-keyword">isnt</span> @cache[socketId]
-      @cache[socketId] = data
-    sockets.forEach (socket) -&gt;
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> socket
-      <span class="hljs-keyword">return</span> socket.send data
+  connect(socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">var</span> i, len, results, socket, sockets;
+    sockets = <span class="hljs-keyword">this</span>.getSockets(socketId);
+    <span class="hljs-keyword">this</span>.checkRequired(sockets);
+    results = [];
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = sockets.length; i &lt; len; i++) {
+      socket = sockets[i];
+      <span class="hljs-keyword">if</span> (!socket) {
+        <span class="hljs-keyword">continue</span>;
+      }
+      results.push(socket.connect());
+    }
+    <span class="hljs-keyword">return</span> results;
+  }
 
-  endGroup: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    sockets = @getSockets socketId
-    @checkRequired sockets
-    <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> sockets
-      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> socket
-      socket.endGroup()
+  beginGroup(group, socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">var</span> sockets;
+    sockets = <span class="hljs-keyword">this</span>.getSockets(socketId);
+    <span class="hljs-keyword">this</span>.checkRequired(sockets);
+    <span class="hljs-keyword">return</span> sockets.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">socket</span>) </span>{
+      <span class="hljs-keyword">if</span> (!socket) {
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">return</span> socket.beginGroup(group);
+    });
+  }
 
-  disconnect: <span class="hljs-function"><span class="hljs-params">(socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    sockets = @getSockets socketId
-    @checkRequired sockets
-    <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> sockets
-      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> socket
-      socket.disconnect()
+  send(data, socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">var</span> sockets;
+    sockets = <span class="hljs-keyword">this</span>.getSockets(socketId);
+    <span class="hljs-keyword">this</span>.checkRequired(sockets);
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isCaching() &amp;&amp; data !== <span class="hljs-keyword">this</span>.cache[socketId]) {
+      <span class="hljs-keyword">this</span>.cache[socketId] = data;
+    }
+    <span class="hljs-keyword">return</span> sockets.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">socket</span>) </span>{
+      <span class="hljs-keyword">if</span> (!socket) {
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">return</span> socket.send(data);
+    });
+  }
 
-  sendIP: <span class="hljs-function"><span class="hljs-params">(type, data, options, socketId, autoConnect = <span class="hljs-literal">true</span>)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> IP.isIP type
-      ip = type
-      socketId = ip.index
-    <span class="hljs-keyword">else</span>
-      ip = <span class="hljs-keyword">new</span> IP type, data, options
-    sockets = @getSockets socketId
-    @checkRequired sockets
+  endGroup(socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">var</span> i, len, results, socket, sockets;
+    sockets = <span class="hljs-keyword">this</span>.getSockets(socketId);
+    <span class="hljs-keyword">this</span>.checkRequired(sockets);
+    results = [];
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = sockets.length; i &lt; len; i++) {
+      socket = sockets[i];
+      <span class="hljs-keyword">if</span> (!socket) {
+        <span class="hljs-keyword">continue</span>;
+      }
+      results.push(socket.endGroup());
+    }
+    <span class="hljs-keyword">return</span> results;
+  }
 
-    <span class="hljs-keyword">if</span> ip.datatype <span class="hljs-keyword">is</span> <span class="hljs-string">'all'</span></pre></div>
+  disconnect(socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">var</span> i, len, results, socket, sockets;
+    sockets = <span class="hljs-keyword">this</span>.getSockets(socketId);
+    <span class="hljs-keyword">this</span>.checkRequired(sockets);
+    results = [];
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = sockets.length; i &lt; len; i++) {
+      socket = sockets[i];
+      <span class="hljs-keyword">if</span> (!socket) {
+        <span class="hljs-keyword">continue</span>;
+      }
+      results.push(socket.disconnect());
+    }
+    <span class="hljs-keyword">return</span> results;
+  }
+
+  sendIP(type, data, options, socketId, autoConnect = <span class="hljs-literal">true</span>) {
+    <span class="hljs-keyword">var</span> i, ip, len, pristine, ref, socket, sockets;
+    <span class="hljs-keyword">if</span> (IP.isIP(type)) {
+      ip = type;
+      socketId = ip.index;
+    } <span class="hljs-keyword">else</span> {
+      ip = <span class="hljs-keyword">new</span> IP(type, data, options);
+    }
+    sockets = <span class="hljs-keyword">this</span>.getSockets(socketId);
+    <span class="hljs-keyword">this</span>.checkRequired(sockets);
+    <span class="hljs-keyword">if</span> (ip.datatype === <span class="hljs-string">'all'</span>) {</pre></div>
             
           
             
             <p>Stamp non-specific IP objects with port datatype</p>
 
             
-              <div class='highlight'><pre>      ip.datatype = @getDataType()
-    <span class="hljs-keyword">if</span> @getSchema() <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> ip.schema</pre></div>
+              <div class='highlight'><pre>      ip.datatype = <span class="hljs-keyword">this</span>.getDataType();
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.getSchema() &amp;&amp; !ip.schema) {</pre></div>
             
           
             
             <p>Stamp non-specific IP objects with port schema</p>
 
             
-              <div class='highlight'><pre>      ip.schema = @getSchema()
+              <div class='highlight'><pre>      ip.schema = <span class="hljs-keyword">this</span>.getSchema();
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isCaching() &amp;&amp; data !== ((ref = <span class="hljs-keyword">this</span>.cache[socketId]) != <span class="hljs-literal">null</span> ? ref.data : <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>)) {
+      <span class="hljs-keyword">this</span>.cache[socketId] = ip;
+    }
+    pristine = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = sockets.length; i &lt; len; i++) {
+      socket = sockets[i];
+      <span class="hljs-keyword">if</span> (!socket) {
+        <span class="hljs-keyword">continue</span>;
+      }
+      <span class="hljs-keyword">if</span> (pristine) {
+        socket.post(ip, autoConnect);
+        pristine = <span class="hljs-literal">false</span>;
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">if</span> (ip.clonable) {
+          ip = ip.clone();
+        }
+        socket.post(ip, autoConnect);
+      }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
 
-    <span class="hljs-keyword">if</span> @isCaching() <span class="hljs-keyword">and</span> data <span class="hljs-keyword">isnt</span> @cache[socketId]?.data
-      @cache[socketId] = ip
-    pristine = <span class="hljs-literal">true</span>
-    <span class="hljs-keyword">for</span> socket <span class="hljs-keyword">in</span> sockets
-      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">unless</span> socket
-      <span class="hljs-keyword">if</span> pristine
-        socket.post ip, autoConnect
-        pristine = <span class="hljs-literal">false</span>
-      <span class="hljs-keyword">else</span>
-        ip = ip.clone() <span class="hljs-keyword">if</span> ip.clonable
-        socket.post ip, autoConnect
-    @
+  openBracket(data = <span class="hljs-literal">null</span>, options = {}, socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.sendIP(<span class="hljs-string">'openBracket'</span>, data, options, socketId);
+  }
 
-  openBracket: <span class="hljs-function"><span class="hljs-params">(data = <span class="hljs-literal">null</span>, options = {}, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    @sendIP <span class="hljs-string">'openBracket'</span>, data, options, socketId
+  data(data, options = {}, socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.sendIP(<span class="hljs-string">'data'</span>, data, options, socketId);
+  }
 
-  data: <span class="hljs-function"><span class="hljs-params">(data, options = {}, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    @sendIP <span class="hljs-string">'data'</span>, data, options, socketId
+  closeBracket(data = <span class="hljs-literal">null</span>, options = {}, socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.sendIP(<span class="hljs-string">'closeBracket'</span>, data, options, socketId);
+  }
 
-  closeBracket: <span class="hljs-function"><span class="hljs-params">(data = <span class="hljs-literal">null</span>, options = {}, socketId = <span class="hljs-literal">null</span>)</span> -&gt;</span>
-    @sendIP <span class="hljs-string">'closeBracket'</span>, data, options, socketId
+  checkRequired(sockets) {
+    <span class="hljs-keyword">if</span> (sockets.length === <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-keyword">this</span>.isRequired()) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.getId()}</span>: No connections available`</span>);
+    }
+  }
 
-  checkRequired: <span class="hljs-function"><span class="hljs-params">(sockets)</span> -&gt;</span>
-    <span class="hljs-keyword">if</span> sockets.length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> @isRequired()
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span>: No connections available"</span>
-
-  getSockets: <span class="hljs-function"><span class="hljs-params">(socketId)</span> -&gt;</span></pre></div>
+  getSockets(socketId) {</pre></div>
             
           
             
             <p>Addressable sockets affect only one connection at time</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> @isAddressable()
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">"<span class="hljs-subst">#{@getId()}</span> Socket ID required"</span> <span class="hljs-keyword">if</span> socketId <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
-      <span class="hljs-keyword">return</span> [] <span class="hljs-keyword">unless</span> @sockets[socketId]
-      <span class="hljs-keyword">return</span> [@sockets[socketId]]</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isAddressable()) {
+      <span class="hljs-keyword">if</span> (socketId === <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.getId()}</span> Socket ID required`</span>);
+      }
+      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.sockets[socketId]) {
+        <span class="hljs-keyword">return</span> [];
+      }
+      <span class="hljs-keyword">return</span> [<span class="hljs-keyword">this</span>.sockets[socketId]];
+    }</pre></div>
             
           
             
             <p>Regular sockets affect all outbound connections</p>
 
             
-              <div class='highlight'><pre>    @sockets
+              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.sockets;
+  }
 
-  isCaching: <span class="hljs-function">-&gt;</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @options.caching
-    <span class="hljs-literal">false</span>
+  isCaching() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.options.caching) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
 
-<span class="hljs-built_in">module</span>.exports = OutPort</pre></div>
+};
+
+<span class="hljs-built_in">module</span>.exports = OutPort;</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee">OutPort.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.js">OutPort.js</a> file.</small></p>
         </div>
       </div>
     </div>

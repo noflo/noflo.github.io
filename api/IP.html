@@ -24,26 +24,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/ArrayPort/index.html' %}class="active" {% endif %}href="/api/ArrayPort/">
-                    ArrayPort
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/AsCallback/index.html' %}class="active" {% endif %}href="/api/AsCallback/">
                     AsCallback
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/AsyncComponent/index.html' %}class="active" {% endif %}href="/api/AsyncComponent/">
-                    AsyncComponent
                   </a>
                 </li>
                 
@@ -150,26 +132,8 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/Port/index.html' %}class="active" {% endif %}href="/api/Port/">
-                    Port
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/Ports/index.html' %}class="active" {% endif %}href="/api/Ports/">
                     Ports
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
-                  <a {% if page.url == '/api/Streams/index.html' %}class="active" {% endif %}href="/api/Streams/">
-                    Streams
                   </a>
                 </li>
                 
@@ -196,26 +160,19 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
             
-              <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IP</span></span></pre></div>
-            
-          
-            
-            <p>Valid IP types</p>
+              <div class='highlight'><pre><span class="hljs-keyword">var</span> IP;
 
-            
-              <div class='highlight'><pre>  @types: [
-    <span class="hljs-string">'data'</span>
-    <span class="hljs-string">'openBracket'</span>
-    <span class="hljs-string">'closeBracket'</span>
-  ]</pre></div>
+<span class="hljs-built_in">module</span>.exports = IP = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IP</span> </span>{</pre></div>
             
           
             
             <p>Detects if an arbitrary value is an IP</p>
 
             
-              <div class='highlight'><pre>  @isIP: <span class="hljs-function"><span class="hljs-params">(obj)</span> -&gt;</span>
-    obj <span class="hljs-keyword">and</span> <span class="hljs-keyword">typeof</span> obj <span class="hljs-keyword">is</span> <span class="hljs-string">'object'</span> <span class="hljs-keyword">and</span> obj._isIP <span class="hljs-keyword">is</span> <span class="hljs-literal">true</span></pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">static</span> isIP(obj) {
+      <span class="hljs-keyword">return</span> obj &amp;&amp; <span class="hljs-keyword">typeof</span> obj === <span class="hljs-string">'object'</span> &amp;&amp; obj._isIP === <span class="hljs-literal">true</span>;
+    }</pre></div>
             
           
             
@@ -223,39 +180,57 @@ NoFlo may be freely distributed under the MIT license
 Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
 
             
-              <div class='highlight'><pre>  constructor: <span class="hljs-function"><span class="hljs-params">(@type = <span class="hljs-string">'data'</span>, @data = <span class="hljs-literal">null</span>, options = {})</span> -&gt;</span>
-    @_isIP = <span class="hljs-literal">true</span>
-    @scope = <span class="hljs-literal">null</span> <span class="hljs-comment"># sync scope id</span>
-    @owner = <span class="hljs-literal">null</span> <span class="hljs-comment"># packet owner process</span>
-    @clonable = <span class="hljs-literal">false</span> <span class="hljs-comment"># cloning safety flag</span>
-    @index = <span class="hljs-literal">null</span> <span class="hljs-comment"># addressable port index</span>
-    @schema = <span class="hljs-literal">null</span>
-    @datatype = <span class="hljs-string">'all'</span>
-    <span class="hljs-keyword">for</span> key, val <span class="hljs-keyword">of</span> options
-      <span class="hljs-keyword">this</span>[key] = val</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">constructor</span>(type = 'data', data = null, options = {}) {
+      <span class="hljs-keyword">var</span> key, val;
+      <span class="hljs-keyword">this</span>.type = type;
+      <span class="hljs-keyword">this</span>.data = data;
+      <span class="hljs-keyword">this</span>._isIP = <span class="hljs-literal">true</span>;
+      <span class="hljs-keyword">this</span>.scope = <span class="hljs-literal">null</span>; <span class="hljs-comment">// sync scope id</span>
+      <span class="hljs-keyword">this</span>.owner = <span class="hljs-literal">null</span>; <span class="hljs-comment">// packet owner process</span>
+      <span class="hljs-keyword">this</span>.clonable = <span class="hljs-literal">false</span>; <span class="hljs-comment">// cloning safety flag</span>
+      <span class="hljs-keyword">this</span>.index = <span class="hljs-literal">null</span>; <span class="hljs-comment">// addressable port index</span>
+      <span class="hljs-keyword">this</span>.schema = <span class="hljs-literal">null</span>;
+      <span class="hljs-keyword">this</span>.datatype = <span class="hljs-string">'all'</span>;
+      <span class="hljs-keyword">for</span> (key <span class="hljs-keyword">in</span> options) {
+        val = options[key];
+        <span class="hljs-keyword">this</span>[key] = val;
+      }
+    }</pre></div>
             
           
             
             <p>Creates a new IP copying its contents by value not reference</p>
 
             
-              <div class='highlight'><pre>  clone: <span class="hljs-function">-&gt;</span>
-    ip = <span class="hljs-keyword">new</span> IP @type
-    <span class="hljs-keyword">for</span> key, val <span class="hljs-keyword">of</span> @
-      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">if</span> [<span class="hljs-string">'owner'</span>].indexOf(key) <span class="hljs-keyword">isnt</span> <span class="hljs-number">-1</span>
-      <span class="hljs-keyword">continue</span> <span class="hljs-keyword">if</span> val <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span>
-      <span class="hljs-keyword">if</span> <span class="hljs-keyword">typeof</span>(val) <span class="hljs-keyword">is</span> <span class="hljs-string">'object'</span>
-        ip[key] = JSON.parse JSON.stringify val
-      <span class="hljs-keyword">else</span>
-        ip[key] = val
-    ip</pre></div>
+              <div class='highlight'><pre>    clone() {
+      <span class="hljs-keyword">var</span> ip, key, ref, val;
+      ip = <span class="hljs-keyword">new</span> IP(<span class="hljs-keyword">this</span>.type);
+      ref = <span class="hljs-keyword">this</span>;
+      <span class="hljs-keyword">for</span> (key <span class="hljs-keyword">in</span> ref) {
+        val = ref[key];
+        <span class="hljs-keyword">if</span> ([<span class="hljs-string">'owner'</span>].indexOf(key) !== <span class="hljs-number">-1</span>) {
+          <span class="hljs-keyword">continue</span>;
+        }
+        <span class="hljs-keyword">if</span> (val === <span class="hljs-literal">null</span>) {
+          <span class="hljs-keyword">continue</span>;
+        }
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> val === <span class="hljs-string">'object'</span>) {
+          ip[key] = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">JSON</span>.stringify(val));
+        } <span class="hljs-keyword">else</span> {
+          ip[key] = val;
+        }
+      }
+      <span class="hljs-keyword">return</span> ip;
+    }</pre></div>
             
           
             
             <p>Moves an IP to a different owner</p>
 
             
-              <div class='highlight'><pre>  move: <span class="hljs-function"><span class="hljs-params">(@owner)</span> -&gt;</span></pre></div>
+              <div class='highlight'><pre>    move(owner) {
+      <span class="hljs-keyword">this</span>.owner = owner;
+    }</pre></div>
             
           
             
@@ -267,11 +242,32 @@ Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
             <p>Frees IP contents</p>
 
             
-              <div class='highlight'><pre>  drop: <span class="hljs-function">-&gt;</span>
-    <span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>[key] <span class="hljs-keyword">for</span> key, val <span class="hljs-keyword">of</span> @</pre></div>
+              <div class='highlight'><pre>    drop() {
+      <span class="hljs-keyword">var</span> key, ref, results, val;
+      ref = <span class="hljs-keyword">this</span>;
+      results = [];
+      <span class="hljs-keyword">for</span> (key <span class="hljs-keyword">in</span> ref) {
+        val = ref[key];
+        results.push(<span class="hljs-keyword">delete</span> <span class="hljs-keyword">this</span>[key]);
+      }
+      <span class="hljs-keyword">return</span> results;
+    }
+
+  };</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/IP.coffee">IP.coffee</a> file.</small></p>
+            
+            <p>Valid IP types</p>
+
+            
+              <div class='highlight'><pre>  IP.types = [<span class="hljs-string">'data'</span>, <span class="hljs-string">'openBracket'</span>, <span class="hljs-string">'closeBracket'</span>];
+
+  <span class="hljs-keyword">return</span> IP;
+
+})();</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/IP.js">IP.js</a> file.</small></p>
         </div>
       </div>
     </div>
