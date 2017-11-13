@@ -316,7 +316,7 @@ ComponentLoader = <span class="hljs-class"><span class="hljs-keyword">class</spa
 
             
               <div class='highlight'><pre>  createComponent(name, component, metadata, callback) {
-    <span class="hljs-keyword">var</span> implementation, instance;
+    <span class="hljs-keyword">var</span> e, implementation, instance;
     implementation = component;
     <span class="hljs-keyword">if</span> (!implementation) {
       <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Component <span class="hljs-subst">${name}</span> not available`</span>));
@@ -341,7 +341,12 @@ ComponentLoader = <span class="hljs-class"><span class="hljs-keyword">class</spa
 
             
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> implementation.getComponent === <span class="hljs-string">'function'</span>) {
-      instance = implementation.getComponent(metadata);</pre></div>
+      <span class="hljs-keyword">try</span> {
+        instance = implementation.getComponent(metadata);
+      } <span class="hljs-keyword">catch</span> (error) {
+        e = error;
+        <span class="hljs-keyword">return</span> callback(e);
+      }</pre></div>
             
           
             
@@ -349,7 +354,12 @@ ComponentLoader = <span class="hljs-class"><span class="hljs-keyword">class</spa
 
             
               <div class='highlight'><pre>    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> implementation === <span class="hljs-string">'function'</span>) {
-      instance = implementation(metadata);
+      <span class="hljs-keyword">try</span> {
+        instance = implementation(metadata);
+      } <span class="hljs-keyword">catch</span> (error) {
+        e = error;
+        <span class="hljs-keyword">return</span> callback(e);
+      }
     } <span class="hljs-keyword">else</span> {
       callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid type <span class="hljs-subst">${<span class="hljs-keyword">typeof</span> implementation}</span> for component <span class="hljs-subst">${name}</span>.`</span>));
       <span class="hljs-keyword">return</span>;
