@@ -2,6 +2,7 @@
 title: Components
 layout: documentation
 ---
+- [Component loading](#component-loading)
 - [Component API](#component-api)
   - [The process function](#the-process-function)
   - [Handling preconditions](#handling-preconditions)
@@ -15,6 +16,14 @@ layout: documentation
 NoFlo programs consist of graphs where different nodes are connected together. These nodes can themselves be graphs, or they can be components written in JavaScript.
 
 A NoFlo component is simply a [JavaScript module](https://www.sitepoint.com/understanding-module-exports-exports-node-js/) that provides a certain interface that allows NoFlo to run it.
+
+## Component loading
+
+By default, NoFlo discovers and loads components from the `components/` folder of your project, as well as the `components/` folders of any of your NPM dependencies.
+
+Components placed in this folder get named based on the filename, so `components/DoSomething.js` becomes available as component `DoSomething`. To prevent name clashes, you can also use the fully-qualified name `project-name/DoSomething`, where `project-name` comes from the name given in `package.json`.
+
+Read more about the project directory structure in [Publishing modules](/documentation/publishing/#module-structure).
 
 ## Component API
 

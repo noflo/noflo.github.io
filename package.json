@@ -1,6 +1,6 @@
 {
   "name": "noflojs-org",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "devDependencies": {
     "grunt": "~1.0.1",
     "grunt-jekyll": "~0.4.6",
@@ -15,6 +15,6 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "noflo": "1.0.0"
+    "noflo": "1.0.1"
   }
 }

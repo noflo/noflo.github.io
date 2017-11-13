@@ -320,7 +320,7 @@ time, in seconds.</p>
             <p>Errors get emitted immediately, like does network end</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (event === <span class="hljs-string">'error'</span> || event === <span class="hljs-string">'process-error'</span> || event === <span class="hljs-string">'end'</span>) {
+              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (event === <span class="hljs-string">'icon'</span> || event === <span class="hljs-string">'error'</span> || event === <span class="hljs-string">'process-error'</span> || event === <span class="hljs-string">'end'</span>) {
         <span class="hljs-keyword">this</span>.emit(event, payload);
         <span class="hljs-keyword">return</span>;
       }
@@ -485,10 +485,12 @@ we already have a process with the given ID, return that.</p>
     }
 
     removeNode(node, callback) {
-      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.processes[node.id]) {
+      <span class="hljs-keyword">var</span> process;
+      process = <span class="hljs-keyword">this</span>.getNode(node.id);
+      <span class="hljs-keyword">if</span> (!process) {
         <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Node <span class="hljs-subst">${node.id}</span> not found`</span>));
       }
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.processes[node.id].component.shutdown(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">return</span> process.component.shutdown(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
         <span class="hljs-keyword">if</span> (err) {
           <span class="hljs-keyword">return</span> callback(err);
         }
@@ -950,7 +952,13 @@ to NoFlo processes, and edges to connections between them.</p>
 
     addDefaults(node, callback) {
       <span class="hljs-keyword">var</span> key, port, process, ref, socket;
-      process = <span class="hljs-keyword">this</span>.processes[node.id];
+      process = <span class="hljs-keyword">this</span>.getNode(node.id);
+      <span class="hljs-keyword">if</span> (!process) {
+        <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Process <span class="hljs-subst">${node.id}</span> not defined`</span>));
+      }
+      <span class="hljs-keyword">if</span> (!process.component) {
+        <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No component defined for node <span class="hljs-subst">${node.id}</span>`</span>));
+      }
       <span class="hljs-keyword">if</span> (!process.component.isReady()) {
         <span class="hljs-keyword">if</span> (process.component.setMaxListeners) {
           process.component.setMaxListeners(<span class="hljs-number">0</span>);
@@ -1003,6 +1011,9 @@ TODO: hasDefault existence check is for backwards compatibility, clean
       to = <span class="hljs-keyword">this</span>.getNode(initializer.to.node);
       <span class="hljs-keyword">if</span> (!to) {
         <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No process defined for inbound node <span class="hljs-subst">${initializer.to.node}</span>`</span>));
+      }
+      <span class="hljs-keyword">if</span> (!to.component) {
+        <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No component defined for inbound node <span class="hljs-subst">${initializer.to.node}</span>`</span>));
       }
       <span class="hljs-keyword">if</span> (!(to.component.isReady() || to.component.inPorts[initializer.to.port])) {
         <span class="hljs-keyword">if</span> (to.component.setMaxListeners) {
