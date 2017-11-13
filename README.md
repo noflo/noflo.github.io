@@ -1,7 +1,7 @@
 NoFlo website
 =============
 
-Sources for the [NoFlo](http://noflojs.org) website.
+Sources for the [NoFlo](https://noflojs.org) website.
 
 ## Updating for new versions
 
@@ -11,7 +11,7 @@ Sources for the [NoFlo](http://noflojs.org) website.
 
 ## Contributing to the site
 
-Feel free to send pull requests. Local site development is handled using [Grunt](http://gruntjs.com/).
+Feel free to send pull requests. Local site development is handled using [Grunt](https://gruntjs.com/).
 
 Install the dependencies with:
 

@@ -15,7 +15,7 @@ categories:
   - [Running NoFlo in the browser](#running-noflo-in-the-browser)
 - [Example: Building a simple calculator](#building-a-simple-calculator)
 
-NoFlo is a [Flow-Based Programming](http://en.wikipedia.org/wiki/Flow-based_programming) environment for JavaScript. In flow-based programs, the logic of your software is defined as a *graph*. The *nodes* of the graph are instances of NoFlo components, and the *edges* define the connections between them.
+NoFlo is a [Flow-Based Programming](https://en.wikipedia.org/wiki/Flow-based_programming) environment for JavaScript. In flow-based programs, the logic of your software is defined as a *graph*. The *nodes* of the graph are instances of NoFlo components, and the *edges* define the connections between them.
 
 NoFlo components react to incoming messages, or *information packets*. When a component receives packets in its input ports it performs a predefined operation, and sends its result out as a packet to its output ports. There is no shared state, and the only way to communicate between components is by sending packets.
 
@@ -226,7 +226,7 @@ Read more in [noflo-component-loader documentation](https://github.com/noflo/nof
 For faster project setup, we have a template for creating NoFlo browser applications: **[noflo-browser-app](https://github.com/noflo/noflo-browser-app)**. To use it, follow these steps:
 
 * Fork the project
-* Import the repository in [Flowhub](http://app.flowhub.io)
+* Import the repository in [Flowhub](https://app.flowhub.io/ide/)
 * Make changes, synchronize to GitHub
 * If you need additional modules, use `npm install --add`
 
