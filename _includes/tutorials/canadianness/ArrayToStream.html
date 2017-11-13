@@ -3,35 +3,53 @@
   
   
   
-    <div class='highlight'><pre>noflo = <span class="hljs-built_in">require</span> <span class="hljs-string">'noflo'</span>
+    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'noflo'</span>);
 
-exports.getComponent = <span class="hljs-function">-&gt;</span>
-  c = <span class="hljs-keyword">new</span> noflo.Component
-    description: <span class="hljs-string">'Convert input array to a NoFlo stream'</span>
-    inPorts:
-      in:
-        datatype: <span class="hljs-string">'array'</span>
-        description: <span class="hljs-string">'data we want to send'</span>
-        required: <span class="hljs-literal">true</span>
-    outPorts:
-      out:
-        datatype: <span class="hljs-string">'string'</span>
-        description: <span class="hljs-string">'the data wrapped in brackets'</span>
-        required: <span class="hljs-literal">true</span>
+exports.getComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> c = <span class="hljs-keyword">new</span> noflo.Component({
+    <span class="hljs-attr">description</span>: <span class="hljs-string">'Convert input array to a NoFlo stream'</span>,
+    <span class="hljs-attr">inPorts</span>: {
+      <span class="hljs-attr">in</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'array'</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">'data we want to send'</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+    },
+    <span class="hljs-attr">outPorts</span>: {
+      <span class="hljs-attr">out</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'string'</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">'the data wrapped in brackets'</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+    },
+  });
 
-  c.process (input, output) -&gt;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> input.hasData <span class="hljs-string">'in'</span>
+  c.process(<span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">'in'</span>)) { <span class="hljs-keyword">return</span>; }
 
-    output.send out: <span class="hljs-keyword">new</span> noflo.IP <span class="hljs-string">'openBracket'</span>
+    <span class="hljs-keyword">let</span> datas = input.getData(<span class="hljs-string">'in'</span>);
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Array</span>.isArray(datas)) {
+      datas = [datas];
+    }
 
-    datas = input.getData <span class="hljs-string">'in'</span>
-    <span class="hljs-keyword">unless</span> Array.isArray datas
-      datas = [datas]
-    <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> datas
-      output.send out: <span class="hljs-keyword">new</span> noflo.IP <span class="hljs-string">'data'</span>, data
+    output.send({
+      <span class="hljs-attr">out</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">'openBracket'</span>),
+    });
 
-    output.send out: <span class="hljs-keyword">new</span> noflo.IP <span class="hljs-string">'closeBracket'</span>
-    output.done()</pre></div>
+    datas.forEach(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+      output.send({
+        <span class="hljs-attr">out</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">'data'</span>, data),
+      });
+    });
+
+    output.send({
+      <span class="hljs-attr">out</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">'closeBracket'</span>),
+    });
+    output.done();
+  });
+
+  <span class="hljs-keyword">return</span> c;
+};</pre></div>
   
 
 </div>

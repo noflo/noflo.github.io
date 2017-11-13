@@ -4,33 +4,40 @@
   <h2 id="import-libraries">Import libraries</h2>
 
   
-    <div class='highlight'><pre>noflo = <span class="hljs-built_in">require</span> <span class="hljs-string">'noflo'</span>
-natural = <span class="hljs-built_in">require</span> <span class="hljs-string">'natural'</span>
-tokenizer = <span class="hljs-keyword">new</span> natural.WordTokenizer()</pre></div>
+    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'noflo'</span>);
+<span class="hljs-keyword">const</span> natural = <span class="hljs-built_in">require</span>(<span class="hljs-string">'natural'</span>);
+
+<span class="hljs-keyword">const</span> tokenizer = <span class="hljs-keyword">new</span> natural.WordTokenizer();</pre></div>
   
 
   
   <h2 id="component-declaration">Component declaration</h2>
 
   
-    <div class='highlight'><pre>exports.getComponent = <span class="hljs-function">-&gt;</span>
-  c = <span class="hljs-keyword">new</span> noflo.Component
-    description: <span class="hljs-string">'Find how the input words compare against the list of weighted words'</span>
-    inPorts:
-      list:
-        datatype: <span class="hljs-string">'array'</span>
-        description: <span class="hljs-string">'list of words we will use with the list of content'</span>
-        control: <span class="hljs-literal">true</span>
-        required: <span class="hljs-literal">true</span>
-      content:
-        datatype: <span class="hljs-string">'string'</span>
-        description: <span class="hljs-string">'the content which we will determine the score of'</span>
-        required: <span class="hljs-literal">true</span>
-    outPorts:
-      score:
-        datatype: <span class="hljs-string">'number'</span>
-        description: <span class="hljs-string">'the resulting number of comparing the content with the list'</span>
-        required: <span class="hljs-literal">true</span></pre></div>
+    <div class='highlight'><pre>exports.getComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> c = <span class="hljs-keyword">new</span> noflo.Component({
+    <span class="hljs-attr">description</span>: <span class="hljs-string">'Find how the input words compare against the list of weighted words'</span>,
+    <span class="hljs-attr">inPorts</span>: {
+      <span class="hljs-attr">list</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'array'</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">'list of words we will use with the list of content'</span>,
+        <span class="hljs-attr">control</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+      <span class="hljs-attr">content</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'string'</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">'the content which we will determine the score of'</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+    },
+    <span class="hljs-attr">outPorts</span>: {
+      <span class="hljs-attr">score</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'number'</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">'the resulting number of comparing the content with the list'</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+    },
+  });</pre></div>
   
 
   
@@ -38,26 +45,27 @@ tokenizer = <span class="hljs-keyword">new</span> natural.WordTokenizer()</pre><
 <p>To preserve streams, forward brackets from the primary inport to the output.</p>
 
   
-    <div class='highlight'><pre>  c.forwardBrackets = {}
+    <div class='highlight'><pre>  c.forwardBrackets = {};
 
-  c.process (input, output) -&gt;</pre></div>
+  c.process(<span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {</pre></div>
   
 
   
   <h3 id="receive-input">Receive input</h3>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> input.hasStream <span class="hljs-string">'content'</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> input.hasData <span class="hljs-string">'list'</span>
-    content = input.getStream(<span class="hljs-string">'content'</span>).filter(<span class="hljs-function"><span class="hljs-params">(ip)</span> -&gt;</span> ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span>).map(<span class="hljs-function"><span class="hljs-params">(ip)</span> -&gt;</span> ip.data)
-    list = input.getData <span class="hljs-string">'list'</span></pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">let</span> scoringFunction;
+    <span class="hljs-keyword">if</span> (!input.hasStream(<span class="hljs-string">'content'</span>)) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">'list'</span>)) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-keyword">let</span> content = input.getStream(<span class="hljs-string">'content'</span>).filter(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.type === <span class="hljs-string">'data'</span>).map(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.data);
+    <span class="hljs-keyword">const</span> list = input.getData(<span class="hljs-string">'list'</span>);</pre></div>
   
 
   
   <p>there can be multiple pieces of content</p>
 
   
-    <div class='highlight'><pre>    content = content.join(<span class="hljs-string">'\n'</span>)</pre></div>
+    <div class='highlight'><pre>    content = content.join(<span class="hljs-string">'\n'</span>);</pre></div>
   
 
   
@@ -65,14 +73,14 @@ tokenizer = <span class="hljs-keyword">new</span> natural.WordTokenizer()</pre><
 <p>our base score we will send out</p>
 
   
-    <div class='highlight'><pre>    score = <span class="hljs-number">0</span></pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">let</span> score = <span class="hljs-number">0</span>;</pre></div>
   
 
   
   <p>splits content into an array of words</p>
 
   
-    <div class='highlight'><pre>    tokens = tokenizer.tokenize content</pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> tokens = tokenizer.tokenize(content);</pre></div>
   
 
   
@@ -80,11 +88,12 @@ tokenizer = <span class="hljs-keyword">new</span> natural.WordTokenizer()</pre><
 otherwise, 0 points</p>
 
   
-    <div class='highlight'><pre><span class="hljs-function">    <span class="hljs-title">wordScore</span> = <span class="hljs-params">(word)</span> -&gt;</span>
-      <span class="hljs-keyword">if</span> list[word]?
-        <span class="hljs-keyword">return</span> list[word]
-      <span class="hljs-keyword">else</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span></pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> wordScore = <span class="hljs-function">(<span class="hljs-params">word</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (list[word] != <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span> list[word];
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    };</pre></div>
   
 
   
@@ -92,68 +101,84 @@ otherwise, 0 points</p>
 if it is Canadian: 1, American: -1, British: .5, None: 0</p>
 
   
-    <div class='highlight'><pre><span class="hljs-function">    <span class="hljs-title">spellingScore</span> = <span class="hljs-params">(word)</span> -&gt;</span>
-      <span class="hljs-keyword">for</span> comparison <span class="hljs-keyword">in</span> list
-        <span class="hljs-keyword">if</span> word <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> comparison[<span class="hljs-string">"American"</span>]
-          <span class="hljs-keyword">if</span> word <span class="hljs-keyword">in</span> comparison[<span class="hljs-string">"Canadian"</span>]
-            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>
-          <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> word <span class="hljs-keyword">in</span> comparison[<span class="hljs-string">"British"</span>]
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0.5</span>
-        <span class="hljs-keyword">else</span>
-          <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>
-
-      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span></pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> spellingScore = <span class="hljs-function">(<span class="hljs-params">word</span>) =&gt;</span> {
+      <span class="hljs-keyword">let</span> value = <span class="hljs-number">0</span>;
+      list.forEach(<span class="hljs-function">(<span class="hljs-params">comparison</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (comparison.American.indexOf(word) !== <span class="hljs-number">-1</span>) {
+          value = <span class="hljs-number">-1</span>;
+          <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-keyword">if</span> (comparison.Canadian.indexOf(word) !== <span class="hljs-number">-1</span>) {
+          value = <span class="hljs-number">1</span>;
+          <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-keyword">if</span> (comparison.British.indexOf(word) !== <span class="hljs-number">-1</span>) {
+          value = <span class="hljs-number">0.5</span>;
+        }
+      });
+      <span class="hljs-keyword">return</span> value;
+    };</pre></div>
   
 
   
   <p>if it has this, it is a spelling list</p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">if</span> list[<span class="hljs-number">0</span>]?[<span class="hljs-string">"Canadian"</span>]?
-      scoringFunction = spellingScore</pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">if</span> ((list[<span class="hljs-number">0</span>] != <span class="hljs-literal">null</span> ? list[<span class="hljs-number">0</span>].Canadian : <span class="hljs-literal">undefined</span>) != <span class="hljs-literal">null</span>) {
+      scoringFunction = spellingScore;</pre></div>
   
 
   
   <p>otherwise it is an object list of words with scores</p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">else</span>
-      scoringFunction = wordScore</pre></div>
+    <div class='highlight'><pre>    } <span class="hljs-keyword">else</span> {
+      scoringFunction = wordScore;
+    }</pre></div>
   
 
   
   <p>use this to singularize and pluralize each word</p>
 
   
-    <div class='highlight'><pre>    nounInflector = <span class="hljs-keyword">new</span> natural.NounInflector()</pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> nounInflector = <span class="hljs-keyword">new</span> natural.NounInflector();</pre></div>
   
 
   
   <p>go through each item in contents</p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> tokens
-      plural = nounInflector.pluralize data
-      singular = nounInflector.singularize data</pre></div>
+    <div class='highlight'><pre>    tokens.forEach(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> plural = nounInflector.pluralize(data);
+      <span class="hljs-keyword">const</span> singular = nounInflector.singularize(data);</pre></div>
   
 
   
   <p>if it is already plural or singular do not use it</p>
 
   
-    <div class='highlight'><pre>      <span class="hljs-keyword">if</span> plural <span class="hljs-keyword">isnt</span> data
-        score += scoringFunction plural
-      <span class="hljs-keyword">if</span> singular <span class="hljs-keyword">isnt</span> data
-        score += scoringFunction singular
+    <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (plural !== data) {
+        score += scoringFunction(plural);
+      }
+      <span class="hljs-keyword">if</span> (singular !== data) {
+        score += scoringFunction(singular);
+      }
 
-      score += scoringFunction data</pre></div>
+      score += scoringFunction(data);
+    });</pre></div>
   
 
   
   <h3 id="send-output">Send output</h3>
 
   
-    <div class='highlight'><pre>    output.sendDone score: score</pre></div>
+    <div class='highlight'><pre>    output.sendDone({
+      score,
+    });
+  });
+
+  <span class="hljs-keyword">return</span> c;
+};</pre></div>
   
 
 </div>

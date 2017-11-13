@@ -4,7 +4,7 @@
   <h2 id="import-libraries">Import libraries</h2>
 
   
-    <div class='highlight'><pre>noflo = <span class="hljs-built_in">require</span> <span class="hljs-string">'noflo'</span></pre></div>
+    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'noflo'</span>);</pre></div>
   
 
   
@@ -12,16 +12,19 @@
 <p>Function to calculate most common value (the <a href="https://en.wikipedia.org/wiki/Mode_(statistics">mode</a>)</p>
 
   
-    <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">findMode</span> = <span class="hljs-params">(array)</span> -&gt;</span>
-  frequency = {}
-  maxFrequency = <span class="hljs-number">0</span>
-  result = <span class="hljs-literal">undefined</span>
-  <span class="hljs-keyword">for</span> v <span class="hljs-keyword">of</span> array
-    frequency[array[v]] = (frequency[array[v]] <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>
-    <span class="hljs-keyword">if</span> frequency[array[v]] &gt; maxFrequency
-      maxFrequency = frequency[array[v]]
-      result = array[v]
-  result</pre></div>
+    <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findMode</span>(<span class="hljs-params">array</span>) </span>{
+  <span class="hljs-keyword">const</span> frequency = {};
+  <span class="hljs-keyword">let</span> maxFrequency = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> result;
+  array.forEach(<span class="hljs-function">(<span class="hljs-params">v</span>) =&gt;</span> {
+    frequency[v] = (frequency[v] || <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (frequency[v] &gt; maxFrequency) {
+      maxFrequency = frequency[v];
+      result = v;
+    }
+  });
+  <span class="hljs-keyword">return</span> result;
+}</pre></div>
   
 
   
@@ -29,28 +32,41 @@
 <p>Define the input and output ports, and describe their function</p>
 
   
-    <div class='highlight'><pre>exports.getComponent = <span class="hljs-function">-&gt;</span>
-  c = <span class="hljs-keyword">new</span> noflo.Component
-    description: <span class="hljs-string">'Find all of the instances of `word` in `content` and send them out in a stream'</span>
-    inPorts:
-      content:
-        datatype: <span class="hljs-string">'string'</span>
-        description: <span class="hljs-string">'the content which we look for the word in'</span>
-        required: <span class="hljs-literal">true</span>
-    outPorts:
-      emotion:
-        datatype: <span class="hljs-string">'string'</span>
-        description: <span class="hljs-string">'the emotion based the content in ehs'</span>
-        required: <span class="hljs-literal">true</span>
-      error:
-        datatype: <span class="hljs-string">'object'</span></pre></div>
+    <div class='highlight'><pre>exports.getComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> c = <span class="hljs-keyword">new</span> noflo.Component({
+    <span class="hljs-attr">description</span>: <span class="hljs-string">'Find all of the instances of `word` in `content` and send them out in a stream'</span>,
+    <span class="hljs-attr">inPorts</span>: {
+      <span class="hljs-attr">content</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'string'</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">'the content which we look for the word in'</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+    },
+    <span class="hljs-attr">outPorts</span>: {
+      <span class="hljs-attr">emotion</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'string'</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">'the emotion based the content in ehs'</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+      <span class="hljs-attr">error</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'object'</span>,
+      },
+    },
+  });</pre></div>
+  
+
+  
+  <p>Since we want to work with a full stream, we disable bracket forwarding</p>
+
+  
+    <div class='highlight'><pre>  c.forwardBrackets = {};</pre></div>
   
 
   
   <h2 id="processing-function">Processing function</h2>
 
   
-    <div class='highlight'><pre>  c.process (input, output) -&gt;</pre></div>
+    <div class='highlight'><pre>  c.process(<span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {</pre></div>
   
 
   
@@ -59,23 +75,16 @@
 Will also accept a single (non-bracketed) input packet, returned as a stream of length 1</p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> input.hasStream <span class="hljs-string">'content'</span>
-    contents = input.getStream <span class="hljs-string">'content'</span></pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!input.hasStream(<span class="hljs-string">'content'</span>)) { <span class="hljs-keyword">return</span>; }</pre></div>
   
 
   
   <p>The output will be a single packet (not a stream),
-hence we drop the <code>openBracket</code> and <code>closeBracket</code></p>
+hence we drop the <code>openBracket</code> and <code>closeBracket</code>
+and extract the data payload from the IP objects</p>
 
   
-    <div class='highlight'><pre>    contents = contents.filter (ip) -&gt; ip.type <span class="hljs-keyword">is</span> <span class="hljs-string">'data'</span></pre></div>
-  
-
-  
-  <p>extract the data payload from the IP objects</p>
-
-  
-    <div class='highlight'><pre>    contents = contents.map (ip) -&gt; ip.data</pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> contents = input.getStream(<span class="hljs-string">'content'</span>).filter(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.type === <span class="hljs-string">'data'</span>).map(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.data);</pre></div>
   
 
   
@@ -89,23 +98,24 @@ This could alternatively be split into two dedicate components.</p>
   <p>to hold the emotions found</p>
 
   
-    <div class='highlight'><pre>    matches = []</pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> matches = [];</pre></div>
   
 
   
   <p>the emotions we will use</p>
 
   
-    <div class='highlight'><pre>    emotions =
-      joy: [<span class="hljs-string">'eh!'</span>]
-      neutral: [<span class="hljs-string">'eh'</span>]
-      amusement: [<span class="hljs-string">'eh?'</span>, <span class="hljs-string">'Eh?'</span>, <span class="hljs-string">'Eh??'</span>]
-      fear: [<span class="hljs-string">'eH??'</span>, <span class="hljs-string">'eh??'</span>]
-      surprise: [<span class="hljs-string">'eh !?'</span>, <span class="hljs-string">'EH!?'</span>]
-      anticipation: [<span class="hljs-string">'eh?!'</span>]
-      excitment: [<span class="hljs-string">'EH!'</span>, <span class="hljs-string">'eH!'</span>]
-      sadness: [<span class="hljs-string">'...eh'</span>, <span class="hljs-string">'...eh...'</span>, <span class="hljs-string">'..eh'</span>, <span class="hljs-string">'eh..'</span>, <span class="hljs-string">'..eh..'</span>]
-      anger: [<span class="hljs-string">'EH!?'</span>, <span class="hljs-string">'EH?'</span>]</pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> emotions = {
+      <span class="hljs-attr">joy</span>: [<span class="hljs-string">'eh!'</span>],
+      <span class="hljs-attr">neutral</span>: [<span class="hljs-string">'eh'</span>],
+      <span class="hljs-attr">amusement</span>: [<span class="hljs-string">'eh?'</span>, <span class="hljs-string">'Eh?'</span>, <span class="hljs-string">'Eh??'</span>],
+      <span class="hljs-attr">fear</span>: [<span class="hljs-string">'eH??'</span>, <span class="hljs-string">'eh??'</span>],
+      <span class="hljs-attr">surprise</span>: [<span class="hljs-string">'eh !?'</span>, <span class="hljs-string">'EH!?'</span>],
+      <span class="hljs-attr">anticipation</span>: [<span class="hljs-string">'eh?!'</span>],
+      <span class="hljs-attr">excitment</span>: [<span class="hljs-string">'EH!'</span>, <span class="hljs-string">'eH!'</span>],
+      <span class="hljs-attr">sadness</span>: [<span class="hljs-string">'...eh'</span>, <span class="hljs-string">'...eh...'</span>, <span class="hljs-string">'..eh'</span>, <span class="hljs-string">'eh..'</span>, <span class="hljs-string">'..eh..'</span>],
+      <span class="hljs-attr">anger</span>: [<span class="hljs-string">'EH!?'</span>, <span class="hljs-string">'EH?'</span>],
+    };</pre></div>
   
 
   
@@ -113,26 +123,32 @@ This could alternatively be split into two dedicate components.</p>
 then add them to our <code>matches</code></p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">for</span> content <span class="hljs-keyword">in</span> contents
-      <span class="hljs-keyword">for</span> emotion, data <span class="hljs-keyword">of</span> emotions
-        <span class="hljs-keyword">if</span> content <span class="hljs-keyword">in</span> data
-          matches.push emotion</pre></div>
+    <div class='highlight'><pre>    contents.forEach(<span class="hljs-function">(<span class="hljs-params">content</span>) =&gt;</span> {
+      <span class="hljs-built_in">Object</span>.keys(emotions).forEach(<span class="hljs-function">(<span class="hljs-params">emotion</span>) =&gt;</span> {
+        <span class="hljs-keyword">const</span> data = emotions[emotion];
+        <span class="hljs-keyword">if</span> (data.indexOf(content) !== <span class="hljs-number">-1</span>) {
+          matches.push(emotion);
+        }
+      });
+    });</pre></div>
   
 
   
   <p>if we didn’t get any emotions, it default to ‘neutral’</p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">if</span> matches.length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
-      mode = <span class="hljs-string">'neutral'</span></pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">let</span> mode;
+    <span class="hljs-keyword">if</span> (matches.length === <span class="hljs-number">0</span>) {
+      mode = <span class="hljs-string">'neutral'</span>;</pre></div>
   
 
   
   <p>if we did, we need to find the emotion that was the most common</p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">else</span>
-      mode = findMode matches</pre></div>
+    <div class='highlight'><pre>    } <span class="hljs-keyword">else</span> {
+      mode = findMode(matches);
+    }</pre></div>
   
 
   
@@ -140,7 +156,13 @@ then add them to our <code>matches</code></p>
 <p>Also signals completion by using <code>sendDone()</code></p>
 
   
-    <div class='highlight'><pre>    output.sendDone emotion: mode</pre></div>
+    <div class='highlight'><pre>    output.sendDone({
+      <span class="hljs-attr">emotion</span>: mode,
+    });
+  });
+
+  <span class="hljs-keyword">return</span> c;
+};</pre></div>
   
 
 </div>

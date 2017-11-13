@@ -4,7 +4,7 @@
   <h2 id="import-libraries">Import libraries</h2>
 
   
-    <div class='highlight'><pre>noflo = <span class="hljs-built_in">require</span> <span class="hljs-string">'noflo'</span></pre></div>
+    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'noflo'</span>);</pre></div>
   
 
   
@@ -17,60 +17,71 @@
   <p>Return all RegExp matches on a string</p>
 
   
-    <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">matchAll</span> = <span class="hljs-params">(string, regexp)</span> -&gt;</span>
-  matches = []
-  string.replace regexp, <span class="hljs-function">-&gt;</span>
-    arr = [].slice.call arguments, <span class="hljs-number">0</span>
-    extras = arr.splice <span class="hljs-number">-2</span>
-    arr.index = extras[<span class="hljs-number">0</span>]
-    arr.input = extras[<span class="hljs-number">1</span>]
-    matches.push arr
-    <span class="hljs-keyword">return</span>
-  <span class="hljs-keyword">if</span> matches.length <span class="hljs-keyword">then</span> matches <span class="hljs-keyword">else</span> []</pre></div>
+    <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">matchAll</span>(<span class="hljs-params">string, regexp</span>) </span>{
+  <span class="hljs-keyword">const</span> matches = [];
+  string.replace(regexp, (...rest) =&gt; {
+    <span class="hljs-keyword">const</span> arr = rest.slice(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">const</span> extras = arr.splice(<span class="hljs-number">-2</span>);
+    [arr.index, arr.input] = extras;
+    matches.push(arr);
+  });
+  <span class="hljs-keyword">if</span> (matches.length) {
+    <span class="hljs-keyword">return</span> matches;
+  }
+  <span class="hljs-keyword">return</span> [];
+}</pre></div>
   
 
   
   <p>Extract the actual data of the match result</p>
 
   
-    <div class='highlight'><pre><span class="hljs-function"><span class="hljs-title">actualMatches</span> = <span class="hljs-params">(matches)</span> -&gt;</span></pre></div>
+    <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">actualMatches</span>(<span class="hljs-params">matches</span>) </span>{</pre></div>
   
 
   
   <p>because we want to send out an empty array if there are no matches</p>
 
   
-    <div class='highlight'><pre>  <span class="hljs-keyword">return</span> [[]] <span class="hljs-keyword">if</span> matches.length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
-  matches.map (match) -&gt; match[<span class="hljs-number">0</span>]</pre></div>
+    <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (matches.length === <span class="hljs-number">0</span>) { <span class="hljs-keyword">return</span> [[]]; }
+  <span class="hljs-keyword">return</span> matches.map(<span class="hljs-function"><span class="hljs-params">match</span> =&gt;</span> match[<span class="hljs-number">0</span>]);
+}</pre></div>
   
 
   
   <h2 id="component-declaration">Component declaration</h2>
 
   
-    <div class='highlight'><pre>exports.getComponent = <span class="hljs-function">-&gt;</span>
-  c = <span class="hljs-keyword">new</span> noflo.Component
-    description: <span class="hljs-string">'Find all of the instances of `word` in `content` and send them out in a stream'</span>
-    inPorts:
-      content:
-        datatype: <span class="hljs-string">'string'</span>
-        description: <span class="hljs-string">'the content which we look for a word in'</span>
-        required: <span class="hljs-literal">true</span>
-      word:
-        datatype: <span class="hljs-string">'string'</span> <span class="hljs-comment"># could be array|string, which would be `all`</span>
-        description: <span class="hljs-string">'the word we are looking for instances of'</span>
-        control: <span class="hljs-literal">true</span>
-        required: <span class="hljs-literal">true</span>
-      surrounding: <span class="hljs-comment"># could use a regex but this is a specific case</span>
-        datatype: <span class="hljs-string">'boolean'</span>
-        description: <span class="hljs-string">'whether to get surrounding characters, symbols before and after until space'</span>
-        default: <span class="hljs-literal">false</span> <span class="hljs-comment"># if nothing is sent to it, this is the default when `get`ting from it</span>
-        control: <span class="hljs-literal">true</span>
-    outPorts:
-      matches:
-        datatype: <span class="hljs-string">'string'</span>
-        description: <span class="hljs-string">'the resulting findings as a stream of data packets'</span>
-        required: <span class="hljs-literal">true</span></pre></div>
+    <div class='highlight'><pre>exports.getComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> c = <span class="hljs-keyword">new</span> noflo.Component({
+    <span class="hljs-attr">description</span>: <span class="hljs-string">'Find all of the instances of `word` in `content` and send them out in a stream'</span>,
+    <span class="hljs-attr">inPorts</span>: {
+      <span class="hljs-attr">content</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'string'</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">'the content which we look for a word in'</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+      <span class="hljs-attr">word</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'string'</span>, <span class="hljs-comment">// could be array|string, which would be `all`</span>
+        description: <span class="hljs-string">'the word we are looking for instances of'</span>,
+        <span class="hljs-attr">control</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+      <span class="hljs-attr">surrounding</span>: { <span class="hljs-comment">// could use a regex but this is a specific case</span>
+        datatype: <span class="hljs-string">'boolean'</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">'whether to get surrounding characters, symbols before and after until space'</span>,
+        <span class="hljs-attr">default</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// if nothing is sent to it, this is the default when `get`ting from it</span>
+        control: <span class="hljs-literal">true</span>,
+      },
+    },
+    <span class="hljs-attr">outPorts</span>: {
+      <span class="hljs-attr">matches</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'string'</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">'the resulting findings as a stream of data packets'</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+    },
+  });</pre></div>
   
 
   
@@ -78,9 +89,11 @@
 <p>To preserve streams, forward brackets from the primary inport <code>content</code> to the output.</p>
 
   
-    <div class='highlight'><pre>  c.forwardBrackets =
-    content: <span class="hljs-string">'matches'</span>
-  c.process (input, output) -&gt;</pre></div>
+    <div class='highlight'><pre>  c.forwardBrackets = {
+    <span class="hljs-attr">content</span>: [<span class="hljs-string">'matches'</span>],
+  };
+
+  c.process(<span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {</pre></div>
   
 
   
@@ -89,8 +102,14 @@
 Since <code>word</code> is a control port, the latest value is kept, no need to continiously send</p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">unless</span> input.hasData <span class="hljs-string">'word'</span>, <span class="hljs-string">'content'</span>
-    [ word, content ] = input.getData <span class="hljs-string">'word'</span>, <span class="hljs-string">'content'</span></pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">'word'</span>, <span class="hljs-string">'content'</span>)) { <span class="hljs-keyword">return</span>; }</pre></div>
+  
+
+  
+  <p>const [word, content] = input.getData(‘word’, ‘content’);</p>
+
+  
+    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> content = input.getData(<span class="hljs-string">'content'</span>);</pre></div>
   
 
   
@@ -100,16 +119,18 @@ we want to wrap them in brackets
 TODO: make exception safe</p>
 
   
-    <div class='highlight'><pre>    output.send matches: <span class="hljs-keyword">new</span> noflo.IP <span class="hljs-string">'openBracket'</span>, content</pre></div>
+    <div class='highlight'><pre>    output.send({
+      <span class="hljs-attr">matches</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">'openBracket'</span>, content),
+    });</pre></div>
   
 
   
   <p>do our word processing</p>
 
   
-    <div class='highlight'><pre>    r = <span class="hljs-regexp">/([.?!]*eh[.?!]*)/gi</span>
-    matches = matchAll content, r
-    matches = actualMatches matches</pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> r = <span class="hljs-regexp">/([.?!]*eh[.?!]*)/gi</span>;
+    <span class="hljs-keyword">let</span> matches = matchAll(content, r);
+    matches = actualMatches(matches);</pre></div>
   
 
   
@@ -117,7 +138,7 @@ TODO: make exception safe</p>
 <p>for each of our matches, send them out</p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">for</span> match <span class="hljs-keyword">in</span> matches</pre></div>
+    <div class='highlight'><pre>    matches.forEach(<span class="hljs-function">(<span class="hljs-params">match</span>) =&gt;</span> {</pre></div>
   
 
   
@@ -125,14 +146,23 @@ TODO: make exception safe</p>
 so this is the same as <code>output.send matches: new noflo.IP &#39;data&#39;, match</code></p>
 
   
-    <div class='highlight'><pre>      output.send matches: match</pre></div>
+    <div class='highlight'><pre>      output.send({
+        <span class="hljs-attr">matches</span>: match,
+      });
+    });</pre></div>
   
 
   
   <p>this is the same as doing <code>output.send</code> and then <code>output.done</code></p>
 
   
-    <div class='highlight'><pre>    output.sendDone matches: <span class="hljs-keyword">new</span> noflo.IP <span class="hljs-string">'closeBracket'</span>, content</pre></div>
+    <div class='highlight'><pre>    output.sendDone({
+      <span class="hljs-attr">matches</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">'closeBracket'</span>, content),
+    });
+  });
+
+  <span class="hljs-keyword">return</span> c;
+};</pre></div>
   
 
 </div>

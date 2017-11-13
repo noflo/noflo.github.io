@@ -175,28 +175,30 @@ FindEhs(FindEhs) MATCHES -> CONTENT DetermineEmotion(DetermineEmotion)
 
 First in line for testing, we have [fbp-spec](https://github.com/flowbased/fbp-spec)
 
-Just add a `fbpspec.coffee` file in `/spec` directory
+Just add a `fbpspec.js` file in `/spec` directory
 
-Important to note, you cannot send brackets or do any sort of special operations using fbp-spec. To get around that, you will have to write [components exclusively for testing](https://github.com/aretecode/canadianness/blob/master/components/TestDetermineEmotion.coffee), and [fbp graphs as fixtures](https://github.com/aretecode/canadianness/blob/master/spec/determineemotion.yaml#L3).
+Important to note, you cannot send brackets or do any sort of special operations using fbp-spec. To get around that, you will have to write [components exclusively for testing](https://github.com/noflo/canadianness/blob/master/components/TestDetermineEmotion.js), and [fbp graphs as fixtures](https://github.com/aretecode/canadianness/blob/master/spec/determineemotion.yaml#L3).
 
 The command we use for noflo, and the flags can be found at [noflo-nodejs flags](https://github.com/noflo/noflo-nodejs/blob/master/src/noflo-nodejs.coffee#L13)
 
-```coffeescript
-fbpspec = require 'fbp-spec'
+```javascript
+const fbpspec = require('fbp-spec');
 
-nodeRuntime =
-  label: "NoFlo node.js"
-  description: ""
-  type: "noflo"
-  protocol: "websocket"
-  secret: 'notasecret'
-  address: "ws://localhost:3333"
-  id: "7807f4d8-63e0-4a89-a577-2770c14f8106"
-  command: './node_modules/.bin/noflo-nodejs --verbose --catch-exceptions=false --secret notasecret --port=3333 --host=localhost --register=false --capture-output=true --debug=true'
+const nodeRuntime = {
+  label: "NoFlo node.js",
+  description: "",
+  type: "noflo",
+  protocol: "websocket",
+  secret: 'notasecret',
+  address: "ws://localhost:3333",
+  id: "7807f4d8-63e0-4a89-a577-2770c14f8106",
+  command: './node_modules/.bin/noflo-nodejs --catch-exceptions=false --secret notasecret --port=3333 --host=localhost --register=false --capture-output=true'
+};
 
-fbpspec.mocha.run nodeRuntime, './spec',
-  fixturetimeout: 20000
-  starttimeout: 100000
+fbpspec.mocha.run(nodeRuntime, './spec', {
+  fixturetimeout: 10000,
+  starttimeout: 10000
+});
 ```
 
 Then, for each test, just add a `yaml` file in the `/spec` directory, each `yaml` file in `/spec` is loaded by the `fbp-spec`.
