@@ -2,6 +2,7 @@
 title: Components
 layout: documentation
 ---
+- [Component loading](#component-loading)
 - [Component API](#component-api)
   - [The process function](#the-process-function)
   - [Handling preconditions](#handling-preconditions)
