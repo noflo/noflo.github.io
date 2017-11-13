@@ -31,7 +31,12 @@ NoFlo graphs can deal with multiple different input paradigms. The same flow can
 
 There are two ways to run your flow-based programs with NoFlo. If your whole application is based on flows, you can simply have NoFlo execute and run it. Flow-based programs done in this way are called *independent* graphs. You can run them on Node.js with the [noflo-nodejs](https://www.npmjs.com/package/noflo-nodejs) command-line tool.
 
+* Read more: [noflo-nodejs](https://github.com/noflo/noflo-nodejs#readme) for execution on Node.js
+* Read more: [running NoFlo in a browser](#running-noflo-in-the-browser)
+
 The other option is to *embed* NoFlo graphs into your existing JavaScript application by using it as a regular NPM module. This is useful when you already have an existing system where you want to automate some parts as their own flows, or to add new functionality.
+
+* Read more: [Embedding NoFlo in existing JavaScript](/documentation/embedding)
 
 Examples of embedded usage of NoFlo include handling billing processes or routing incoming SMS or email within an existing Node.js web application.
 
