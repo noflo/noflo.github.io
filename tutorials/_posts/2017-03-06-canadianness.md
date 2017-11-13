@@ -143,7 +143,7 @@ SpellingScore SCORE -> ADDEND Add(math/Add)
 CanadianScore SCORE -> AUGEND Add
 ```
 
-[See the graph](https://github.com/aretecode/canadianness/blob/master/graphs/Canadianness.fbp)
+[See the graph](https://github.com/noflo/canadianness/blob/master/graphs/Canadianness.fbp)
 <img src="/img/canadianness.png" alt="noflo canadianness graph"/>
 
 ## Emotion
@@ -159,7 +159,7 @@ OUTPORT=DetermineEmotion.EMOTION:EMOTION
 FindEhs(FindEhs) MATCHES -> CONTENT DetermineEmotion(DetermineEmotion)
 ```
 
-[See the graph](https://github.com/aretecode/canadianness/blob/master/graphs/Emotion.fbp)
+[See the graph](https://github.com/noflo/canadianness/blob/master/graphs/Emotion.fbp)
 <img src="/img/emotion.png" alt="noflo canadianness emotion graph"/>
 
 # Writing tests
@@ -168,7 +168,7 @@ First in line for testing, we have [fbp-spec](https://github.com/flowbased/fbp-s
 
 Just add a `fbpspec.js` file in `/spec` directory
 
-Important to note, you cannot send brackets or do any sort of special operations using fbp-spec. To get around that, you will can write components exclusively for testing, and [fbp graphs as fixtures](https://github.com/aretecode/canadianness/blob/master/spec/determineemotion.yaml#L3).
+Important to note, you cannot send brackets or do any sort of special operations using fbp-spec. To get around that, you will can write components exclusively for testing, and [fbp graphs as fixtures](https://github.com/noflo/canadianness/blob/master/spec/determineemotion.yaml#L3).
 
 The command we use for noflo, and the flags can be found at [noflo-nodejs flags](https://github.com/noflo/noflo-nodejs/blob/master/src/noflo-nodejs.coffee#L13)
 
