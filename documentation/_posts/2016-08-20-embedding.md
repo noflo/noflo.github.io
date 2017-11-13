@@ -73,16 +73,16 @@ For example, you can convert it to a Promise [either manually](https://benmccorm
 
 ```javascript
 // Load Bluebird
-var Promise = require('bluebird');
+const bluebird = require('bluebird');
 
 // Convert the wrapped function into a Promise
-var promisedGraph = Promise.promisify(wrappedGraph);
+const promisedGraph = bluebird.promisify(wrappedGraph);
 
 // Run it
 promisedGraph({
   in: 'baz'
 })
-.then (function (result) {
+.then ((result) => {
   console.log(result.out);
 });
 ```

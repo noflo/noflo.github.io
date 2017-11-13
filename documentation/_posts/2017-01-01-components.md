@@ -31,15 +31,15 @@ So, how does a NoFlo component written in JavaScript look like?
 
 ```javascript
 // Load the NoFlo interface
-var noflo = require('noflo');
+const noflo = require('noflo');
 // Also load any other dependencies you have
-var fs = require('fs');
+const fs = require('fs');
 
 // Implement the getComponent function that NoFlo's component loader
 // uses to instantiate components to the program
-exports.getComponent = function () {
+exports.getComponent = () => {
   // Start by instantiating a component
-  var c = new noflo.Component();
+  const c = new noflo.Component();
 
   // Provide some metadata, including icon for visual editors
   c.description = 'Reads a file from the filesystem';
@@ -59,7 +59,7 @@ exports.getComponent = function () {
 
   // Implement the processing function that gets called when the
   // inport buffers have packets available
-  c.process(function (input, output) {
+  c.process(((input, output) => {
     // Precondition: check that the "in" port has a data packet.
     // Not necessary for single-inport components but added here
     // for the sake of demonstration
@@ -69,8 +69,8 @@ exports.getComponent = function () {
 
     // Since the preconditions matched, we can read from the inport
     // buffer and start processing
-    var filePath = input.getData('in');
-    fs.readFile(filePath, 'utf-8', (err, contents) {
+    const filePath = input.getData('in');
+    fs.readFile(filePath, 'utf-8', (err, contents) => {
       // In case of errors we can just pass the error to the "error"
       // outport
       if (err) {
@@ -127,7 +127,7 @@ For more complex checking it is also possible to pass a validation function to t
 
 ```javascript
 // We want to process only when color is green
-var validator = function (packet) {
+const validator = (packet) => {
   if (packet.data.color === 'green') {
     return true;
   }
@@ -172,8 +172,8 @@ For data packets you can also just send the data as-is, and NoFlo will wrap it t
 Once you've finished processing, simply call `output.done()` to deactivate the component. There is also a convenience method that is a combination of `send` and `done`. This is useful for simple components:
 
 ```javascript
-c.process(function (input, output) {
-  var data = input.getData('in');
+c.process((input, output) => {
+  const data = input.getData('in');
   // We just add one to the number we received and send it out
   output.sendDone({
     out: data + 1
@@ -220,8 +220,8 @@ Some examples of generators include:
 The same rules of "only send when activated" apply also to generators. However, they can utilize the processing context to self-activate as needed:
 
 ```javascript
-exports.getComponent = function () {
-  var c = new noflo.Component();
+exports.getComponent = () => {
+  const c = new noflo.Component();
   c.inPorts.add('start', { datatype: 'bang' });
   c.inPorts.add('stop', { datatype: 'bang' });
   c.outPorts.add('out', { datatype: 'bang' });
@@ -230,7 +230,7 @@ exports.getComponent = function () {
   c.autoOrdering = false;
 
   // Helper function for clearing a running timer loop
-  var cleanup = function () {
+  const cleanup = () => {
     // Clear the timer
     clearInterval(c.timer.interval);
     // Then deactivate the long-running context
@@ -239,7 +239,7 @@ exports.getComponent = function () {
   }
 
   // Receive the context together with input and output
-  c.process(function (input, output, context) {
+  c.process((input, output, context) => {
     if (input.hasData('start')) {
       // We've received a packet to the "start" port
       // Stop the previous interval and deactivate it, if any
@@ -252,7 +252,7 @@ exports.getComponent = function () {
       // be deactivated from the outside
       c.timer = context
       // Start generating packets
-      c.timer.interval = setInterval(function () {
+      c.timer.interval = setInterval(() => {
         // Send a packet
         output.send({
           out: true
@@ -278,7 +278,7 @@ exports.getComponent = function () {
   });
 
   // We also may need to clear the timer at network shutdown
-  c.tearDown = function (callback) {
+  c.tearDown = (callback) => {
     if (c.timer) {
       // Stop the interval and deactivate
       cleanup();
