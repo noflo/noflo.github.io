@@ -18,22 +18,6 @@ module.exports = ->
           bundleExec: true
         files:
           'css/main.css': 'css/main.scss'
-      site:
-        options:
-          sourcemap: true
-          style: 'compressed'
-          bundleExec: true
-        files:
-          '_site/css/main.css': '_site/css/main.scss'
-    
-    copy:
-      site2src:
-        files: [
-          expand: true
-          cwd: '_site/css/'
-          src: ['main.*'],
-          dest: 'css/'
-        ]
     
     #imagemin:
     #  dist:
@@ -89,7 +73,7 @@ module.exports = ->
           '**/*.html'
           '**/*.md'
           '**/*.js'
-          '**/*.css'
+          'css/*.css'
           '**/_posts/*.md'
           # Ignore the generated files
           '!_site/*'
@@ -105,12 +89,6 @@ module.exports = ->
           'css/*.scss'
         ]
         tasks: ['sass:src']
-
-      siteSass:
-        files: [
-          '_site/css/*.scss'
-        ]
-        tasks: ['sass:site', 'copy:site2src']
 
   @loadNpmTasks 'grunt-jekyll'
   @loadNpmTasks 'grunt-docco'
