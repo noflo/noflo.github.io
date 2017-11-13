@@ -1,0 +1,66 @@
+<div>
+
+  
+  
+  
+    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'noflo'</span>);
+<span class="hljs-keyword">const</span> defaultSpellingData = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./spellingdata.json'</span>);
+
+<span class="hljs-keyword">const</span> defaultWords = {
+  <span class="hljs-attr">eh</span>: <span class="hljs-number">11</span>,
+  <span class="hljs-string">'eh!'</span>: <span class="hljs-number">11</span>,
+};</pre></div>
+  
+
+  
+  <p>Produce the JavaScript entry point</p>
+
+  
+    <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">canadianness</span>(<span class="hljs-params">contentData, options, callback</span>) </span>{</pre></div>
+  
+
+  
+  <p>Normalize options</p>
+
+  
+    <div class='highlight'><pre>  <span class="hljs-keyword">const</span> spellingData = options.spelling || defaultSpellingData;
+  <span class="hljs-keyword">const</span> wordsData = options.words || defaultWords;</pre></div>
+  
+
+  
+  <p>Convert options and input to a set of NoFlo packets to be sent</p>
+
+  
+    <div class='highlight'><pre>  <span class="hljs-keyword">const</span> inputs = {
+    <span class="hljs-attr">words</span>: wordsData,
+    <span class="hljs-attr">spelling</span>: spellingData,
+    <span class="hljs-attr">content</span>: contentData,
+  };</pre></div>
+  
+
+  
+  <p>Produce a NoFlo.asCallback wrapped function to execute our graph</p>
+
+  
+    <div class='highlight'><pre>  <span class="hljs-keyword">const</span> componentName = <span class="hljs-string">'canadianness/Canadianness'</span>;
+  <span class="hljs-keyword">const</span> wrapperFunction = noflo.asCallback(componentName, {
+    <span class="hljs-attr">baseDir</span>: __dirname,
+  });</pre></div>
+  
+
+  
+  <p>Run the graph with inputs and call callback</p>
+
+  
+    <div class='highlight'><pre>  wrapperFunction(inputs, callback);
+}</pre></div>
+  
+
+  
+  <p>Expose function as public API</p>
+
+  
+    <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = canadianness;</pre></div>
+  
+
+</div>
