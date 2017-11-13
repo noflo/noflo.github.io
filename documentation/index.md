@@ -19,13 +19,17 @@ NoFlo is a [Flow-Based Programming](http://en.wikipedia.org/wiki/Flow-based_prog
 
 NoFlo components react to incoming messages, or *information packets*. When a component receives packets in its input ports it performs a predefined operation, and sends its result out as a packet to its output ports. There is no shared state, and the only way to communicate between components is by sending packets.
 
-NoFlo components are built as simple JavaScript or [CoffeeScript](http://coffeescript.org/) objects that define the input and output ports, and register various event listeners on them. When executed, NoFlo creates a live graph, or *network* out of a graph definition, instantiates the components used in the graph, and connects them together.
+NoFlo components are built as simple JavaScript or [CoffeeScript](http://coffeescript.org/) modules that define the input and output ports, and register various event listeners on them. When executed, NoFlo creates a live graph, or *network* out of a graph definition, instantiates the components used in the graph, and connects them together.
+
+* Read more: [Writing components](/documentation/components/)
 
 NoFlo graphs can deal with multiple different input paradigms. The same flow can react to incoming HTTP requests, text messages, and changes in the file system, and can similarly output to different targets like writing to a database, responding to the HTTP requests, or updating a dashboard. It is simply a matter of choosing the components you want to use.
 
+* Read more: [Defining graphs](/documentation/graphs/)
+
 ## Using NoFlo
 
-There are two ways to run your flow-based programs with NoFlo. If your whole application is based on flows, you can simply have NoFlo execute and run it. Flow-based programs done in this way are called *independent* graphs. You can run them with the `noflo` command that ships with the NoFlo package.
+There are two ways to run your flow-based programs with NoFlo. If your whole application is based on flows, you can simply have NoFlo execute and run it. Flow-based programs done in this way are called *independent* graphs. You can run them on Node.js with the [noflo-nodejs](https://www.npmjs.com/package/noflo-nodejs) command-line tool.
 
 The other option is to *embed* NoFlo graphs into your existing JavaScript application by using it as a regular NPM module. This is useful when you already have an existing system where you want to automate some parts as their own flows, or to add new functionality.
 
@@ -46,7 +50,7 @@ This activation model provides many possibilities:
 
 ## Creating a NoFlo project
 
-NoFlo projects are created in the same way as any other Node.js project would. To get started, you need a working installation of [Node.js](http://nodejs.org/) (version 0.8 or later), and the [NPM](https://npmjs.org/) package manager that comes with it.
+NoFlo projects are created in the same way as any other Node.js project would. To get started, you need a working installation of [Node.js](https://nodejs.org/) (version 6 or later), and the [NPM](https://npmjs.com/) package manager that comes with it.
 
 You can test that your Node.js installation works by running:
 
@@ -54,7 +58,7 @@ You can test that your Node.js installation works by running:
 $ npm -v
 ```
 
-If this doesn't work, read the [Node.js installation instructions](http://nodejs.org/download/) for your operating system.
+If this doesn't work, read the [Node.js installation instructions](https://nodejs.org/en/download/) for your operating system.
 
 ### Project folder
 
@@ -82,6 +86,8 @@ A basic `package.json` file could look like the following. Create one using a te
   "version": "0.0.1"
 }
 ```
+
+You can also create the `package.json` using the `npm init` command.
 
 Once the `package.json` file is in place, you're ready to install NoFlo. Do this by running:
 
@@ -149,7 +155,7 @@ Read(filesystem/ReadFile) OUT -> IN Display(core/Output)
 Once you've saved the file you can run the graph with NoFlo:
 
 ```bash
-$ ./node_modules/.bin/noflo-nodejs --graph graphs/ShowContents.fbp --batch --register=false
+$ ./node_modules/.bin/noflo-nodejs --graph graphs/ShowContents.fbp --batch
 ```
 
 The contents of your `package.json` should be shown on the console.
@@ -159,7 +165,7 @@ The contents of your `package.json` should be shown on the console.
 If you want to see how the graph works internally, you can run NoFlo with the debugger:
 
 ```bash
-$ ./node_modules/.bin/noflo-nodejs --graph graphs/ShowContents.fbp --batch --register=false --debug
+$ ./node_modules/.bin/noflo-nodejs --graph graphs/ShowContents.fbp --batch --debug
 ```
 
 This will show all the various events happening inside the graph:
@@ -169,7 +175,7 @@ This will show all the various events happening inside the graph:
 * Data being sent through the connections
 * Connections being closed
 
-Looking at this is useful in order to understand how information flows through a NoFlo network.
+Looking at this is useful in order to understand how information flows through a NoFlo network. Visual tools like [Flowhub](https://flowhub.io/ide/) can give an even better view at how the graph looks and behaves.
 
 ### Running NoFlo in the browser
 
@@ -181,7 +187,34 @@ In nutshell, making a browser build of a NoFlo project involves the following st
 2. Generate a custom NoFlo component loader that requires all the component files and registers them for NoFlo to load
 3. Configure and run webpack with the application entry point, replacing NoFlo's standard component loader with the generated custom one
 
-To automate these steps we have **[grunt-noflo-browser](https://github.com/noflo/grunt-noflo-browser)**, a plugin for the [Grunt](https://gruntjs.com) task runner that we use for build automation.
+To automate these steps we have **[noflo-component-loader](https://www.npmjs.com/package/noflo-component-loader)**, a WebPack loader plugin. Install it as a development dependency:
+
+```bash
+$ npm install noflo-component-loader --save-dev
+```
+
+Then edit your webpack configuration and enable this loader in your `module.rules`:
+
+```javascript
+{
+  // Replace NoFlo's dynamic loader with a generated one
+  test: /noflo\/lib\/loader\/register.js$/,
+  use: [
+    {
+      loader: 'noflo-component-loader',
+      options: {
+        // Only include components used by this graph
+        // Set to NULL if you want all installed components
+        graph: 'myproject/GraphName',
+        // Whether to include the original component sources
+        // in the build
+        debug: false,
+      },
+    },
+  ],
+```
+
+Read more in [noflo-component-loader documentation](https://github.com/noflo/noflo-component-loader#readme).
 
 #### Project scaffolding
 
@@ -198,7 +231,7 @@ More details for using the template can be found from the [project README](https
 
 ## Building a simple calculator
 
-NoFlo has a [wealth of components](/library/) available. One such example is the [noflo-math](https://www.npmjs.com/package/noflo-math), which can be used for performing simple calculations.
+NoFlo has a [wealth of components](https://www.npmjs.com/browse/keyword/noflo) available. One such example is the [noflo-math](https://www.npmjs.com/package/noflo-math), which can be used for performing simple calculations.
 
 Install it with:
 
@@ -223,7 +256,7 @@ Multiply PRODUCT -> IN Display(core/Output)
 If you run this with:
 
 ```bash
-$ ./node_modules/.bin/noflo-nodejs --graph graphs/Calculate.fbp --batch --register=false
+$ ./node_modules/.bin/noflo-nodejs --graph graphs/Calculate.fbp --batch
 ```
 
 it will give the answer of `42`. Doing other mathematical operations with noflo-math is left as an exercise to the user.
