@@ -60,7 +60,11 @@ module.exports = ->
           template: '_docco/docco.jst'
           css: ''
       tutorials:
-        src: ['./projects/canadianness/components/*.js']
+        src: [
+          './projects/canadianness/graphs/*.fbp'
+          './projects/canadianness/components/*.js'
+          './projects/canadianness/index.js'
+        ]
         options:
           output: '_includes/tutorials/canadianness'
           template: '_docco/tutorials.jst'

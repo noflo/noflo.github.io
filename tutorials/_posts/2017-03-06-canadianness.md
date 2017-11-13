@@ -3,39 +3,32 @@ layout: projects
 title: "Tutorial: Data transformation"
 ---
 
-### Initial:
-- [Idea](#idea)
-- [Requirements](#requirements)
-- [Planning](#planning)
-- [Researching](#researching)
-- [Pseudo code](#pseudo-code)
+- Preparation
+  - [Idea](#idea)
+  - [Requirements](#requirements)
+  - [Planning](#planning)
+  - [Researching](#researching)
+  - [Pseudo code](#pseudo-code)
+- Implementation
+  - [Overall architecture](#overall-architecture)
+  - [Writing tests](#writing-tests)
+  - [Implement components](#implement-components)
+    - [DetermineEmotion](#determineemotion)
+    - [FindWords](#findwords)
+    - [WordScore](#wordscore)
+  - [Providing a JavaScript API](#providing-a-javascript-api)
 
-### Writing components
-- [FindEhs](/projects/find-ehs)
-- [DetermineEmotion](/projects/determine-emotion)
-- [WordScore](/projects/word-score)
-
-### Writing graphs
-- [Graphs](/projects/graphs)
-
-### Testing
-- [Testing](/projects/testing)
-
-### Finishing up
-- [Embedding](/projects/embedding)
-- [Summary](/projects/summary)
-
-[See the full project](https://github.com/aretecode/canadianness)
+[See the full project](https://github.com/noflo/canadianness)
 
 -------------------------
-# Idea <a id="idea"></a>
+# Idea
 
 Make a project that calculates how Canadian a string is.
 As an added bonus, it will determine the emotion of the string based on how _eh_'s are used.
 
 
 -------------------------
-# Requirements <a id="requirements"></a>
+# Requirements
 
 Use:
 - our own components
@@ -48,7 +41,7 @@ Use:
 
 
 -------------------------
-# Planning <a id="planning"></a>
+# Planning
 
 - To determine how Canadian something is, we want to check words inside of the string.
   - ~ If it is easily possible, figure out how far words are from each other
@@ -58,7 +51,7 @@ Use:
 - The output should have the _Emotion_, and the _Canadian Score_.
 
 -------------------------
-# Researching <a id="researching"></a>
+# Researching
 
 ## Word Weight
 Search Google for a library that may be able to help us with dealing with word weights, singularize, and pluralize words.
@@ -78,9 +71,7 @@ This is data on a table though with no apparent api, so we should get it into us
 
 
 -------------------------
-# Pseudo code <a id="pseudo-code"></a>
-
-TODO: move into overall arch or project definition
+# Pseudo code
 
 ```
 [How Canadian]
@@ -126,7 +117,6 @@ TODO: move into overall arch or project definition
 ### Real graph implementation of pseudo code:
 
 ```
-graph = "
 # (string)
 INPORT=SplitContent.IN:CONTENT
 # (array)
@@ -149,7 +139,6 @@ SplitContent OUT -> CONTENT CanadianScore(canadianness/WordScore)
 
 SpellingScore SCORE -> ADDEND Add(math/Add)
 CanadianScore SCORE -> AUGEND Add
-"
 ```
 
 [See the graph](https://github.com/aretecode/canadianness/blob/master/graphs/Canadianness.fbp)
@@ -159,7 +148,7 @@ CanadianScore SCORE -> AUGEND Add
 
 This can be its own graph loaded inside of the main graph as a [subgraph](/documentation/graphs/#subgraphs) so the whole operation can be represented as a box:
 
-```FBP
+```fbp
 # (string)
 INPORT=FINDEHS.CONTENT:CONTENT
 # (string)
@@ -177,7 +166,7 @@ First in line for testing, we have [fbp-spec](https://github.com/flowbased/fbp-s
 
 Just add a `fbpspec.js` file in `/spec` directory
 
-Important to note, you cannot send brackets or do any sort of special operations using fbp-spec. To get around that, you will have to write [components exclusively for testing](https://github.com/noflo/canadianness/blob/master/components/TestDetermineEmotion.js), and [fbp graphs as fixtures](https://github.com/aretecode/canadianness/blob/master/spec/determineemotion.yaml#L3).
+Important to note, you cannot send brackets or do any sort of special operations using fbp-spec. To get around that, you will can write components exclusively for testing, and [fbp graphs as fixtures](https://github.com/aretecode/canadianness/blob/master/spec/determineemotion.yaml#L3).
 
 The command we use for noflo, and the flags can be found at [noflo-nodejs flags](https://github.com/noflo/noflo-nodejs/blob/master/src/noflo-nodejs.coffee#L13)
 
@@ -235,4 +224,6 @@ cases:
 
 # Providing a JavaScript API
 
-TODO: write
+If we want to make the NoFlo project also available to regular JavaScript users, it is possible to utilize the [NoFlo embedding API](/documentation/embedding) to produce a regular Node.js style function.
+
+{% include tutorials/canadianness/index.html %}
