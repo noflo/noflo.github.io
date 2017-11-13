@@ -11,6 +11,8 @@ title: "Tutorial: Data transformation"
   - [Pseudo code](#pseudo-code)
 - Implementation
   - [Overall architecture](#overall-architecture)
+    - [Canadianness](#canadianness)
+    - [Emotion](#emotion)
   - [Writing tests](#writing-tests)
   - [Implement components](#implement-components)
     - [DetermineEmotion](#determineemotion)
