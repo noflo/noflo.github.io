@@ -792,7 +792,7 @@ to NoFlo processes, and edges to connections between them.</p>
           <span class="hljs-keyword">if</span> (!data.subgraph.unshift) {
             data.subgraph = [data.subgraph];
           }
-          data.subgraph = data.subgraph.unshift(node.id);
+          data.subgraph.unshift(node.id);
         } <span class="hljs-keyword">else</span> {
           data.subgraph = [node.id];
         }
