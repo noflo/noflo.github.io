@@ -4,6 +4,7 @@ title: Embedding
 ---
 - [Including NoFlo in your project](#including-noflo-in-your-project)
 - [asCallback](#ascallback)
+  - [Using with an arbitrary graph](#using-with-an-arbitrary-graph)
   - [Use cases](#use-cases)
   - [Network lifecycle](#network-lifecycle)
   - [Promises](#promises)
@@ -46,6 +47,38 @@ wrappedGraph({
 ```
 
 If the graph has multiple inports, you can provide each of them a value in that input object. Similarly, the results sent to each outport will be in the result object. If a port sent multiple packets, their values will be in an array.
+
+### Using with an arbitrary graph
+
+If you have a graph that is constructed at runtime, and hence not registered as a component, you can still run it with asCallback. Simply call `noflo.asCallback` with the Graph instance instead of a component name:
+
+```javascript
+const noflo = require('noflo');
+// Create a graph instance
+const graph = new noflo.Graph('My graph');
+// Add some nodes
+graph.addNode('Read', 'filesystem/ReadFile');
+graph.addNode('Parse', 'yaml/ParseYaml');
+graph.addNode('Errors', 'core/Merge');
+// Connect the nodes together
+graph.addEdge('Read', 'out', 'Parse', 'in');
+graph.addEdge('Read', 'error', 'Errors', 'in');
+graph.addEdge('Parse', 'error', 'Errors', 'in');
+// Export the ports you want to interface with
+graph.addInport('in', 'Read', 'in');
+graph.addOutport('out', 'Parse', 'out');
+graph.addOutport('error', 'Errors', 'out');
+
+// Then just wrap it via asCallback
+const wrappedGraph = noflo.asCallback(graph);
+
+// And run it as many times as needed
+wrappedGraph('somefile.yml', (err, result) => {
+  // Do something with the results
+});
+```
+
+Please note that instead of constructing graph programatically, you can also load it from a FBP or JSON definition using `noflo.graph.loadFBP` or `noflo.graph.loadJSON`.
 
 ### Use cases
 
