@@ -9,7 +9,7 @@ categories:
       <div class="plain-title">
         <h1>NoFlo Examples</h1>
         <h2>{{ site.tagline }}</h2>
-        <p>This page lists some demos and applications that have been built with NoFlo. If you have something out in the open that you'd like to add, please <a href="mailto:henri.bergius@iki.fi">drop us a line</a>!</p>
+        <p>This page lists some demos and applications that have been built with NoFlo. You can also find <a href="https://www.npmjs.com/browse/keyword/noflo">dozens of projects</a> on NPM. If you have something out in the open that you'd like to add, please <a href="mailto:henri.bergius@iki.fi">drop us a line</a>!</p>
       </div>
 
       <div class="main">
@@ -22,7 +22,10 @@ categories:
               <h3 class="demo__title">{{ example.title }}</h3>
               {{ example.content }}
               {% if example.demo %}
-              <a href="{{ example.demo }}" class="btn btn-primary big-button demo__button">View Demo</a>
+              <a href="{{ example.demo }}" class="btn btn-primary big-button demo__button">Run Demo</a>
+              {% endif %}
+              {% if example.flowhub %}
+              <a href="{{ example.flowhub }}" class="btn btn-primary big-button demo__button">Open in Flowhub</a>
               {% endif %}
               <h4>Related Resources </h4>
               {% if example.blog %}
@@ -51,7 +54,10 @@ categories:
               <h3 class="demo__title">{{ example.title }}</h3>
               {{ example.content }}
               {% if example.demo %}
-              <a href="{{ example.demo }}" class="btn btn-primary big-button demo__button">View Demo</a>
+              <a href="{{ example.demo }}" class="btn btn-primary big-button demo__button">Run Demo</a>
+              {% endif %}
+              {% if example.flowhub %}
+              <a href="{{ example.flowhub }}" class="btn btn-primary big-button demo__button">Open in Flowhub</a>
               {% endif %}
               <h4>Related Resources </h4>
               {% if example.blog %}
