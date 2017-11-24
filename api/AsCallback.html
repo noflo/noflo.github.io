@@ -199,7 +199,31 @@ normalizeOptions = <span class="hljs-function"><span class="hljs-keyword">functi
   <span class="hljs-keyword">return</span> options;
 };
 
-prepareNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, options, callback</span>) </span>{</pre></div>
+prepareNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, options, callback</span>) </span>{
+  <span class="hljs-keyword">var</span> network;</pre></div>
+            
+          
+            
+            <p>If we were given a graph instance, then just create a network</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> component === <span class="hljs-string">'object'</span>) {
+    component.componentLoader = options.loader;
+    network = <span class="hljs-keyword">new</span> Network(component, options);</pre></div>
+            
+          
+            
+            <p>Wire the network up</p>
+
+            
+              <div class='highlight'><pre>    network.connect(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+      <span class="hljs-keyword">if</span> (err) {
+        <span class="hljs-keyword">return</span> callback(err);
+      }
+      <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, network);
+    });
+    <span class="hljs-keyword">return</span>;
+  }</pre></div>
             
           
             
@@ -207,7 +231,7 @@ prepareNetwork = <span class="hljs-function"><span class="hljs-keyword">function
 
             
               <div class='highlight'><pre>  <span class="hljs-keyword">return</span> options.loader.load(component, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, instance</span>) </span>{
-    <span class="hljs-keyword">var</span> def, graph, inPorts, network, nodeName, outPorts, port;
+    <span class="hljs-keyword">var</span> def, graph, inPorts, nodeName, outPorts, port;
     <span class="hljs-keyword">if</span> (err) {
       <span class="hljs-keyword">return</span> callback(err);
     }</pre></div>
@@ -260,8 +284,7 @@ prepareNetwork = <span class="hljs-function"><span class="hljs-keyword">function
 };
 
 runNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">network, inputs, options, callback</span>) </span>{
-  <span class="hljs-keyword">var</span> inPorts, inSockets, outPorts, outSockets, process, received;
-  process = network.getNode(options.name);</pre></div>
+  <span class="hljs-keyword">var</span> inPorts, inSockets, outPorts, outSockets, received;</pre></div>
             
           
             
@@ -271,8 +294,11 @@ runNetwork = <span class="hljs-function"><span class="hljs-keyword">function</sp
               <div class='highlight'><pre>  inPorts = <span class="hljs-built_in">Object</span>.keys(network.graph.inports);
   inSockets = {};
   inPorts.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">inport</span>) </span>{
+    <span class="hljs-keyword">var</span> portDef, process;
+    portDef = network.graph.inports[inport];
+    process = network.getNode(portDef.process);
     inSockets[inport] = internalSocket.createSocket();
-    <span class="hljs-keyword">return</span> process.component.inPorts[inport].attach(inSockets[inport]);
+    <span class="hljs-keyword">return</span> process.component.inPorts[portDef.port].attach(inSockets[inport]);
   });</pre></div>
             
           
@@ -284,8 +310,15 @@ runNetwork = <span class="hljs-function"><span class="hljs-keyword">function</sp
   outPorts = <span class="hljs-built_in">Object</span>.keys(network.graph.outports);
   outSockets = {};
   outPorts.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">outport</span>) </span>{
+    <span class="hljs-keyword">var</span> portDef, process;
+    portDef = network.graph.outports[outport];
+    process = network.getNode(portDef.process);
     outSockets[outport] = internalSocket.createSocket();
-    process.component.outPorts[outport].attach(outSockets[outport]);
+    process.component.outPorts[portDef.port].attach(outSockets[outport]);
+    outSockets[outport].from = {
+      <span class="hljs-attr">process</span>: process,
+      <span class="hljs-attr">port</span>: portDef.port
+    };
     <span class="hljs-keyword">return</span> outSockets[outport].on(<span class="hljs-string">'ip'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ip</span>) </span>{
       <span class="hljs-keyword">var</span> res;
       res = {};
@@ -309,7 +342,7 @@ runNetwork = <span class="hljs-function"><span class="hljs-keyword">function</sp
             
               <div class='highlight'><pre>    <span class="hljs-keyword">for</span> (port <span class="hljs-keyword">in</span> outSockets) {
       socket = outSockets[port];
-      process.component.outPorts[port].detach(socket);
+      socket.from.process.component.outPorts[socket.from.port].detach(socket);
     }
     outSockets = {};
     inSockets = {};
