@@ -43,7 +43,7 @@ categories:
               <%= section.codeHtml %>
             <% } %>
           <% } %>
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/<%= title %>"><%= title %></a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/<%= title.replace('.js', '.coffee') %>"><%= title.replace('.js', '.coffee') %></a> file.</small></p>
         </div>
       </div>
     </div>
