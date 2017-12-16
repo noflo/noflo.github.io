@@ -12,7 +12,7 @@ title: Embedding
 
 It has always been easy to wrap existing JavaScript code into NoFlo graphs &mdash; just [write a component](/documentation/components/) that exposes its functionality via some ports.
 
-Going the other way and exposing a NoFlo graph to an existing JavaScript codebase can be accomplished easily using the `noflo.asCallback` API.
+Going the other way and exposing a NoFlo graph to an existing JavaScript codebase can be accomplished easily using the `noflo.asCallback` API. This can also be useful for utilizing NoFlo graphs in serverless environments like AWS Lambda.
 
 ## Including NoFlo in your project
 
