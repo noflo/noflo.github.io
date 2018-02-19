@@ -33,6 +33,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/AsComponent/index.html' %}class="active" {% endif %}href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
                     BasePort
                   </a>
@@ -160,6 +169,41 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
             
+          
+            
+            <h2 id="information-packets">Information Packets</h2>
+
+            
+          
+            
+            <p>IP objects are the way information is transmitted between
+components running in a NoFlo network. IP objects contain
+a <code>type</code> that defines whether they’re regular <code>data</code> IPs
+or whether they are the beginning or end of a stream
+(<code>openBracket</code>, <code>closeBracket</code>).</p>
+
+            
+          
+            
+            <p>The component currently holding an IP object is identified
+with the <code>owner</code> key.</p>
+
+            
+          
+            
+            <p>By default, IP objects may be sent to multiple components.
+If they’re set to be clonable, each component will receive
+its own clone of the IP. This should be enabled for any
+IP object working with data that is safe to clone.</p>
+
+            
+          
+            
+            <p>It is also possible to carry metadata with an IP object.
+For example, the <code>datatype</code> and <code>schema</code> of the sending
+port is transmitted with the IP object.</p>
+
+            
               <div class='highlight'><pre><span class="hljs-keyword">var</span> IP;
 
 <span class="hljs-built_in">module</span>.exports = IP = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
@@ -264,7 +308,7 @@ Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
 
   <span class="hljs-keyword">return</span> IP;
 
-})();</pre></div>
+}).call(<span class="hljs-keyword">this</span>);</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/IP.coffee">IP.coffee</a> file.</small></p>

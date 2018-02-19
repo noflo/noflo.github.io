@@ -33,6 +33,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/AsComponent/index.html' %}class="active" {% endif %}href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
                     BasePort
                   </a>
@@ -160,11 +169,6 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
             
-          
-            
-            <p>Ports collection classes for NoFlo components</p>
-
-            
               <div class='highlight'><pre><span class="hljs-keyword">var</span> EventEmitter, InPort, InPorts, OutPort, OutPorts, Ports;
 
 ({EventEmitter} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>));
@@ -173,8 +177,20 @@ InPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">'.
 
 OutPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./OutPort'</span>);
 
-Ports = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ports</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+Ports = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div>
+            
+          
+            
+            <p>NoFlo ports collections</p>
+
+            
+          
+            
+            <p>Ports collection classes for NoFlo components. These are
+used to hold a set of input or output ports of a component.</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ports</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
     <span class="hljs-keyword">constructor</span>(ports) {
       <span class="hljs-keyword">var</span> name, options;
       <span class="hljs-keyword">super</span>();
@@ -230,7 +246,7 @@ Ports = (<span class="hljs-function"><span class="hljs-keyword">function</span>(
 
   <span class="hljs-keyword">return</span> Ports;
 
-})();
+}).call(<span class="hljs-keyword">this</span>);
 
 exports.InPorts = InPorts = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPorts</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ports</span> </span>{
   on(name, event, callback) {
@@ -292,7 +308,7 @@ exports.OutPorts = OutPorts = (<span class="hljs-function"><span class="hljs-key
 
   <span class="hljs-keyword">return</span> OutPorts;
 
-})();</pre></div>
+}).call(<span class="hljs-keyword">this</span>);</pre></div>
             
           
             

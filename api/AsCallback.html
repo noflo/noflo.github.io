@@ -33,6 +33,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/AsComponent/index.html' %}class="active" {% endif %}href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
                     BasePort
                   </a>
@@ -156,14 +165,9 @@ categories:
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2017</span> Flowhub UG
+(c) <span class="hljs-number">2017</span><span class="hljs-number">-2018</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license
 </code></pre>
-            
-          
-            
-            <p>asCallback helper embedding NoFlo components or graphs in other JavaScript programs.</p>
-
             
               <div class='highlight'><pre><span class="hljs-keyword">var</span> ComponentLoader, Graph, IP, Network, getType, internalSocket, normalizeOptions, normalizeOutput, prepareInputMap, prepareNetwork, runNetwork, sendOutputMap;
 
@@ -175,9 +179,54 @@ IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./IP'
 
 internalSocket = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./InternalSocket'</span>);
 
-Graph = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fbp-graph'</span>).Graph;
+Graph = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fbp-graph'</span>).Graph;</pre></div>
+            
+          
+            
+            <h2 id="ascallback-embedding-api">asCallback embedding API</h2>
 
-normalizeOptions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options, component</span>) </span>{
+            
+          
+            
+            <p>asCallback is a helper for embedding NoFlo components or
+graphs in other JavaScript programs.</p>
+
+            
+          
+            
+            <p>By using the <code>noflo.asCallback</code> function, you can turn any
+NoFlo component or NoFlo Graph instance into a regular,
+Node.js-style JavaScript function.</p>
+
+            
+          
+            
+            <p>Each call to that function starts a new NoFlo network where
+the given input arguments are sent as IP objects to matching
+inports. Once the network finishes, the IP objects received
+from the network will be sent to the callback function.</p>
+
+            
+          
+            
+            <p>If there was anything sent to an <code>error</code> outport, this will
+be provided as the error argument to the callback.</p>
+
+            
+          
+            
+            <h3 id="option-normalization">Option normalization</h3>
+
+            
+          
+            
+            <p>Here we handle the input valus given to the <code>asCallback</code>
+function. This allows passing things like a pre-initialized
+NoFlo ComponentLoader, or giving the component loading
+baseDir context.</p>
+
+            
+              <div class='highlight'><pre>normalizeOptions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options, component</span>) </span>{
   <span class="hljs-keyword">if</span> (!options) {
     options = {};
   }
@@ -197,9 +246,21 @@ normalizeOptions = <span class="hljs-function"><span class="hljs-keyword">functi
     options.raw = <span class="hljs-literal">false</span>;
   }
   <span class="hljs-keyword">return</span> options;
-};
+};</pre></div>
+            
+          
+            
+            <h3 id="network-preparation">Network preparation</h3>
 
-prepareNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, options, callback</span>) </span>{
+            
+          
+            
+            <p>Each invocation of the asCallback-wrapped NoFlo graph
+creates a new network. This way we can isolate multiple
+executions of the function in their own contexts.</p>
+
+            
+              <div class='highlight'><pre>prepareNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, options, callback</span>) </span>{
   <span class="hljs-keyword">var</span> network;</pre></div>
             
           
@@ -281,9 +342,32 @@ prepareNetwork = <span class="hljs-function"><span class="hljs-keyword">function
       <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, network);
     });
   });
-};
+};</pre></div>
+            
+          
+            
+            <h3 id="network-execution">Network execution</h3>
 
-runNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">network, inputs, options, callback</span>) </span>{
+            
+          
+            
+            <p>Once network is ready, we connect to all of its exported
+in and outports and start the network.</p>
+
+            
+          
+            
+            <p>Input data is sent to the inports, and we collect IP
+packets received on the outports.</p>
+
+            
+          
+            
+            <p>Once the network finishes, we send the resulting IP
+objects to the callback.</p>
+
+            
+              <div class='highlight'><pre>runNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">network, inputs, options, callback</span>) </span>{
   <span class="hljs-keyword">var</span> inPorts, inSockets, outPorts, outSockets, received;</pre></div>
             
           
@@ -292,14 +376,7 @@ runNetwork = <span class="hljs-function"><span class="hljs-keyword">function</sp
 
             
               <div class='highlight'><pre>  inPorts = <span class="hljs-built_in">Object</span>.keys(network.graph.inports);
-  inSockets = {};
-  inPorts.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">inport</span>) </span>{
-    <span class="hljs-keyword">var</span> portDef, process;
-    portDef = network.graph.inports[inport];
-    process = network.getNode(portDef.process);
-    inSockets[inport] = internalSocket.createSocket();
-    <span class="hljs-keyword">return</span> process.component.inPorts[portDef.port].attach(inSockets[inport]);
-  });</pre></div>
+  inSockets = {};</pre></div>
             
           
             
@@ -355,24 +432,30 @@ runNetwork = <span class="hljs-function"><span class="hljs-keyword">function</sp
 
             
               <div class='highlight'><pre>  <span class="hljs-keyword">return</span> network.start(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
-    <span class="hljs-keyword">var</span> i, inputMap, len, port, results, value;
+    <span class="hljs-keyword">var</span> i, inputMap, len, port, portDef, process, results, value;
     <span class="hljs-keyword">if</span> (err) {
       <span class="hljs-keyword">return</span> callback(err);
-    }
-    results = [];</pre></div>
+    }</pre></div>
             
           
             
             <p>Send inputs</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = inputs.length; i &lt; len; i++) {
+              <div class='highlight'><pre>    results = [];
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = inputs.length; i &lt; len; i++) {
       inputMap = inputs[i];
       results.push((<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
         <span class="hljs-keyword">var</span> results1;
         results1 = [];
         <span class="hljs-keyword">for</span> (port <span class="hljs-keyword">in</span> inputMap) {
           value = inputMap[port];
+          <span class="hljs-keyword">if</span> (!inSockets[port]) {
+            portDef = network.graph.inports[port];
+            process = network.getNode(portDef.process);
+            inSockets[port] = internalSocket.createSocket();
+            process.component.inPorts[portDef.port].attach(inSockets[port]);
+          }
           <span class="hljs-keyword">if</span> (IP.isIP(value)) {
             inSockets[port].post(value);
             <span class="hljs-keyword">continue</span>;

@@ -33,6 +33,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/AsComponent/index.html' %}class="active" {% endif %}href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
                     BasePort
                   </a>
@@ -160,50 +169,116 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
             
-          
-            
-            <p>Base port type used for options normalization</p>
-
-            
               <div class='highlight'><pre><span class="hljs-keyword">var</span> BasePort, EventEmitter, validTypes;
 
-({EventEmitter} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>));
+({EventEmitter} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>));</pre></div>
+            
+          
+            
+            <h2 id="noflo-port-base-class">NoFlo Port Base class</h2>
 
-validTypes = [<span class="hljs-string">'all'</span>, <span class="hljs-string">'string'</span>, <span class="hljs-string">'number'</span>, <span class="hljs-string">'int'</span>, <span class="hljs-string">'object'</span>, <span class="hljs-string">'array'</span>, <span class="hljs-string">'boolean'</span>, <span class="hljs-string">'color'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'bang'</span>, <span class="hljs-string">'function'</span>, <span class="hljs-string">'buffer'</span>, <span class="hljs-string">'stream'</span>];
+            
+          
+            
+            <p>Base port type used for options normalization. Both inports and outports extend this class.</p>
+
+            
+          
+            
+            <p>The list of valid datatypes for ports.</p>
+
+            
+              <div class='highlight'><pre>validTypes = [<span class="hljs-string">'all'</span>, <span class="hljs-string">'string'</span>, <span class="hljs-string">'number'</span>, <span class="hljs-string">'int'</span>, <span class="hljs-string">'object'</span>, <span class="hljs-string">'array'</span>, <span class="hljs-string">'boolean'</span>, <span class="hljs-string">'color'</span>, <span class="hljs-string">'date'</span>, <span class="hljs-string">'bang'</span>, <span class="hljs-string">'function'</span>, <span class="hljs-string">'buffer'</span>, <span class="hljs-string">'stream'</span>];
 
 BasePort = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BasePort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
   <span class="hljs-keyword">constructor</span>(options) {
-    <span class="hljs-keyword">super</span>();
-    <span class="hljs-keyword">this</span>.handleOptions(options);
-    <span class="hljs-keyword">this</span>.sockets = [];
-    <span class="hljs-keyword">this</span>.node = <span class="hljs-literal">null</span>;
-    <span class="hljs-keyword">this</span>.name = <span class="hljs-literal">null</span>;
+    <span class="hljs-keyword">super</span>();</pre></div>
+            
+          
+            
+            <p>Options holds all options of the current port</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">this</span>.options = <span class="hljs-keyword">this</span>.handleOptions(options);</pre></div>
+            
+          
+            
+            <p>Sockets list contains all currently attached
+connections to the port</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">this</span>.sockets = [];</pre></div>
+            
+          
+            
+            <p>Name of the graph node this port is in</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">this</span>.node = <span class="hljs-literal">null</span>;</pre></div>
+            
+          
+            
+            <p>Name of the port</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">this</span>.name = <span class="hljs-literal">null</span>;
   }
 
   handleOptions(options) {
     <span class="hljs-keyword">if</span> (!options) {
       options = {};
     }
-    <span class="hljs-keyword">if</span> (!options.datatype) {
-      options.datatype = <span class="hljs-string">'all'</span>;
+    <span class="hljs-keyword">if</span> (!options.datatype) {</pre></div>
+            
+          
+            
+            <p>We default to the <code>all</code> type if no explicit datatype
+was provided</p>
+
+            
+              <div class='highlight'><pre>      options.datatype = <span class="hljs-string">'all'</span>;
     }
-    <span class="hljs-keyword">if</span> (options.required === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) {
-      options.required = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">if</span> (options.required === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) {</pre></div>
+            
+          
+            
+            <p>By default ports are not required for graph execution</p>
+
+            
+              <div class='highlight'><pre>      options.required = <span class="hljs-literal">false</span>;
     }
-    <span class="hljs-keyword">if</span> (options.datatype === <span class="hljs-string">'integer'</span>) {
-      options.datatype = <span class="hljs-string">'int'</span>;
-    }
-    <span class="hljs-keyword">if</span> (validTypes.indexOf(options.datatype) === <span class="hljs-number">-1</span>) {
+    <span class="hljs-keyword">if</span> (options.datatype === <span class="hljs-string">'integer'</span>) {</pre></div>
+            
+          
+            
+            <p>Normalize the legacy <code>integer</code> type to <code>int</code>.</p>
+
+            
+              <div class='highlight'><pre>      options.datatype = <span class="hljs-string">'int'</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Ensure datatype defined for the port is valid</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (validTypes.indexOf(options.datatype) === <span class="hljs-number">-1</span>) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port datatype '<span class="hljs-subst">${options.datatype}</span>' specified, valid are <span class="hljs-subst">${validTypes.join(<span class="hljs-string">', '</span>)}</span>`</span>);
-    }
-    <span class="hljs-keyword">if</span> (options.type &amp;&amp; !options.schema) {
+    }</pre></div>
+            
+          
+            
+            <p>Ensure schema defined for the port is valid</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (options.type &amp;&amp; !options.schema) {
       options.schema = options.type;
       <span class="hljs-keyword">delete</span> options.type;
     }
     <span class="hljs-keyword">if</span> (options.schema &amp;&amp; options.schema.indexOf(<span class="hljs-string">'/'</span>) === <span class="hljs-number">-1</span>) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port schema '<span class="hljs-subst">${options.schema}</span>' specified. Should be URL or MIME type`</span>);
     }
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.options = options;
+    <span class="hljs-keyword">return</span> options;
   }
 
   getId() {
