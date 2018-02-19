@@ -33,6 +33,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/AsComponent/index.html' %}class="active" {% endif %}href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
                     BasePort
                   </a>
@@ -960,9 +969,7 @@ to NoFlo processes, and edges to connections between them.</p>
         <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No component defined for node <span class="hljs-subst">${node.id}</span>`</span>));
       }
       <span class="hljs-keyword">if</span> (!process.component.isReady()) {
-        <span class="hljs-keyword">if</span> (process.component.setMaxListeners) {
-          process.component.setMaxListeners(<span class="hljs-number">0</span>);
-        }
+        process.component.setMaxListeners(<span class="hljs-number">0</span>);
         process.component.once(<span class="hljs-string">"ready"</span>, () =&gt; {
           <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.addDefaults(process, callback);
         });
@@ -974,12 +981,10 @@ to NoFlo processes, and edges to connections between them.</p>
             
           
             
-            <p>Attach a socket to any defaulted inPorts as long as they aren’t already attached.
-TODO: hasDefault existence check is for backwards compatibility, clean
-      up when legacy ports are removed.</p>
+            <p>Attach a socket to any defaulted inPorts as long as they aren’t already attached.</p>
 
             
-              <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> port.hasDefault === <span class="hljs-string">'function'</span> &amp;&amp; port.hasDefault() &amp;&amp; !port.isAttached()) {
+              <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (port.hasDefault() &amp;&amp; !port.isAttached()) {
           socket = internalSocket.createSocket();
           socket.setDebug(<span class="hljs-keyword">this</span>.debug);</pre></div>
             
@@ -1016,9 +1021,7 @@ TODO: hasDefault existence check is for backwards compatibility, clean
         <span class="hljs-keyword">return</span> callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No component defined for inbound node <span class="hljs-subst">${initializer.to.node}</span>`</span>));
       }
       <span class="hljs-keyword">if</span> (!(to.component.isReady() || to.component.inPorts[initializer.to.port])) {
-        <span class="hljs-keyword">if</span> (to.component.setMaxListeners) {
-          to.component.setMaxListeners(<span class="hljs-number">0</span>);
-        }
+        to.component.setMaxListeners(<span class="hljs-number">0</span>);
         to.component.once(<span class="hljs-string">"ready"</span>, () =&gt; {
           <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.addInitial(initializer, callback);
         });
@@ -1470,7 +1473,7 @@ a socket is attached from the “parent” graph.</p>
 
   <span class="hljs-keyword">return</span> Network;
 
-})();
+}).call(<span class="hljs-keyword">this</span>);
 
 exports.Network = Network;</pre></div>
             

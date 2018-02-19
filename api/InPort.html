@@ -33,6 +33,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/AsComponent/index.html' %}class="active" {% endif %}href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
                     BasePort
                   </a>
@@ -160,20 +169,24 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
             
-          
-            
-            <p>Input Port (inport) implementation for NoFlo components</p>
-
-            
-              <div class='highlight'><pre><span class="hljs-keyword">var</span> BasePort, IP, InPort, platform;
+              <div class='highlight'><pre><span class="hljs-keyword">var</span> BasePort, IP, InPort;
 
 BasePort = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./BasePort'</span>);
 
-IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./IP'</span>);
+IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./IP'</span>);</pre></div>
+            
+          
+            
+            <h2 id="noflo-inport">NoFlo inport</h2>
 
-platform = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Platform'</span>);
+            
+          
+            
+            <p>Input Port (inport) implementation for NoFlo components. These
+ports are the way a component receives Information Packets.</p>
 
-InPort = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
+            
+              <div class='highlight'><pre>InPort = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
   <span class="hljs-keyword">constructor</span>(options = {}) {
     <span class="hljs-keyword">if</span> (options.control == <span class="hljs-literal">null</span>) {
       options.control = <span class="hljs-literal">false</span>;
@@ -186,11 +199,9 @@ InPort = <span class="hljs-class"><span class="hljs-keyword">class</span> <span 
     }
     <span class="hljs-keyword">if</span> (options.process) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'InPort process callback is deprecated. Please use Process API'</span>);
-      <span class="hljs-keyword">delete</span> options.process;
     }
     <span class="hljs-keyword">if</span> (options.handle) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'InPort handle callback is deprecated. Please use Process API'</span>);
-      <span class="hljs-keyword">delete</span> options.handle;
     }
     <span class="hljs-keyword">super</span>(options);
     <span class="hljs-keyword">this</span>.prepareBuffer();

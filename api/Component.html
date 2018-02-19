@@ -33,6 +33,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/AsComponent/index.html' %}class="active" {% endif %}href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
                     BasePort
                   </a>
@@ -161,11 +170,6 @@ categories:
 NoFlo may be freely distributed under the MIT license
 </code></pre>
             
-          
-            
-            <p>Baseclass for regular NoFlo components.</p>
-
-            
               <div class='highlight'><pre><span class="hljs-keyword">var</span> Component, EventEmitter, IP, ProcessContext, ProcessInput, ProcessOutput, debug, debugBrackets, debugSend, ports,
   boundMethodCheck = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">instance, Constructor</span>) </span>{ <span class="hljs-keyword">if</span> (!(instance <span class="hljs-keyword">instanceof</span> Constructor)) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Bound instance method accessed before binding'</span>); } };
 
@@ -181,54 +185,150 @@ debugBrackets = <span class="hljs-built_in">require</span>(<span class="hljs-str
 
 debugSend = <span class="hljs-built_in">require</span>(<span class="hljs-string">'debug'</span>)(<span class="hljs-string">'noflo:component:send'</span>);
 
-Component = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Component</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+Component = (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div>
+            
+          
+            
+            <h2 id="noflo-component-base-class">NoFlo Component Base class</h2>
+
+            
+          
+            
+            <p>The <code>noflo.Component</code> interface provides a way to instantiate
+and extend NoFlo components.</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Component</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
     <span class="hljs-keyword">constructor</span>(options) {
       <span class="hljs-keyword">var</span> ref, ref1, ref2;
-      <span class="hljs-keyword">super</span>();
-      <span class="hljs-keyword">this</span>.error = <span class="hljs-keyword">this</span>.error.bind(<span class="hljs-keyword">this</span>);
+      <span class="hljs-keyword">super</span>();</pre></div>
+            
+          
+            
+            <h3 id="error-emitting-helper">Error emitting helper</h3>
+
+            
+          
+            
+            <p>If component has an <code>error</code> outport that is connected, errors
+are sent as IP objects there. If the port is not connected,
+errors are thrown.</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">this</span>.error = <span class="hljs-keyword">this</span>.error.bind(<span class="hljs-keyword">this</span>);
       <span class="hljs-keyword">if</span> (!options) {
         options = {};
       }
-      <span class="hljs-keyword">if</span> (!options.inPorts) {
-        options.inPorts = {};
+      <span class="hljs-keyword">if</span> (!options.inPorts) {</pre></div>
+            
+          
+            
+            <p>Prepare inports, if any were given in options.
+They can also be set up imperatively after component
+instantiation by using the <code>component.inPorts.add</code>
+method.</p>
+
+            
+              <div class='highlight'><pre>        options.inPorts = {};
       }
       <span class="hljs-keyword">if</span> (options.inPorts <span class="hljs-keyword">instanceof</span> ports.InPorts) {
         <span class="hljs-keyword">this</span>.inPorts = options.inPorts;
       } <span class="hljs-keyword">else</span> {
         <span class="hljs-keyword">this</span>.inPorts = <span class="hljs-keyword">new</span> ports.InPorts(options.inPorts);
       }
-      <span class="hljs-keyword">if</span> (!options.outPorts) {
-        options.outPorts = {};
+      <span class="hljs-keyword">if</span> (!options.outPorts) {</pre></div>
+            
+          
+            
+            <p>Prepare outports, if any were given in options.
+They can also be set up imperatively after component
+instantiation by using the <code>component.outPorts.add</code>
+method.</p>
+
+            
+              <div class='highlight'><pre>        options.outPorts = {};
       }
       <span class="hljs-keyword">if</span> (options.outPorts <span class="hljs-keyword">instanceof</span> ports.OutPorts) {
         <span class="hljs-keyword">this</span>.outPorts = options.outPorts;
       } <span class="hljs-keyword">else</span> {
         <span class="hljs-keyword">this</span>.outPorts = <span class="hljs-keyword">new</span> ports.OutPorts(options.outPorts);
       }
-      <span class="hljs-keyword">if</span> (options.icon) {
-        <span class="hljs-keyword">this</span>.icon = options.icon;
+      <span class="hljs-keyword">if</span> (options.icon) {</pre></div>
+            
+          
+            
+            <p>Set the default component icon and description</p>
+
+            
+              <div class='highlight'><pre>        <span class="hljs-keyword">this</span>.icon = options.icon;
       }
       <span class="hljs-keyword">if</span> (options.description) {
         <span class="hljs-keyword">this</span>.description = options.description;
-      }
-      <span class="hljs-keyword">this</span>.started = <span class="hljs-literal">false</span>;
-      <span class="hljs-keyword">this</span>.load = <span class="hljs-number">0</span>;
-      <span class="hljs-keyword">this</span>.ordered = (ref = options.ordered) != <span class="hljs-literal">null</span> ? ref : <span class="hljs-literal">false</span>;
-      <span class="hljs-keyword">this</span>.autoOrdering = (ref1 = options.autoOrdering) != <span class="hljs-literal">null</span> ? ref1 : <span class="hljs-literal">null</span>;
-      <span class="hljs-keyword">this</span>.outputQ = [];
-      <span class="hljs-keyword">this</span>.bracketContext = {
+      }</pre></div>
+            
+          
+            
+            <p>Initially the component is not started</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">this</span>.started = <span class="hljs-literal">false</span>;
+      <span class="hljs-keyword">this</span>.load = <span class="hljs-number">0</span>;</pre></div>
+            
+          
+            
+            <p>Whether the component should keep send packets
+out in the order they were received</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">this</span>.ordered = (ref = options.ordered) != <span class="hljs-literal">null</span> ? ref : <span class="hljs-literal">false</span>;
+      <span class="hljs-keyword">this</span>.autoOrdering = (ref1 = options.autoOrdering) != <span class="hljs-literal">null</span> ? ref1 : <span class="hljs-literal">null</span>;</pre></div>
+            
+          
+            
+            <p>Queue for handling ordered output packets</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">this</span>.outputQ = [];</pre></div>
+            
+          
+            
+            <p>Context used for bracket forwarding</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">this</span>.bracketContext = {
         <span class="hljs-attr">in</span>: {},
         <span class="hljs-attr">out</span>: {}
-      };
-      <span class="hljs-keyword">this</span>.activateOnInput = (ref2 = options.activateOnInput) != <span class="hljs-literal">null</span> ? ref2 : <span class="hljs-literal">true</span>;
-      <span class="hljs-keyword">this</span>.forwardBrackets = {
+      };</pre></div>
+            
+          
+            
+            <p>Whether the component should activate when it
+receives packets</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">this</span>.activateOnInput = (ref2 = options.activateOnInput) != <span class="hljs-literal">null</span> ? ref2 : <span class="hljs-literal">true</span>;</pre></div>
+            
+          
+            
+            <p>Bracket forwarding rules. By default we forward
+brackets from <code>in</code> port to <code>out</code> and <code>error</code> ports.</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">this</span>.forwardBrackets = {
         <span class="hljs-attr">in</span>: [<span class="hljs-string">'out'</span>, <span class="hljs-string">'error'</span>]
       };
       <span class="hljs-keyword">if</span> (<span class="hljs-string">'forwardBrackets'</span> <span class="hljs-keyword">in</span> options) {
         <span class="hljs-keyword">this</span>.forwardBrackets = options.forwardBrackets;
-      }
-      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options.process === <span class="hljs-string">'function'</span>) {
+      }</pre></div>
+            
+          
+            
+            <p>The component’s process function can either be
+passed in options, or given imperatively after
+instantation using the <code>component.process</code> method.</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options.process === <span class="hljs-string">'function'</span>) {
         <span class="hljs-keyword">this</span>.process(options.process);
       }
     }
@@ -274,20 +374,25 @@ Component = (<span class="hljs-function"><span class="hljs-keyword">function</sp
           });
         }
         <span class="hljs-keyword">return</span>;
-      }</pre></div>
-            
-          
-            
-            <p>@outPorts[errorPort].disconnect()</p>
-
-            
-              <div class='highlight'><pre>      <span class="hljs-keyword">throw</span> e;
+      }
+      <span class="hljs-keyword">throw</span> e;
     }</pre></div>
             
           
             
-            <p>The setUp method is for component-specific initialization. Called
-at start-up</p>
+            <h3 id="setup">Setup</h3>
+
+            
+          
+            
+            <p>The setUp method is for component-specific initialization.
+Called at network start-up.</p>
+
+            
+          
+            
+            <p>Override in component implementation to do component-specific
+setup work.</p>
 
             
               <div class='highlight'><pre>    setUp(callback) {
@@ -296,15 +401,37 @@ at start-up</p>
             
           
             
+            <h3 id="setup">Setup</h3>
+
+            
+          
+            
             <p>The tearDown method is for component-specific cleanup. Called
-at shutdown</p>
+at network shutdown</p>
+
+            
+          
+            
+            <p>Override in component implementation to do component-specific
+cleanup work, like clearing any accumulated state.</p>
 
             
               <div class='highlight'><pre>    tearDown(callback) {
       callback();
-    }
+    }</pre></div>
+            
+          
+            
+            <h3 id="start">Start</h3>
 
-    start(callback) {
+            
+          
+            
+            <p>Called when network starts. This sets calls the setUp
+method and sets the component to a started state.</p>
+
+            
+              <div class='highlight'><pre>    start(callback) {
       <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isStarted()) {
         <span class="hljs-keyword">return</span> callback();
       }
@@ -316,9 +443,27 @@ at shutdown</p>
         <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'start'</span>);
         callback(<span class="hljs-literal">null</span>);
       });
-    }
+    }</pre></div>
+            
+          
+            
+            <h3 id="shutdown">Shutdown</h3>
 
-    shutdown(callback) {
+            
+          
+            
+            <p>Called when network is shut down. This sets calls the
+tearDown method and sets the component back to a
+non-started state.</p>
+
+            
+          
+            
+            <p>The callback is called when tearDown finishes and
+all active processing contexts have ended.</p>
+
+            
+              <div class='highlight'><pre>    shutdown(callback) {
       <span class="hljs-keyword">var</span> finalize;
       finalize = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
         <span class="hljs-keyword">var</span> inPort, inPorts, portName;</pre></div>
@@ -418,9 +563,15 @@ at shutdown</p>
         }
       }
       <span class="hljs-keyword">return</span> results;
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Method for determining if a component is using the modern
+NoFlo Process API</p>
 
-    isLegacy() {
+            
+              <div class='highlight'><pre>    isLegacy() {
       <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.handle) {</pre></div>
             
           
@@ -445,7 +596,7 @@ at shutdown</p>
 
             
               <div class='highlight'><pre>    process(handle) {
-      <span class="hljs-keyword">var</span> fn, name, port, ref;
+      <span class="hljs-keyword">var</span> name, port, ref;
       <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> handle !== <span class="hljs-string">'function'</span>) {
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"Process handler must be a function"</span>);
       }
@@ -455,22 +606,27 @@ at shutdown</p>
       <span class="hljs-keyword">this</span>.prepareForwarding();
       <span class="hljs-keyword">this</span>.handle = handle;
       ref = <span class="hljs-keyword">this</span>.inPorts.ports;
-      fn = <span class="hljs-function">(<span class="hljs-params">name, port</span>) =&gt;</span> {
-        <span class="hljs-keyword">if</span> (!port.name) {
-          port.name = name;
-        }
-        <span class="hljs-keyword">return</span> port.on(<span class="hljs-string">'ip'</span>, (ip) =&gt; {
-          <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.handleIP(ip, port);
-        });
-      };
       <span class="hljs-keyword">for</span> (name <span class="hljs-keyword">in</span> ref) {
         port = ref[name];
-        fn(name, port);
+        <span class="hljs-function">(<span class="hljs-params">(name, port</span>) =&gt;</span> {
+          <span class="hljs-keyword">if</span> (!port.name) {
+            port.name = name;
+          }
+          <span class="hljs-keyword">return</span> port.on(<span class="hljs-string">'ip'</span>, (ip) =&gt; {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.handleIP(ip, port);
+          });
+        })(name, port);
       }
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Method for checking if a given inport is set up for
+automatic bracket forwarding</p>
 
-    isForwardingInport(port) {
+            
+              <div class='highlight'><pre>    isForwardingInport(port) {
       <span class="hljs-keyword">var</span> portName;
       <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> port === <span class="hljs-string">'string'</span>) {
         portName = port;
@@ -481,9 +637,15 @@ at shutdown</p>
         <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
       }
       <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Method for checking if a given outport is set up for
+automatic bracket forwarding</p>
 
-    isForwardingOutport(inport, outport) {
+            
+              <div class='highlight'><pre>    isForwardingOutport(inport, outport) {
       <span class="hljs-keyword">var</span> inportName, outportName;
       <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> inport === <span class="hljs-string">'string'</span>) {
         inportName = inport;
@@ -502,9 +664,15 @@ at shutdown</p>
         <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
       }
       <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Method for checking whether the component sends packets
+in the same order they were received.</p>
 
-    isOrdered() {
+            
+              <div class='highlight'><pre>    isOrdered() {
       <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.ordered) {
         <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
       }
@@ -516,9 +684,14 @@ at shutdown</p>
             
           
             
-            <p>The component has received an Information Packet. Call the processing function
-so that firing pattern preconditions can be checked and component can do
-processing as needed.</p>
+            <h3 id="handling-ip-objects">Handling IP objects</h3>
+
+            
+          
+            
+            <p>The component has received an Information Packet. Call the
+processing function so that firing pattern preconditions can
+be checked and component can do processing as needed.</p>
 
             
               <div class='highlight'><pre>    handleIP(ip, port) {
@@ -641,15 +814,27 @@ firing</p>
       }
       <span class="hljs-keyword">if</span> (context.activated) {
         <span class="hljs-keyword">return</span>;
-      }
-      <span class="hljs-keyword">if</span> (port.isAddressable()) {
+      }</pre></div>
+            
+          
+            
+            <p>If receiving an IP object didn’t cause the component to
+activate, log that input conditions were not met</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (port.isAddressable()) {
         debug(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> packet on '<span class="hljs-subst">${port.name}</span>[<span class="hljs-subst">${ip.index}</span>]' didn't match preconditions: <span class="hljs-subst">${ip.type}</span>`</span>);
         <span class="hljs-keyword">return</span>;
       }
       debug(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.nodeId}</span> packet on '<span class="hljs-subst">${port.name}</span>' didn't match preconditions: <span class="hljs-subst">${ip.type}</span>`</span>);
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Get the current bracket forwarding context for an IP object</p>
 
-    getBracketContext(type, port, scope, idx) {
+            
+              <div class='highlight'><pre>    getBracketContext(type, port, scope, idx) {
       <span class="hljs-keyword">var</span> index, name, portsList;
       ({name, index} = ports.normalizePortName(port));
       <span class="hljs-keyword">if</span> (idx != <span class="hljs-literal">null</span>) {
@@ -672,9 +857,15 @@ firing</p>
         <span class="hljs-keyword">this</span>.bracketContext[type][port][scope] = [];
       }
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.bracketContext[type][port][scope];
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Add an IP object to the list of results to be sent in
+order</p>
 
-    addToResult(result, port, ip, before = <span class="hljs-literal">false</span>) {
+            
+              <div class='highlight'><pre>    addToResult(result, port, ip, before = <span class="hljs-literal">false</span>) {
       <span class="hljs-keyword">var</span> idx, index, method, name;
       ({name, index} = ports.normalizePortName(port));
       method = before ? <span class="hljs-string">'unshift'</span> : <span class="hljs-string">'push'</span>;
@@ -694,9 +885,15 @@ firing</p>
         result[name] = [];
       }
       <span class="hljs-keyword">return</span> result[name][method](ip);
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Get contexts that can be forwarded with this in/outport
+pair.</p>
 
-    getForwardableContexts(inport, outport, contexts) {
+            
+              <div class='highlight'><pre>    getForwardableContexts(inport, outport, contexts) {
       <span class="hljs-keyword">var</span> forwardable, index, name;
       ({name, index} = ports.normalizePortName(outport));
       forwardable = [];
@@ -736,9 +933,14 @@ inport</p>
         <span class="hljs-keyword">return</span> forwardable.push(ctx);
       });
       <span class="hljs-keyword">return</span> forwardable;
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Add any bracket forwards needed to the result queue</p>
 
-    addBracketForwards(result) {
+            
+              <div class='highlight'><pre>    addBracketForwards(result) {
       <span class="hljs-keyword">var</span> context, i, ipClone, j, k, l, len1, len2, len3, len4, port, ref, ref1, ref2, ref3, ref4, ref5;
       <span class="hljs-keyword">if</span> ((ref = result.__bracketClosingBefore) != <span class="hljs-literal">null</span> ? ref.length : <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) {
         ref1 = result.__bracketClosingBefore;
@@ -873,9 +1075,15 @@ the keys so that they get added in correct order</p>
       <span class="hljs-keyword">delete</span> result.__bracketClosingBefore;
       <span class="hljs-keyword">delete</span> result.__bracketContext;
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">delete</span> result.__bracketClosingAfter;
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Whenever an execution context finishes, send all resolved
+output from the queue in the order it is in.</p>
 
-    processOutputQueue() {
+            
+              <div class='highlight'><pre>    processOutputQueue() {
       <span class="hljs-keyword">var</span> idx, idxIps, ip, ips, port, portIdentifier, result, results;
       results = [];
       <span class="hljs-keyword">while</span> (<span class="hljs-keyword">this</span>.outputQ.length &gt; <span class="hljs-number">0</span>) {
@@ -945,9 +1153,15 @@ the keys so that they get added in correct order</p>
         }).call(<span class="hljs-keyword">this</span>));
       }
       <span class="hljs-keyword">return</span> results;
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Signal that component has activated. There may be multiple
+activated contexts at the same time</p>
 
-    activate(context) {
+            
+              <div class='highlight'><pre>    activate(context) {
       <span class="hljs-keyword">if</span> (context.activated) { <span class="hljs-comment">// prevent double activation</span>
         <span class="hljs-keyword">return</span>;
       }
@@ -958,9 +1172,15 @@ the keys so that they get added in correct order</p>
       <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.ordered || <span class="hljs-keyword">this</span>.autoOrdering) {
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.outputQ.push(context.result);
       }
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Signal that component has deactivated. There may be multiple
+activated contexts at the same time</p>
 
-    deactivate(context) {
+            
+              <div class='highlight'><pre>    deactivate(context) {
       <span class="hljs-keyword">if</span> (context.deactivated) { <span class="hljs-comment">// prevent double deactivation</span>
         <span class="hljs-keyword">return</span>;
       }
@@ -981,9 +1201,7 @@ the keys so that they get added in correct order</p>
 
   <span class="hljs-keyword">return</span> Component;
 
-})();
-
-exports.Component = Component;
+}).call(<span class="hljs-keyword">this</span>);
 
 ProcessContext = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessContext</span> </span>{
   <span class="hljs-keyword">constructor</span>(ip1, nodeInstance, port1, result1) {
@@ -1719,7 +1937,9 @@ last running process function.</p>
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.nodeInstance.deactivate(<span class="hljs-keyword">this</span>.context);
   }
 
-};</pre></div>
+};
+
+exports.Component = Component;</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee">Component.coffee</a> file.</small></p>
