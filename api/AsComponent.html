@@ -334,7 +334,7 @@ recommended to use default values only with components that don’t need to run 
       <span class="hljs-keyword">return</span>;
     }
     res = func.apply(<span class="hljs-literal">null</span>, values);
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> res === <span class="hljs-string">'object'</span> &amp;&amp; <span class="hljs-keyword">typeof</span> res.then === <span class="hljs-string">'function'</span>) {</pre></div>
+    <span class="hljs-keyword">if</span> (res &amp;&amp; <span class="hljs-keyword">typeof</span> res === <span class="hljs-string">'object'</span> &amp;&amp; <span class="hljs-keyword">typeof</span> res.then === <span class="hljs-string">'function'</span>) {</pre></div>
             
           
             
