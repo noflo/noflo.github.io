@@ -117,7 +117,7 @@ $ ./node_modules/.bin/noflo-nodejs -h
 
 The main NoFlo package gives you the environment for running flows. In addition you'll need the components that you'll be using in your graphs.
 
-There are hundreds of open source components available via [NoFlo Component Libraries](https://www.npmjs.com/browse/keyword/noflo) that you can install with NPM.
+There are hundreds of open source components available via [NoFlo Component Libraries](/component/) that you can install with NPM.
 
 For example, to install the [filesystem components](https://www.npmjs.com/package/noflo-filesystem/), you can run:
 
@@ -236,7 +236,7 @@ More details for using the template can be found from the [project README](https
 
 ## Building a simple calculator
 
-NoFlo has a [wealth of components](https://www.npmjs.com/browse/keyword/noflo) available. One such example is the [noflo-math](https://www.npmjs.com/package/noflo-math), which can be used for performing simple calculations.
+NoFlo has a [wealth of components](/component/) available. One such example is the [noflo-math](https://www.npmjs.com/package/noflo-math), which can be used for performing simple calculations.
 
 Install it with:
 

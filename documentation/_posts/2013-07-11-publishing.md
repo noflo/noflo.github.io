@@ -12,7 +12,7 @@ title: Publishing modules
   - [Release automation with Travis CI](#release-automation-with-travis-ci)
 - [Bootstrapping modules](#bootstrapping-modules)
 
-NoFlo modules are distributed via the [NPM package registry](https://www.npmjs.com). You can see a [list of reusable NoFlo modules](https://www.npmjs.com/browse/keyword/noflo) using the `noflo` keyword.
+NoFlo modules are distributed via the [NPM package registry](https://www.npmjs.com). You can see a [list of reusable NoFlo modules](/component/) using the `noflo` keyword.
 
 Developers can publish their own NoFlo modules by simply releasing them on NPM. The module can be NoFlo-only, but it is also possible to include NoFlo components and graphs in any NPM module.
 
