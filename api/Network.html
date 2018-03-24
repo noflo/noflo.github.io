@@ -867,6 +867,11 @@ to NoFlo processes, and edges to connections between them.</p>
     }
 
     subscribeNode(node) {
+      node.component.on(<span class="hljs-string">'activate'</span>, (load) =&gt; {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.debouncedEnd) {
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.abortDebounce = <span class="hljs-literal">true</span>;
+        }
+      });
       node.component.on(<span class="hljs-string">'deactivate'</span>, (load) =&gt; {
         <span class="hljs-keyword">if</span> (load &gt; <span class="hljs-number">0</span>) {
           <span class="hljs-keyword">return</span>;
@@ -1144,9 +1149,6 @@ started and set</p>
     }
 
     isRunning() {
-      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.started) {
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-      }
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.getActiveProcesses().length &gt; <span class="hljs-number">0</span>;
     }
 
