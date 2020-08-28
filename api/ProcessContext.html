@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Platform API"
+title: "ProcessContext API"
 categories:
   - api
 ---
@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Platform.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/ProcessContext.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -202,61 +202,68 @@ categories:
             
             
             
-              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;</pre></div>
+              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_classCallCheck</span>(<span class="hljs-params">instance, Constructor</span>) </span>{ <span class="hljs-keyword">if</span> (!(instance <span class="hljs-keyword">instanceof</span> Constructor)) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Cannot call a class as a function&quot;</span>); } }
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_defineProperties</span>(<span class="hljs-params">target, props</span>) </span>{ <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; props.length; i++) { <span class="hljs-keyword">var</span> descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || <span class="hljs-literal">false</span>; descriptor.configurable = <span class="hljs-literal">true</span>; <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;value&quot;</span> <span class="hljs-keyword">in</span> descriptor) descriptor.writable = <span class="hljs-literal">true</span>; <span class="hljs-built_in">Object</span>.defineProperty(target, descriptor.key, descriptor); } }
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createClass</span>(<span class="hljs-params">Constructor, protoProps, staticProps</span>) </span>{ <span class="hljs-keyword">if</span> (protoProps) _defineProperties(Constructor.prototype, protoProps); <span class="hljs-keyword">if</span> (staticProps) _defineProperties(Constructor, staticProps); <span class="hljs-keyword">return</span> Constructor; }</pre></div>
             
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
+(c) <span class="hljs-number">2013</span><span class="hljs-number">-2020</span> Flowhub UG
+(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre>
-<span class="hljs-comment">/* eslint-disable
-    no-console,
-    no-undef,
-*/</span></pre></div>
-            
-          
-            
-            <p>Platform detection method</p>
+              <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = <span class="hljs-comment">/*#__PURE__*/</span><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ProcessContext</span>(<span class="hljs-params">ip, nodeInstance, port, result</span>) </span>{
+    _classCallCheck(<span class="hljs-built_in">this</span>, ProcessContext);
 
-            
-              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.isBrowser = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isBrowser</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> process !== <span class="hljs-string">&#x27;undefined&#x27;</span> &amp;&amp; process.execPath &amp;&amp; process.execPath.match(<span class="hljs-regexp">/node|iojs/</span>)) {
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.ip = ip;
+    <span class="hljs-built_in">this</span>.nodeInstance = nodeInstance;
+    <span class="hljs-built_in">this</span>.port = port;
+    <span class="hljs-built_in">this</span>.result = result;
+    <span class="hljs-built_in">this</span>.scope = <span class="hljs-built_in">this</span>.ip.scope;
+    <span class="hljs-built_in">this</span>.activated = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.deactivated = <span class="hljs-literal">false</span>;
   }
 
-  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-}; <span class="hljs-comment">// Mechanism for showing API deprecation warnings. By default logs the warnings</span></pre></div>
+  _createClass(ProcessContext, [{
+    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;activate&quot;</span>,
+    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">activate</span>(<span class="hljs-params"></span>) </span>{</pre></div>
             
           
             
-            <p>but can also be configured to throw instead with the <code>NOFLO_FATAL_DEPRECATED</code>
-env var.</p>
+            <p>Push a new result value if previous has been sent already</p>
 
             
               <div class='highlight'><pre>
+      <span class="hljs-comment">/* eslint-disable no-underscore-dangle */</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.result.__resolved || <span class="hljs-built_in">this</span>.nodeInstance.outputQ.indexOf(<span class="hljs-built_in">this</span>.result) === <span class="hljs-number">-1</span>) {
+        <span class="hljs-built_in">this</span>.result = {};
+      }
 
-<span class="hljs-built_in">exports</span>.deprecated = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deprecated</span>(<span class="hljs-params">message</span>) </span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exports</span>.isBrowser()) {
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.NOFLO_FATAL_DEPRECATED) {
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message);
+      <span class="hljs-built_in">this</span>.nodeInstance.activate(<span class="hljs-built_in">this</span>);
     }
+  }, {
+    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;deactivate&quot;</span>,
+    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deactivate</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.result.__resolved) {
+        <span class="hljs-built_in">this</span>.result.__resolved = <span class="hljs-literal">true</span>;
+      }
 
-    <span class="hljs-built_in">console</span>.warn(message);
-    <span class="hljs-keyword">return</span>;
-  }
+      <span class="hljs-built_in">this</span>.nodeInstance.deactivate(<span class="hljs-built_in">this</span>);
+    }
+  }]);
 
-  <span class="hljs-keyword">if</span> (process.env.NOFLO_FATAL_DEPRECATED) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message);
-  }
-
-  <span class="hljs-built_in">console</span>.warn(message);
-};</pre></div>
+  <span class="hljs-keyword">return</span> ProcessContext;
+}();</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Platform.coffee">Platform.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ProcessContext.coffee">ProcessContext.coffee</a> file.</small></p>
         </div>
       </div>
     </div>

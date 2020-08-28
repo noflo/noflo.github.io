@@ -42,6 +42,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/BaseNetwork/index.html' %}class="active" {% endif %}href="/api/BaseNetwork/">
+                    BaseNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
                     BasePort
                   </a>
@@ -69,15 +78,6 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">
-                    Helpers
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">
                     IP
                   </a>
@@ -98,6 +98,15 @@ categories:
                 <li>
                   <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">
                     InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/LegacyNetwork/index.html' %}class="active" {% endif %}href="/api/LegacyNetwork/">
+                    LegacyNetwork
                   </a>
                 </li>
                 
@@ -150,6 +159,33 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/ProcessContext/index.html' %}class="active" {% endif %}href="/api/ProcessContext/">
+                    ProcessContext
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ProcessInput/index.html' %}class="active" {% endif %}href="/api/ProcessInput/">
+                    ProcessInput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ProcessOutput/index.html' %}class="active" {% endif %}href="/api/ProcessOutput/">
+                    ProcessOutput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">
                     Utils
                   </a>
@@ -164,94 +200,85 @@ categories:
           <h1>{{ page.title }}</h1>
           
             
-            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2017</span><span class="hljs-number">-2018</span> Flowhub UG
-NoFlo may be freely distributed under the MIT license
-</code></pre>
             
-              <div class='highlight'><pre><span class="hljs-keyword">var</span> ComponentLoader, Graph, IP, Network, getType, internalSocket, normalizeOptions, normalizeOutput, prepareInputMap, prepareNetwork, runNetwork, sendOutputMap;
+            
+              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;
 
-ComponentLoader = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./ComponentLoader'</span>).ComponentLoader;
-
-Network = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Network'</span>).Network;
-
-IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./IP'</span>);
-
-internalSocket = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./InternalSocket'</span>);
-
-Graph = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fbp-graph'</span>).Graph;</pre></div>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-string">&quot;@babel/helpers - typeof&quot;</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>.iterator === <span class="hljs-string">&quot;symbol&quot;</span>) { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">else</span> { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> obj &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; obj.constructor === <span class="hljs-built_in">Symbol</span> &amp;&amp; obj !== <span class="hljs-built_in">Symbol</span>.prototype ? <span class="hljs-string">&quot;symbol&quot;</span> : <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">return</span> _typeof(obj); }</pre></div>
             
           
             
-            <h2 id="ascallback-embedding-api">asCallback embedding API</h2>
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2017</span><span class="hljs-number">-2018</span> Flowhub UG
+NoFlo may be freely distributed under the MIT license</code></pre>
 
+            
+              <div class='highlight'><pre>
+<span class="hljs-comment">/* eslint-disable
+    no-param-reassign,
+*/</span>
+<span class="hljs-keyword">var</span> _require = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fbp-graph&#x27;</span>),
+    Graph = _require.Graph;
+
+<span class="hljs-keyword">var</span> _require2 = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./ComponentLoader&#x27;</span>),
+    ComponentLoader = _require2.ComponentLoader;
+
+<span class="hljs-keyword">var</span> _require3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Network&#x27;</span>),
+    Network = _require3.Network;
+
+<span class="hljs-keyword">var</span> IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);
+
+<span class="hljs-keyword">var</span> internalSocket = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InternalSocket&#x27;</span>); <span class="hljs-comment">// ## asCallback embedding API</span></pre></div>
             
           
             
             <p>asCallback is a helper for embedding NoFlo components or
 graphs in other JavaScript programs.</p>
-
-            
-          
-            
-            <p>By using the <code>noflo.asCallback</code> function, you can turn any
+<p>By using the <code>noflo.asCallback</code> function, you can turn any
 NoFlo component or NoFlo Graph instance into a regular,
 Node.js-style JavaScript function.</p>
-
-            
-          
-            
-            <p>Each call to that function starts a new NoFlo network where
+<p>Each call to that function starts a new NoFlo network where
 the given input arguments are sent as IP objects to matching
 inports. Once the network finishes, the IP objects received
 from the network will be sent to the callback function.</p>
-
-            
-          
-            
-            <p>If there was anything sent to an <code>error</code> outport, this will
+<p>If there was anything sent to an <code>error</code> outport, this will
 be provided as the error argument to the callback.</p>
-
-            
-          
-            
-            <h3 id="option-normalization">Option normalization</h3>
-
-            
-          
-            
-            <p>Here we handle the input valus given to the <code>asCallback</code>
+<h3 id="option-normalization">Option normalization</h3>
+<p>Here we handle the input valus given to the <code>asCallback</code>
 function. This allows passing things like a pre-initialized
 NoFlo ComponentLoader, or giving the component loading
 baseDir context.</p>
 
             
-              <div class='highlight'><pre>normalizeOptions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options, component</span>) </span>{
+              <div class='highlight'><pre>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">normalizeOptions</span>(<span class="hljs-params">options, component</span>) </span>{
   <span class="hljs-keyword">if</span> (!options) {
     options = {};
   }
+
   <span class="hljs-keyword">if</span> (!options.name) {
     options.name = component;
   }
+
   <span class="hljs-keyword">if</span> (options.loader) {
     options.baseDir = options.loader.baseDir;
   }
+
   <span class="hljs-keyword">if</span> (!options.baseDir &amp;&amp; process &amp;&amp; process.cwd) {
     options.baseDir = process.cwd();
   }
+
   <span class="hljs-keyword">if</span> (!options.loader) {
     options.loader = <span class="hljs-keyword">new</span> ComponentLoader(options.baseDir);
   }
+
   <span class="hljs-keyword">if</span> (!options.raw) {
     options.raw = <span class="hljs-literal">false</span>;
   }
-  <span class="hljs-keyword">return</span> options;
-};</pre></div>
-            
-          
-            
-            <h3 id="network-preparation">Network preparation</h3>
 
+  <span class="hljs-keyword">return</span> options;
+} <span class="hljs-comment">// ### Network preparation</span></pre></div>
             
           
             
@@ -260,386 +287,333 @@ creates a new network. This way we can isolate multiple
 executions of the function in their own contexts.</p>
 
             
-              <div class='highlight'><pre>prepareNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, options, callback</span>) </span>{
-  <span class="hljs-keyword">var</span> network;</pre></div>
+              <div class='highlight'><pre>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prepareNetwork</span>(<span class="hljs-params">component, options, callback</span>) </span>{</pre></div>
             
           
             
             <p>If we were given a graph instance, then just create a network</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> component === <span class="hljs-string">'object'</span>) {
-    component.componentLoader = options.loader;
-    network = <span class="hljs-keyword">new</span> Network(component, options);</pre></div>
-            
-          
-            
-            <p>Wire the network up</p>
+              <div class='highlight'><pre>  <span class="hljs-keyword">var</span> network;
 
-            
-              <div class='highlight'><pre>    network.connect(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+  <span class="hljs-keyword">if</span> (_typeof(component) === <span class="hljs-string">&#x27;object&#x27;</span>) {
+    component.componentLoader = options.loader;
+    network = <span class="hljs-keyword">new</span> Network(component, options); <span class="hljs-comment">// Wire the network up</span>
+
+    network.connect(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
       <span class="hljs-keyword">if</span> (err) {
-        <span class="hljs-keyword">return</span> callback(err);
+        callback(err);
+        <span class="hljs-keyword">return</span>;
       }
-      <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, network);
+
+      callback(<span class="hljs-literal">null</span>, network);
     });
     <span class="hljs-keyword">return</span>;
-  }</pre></div>
-            
-          
-            
-            <p>Start by loading the component</p>
+  } <span class="hljs-comment">// Start by loading the component</span>
 
-            
-              <div class='highlight'><pre>  <span class="hljs-keyword">return</span> options.loader.load(component, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, instance</span>) </span>{
-    <span class="hljs-keyword">var</span> def, graph, inPorts, nodeName, outPorts, port;
+
+  options.loader.load(component, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, instance</span>) </span>{
     <span class="hljs-keyword">if</span> (err) {
-      <span class="hljs-keyword">return</span> callback(err);
-    }</pre></div>
-            
-          
-            
-            <p>Prepare a graph wrapping the component</p>
+      callback(err);
+      <span class="hljs-keyword">return</span>;
+    } <span class="hljs-comment">// Prepare a graph wrapping the component</span>
 
-            
-              <div class='highlight'><pre>    graph = <span class="hljs-keyword">new</span> Graph(options.name);
-    nodeName = options.name;
-    graph.addNode(nodeName, component);</pre></div>
-            
-          
-            
-            <p>Expose ports</p>
 
-            
-              <div class='highlight'><pre>    inPorts = instance.inPorts.ports;
-    outPorts = instance.outPorts.ports;
-    <span class="hljs-keyword">for</span> (port <span class="hljs-keyword">in</span> inPorts) {
-      def = inPorts[port];
+    <span class="hljs-keyword">var</span> graph = <span class="hljs-keyword">new</span> Graph(options.name);
+    <span class="hljs-keyword">var</span> nodeName = options.name;
+    graph.addNode(nodeName, component); <span class="hljs-comment">// Expose ports</span>
+
+    <span class="hljs-keyword">var</span> inPorts = instance.inPorts.ports;
+    <span class="hljs-keyword">var</span> outPorts = instance.outPorts.ports;
+    <span class="hljs-built_in">Object</span>.keys(inPorts).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">port</span>) </span>{
       graph.addInport(port, nodeName, port);
-    }
-    <span class="hljs-keyword">for</span> (port <span class="hljs-keyword">in</span> outPorts) {
-      def = outPorts[port];
+    });
+    <span class="hljs-built_in">Object</span>.keys(outPorts).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">port</span>) </span>{
       graph.addOutport(port, nodeName, port);
-    }</pre></div>
-            
-          
-            
-            <p>Prepare network</p>
+    }); <span class="hljs-comment">// Prepare network</span>
 
-            
-              <div class='highlight'><pre>    graph.componentLoader = options.loader;
-    network = <span class="hljs-keyword">new</span> Network(graph, options);</pre></div>
-            
-          
-            
-            <p>Wire the network up and start execution</p>
+    graph.componentLoader = options.loader;
+    network = <span class="hljs-keyword">new</span> Network(graph, options); <span class="hljs-comment">// Wire the network up and start execution</span>
 
-            
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> network.connect(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
-      <span class="hljs-keyword">if</span> (err) {
-        <span class="hljs-keyword">return</span> callback(err);
+    network.connect(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err2</span>) </span>{
+      <span class="hljs-keyword">if</span> (err2) {
+        callback(err2);
+        <span class="hljs-keyword">return</span>;
       }
-      <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, network);
+
+      callback(<span class="hljs-literal">null</span>, network);
     });
   });
-};</pre></div>
-            
-          
-            
-            <h3 id="network-execution">Network execution</h3>
-
+} <span class="hljs-comment">// ### Network execution</span></pre></div>
             
           
             
             <p>Once network is ready, we connect to all of its exported
 in and outports and start the network.</p>
-
-            
-          
-            
-            <p>Input data is sent to the inports, and we collect IP
+<p>Input data is sent to the inports, and we collect IP
 packets received on the outports.</p>
-
-            
-          
-            
-            <p>Once the network finishes, we send the resulting IP
+<p>Once the network finishes, we send the resulting IP
 objects to the callback.</p>
 
             
-              <div class='highlight'><pre>runNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">network, inputs, options, callback</span>) </span>{
-  <span class="hljs-keyword">var</span> inPorts, inSockets, outPorts, outSockets, received;</pre></div>
+              <div class='highlight'><pre>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">runNetwork</span>(<span class="hljs-params">network, inputs, options, callback</span>) </span>{</pre></div>
             
           
             
             <p>Prepare inports</p>
 
             
-              <div class='highlight'><pre>  inPorts = <span class="hljs-built_in">Object</span>.keys(network.graph.inports);
-  inSockets = {};</pre></div>
-            
-          
-            
-            <p>Subscribe outports</p>
+              <div class='highlight'><pre>  <span class="hljs-keyword">var</span> inSockets = {}; <span class="hljs-comment">// Subscribe outports</span>
 
-            
-              <div class='highlight'><pre>  received = [];
-  outPorts = <span class="hljs-built_in">Object</span>.keys(network.graph.outports);
-  outSockets = {};
-  outPorts.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">outport</span>) </span>{
-    <span class="hljs-keyword">var</span> portDef, process;
-    portDef = network.graph.outports[outport];
-    process = network.getNode(portDef.process);
+  <span class="hljs-keyword">var</span> received = [];
+  <span class="hljs-keyword">var</span> outPorts = <span class="hljs-built_in">Object</span>.keys(network.graph.outports);
+  <span class="hljs-keyword">var</span> outSockets = {};
+  outPorts.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">outport</span>) </span>{
+    <span class="hljs-keyword">var</span> portDef = network.graph.outports[outport];
+    <span class="hljs-keyword">var</span> process = network.getNode(portDef.process);
     outSockets[outport] = internalSocket.createSocket();
     process.component.outPorts[portDef.port].attach(outSockets[outport]);
     outSockets[outport].from = {
       <span class="hljs-attr">process</span>: process,
       <span class="hljs-attr">port</span>: portDef.port
     };
-    <span class="hljs-keyword">return</span> outSockets[outport].on(<span class="hljs-string">'ip'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ip</span>) </span>{
-      <span class="hljs-keyword">var</span> res;
-      res = {};
+    outSockets[outport].on(<span class="hljs-string">&#x27;ip&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">ip</span>) </span>{
+      <span class="hljs-keyword">var</span> res = {};
       res[outport] = ip;
-      <span class="hljs-keyword">return</span> received.push(res);
+      received.push(res);
     });
-  });</pre></div>
-            
-          
-            
-            <p>Subscribe network finish</p>
+  }); <span class="hljs-comment">// Subscribe to process errors</span>
 
-            
-              <div class='highlight'><pre>  network.once(<span class="hljs-string">'end'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">var</span> port, socket;</pre></div>
+  <span class="hljs-keyword">var</span> onEnd = <span class="hljs-literal">null</span>;
+  <span class="hljs-keyword">var</span> onError = <span class="hljs-literal">null</span>;
+
+  onError = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onError</span>(<span class="hljs-params">err</span>) </span>{
+    callback(err.error);
+    network.removeListener(<span class="hljs-string">&#x27;end&#x27;</span>, onEnd);
+  };
+
+  network.once(<span class="hljs-string">&#x27;process-error&#x27;</span>, onError); <span class="hljs-comment">// Subscribe network finish</span>
+
+  onEnd = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onEnd</span>(<span class="hljs-params"></span>) </span>{</pre></div>
             
           
             
             <p>Clear listeners</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">for</span> (port <span class="hljs-keyword">in</span> outSockets) {
-      socket = outSockets[port];
+              <div class='highlight'><pre>    <span class="hljs-built_in">Object</span>.keys(outSockets).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">port</span>) </span>{
+      <span class="hljs-keyword">var</span> socket = outSockets[port];
       socket.from.process.component.outPorts[socket.from.port].detach(socket);
-    }
+    });
     outSockets = {};
     inSockets = {};
-    <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, received);
-  });</pre></div>
-            
-          
-            
-            <p>Start network</p>
+    callback(<span class="hljs-literal">null</span>, received);
+    network.removeListener(<span class="hljs-string">&#x27;process-error&#x27;</span>, onError);
+  };
 
-            
-              <div class='highlight'><pre>  <span class="hljs-keyword">return</span> network.start(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
-    <span class="hljs-keyword">var</span> i, inputMap, len, port, portDef, process, results, value;
+  network.once(<span class="hljs-string">&#x27;end&#x27;</span>, onEnd); <span class="hljs-comment">// Start network</span>
+
+  network.start(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
     <span class="hljs-keyword">if</span> (err) {
-      <span class="hljs-keyword">return</span> callback(err);
-    }</pre></div>
-            
-          
-            
-            <p>Send inputs</p>
+      callback(err);
+      <span class="hljs-keyword">return</span>;
+    } <span class="hljs-comment">// Send inputs</span>
 
-            
-              <div class='highlight'><pre>    results = [];
-    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = inputs.length; i &lt; len; i++) {
-      inputMap = inputs[i];
-      results.push((<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-        <span class="hljs-keyword">var</span> results1;
-        results1 = [];
-        <span class="hljs-keyword">for</span> (port <span class="hljs-keyword">in</span> inputMap) {
-          value = inputMap[port];
-          <span class="hljs-keyword">if</span> (!inSockets[port]) {
-            portDef = network.graph.inports[port];
-            process = network.getNode(portDef.process);
-            inSockets[port] = internalSocket.createSocket();
-            process.component.inPorts[portDef.port].attach(inSockets[port]);
-          }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; inputs.length; i += <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">var</span> inputMap = inputs[i];
+      <span class="hljs-keyword">var</span> keys = <span class="hljs-built_in">Object</span>.keys(inputMap);
+
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; keys.length; j += <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">var</span> port = keys[j];
+        <span class="hljs-keyword">var</span> value = inputMap[port];
+
+        <span class="hljs-keyword">if</span> (!inSockets[port]) {
+          <span class="hljs-keyword">var</span> portDef = network.graph.inports[port];
+
+          <span class="hljs-keyword">var</span> _process = network.getNode(portDef.process);
+
+          inSockets[port] = internalSocket.createSocket();
+
+          _process.component.inPorts[portDef.port].attach(inSockets[port]);
+        }
+
+        <span class="hljs-keyword">try</span> {
           <span class="hljs-keyword">if</span> (IP.isIP(value)) {
             inSockets[port].post(value);
-            <span class="hljs-keyword">continue</span>;
+          } <span class="hljs-keyword">else</span> {
+            inSockets[port].post(<span class="hljs-keyword">new</span> IP(<span class="hljs-string">&#x27;data&#x27;</span>, value));
           }
-          results1.push(inSockets[port].post(<span class="hljs-keyword">new</span> IP(<span class="hljs-string">'data'</span>, value)));
+        } <span class="hljs-keyword">catch</span> (e) {
+          callback(e);
+          network.removeListener(<span class="hljs-string">&#x27;process-error&#x27;</span>, onError);
+          network.removeListener(<span class="hljs-string">&#x27;end&#x27;</span>, onEnd);
+          <span class="hljs-keyword">return</span>;
         }
-        <span class="hljs-keyword">return</span> results1;
-      })());
+      }
     }
-    <span class="hljs-keyword">return</span> results;
   });
-};
+}
 
-getType = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">inputs, network</span>) </span>{
-  <span class="hljs-keyword">var</span> key, maps, value;
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> inputs !== <span class="hljs-string">'object'</span>) {</pre></div>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getType</span>(<span class="hljs-params">inputs, network</span>) </span>{</pre></div>
             
           
             
             <p>Scalar values are always simple inputs</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-string">'simple'</span>;
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (_typeof(inputs) !== <span class="hljs-string">&#x27;object&#x27;</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;simple&#x27;</span>;
   }
+
   <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(inputs)) {
-    maps = inputs.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">entry</span>) </span>{
-      <span class="hljs-keyword">return</span> getType(entry, network) === <span class="hljs-string">'map'</span>;
-    });
-    <span class="hljs-keyword">if</span> (maps.length === inputs.length) {</pre></div>
-            
-          
-            
-            <p>If each member if the array is an input map, this is a sequence</p>
+    <span class="hljs-keyword">var</span> maps = inputs.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">entry</span>) </span>{
+      <span class="hljs-keyword">return</span> getType(entry, network) === <span class="hljs-string">&#x27;map&#x27;</span>;
+    }); <span class="hljs-comment">// If each member if the array is an input map, this is a sequence</span>
 
-            
-              <div class='highlight'><pre>      <span class="hljs-keyword">return</span> <span class="hljs-string">'sequence'</span>;
-    }</pre></div>
-            
-          
-            
-            <p>Otherwise arrays must be simple inputs</p>
+    <span class="hljs-keyword">if</span> (maps.length === inputs.length) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;sequence&#x27;</span>;
+    } <span class="hljs-comment">// Otherwise arrays must be simple inputs</span>
 
-            
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-string">'simple'</span>;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;simple&#x27;</span>;
+  } <span class="hljs-comment">// Empty objects can&#x27;t be maps</span>
+
+
+  <span class="hljs-keyword">var</span> keys = <span class="hljs-built_in">Object</span>.keys(inputs);
+
+  <span class="hljs-keyword">if</span> (!keys.length) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;simple&#x27;</span>;
   }
-  <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Object</span>.keys(inputs).length) {</pre></div>
-            
-          
-            
-            <p>Empty objects can’t be maps</p>
 
-            
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-string">'simple'</span>;
-  }
-  <span class="hljs-keyword">for</span> (key <span class="hljs-keyword">in</span> inputs) {
-    value = inputs[key];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; keys.length; i += <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">var</span> key = keys[i];
+
     <span class="hljs-keyword">if</span> (!network.graph.inports[key]) {
-      <span class="hljs-keyword">return</span> <span class="hljs-string">'simple'</span>;
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;simple&#x27;</span>;
     }
   }
-  <span class="hljs-keyword">return</span> <span class="hljs-string">'map'</span>;
-};
 
-prepareInputMap = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">inputs, inputType, network</span>) </span>{
-  <span class="hljs-keyword">var</span> inPort, map;
-  <span class="hljs-keyword">if</span> (inputType === <span class="hljs-string">'sequence'</span>) {</pre></div>
+  <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;map&#x27;</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prepareInputMap</span>(<span class="hljs-params">inputs, inputType, network</span>) </span>{</pre></div>
             
           
             
             <p>Sequence we can use as-is</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> inputs;
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (inputType === <span class="hljs-string">&#x27;sequence&#x27;</span>) {
+    <span class="hljs-keyword">return</span> inputs;
+  } <span class="hljs-comment">// We can turn a map to a sequence by wrapping it in an array</span>
+
+
+  <span class="hljs-keyword">if</span> (inputType === <span class="hljs-string">&#x27;map&#x27;</span>) {
+    <span class="hljs-keyword">return</span> [inputs];
+  } <span class="hljs-comment">// Simple inputs need to be converted to a sequence</span>
+
+
+  <span class="hljs-keyword">var</span> inPort = <span class="hljs-built_in">Object</span>.keys(network.graph.inports)[<span class="hljs-number">0</span>]; <span class="hljs-comment">// If we have a port named &quot;IN&quot;, send to that</span>
+
+  <span class="hljs-keyword">if</span> (network.graph.inports[<span class="hljs-string">&quot;in&quot;</span>]) {
+    inPort = <span class="hljs-string">&#x27;in&#x27;</span>;
   }
-  <span class="hljs-keyword">if</span> (inputType === <span class="hljs-string">'map'</span>) {</pre></div>
-            
-          
-            
-            <p>We can turn a map to a sequence by wrapping it in an array</p>
 
-            
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> [inputs];
-  }</pre></div>
-            
-          
-            
-            <p>Simple inputs need to be converted to a sequence</p>
-
-            
-              <div class='highlight'><pre>  inPort = <span class="hljs-built_in">Object</span>.keys(network.graph.inports)[<span class="hljs-number">0</span>];
-  <span class="hljs-keyword">if</span> (network.graph.inports.in) {</pre></div>
-            
-          
-            
-            <p>If we have a port named “IN”, send to that</p>
-
-            
-              <div class='highlight'><pre>    inPort = <span class="hljs-string">'in'</span>;
-  }
-  map = {};
+  <span class="hljs-keyword">var</span> map = {};
   map[inPort] = inputs;
   <span class="hljs-keyword">return</span> [map];
-};
+}
 
-normalizeOutput = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">values, options</span>) </span>{
-  <span class="hljs-keyword">var</span> current, i, len, packet, previous, result;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">normalizeOutput</span>(<span class="hljs-params">values, options</span>) </span>{
   <span class="hljs-keyword">if</span> (options.raw) {
     <span class="hljs-keyword">return</span> values;
   }
-  result = [];
-  previous = <span class="hljs-literal">null</span>;
-  current = result;
-  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = values.length; i &lt; len; i++) {
-    packet = values[i];
-    <span class="hljs-keyword">if</span> (packet.type === <span class="hljs-string">'openBracket'</span>) {
+
+  <span class="hljs-keyword">var</span> result = [];
+  <span class="hljs-keyword">var</span> previous = <span class="hljs-literal">null</span>;
+  <span class="hljs-keyword">var</span> current = result;
+  values.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">packet</span>) </span>{
+    <span class="hljs-keyword">if</span> (packet.type === <span class="hljs-string">&#x27;openBracket&#x27;</span>) {
       previous = current;
       current = [];
       previous.push(current);
     }
-    <span class="hljs-keyword">if</span> (packet.type === <span class="hljs-string">'data'</span>) {
+
+    <span class="hljs-keyword">if</span> (packet.type === <span class="hljs-string">&#x27;data&#x27;</span>) {
       current.push(packet.data);
     }
-    <span class="hljs-keyword">if</span> (packet.type === <span class="hljs-string">'closeBracket'</span>) {
+
+    <span class="hljs-keyword">if</span> (packet.type === <span class="hljs-string">&#x27;closeBracket&#x27;</span>) {
       current = previous;
     }
-  }
+  });
+
   <span class="hljs-keyword">if</span> (result.length === <span class="hljs-number">1</span>) {
     <span class="hljs-keyword">return</span> result[<span class="hljs-number">0</span>];
   }
-  <span class="hljs-keyword">return</span> result;
-};
 
-sendOutputMap = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">outputs, resultType, options, callback</span>) </span>{
-  <span class="hljs-keyword">var</span> errors, i, key, len, map, mappedOutputs, outputKeys, packets, port, result, val, withValue;</pre></div>
+  <span class="hljs-keyword">return</span> result;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sendOutputMap</span>(<span class="hljs-params">outputs, resultType, options, callback</span>) </span>{</pre></div>
             
           
             
             <p>First check if the output sequence contains errors</p>
 
             
-              <div class='highlight'><pre>  errors = outputs.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">map</span>) </span>{
+              <div class='highlight'><pre>  <span class="hljs-keyword">var</span> errors = outputs.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">map</span>) </span>{
     <span class="hljs-keyword">return</span> map.error != <span class="hljs-literal">null</span>;
-  }).map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">map</span>) </span>{
+  }).map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">map</span>) </span>{
     <span class="hljs-keyword">return</span> map.error;
   });
+
   <span class="hljs-keyword">if</span> (errors.length) {
-    <span class="hljs-keyword">return</span> callback(normalizeOutput(errors, options));
+    callback(normalizeOutput(errors, options));
+    <span class="hljs-keyword">return</span>;
   }
-  <span class="hljs-keyword">if</span> (resultType === <span class="hljs-string">'sequence'</span>) {
-    <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, outputs.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">map</span>) </span>{
-      <span class="hljs-keyword">var</span> key, res, val;
-      res = {};
-      <span class="hljs-keyword">for</span> (key <span class="hljs-keyword">in</span> map) {
-        val = map[key];
+
+  <span class="hljs-keyword">if</span> (resultType === <span class="hljs-string">&#x27;sequence&#x27;</span>) {
+    callback(<span class="hljs-literal">null</span>, outputs.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">map</span>) </span>{
+      <span class="hljs-keyword">var</span> res = {};
+      <span class="hljs-built_in">Object</span>.keys(map).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{
+        <span class="hljs-keyword">var</span> val = map[key];
+
         <span class="hljs-keyword">if</span> (options.raw) {
           res[key] = val;
-          <span class="hljs-keyword">continue</span>;
+          <span class="hljs-keyword">return</span>;
         }
+
         res[key] = normalizeOutput([val], options);
-      }
+      });
       <span class="hljs-keyword">return</span> res;
     }));
-  }</pre></div>
-            
-          
-            
-            <p>Flatten the sequence</p>
+    <span class="hljs-keyword">return</span>;
+  } <span class="hljs-comment">// Flatten the sequence</span>
 
-            
-              <div class='highlight'><pre>  mappedOutputs = {};
-  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = outputs.length; i &lt; len; i++) {
-    map = outputs[i];
-    <span class="hljs-keyword">for</span> (key <span class="hljs-keyword">in</span> map) {
-      val = map[key];
+
+  <span class="hljs-keyword">var</span> mappedOutputs = {};
+  outputs.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">map</span>) </span>{
+    <span class="hljs-built_in">Object</span>.keys(map).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{
+      <span class="hljs-keyword">var</span> val = map[key];
+
       <span class="hljs-keyword">if</span> (!mappedOutputs[key]) {
         mappedOutputs[key] = [];
       }
+
       mappedOutputs[key].push(val);
-    }
-  }
-  outputKeys = <span class="hljs-built_in">Object</span>.keys(mappedOutputs);
-  withValue = outputKeys.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">outport</span>) </span>{
+    });
+  });
+  <span class="hljs-keyword">var</span> outputKeys = <span class="hljs-built_in">Object</span>.keys(mappedOutputs);
+  <span class="hljs-keyword">var</span> withValue = outputKeys.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">outport</span>) </span>{
     <span class="hljs-keyword">return</span> mappedOutputs[outport].length &gt; <span class="hljs-number">0</span>;
   });
+
   <span class="hljs-keyword">if</span> (withValue.length === <span class="hljs-number">0</span>) {</pre></div>
             
           
@@ -647,40 +621,51 @@ sendOutputMap = <span class="hljs-function"><span class="hljs-keyword">function<
             <p>No output</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>);
+              <div class='highlight'><pre>    callback(<span class="hljs-literal">null</span>);
+    <span class="hljs-keyword">return</span>;
   }
-  <span class="hljs-keyword">if</span> (withValue.length === <span class="hljs-number">1</span> &amp;&amp; resultType === <span class="hljs-string">'simple'</span>) {</pre></div>
+
+  <span class="hljs-keyword">if</span> (withValue.length === <span class="hljs-number">1</span> &amp;&amp; resultType === <span class="hljs-string">&#x27;simple&#x27;</span>) {</pre></div>
             
           
             
             <p>Single outport</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, normalizeOutput(mappedOutputs[withValue[<span class="hljs-number">0</span>]], options));
+              <div class='highlight'><pre>    callback(<span class="hljs-literal">null</span>, normalizeOutput(mappedOutputs[withValue[<span class="hljs-number">0</span>]], options));
+    <span class="hljs-keyword">return</span>;
   }
-  result = {};
-  <span class="hljs-keyword">for</span> (port <span class="hljs-keyword">in</span> mappedOutputs) {
-    packets = mappedOutputs[port];
-    result[port] = normalizeOutput(packets, options);
-  }
-  <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, result);
-};
 
-exports.asCallback = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, options</span>) </span>{
+  <span class="hljs-keyword">var</span> result = {};
+  <span class="hljs-built_in">Object</span>.keys(mappedOutputs).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">port</span>) </span>{
+    <span class="hljs-keyword">var</span> packets = mappedOutputs[port];
+    result[port] = normalizeOutput(packets, options);
+  });
+  callback(<span class="hljs-literal">null</span>, result);
+}
+
+<span class="hljs-built_in">exports</span>.asCallback = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asCallback</span>(<span class="hljs-params">component, options</span>) </span>{
   options = normalizeOptions(options, component);
-  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">inputs, callback</span>) </span>{
-    <span class="hljs-keyword">return</span> prepareNetwork(component, options, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, network</span>) </span>{
-      <span class="hljs-keyword">var</span> inputMap, resultType;
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">inputs, callback</span>) </span>{
+    prepareNetwork(component, options, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
       <span class="hljs-keyword">if</span> (err) {
-        <span class="hljs-keyword">return</span> callback(err);
+        callback(err);
+        <span class="hljs-keyword">return</span>;
       }
-      resultType = getType(inputs, network);
-      inputMap = prepareInputMap(inputs, resultType, network);
-      <span class="hljs-keyword">return</span> runNetwork(network, inputMap, options, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, outputMap</span>) </span>{
-        <span class="hljs-keyword">if</span> (err) {
-          <span class="hljs-keyword">return</span> callback(err);
+
+      <span class="hljs-keyword">if</span> (options.networkCallback) {
+        options.networkCallback(network);
+      }
+
+      <span class="hljs-keyword">var</span> resultType = getType(inputs, network);
+      <span class="hljs-keyword">var</span> inputMap = prepareInputMap(inputs, resultType, network);
+      runNetwork(network, inputMap, options, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err2, outputMap</span>) </span>{
+        <span class="hljs-keyword">if</span> (err2) {
+          callback(err2);
+          <span class="hljs-keyword">return</span>;
         }
-        <span class="hljs-keyword">return</span> sendOutputMap(outputMap, resultType, options, callback);
+
+        sendOutputMap(outputMap, resultType, options, callback);
       });
     });
   };
