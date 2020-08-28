@@ -42,6 +42,15 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/BaseNetwork/index.html' %}class="active" {% endif %}href="/api/BaseNetwork/">
+                    BaseNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/BasePort/index.html' %}class="active" {% endif %}href="/api/BasePort/">
                     BasePort
                   </a>
@@ -69,15 +78,6 @@ categories:
                 
                 
                 <li>
-                  <a {% if page.url == '/api/Helpers/index.html' %}class="active" {% endif %}href="/api/Helpers/">
-                    Helpers
-                  </a>
-                </li>
-                
-              
-                
-                
-                <li>
                   <a {% if page.url == '/api/IP/index.html' %}class="active" {% endif %}href="/api/IP/">
                     IP
                   </a>
@@ -98,6 +98,15 @@ categories:
                 <li>
                   <a {% if page.url == '/api/InternalSocket/index.html' %}class="active" {% endif %}href="/api/InternalSocket/">
                     InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/LegacyNetwork/index.html' %}class="active" {% endif %}href="/api/LegacyNetwork/">
+                    LegacyNetwork
                   </a>
                 </li>
                 
@@ -150,6 +159,33 @@ categories:
                 
                 
                 <li>
+                  <a {% if page.url == '/api/ProcessContext/index.html' %}class="active" {% endif %}href="/api/ProcessContext/">
+                    ProcessContext
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ProcessInput/index.html' %}class="active" {% endif %}href="/api/ProcessInput/">
+                    ProcessInput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a {% if page.url == '/api/ProcessOutput/index.html' %}class="active" {% endif %}href="/api/ProcessOutput/">
+                    ProcessOutput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
                   <a {% if page.url == '/api/Utils/index.html' %}class="active" {% endif %}href="/api/Utils/">
                     Utils
                   </a>
@@ -164,159 +200,139 @@ categories:
           <h1>{{ page.title }}</h1>
           
             
-            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2018</span> Flowhub UG
-NoFlo may be freely distributed under the MIT license
-</code></pre>
             
-              <div class='highlight'><pre><span class="hljs-keyword">var</span> Component, getParams;
+            
+              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;
 
-getParams = <span class="hljs-built_in">require</span>(<span class="hljs-string">'get-function-params'</span>);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-string">&quot;@babel/helpers - typeof&quot;</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>.iterator === <span class="hljs-string">&quot;symbol&quot;</span>) { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">else</span> { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> obj &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; obj.constructor === <span class="hljs-built_in">Symbol</span> &amp;&amp; obj !== <span class="hljs-built_in">Symbol</span>.prototype ? <span class="hljs-string">&quot;symbol&quot;</span> : <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">return</span> _typeof(obj); }
 
-({Component} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Component'</span>));</pre></div>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_toConsumableArray</span>(<span class="hljs-params">arr</span>) </span>{ <span class="hljs-keyword">return</span> _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_nonIterableSpread</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.&quot;</span>); }
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_unsupportedIterableToArray</span>(<span class="hljs-params">o, minLen</span>) </span>{ <span class="hljs-keyword">if</span> (!o) <span class="hljs-keyword">return</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> o === <span class="hljs-string">&quot;string&quot;</span>) <span class="hljs-keyword">return</span> _arrayLikeToArray(o, minLen); <span class="hljs-keyword">var</span> n = <span class="hljs-built_in">Object</span>.prototype.toString.call(o).slice(<span class="hljs-number">8</span>, <span class="hljs-number">-1</span>); <span class="hljs-keyword">if</span> (n === <span class="hljs-string">&quot;Object&quot;</span> &amp;&amp; o.constructor) n = o.constructor.name; <span class="hljs-keyword">if</span> (n === <span class="hljs-string">&quot;Map&quot;</span> || n === <span class="hljs-string">&quot;Set&quot;</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.from(o); <span class="hljs-keyword">if</span> (n === <span class="hljs-string">&quot;Arguments&quot;</span> || <span class="hljs-regexp">/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/</span>.test(n)) <span class="hljs-keyword">return</span> _arrayLikeToArray(o, minLen); }
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_iterableToArray</span>(<span class="hljs-params">iter</span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> !== <span class="hljs-string">&quot;undefined&quot;</span> &amp;&amp; <span class="hljs-built_in">Symbol</span>.iterator <span class="hljs-keyword">in</span> <span class="hljs-built_in">Object</span>(iter)) <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.from(iter); }
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_arrayWithoutHoles</span>(<span class="hljs-params">arr</span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(arr)) <span class="hljs-keyword">return</span> _arrayLikeToArray(arr); }
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_arrayLikeToArray</span>(<span class="hljs-params">arr, len</span>) </span>{ <span class="hljs-keyword">if</span> (len == <span class="hljs-literal">null</span> || len &gt; arr.length) len = arr.length; <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, arr2 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(len); i &lt; len; i++) { arr2[i] = arr[i]; } <span class="hljs-keyword">return</span> arr2; }</pre></div>
             
           
             
-            <h2 id="ascomponent-generator-api">asComponent generator API</h2>
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2018</span> Flowhub UG
+NoFlo may be freely distributed under the MIT license</code></pre>
 
+            
+              <div class='highlight'><pre><span class="hljs-keyword">var</span> getParams = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;get-function-params&#x27;</span>);
+
+<span class="hljs-keyword">var</span> _require = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Component&#x27;</span>),
+    Component = _require.Component; <span class="hljs-comment">// ## asComponent generator API</span></pre></div>
             
           
             
             <p>asComponent is a helper for turning JavaScript functions into
 NoFlo components.</p>
-
-            
-          
-            
-            <p>Each call to this function returns a component instance where
+<p>Each call to this function returns a component instance where
 the input parameters of the given function are converted into
 NoFlo inports, and there are <code>out</code> and <code>error</code> ports for the
 results of the function execution.</p>
-
-            
-          
-            
-            <p>Variants supported:</p>
-
-            
-          
-            
-            <ul>
-<li>Regular synchronous functions: return value gets sent to <code>out</code>. Thrown errors get sent to <code>error</code></li>
-<li>Functions returning a Promise: resolved promises get sent to <code>out</code>, rejected promises to <code>error</code></li>
-<li>Functions taking a Node.js style asynchronous callback: <code>err</code> argument to callback gets sent to <code>error</code>, result gets sent to <code>out</code></li>
+<p>Variants supported:</p>
+<ul>
+<li>Regular synchronous functions: return value gets sent to <code>out</code>.
+Thrown errors get sent to <code>error</code></li>
+<li>Functions returning a Promise: resolved promises get sent to <code>out</code>,
+rejected promises to <code>error</code></li>
+<li>Functions taking a Node.js style asynchronous callback: <code>err</code> argument
+to callback gets sent to <code>error</code>, result gets sent to <code>out</code></li>
 </ul>
-
-            
-          
-            
-            <p>Usage example:</p>
-
-            
-          
-            
-            <pre><code>exports.getComponent = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+<p>Usage example:</p>
+<pre><code><span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> noflo.asComponent(<span class="hljs-built_in">Math</span>.random, {
-    <span class="hljs-attr">description</span>: <span class="hljs-string">'Generate a random number'</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Generate a random number&#x27;</span>,
   });
-};
-</code></pre>
-            
-          
-            
-            <h3 id="wrapping-built-in-functions">Wrapping built-in functions</h3>
-
-            
-          
-            
-            <p>Built-in JavaScript functions don’t make their arguments introspectable. Because of this, these
-cannot be directly converted to components. You’ll have to provide a wrapper JavaScript function to make
-the arguments appear as ports.</p>
-
-            
-          
-            
-            <p>Example:</p>
-
-            
-          
-            
-            <pre><code>exports.getComponent = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+};</code></pre>
+<h3 id="wrapping-built-in-functions">Wrapping built-in functions</h3>
+<p>Built-in JavaScript functions don’t make their arguments introspectable.
+Because of this, these cannot be directly converted to components.
+You’ll have to provide a wrapper JavaScript function to make  the arguments appear as ports.</p>
+<p>Example:</p>
+<pre><code><span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> noflo.asComponent(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">selector</span>) </span>{
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.querySelector(selector);
   }, {
-    <span class="hljs-attr">description</span>: <span class="hljs-string">'Return an element matching the CSS selector'</span>,
-    <span class="hljs-attr">icon</span>: <span class="hljs-string">'html5'</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Return an element matching the CSS selector&#x27;</span>,
+    <span class="hljs-attr">icon</span>: <span class="hljs-string">&#x27;html5&#x27;</span>,
   });
-};
-</code></pre>
-            
-          
-            
-            <h3 id="default-values">Default values</h3>
-
-            
-          
-            
-            <p>Function arguments with a default value are supported in ES6 environments. The default arguments are visible via the component’s
-port interface.</p>
-
-            
-          
-            
-            <p>However, ES5 transpilation doesn’t work with default values. In these cases the port with a default won’t be visible. It is
+};</code></pre>
+<h3 id="default-values">Default values</h3>
+<p>Function arguments with a default value are supported in ES6 environments.
+The default arguments are visible via the component’s port interface.</p>
+<p>However, ES5 transpilation doesn’t work with default values.
+In these cases the port with a default won’t be visible. It is
 recommended to use default values only with components that don’t need to run in legacy browsers.</p>
 
             
-              <div class='highlight'><pre>exports.asComponent = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">func, options</span>) </span>{
-  <span class="hljs-keyword">var</span> c, hasCallback, i, len, p, params, portOptions;
-  hasCallback = <span class="hljs-literal">false</span>;
-  params = getParams(func).filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">p</span>) </span>{
-    <span class="hljs-keyword">if</span> (p.param !== <span class="hljs-string">'callback'</span>) {
+              <div class='highlight'><pre>
+
+<span class="hljs-built_in">exports</span>.asComponent = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asComponent</span>(<span class="hljs-params">func, options</span>) </span>{
+  <span class="hljs-keyword">var</span> hasCallback = <span class="hljs-literal">false</span>;
+  <span class="hljs-keyword">var</span> params = getParams(func).filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">p</span>) </span>{
+    <span class="hljs-keyword">if</span> (p.param !== <span class="hljs-string">&#x27;callback&#x27;</span>) {
       <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
     }
+
     hasCallback = <span class="hljs-literal">true</span>;
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   });
-  c = <span class="hljs-keyword">new</span> Component(options);
-  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = params.length; i &lt; len; i++) {
-    p = params[i];
-    portOptions = {
+  <span class="hljs-keyword">var</span> c = <span class="hljs-keyword">new</span> Component(options);
+  params.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">p</span>) </span>{
+    <span class="hljs-keyword">var</span> portOptions = {
       <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>
     };
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> p.default !== <span class="hljs-string">'undefined'</span>) {
-      portOptions.default = p.default;
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> p[<span class="hljs-string">&quot;default&quot;</span>] !== <span class="hljs-string">&#x27;undefined&#x27;</span>) {
+      portOptions[<span class="hljs-string">&quot;default&quot;</span>] = p[<span class="hljs-string">&quot;default&quot;</span>];
       portOptions.required = <span class="hljs-literal">false</span>;
     }
+
     c.inPorts.add(p.param, portOptions);
-    c.forwardBrackets[p.param] = [<span class="hljs-string">'out'</span>, <span class="hljs-string">'error'</span>];
-  }
+    c.forwardBrackets[p.param] = [<span class="hljs-string">&#x27;out&#x27;</span>, <span class="hljs-string">&#x27;error&#x27;</span>];
+  });
+
   <span class="hljs-keyword">if</span> (!params.length) {
-    c.inPorts.add(<span class="hljs-string">'in'</span>, {
-      <span class="hljs-attr">datatype</span>: <span class="hljs-string">'bang'</span>
+    c.inPorts.add(<span class="hljs-string">&#x27;in&#x27;</span>, {
+      <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;bang&#x27;</span>
     });
   }
-  c.outPorts.add(<span class="hljs-string">'out'</span>);
-  c.outPorts.add(<span class="hljs-string">'error'</span>);
-  c.process(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">input, output</span>) </span>{
-    <span class="hljs-keyword">var</span> j, len1, res, values;
+
+  c.outPorts.add(<span class="hljs-string">&#x27;out&#x27;</span>);
+  c.outPorts.add(<span class="hljs-string">&#x27;error&#x27;</span>);
+  c.process(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">input, output</span>) </span>{
+    <span class="hljs-keyword">var</span> values;
+
     <span class="hljs-keyword">if</span> (params.length) {
-      <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>, len1 = params.length; j &lt; len1; j++) {
-        p = params[j];
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; params.length; i += <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">var</span> p = params[i];
+
         <span class="hljs-keyword">if</span> (!input.hasData(p.param)) {
           <span class="hljs-keyword">return</span>;
         }
       }
-      values = params.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">p</span>) </span>{
+
+      values = params.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">p</span>) </span>{
         <span class="hljs-keyword">return</span> input.getData(p.param);
       });
     } <span class="hljs-keyword">else</span> {
-      <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">'in'</span>)) {
+      <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">&#x27;in&#x27;</span>)) {
         <span class="hljs-keyword">return</span>;
       }
-      input.getData(<span class="hljs-string">'in'</span>);
+
+      input.getData(<span class="hljs-string">&#x27;in&#x27;</span>);
       values = [];
     }
+
     <span class="hljs-keyword">if</span> (hasCallback) {</pre></div>
             
           
@@ -324,31 +340,36 @@ recommended to use default values only with components that don’t need to run 
             <p>Handle Node.js style async functions</p>
 
             
-              <div class='highlight'><pre>      values.push(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
+              <div class='highlight'><pre>      values.push(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, res</span>) </span>{
         <span class="hljs-keyword">if</span> (err) {
-          <span class="hljs-keyword">return</span> output.done(err);
+          output.done(err);
+          <span class="hljs-keyword">return</span>;
         }
-        <span class="hljs-keyword">return</span> output.sendDone(res);
+
+        output.sendDone(res);
       });
-      res = func.apply(<span class="hljs-literal">null</span>, values);
+      func.apply(<span class="hljs-keyword">void</span> <span class="hljs-number">0</span>, _toConsumableArray(values));
       <span class="hljs-keyword">return</span>;
     }
-    res = func.apply(<span class="hljs-literal">null</span>, values);
-    <span class="hljs-keyword">if</span> (res &amp;&amp; <span class="hljs-keyword">typeof</span> res === <span class="hljs-string">'object'</span> &amp;&amp; <span class="hljs-keyword">typeof</span> res.then === <span class="hljs-string">'function'</span>) {</pre></div>
+
+    <span class="hljs-keyword">var</span> res = func.apply(<span class="hljs-keyword">void</span> <span class="hljs-number">0</span>, _toConsumableArray(values));
+
+    <span class="hljs-keyword">if</span> (res &amp;&amp; _typeof(res) === <span class="hljs-string">&#x27;object&#x27;</span> &amp;&amp; <span class="hljs-keyword">typeof</span> res.then === <span class="hljs-string">&#x27;function&#x27;</span>) {</pre></div>
             
           
             
             <p>Result is a Promise, resolve and handle</p>
 
             
-              <div class='highlight'><pre>      res.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">val</span>) </span>{
+              <div class='highlight'><pre>      res.then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">val</span>) </span>{
         <span class="hljs-keyword">return</span> output.sendDone(val);
-      }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+      }, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
         <span class="hljs-keyword">return</span> output.done(err);
       });
       <span class="hljs-keyword">return</span>;
     }
-    <span class="hljs-keyword">return</span> output.sendDone(res);
+
+    output.sendDone(res);
   });
   <span class="hljs-keyword">return</span> c;
 };</pre></div>
