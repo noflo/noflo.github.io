@@ -200,52 +200,19 @@ categories:
           <h1>{{ page.title }}</h1>
           
             
-            
-            
-              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-string">&quot;@babel/helpers - typeof&quot;</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>.iterator === <span class="hljs-string">&quot;symbol&quot;</span>) { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">else</span> { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> obj &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; obj.constructor === <span class="hljs-built_in">Symbol</span> &amp;&amp; obj !== <span class="hljs-built_in">Symbol</span>.prototype ? <span class="hljs-string">&quot;symbol&quot;</span> : <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">return</span> _typeof(obj); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_classCallCheck</span>(<span class="hljs-params">instance, Constructor</span>) </span>{ <span class="hljs-keyword">if</span> (!(instance <span class="hljs-keyword">instanceof</span> Constructor)) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Cannot call a class as a function&quot;</span>); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_defineProperties</span>(<span class="hljs-params">target, props</span>) </span>{ <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; props.length; i++) { <span class="hljs-keyword">var</span> descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || <span class="hljs-literal">false</span>; descriptor.configurable = <span class="hljs-literal">true</span>; <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;value&quot;</span> <span class="hljs-keyword">in</span> descriptor) descriptor.writable = <span class="hljs-literal">true</span>; <span class="hljs-built_in">Object</span>.defineProperty(target, descriptor.key, descriptor); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createClass</span>(<span class="hljs-params">Constructor, protoProps, staticProps</span>) </span>{ <span class="hljs-keyword">if</span> (protoProps) _defineProperties(Constructor.prototype, protoProps); <span class="hljs-keyword">if</span> (staticProps) _defineProperties(Constructor, staticProps); <span class="hljs-keyword">return</span> Constructor; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_get</span>(<span class="hljs-params">target, property, receiver</span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Reflect</span> !== <span class="hljs-string">&quot;undefined&quot;</span> &amp;&amp; <span class="hljs-built_in">Reflect</span>.get) { _get = <span class="hljs-built_in">Reflect</span>.get; } <span class="hljs-keyword">else</span> { _get = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_get</span>(<span class="hljs-params">target, property, receiver</span>) </span>{ <span class="hljs-keyword">var</span> base = _superPropBase(target, property); <span class="hljs-keyword">if</span> (!base) <span class="hljs-keyword">return</span>; <span class="hljs-keyword">var</span> desc = <span class="hljs-built_in">Object</span>.getOwnPropertyDescriptor(base, property); <span class="hljs-keyword">if</span> (desc.get) { <span class="hljs-keyword">return</span> desc.get.call(receiver); } <span class="hljs-keyword">return</span> desc.value; }; } <span class="hljs-keyword">return</span> _get(target, property, receiver || target); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_superPropBase</span>(<span class="hljs-params">object, property</span>) </span>{ <span class="hljs-keyword">while</span> (!<span class="hljs-built_in">Object</span>.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); <span class="hljs-keyword">if</span> (object === <span class="hljs-literal">null</span>) <span class="hljs-keyword">break</span>; } <span class="hljs-keyword">return</span> object; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_inherits</span>(<span class="hljs-params">subClass, superClass</span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> superClass !== <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; superClass !== <span class="hljs-literal">null</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Super expression must either be null or a function&quot;</span>); } subClass.prototype = <span class="hljs-built_in">Object</span>.create(superClass &amp;&amp; superClass.prototype, { <span class="hljs-attr">constructor</span>: { <span class="hljs-attr">value</span>: subClass, <span class="hljs-attr">writable</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">configurable</span>: <span class="hljs-literal">true</span> } }); <span class="hljs-keyword">if</span> (superClass) _setPrototypeOf(subClass, superClass); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_setPrototypeOf</span>(<span class="hljs-params">o, p</span>) </span>{ _setPrototypeOf = <span class="hljs-built_in">Object</span>.setPrototypeOf || <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_setPrototypeOf</span>(<span class="hljs-params">o, p</span>) </span>{ o.__proto__ = p; <span class="hljs-keyword">return</span> o; }; <span class="hljs-keyword">return</span> _setPrototypeOf(o, p); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createSuper</span>(<span class="hljs-params">Derived</span>) </span>{ <span class="hljs-keyword">var</span> hasNativeReflectConstruct = _isNativeReflectConstruct(); <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createSuperInternal</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">var</span> Super = _getPrototypeOf(Derived), result; <span class="hljs-keyword">if</span> (hasNativeReflectConstruct) { <span class="hljs-keyword">var</span> NewTarget = _getPrototypeOf(<span class="hljs-built_in">this</span>).constructor; result = <span class="hljs-built_in">Reflect</span>.construct(Super, <span class="hljs-built_in">arguments</span>, NewTarget); } <span class="hljs-keyword">else</span> { result = Super.apply(<span class="hljs-built_in">this</span>, <span class="hljs-built_in">arguments</span>); } <span class="hljs-keyword">return</span> _possibleConstructorReturn(<span class="hljs-built_in">this</span>, result); }; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_possibleConstructorReturn</span>(<span class="hljs-params">self, call</span>) </span>{ <span class="hljs-keyword">if</span> (call &amp;&amp; (_typeof(call) === <span class="hljs-string">&quot;object&quot;</span> || <span class="hljs-keyword">typeof</span> call === <span class="hljs-string">&quot;function&quot;</span>)) { <span class="hljs-keyword">return</span> call; } <span class="hljs-keyword">return</span> _assertThisInitialized(self); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_assertThisInitialized</span>(<span class="hljs-params">self</span>) </span>{ <span class="hljs-keyword">if</span> (self === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">ReferenceError</span>(<span class="hljs-string">&quot;this hasn&#x27;t been initialised - super() hasn&#x27;t been called&quot;</span>); } <span class="hljs-keyword">return</span> self; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_isNativeReflectConstruct</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Reflect</span> === <span class="hljs-string">&quot;undefined&quot;</span> || !<span class="hljs-built_in">Reflect</span>.construct) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Reflect</span>.construct.sham) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Proxy</span> === <span class="hljs-string">&quot;function&quot;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">try</span> { <span class="hljs-built_in">Date</span>.prototype.toString.call(<span class="hljs-built_in">Reflect</span>.construct(<span class="hljs-built_in">Date</span>, [], <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{})); <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; } <span class="hljs-keyword">catch</span> (e) { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getPrototypeOf</span>(<span class="hljs-params">o</span>) </span>{ _getPrototypeOf = <span class="hljs-built_in">Object</span>.setPrototypeOf ? <span class="hljs-built_in">Object</span>.getPrototypeOf : <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getPrototypeOf</span>(<span class="hljs-params">o</span>) </span>{ <span class="hljs-keyword">return</span> o.__proto__ || <span class="hljs-built_in">Object</span>.getPrototypeOf(o); }; <span class="hljs-keyword">return</span> _getPrototypeOf(o); }</pre></div>
-            
-          
-            
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2013</span><span class="hljs-number">-2018</span> Flowhub UG
 (c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">var</span> BaseNetwork = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./BaseNetwork&#x27;</span>);
-
-<span class="hljs-keyword">var</span> _require = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>),
-    deprecated = _require.deprecated; <span class="hljs-comment">// ## The NoFlo network coordinator</span></pre></div>
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> BaseNetwork = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./BaseNetwork&#x27;</span>);
+<span class="hljs-keyword">const</span> { deprecated } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>);</pre></div>
             
           
             
-            <p>NoFlo networks consist of processes connected to each other
+            <h2 id="the-noflo-network-coordinator">The NoFlo network coordinator</h2>
+<p>NoFlo networks consist of processes connected to each other
 via sockets attached from outports to inports.</p>
 <p>The role of the network coordinator is to take a graph and
 instantiate all the necessary processes from the designated
@@ -253,12 +220,7 @@ components, attach sockets between them, and handle the sending
 of Initial Information Packets.</p>
 
             
-              <div class='highlight'><pre>
-
-<span class="hljs-keyword">var</span> LegacyNetwork = <span class="hljs-comment">/*#__PURE__*/</span><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">_BaseNetwork</span>) </span>{
-  _inherits(LegacyNetwork, _BaseNetwork);
-
-  <span class="hljs-keyword">var</span> _super = _createSuper(LegacyNetwork);</pre></div>
+              <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LegacyNetwork</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseNetwork</span> </span>{</pre></div>
             
           
             
@@ -270,145 +232,95 @@ accordingly, including removing connections, adding new nodes,
 and sending new IIPs.</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">LegacyNetwork</span>(<span class="hljs-params">graph</span>) </span>{
-    <span class="hljs-keyword">var</span> options = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] : {};
-
-    _classCallCheck(<span class="hljs-built_in">this</span>, LegacyNetwork);
-
+              <div class='highlight'><pre>  <span class="hljs-keyword">constructor</span>(graph, options = {}) {
     deprecated(<span class="hljs-string">&#x27;noflo.Network construction is deprecated, use noflo.createNetwork&#x27;</span>);
-    <span class="hljs-keyword">return</span> _super.call(<span class="hljs-built_in">this</span>, graph, options);
+    <span class="hljs-built_in">super</span>(graph, options);
   }
 
-  _createClass(LegacyNetwork, [{
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;connect&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connect</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> _this = <span class="hljs-built_in">this</span>;
-
-      <span class="hljs-keyword">var</span> done = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{};
-
-      _get(_getPrototypeOf(LegacyNetwork.prototype), <span class="hljs-string">&quot;connect&quot;</span>, <span class="hljs-built_in">this</span>).call(<span class="hljs-built_in">this</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
-        <span class="hljs-keyword">if</span> (err) {
-          done(err);
-          <span class="hljs-keyword">return</span>;
-        }
-
-        _this.subscribeGraph();
-
-        done();
-      });
-    } <span class="hljs-comment">// A NoFlo graph may change after network initialization.</span></pre></div>
+  connect(done = <span class="hljs-function">() =&gt;</span> {}) {
+    <span class="hljs-built_in">super</span>.connect(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        done(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-built_in">this</span>.subscribeGraph();
+      done();
+    });
+  }</pre></div>
             
           
             
-            <p>For this, the legacy network subscribes to the change events
+            <p>A NoFlo graph may change after network initialization.
+For this, the legacy network subscribes to the change events
 from the graph.</p>
 <p>In graph we talk about nodes and edges. Nodes correspond
 to NoFlo processes, and edges to connections between them.</p>
 
             
-              <div class='highlight'><pre>
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;subscribeGraph&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">subscribeGraph</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> _this2 = <span class="hljs-built_in">this</span>;
-
-      <span class="hljs-keyword">var</span> graphOps = [];
-      <span class="hljs-keyword">var</span> processing = <span class="hljs-literal">false</span>;
-
-      <span class="hljs-keyword">var</span> registerOp = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">registerOp</span>(<span class="hljs-params">op, details</span>) </span>{
-        graphOps.push({
-          <span class="hljs-attr">op</span>: op,
-          <span class="hljs-attr">details</span>: details
-        });
-      };
-
-      <span class="hljs-keyword">var</span> processOps = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">processOps</span>(<span class="hljs-params">err</span>) </span>{
-        <span class="hljs-keyword">if</span> (err) {
-          <span class="hljs-keyword">if</span> (_this2.listeners(<span class="hljs-string">&#x27;process-error&#x27;</span>).length === <span class="hljs-number">0</span>) {
-            <span class="hljs-keyword">throw</span> err;
-          }
-
-          _this2.bufferedEmit(<span class="hljs-string">&#x27;process-error&#x27;</span>, err);
-        }
-
-        <span class="hljs-keyword">if</span> (!graphOps.length) {
-          processing = <span class="hljs-literal">false</span>;
-          <span class="hljs-keyword">return</span>;
-        }
-
-        processing = <span class="hljs-literal">true</span>;
-        <span class="hljs-keyword">var</span> op = graphOps.shift();
-        <span class="hljs-keyword">var</span> cb = processOps;
-
-        <span class="hljs-keyword">switch</span> (op.op) {
-          <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;renameNode&#x27;</span>:
-            _this2.renameNode(op.details.from, op.details.to, cb);
-
-            <span class="hljs-keyword">break</span>;
-
-          <span class="hljs-keyword">default</span>:
-            _this2[op.op](op.details, cb);
-
-        }
-      };
-
-      <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;addNode&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node</span>) </span>{
-        registerOp(<span class="hljs-string">&#x27;addNode&#x27;</span>, node);
-
-        <span class="hljs-keyword">if</span> (!processing) {
-          processOps();
-        }
+              <div class='highlight'><pre>  subscribeGraph() {
+    <span class="hljs-keyword">const</span> graphOps = [];
+    <span class="hljs-keyword">let</span> processing = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">const</span> registerOp = <span class="hljs-function">(<span class="hljs-params">op, details</span>) =&gt;</span> {
+      graphOps.push({
+        op,
+        details,
       });
-      <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;removeNode&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node</span>) </span>{
-        registerOp(<span class="hljs-string">&#x27;removeNode&#x27;</span>, node);
+    };
+    <span class="hljs-keyword">const</span> processOps = <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.listeners(<span class="hljs-string">&#x27;process-error&#x27;</span>).length === <span class="hljs-number">0</span>) { <span class="hljs-keyword">throw</span> err; }
+        <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;process-error&#x27;</span>, err);
+      }
 
-        <span class="hljs-keyword">if</span> (!processing) {
-          processOps();
-        }
+      <span class="hljs-keyword">if</span> (!graphOps.length) {
+        processing = <span class="hljs-literal">false</span>;
+        <span class="hljs-keyword">return</span>;
+      }
+      processing = <span class="hljs-literal">true</span>;
+      <span class="hljs-keyword">const</span> op = graphOps.shift();
+      <span class="hljs-keyword">const</span> cb = processOps;
+      <span class="hljs-keyword">switch</span> (op.op) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;renameNode&#x27;</span>:
+          <span class="hljs-built_in">this</span>.renameNode(op.details.from, op.details.to, cb);
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+          <span class="hljs-built_in">this</span>[op.op](op.details, cb);
+      }
+    };
+
+    <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;addNode&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">node</span>) =&gt;</span> {
+      registerOp(<span class="hljs-string">&#x27;addNode&#x27;</span>, node);
+      <span class="hljs-keyword">if</span> (!processing) { processOps(); }
+    });
+    <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;removeNode&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">node</span>) =&gt;</span> {
+      registerOp(<span class="hljs-string">&#x27;removeNode&#x27;</span>, node);
+      <span class="hljs-keyword">if</span> (!processing) { processOps(); }
+    });
+    <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;renameNode&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">oldId, newId</span>) =&gt;</span> {
+      registerOp(<span class="hljs-string">&#x27;renameNode&#x27;</span>, {
+        <span class="hljs-attr">from</span>: oldId,
+        <span class="hljs-attr">to</span>: newId,
       });
-      <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;renameNode&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">oldId, newId</span>) </span>{
-        registerOp(<span class="hljs-string">&#x27;renameNode&#x27;</span>, {
-          <span class="hljs-attr">from</span>: oldId,
-          <span class="hljs-attr">to</span>: newId
-        });
-
-        <span class="hljs-keyword">if</span> (!processing) {
-          processOps();
-        }
-      });
-      <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;addEdge&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">edge</span>) </span>{
-        registerOp(<span class="hljs-string">&#x27;addEdge&#x27;</span>, edge);
-
-        <span class="hljs-keyword">if</span> (!processing) {
-          processOps();
-        }
-      });
-      <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;removeEdge&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">edge</span>) </span>{
-        registerOp(<span class="hljs-string">&#x27;removeEdge&#x27;</span>, edge);
-
-        <span class="hljs-keyword">if</span> (!processing) {
-          processOps();
-        }
-      });
-      <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;addInitial&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">iip</span>) </span>{
-        registerOp(<span class="hljs-string">&#x27;addInitial&#x27;</span>, iip);
-
-        <span class="hljs-keyword">if</span> (!processing) {
-          processOps();
-        }
-      });
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;removeInitial&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">iip</span>) </span>{
-        registerOp(<span class="hljs-string">&#x27;removeInitial&#x27;</span>, iip);
-
-        <span class="hljs-keyword">if</span> (!processing) {
-          processOps();
-        }
-      });
-    }
-  }]);
-
-  <span class="hljs-keyword">return</span> LegacyNetwork;
-}(BaseNetwork);
+      <span class="hljs-keyword">if</span> (!processing) { processOps(); }
+    });
+    <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;addEdge&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">edge</span>) =&gt;</span> {
+      registerOp(<span class="hljs-string">&#x27;addEdge&#x27;</span>, edge);
+      <span class="hljs-keyword">if</span> (!processing) { processOps(); }
+    });
+    <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;removeEdge&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">edge</span>) =&gt;</span> {
+      registerOp(<span class="hljs-string">&#x27;removeEdge&#x27;</span>, edge);
+      <span class="hljs-keyword">if</span> (!processing) { processOps(); }
+    });
+    <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;addInitial&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">iip</span>) =&gt;</span> {
+      registerOp(<span class="hljs-string">&#x27;addInitial&#x27;</span>, iip);
+      <span class="hljs-keyword">if</span> (!processing) { processOps(); }
+    });
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.graph.on(<span class="hljs-string">&#x27;removeInitial&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">iip</span>) =&gt;</span> {
+      registerOp(<span class="hljs-string">&#x27;removeInitial&#x27;</span>, iip);
+      <span class="hljs-keyword">if</span> (!processing) { processOps(); }
+    });
+  }
+}
 
 <span class="hljs-built_in">exports</span>.Network = LegacyNetwork;</pre></div>
             

@@ -200,14 +200,6 @@ categories:
           <h1>{{ page.title }}</h1>
           
             
-            
-            
-              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-string">&quot;@babel/helpers - typeof&quot;</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>.iterator === <span class="hljs-string">&quot;symbol&quot;</span>) { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">else</span> { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> obj &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; obj.constructor === <span class="hljs-built_in">Symbol</span> &amp;&amp; obj !== <span class="hljs-built_in">Symbol</span>.prototype ? <span class="hljs-string">&quot;symbol&quot;</span> : <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">return</span> _typeof(obj); }</pre></div>
-            
-          
-            
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2013</span><span class="hljs-number">-2018</span> Flowhub UG
 (c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
@@ -229,97 +221,95 @@ main entry point to the NoFlo network.</p>
 <p><a href="https://github.com/flowbased/fbp-graph">fbp-graph</a> is used for instantiating FBP graph definitions.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">var</span> fbpGraph = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fbp-graph&#x27;</span>);
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> fbpGraph = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fbp-graph&#x27;</span>);
 
 <span class="hljs-built_in">exports</span>.graph = fbpGraph.graph;
-<span class="hljs-built_in">exports</span>.Graph = fbpGraph.Graph; <span class="hljs-comment">// ### Graph journal</span></pre></div>
+<span class="hljs-built_in">exports</span>.Graph = fbpGraph.Graph;</pre></div>
             
           
             
-            <p>Journal is used for keeping track of graph changes</p>
+            <h3 id="graph-journal">Graph journal</h3>
+<p>Journal is used for keeping track of graph changes</p>
 
             
-              <div class='highlight'><pre>
-<span class="hljs-built_in">exports</span>.journal = fbpGraph.journal;
-<span class="hljs-built_in">exports</span>.Journal = fbpGraph.Journal; <span class="hljs-comment">// ## Network interface</span></pre></div>
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.journal = fbpGraph.journal;
+<span class="hljs-built_in">exports</span>.Journal = fbpGraph.Journal;</pre></div>
             
           
             
-            <p><a href="../Network/">Network</a> is used for running NoFlo graphs. The direct Network inteface is only
+            <h2 id="network-interface">Network interface</h2>
+<p><a href="../Network/">Network</a> is used for running NoFlo graphs. The direct Network inteface is only
 provided for backwards compatibility purposes. Use <code>createNetwork</code> instead.</p>
 
             
-              <div class='highlight'><pre>
-<span class="hljs-keyword">var</span> _require = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Network&#x27;</span>),
-    Network = _require.Network;
-
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> {
+  Network,
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Network&#x27;</span>);
 <span class="hljs-built_in">exports</span>.Network = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./LegacyNetwork&#x27;</span>).Network;
-
-<span class="hljs-keyword">var</span> _require2 = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>),
-    deprecated = _require2.deprecated; <span class="hljs-comment">// ### Platform detection</span></pre></div>
+<span class="hljs-keyword">const</span> { deprecated } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>);</pre></div>
             
           
             
-            <p>NoFlo works on both Node.js and the browser. Because some dependencies are different,
+            <h3 id="platform-detection">Platform detection</h3>
+<p>NoFlo works on both Node.js and the browser. Because some dependencies are different,
 we need a way to detect which we’re on.</p>
 
             
-              <div class='highlight'><pre>
-
-<span class="hljs-built_in">exports</span>.isBrowser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>).isBrowser; <span class="hljs-comment">// ### Component Loader</span></pre></div>
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.isBrowser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>).isBrowser;</pre></div>
             
           
             
-            <p>The <a href="../ComponentLoader/">ComponentLoader</a> is responsible for finding and loading
+            <h3 id="component-loader">Component Loader</h3>
+<p>The <a href="../ComponentLoader/">ComponentLoader</a> is responsible for finding and loading
 NoFlo components. Component Loader uses <a href="https://github.com/flowbased/fbp-manifest">fbp-manifest</a>
 to find components and graphs by traversing the NPM dependency tree from a given root
 directory on the file system.</p>
 
             
-              <div class='highlight'><pre>
-<span class="hljs-built_in">exports</span>.ComponentLoader = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./ComponentLoader&#x27;</span>).ComponentLoader; <span class="hljs-comment">// ### Component baseclasses</span></pre></div>
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.ComponentLoader = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./ComponentLoader&#x27;</span>).ComponentLoader;</pre></div>
             
           
             
-            <p>These baseclasses can be used for defining NoFlo components.</p>
+            <h3 id="component-baseclasses">Component baseclasses</h3>
+<p>These baseclasses can be used for defining NoFlo components.</p>
 
             
-              <div class='highlight'><pre>
-<span class="hljs-built_in">exports</span>.Component = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Component&#x27;</span>).Component; <span class="hljs-comment">// ### NoFlo ports</span></pre></div>
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.Component = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Component&#x27;</span>).Component;</pre></div>
             
           
             
-            <p>These classes are used for instantiating ports on NoFlo components.</p>
+            <h3 id="noflo-ports">NoFlo ports</h3>
+<p>These classes are used for instantiating ports on NoFlo components.</p>
 
             
-              <div class='highlight'><pre>
-<span class="hljs-keyword">var</span> ports = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Ports&#x27;</span>);
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> ports = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Ports&#x27;</span>);
 
 <span class="hljs-built_in">exports</span>.InPorts = ports.InPorts;
 <span class="hljs-built_in">exports</span>.OutPorts = ports.OutPorts;
 <span class="hljs-built_in">exports</span>.InPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InPort&#x27;</span>);
-<span class="hljs-built_in">exports</span>.OutPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./OutPort&#x27;</span>); <span class="hljs-comment">// ### NoFlo sockets</span></pre></div>
+<span class="hljs-built_in">exports</span>.OutPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./OutPort&#x27;</span>);</pre></div>
             
           
             
-            <p>The NoFlo <a href="InternalSocket.html">internalSocket</a> is used for connecting ports of
+            <h3 id="noflo-sockets">NoFlo sockets</h3>
+<p>The NoFlo <a href="InternalSocket.html">internalSocket</a> is used for connecting ports of
 different components together in a network.</p>
 
             
-              <div class='highlight'><pre>
-<span class="hljs-built_in">exports</span>.internalSocket = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InternalSocket&#x27;</span>); <span class="hljs-comment">// ### Information Packets</span></pre></div>
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.internalSocket = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InternalSocket&#x27;</span>);</pre></div>
             
           
             
-            <p>NoFlo Information Packets are defined as “IP” objects.</p>
+            <h3 id="information-packets">Information Packets</h3>
+<p>NoFlo Information Packets are defined as “IP” objects.</p>
 
             
-              <div class='highlight'><pre>
-<span class="hljs-built_in">exports</span>.IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>); <span class="hljs-comment">// ## Network instantiation</span></pre></div>
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);</pre></div>
             
           
             
-            <p>This function handles instantiation of NoFlo networks from a Graph object. It creates
+            <h2 id="network-instantiation">Network instantiation</h2>
+<p>This function handles instantiation of NoFlo networks from a Graph object. It creates
 the network, and then starts execution by sending the Initial Information Packets.</p>
 <pre><code>noflo.createNetwork(someGraph, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Network is now running!&#x27;</span>);
@@ -350,24 +340,18 @@ graph for changes</li>
 network.</p>
 
             
-              <div class='highlight'><pre>
-<span class="hljs-built_in">exports</span>.createNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createNetwork</span>(<span class="hljs-params">graph, options, callback</span>) </span>{
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.createNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createNetwork</span>(<span class="hljs-params">graph, options, callback</span>) </span>{
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
-    <span class="hljs-keyword">var</span> opts = callback;
+    <span class="hljs-keyword">const</span> opts = callback;
     callback = options;
     options = opts;
   }
-
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;boolean&#x27;</span>) {
-    options = {
-      <span class="hljs-attr">delay</span>: options
-    };
+    options = { <span class="hljs-attr">delay</span>: options };
   }
-
-  <span class="hljs-keyword">if</span> (_typeof(options) !== <span class="hljs-string">&#x27;object&#x27;</span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options !== <span class="hljs-string">&#x27;object&#x27;</span>) {
     options = {};
   }
-
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options.subscribeGraph === <span class="hljs-string">&#x27;undefined&#x27;</span>) {</pre></div>
             
           
@@ -377,79 +361,83 @@ network.</p>
             
               <div class='highlight'><pre>    options.subscribeGraph = <span class="hljs-literal">true</span>;
   }
-
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback !== <span class="hljs-string">&#x27;function&#x27;</span>) {
     deprecated(<span class="hljs-string">&#x27;Calling noflo.createNetwork without a callback is deprecated&#x27;</span>);
-
-    callback = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">err</span>) </span>{
-      <span class="hljs-keyword">if</span> (err) {
-        <span class="hljs-keyword">throw</span> err;
-      }
+    callback = <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) { <span class="hljs-keyword">throw</span> err; }
     };
-  } <span class="hljs-comment">// Choose legacy or modern network based on whether graph</span></pre></div>
+  }</pre></div>
             
           
             
-            <p>subscription is needed</p>
+            <p>Choose legacy or modern network based on whether graph
+subscription is needed</p>
 
             
-              <div class='highlight'><pre>
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> NetworkType = options.subscribeGraph ? <span class="hljs-built_in">exports</span>.Network : Network;
+  <span class="hljs-keyword">const</span> network = <span class="hljs-keyword">new</span> NetworkType(graph, options);
 
-  <span class="hljs-keyword">var</span> NetworkType = options.subscribeGraph ? <span class="hljs-built_in">exports</span>.Network : Network;
-  <span class="hljs-keyword">var</span> network = <span class="hljs-keyword">new</span> NetworkType(graph, options);
-
-  <span class="hljs-keyword">var</span> networkReady = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">networkReady</span>(<span class="hljs-params">net</span>) </span>{</pre></div>
-            
-          
-            
-            <p>Send IIPs</p>
-
-            
-              <div class='highlight'><pre>    net.start(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
+  <span class="hljs-keyword">const</span> networkReady = <span class="hljs-function">(<span class="hljs-params">net</span>) =&gt;</span> { <span class="hljs-comment">// Send IIPs</span>
+    net.start(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> (err) {
         callback(err);
         <span class="hljs-keyword">return</span>;
       }
-
       callback(<span class="hljs-literal">null</span>, net);
     });
-  }; <span class="hljs-comment">// Ensure components are loaded before continuing</span>
+  };</pre></div>
+            
+          
+            
+            <p>Ensure components are loaded before continuing</p>
 
-
-  network.loader.listComponents(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
+            
+              <div class='highlight'><pre>  network.loader.listComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
     <span class="hljs-keyword">if</span> (err) {
       callback(err);
       <span class="hljs-keyword">return</span>;
-    } <span class="hljs-comment">// In case of delayed execution we don&#x27;t wire it up</span>
+    }</pre></div>
+            
+          
+            
+            <p>In case of delayed execution we don’t wire it up</p>
 
-
-    <span class="hljs-keyword">if</span> (options.delay) {
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (options.delay) {
       callback(<span class="hljs-literal">null</span>, network);
       <span class="hljs-keyword">return</span>;
-    } <span class="hljs-comment">// Empty network, no need to connect it up</span>
+    }</pre></div>
+            
+          
+            
+            <p>Empty network, no need to connect it up</p>
 
-
-    <span class="hljs-keyword">if</span> (graph.nodes.length === <span class="hljs-number">0</span>) {
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (graph.nodes.length === <span class="hljs-number">0</span>) {
       networkReady(network);
       <span class="hljs-keyword">return</span>;
-    } <span class="hljs-comment">// Wire the network up and start execution</span>
+    }</pre></div>
+            
+          
+            
+            <p>Wire the network up and start execution</p>
 
-
-    network.connect(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err2</span>) </span>{
+            
+              <div class='highlight'><pre>    network.connect(<span class="hljs-function">(<span class="hljs-params">err2</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> (err2) {
         callback(err2);
         <span class="hljs-keyword">return</span>;
       }
-
       networkReady(network);
     });
   });
   <span class="hljs-keyword">return</span> network;
-}; <span class="hljs-comment">// ### Starting a network from a file</span></pre></div>
+};</pre></div>
             
           
             
-            <p>It is also possible to start a NoFlo network by giving it a path to a <code>.json</code> or <code>.fbp</code> network
+            <h3 id="starting-a-network-from-a-file">Starting a network from a file</h3>
+<p>It is also possible to start a NoFlo network by giving it a path to a <code>.json</code> or <code>.fbp</code> network
 definition file.</p>
 <pre><code>noflo.loadFile(<span class="hljs-string">&#x27;somefile.json&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
   <span class="hljs-keyword">if</span> (err) {
@@ -459,56 +447,46 @@ definition file.</p>
 })</code></pre>
 
             
-              <div class='highlight'><pre>
-
-<span class="hljs-built_in">exports</span>.loadFile = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadFile</span>(<span class="hljs-params">file, options, callback</span>) </span>{
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.loadFile = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadFile</span>(<span class="hljs-params">file, options, callback</span>) </span>{
   <span class="hljs-keyword">if</span> (!callback) {
     callback = options;
     options = <span class="hljs-literal">null</span>;
   }
 
-  <span class="hljs-keyword">if</span> (callback &amp;&amp; _typeof(options) !== <span class="hljs-string">&#x27;object&#x27;</span>) {
-    options = {
-      <span class="hljs-attr">baseDir</span>: options
-    };
+  <span class="hljs-keyword">if</span> (callback &amp;&amp; (<span class="hljs-keyword">typeof</span> options !== <span class="hljs-string">&#x27;object&#x27;</span>)) {
+    options = { <span class="hljs-attr">baseDir</span>: options };
   }
-
-  <span class="hljs-keyword">if</span> (_typeof(options) !== <span class="hljs-string">&#x27;object&#x27;</span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options !== <span class="hljs-string">&#x27;object&#x27;</span>) {
     options = {};
   }
-
   <span class="hljs-keyword">if</span> (!options.subscribeGraph) {
     options.subscribeGraph = <span class="hljs-literal">false</span>;
   }
 
-  <span class="hljs-built_in">exports</span>.graph.loadFile(file, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, net</span>) </span>{
+  <span class="hljs-built_in">exports</span>.graph.loadFile(file, <span class="hljs-function">(<span class="hljs-params">err, net</span>) =&gt;</span> {
     <span class="hljs-keyword">if</span> (err) {
       callback(err);
       <span class="hljs-keyword">return</span>;
     }
-
-    <span class="hljs-keyword">if</span> (options.baseDir) {
-      net.baseDir = options.baseDir;
-    }
-
+    <span class="hljs-keyword">if</span> (options.baseDir) { net.baseDir = options.baseDir; }
     <span class="hljs-built_in">exports</span>.createNetwork(net, options, callback);
   });
-}; <span class="hljs-comment">// ### Saving a network definition</span></pre></div>
+};</pre></div>
             
           
             
-            <p>NoFlo graph files can be saved back into the filesystem with this method.</p>
+            <h3 id="saving-a-network-definition">Saving a network definition</h3>
+<p>NoFlo graph files can be saved back into the filesystem with this method.</p>
 
             
-              <div class='highlight'><pre>
-
-<span class="hljs-built_in">exports</span>.saveFile = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">saveFile</span>(<span class="hljs-params">graph, file, callback</span>) </span>{
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.saveFile = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">saveFile</span>(<span class="hljs-params">graph, file, callback</span>) </span>{
   graph.save(file, callback);
-}; <span class="hljs-comment">// ## Embedding NoFlo in existing JavaScript code</span></pre></div>
+};</pre></div>
             
           
             
-            <p>The <code>asCallback</code> helper provides an interface to wrap NoFlo components
+            <h2 id="embedding-noflo-in-existing-javascript-code">Embedding NoFlo in existing JavaScript code</h2>
+<p>The <code>asCallback</code> helper provides an interface to wrap NoFlo components
 or graphs into existing JavaScript code.</p>
 <pre><code><span class="hljs-comment">// Produce an asynchronous function wrapping a NoFlo graph</span>
 <span class="hljs-keyword">var</span> wrapped = noflo.asCallback(<span class="hljs-string">&#x27;myproject/MyGraph&#x27;</span>);
@@ -521,13 +499,12 @@ wrapped({
 });</code></pre>
 
             
-              <div class='highlight'><pre>
-
-<span class="hljs-built_in">exports</span>.asCallback = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./AsCallback&#x27;</span>).asCallback; <span class="hljs-comment">// ## Generating components from JavaScript functions</span></pre></div>
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.asCallback = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./AsCallback&#x27;</span>).asCallback;</pre></div>
             
           
             
-            <p>The <code>asComponent</code> helper makes it easy to expose a JavaScript function as a
+            <h2 id="generating-components-from-javascript-functions">Generating components from JavaScript functions</h2>
+<p>The <code>asComponent</code> helper makes it easy to expose a JavaScript function as a
 NoFlo component. All input arguments become input ports, and the function’s
 result will be sent to either <code>out</code> or <code>error</code> port.</p>
 <pre><code><span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
@@ -537,8 +514,7 @@ result will be sent to either <code>out</code> or <code>error</code> port.</p>
 };</code></pre>
 
             
-              <div class='highlight'><pre>
-<span class="hljs-built_in">exports</span>.asComponent = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./AsComponent&#x27;</span>).asComponent;</pre></div>
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.asComponent = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./AsComponent&#x27;</span>).asComponent;</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.coffee">NoFlo.coffee</a> file.</small></p>

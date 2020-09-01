@@ -200,12 +200,6 @@ categories:
           <h1>{{ page.title }}</h1>
           
             
-            
-            
-              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;</pre></div>
-            
-          
-            
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license</code></pre>
@@ -223,35 +217,28 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 
             
               <div class='highlight'><pre><span class="hljs-built_in">exports</span>.isBrowser = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isBrowser</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> process !== <span class="hljs-string">&#x27;undefined&#x27;</span> &amp;&amp; process.execPath &amp;&amp; process.execPath.match(<span class="hljs-regexp">/node|iojs/</span>)) {
+  <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> process !== <span class="hljs-string">&#x27;undefined&#x27;</span>) &amp;&amp; process.execPath &amp;&amp; process.execPath.match(<span class="hljs-regexp">/node|iojs/</span>)) {
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }
-
   <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-}; <span class="hljs-comment">// Mechanism for showing API deprecation warnings. By default logs the warnings</span></pre></div>
+};</pre></div>
             
           
             
-            <p>but can also be configured to throw instead with the <code>NOFLO_FATAL_DEPRECATED</code>
+            <p>Mechanism for showing API deprecation warnings. By default logs the warnings
+but can also be configured to throw instead with the <code>NOFLO_FATAL_DEPRECATED</code>
 env var.</p>
 
             
-              <div class='highlight'><pre>
-
-<span class="hljs-built_in">exports</span>.deprecated = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deprecated</span>(<span class="hljs-params">message</span>) </span>{
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.deprecated = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deprecated</span>(<span class="hljs-params">message</span>) </span>{
   <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exports</span>.isBrowser()) {
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.NOFLO_FATAL_DEPRECATED) {
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message);
-    }
-
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.NOFLO_FATAL_DEPRECATED) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message); }
     <span class="hljs-built_in">console</span>.warn(message);
     <span class="hljs-keyword">return</span>;
   }
-
   <span class="hljs-keyword">if</span> (process.env.NOFLO_FATAL_DEPRECATED) {
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message);
   }
-
   <span class="hljs-built_in">console</span>.warn(message);
 };</pre></div>
             

@@ -200,28 +200,15 @@ categories:
           <h1>{{ page.title }}</h1>
           
             
-            
-            
-              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_classCallCheck</span>(<span class="hljs-params">instance, Constructor</span>) </span>{ <span class="hljs-keyword">if</span> (!(instance <span class="hljs-keyword">instanceof</span> Constructor)) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Cannot call a class as a function&quot;</span>); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_defineProperties</span>(<span class="hljs-params">target, props</span>) </span>{ <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; props.length; i++) { <span class="hljs-keyword">var</span> descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || <span class="hljs-literal">false</span>; descriptor.configurable = <span class="hljs-literal">true</span>; <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;value&quot;</span> <span class="hljs-keyword">in</span> descriptor) descriptor.writable = <span class="hljs-literal">true</span>; <span class="hljs-built_in">Object</span>.defineProperty(target, descriptor.key, descriptor); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createClass</span>(<span class="hljs-params">Constructor, protoProps, staticProps</span>) </span>{ <span class="hljs-keyword">if</span> (protoProps) _defineProperties(Constructor.prototype, protoProps); <span class="hljs-keyword">if</span> (staticProps) _defineProperties(Constructor, staticProps); <span class="hljs-keyword">return</span> Constructor; }</pre></div>
-            
-          
-            
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2013</span><span class="hljs-number">-2020</span> Flowhub UG
 (c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = <span class="hljs-comment">/*#__PURE__*/</span><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ProcessContext</span>(<span class="hljs-params">ip, nodeInstance, port, result</span>) </span>{
-    _classCallCheck(<span class="hljs-built_in">this</span>, ProcessContext);
-
+              <div class='highlight'><pre>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessContext</span> </span>{
+  <span class="hljs-keyword">constructor</span>(ip, nodeInstance, port, result) {
     <span class="hljs-built_in">this</span>.ip = ip;
     <span class="hljs-built_in">this</span>.nodeInstance = nodeInstance;
     <span class="hljs-built_in">this</span>.port = port;
@@ -231,36 +218,25 @@ NoFlo may be freely distributed under the MIT license</code></pre>
     <span class="hljs-built_in">this</span>.deactivated = <span class="hljs-literal">false</span>;
   }
 
-  _createClass(ProcessContext, [{
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;activate&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">activate</span>(<span class="hljs-params"></span>) </span>{</pre></div>
+  activate() {</pre></div>
             
           
             
             <p>Push a new result value if previous has been sent already</p>
 
             
-              <div class='highlight'><pre>
-      <span class="hljs-comment">/* eslint-disable no-underscore-dangle */</span>
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.result.__resolved || <span class="hljs-built_in">this</span>.nodeInstance.outputQ.indexOf(<span class="hljs-built_in">this</span>.result) === <span class="hljs-number">-1</span>) {
-        <span class="hljs-built_in">this</span>.result = {};
-      }
-
-      <span class="hljs-built_in">this</span>.nodeInstance.activate(<span class="hljs-built_in">this</span>);
+              <div class='highlight'><pre>    <span class="hljs-comment">/* eslint-disable no-underscore-dangle */</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.result.__resolved || (<span class="hljs-built_in">this</span>.nodeInstance.outputQ.indexOf(<span class="hljs-built_in">this</span>.result) === <span class="hljs-number">-1</span>)) {
+      <span class="hljs-built_in">this</span>.result = {};
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;deactivate&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deactivate</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.result.__resolved) {
-        <span class="hljs-built_in">this</span>.result.__resolved = <span class="hljs-literal">true</span>;
-      }
+    <span class="hljs-built_in">this</span>.nodeInstance.activate(<span class="hljs-built_in">this</span>);
+  }
 
-      <span class="hljs-built_in">this</span>.nodeInstance.deactivate(<span class="hljs-built_in">this</span>);
-    }
-  }]);
-
-  <span class="hljs-keyword">return</span> ProcessContext;
-}();</pre></div>
+  deactivate() {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.result.__resolved) { <span class="hljs-built_in">this</span>.result.__resolved = <span class="hljs-literal">true</span>; }
+    <span class="hljs-built_in">this</span>.nodeInstance.deactivate(<span class="hljs-built_in">this</span>);
+  }
+};</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ProcessContext.coffee">ProcessContext.coffee</a> file.</small></p>

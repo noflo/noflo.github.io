@@ -202,31 +202,7 @@ categories:
             
             
             
-              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-string">&quot;@babel/helpers - typeof&quot;</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>.iterator === <span class="hljs-string">&quot;symbol&quot;</span>) { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">else</span> { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> obj &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; obj.constructor === <span class="hljs-built_in">Symbol</span> &amp;&amp; obj !== <span class="hljs-built_in">Symbol</span>.prototype ? <span class="hljs-string">&quot;symbol&quot;</span> : <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">return</span> _typeof(obj); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_classCallCheck</span>(<span class="hljs-params">instance, Constructor</span>) </span>{ <span class="hljs-keyword">if</span> (!(instance <span class="hljs-keyword">instanceof</span> Constructor)) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Cannot call a class as a function&quot;</span>); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_defineProperties</span>(<span class="hljs-params">target, props</span>) </span>{ <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; props.length; i++) { <span class="hljs-keyword">var</span> descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || <span class="hljs-literal">false</span>; descriptor.configurable = <span class="hljs-literal">true</span>; <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;value&quot;</span> <span class="hljs-keyword">in</span> descriptor) descriptor.writable = <span class="hljs-literal">true</span>; <span class="hljs-built_in">Object</span>.defineProperty(target, descriptor.key, descriptor); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createClass</span>(<span class="hljs-params">Constructor, protoProps, staticProps</span>) </span>{ <span class="hljs-keyword">if</span> (protoProps) _defineProperties(Constructor.prototype, protoProps); <span class="hljs-keyword">if</span> (staticProps) _defineProperties(Constructor, staticProps); <span class="hljs-keyword">return</span> Constructor; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_inherits</span>(<span class="hljs-params">subClass, superClass</span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> superClass !== <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; superClass !== <span class="hljs-literal">null</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Super expression must either be null or a function&quot;</span>); } subClass.prototype = <span class="hljs-built_in">Object</span>.create(superClass &amp;&amp; superClass.prototype, { <span class="hljs-attr">constructor</span>: { <span class="hljs-attr">value</span>: subClass, <span class="hljs-attr">writable</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">configurable</span>: <span class="hljs-literal">true</span> } }); <span class="hljs-keyword">if</span> (superClass) _setPrototypeOf(subClass, superClass); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_setPrototypeOf</span>(<span class="hljs-params">o, p</span>) </span>{ _setPrototypeOf = <span class="hljs-built_in">Object</span>.setPrototypeOf || <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_setPrototypeOf</span>(<span class="hljs-params">o, p</span>) </span>{ o.__proto__ = p; <span class="hljs-keyword">return</span> o; }; <span class="hljs-keyword">return</span> _setPrototypeOf(o, p); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createSuper</span>(<span class="hljs-params">Derived</span>) </span>{ <span class="hljs-keyword">var</span> hasNativeReflectConstruct = _isNativeReflectConstruct(); <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createSuperInternal</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">var</span> Super = _getPrototypeOf(Derived), result; <span class="hljs-keyword">if</span> (hasNativeReflectConstruct) { <span class="hljs-keyword">var</span> NewTarget = _getPrototypeOf(<span class="hljs-built_in">this</span>).constructor; result = <span class="hljs-built_in">Reflect</span>.construct(Super, <span class="hljs-built_in">arguments</span>, NewTarget); } <span class="hljs-keyword">else</span> { result = Super.apply(<span class="hljs-built_in">this</span>, <span class="hljs-built_in">arguments</span>); } <span class="hljs-keyword">return</span> _possibleConstructorReturn(<span class="hljs-built_in">this</span>, result); }; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_possibleConstructorReturn</span>(<span class="hljs-params">self, call</span>) </span>{ <span class="hljs-keyword">if</span> (call &amp;&amp; (_typeof(call) === <span class="hljs-string">&quot;object&quot;</span> || <span class="hljs-keyword">typeof</span> call === <span class="hljs-string">&quot;function&quot;</span>)) { <span class="hljs-keyword">return</span> call; } <span class="hljs-keyword">return</span> _assertThisInitialized(self); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_assertThisInitialized</span>(<span class="hljs-params">self</span>) </span>{ <span class="hljs-keyword">if</span> (self === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">ReferenceError</span>(<span class="hljs-string">&quot;this hasn&#x27;t been initialised - super() hasn&#x27;t been called&quot;</span>); } <span class="hljs-keyword">return</span> self; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_isNativeReflectConstruct</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Reflect</span> === <span class="hljs-string">&quot;undefined&quot;</span> || !<span class="hljs-built_in">Reflect</span>.construct) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Reflect</span>.construct.sham) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Proxy</span> === <span class="hljs-string">&quot;function&quot;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">try</span> { <span class="hljs-built_in">Date</span>.prototype.toString.call(<span class="hljs-built_in">Reflect</span>.construct(<span class="hljs-built_in">Date</span>, [], <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{})); <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; } <span class="hljs-keyword">catch</span> (e) { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getPrototypeOf</span>(<span class="hljs-params">o</span>) </span>{ _getPrototypeOf = <span class="hljs-built_in">Object</span>.setPrototypeOf ? <span class="hljs-built_in">Object</span>.getPrototypeOf : <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getPrototypeOf</span>(<span class="hljs-params">o</span>) </span>{ <span class="hljs-keyword">return</span> o.__proto__ || <span class="hljs-built_in">Object</span>.getPrototypeOf(o); }; <span class="hljs-keyword">return</span> _getPrototypeOf(o); }
-
-<span class="hljs-comment">/* eslint-disable max-classes-per-file */</span></pre></div>
+              <div class='highlight'><pre><span class="hljs-comment">/* eslint-disable max-classes-per-file */</span></pre></div>
             
           
             
@@ -235,215 +211,144 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">var</span> _require = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>),
-    EventEmitter = _require.EventEmitter;
-
-<span class="hljs-keyword">var</span> InPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InPort&#x27;</span>);
-
-<span class="hljs-keyword">var</span> OutPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./OutPort&#x27;</span>); <span class="hljs-comment">// NoFlo ports collections</span></pre></div>
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> { EventEmitter } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>);
+<span class="hljs-keyword">const</span> InPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InPort&#x27;</span>);
+<span class="hljs-keyword">const</span> OutPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./OutPort&#x27;</span>);</pre></div>
             
           
             
-            <p>Ports collection classes for NoFlo components. These are
+            <p>NoFlo ports collections</p>
+<p>Ports collection classes for NoFlo components. These are
 used to hold a set of input or output ports of a component.</p>
 
             
-              <div class='highlight'><pre>
-
-<span class="hljs-keyword">var</span> Ports = <span class="hljs-comment">/*#__PURE__*/</span><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">_EventEmitter</span>) </span>{
-  _inherits(Ports, _EventEmitter);
-
-  <span class="hljs-keyword">var</span> _super = _createSuper(Ports);
-
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Ports</span>(<span class="hljs-params">ports, model</span>) </span>{
-    <span class="hljs-keyword">var</span> _this;
-
-    _classCallCheck(<span class="hljs-built_in">this</span>, Ports);
-
-    _this = _super.call(<span class="hljs-built_in">this</span>);
-    _this.model = model;
-    _this.ports = {};
-
-    <span class="hljs-keyword">if</span> (!ports) {
-      <span class="hljs-keyword">return</span> _possibleConstructorReturn(_this);
-    }
-
-    <span class="hljs-built_in">Object</span>.keys(ports).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-      <span class="hljs-keyword">var</span> options = ports[name];
-
-      _this.add(name, options);
+              <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ports</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+  <span class="hljs-keyword">constructor</span>(ports, model) {
+    <span class="hljs-built_in">super</span>();
+    <span class="hljs-built_in">this</span>.model = model;
+    <span class="hljs-built_in">this</span>.ports = {};
+    <span class="hljs-keyword">if</span> (!ports) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-built_in">Object</span>.keys(ports).forEach(<span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> options = ports[name];
+      <span class="hljs-built_in">this</span>.add(name, options);
     });
-    <span class="hljs-keyword">return</span> _this;
   }
 
-  _createClass(Ports, [{
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;add&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params">name, options, process</span>) </span>{
-      <span class="hljs-keyword">if</span> (name === <span class="hljs-string">&#x27;add&#x27;</span> || name === <span class="hljs-string">&#x27;remove&#x27;</span>) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;Add and remove are restricted port names&#x27;</span>);
-      }
-      <span class="hljs-comment">/* eslint-disable no-useless-escape */</span>
-
-
-      <span class="hljs-keyword">if</span> (!name.match(<span class="hljs-regexp">/^[a-z0-9_\.\/]+$/</span>)) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Port names can only contain lowercase alphanumeric characters and underscores. &#x27;&quot;</span>.concat(name, <span class="hljs-string">&quot;&#x27; not allowed&quot;</span>));
-      } <span class="hljs-comment">// Remove previous implementation</span>
-
-
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.ports[name]) {
-        <span class="hljs-built_in">this</span>.remove(name);
-      }
-
-      <span class="hljs-keyword">if</span> (_typeof(options) === <span class="hljs-string">&#x27;object&#x27;</span> &amp;&amp; options.canAttach) {
-        <span class="hljs-built_in">this</span>.ports[name] = options;
-      } <span class="hljs-keyword">else</span> {
-        <span class="hljs-keyword">var</span> Model = <span class="hljs-built_in">this</span>.model;
-        <span class="hljs-built_in">this</span>.ports[name] = <span class="hljs-keyword">new</span> Model(options, process);
-      }
-
-      <span class="hljs-built_in">this</span>[name] = <span class="hljs-built_in">this</span>.ports[name];
-      <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;add&#x27;</span>, name);
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>; <span class="hljs-comment">// chainable</span>
+  add(name, options, process) {
+    <span class="hljs-keyword">if</span> ((name === <span class="hljs-string">&#x27;add&#x27;</span>) || (name === <span class="hljs-string">&#x27;remove&#x27;</span>)) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;Add and remove are restricted port names&#x27;</span>);
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;remove&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">remove</span>(<span class="hljs-params">name</span>) </span>{
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Port &quot;</span>.concat(name, <span class="hljs-string">&quot; not defined&quot;</span>));
-      }
 
-      <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.ports[name];
-      <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>[name];
-      <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;remove&#x27;</span>, name);
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>; <span class="hljs-comment">// chainable</span>
-    }
-  }]);
-
-  <span class="hljs-keyword">return</span> Ports;
-}(EventEmitter);
-
-<span class="hljs-built_in">exports</span>.InPorts = <span class="hljs-comment">/*#__PURE__*/</span><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">_Ports</span>) </span>{
-  _inherits(InPorts, _Ports);
-
-  <span class="hljs-keyword">var</span> _super2 = _createSuper(InPorts);
-
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">InPorts</span>(<span class="hljs-params">ports</span>) </span>{
-    _classCallCheck(<span class="hljs-built_in">this</span>, InPorts);
-
-    <span class="hljs-keyword">return</span> _super2.call(<span class="hljs-built_in">this</span>, ports, InPort);
-  }
-
-  _createClass(InPorts, [{
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;on&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">on</span>(<span class="hljs-params">name, event, callback</span>) </span>{
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Port &quot;</span>.concat(name, <span class="hljs-string">&quot; not available&quot;</span>));
-      }
-
-      <span class="hljs-built_in">this</span>.ports[name].on(event, callback);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;once&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">once</span>(<span class="hljs-params">name, event, callback</span>) </span>{
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Port &quot;</span>.concat(name, <span class="hljs-string">&quot; not available&quot;</span>));
-      }
-
-      <span class="hljs-built_in">this</span>.ports[name].once(event, callback);
-    }
-  }]);
-
-  <span class="hljs-keyword">return</span> InPorts;
-}(Ports);
-
-<span class="hljs-built_in">exports</span>.OutPorts = <span class="hljs-comment">/*#__PURE__*/</span><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">_Ports2</span>) </span>{
-  _inherits(OutPorts, _Ports2);
-
-  <span class="hljs-keyword">var</span> _super3 = _createSuper(OutPorts);
-
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">OutPorts</span>(<span class="hljs-params">ports</span>) </span>{
-    _classCallCheck(<span class="hljs-built_in">this</span>, OutPorts);
-
-    <span class="hljs-keyword">return</span> _super3.call(<span class="hljs-built_in">this</span>, ports, OutPort);
-  }
-
-  _createClass(OutPorts, [{
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;connect&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connect</span>(<span class="hljs-params">name, socketId</span>) </span>{
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Port &quot;</span>.concat(name, <span class="hljs-string">&quot; not available&quot;</span>));
-      }
-
-      <span class="hljs-built_in">this</span>.ports[name].connect(socketId);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;beginGroup&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">beginGroup</span>(<span class="hljs-params">name, group, socketId</span>) </span>{
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Port &quot;</span>.concat(name, <span class="hljs-string">&quot; not available&quot;</span>));
-      }
-
-      <span class="hljs-built_in">this</span>.ports[name].beginGroup(group, socketId);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;send&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send</span>(<span class="hljs-params">name, data, socketId</span>) </span>{
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Port &quot;</span>.concat(name, <span class="hljs-string">&quot; not available&quot;</span>));
-      }
-
-      <span class="hljs-built_in">this</span>.ports[name].send(data, socketId);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;endGroup&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">endGroup</span>(<span class="hljs-params">name, socketId</span>) </span>{
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Port &quot;</span>.concat(name, <span class="hljs-string">&quot; not available&quot;</span>));
-      }
-
-      <span class="hljs-built_in">this</span>.ports[name].endGroup(socketId);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;disconnect&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">disconnect</span>(<span class="hljs-params">name, socketId</span>) </span>{
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Port &quot;</span>.concat(name, <span class="hljs-string">&quot; not available&quot;</span>));
-      }
-
-      <span class="hljs-built_in">this</span>.ports[name].disconnect(socketId);
-    }
-  }]);
-
-  <span class="hljs-keyword">return</span> OutPorts;
-}(Ports); <span class="hljs-comment">// Port name normalization:</span></pre></div>
+    <span class="hljs-comment">/* eslint-disable no-useless-escape */</span>
+    <span class="hljs-keyword">if</span> (!name.match(<span class="hljs-regexp">/^[a-z0-9_\.\/]+$/</span>)) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port names can only contain lowercase alphanumeric characters and underscores. &#x27;<span class="hljs-subst">${name}</span>&#x27; not allowed`</span>);
+    }</pre></div>
             
           
             
-            <p>returns object containing keys name and index for ports names in
+            <p>Remove previous implementation</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-built_in">this</span>.remove(name); }
+
+    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; options.canAttach) {
+      <span class="hljs-built_in">this</span>.ports[name] = options;
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">const</span> Model = <span class="hljs-built_in">this</span>.model;
+      <span class="hljs-built_in">this</span>.ports[name] = <span class="hljs-keyword">new</span> Model(options, process);
+    }
+
+    <span class="hljs-built_in">this</span>[name] = <span class="hljs-built_in">this</span>.ports[name];
+
+    <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;add&#x27;</span>, name);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>; <span class="hljs-comment">// chainable</span>
+  }
+
+  remove(name) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not defined`</span>); }
+    <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.ports[name];
+    <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>[name];
+    <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;remove&#x27;</span>, name);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>; <span class="hljs-comment">// chainable</span>
+  }
+}
+
+<span class="hljs-built_in">exports</span>.InPorts = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPorts</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ports</span> </span>{
+  <span class="hljs-keyword">constructor</span>(ports) {
+    <span class="hljs-built_in">super</span>(ports, InPort);
+  }
+
+  on(name, event, callback) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    <span class="hljs-built_in">this</span>.ports[name].on(event, callback);
+  }
+
+  once(name, event, callback) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    <span class="hljs-built_in">this</span>.ports[name].once(event, callback);
+  }
+};
+
+<span class="hljs-built_in">exports</span>.OutPorts = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPorts</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ports</span> </span>{
+  <span class="hljs-keyword">constructor</span>(ports) {
+    <span class="hljs-built_in">super</span>(ports, OutPort);
+  }
+
+  connect(name, socketId) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    <span class="hljs-built_in">this</span>.ports[name].connect(socketId);
+  }
+
+  beginGroup(name, group, socketId) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    <span class="hljs-built_in">this</span>.ports[name].beginGroup(group, socketId);
+  }
+
+  send(name, data, socketId) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    <span class="hljs-built_in">this</span>.ports[name].send(data, socketId);
+  }
+
+  endGroup(name, socketId) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    <span class="hljs-built_in">this</span>.ports[name].endGroup(socketId);
+  }
+
+  disconnect(name, socketId) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    <span class="hljs-built_in">this</span>.ports[name].disconnect(socketId);
+  }
+};</pre></div>
+            
+          
+            
+            <p>Port name normalization:
+returns object containing keys name and index for ports names in
 format <code>portname</code> or <code>portname[index]</code>.</p>
 
             
-              <div class='highlight'><pre>
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.normalizePortName = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">normalizePortName</span>(<span class="hljs-params">name</span>) </span>{
+  <span class="hljs-keyword">const</span> port = { name };</pre></div>
+            
+          
+            
+            <p>Regular port</p>
 
-<span class="hljs-built_in">exports</span>.normalizePortName = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">normalizePortName</span>(<span class="hljs-params">name</span>) </span>{
-  <span class="hljs-keyword">var</span> port = {
-    <span class="hljs-attr">name</span>: name
-  }; <span class="hljs-comment">// Regular port</span>
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (name.indexOf(<span class="hljs-string">&#x27;[&#x27;</span>) === <span class="hljs-number">-1</span>) { <span class="hljs-keyword">return</span> port; }</pre></div>
+            
+          
+            
+            <p>Addressable port with index</p>
 
-  <span class="hljs-keyword">if</span> (name.indexOf(<span class="hljs-string">&#x27;[&#x27;</span>) === <span class="hljs-number">-1</span>) {
-    <span class="hljs-keyword">return</span> port;
-  } <span class="hljs-comment">// Addressable port with index</span>
-
-
-  <span class="hljs-keyword">var</span> matched = name.match(<span class="hljs-regexp">/(.*)\[([0-9]+)\]/</span>);
-
-  <span class="hljs-keyword">if</span> (!(matched != <span class="hljs-literal">null</span> ? matched.length : <span class="hljs-literal">undefined</span>)) {
-    <span class="hljs-keyword">return</span> name;
-  }
-
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> matched = name.match(<span class="hljs-regexp">/(.*)\[([0-9]+)\]/</span>);
+  <span class="hljs-keyword">if</span> (!(matched != <span class="hljs-literal">null</span> ? matched.length : <span class="hljs-literal">undefined</span>)) { <span class="hljs-keyword">return</span> name; }
   <span class="hljs-keyword">return</span> {
     <span class="hljs-attr">name</span>: matched[<span class="hljs-number">1</span>],
-    <span class="hljs-attr">index</span>: matched[<span class="hljs-number">2</span>]
+    <span class="hljs-attr">index</span>: matched[<span class="hljs-number">2</span>],
   };
 };</pre></div>
             

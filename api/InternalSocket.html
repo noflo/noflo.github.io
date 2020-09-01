@@ -200,44 +200,14 @@ categories:
           <h1>{{ page.title }}</h1>
           
             
-            
-            
-              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-string">&quot;@babel/helpers - typeof&quot;</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>.iterator === <span class="hljs-string">&quot;symbol&quot;</span>) { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">else</span> { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> obj &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; obj.constructor === <span class="hljs-built_in">Symbol</span> &amp;&amp; obj !== <span class="hljs-built_in">Symbol</span>.prototype ? <span class="hljs-string">&quot;symbol&quot;</span> : <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">return</span> _typeof(obj); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_classCallCheck</span>(<span class="hljs-params">instance, Constructor</span>) </span>{ <span class="hljs-keyword">if</span> (!(instance <span class="hljs-keyword">instanceof</span> Constructor)) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Cannot call a class as a function&quot;</span>); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_defineProperties</span>(<span class="hljs-params">target, props</span>) </span>{ <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; props.length; i++) { <span class="hljs-keyword">var</span> descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || <span class="hljs-literal">false</span>; descriptor.configurable = <span class="hljs-literal">true</span>; <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;value&quot;</span> <span class="hljs-keyword">in</span> descriptor) descriptor.writable = <span class="hljs-literal">true</span>; <span class="hljs-built_in">Object</span>.defineProperty(target, descriptor.key, descriptor); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createClass</span>(<span class="hljs-params">Constructor, protoProps, staticProps</span>) </span>{ <span class="hljs-keyword">if</span> (protoProps) _defineProperties(Constructor.prototype, protoProps); <span class="hljs-keyword">if</span> (staticProps) _defineProperties(Constructor, staticProps); <span class="hljs-keyword">return</span> Constructor; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_inherits</span>(<span class="hljs-params">subClass, superClass</span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> superClass !== <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; superClass !== <span class="hljs-literal">null</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Super expression must either be null or a function&quot;</span>); } subClass.prototype = <span class="hljs-built_in">Object</span>.create(superClass &amp;&amp; superClass.prototype, { <span class="hljs-attr">constructor</span>: { <span class="hljs-attr">value</span>: subClass, <span class="hljs-attr">writable</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">configurable</span>: <span class="hljs-literal">true</span> } }); <span class="hljs-keyword">if</span> (superClass) _setPrototypeOf(subClass, superClass); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_setPrototypeOf</span>(<span class="hljs-params">o, p</span>) </span>{ _setPrototypeOf = <span class="hljs-built_in">Object</span>.setPrototypeOf || <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_setPrototypeOf</span>(<span class="hljs-params">o, p</span>) </span>{ o.__proto__ = p; <span class="hljs-keyword">return</span> o; }; <span class="hljs-keyword">return</span> _setPrototypeOf(o, p); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createSuper</span>(<span class="hljs-params">Derived</span>) </span>{ <span class="hljs-keyword">var</span> hasNativeReflectConstruct = _isNativeReflectConstruct(); <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createSuperInternal</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">var</span> Super = _getPrototypeOf(Derived), result; <span class="hljs-keyword">if</span> (hasNativeReflectConstruct) { <span class="hljs-keyword">var</span> NewTarget = _getPrototypeOf(<span class="hljs-built_in">this</span>).constructor; result = <span class="hljs-built_in">Reflect</span>.construct(Super, <span class="hljs-built_in">arguments</span>, NewTarget); } <span class="hljs-keyword">else</span> { result = Super.apply(<span class="hljs-built_in">this</span>, <span class="hljs-built_in">arguments</span>); } <span class="hljs-keyword">return</span> _possibleConstructorReturn(<span class="hljs-built_in">this</span>, result); }; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_possibleConstructorReturn</span>(<span class="hljs-params">self, call</span>) </span>{ <span class="hljs-keyword">if</span> (call &amp;&amp; (_typeof(call) === <span class="hljs-string">&quot;object&quot;</span> || <span class="hljs-keyword">typeof</span> call === <span class="hljs-string">&quot;function&quot;</span>)) { <span class="hljs-keyword">return</span> call; } <span class="hljs-keyword">return</span> _assertThisInitialized(self); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_assertThisInitialized</span>(<span class="hljs-params">self</span>) </span>{ <span class="hljs-keyword">if</span> (self === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">ReferenceError</span>(<span class="hljs-string">&quot;this hasn&#x27;t been initialised - super() hasn&#x27;t been called&quot;</span>); } <span class="hljs-keyword">return</span> self; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_isNativeReflectConstruct</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Reflect</span> === <span class="hljs-string">&quot;undefined&quot;</span> || !<span class="hljs-built_in">Reflect</span>.construct) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Reflect</span>.construct.sham) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Proxy</span> === <span class="hljs-string">&quot;function&quot;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">try</span> { <span class="hljs-built_in">Date</span>.prototype.toString.call(<span class="hljs-built_in">Reflect</span>.construct(<span class="hljs-built_in">Date</span>, [], <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{})); <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; } <span class="hljs-keyword">catch</span> (e) { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getPrototypeOf</span>(<span class="hljs-params">o</span>) </span>{ _getPrototypeOf = <span class="hljs-built_in">Object</span>.setPrototypeOf ? <span class="hljs-built_in">Object</span>.getPrototypeOf : <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getPrototypeOf</span>(<span class="hljs-params">o</span>) </span>{ <span class="hljs-keyword">return</span> o.__proto__ || <span class="hljs-built_in">Object</span>.getPrototypeOf(o); }; <span class="hljs-keyword">return</span> _getPrototypeOf(o); }</pre></div>
-            
-          
-            
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2013</span><span class="hljs-number">-2017</span> Flowhub UG
 (c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">var</span> _require = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>),
-    EventEmitter = _require.EventEmitter;
-
-<span class="hljs-keyword">var</span> IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> { EventEmitter } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>);
+<span class="hljs-keyword">const</span> IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">legacyToIp</span>(<span class="hljs-params">event, payload</span>) </span>{</pre></div>
             
@@ -246,21 +216,20 @@ NoFlo may be freely distributed under the MIT license</code></pre>
             <p>No need to wrap modern IP Objects</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (IP.isIP(payload)) {
-    <span class="hljs-keyword">return</span> payload;
-  } <span class="hljs-comment">// Wrap legacy events into appropriate IP objects</span>
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (IP.isIP(payload)) { <span class="hljs-keyword">return</span> payload; }</pre></div>
+            
+          
+            
+            <p>Wrap legacy events into appropriate IP objects</p>
 
-
-  <span class="hljs-keyword">switch</span> (event) {
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">switch</span> (event) {
     <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;begingroup&#x27;</span>:
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> IP(<span class="hljs-string">&#x27;openBracket&#x27;</span>, payload);
-
     <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;endgroup&#x27;</span>:
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> IP(<span class="hljs-string">&#x27;closeBracket&#x27;</span>);
-
     <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;data&#x27;</span>:
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> IP(<span class="hljs-string">&#x27;data&#x27;</span>, payload);
-
     <span class="hljs-keyword">default</span>:
       <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
   }
@@ -271,101 +240,78 @@ NoFlo may be freely distributed under the MIT license</code></pre>
     <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;openBracket&#x27;</span>:
       <span class="hljs-keyword">return</span> {
         <span class="hljs-attr">event</span>: <span class="hljs-string">&#x27;begingroup&#x27;</span>,
-        <span class="hljs-attr">payload</span>: ip.data
+        <span class="hljs-attr">payload</span>: ip.data,
       };
-
     <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;data&#x27;</span>:
       <span class="hljs-keyword">return</span> {
         <span class="hljs-attr">event</span>: <span class="hljs-string">&#x27;data&#x27;</span>,
-        <span class="hljs-attr">payload</span>: ip.data
+        <span class="hljs-attr">payload</span>: ip.data,
       };
-
     <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;closeBracket&#x27;</span>:
       <span class="hljs-keyword">return</span> {
         <span class="hljs-attr">event</span>: <span class="hljs-string">&#x27;endgroup&#x27;</span>,
-        <span class="hljs-attr">payload</span>: ip.data
+        <span class="hljs-attr">payload</span>: ip.data,
       };
-
     <span class="hljs-keyword">default</span>:
       <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
   }
-} <span class="hljs-comment">// ## Internal Sockets</span></pre></div>
+}</pre></div>
             
           
             
-            <p>The default communications mechanism between NoFlo processes is
+            <h2 id="internal-sockets">Internal Sockets</h2>
+<p>The default communications mechanism between NoFlo processes is
 an <em>internal socket</em>, which is responsible for accepting information
 packets sent from processes’ outports, and emitting corresponding
 events so that the packets can be caught to the inport of the
 connected process.</p>
 
             
-              <div class='highlight'><pre>
+              <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InternalSocket</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+  regularEmitEvent(event, data) {
+    <span class="hljs-built_in">this</span>.emit(event, data);
+  }
 
-<span class="hljs-keyword">var</span> InternalSocket = <span class="hljs-comment">/*#__PURE__*/</span><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">_EventEmitter</span>) </span>{
-  _inherits(InternalSocket, _EventEmitter);
-
-  <span class="hljs-keyword">var</span> _super = _createSuper(InternalSocket);
-
-  _createClass(InternalSocket, [{
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;regularEmitEvent&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">regularEmitEvent</span>(<span class="hljs-params">event, data</span>) </span>{
+  debugEmitEvent(event, data) {
+    <span class="hljs-keyword">try</span> {
       <span class="hljs-built_in">this</span>.emit(event, data);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;debugEmitEvent&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">debugEmitEvent</span>(<span class="hljs-params">event, data</span>) </span>{
-      <span class="hljs-keyword">try</span> {
-        <span class="hljs-built_in">this</span>.emit(event, data);
-      } <span class="hljs-keyword">catch</span> (error) {
-        <span class="hljs-keyword">if</span> (error.id &amp;&amp; error.metadata &amp;&amp; error.error) {</pre></div>
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-keyword">if</span> (error.id &amp;&amp; error.metadata &amp;&amp; error.error) {</pre></div>
             
           
             
             <p>Wrapped debuggable error coming from downstream, no need to wrap</p>
 
             
-              <div class='highlight'><pre>          <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.listeners(<span class="hljs-string">&#x27;error&#x27;</span>).length === <span class="hljs-number">0</span>) {
-            <span class="hljs-keyword">throw</span> error.error;
-          }
-
-          <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;error&#x27;</span>, error);
-          <span class="hljs-keyword">return</span>;
-        }
-
-        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.listeners(<span class="hljs-string">&#x27;error&#x27;</span>).length === <span class="hljs-number">0</span>) {
-          <span class="hljs-keyword">throw</span> error;
-        }
-
-        <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;error&#x27;</span>, {
-          <span class="hljs-attr">id</span>: <span class="hljs-built_in">this</span>.to.process.id,
-          <span class="hljs-attr">error</span>: error,
-          <span class="hljs-attr">metadata</span>: <span class="hljs-built_in">this</span>.metadata
-        });
+              <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.listeners(<span class="hljs-string">&#x27;error&#x27;</span>).length === <span class="hljs-number">0</span>) { <span class="hljs-keyword">throw</span> error.error; }
+        <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;error&#x27;</span>, error);
+        <span class="hljs-keyword">return</span>;
       }
+
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.listeners(<span class="hljs-string">&#x27;error&#x27;</span>).length === <span class="hljs-number">0</span>) { <span class="hljs-keyword">throw</span> error; }
+
+      <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;error&#x27;</span>, {
+        <span class="hljs-attr">id</span>: <span class="hljs-built_in">this</span>.to.process.id,
+        error,
+        <span class="hljs-attr">metadata</span>: <span class="hljs-built_in">this</span>.metadata,
+      });
     }
-  }]);
+  }
 
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">InternalSocket</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">var</span> _this;
-
-    <span class="hljs-keyword">var</span> metadata = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : {};
-
-    _classCallCheck(<span class="hljs-built_in">this</span>, InternalSocket);
-
-    _this = _super.call(<span class="hljs-built_in">this</span>);
-    _this.metadata = metadata;
-    _this.brackets = [];
-    _this.connected = <span class="hljs-literal">false</span>;
-    _this.dataDelegate = <span class="hljs-literal">null</span>;
-    _this.debug = <span class="hljs-literal">false</span>;
-    _this.emitEvent = _this.regularEmitEvent;
-    <span class="hljs-keyword">return</span> _this;
-  } <span class="hljs-comment">// ## Socket connections</span></pre></div>
+  <span class="hljs-keyword">constructor</span>(metadata = {}) {
+    <span class="hljs-built_in">super</span>();
+    <span class="hljs-built_in">this</span>.metadata = metadata;
+    <span class="hljs-built_in">this</span>.brackets = [];
+    <span class="hljs-built_in">this</span>.connected = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.dataDelegate = <span class="hljs-literal">null</span>;
+    <span class="hljs-built_in">this</span>.debug = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.emitEvent = <span class="hljs-built_in">this</span>.regularEmitEvent;
+  }</pre></div>
             
           
             
-            <p>Sockets that are attached to the ports of processes may be
+            <h2 id="socket-connections">Socket connections</h2>
+<p>Sockets that are attached to the ports of processes may be
 either connected or disconnected. The semantical meaning of
 a connection is that the outport is in the process of sending
 data. Disconnecting means an end of transmission.</p>
@@ -387,37 +333,24 @@ file or a database query.</p>
     @readBuffer fd, position, size, buffer</code></pre>
 
             
-              <div class='highlight'><pre>
+              <div class='highlight'><pre>  connect() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.connected) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-built_in">this</span>.connected = <span class="hljs-literal">true</span>;
+    <span class="hljs-built_in">this</span>.emitEvent(<span class="hljs-string">&#x27;connect&#x27;</span>, <span class="hljs-literal">null</span>);
+  }
 
-  _createClass(InternalSocket, [{
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;connect&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connect</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.connected) {
-        <span class="hljs-keyword">return</span>;
-      }
+  disconnect() {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.connected) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-built_in">this</span>.connected = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.emitEvent(<span class="hljs-string">&#x27;disconnect&#x27;</span>, <span class="hljs-literal">null</span>);
+  }
 
-      <span class="hljs-built_in">this</span>.connected = <span class="hljs-literal">true</span>;
-      <span class="hljs-built_in">this</span>.emitEvent(<span class="hljs-string">&#x27;connect&#x27;</span>, <span class="hljs-literal">null</span>);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;disconnect&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">disconnect</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.connected) {
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-built_in">this</span>.connected = <span class="hljs-literal">false</span>;
-      <span class="hljs-built_in">this</span>.emitEvent(<span class="hljs-string">&#x27;disconnect&#x27;</span>, <span class="hljs-literal">null</span>);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;isConnected&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isConnected</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.connected;
-    } <span class="hljs-comment">// ## Sending information packets</span></pre></div>
+  isConnected() { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.connected; }</pre></div>
             
           
             
-            <p>The <em>send</em> method is used by a processe’s outport to
+            <h2 id="sending-information-packets">Sending information packets</h2>
+<p>The <em>send</em> method is used by a processe’s outport to
 send information packets. The actual packet contents are
 not defined by NoFlo, and may be any valid JavaScript data
 structure.</p>
@@ -427,51 +360,46 @@ can be constructed with more flexibility, as file buffers or
 message queues can be used as additional packet relay mechanisms.</p>
 
             
-              <div class='highlight'><pre>
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;send&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send</span>(<span class="hljs-params">data</span>) </span>{
-      <span class="hljs-keyword">if</span> (data === <span class="hljs-literal">undefined</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">this</span>.dataDelegate === <span class="hljs-string">&#x27;function&#x27;</span>) {
-        <span class="hljs-built_in">this</span>.handleSocketEvent(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-built_in">this</span>.dataDelegate());
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-built_in">this</span>.handleSocketEvent(<span class="hljs-string">&#x27;data&#x27;</span>, data);
-    } <span class="hljs-comment">// ## Sending information packets without open bracket</span></pre></div>
+              <div class='highlight'><pre>  send(data) {
+    <span class="hljs-keyword">if</span> ((data === <span class="hljs-literal">undefined</span>) &amp;&amp; (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">this</span>.dataDelegate === <span class="hljs-string">&#x27;function&#x27;</span>)) {
+      <span class="hljs-built_in">this</span>.handleSocketEvent(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-built_in">this</span>.dataDelegate());
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-built_in">this</span>.handleSocketEvent(<span class="hljs-string">&#x27;data&#x27;</span>, data);
+  }</pre></div>
             
           
             
-            <p>As <em>connect</em> event is considered as open bracket, it needs to be followed
+            <h2 id="sending-information-packets-without-open-bracket">Sending information packets without open bracket</h2>
+<p>As <em>connect</em> event is considered as open bracket, it needs to be followed
 by a <em>disconnect</em> event or a closing bracket. In the new simplified
 sending semantics single IP objects can be sent without open/close brackets.</p>
 
             
-              <div class='highlight'><pre>
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;post&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">post</span>(<span class="hljs-params">packet</span>) </span>{
-      <span class="hljs-keyword">var</span> autoDisconnect = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] : <span class="hljs-literal">true</span>;
-      <span class="hljs-keyword">var</span> ip = packet;
-
-      <span class="hljs-keyword">if</span> (ip === <span class="hljs-literal">undefined</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">this</span>.dataDelegate === <span class="hljs-string">&#x27;function&#x27;</span>) {
-        ip = <span class="hljs-built_in">this</span>.dataDelegate();
-      } <span class="hljs-comment">// Send legacy connect/disconnect if needed</span>
-
-
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isConnected() &amp;&amp; <span class="hljs-built_in">this</span>.brackets.length === <span class="hljs-number">0</span>) {
-        <span class="hljs-built_in">this</span>.connect();
-      }
-
-      <span class="hljs-built_in">this</span>.handleSocketEvent(<span class="hljs-string">&#x27;ip&#x27;</span>, ip, <span class="hljs-literal">false</span>);
-
-      <span class="hljs-keyword">if</span> (autoDisconnect &amp;&amp; <span class="hljs-built_in">this</span>.isConnected() &amp;&amp; <span class="hljs-built_in">this</span>.brackets.length === <span class="hljs-number">0</span>) {
-        <span class="hljs-built_in">this</span>.disconnect();
-      }
-    } <span class="hljs-comment">// ## Information Packet grouping</span></pre></div>
+              <div class='highlight'><pre>  post(packet, autoDisconnect = <span class="hljs-literal">true</span>) {
+    <span class="hljs-keyword">let</span> ip = packet;
+    <span class="hljs-keyword">if</span> ((ip === <span class="hljs-literal">undefined</span>) &amp;&amp; (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">this</span>.dataDelegate === <span class="hljs-string">&#x27;function&#x27;</span>)) {
+      ip = <span class="hljs-built_in">this</span>.dataDelegate();
+    }</pre></div>
             
           
             
-            <p>Processes sending data to sockets may also group the packets
+            <p>Send legacy connect/disconnect if needed</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isConnected() &amp;&amp; (<span class="hljs-built_in">this</span>.brackets.length === <span class="hljs-number">0</span>)) {
+      (<span class="hljs-built_in">this</span>.connect)();
+    }
+    <span class="hljs-built_in">this</span>.handleSocketEvent(<span class="hljs-string">&#x27;ip&#x27;</span>, ip, <span class="hljs-literal">false</span>);
+    <span class="hljs-keyword">if</span> (autoDisconnect &amp;&amp; <span class="hljs-built_in">this</span>.isConnected() &amp;&amp; (<span class="hljs-built_in">this</span>.brackets.length === <span class="hljs-number">0</span>)) {
+      (<span class="hljs-built_in">this</span>.disconnect)();
+    }
+  }</pre></div>
+            
+          
+            
+            <h2 id="information-packet-grouping">Information Packet grouping</h2>
+<p>Processes sending data to sockets may also group the packets
 when necessary. This allows transmitting tree structures as
 a stream of packets.</p>
 <p>For example, an object could be split into multiple packets
@@ -497,179 +425,140 @@ to pass received groupings onward if the data structures remain
 intact through the component’s processing.</p>
 
             
-              <div class='highlight'><pre>
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;beginGroup&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">beginGroup</span>(<span class="hljs-params">group</span>) </span>{
-      <span class="hljs-built_in">this</span>.handleSocketEvent(<span class="hljs-string">&#x27;begingroup&#x27;</span>, group);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;endGroup&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">endGroup</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-built_in">this</span>.handleSocketEvent(<span class="hljs-string">&#x27;endgroup&#x27;</span>);
-    } <span class="hljs-comment">// ## Socket data delegation</span></pre></div>
+              <div class='highlight'><pre>  beginGroup(group) {
+    <span class="hljs-built_in">this</span>.handleSocketEvent(<span class="hljs-string">&#x27;begingroup&#x27;</span>, group);
+  }
+
+  endGroup() {
+    <span class="hljs-built_in">this</span>.handleSocketEvent(<span class="hljs-string">&#x27;endgroup&#x27;</span>);
+  }</pre></div>
             
           
             
-            <p>Sockets have the option to receive data from a delegate function
+            <h2 id="socket-data-delegation">Socket data delegation</h2>
+<p>Sockets have the option to receive data from a delegate function
 should the <code>send</code> method receive undefined for <code>data</code>.  This
 helps in the case of defaulting values.</p>
 
             
-              <div class='highlight'><pre>
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;setDataDelegate&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setDataDelegate</span>(<span class="hljs-params">delegate</span>) </span>{
-      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> delegate !== <span class="hljs-string">&#x27;function&#x27;</span>) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;A data delegate must be a function.&#x27;</span>);
-      }
-
-      <span class="hljs-built_in">this</span>.dataDelegate = delegate;
-    } <span class="hljs-comment">// ## Socket debug mode</span></pre></div>
+              <div class='highlight'><pre>  setDataDelegate(delegate) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> delegate !== <span class="hljs-string">&#x27;function&#x27;</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;A data delegate must be a function.&#x27;</span>);
+    }
+    <span class="hljs-built_in">this</span>.dataDelegate = delegate;
+  }</pre></div>
             
           
             
-            <p>Sockets can catch exceptions happening in processes when data is
+            <h2 id="socket-debug-mode">Socket debug mode</h2>
+<p>Sockets can catch exceptions happening in processes when data is
 sent to them. These errors can then be reported to the network for
 notification to the developer.</p>
 
             
-              <div class='highlight'><pre>
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;setDebug&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setDebug</span>(<span class="hljs-params">active</span>) </span>{
-      <span class="hljs-built_in">this</span>.debug = active;
-      <span class="hljs-built_in">this</span>.emitEvent = <span class="hljs-built_in">this</span>.debug ? <span class="hljs-built_in">this</span>.debugEmitEvent : <span class="hljs-built_in">this</span>.regularEmitEvent;
-    } <span class="hljs-comment">// ## Socket identifiers</span></pre></div>
+              <div class='highlight'><pre>  setDebug(active) {
+    <span class="hljs-built_in">this</span>.debug = active;
+    <span class="hljs-built_in">this</span>.emitEvent = <span class="hljs-built_in">this</span>.debug ? <span class="hljs-built_in">this</span>.debugEmitEvent : <span class="hljs-built_in">this</span>.regularEmitEvent;
+  }</pre></div>
             
           
             
-            <p>Socket identifiers are mainly used for debugging purposes.
+            <h2 id="socket-identifiers">Socket identifiers</h2>
+<p>Socket identifiers are mainly used for debugging purposes.
 Typical identifiers look like <em>ReadFile:OUT -&gt; Display:IN</em>,
 but for sockets sending initial information packets to
 components may also loom like <em>DATA -&gt; ReadFile:SOURCE</em>.</p>
 
             
-              <div class='highlight'><pre>
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;getId&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getId</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> fromStr = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fromStr</span>(<span class="hljs-params">from</span>) </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>.concat(<span class="hljs-keyword">from</span>.process.id, <span class="hljs-string">&quot;() &quot;</span>).concat(<span class="hljs-keyword">from</span>.port.toUpperCase());
-      };
+              <div class='highlight'><pre>  getId() {
+    <span class="hljs-keyword">const</span> fromStr = <span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">from</span></span>) =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">from</span>.process.id}</span>() <span class="hljs-subst">${<span class="hljs-keyword">from</span>.port.toUpperCase()}</span>`</span>;
+    <span class="hljs-keyword">const</span> toStr = <span class="hljs-function">(<span class="hljs-params">to</span>) =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${to.port.toUpperCase()}</span> <span class="hljs-subst">${to.process.id}</span>()`</span>;
 
-      <span class="hljs-keyword">var</span> toStr = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">toStr</span>(<span class="hljs-params">to</span>) </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>.concat(to.port.toUpperCase(), <span class="hljs-string">&quot; &quot;</span>).concat(to.process.id, <span class="hljs-string">&quot;()&quot;</span>);
-      };
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.from &amp;&amp; !<span class="hljs-built_in">this</span>.to) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;UNDEFINED&#x27;</span>; }
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.from &amp;&amp; !<span class="hljs-built_in">this</span>.to) { <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${fromStr(<span class="hljs-built_in">this</span>.<span class="hljs-keyword">from</span>)}</span> -&gt; ANON`</span>; }
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.from) { <span class="hljs-keyword">return</span> <span class="hljs-string">`DATA -&gt; <span class="hljs-subst">${toStr(<span class="hljs-built_in">this</span>.to)}</span>`</span>; }
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${fromStr(<span class="hljs-built_in">this</span>.<span class="hljs-keyword">from</span>)}</span> -&gt; <span class="hljs-subst">${toStr(<span class="hljs-built_in">this</span>.to)}</span>`</span>;
+  }
 
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.from &amp;&amp; !<span class="hljs-built_in">this</span>.to) {
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;UNDEFINED&#x27;</span>;
-      }
+  <span class="hljs-comment">/* eslint-disable no-param-reassign */</span>
+  handleSocketEvent(event, payload, autoConnect = <span class="hljs-literal">true</span>) {
+    <span class="hljs-keyword">const</span> isIP = (event === <span class="hljs-string">&#x27;ip&#x27;</span>) &amp;&amp; IP.isIP(payload);
+    <span class="hljs-keyword">const</span> ip = isIP ? payload : legacyToIp(event, payload);
+    <span class="hljs-keyword">if</span> (!ip) { <span class="hljs-keyword">return</span>; }
 
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.from &amp;&amp; !<span class="hljs-built_in">this</span>.to) {
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>.concat(fromStr(<span class="hljs-built_in">this</span>.from), <span class="hljs-string">&quot; -&gt; ANON&quot;</span>);
-      }
-
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.from) {
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;DATA -&gt; &quot;</span>.concat(toStr(<span class="hljs-built_in">this</span>.to));
-      }
-
-      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>.concat(fromStr(<span class="hljs-built_in">this</span>.from), <span class="hljs-string">&quot; -&gt; &quot;</span>).concat(toStr(<span class="hljs-built_in">this</span>.to));
-    }
-    <span class="hljs-comment">/* eslint-disable no-param-reassign */</span>
-
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;handleSocketEvent&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleSocketEvent</span>(<span class="hljs-params">event, payload</span>) </span>{
-      <span class="hljs-keyword">var</span> autoConnect = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">2</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] : <span class="hljs-literal">true</span>;
-      <span class="hljs-keyword">var</span> isIP = event === <span class="hljs-string">&#x27;ip&#x27;</span> &amp;&amp; IP.isIP(payload);
-      <span class="hljs-keyword">var</span> ip = isIP ? payload : legacyToIp(event, payload);
-
-      <span class="hljs-keyword">if</span> (!ip) {
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isConnected() &amp;&amp; autoConnect &amp;&amp; <span class="hljs-built_in">this</span>.brackets.length === <span class="hljs-number">0</span>) {</pre></div>
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isConnected() &amp;&amp; autoConnect &amp;&amp; (<span class="hljs-built_in">this</span>.brackets.length === <span class="hljs-number">0</span>)) {</pre></div>
             
           
             
             <p>Connect before sending</p>
 
             
-              <div class='highlight'><pre>        <span class="hljs-built_in">this</span>.connect();
-      }
+              <div class='highlight'><pre>      <span class="hljs-built_in">this</span>.connect();
+    }
 
-      <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;begingroup&#x27;</span>) {
-        <span class="hljs-built_in">this</span>.brackets.push(payload);
-      }
+    <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;begingroup&#x27;</span>) {
+      <span class="hljs-built_in">this</span>.brackets.push(payload);
+    }
+    <span class="hljs-keyword">if</span> (isIP &amp;&amp; (ip.type === <span class="hljs-string">&#x27;openBracket&#x27;</span>)) {
+      <span class="hljs-built_in">this</span>.brackets.push(ip.data);
+    }
 
-      <span class="hljs-keyword">if</span> (isIP &amp;&amp; ip.type === <span class="hljs-string">&#x27;openBracket&#x27;</span>) {
-        <span class="hljs-built_in">this</span>.brackets.push(ip.data);
-      }
-
-      <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;endgroup&#x27;</span>) {</pre></div>
+    <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;endgroup&#x27;</span>) {</pre></div>
             
           
             
             <p>Prevent closing already closed groups</p>
 
             
-              <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.brackets.length === <span class="hljs-number">0</span>) {
-          <span class="hljs-keyword">return</span>;
-        } <span class="hljs-comment">// Add group name to bracket</span>
+              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.brackets.length === <span class="hljs-number">0</span>) { <span class="hljs-keyword">return</span>; }</pre></div>
+            
+          
+            
+            <p>Add group name to bracket</p>
 
-
-        ip.data = <span class="hljs-built_in">this</span>.brackets.pop();
-        payload = ip.data;
-      }
-
-      <span class="hljs-keyword">if</span> (isIP &amp;&amp; payload.type === <span class="hljs-string">&#x27;closeBracket&#x27;</span>) {</pre></div>
+            
+              <div class='highlight'><pre>      ip.data = <span class="hljs-built_in">this</span>.brackets.pop();
+      payload = ip.data;
+    }
+    <span class="hljs-keyword">if</span> (isIP &amp;&amp; (payload.type === <span class="hljs-string">&#x27;closeBracket&#x27;</span>)) {</pre></div>
             
           
             
             <p>Prevent closing already closed brackets</p>
 
             
-              <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.brackets.length === <span class="hljs-number">0</span>) {
-          <span class="hljs-keyword">return</span>;
-        }
+              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.brackets.length === <span class="hljs-number">0</span>) { <span class="hljs-keyword">return</span>; }
+      <span class="hljs-built_in">this</span>.brackets.pop();
+    }</pre></div>
+            
+          
+            
+            <p>Emit the IP Object</p>
 
-        <span class="hljs-built_in">this</span>.brackets.pop();
-      } <span class="hljs-comment">// Emit the IP Object</span>
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.emitEvent(<span class="hljs-string">&#x27;ip&#x27;</span>, ip);</pre></div>
+            
+          
+            
+            <p>Emit the legacy event</p>
 
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!ip || !ip.type) { <span class="hljs-keyword">return</span>; }
 
-      <span class="hljs-built_in">this</span>.emitEvent(<span class="hljs-string">&#x27;ip&#x27;</span>, ip); <span class="hljs-comment">// Emit the legacy event</span>
-
-      <span class="hljs-keyword">if</span> (!ip || !ip.type) {
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (isIP) {
-        <span class="hljs-keyword">var</span> legacy = ipToLegacy(ip);
-        event = legacy.event;
-        payload = legacy.payload;
-      }
-
-      <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;connect&#x27;</span>) {
-        <span class="hljs-built_in">this</span>.connected = <span class="hljs-literal">true</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;disconnect&#x27;</span>) {
-        <span class="hljs-built_in">this</span>.connected = <span class="hljs-literal">false</span>;
-      }
-
-      <span class="hljs-built_in">this</span>.emitEvent(event, payload);
+    <span class="hljs-keyword">if</span> (isIP) {
+      <span class="hljs-keyword">const</span> legacy = ipToLegacy(ip);
+      ({ event, payload } = legacy);
     }
-  }]);
 
-  <span class="hljs-keyword">return</span> InternalSocket;
-}(EventEmitter);
+    <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;connect&#x27;</span>) { <span class="hljs-built_in">this</span>.connected = <span class="hljs-literal">true</span>; }
+    <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;disconnect&#x27;</span>) { <span class="hljs-built_in">this</span>.connected = <span class="hljs-literal">false</span>; }
+    <span class="hljs-built_in">this</span>.emitEvent(event, payload);
+  }
+}
 
 <span class="hljs-built_in">exports</span>.InternalSocket = InternalSocket;
 
-<span class="hljs-built_in">exports</span>.createSocket = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> InternalSocket();
-};</pre></div>
+<span class="hljs-built_in">exports</span>.createSocket = <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">new</span> InternalSocket();</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InternalSocket.coffee">InternalSocket.coffee</a> file.</small></p>

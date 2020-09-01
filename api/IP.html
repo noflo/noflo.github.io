@@ -200,24 +200,14 @@ categories:
           <h1>{{ page.title }}</h1>
           
             
-            
-            
-              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-string">&quot;@babel/helpers - typeof&quot;</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>.iterator === <span class="hljs-string">&quot;symbol&quot;</span>) { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">else</span> { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> obj &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; obj.constructor === <span class="hljs-built_in">Symbol</span> &amp;&amp; obj !== <span class="hljs-built_in">Symbol</span>.prototype ? <span class="hljs-string">&quot;symbol&quot;</span> : <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">return</span> _typeof(obj); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_classCallCheck</span>(<span class="hljs-params">instance, Constructor</span>) </span>{ <span class="hljs-keyword">if</span> (!(instance <span class="hljs-keyword">instanceof</span> Constructor)) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Cannot call a class as a function&quot;</span>); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_defineProperties</span>(<span class="hljs-params">target, props</span>) </span>{ <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; props.length; i++) { <span class="hljs-keyword">var</span> descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || <span class="hljs-literal">false</span>; descriptor.configurable = <span class="hljs-literal">true</span>; <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;value&quot;</span> <span class="hljs-keyword">in</span> descriptor) descriptor.writable = <span class="hljs-literal">true</span>; <span class="hljs-built_in">Object</span>.defineProperty(target, descriptor.key, descriptor); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createClass</span>(<span class="hljs-params">Constructor, protoProps, staticProps</span>) </span>{ <span class="hljs-keyword">if</span> (protoProps) _defineProperties(Constructor.prototype, protoProps); <span class="hljs-keyword">if</span> (staticProps) _defineProperties(Constructor, staticProps); <span class="hljs-keyword">return</span> Constructor; }</pre></div>
-            
-          
-            
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2016</span><span class="hljs-number">-2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license</code></pre>
-<h2 id="information-packets">Information Packets</h2>
+
+            
+          
+            
+            <h2 id="information-packets">Information Packets</h2>
 <p>IP objects are the way information is transmitted between
 components running in a NoFlo network. IP objects contain
 a <code>type</code> that defines whether they’re regular <code>data</code> IPs
@@ -231,8 +221,12 @@ its own clone of the IP. This should be enabled for any
 IP object working with data that is safe to clone.</p>
 <p>It is also possible to carry metadata with an IP object.
 For example, the <code>datatype</code> and <code>schema</code> of the sending
-port is transmitted with the IP object.
-Valid IP types:</p>
+port is transmitted with the IP object.</p>
+
+            
+          
+            
+            <p>Valid IP types:</p>
 <ul>
 <li>‘data’</li>
 <li>‘openBracket’</li>
@@ -240,111 +234,85 @@ Valid IP types:</p>
 </ul>
 
             
-              <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = <span class="hljs-comment">/*#__PURE__*/</span><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-  _createClass(IP, <span class="hljs-literal">null</span>, [{
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;isIP&quot;</span>,</pre></div>
+              <div class='highlight'><pre>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IP</span> </span>{</pre></div>
             
           
             
             <p>Detects if an arbitrary value is an IP</p>
 
             
-              <div class='highlight'><pre>    value: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isIP</span>(<span class="hljs-params">obj</span>) </span>{
-      <span class="hljs-keyword">return</span> obj &amp;&amp; _typeof(obj) === <span class="hljs-string">&#x27;object&#x27;</span> &amp;&amp; obj.isIP === <span class="hljs-literal">true</span>;
-    } <span class="hljs-comment">// Creates as new IP object</span></pre></div>
+              <div class='highlight'><pre>  <span class="hljs-keyword">static</span> isIP(obj) {
+    <span class="hljs-keyword">return</span> obj &amp;&amp; (<span class="hljs-keyword">typeof</span> obj === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; (obj.isIP === <span class="hljs-literal">true</span>);
+  }</pre></div>
             
           
             
-            <p>Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
+            <p>Creates as new IP object
+Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
 
             
-              <div class='highlight'><pre>
-  }]);
-
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">IP</span>(<span class="hljs-params">type</span>) </span>{
-    <span class="hljs-keyword">var</span> _this = <span class="hljs-built_in">this</span>;
-
-    <span class="hljs-keyword">var</span> data = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] : <span class="hljs-literal">null</span>;
-    <span class="hljs-keyword">var</span> options = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">2</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] : {};
-
-    _classCallCheck(<span class="hljs-built_in">this</span>, IP);
-
+              <div class='highlight'><pre>  <span class="hljs-keyword">constructor</span>(type, data = null, options = {}) {
     <span class="hljs-built_in">this</span>.type = type || <span class="hljs-string">&#x27;data&#x27;</span>;
     <span class="hljs-built_in">this</span>.data = data;
     <span class="hljs-built_in">this</span>.isIP = <span class="hljs-literal">true</span>;
     <span class="hljs-built_in">this</span>.scope = <span class="hljs-literal">null</span>; <span class="hljs-comment">// sync scope id</span>
-
     <span class="hljs-built_in">this</span>.owner = <span class="hljs-literal">null</span>; <span class="hljs-comment">// packet owner process</span>
-
     <span class="hljs-built_in">this</span>.clonable = <span class="hljs-literal">false</span>; <span class="hljs-comment">// cloning safety flag</span>
-
     <span class="hljs-built_in">this</span>.index = <span class="hljs-literal">null</span>; <span class="hljs-comment">// addressable port index</span>
-
     <span class="hljs-built_in">this</span>.schema = <span class="hljs-literal">null</span>;
     <span class="hljs-built_in">this</span>.datatype = <span class="hljs-string">&#x27;all&#x27;</span>;
-
-    <span class="hljs-keyword">if</span> (_typeof(options) === <span class="hljs-string">&#x27;object&#x27;</span>) {
-      <span class="hljs-built_in">Object</span>.keys(options).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{
-        _this[key] = options[key];
-      });
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;object&#x27;</span>) {
+      <span class="hljs-built_in">Object</span>.keys(options).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> { <span class="hljs-built_in">this</span>[key] = options[key]; });
     }
-
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
-  } <span class="hljs-comment">// Creates a new IP copying its contents by value not reference</span>
+  }</pre></div>
+            
+          
+            
+            <p>Creates a new IP copying its contents by value not reference</p>
 
+            
+              <div class='highlight'><pre>  clone() {
+    <span class="hljs-keyword">const</span> ip = <span class="hljs-keyword">new</span> IP(<span class="hljs-built_in">this</span>.type);
+    <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> val = <span class="hljs-built_in">this</span>[key];
+      <span class="hljs-keyword">if</span> (key === <span class="hljs-string">&#x27;owner&#x27;</span>) { <span class="hljs-keyword">return</span>; }
+      <span class="hljs-keyword">if</span> (val === <span class="hljs-literal">null</span>) { <span class="hljs-keyword">return</span>; }
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> (val) === <span class="hljs-string">&#x27;object&#x27;</span>) {
+        ip[key] = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">JSON</span>.stringify(val));
+      } <span class="hljs-keyword">else</span> {
+        ip[key] = val;
+      }
+    });
+    <span class="hljs-keyword">return</span> ip;
+  }</pre></div>
+            
+          
+            
+            <p>Moves an IP to a different owner</p>
 
-  _createClass(IP, [{
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;clone&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">clone</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> _this2 = <span class="hljs-built_in">this</span>;
-
-      <span class="hljs-keyword">var</span> ip = <span class="hljs-keyword">new</span> IP(<span class="hljs-built_in">this</span>.type);
-      <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{
-        <span class="hljs-keyword">var</span> val = _this2[key];
-
-        <span class="hljs-keyword">if</span> (key === <span class="hljs-string">&#x27;owner&#x27;</span>) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        <span class="hljs-keyword">if</span> (val === <span class="hljs-literal">null</span>) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        <span class="hljs-keyword">if</span> (_typeof(val) === <span class="hljs-string">&#x27;object&#x27;</span>) {
-          ip[key] = <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-built_in">JSON</span>.stringify(val));
-        } <span class="hljs-keyword">else</span> {
-          ip[key] = val;
-        }
-      });
-      <span class="hljs-keyword">return</span> ip;
-    } <span class="hljs-comment">// Moves an IP to a different owner</span>
-
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;move&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">move</span>(<span class="hljs-params">owner</span>) </span>{</pre></div>
+            
+              <div class='highlight'><pre>  move(owner) {</pre></div>
             
           
             
             <p>no-op</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-built_in">this</span>.owner = owner;
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
-    } <span class="hljs-comment">// Frees IP contents</span>
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.owner = owner;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
+  }</pre></div>
+            
+          
+            
+            <p>Frees IP contents</p>
 
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;drop&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drop</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> _this3 = <span class="hljs-built_in">this</span>;
-
-      <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{
-        <span class="hljs-keyword">delete</span> _this3[key];
-      });
-    }
-  }]);
-
-  <span class="hljs-keyword">return</span> IP;
-}();</pre></div>
+            
+              <div class='highlight'><pre>  drop() {
+    <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> { <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>[key]; });
+  }
+};</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/IP.coffee">IP.coffee</a> file.</small></p>

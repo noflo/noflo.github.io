@@ -200,293 +200,177 @@ categories:
           <h1>{{ page.title }}</h1>
           
             
-            
-            
-              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-string">&quot;@babel/helpers - typeof&quot;</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>.iterator === <span class="hljs-string">&quot;symbol&quot;</span>) { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">else</span> { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> obj &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; obj.constructor === <span class="hljs-built_in">Symbol</span> &amp;&amp; obj !== <span class="hljs-built_in">Symbol</span>.prototype ? <span class="hljs-string">&quot;symbol&quot;</span> : <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">return</span> _typeof(obj); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_classCallCheck</span>(<span class="hljs-params">instance, Constructor</span>) </span>{ <span class="hljs-keyword">if</span> (!(instance <span class="hljs-keyword">instanceof</span> Constructor)) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Cannot call a class as a function&quot;</span>); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_defineProperties</span>(<span class="hljs-params">target, props</span>) </span>{ <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; props.length; i++) { <span class="hljs-keyword">var</span> descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || <span class="hljs-literal">false</span>; descriptor.configurable = <span class="hljs-literal">true</span>; <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;value&quot;</span> <span class="hljs-keyword">in</span> descriptor) descriptor.writable = <span class="hljs-literal">true</span>; <span class="hljs-built_in">Object</span>.defineProperty(target, descriptor.key, descriptor); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createClass</span>(<span class="hljs-params">Constructor, protoProps, staticProps</span>) </span>{ <span class="hljs-keyword">if</span> (protoProps) _defineProperties(Constructor.prototype, protoProps); <span class="hljs-keyword">if</span> (staticProps) _defineProperties(Constructor, staticProps); <span class="hljs-keyword">return</span> Constructor; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_get</span>(<span class="hljs-params">target, property, receiver</span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Reflect</span> !== <span class="hljs-string">&quot;undefined&quot;</span> &amp;&amp; <span class="hljs-built_in">Reflect</span>.get) { _get = <span class="hljs-built_in">Reflect</span>.get; } <span class="hljs-keyword">else</span> { _get = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_get</span>(<span class="hljs-params">target, property, receiver</span>) </span>{ <span class="hljs-keyword">var</span> base = _superPropBase(target, property); <span class="hljs-keyword">if</span> (!base) <span class="hljs-keyword">return</span>; <span class="hljs-keyword">var</span> desc = <span class="hljs-built_in">Object</span>.getOwnPropertyDescriptor(base, property); <span class="hljs-keyword">if</span> (desc.get) { <span class="hljs-keyword">return</span> desc.get.call(receiver); } <span class="hljs-keyword">return</span> desc.value; }; } <span class="hljs-keyword">return</span> _get(target, property, receiver || target); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_superPropBase</span>(<span class="hljs-params">object, property</span>) </span>{ <span class="hljs-keyword">while</span> (!<span class="hljs-built_in">Object</span>.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); <span class="hljs-keyword">if</span> (object === <span class="hljs-literal">null</span>) <span class="hljs-keyword">break</span>; } <span class="hljs-keyword">return</span> object; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_inherits</span>(<span class="hljs-params">subClass, superClass</span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> superClass !== <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; superClass !== <span class="hljs-literal">null</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Super expression must either be null or a function&quot;</span>); } subClass.prototype = <span class="hljs-built_in">Object</span>.create(superClass &amp;&amp; superClass.prototype, { <span class="hljs-attr">constructor</span>: { <span class="hljs-attr">value</span>: subClass, <span class="hljs-attr">writable</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">configurable</span>: <span class="hljs-literal">true</span> } }); <span class="hljs-keyword">if</span> (superClass) _setPrototypeOf(subClass, superClass); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_setPrototypeOf</span>(<span class="hljs-params">o, p</span>) </span>{ _setPrototypeOf = <span class="hljs-built_in">Object</span>.setPrototypeOf || <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_setPrototypeOf</span>(<span class="hljs-params">o, p</span>) </span>{ o.__proto__ = p; <span class="hljs-keyword">return</span> o; }; <span class="hljs-keyword">return</span> _setPrototypeOf(o, p); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createSuper</span>(<span class="hljs-params">Derived</span>) </span>{ <span class="hljs-keyword">var</span> hasNativeReflectConstruct = _isNativeReflectConstruct(); <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createSuperInternal</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">var</span> Super = _getPrototypeOf(Derived), result; <span class="hljs-keyword">if</span> (hasNativeReflectConstruct) { <span class="hljs-keyword">var</span> NewTarget = _getPrototypeOf(<span class="hljs-built_in">this</span>).constructor; result = <span class="hljs-built_in">Reflect</span>.construct(Super, <span class="hljs-built_in">arguments</span>, NewTarget); } <span class="hljs-keyword">else</span> { result = Super.apply(<span class="hljs-built_in">this</span>, <span class="hljs-built_in">arguments</span>); } <span class="hljs-keyword">return</span> _possibleConstructorReturn(<span class="hljs-built_in">this</span>, result); }; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_possibleConstructorReturn</span>(<span class="hljs-params">self, call</span>) </span>{ <span class="hljs-keyword">if</span> (call &amp;&amp; (_typeof(call) === <span class="hljs-string">&quot;object&quot;</span> || <span class="hljs-keyword">typeof</span> call === <span class="hljs-string">&quot;function&quot;</span>)) { <span class="hljs-keyword">return</span> call; } <span class="hljs-keyword">return</span> _assertThisInitialized(self); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_assertThisInitialized</span>(<span class="hljs-params">self</span>) </span>{ <span class="hljs-keyword">if</span> (self === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">ReferenceError</span>(<span class="hljs-string">&quot;this hasn&#x27;t been initialised - super() hasn&#x27;t been called&quot;</span>); } <span class="hljs-keyword">return</span> self; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_isNativeReflectConstruct</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Reflect</span> === <span class="hljs-string">&quot;undefined&quot;</span> || !<span class="hljs-built_in">Reflect</span>.construct) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Reflect</span>.construct.sham) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Proxy</span> === <span class="hljs-string">&quot;function&quot;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">try</span> { <span class="hljs-built_in">Date</span>.prototype.toString.call(<span class="hljs-built_in">Reflect</span>.construct(<span class="hljs-built_in">Date</span>, [], <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{})); <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; } <span class="hljs-keyword">catch</span> (e) { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getPrototypeOf</span>(<span class="hljs-params">o</span>) </span>{ _getPrototypeOf = <span class="hljs-built_in">Object</span>.setPrototypeOf ? <span class="hljs-built_in">Object</span>.getPrototypeOf : <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getPrototypeOf</span>(<span class="hljs-params">o</span>) </span>{ <span class="hljs-keyword">return</span> o.__proto__ || <span class="hljs-built_in">Object</span>.getPrototypeOf(o); }; <span class="hljs-keyword">return</span> _getPrototypeOf(o); }</pre></div>
-            
-          
-            
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">var</span> BasePort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./BasePort&#x27;</span>);
-
-<span class="hljs-keyword">var</span> IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>); <span class="hljs-comment">// ## NoFlo outport</span></pre></div>
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> BasePort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./BasePort&#x27;</span>);
+<span class="hljs-keyword">const</span> IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);</pre></div>
             
           
             
-            <p>Outport Port (outport) implementation for NoFlo components.
+            <h2 id="noflo-outport">NoFlo outport</h2>
+<p>Outport Port (outport) implementation for NoFlo components.
 These ports are the way a component sends Information Packets.</p>
 
             
-              <div class='highlight'><pre>
-
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-comment">/*#__PURE__*/</span><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">_BasePort</span>) </span>{
-  _inherits(OutPort, _BasePort);
-
-  <span class="hljs-keyword">var</span> _super = _createSuper(OutPort);
-
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">OutPort</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">var</span> _this;
-
-    <span class="hljs-keyword">var</span> options = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : {};
-
-    _classCallCheck(<span class="hljs-built_in">this</span>, OutPort);
-
-    <span class="hljs-keyword">var</span> opts = options;
-
-    <span class="hljs-keyword">if</span> (opts.scoped == <span class="hljs-literal">null</span>) {
-      opts.scoped = <span class="hljs-literal">true</span>;
-    }
-
-    _this = _super.call(<span class="hljs-built_in">this</span>, opts);
-    _this.cache = {};
-    <span class="hljs-keyword">return</span> _this;
+              <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
+  <span class="hljs-keyword">constructor</span>(options = {}) {
+    <span class="hljs-keyword">const</span> opts = options;
+    <span class="hljs-keyword">if</span> (opts.scoped == <span class="hljs-literal">null</span>) { opts.scoped = <span class="hljs-literal">true</span>; }
+    <span class="hljs-built_in">super</span>(opts);
+    <span class="hljs-built_in">this</span>.cache = {};
   }
 
-  _createClass(OutPort, [{
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;attach&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">attach</span>(<span class="hljs-params">socket</span>) </span>{
-      <span class="hljs-keyword">var</span> index = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] : <span class="hljs-literal">null</span>;
-
-      _get(_getPrototypeOf(OutPort.prototype), <span class="hljs-string">&quot;attach&quot;</span>, <span class="hljs-built_in">this</span>).call(<span class="hljs-built_in">this</span>, socket, index);
-
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isCaching() &amp;&amp; <span class="hljs-built_in">this</span>.cache[index] != <span class="hljs-literal">null</span>) {
-        <span class="hljs-built_in">this</span>.send(<span class="hljs-built_in">this</span>.cache[index], index);
-      }
+  attach(socket, index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-built_in">super</span>.attach(socket, index);
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isCaching() &amp;&amp; (<span class="hljs-built_in">this</span>.cache[index] != <span class="hljs-literal">null</span>)) {
+      <span class="hljs-built_in">this</span>.send(<span class="hljs-built_in">this</span>.cache[index], index);
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;connect&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connect</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> index = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : <span class="hljs-literal">null</span>;
-      <span class="hljs-keyword">var</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
-      <span class="hljs-built_in">this</span>.checkRequired(sockets);
-      sockets.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">socket</span>) </span>{
-        <span class="hljs-keyword">if</span> (!socket) {
-          <span class="hljs-keyword">return</span>;
-        }
+  }
 
-        socket.connect();
-      });
+  connect(index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">const</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
+    <span class="hljs-built_in">this</span>.checkRequired(sockets);
+    sockets.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!socket) { <span class="hljs-keyword">return</span>; }
+      socket.connect();
+    });
+  }
+
+  beginGroup(group, index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">const</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
+    <span class="hljs-built_in">this</span>.checkRequired(sockets);
+    sockets.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!socket) { <span class="hljs-keyword">return</span>; }
+      socket.beginGroup(group);
+    });
+  }
+
+  send(data, index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">const</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
+    <span class="hljs-built_in">this</span>.checkRequired(sockets);
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isCaching() &amp;&amp; (data !== <span class="hljs-built_in">this</span>.cache[index])) {
+      <span class="hljs-built_in">this</span>.cache[index] = data;
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;beginGroup&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">beginGroup</span>(<span class="hljs-params">group</span>) </span>{
-      <span class="hljs-keyword">var</span> index = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] : <span class="hljs-literal">null</span>;
-      <span class="hljs-keyword">var</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
-      <span class="hljs-built_in">this</span>.checkRequired(sockets);
-      sockets.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">socket</span>) </span>{
-        <span class="hljs-keyword">if</span> (!socket) {
-          <span class="hljs-keyword">return</span>;
-        }
+    sockets.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!socket) { <span class="hljs-keyword">return</span>; }
+      socket.send(data);
+    });
+  }
 
-        socket.beginGroup(group);
-      });
+  endGroup(index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">const</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
+    <span class="hljs-built_in">this</span>.checkRequired(sockets);
+    sockets.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!socket) { <span class="hljs-keyword">return</span>; }
+      socket.endGroup();
+    });
+  }
+
+  disconnect(index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">const</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
+    <span class="hljs-built_in">this</span>.checkRequired(sockets);
+    sockets.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!socket) { <span class="hljs-keyword">return</span>; }
+      socket.disconnect();
+    });
+  }
+
+  sendIP(type, data, options, index, autoConnect = <span class="hljs-literal">true</span>) {
+    <span class="hljs-keyword">let</span> ip;
+    <span class="hljs-keyword">let</span> idx = index;
+    <span class="hljs-keyword">if</span> (IP.isIP(type)) {
+      ip = type;
+      idx = ip.index;
+    } <span class="hljs-keyword">else</span> {
+      ip = <span class="hljs-keyword">new</span> IP(type, data, options);
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;send&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send</span>(<span class="hljs-params">data</span>) </span>{
-      <span class="hljs-keyword">var</span> index = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] : <span class="hljs-literal">null</span>;
-      <span class="hljs-keyword">var</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
-      <span class="hljs-built_in">this</span>.checkRequired(sockets);
+    <span class="hljs-keyword">const</span> sockets = <span class="hljs-built_in">this</span>.getSockets(idx);
+    <span class="hljs-built_in">this</span>.checkRequired(sockets);
 
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isCaching() &amp;&amp; data !== <span class="hljs-built_in">this</span>.cache[index]) {
-        <span class="hljs-built_in">this</span>.cache[index] = data;
-      }
-
-      sockets.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">socket</span>) </span>{
-        <span class="hljs-keyword">if</span> (!socket) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        socket.send(data);
-      });
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;endGroup&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">endGroup</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> index = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : <span class="hljs-literal">null</span>;
-      <span class="hljs-keyword">var</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
-      <span class="hljs-built_in">this</span>.checkRequired(sockets);
-      sockets.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">socket</span>) </span>{
-        <span class="hljs-keyword">if</span> (!socket) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        socket.endGroup();
-      });
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;disconnect&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">disconnect</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> index = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : <span class="hljs-literal">null</span>;
-      <span class="hljs-keyword">var</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
-      <span class="hljs-built_in">this</span>.checkRequired(sockets);
-      sockets.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">socket</span>) </span>{
-        <span class="hljs-keyword">if</span> (!socket) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        socket.disconnect();
-      });
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;sendIP&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sendIP</span>(<span class="hljs-params">type, data, options, index</span>) </span>{
-      <span class="hljs-keyword">var</span> autoConnect = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">4</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">4</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">4</span>] : <span class="hljs-literal">true</span>;
-      <span class="hljs-keyword">var</span> ip;
-      <span class="hljs-keyword">var</span> idx = index;
-
-      <span class="hljs-keyword">if</span> (IP.isIP(type)) {
-        ip = type;
-        idx = ip.index;
-      } <span class="hljs-keyword">else</span> {
-        ip = <span class="hljs-keyword">new</span> IP(type, data, options);
-      }
-
-      <span class="hljs-keyword">var</span> sockets = <span class="hljs-built_in">this</span>.getSockets(idx);
-      <span class="hljs-built_in">this</span>.checkRequired(sockets);
-
-      <span class="hljs-keyword">if</span> (ip.datatype === <span class="hljs-string">&#x27;all&#x27;</span>) {</pre></div>
+    <span class="hljs-keyword">if</span> (ip.datatype === <span class="hljs-string">&#x27;all&#x27;</span>) {</pre></div>
             
           
             
             <p>Stamp non-specific IP objects with port datatype</p>
 
             
-              <div class='highlight'><pre>        ip.datatype = <span class="hljs-built_in">this</span>.getDataType();
-      }
-
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.getSchema() &amp;&amp; !ip.schema) {</pre></div>
+              <div class='highlight'><pre>      ip.datatype = <span class="hljs-built_in">this</span>.getDataType();
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.getSchema() &amp;&amp; !ip.schema) {</pre></div>
             
           
             
             <p>Stamp non-specific IP objects with port schema</p>
 
             
-              <div class='highlight'><pre>        ip.schema = <span class="hljs-built_in">this</span>.getSchema();
+              <div class='highlight'><pre>      ip.schema = <span class="hljs-built_in">this</span>.getSchema();
+    }
+
+    <span class="hljs-keyword">const</span> cachedData = <span class="hljs-built_in">this</span>.cache[idx] != <span class="hljs-literal">null</span> ? <span class="hljs-built_in">this</span>.cache[idx].data : <span class="hljs-literal">undefined</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isCaching() &amp;&amp; data !== cachedData) {
+      <span class="hljs-built_in">this</span>.cache[idx] = ip;
+    }
+    <span class="hljs-keyword">let</span> pristine = <span class="hljs-literal">true</span>;
+    sockets.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!socket) { <span class="hljs-keyword">return</span>; }
+      <span class="hljs-keyword">if</span> (pristine) {
+        socket.post(ip, autoConnect);
+        pristine = <span class="hljs-literal">false</span>;
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">if</span> (ip.clonable) { ip = ip.clone(); }
+        socket.post(ip, autoConnect);
       }
+    });
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
+  }
 
-      <span class="hljs-keyword">var</span> cachedData = <span class="hljs-built_in">this</span>.cache[idx] != <span class="hljs-literal">null</span> ? <span class="hljs-built_in">this</span>.cache[idx].data : <span class="hljs-literal">undefined</span>;
+  openBracket(data = <span class="hljs-literal">null</span>, options = {}, index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sendIP(<span class="hljs-string">&#x27;openBracket&#x27;</span>, data, options, index);
+  }
 
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isCaching() &amp;&amp; data !== cachedData) {
-        <span class="hljs-built_in">this</span>.cache[idx] = ip;
-      }
+  data(data, options = {}, index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sendIP(<span class="hljs-string">&#x27;data&#x27;</span>, data, options, index);
+  }
 
-      <span class="hljs-keyword">var</span> pristine = <span class="hljs-literal">true</span>;
-      sockets.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">socket</span>) </span>{
-        <span class="hljs-keyword">if</span> (!socket) {
-          <span class="hljs-keyword">return</span>;
-        }
+  closeBracket(data = <span class="hljs-literal">null</span>, options = {}, index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sendIP(<span class="hljs-string">&#x27;closeBracket&#x27;</span>, data, options, index);
+  }
 
-        <span class="hljs-keyword">if</span> (pristine) {
-          socket.post(ip, autoConnect);
-          pristine = <span class="hljs-literal">false</span>;
-        } <span class="hljs-keyword">else</span> {
-          <span class="hljs-keyword">if</span> (ip.clonable) {
-            ip = ip.clone();
-          }
+  checkRequired(sockets) {
+    <span class="hljs-keyword">if</span> ((sockets.length === <span class="hljs-number">0</span>) &amp;&amp; <span class="hljs-built_in">this</span>.isRequired()) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.getId()}</span>: No connections available`</span>);
+    }
+  }
 
-          socket.post(ip, autoConnect);
-        }
-      });
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;openBracket&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">openBracket</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> data = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : <span class="hljs-literal">null</span>;
-      <span class="hljs-keyword">var</span> options = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] : {};
-      <span class="hljs-keyword">var</span> index = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">2</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] : <span class="hljs-literal">null</span>;
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sendIP(<span class="hljs-string">&#x27;openBracket&#x27;</span>, data, options, index);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;data&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">data</span>(<span class="hljs-params">_data</span>) </span>{
-      <span class="hljs-keyword">var</span> options = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] : {};
-      <span class="hljs-keyword">var</span> index = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">2</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] : <span class="hljs-literal">null</span>;
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sendIP(<span class="hljs-string">&#x27;data&#x27;</span>, _data, options, index);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;closeBracket&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">closeBracket</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> data = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : <span class="hljs-literal">null</span>;
-      <span class="hljs-keyword">var</span> options = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">1</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>] : {};
-      <span class="hljs-keyword">var</span> index = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">2</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">2</span>] : <span class="hljs-literal">null</span>;
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sendIP(<span class="hljs-string">&#x27;closeBracket&#x27;</span>, data, options, index);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;checkRequired&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkRequired</span>(<span class="hljs-params">sockets</span>) </span>{
-      <span class="hljs-keyword">if</span> (sockets.length === <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">this</span>.isRequired()) {
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;&quot;</span>.concat(<span class="hljs-built_in">this</span>.getId(), <span class="hljs-string">&quot;: No connections available&quot;</span>));
-      }
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;getSockets&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSockets</span>(<span class="hljs-params">index</span>) </span>{</pre></div>
+  getSockets(index) {</pre></div>
             
           
             
             <p>Addressable sockets affect only one connection at time</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
-        <span class="hljs-keyword">if</span> (index === <span class="hljs-literal">null</span>) {
-          <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;&quot;</span>.concat(<span class="hljs-built_in">this</span>.getId(), <span class="hljs-string">&quot; Socket ID required&quot;</span>));
-        }
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
+      <span class="hljs-keyword">if</span> (index === <span class="hljs-literal">null</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.getId()}</span> Socket ID required`</span>); }
+      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.sockets[index]) { <span class="hljs-keyword">return</span> []; }
+      <span class="hljs-keyword">return</span> [<span class="hljs-built_in">this</span>.sockets[index]];
+    }</pre></div>
+            
+          
+            
+            <p>Regular sockets affect all outbound connections</p>
 
-        <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.sockets[index]) {
-          <span class="hljs-keyword">return</span> [];
-        }
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sockets;
+  }
 
-        <span class="hljs-keyword">return</span> [<span class="hljs-built_in">this</span>.sockets[index]];
-      } <span class="hljs-comment">// Regular sockets affect all outbound connections</span>
-
-
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sockets;
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;isCaching&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isCaching</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.caching) {
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-      }
-
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-    }
-  }]);
-
-  <span class="hljs-keyword">return</span> OutPort;
-}(BasePort);</pre></div>
+  isCaching() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.caching) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+};</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee">OutPort.coffee</a> file.</small></p>

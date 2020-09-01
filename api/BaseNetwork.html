@@ -200,34 +200,6 @@ categories:
           <h1>{{ page.title }}</h1>
           
             
-            
-            
-              <div class='highlight'><pre><span class="hljs-meta">&quot;use strict&quot;</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-string">&quot;@babel/helpers - typeof&quot;</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span>.iterator === <span class="hljs-string">&quot;symbol&quot;</span>) { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">else</span> { _typeof = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_typeof</span>(<span class="hljs-params">obj</span>) </span>{ <span class="hljs-keyword">return</span> obj &amp;&amp; <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; obj.constructor === <span class="hljs-built_in">Symbol</span> &amp;&amp; obj !== <span class="hljs-built_in">Symbol</span>.prototype ? <span class="hljs-string">&quot;symbol&quot;</span> : <span class="hljs-keyword">typeof</span> obj; }; } <span class="hljs-keyword">return</span> _typeof(obj); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_classCallCheck</span>(<span class="hljs-params">instance, Constructor</span>) </span>{ <span class="hljs-keyword">if</span> (!(instance <span class="hljs-keyword">instanceof</span> Constructor)) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Cannot call a class as a function&quot;</span>); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_defineProperties</span>(<span class="hljs-params">target, props</span>) </span>{ <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; props.length; i++) { <span class="hljs-keyword">var</span> descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || <span class="hljs-literal">false</span>; descriptor.configurable = <span class="hljs-literal">true</span>; <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;value&quot;</span> <span class="hljs-keyword">in</span> descriptor) descriptor.writable = <span class="hljs-literal">true</span>; <span class="hljs-built_in">Object</span>.defineProperty(target, descriptor.key, descriptor); } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createClass</span>(<span class="hljs-params">Constructor, protoProps, staticProps</span>) </span>{ <span class="hljs-keyword">if</span> (protoProps) _defineProperties(Constructor.prototype, protoProps); <span class="hljs-keyword">if</span> (staticProps) _defineProperties(Constructor, staticProps); <span class="hljs-keyword">return</span> Constructor; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_inherits</span>(<span class="hljs-params">subClass, superClass</span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> superClass !== <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; superClass !== <span class="hljs-literal">null</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Super expression must either be null or a function&quot;</span>); } subClass.prototype = <span class="hljs-built_in">Object</span>.create(superClass &amp;&amp; superClass.prototype, { <span class="hljs-attr">constructor</span>: { <span class="hljs-attr">value</span>: subClass, <span class="hljs-attr">writable</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">configurable</span>: <span class="hljs-literal">true</span> } }); <span class="hljs-keyword">if</span> (superClass) _setPrototypeOf(subClass, superClass); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_setPrototypeOf</span>(<span class="hljs-params">o, p</span>) </span>{ _setPrototypeOf = <span class="hljs-built_in">Object</span>.setPrototypeOf || <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_setPrototypeOf</span>(<span class="hljs-params">o, p</span>) </span>{ o.__proto__ = p; <span class="hljs-keyword">return</span> o; }; <span class="hljs-keyword">return</span> _setPrototypeOf(o, p); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createSuper</span>(<span class="hljs-params">Derived</span>) </span>{ <span class="hljs-keyword">var</span> hasNativeReflectConstruct = _isNativeReflectConstruct(); <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_createSuperInternal</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">var</span> Super = _getPrototypeOf(Derived), result; <span class="hljs-keyword">if</span> (hasNativeReflectConstruct) { <span class="hljs-keyword">var</span> NewTarget = _getPrototypeOf(<span class="hljs-built_in">this</span>).constructor; result = <span class="hljs-built_in">Reflect</span>.construct(Super, <span class="hljs-built_in">arguments</span>, NewTarget); } <span class="hljs-keyword">else</span> { result = Super.apply(<span class="hljs-built_in">this</span>, <span class="hljs-built_in">arguments</span>); } <span class="hljs-keyword">return</span> _possibleConstructorReturn(<span class="hljs-built_in">this</span>, result); }; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_possibleConstructorReturn</span>(<span class="hljs-params">self, call</span>) </span>{ <span class="hljs-keyword">if</span> (call &amp;&amp; (_typeof(call) === <span class="hljs-string">&quot;object&quot;</span> || <span class="hljs-keyword">typeof</span> call === <span class="hljs-string">&quot;function&quot;</span>)) { <span class="hljs-keyword">return</span> call; } <span class="hljs-keyword">return</span> _assertThisInitialized(self); }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_assertThisInitialized</span>(<span class="hljs-params">self</span>) </span>{ <span class="hljs-keyword">if</span> (self === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">ReferenceError</span>(<span class="hljs-string">&quot;this hasn&#x27;t been initialised - super() hasn&#x27;t been called&quot;</span>); } <span class="hljs-keyword">return</span> self; }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_isNativeReflectConstruct</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Reflect</span> === <span class="hljs-string">&quot;undefined&quot;</span> || !<span class="hljs-built_in">Reflect</span>.construct) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Reflect</span>.construct.sham) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Proxy</span> === <span class="hljs-string">&quot;function&quot;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">try</span> { <span class="hljs-built_in">Date</span>.prototype.toString.call(<span class="hljs-built_in">Reflect</span>.construct(<span class="hljs-built_in">Date</span>, [], <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{})); <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; } <span class="hljs-keyword">catch</span> (e) { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; } }
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getPrototypeOf</span>(<span class="hljs-params">o</span>) </span>{ _getPrototypeOf = <span class="hljs-built_in">Object</span>.setPrototypeOf ? <span class="hljs-built_in">Object</span>.getPrototypeOf : <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">_getPrototypeOf</span>(<span class="hljs-params">o</span>) </span>{ <span class="hljs-keyword">return</span> o.__proto__ || <span class="hljs-built_in">Object</span>.getPrototypeOf(o); }; <span class="hljs-keyword">return</span> _getPrototypeOf(o); }</pre></div>
-            
-          
-            
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
 (c) <span class="hljs-number">2013</span><span class="hljs-number">-2018</span> Flowhub UG
 (c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
@@ -239,51 +211,44 @@ NoFlo may be freely distributed under the MIT license</code></pre>
     no-param-reassign,
     no-underscore-dangle,
 */</span>
-<span class="hljs-keyword">var</span> _require = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>),
-    EventEmitter = _require.EventEmitter;
 
-<span class="hljs-keyword">var</span> internalSocket = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InternalSocket&#x27;</span>);
-
-<span class="hljs-keyword">var</span> platform = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>);
-
-<span class="hljs-keyword">var</span> componentLoader = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./ComponentLoader&#x27;</span>);
-
-<span class="hljs-keyword">var</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Utils&#x27;</span>);
-
-<span class="hljs-keyword">var</span> IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);
+<span class="hljs-keyword">const</span> { EventEmitter } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>);
+<span class="hljs-keyword">const</span> internalSocket = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InternalSocket&#x27;</span>);
+<span class="hljs-keyword">const</span> platform = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>);
+<span class="hljs-keyword">const</span> componentLoader = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./ComponentLoader&#x27;</span>);
+<span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Utils&#x27;</span>);
+<span class="hljs-keyword">const</span> IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connectPort</span>(<span class="hljs-params">socket, process, port, index, inbound, callback</span>) </span>{
   <span class="hljs-keyword">if</span> (inbound) {
     socket.to = {
-      <span class="hljs-attr">process</span>: process,
-      <span class="hljs-attr">port</span>: port,
-      <span class="hljs-attr">index</span>: index
+      process,
+      port,
+      index,
     };
 
     <span class="hljs-keyword">if</span> (!process.component.inPorts || !process.component.inPorts[port]) {
-      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;No inport &#x27;&quot;</span>.concat(port, <span class="hljs-string">&quot;&#x27; defined in process &quot;</span>).concat(process.id, <span class="hljs-string">&quot; (&quot;</span>).concat(socket.getId(), <span class="hljs-string">&quot;)&quot;</span>)));
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No inport &#x27;<span class="hljs-subst">${port}</span>&#x27; defined in process <span class="hljs-subst">${process.id}</span> (<span class="hljs-subst">${socket.getId()}</span>)`</span>));
       <span class="hljs-keyword">return</span>;
     }
-
     <span class="hljs-keyword">if</span> (process.component.inPorts[port].isAddressable()) {
       process.component.inPorts[port].attach(socket, index);
       callback();
       <span class="hljs-keyword">return</span>;
     }
-
     process.component.inPorts[port].attach(socket);
     callback();
     <span class="hljs-keyword">return</span>;
   }
 
   socket.from = {
-    <span class="hljs-attr">process</span>: process,
-    <span class="hljs-attr">port</span>: port,
-    <span class="hljs-attr">index</span>: index
+    process,
+    port,
+    index,
   };
 
   <span class="hljs-keyword">if</span> (!process.component.outPorts || !process.component.outPorts[port]) {
-    callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;No outport &#x27;&quot;</span>.concat(port, <span class="hljs-string">&quot;&#x27; defined in process &quot;</span>).concat(process.id, <span class="hljs-string">&quot; (&quot;</span>).concat(socket.getId(), <span class="hljs-string">&quot;)&quot;</span>)));
+    callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No outport &#x27;<span class="hljs-subst">${port}</span>&#x27; defined in process <span class="hljs-subst">${process.id}</span> (<span class="hljs-subst">${socket.getId()}</span>)`</span>));
     <span class="hljs-keyword">return</span>;
   }
 
@@ -292,20 +257,19 @@ NoFlo may be freely distributed under the MIT license</code></pre>
     callback();
     <span class="hljs-keyword">return</span>;
   }
-
   process.component.outPorts[port].attach(socket);
   callback();
 }
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sendInitial</span>(<span class="hljs-params">initial</span>) </span>{
-  initial.socket.post(<span class="hljs-keyword">new</span> IP(<span class="hljs-string">&#x27;data&#x27;</span>, initial.data, {
-    <span class="hljs-attr">initial</span>: <span class="hljs-literal">true</span>
-  }));
-} <span class="hljs-comment">// ## The NoFlo network coordinator</span></pre></div>
+  initial.socket.post(<span class="hljs-keyword">new</span> IP(<span class="hljs-string">&#x27;data&#x27;</span>, initial.data,
+    { <span class="hljs-attr">initial</span>: <span class="hljs-literal">true</span> }));
+}</pre></div>
             
           
             
-            <p>NoFlo networks consist of processes connected to each other
+            <h2 id="the-noflo-network-coordinator">The NoFlo network coordinator</h2>
+<p>NoFlo networks consist of processes connected to each other
 via sockets attached from outports to inports.</p>
 <p>The role of the network coordinator is to take a graph and
 instantiate all the necessary processes from the designated
@@ -313,12 +277,7 @@ components, attach sockets between them, and handle the sending
 of Initial Information Packets.</p>
 
             
-              <div class='highlight'><pre>
-
-<span class="hljs-keyword">var</span> BaseNetwork = <span class="hljs-comment">/*#__PURE__*/</span><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">_EventEmitter</span>) </span>{
-  _inherits(BaseNetwork, _EventEmitter);
-
-  <span class="hljs-keyword">var</span> _super = _createSuper(BaseNetwork);</pre></div>
+              <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BaseNetwork</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{</pre></div>
             
           
             
@@ -327,204 +286,203 @@ they will load all the needed components, instantiate them, and
 set up the defined connections and IIPs.</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">BaseNetwork</span>(<span class="hljs-params">graph, options</span>) </span>{
-    <span class="hljs-keyword">var</span> _this;
-
-    _classCallCheck(<span class="hljs-built_in">this</span>, BaseNetwork);
-
-    <span class="hljs-keyword">if</span> (options == <span class="hljs-literal">null</span>) {
-      options = {};
-    }
-
-    _this = _super.call(<span class="hljs-built_in">this</span>);
-    _this.options = options; <span class="hljs-comment">// Processes contains all the instantiated components for this network</span>
-
-    _this.processes = {}; <span class="hljs-comment">// Connections contains all the socket connections in the network</span>
-
-    _this.connections = []; <span class="hljs-comment">// Initials contains all Initial Information Packets (IIPs)</span>
-
-    _this.initials = [];
-    _this.nextInitials = []; <span class="hljs-comment">// Container to hold sockets that will be sending default data.</span>
-
-    _this.defaults = []; <span class="hljs-comment">// The Graph this network is instantiated with</span>
-
-    _this.graph = graph;
-    _this.started = <span class="hljs-literal">false</span>;
-    _this.stopped = <span class="hljs-literal">true</span>;
-    _this.debug = <span class="hljs-literal">true</span>;
-    _this.eventBuffer = []; <span class="hljs-comment">// On Node.js we default the baseDir for component loading to</span></pre></div>
+              <div class='highlight'><pre>  <span class="hljs-keyword">constructor</span>(graph, options) {
+    <span class="hljs-keyword">if</span> (options == <span class="hljs-literal">null</span>) { options = {}; }
+    <span class="hljs-built_in">super</span>();
+    <span class="hljs-built_in">this</span>.options = options;</pre></div>
             
           
             
-            <p>the current working directory</p>
+            <p>Processes contains all the instantiated components for this network</p>
 
             
-              <div class='highlight'><pre>
-    <span class="hljs-keyword">if</span> (!platform.isBrowser()) {
-      _this.baseDir = graph.baseDir || process.cwd(); <span class="hljs-comment">// On browser we default the baseDir to the Component loading</span></pre></div>
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.processes = {};</pre></div>
             
           
             
-            <p>root</p>
+            <p>Connections contains all the socket connections in the network</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.connections = [];</pre></div>
+            
+          
+            
+            <p>Initials contains all Initial Information Packets (IIPs)</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.initials = [];
+    <span class="hljs-built_in">this</span>.nextInitials = [];</pre></div>
+            
+          
+            
+            <p>Container to hold sockets that will be sending default data.</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.defaults = [];</pre></div>
+            
+          
+            
+            <p>The Graph this network is instantiated with</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.graph = graph;
+    <span class="hljs-built_in">this</span>.started = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.stopped = <span class="hljs-literal">true</span>;
+    <span class="hljs-built_in">this</span>.debug = <span class="hljs-literal">true</span>;
+    <span class="hljs-built_in">this</span>.eventBuffer = [];</pre></div>
+            
+          
+            
+            <p>On Node.js we default the baseDir for component loading to
+the current working directory</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!platform.isBrowser()) {
+      <span class="hljs-built_in">this</span>.baseDir = graph.baseDir || process.cwd();</pre></div>
+            
+          
+            
+            <p>On browser we default the baseDir to the Component loading
+root</p>
 
             
               <div class='highlight'><pre>    } <span class="hljs-keyword">else</span> {
-      _this.baseDir = graph.baseDir || <span class="hljs-string">&#x27;/&#x27;</span>;
-    } <span class="hljs-comment">// As most NoFlo networks are long-running processes, the</span></pre></div>
+      <span class="hljs-built_in">this</span>.baseDir = graph.baseDir || <span class="hljs-string">&#x27;/&#x27;</span>;
+    }</pre></div>
             
           
             
-            <p>network coordinator marks down the start-up time. This
+            <p>As most NoFlo networks are long-running processes, the
+network coordinator marks down the start-up time. This
 way we can calculate the uptime of the network.</p>
 
             
-              <div class='highlight'><pre>
-
-    _this.startupDate = <span class="hljs-literal">null</span>; <span class="hljs-comment">// Initialize a Component Loader for the network</span>
-
-    <span class="hljs-keyword">if</span> (graph.componentLoader) {
-      _this.loader = graph.componentLoader;
-    } <span class="hljs-keyword">else</span> {
-      _this.loader = <span class="hljs-keyword">new</span> componentLoader.ComponentLoader(_this.baseDir, _this.options);
-    }
-
-    <span class="hljs-keyword">return</span> _this;
-  } <span class="hljs-comment">// The uptime of the network is the current time minus the start-up</span></pre></div>
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.startupDate = <span class="hljs-literal">null</span>;</pre></div>
             
           
             
-            <p>time, in seconds.</p>
+            <p>Initialize a Component Loader for the network</p>
 
             
-              <div class='highlight'><pre>
-
-  _createClass(BaseNetwork, [{
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;uptime&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">uptime</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.startupDate) {
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-      }
-
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>() - <span class="hljs-built_in">this</span>.startupDate;
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (graph.componentLoader) {
+      <span class="hljs-built_in">this</span>.loader = graph.componentLoader;
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-built_in">this</span>.loader = <span class="hljs-keyword">new</span> componentLoader.ComponentLoader(<span class="hljs-built_in">this</span>.baseDir, <span class="hljs-built_in">this</span>.options);
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;getActiveProcesses&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getActiveProcesses</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> _this2 = <span class="hljs-built_in">this</span>;
+  }</pre></div>
+            
+          
+            
+            <p>The uptime of the network is the current time minus the start-up
+time, in seconds.</p>
 
-      <span class="hljs-keyword">var</span> active = [];
+            
+              <div class='highlight'><pre>  uptime() {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.startupDate) { <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>() - <span class="hljs-built_in">this</span>.startupDate;
+  }
 
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.started) {
-        <span class="hljs-keyword">return</span> active;
-      }
-
-      <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-        <span class="hljs-keyword">var</span> process = _this2.processes[name];
-
-        <span class="hljs-keyword">if</span> (process.component.load &gt; <span class="hljs-number">0</span>) {</pre></div>
+  getActiveProcesses() {
+    <span class="hljs-keyword">const</span> active = [];
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.started) { <span class="hljs-keyword">return</span> active; }
+    <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).forEach(<span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> process = <span class="hljs-built_in">this</span>.processes[name];
+      <span class="hljs-keyword">if</span> (process.component.load &gt; <span class="hljs-number">0</span>) {</pre></div>
             
           
             
             <p>Modern component with load</p>
 
             
-              <div class='highlight'><pre>          active.push(name);
-        }
-
-        <span class="hljs-keyword">if</span> (process.component.__openConnections &gt; <span class="hljs-number">0</span>) {</pre></div>
+              <div class='highlight'><pre>        active.push(name);
+      }
+      <span class="hljs-keyword">if</span> (process.component.__openConnections &gt; <span class="hljs-number">0</span>) {</pre></div>
             
           
             
             <p>Legacy component</p>
 
             
-              <div class='highlight'><pre>          active.push(name);
-        }
-      });
-      <span class="hljs-keyword">return</span> active;
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;bufferedEmit&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bufferedEmit</span>(<span class="hljs-params">event, payload</span>) </span>{
-      <span class="hljs-keyword">var</span> _this3 = <span class="hljs-built_in">this</span>;</pre></div>
+              <div class='highlight'><pre>        active.push(name);
+      }
+    });
+    <span class="hljs-keyword">return</span> active;
+  }
+
+  bufferedEmit(event, payload) {</pre></div>
             
           
             
             <p>Errors get emitted immediately, like does network end</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> ([<span class="hljs-string">&#x27;icon&#x27;</span>, <span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-string">&#x27;process-error&#x27;</span>, <span class="hljs-string">&#x27;end&#x27;</span>].includes(event)) {
-        <span class="hljs-built_in">this</span>.emit(event, payload);
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isStarted() &amp;&amp; event !== <span class="hljs-string">&#x27;end&#x27;</span>) {
-        <span class="hljs-built_in">this</span>.eventBuffer.push({
-          <span class="hljs-attr">type</span>: event,
-          <span class="hljs-attr">payload</span>: payload
-        });
-        <span class="hljs-keyword">return</span>;
-      }
-
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> ([<span class="hljs-string">&#x27;icon&#x27;</span>, <span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-string">&#x27;process-error&#x27;</span>, <span class="hljs-string">&#x27;end&#x27;</span>].includes(event)) {
       <span class="hljs-built_in">this</span>.emit(event, payload);
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isStarted() &amp;&amp; (event !== <span class="hljs-string">&#x27;end&#x27;</span>)) {
+      <span class="hljs-built_in">this</span>.eventBuffer.push({
+        <span class="hljs-attr">type</span>: event,
+        payload,
+      });
+      <span class="hljs-keyword">return</span>;
+    }
 
-      <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;start&#x27;</span>) {</pre></div>
+    <span class="hljs-built_in">this</span>.emit(event, payload);
+
+    <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;start&#x27;</span>) {</pre></div>
             
           
             
             <p>Once network has started we can send the IP-related events</p>
 
             
-              <div class='highlight'><pre>        <span class="hljs-built_in">this</span>.eventBuffer.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">ev</span>) </span>{
-          _this3.emit(ev.type, ev.payload);
-        });
-        <span class="hljs-built_in">this</span>.eventBuffer = [];
-      }
+              <div class='highlight'><pre>      <span class="hljs-built_in">this</span>.eventBuffer.forEach(<span class="hljs-function">(<span class="hljs-params">ev</span>) =&gt;</span> {
+        <span class="hljs-built_in">this</span>.emit(ev.type, ev.payload);
+      });
+      <span class="hljs-built_in">this</span>.eventBuffer = [];
+    }
 
-      <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;ip&#x27;</span>) {</pre></div>
+    <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;ip&#x27;</span>) {</pre></div>
             
           
             
             <p>Emit also the legacy events from IP</p>
 
             
-              <div class='highlight'><pre>        <span class="hljs-keyword">switch</span> (payload.type) {
-          <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;openBracket&#x27;</span>:
-            <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;begingroup&#x27;</span>, payload);
-            <span class="hljs-keyword">return</span>;
-
-          <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;closeBracket&#x27;</span>:
-            <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;endgroup&#x27;</span>, payload);
-            <span class="hljs-keyword">return</span>;
-
-          <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;data&#x27;</span>:
-            <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;data&#x27;</span>, payload);
-            <span class="hljs-keyword">break</span>;
-
-          <span class="hljs-keyword">default</span>:
-        }
+              <div class='highlight'><pre>      <span class="hljs-keyword">switch</span> (payload.type) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;openBracket&#x27;</span>:
+          <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;begingroup&#x27;</span>, payload);
+          <span class="hljs-keyword">return</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;closeBracket&#x27;</span>:
+          <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;endgroup&#x27;</span>, payload);
+          <span class="hljs-keyword">return</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;data&#x27;</span>:
+          <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;data&#x27;</span>, payload);
+          <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
       }
-    } <span class="hljs-comment">// ## Loading components</span></pre></div>
+    }
+  }</pre></div>
             
           
             
-            <p>Components can be passed to the NoFlo network in two ways:</p>
+            <h2 id="loading-components">Loading components</h2>
+<p>Components can be passed to the NoFlo network in two ways:</p>
 <ul>
 <li>As direct, instantiated JavaScript objects</li>
 <li>As filenames</li>
 </ul>
 
             
-              <div class='highlight'><pre>
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;load&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">load</span>(<span class="hljs-params">component, metadata, callback</span>) </span>{
-      <span class="hljs-built_in">this</span>.loader.load(component, callback, metadata);
-    } <span class="hljs-comment">// ## Add a process to the network</span></pre></div>
+              <div class='highlight'><pre>  load(component, metadata, callback) {
+    <span class="hljs-built_in">this</span>.loader.load(component, callback, metadata);
+  }</pre></div>
             
           
             
-            <p>Processes can be added to a network at either start-up time
+            <h2 id="add-a-process-to-the-network">Add a process to the network</h2>
+<p>Processes can be added to a network at either start-up time
 or later. The processes are added with a node definition object
 that includes the following properties:</p>
 <ul>
@@ -533,147 +491,148 @@ that includes the following properties:</p>
 </ul>
 
             
-              <div class='highlight'><pre>
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;addNode&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addNode</span>(<span class="hljs-params">node, options, callback</span>) </span>{
-      <span class="hljs-keyword">var</span> _this4 = <span class="hljs-built_in">this</span>;
-
-      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
-        callback = options;
-        options = {};
-      } <span class="hljs-comment">// Processes are treated as singletons by their identifier. If</span></pre></div>
+              <div class='highlight'><pre>  addNode(node, options, callback) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
+      callback = options;
+      options = {};
+    }</pre></div>
             
           
             
-            <p>we already have a process with the given ID, return that.</p>
+            <p>Processes are treated as singletons by their identifier. If
+we already have a process with the given ID, return that.</p>
 
             
-              <div class='highlight'><pre>
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.processes[node.id]) {
+      callback(<span class="hljs-literal">null</span>, <span class="hljs-built_in">this</span>.processes[node.id]);
+      <span class="hljs-keyword">return</span>;
+    }
 
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.processes[node.id]) {
-        callback(<span class="hljs-literal">null</span>, <span class="hljs-built_in">this</span>.processes[node.id]);
+    <span class="hljs-keyword">const</span> process = { <span class="hljs-attr">id</span>: node.id };</pre></div>
+            
+          
+            
+            <p>No component defined, just register the process but don’t start.</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!node.component) {
+      <span class="hljs-built_in">this</span>.processes[process.id] = process;
+      callback(<span class="hljs-literal">null</span>, process);
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Load the component for the process.</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.load(node.component, node.metadata, <span class="hljs-function">(<span class="hljs-params">err, instance</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
         <span class="hljs-keyword">return</span>;
       }
+      instance.nodeId = node.id;
+      process.component = instance;
+      process.componentName = node.component;</pre></div>
+            
+          
+            
+            <p>Inform the ports of the node name</p>
 
-      <span class="hljs-keyword">var</span> process = {
-        <span class="hljs-attr">id</span>: node.id
-      }; <span class="hljs-comment">// No component defined, just register the process but don&#x27;t start.</span>
-
-      <span class="hljs-keyword">if</span> (!node.component) {
-        <span class="hljs-built_in">this</span>.processes[process.id] = process;
-        callback(<span class="hljs-literal">null</span>, process);
-        <span class="hljs-keyword">return</span>;
-      } <span class="hljs-comment">// Load the component for the process.</span>
-
-
-      <span class="hljs-built_in">this</span>.load(node.component, node.metadata, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, instance</span>) </span>{
-        <span class="hljs-keyword">if</span> (err) {
-          callback(err);
-          <span class="hljs-keyword">return</span>;
-        }
-
-        instance.nodeId = node.id;
-        process.component = instance;
-        process.componentName = node.component; <span class="hljs-comment">// Inform the ports of the node name</span>
-
-        <span class="hljs-keyword">var</span> inPorts = process.component.inPorts.ports;
-        <span class="hljs-keyword">var</span> outPorts = process.component.outPorts.ports;
-        <span class="hljs-built_in">Object</span>.keys(inPorts).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-          <span class="hljs-keyword">var</span> port = inPorts[name];
-          port.node = node.id;
-          port.nodeInstance = instance;
-          port.name = name;
-        });
-        <span class="hljs-built_in">Object</span>.keys(outPorts).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-          <span class="hljs-keyword">var</span> port = outPorts[name];
-          port.node = node.id;
-          port.nodeInstance = instance;
-          port.name = name;
-        });
-
-        <span class="hljs-keyword">if</span> (instance.isSubgraph()) {
-          _this4.subscribeSubgraph(process);
-        }
-
-        _this4.subscribeNode(process); <span class="hljs-comment">// Store and return the process instance</span>
-
-
-        _this4.processes[process.id] = process;
-        callback(<span class="hljs-literal">null</span>, process);
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">const</span> inPorts = process.component.inPorts.ports;
+      <span class="hljs-keyword">const</span> outPorts = process.component.outPorts.ports;
+      <span class="hljs-built_in">Object</span>.keys(inPorts).forEach(<span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
+        <span class="hljs-keyword">const</span> port = inPorts[name];
+        port.node = node.id;
+        port.nodeInstance = instance;
+        port.name = name;
       });
+
+      <span class="hljs-built_in">Object</span>.keys(outPorts).forEach(<span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
+        <span class="hljs-keyword">const</span> port = outPorts[name];
+        port.node = node.id;
+        port.nodeInstance = instance;
+        port.name = name;
+      });
+
+      <span class="hljs-keyword">if</span> (instance.isSubgraph()) { <span class="hljs-built_in">this</span>.subscribeSubgraph(process); }
+
+      <span class="hljs-built_in">this</span>.subscribeNode(process);</pre></div>
+            
+          
+            
+            <p>Store and return the process instance</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-built_in">this</span>.processes[process.id] = process;
+      callback(<span class="hljs-literal">null</span>, process);
+    });
+  }
+
+  removeNode(node, callback) {
+    <span class="hljs-keyword">const</span> process = <span class="hljs-built_in">this</span>.getNode(node.id);
+    <span class="hljs-keyword">if</span> (!process) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Node <span class="hljs-subst">${node.id}</span> not found`</span>));
+      <span class="hljs-keyword">return</span>;
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;removeNode&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeNode</span>(<span class="hljs-params">node, callback</span>) </span>{
-      <span class="hljs-keyword">var</span> _this5 = <span class="hljs-built_in">this</span>;
-
-      <span class="hljs-keyword">var</span> process = <span class="hljs-built_in">this</span>.getNode(node.id);
-
-      <span class="hljs-keyword">if</span> (!process) {
-        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Node &quot;</span>.concat(node.id, <span class="hljs-string">&quot; not found&quot;</span>)));
+    process.component.shutdown(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
         <span class="hljs-keyword">return</span>;
       }
-
-      process.component.shutdown(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
-        <span class="hljs-keyword">if</span> (err) {
-          callback(err);
-          <span class="hljs-keyword">return</span>;
-        }
-
-        <span class="hljs-keyword">delete</span> _this5.processes[node.id];
-        callback(<span class="hljs-literal">null</span>);
-      });
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;renameNode&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renameNode</span>(<span class="hljs-params">oldId, newId, callback</span>) </span>{
-      <span class="hljs-keyword">var</span> process = <span class="hljs-built_in">this</span>.getNode(oldId);
-
-      <span class="hljs-keyword">if</span> (!process) {
-        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Process &quot;</span>.concat(oldId, <span class="hljs-string">&quot; not found&quot;</span>)));
-        <span class="hljs-keyword">return</span>;
-      } <span class="hljs-comment">// Inform the process of its ID</span>
-
-
-      process.id = newId; <span class="hljs-comment">// Inform the ports of the node name</span>
-
-      <span class="hljs-keyword">var</span> inPorts = process.component.inPorts.ports;
-      <span class="hljs-keyword">var</span> outPorts = process.component.outPorts.ports;
-      <span class="hljs-built_in">Object</span>.keys(inPorts).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-        <span class="hljs-keyword">var</span> port = inPorts[name];
-
-        <span class="hljs-keyword">if</span> (!port) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        port.node = newId;
-      });
-      <span class="hljs-built_in">Object</span>.keys(outPorts).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>{
-        <span class="hljs-keyword">var</span> port = outPorts[name];
-
-        <span class="hljs-keyword">if</span> (!port) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        port.node = newId;
-      });
-      <span class="hljs-built_in">this</span>.processes[newId] = process;
-      <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.processes[oldId];
+      <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.processes[node.id];
       callback(<span class="hljs-literal">null</span>);
-    } <span class="hljs-comment">// Get process by its ID.</span>
+    });
+  }
 
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;getNode&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getNode</span>(<span class="hljs-params">id</span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.processes[id];
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;connect&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connect</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> _this6 = <span class="hljs-built_in">this</span>;
+  renameNode(oldId, newId, callback) {
+    <span class="hljs-keyword">const</span> process = <span class="hljs-built_in">this</span>.getNode(oldId);
+    <span class="hljs-keyword">if</span> (!process) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Process <span class="hljs-subst">${oldId}</span> not found`</span>));
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Inform the process of its ID</p>
 
-      <span class="hljs-keyword">var</span> done = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{};</pre></div>
+            
+              <div class='highlight'><pre>    process.id = newId;</pre></div>
+            
+          
+            
+            <p>Inform the ports of the node name</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">const</span> inPorts = process.component.inPorts.ports;
+    <span class="hljs-keyword">const</span> outPorts = process.component.outPorts.ports;
+    <span class="hljs-built_in">Object</span>.keys(inPorts).forEach(<span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> port = inPorts[name];
+      <span class="hljs-keyword">if</span> (!port) { <span class="hljs-keyword">return</span>; }
+      port.node = newId;
+    });
+    <span class="hljs-built_in">Object</span>.keys(outPorts).forEach(<span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> port = outPorts[name];
+      <span class="hljs-keyword">if</span> (!port) { <span class="hljs-keyword">return</span>; }
+      port.node = newId;
+    });
+
+    <span class="hljs-built_in">this</span>.processes[newId] = process;
+    <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.processes[oldId];
+    callback(<span class="hljs-literal">null</span>);
+  }</pre></div>
+            
+          
+            
+            <p>Get process by its ID.</p>
+
+            
+              <div class='highlight'><pre>  getNode(id) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.processes[id];
+  }
+
+  connect(done = <span class="hljs-function">() =&gt;</span> {}) {</pre></div>
             
           
             
@@ -681,10 +640,8 @@ that includes the following properties:</p>
 it</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">var</span> callStack = <span class="hljs-number">0</span>;
-
-      <span class="hljs-keyword">var</span> serialize = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">serialize</span>(<span class="hljs-params">next, add</span>) </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">type</span>) </span>{</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">let</span> callStack = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">const</span> serialize = <span class="hljs-function">(<span class="hljs-params">next, add</span>) =&gt;</span> <span class="hljs-function">(<span class="hljs-params">type</span>) =&gt;</span> {</pre></div>
             
           
             
@@ -692,389 +649,366 @@ it</p>
 when done</p>
 
             
-              <div class='highlight'><pre>          _this6[<span class="hljs-string">&quot;add&quot;</span>.concat(type)](add, {
-            <span class="hljs-attr">initial</span>: <span class="hljs-literal">true</span>
-          }, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
-            <span class="hljs-keyword">if</span> (err) {
-              done(err);
-              <span class="hljs-keyword">return</span>;
-            }
-
-            callStack += <span class="hljs-number">1</span>;
-
-            <span class="hljs-keyword">if</span> (callStack % <span class="hljs-number">100</span> === <span class="hljs-number">0</span>) {
-              <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-                next(type);
-              }, <span class="hljs-number">0</span>);
-              <span class="hljs-keyword">return</span>;
-            }
-
-            next(type);
-          });
-        };
-      }; <span class="hljs-comment">// Serialize default socket creation then call callback when done</span>
-
-
-      <span class="hljs-keyword">var</span> setDefaults = utils.reduceRight(<span class="hljs-built_in">this</span>.graph.nodes, serialize, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        done();
-      }); <span class="hljs-comment">// Serialize initializers then call defaults.</span>
-
-      <span class="hljs-keyword">var</span> initializers = utils.reduceRight(<span class="hljs-built_in">this</span>.graph.initializers, serialize, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        setDefaults(<span class="hljs-string">&#x27;Defaults&#x27;</span>);
-      }); <span class="hljs-comment">// Serialize edge creators then call the initializers.</span>
-
-      <span class="hljs-keyword">var</span> edges = utils.reduceRight(<span class="hljs-built_in">this</span>.graph.edges, serialize, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        initializers(<span class="hljs-string">&#x27;Initial&#x27;</span>);
-      }); <span class="hljs-comment">// Serialize node creators then call the edge creators</span>
-
-      <span class="hljs-keyword">var</span> nodes = utils.reduceRight(<span class="hljs-built_in">this</span>.graph.nodes, serialize, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        edges(<span class="hljs-string">&#x27;Edge&#x27;</span>);
-      }); <span class="hljs-comment">// Start with node creators</span>
-
-      nodes(<span class="hljs-string">&#x27;Node&#x27;</span>);
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;subscribeSubgraph&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">subscribeSubgraph</span>(<span class="hljs-params">node</span>) </span>{
-      <span class="hljs-keyword">var</span> _this7 = <span class="hljs-built_in">this</span>;
-
-      <span class="hljs-keyword">if</span> (!node.component.isReady()) {
-        node.component.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-          _this7.subscribeSubgraph(node);
-        });
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (!node.component.network) {
-        <span class="hljs-keyword">return</span>;
-      }
-
-      node.component.network.setDebug(<span class="hljs-built_in">this</span>.debug);
-
-      <span class="hljs-keyword">var</span> emitSub = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">emitSub</span>(<span class="hljs-params">type, data</span>) </span>{
-        <span class="hljs-keyword">if</span> (type === <span class="hljs-string">&#x27;process-error&#x27;</span> &amp;&amp; _this7.listeners(<span class="hljs-string">&#x27;process-error&#x27;</span>).length === <span class="hljs-number">0</span>) {
-          <span class="hljs-keyword">if</span> (data.id &amp;&amp; data.metadata &amp;&amp; data.error) {
-            <span class="hljs-keyword">throw</span> data.error;
-          }
-
-          <span class="hljs-keyword">throw</span> data;
-        }
-
-        <span class="hljs-keyword">if</span> (!data) {
-          data = {};
-        }
-
-        <span class="hljs-keyword">if</span> (data.subgraph) {
-          <span class="hljs-keyword">if</span> (!data.subgraph.unshift) {
-            data.subgraph = [data.subgraph];
-          }
-
-          data.subgraph.unshift(node.id);
-        } <span class="hljs-keyword">else</span> {
-          data.subgraph = [node.id];
-        }
-
-        <span class="hljs-keyword">return</span> _this7.bufferedEmit(type, data);
-      };
-
-      node.component.network.on(<span class="hljs-string">&#x27;ip&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
-        emitSub(<span class="hljs-string">&#x27;ip&#x27;</span>, data);
-      });
-      node.component.network.on(<span class="hljs-string">&#x27;process-error&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
-        emitSub(<span class="hljs-string">&#x27;process-error&#x27;</span>, data);
-      });
-    } <span class="hljs-comment">// Subscribe to events from all connected sockets and re-emit them</span>
-
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;subscribeSocket&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">subscribeSocket</span>(<span class="hljs-params">socket, source</span>) </span>{
-      <span class="hljs-keyword">var</span> _this8 = <span class="hljs-built_in">this</span>;
-
-      socket.on(<span class="hljs-string">&#x27;ip&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">ip</span>) </span>{
-        _this8.bufferedEmit(<span class="hljs-string">&#x27;ip&#x27;</span>, {
-          <span class="hljs-attr">id</span>: socket.getId(),
-          <span class="hljs-attr">type</span>: ip.type,
-          <span class="hljs-attr">socket</span>: socket,
-          <span class="hljs-attr">data</span>: ip.data,
-          <span class="hljs-attr">metadata</span>: socket.metadata
-        });
-      });
-      socket.on(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>{
-        <span class="hljs-keyword">if</span> (_this8.listeners(<span class="hljs-string">&#x27;process-error&#x27;</span>).length === <span class="hljs-number">0</span>) {
-          <span class="hljs-keyword">if</span> (event.id &amp;&amp; event.metadata &amp;&amp; event.error) {
-            <span class="hljs-keyword">throw</span> event.error;
-          }
-
-          <span class="hljs-keyword">throw</span> event;
-        }
-
-        _this8.bufferedEmit(<span class="hljs-string">&#x27;process-error&#x27;</span>, event);
-      });
-
-      <span class="hljs-keyword">if</span> (!source || !source.component || !source.component.isLegacy()) {
-        <span class="hljs-keyword">return</span>;
-      } <span class="hljs-comment">// Handle activation for legacy components via connects/disconnects</span>
-
-
-      socket.on(<span class="hljs-string">&#x27;connect&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        <span class="hljs-keyword">if</span> (!source.component.__openConnections) {
-          source.component.__openConnections = <span class="hljs-number">0</span>;
-        }
-
-        source.component.__openConnections += <span class="hljs-number">1</span>;
-      });
-      socket.on(<span class="hljs-string">&#x27;disconnect&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        source.component.__openConnections -= <span class="hljs-number">1</span>;
-
-        <span class="hljs-keyword">if</span> (source.component.__openConnections &lt; <span class="hljs-number">0</span>) {
-          source.component.__openConnections = <span class="hljs-number">0</span>;
-        }
-
-        <span class="hljs-keyword">if</span> (source.component.__openConnections === <span class="hljs-number">0</span>) {
-          _this8.checkIfFinished();
-        }
-      });
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;subscribeNode&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">subscribeNode</span>(<span class="hljs-params">node</span>) </span>{
-      <span class="hljs-keyword">var</span> _this9 = <span class="hljs-built_in">this</span>;
-
-      node.component.on(<span class="hljs-string">&#x27;activate&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        <span class="hljs-keyword">if</span> (_this9.debouncedEnd) {
-          _this9.abortDebounce = <span class="hljs-literal">true</span>;
-        }
-      });
-      node.component.on(<span class="hljs-string">&#x27;deactivate&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">load</span>) </span>{
-        <span class="hljs-keyword">if</span> (load &gt; <span class="hljs-number">0</span>) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        _this9.checkIfFinished();
-      });
-
-      <span class="hljs-keyword">if</span> (!node.component.getIcon) {
-        <span class="hljs-keyword">return</span>;
-      }
-
-      node.component.on(<span class="hljs-string">&#x27;icon&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-        _this9.bufferedEmit(<span class="hljs-string">&#x27;icon&#x27;</span>, {
-          <span class="hljs-attr">id</span>: node.id,
-          <span class="hljs-attr">icon</span>: node.component.getIcon()
-        });
-      });
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;addEdge&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addEdge</span>(<span class="hljs-params">edge, options, callback</span>) </span>{
-      <span class="hljs-keyword">var</span> _this10 = <span class="hljs-built_in">this</span>;
-
-      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
-        callback = options;
-        options = {};
-      }
-
-      <span class="hljs-keyword">var</span> socket = internalSocket.createSocket(edge.metadata);
-      socket.setDebug(<span class="hljs-built_in">this</span>.debug);
-      <span class="hljs-keyword">var</span> <span class="hljs-keyword">from</span> = <span class="hljs-built_in">this</span>.getNode(edge.from.node);
-
-      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">from</span>) {
-        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;No process defined for outbound node &quot;</span>.concat(edge.from.node)));
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">from</span>.component) {
-        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;No component defined for outbound node &quot;</span>.concat(edge.from.node)));
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">from</span>.component.isReady()) {
-        <span class="hljs-keyword">from</span>.component.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-          _this10.addEdge(edge, callback);
-        });
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">var</span> to = <span class="hljs-built_in">this</span>.getNode(edge.to.node);
-
-      <span class="hljs-keyword">if</span> (!to) {
-        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;No process defined for inbound node &quot;</span>.concat(edge.to.node)));
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (!to.component) {
-        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;No component defined for inbound node &quot;</span>.concat(edge.to.node)));
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (!to.component.isReady()) {
-        to.component.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-          _this10.addEdge(edge, callback);
-        });
-        <span class="hljs-keyword">return</span>;
-      } <span class="hljs-comment">// Subscribe to events from the socket</span>
-
-
-      <span class="hljs-built_in">this</span>.subscribeSocket(socket, <span class="hljs-keyword">from</span>);
-      connectPort(socket, to, edge.to.port, edge.to.index, <span class="hljs-literal">true</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
-        <span class="hljs-keyword">if</span> (err) {
-          callback(err);
-          <span class="hljs-keyword">return</span>;
-        }
-
-        connectPort(socket, <span class="hljs-keyword">from</span>, edge.from.port, edge.from.index, <span class="hljs-literal">false</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err2</span>) </span>{
-          <span class="hljs-keyword">if</span> (err2) {
-            callback(err2);
+              <div class='highlight'><pre>      <span class="hljs-built_in">this</span>[<span class="hljs-string">`add<span class="hljs-subst">${type}</span>`</span>](add,
+        { <span class="hljs-attr">initial</span>: <span class="hljs-literal">true</span> },
+        <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+          <span class="hljs-keyword">if</span> (err) {
+            done(err);
             <span class="hljs-keyword">return</span>;
           }
-
-          _this10.connections.push(socket);
-
-          callback();
-        });
-      });
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;removeEdge&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeEdge</span>(<span class="hljs-params">edge, callback</span>) </span>{
-      <span class="hljs-keyword">var</span> _this11 = <span class="hljs-built_in">this</span>;
-
-      <span class="hljs-built_in">this</span>.connections.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">connection</span>) </span>{
-        <span class="hljs-keyword">if</span> (!connection) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        <span class="hljs-keyword">if</span> (edge.to.node !== connection.to.process.id || edge.to.port !== connection.to.port) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        connection.to.process.component.inPorts[connection.to.port].detach(connection);
-
-        <span class="hljs-keyword">if</span> (edge.from.node) {
-          <span class="hljs-keyword">if</span> (connection.from &amp;&amp; edge.from.node === connection.from.process.id &amp;&amp; edge.from.port === connection.from.port) {
-            connection.from.process.component.outPorts[connection.from.port].detach(connection);
+          callStack += <span class="hljs-number">1</span>;
+          <span class="hljs-keyword">if</span> ((callStack % <span class="hljs-number">100</span>) === <span class="hljs-number">0</span>) {
+            <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+              next(type);
+            },
+            <span class="hljs-number">0</span>);
+            <span class="hljs-keyword">return</span>;
           }
+          next(type);
+        });
+    };</pre></div>
+            
+          
+            
+            <p>Serialize default socket creation then call callback when done</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">const</span> setDefaults = utils.reduceRight(<span class="hljs-built_in">this</span>.graph.nodes, serialize, <span class="hljs-function">() =&gt;</span> {
+      done();
+    });</pre></div>
+            
+          
+            
+            <p>Serialize initializers then call defaults.</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">const</span> initializers = utils.reduceRight(<span class="hljs-built_in">this</span>.graph.initializers, serialize, <span class="hljs-function">() =&gt;</span> {
+      setDefaults(<span class="hljs-string">&#x27;Defaults&#x27;</span>);
+    });</pre></div>
+            
+          
+            
+            <p>Serialize edge creators then call the initializers.</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">const</span> edges = utils.reduceRight(<span class="hljs-built_in">this</span>.graph.edges, serialize, <span class="hljs-function">() =&gt;</span> {
+      initializers(<span class="hljs-string">&#x27;Initial&#x27;</span>);
+    });</pre></div>
+            
+          
+            
+            <p>Serialize node creators then call the edge creators</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">const</span> nodes = utils.reduceRight(<span class="hljs-built_in">this</span>.graph.nodes, serialize, <span class="hljs-function">() =&gt;</span> {
+      edges(<span class="hljs-string">&#x27;Edge&#x27;</span>);
+    });</pre></div>
+            
+          
+            
+            <p>Start with node creators</p>
+
+            
+              <div class='highlight'><pre>    nodes(<span class="hljs-string">&#x27;Node&#x27;</span>);
+  }
+
+  subscribeSubgraph(node) {
+    <span class="hljs-keyword">if</span> (!node.component.isReady()) {
+      node.component.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.subscribeSubgraph(node);
+      });
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (!node.component.network) { <span class="hljs-keyword">return</span>; }
+
+    node.component.network.setDebug(<span class="hljs-built_in">this</span>.debug);
+
+    <span class="hljs-keyword">const</span> emitSub = <span class="hljs-function">(<span class="hljs-params">type, data</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> ((type === <span class="hljs-string">&#x27;process-error&#x27;</span>) &amp;&amp; (<span class="hljs-built_in">this</span>.listeners(<span class="hljs-string">&#x27;process-error&#x27;</span>).length === <span class="hljs-number">0</span>)) {
+        <span class="hljs-keyword">if</span> (data.id &amp;&amp; data.metadata &amp;&amp; data.error) { <span class="hljs-keyword">throw</span> data.error; }
+        <span class="hljs-keyword">throw</span> data;
+      }
+      <span class="hljs-keyword">if</span> (!data) { data = {}; }
+      <span class="hljs-keyword">if</span> (data.subgraph) {
+        <span class="hljs-keyword">if</span> (!data.subgraph.unshift) {
+          data.subgraph = [data.subgraph];
+        }
+        data.subgraph.unshift(node.id);
+      } <span class="hljs-keyword">else</span> {
+        data.subgraph = [node.id];
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.bufferedEmit(type, data);
+    };
+
+    node.component.network.on(<span class="hljs-string">&#x27;ip&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+      emitSub(<span class="hljs-string">&#x27;ip&#x27;</span>, data);
+    });
+    node.component.network.on(<span class="hljs-string">&#x27;process-error&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+      emitSub(<span class="hljs-string">&#x27;process-error&#x27;</span>, data);
+    });
+  }</pre></div>
+            
+          
+            
+            <p>Subscribe to events from all connected sockets and re-emit them</p>
+
+            
+              <div class='highlight'><pre>  subscribeSocket(socket, source) {
+    socket.on(<span class="hljs-string">&#x27;ip&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">ip</span>) =&gt;</span> {
+      <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;ip&#x27;</span>, {
+        <span class="hljs-attr">id</span>: socket.getId(),
+        <span class="hljs-attr">type</span>: ip.type,
+        socket,
+        <span class="hljs-attr">data</span>: ip.data,
+        <span class="hljs-attr">metadata</span>: socket.metadata,
+      });
+    });
+    socket.on(<span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.listeners(<span class="hljs-string">&#x27;process-error&#x27;</span>).length === <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">if</span> (event.id &amp;&amp; event.metadata &amp;&amp; event.error) { <span class="hljs-keyword">throw</span> event.error; }
+        <span class="hljs-keyword">throw</span> event;
+      }
+      <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;process-error&#x27;</span>, event);
+    });
+    <span class="hljs-keyword">if</span> (!source || !source.component || !source.component.isLegacy()) {
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Handle activation for legacy components via connects/disconnects</p>
+
+            
+              <div class='highlight'><pre>    socket.on(<span class="hljs-string">&#x27;connect&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!source.component.__openConnections) { source.component.__openConnections = <span class="hljs-number">0</span>; }
+      source.component.__openConnections += <span class="hljs-number">1</span>;
+    });
+    socket.on(<span class="hljs-string">&#x27;disconnect&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+      source.component.__openConnections -= <span class="hljs-number">1</span>;
+      <span class="hljs-keyword">if</span> (source.component.__openConnections &lt; <span class="hljs-number">0</span>) {
+        source.component.__openConnections = <span class="hljs-number">0</span>;
+      }
+      <span class="hljs-keyword">if</span> (source.component.__openConnections === <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">this</span>.checkIfFinished();
+      }
+    });
+  }
+
+  subscribeNode(node) {
+    node.component.on(<span class="hljs-string">&#x27;activate&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.debouncedEnd) { <span class="hljs-built_in">this</span>.abortDebounce = <span class="hljs-literal">true</span>; }
+    });
+    node.component.on(<span class="hljs-string">&#x27;deactivate&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">load</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (load &gt; <span class="hljs-number">0</span>) { <span class="hljs-keyword">return</span>; }
+      <span class="hljs-built_in">this</span>.checkIfFinished();
+    });
+    <span class="hljs-keyword">if</span> (!node.component.getIcon) { <span class="hljs-keyword">return</span>; }
+    node.component.on(<span class="hljs-string">&#x27;icon&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;icon&#x27;</span>, {
+        <span class="hljs-attr">id</span>: node.id,
+        <span class="hljs-attr">icon</span>: node.component.getIcon(),
+      });
+    });
+  }
+
+  addEdge(edge, options, callback) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
+      callback = options;
+      options = {};
+    }
+    <span class="hljs-keyword">const</span> socket = internalSocket.createSocket(edge.metadata);
+    socket.setDebug(<span class="hljs-built_in">this</span>.debug);
+
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">from</span> = <span class="hljs-built_in">this</span>.getNode(edge.from.node);
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">from</span>) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No process defined for outbound node <span class="hljs-subst">${edge.<span class="hljs-keyword">from</span>.node}</span>`</span>));
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">from</span>.component) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No component defined for outbound node <span class="hljs-subst">${edge.<span class="hljs-keyword">from</span>.node}</span>`</span>));
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">from</span>.component.isReady()) {
+      <span class="hljs-keyword">from</span>.component.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.addEdge(edge, callback);
+      });
+
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">const</span> to = <span class="hljs-built_in">this</span>.getNode(edge.to.node);
+    <span class="hljs-keyword">if</span> (!to) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No process defined for inbound node <span class="hljs-subst">${edge.to.node}</span>`</span>));
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (!to.component) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No component defined for inbound node <span class="hljs-subst">${edge.to.node}</span>`</span>));
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (!to.component.isReady()) {
+      to.component.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.addEdge(edge, callback);
+      });
+
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Subscribe to events from the socket</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.subscribeSocket(socket, <span class="hljs-keyword">from</span>);
+
+    connectPort(socket, to, edge.to.port, edge.to.index, <span class="hljs-literal">true</span>, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      connectPort(socket, <span class="hljs-keyword">from</span>, edge.from.port, edge.from.index, <span class="hljs-literal">false</span>, <span class="hljs-function">(<span class="hljs-params">err2</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err2) {
+          callback(err2);
+          <span class="hljs-keyword">return</span>;
         }
 
-        _this11.connections.splice(_this11.connections.indexOf(connection), <span class="hljs-number">1</span>);
-
+        <span class="hljs-built_in">this</span>.connections.push(socket);
         callback();
       });
+    });
+  }
+
+  removeEdge(edge, callback) {
+    <span class="hljs-built_in">this</span>.connections.forEach(<span class="hljs-function">(<span class="hljs-params">connection</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!connection) { <span class="hljs-keyword">return</span>; }
+      <span class="hljs-keyword">if</span> ((edge.to.node !== connection.to.process.id) || (edge.to.port !== connection.to.port)) {
+        <span class="hljs-keyword">return</span>;
+      }
+      connection.to.process.component.inPorts[connection.to.port].detach(connection);
+      <span class="hljs-keyword">if</span> (edge.from.node) {
+        <span class="hljs-keyword">if</span> (connection.from
+          &amp;&amp; (edge.from.node === connection.from.process.id)
+          &amp;&amp; (edge.from.port === connection.from.port)) {
+          connection.from.process.component.outPorts[connection.from.port].detach(connection);
+        }
+      }
+      <span class="hljs-built_in">this</span>.connections.splice(<span class="hljs-built_in">this</span>.connections.indexOf(connection), <span class="hljs-number">1</span>);
+      callback();
+    });
+  }
+
+  addDefaults(node, options, callback) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
+      callback = options;
+      options = {};
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;addDefaults&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addDefaults</span>(<span class="hljs-params">node, options, callback</span>) </span>{
-      <span class="hljs-keyword">var</span> _this12 = <span class="hljs-built_in">this</span>;
 
-      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
-        callback = options;
-        options = {};
-      }
+    <span class="hljs-keyword">const</span> process = <span class="hljs-built_in">this</span>.getNode(node.id);
+    <span class="hljs-keyword">if</span> (!process) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Process <span class="hljs-subst">${node.id}</span> not defined`</span>));
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (!process.component) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No component defined for node <span class="hljs-subst">${node.id}</span>`</span>));
+      <span class="hljs-keyword">return</span>;
+    }
 
-      <span class="hljs-keyword">var</span> process = <span class="hljs-built_in">this</span>.getNode(node.id);
+    <span class="hljs-keyword">if</span> (!process.component.isReady()) {
+      process.component.setMaxListeners(<span class="hljs-number">0</span>);
+      process.component.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.addDefaults(process, callback);
+      });
+      <span class="hljs-keyword">return</span>;
+    }
 
-      <span class="hljs-keyword">if</span> (!process) {
-        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Process &quot;</span>.concat(node.id, <span class="hljs-string">&quot; not defined&quot;</span>)));
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (!process.component) {
-        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;No component defined for node &quot;</span>.concat(node.id)));
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (!process.component.isReady()) {
-        process.component.setMaxListeners(<span class="hljs-number">0</span>);
-        process.component.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-          _this12.addDefaults(process, callback);
-        });
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-built_in">Object</span>.keys(process.component.inPorts.ports).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">key</span>) </span>{</pre></div>
+    <span class="hljs-built_in">Object</span>.keys(process.component.inPorts.ports).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> {</pre></div>
             
           
             
             <p>Attach a socket to any defaulted inPorts as long as they aren’t already attached.</p>
 
             
-              <div class='highlight'><pre>        <span class="hljs-keyword">var</span> port = process.component.inPorts.ports[key];
+              <div class='highlight'><pre>      <span class="hljs-keyword">const</span> port = process.component.inPorts.ports[key];
+      <span class="hljs-keyword">if</span> (port.hasDefault() &amp;&amp; !port.isAttached()) {
+        <span class="hljs-keyword">const</span> socket = internalSocket.createSocket();
+        socket.setDebug(<span class="hljs-built_in">this</span>.debug);</pre></div>
+            
+          
+            
+            <p>Subscribe to events from the socket</p>
 
-        <span class="hljs-keyword">if</span> (port.hasDefault() &amp;&amp; !port.isAttached()) {
-          <span class="hljs-keyword">var</span> socket = internalSocket.createSocket();
-          socket.setDebug(_this12.debug); <span class="hljs-comment">// Subscribe to events from the socket</span>
+            
+              <div class='highlight'><pre>        <span class="hljs-built_in">this</span>.subscribeSocket(socket);
 
-          _this12.subscribeSocket(socket);
+        connectPort(socket, process, key, <span class="hljs-literal">undefined</span>, <span class="hljs-literal">true</span>, <span class="hljs-function">() =&gt;</span> {});
 
-          connectPort(socket, process, key, <span class="hljs-literal">undefined</span>, <span class="hljs-literal">true</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{});
+        <span class="hljs-built_in">this</span>.connections.push(socket);
 
-          _this12.connections.push(socket);
+        <span class="hljs-built_in">this</span>.defaults.push(socket);
+      }
+    });
 
-          _this12.defaults.push(socket);
-        }
-      });
-      callback();
+    callback();
+  }
+
+  addInitial(initializer, options, callback) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
+      callback = options;
+      options = {};
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;addInitial&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addInitial</span>(<span class="hljs-params">initializer, options, callback</span>) </span>{
-      <span class="hljs-keyword">var</span> _this13 = <span class="hljs-built_in">this</span>;
 
-      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
-        callback = options;
-        options = {};
-      }
+    <span class="hljs-keyword">const</span> socket = internalSocket.createSocket(initializer.metadata);
+    socket.setDebug(<span class="hljs-built_in">this</span>.debug);</pre></div>
+            
+          
+            
+            <p>Subscribe to events from the socket</p>
 
-      <span class="hljs-keyword">var</span> socket = internalSocket.createSocket(initializer.metadata);
-      socket.setDebug(<span class="hljs-built_in">this</span>.debug); <span class="hljs-comment">// Subscribe to events from the socket</span>
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.subscribeSocket(socket);
 
-      <span class="hljs-built_in">this</span>.subscribeSocket(socket);
-      <span class="hljs-keyword">var</span> to = <span class="hljs-built_in">this</span>.getNode(initializer.to.node);
+    <span class="hljs-keyword">const</span> to = <span class="hljs-built_in">this</span>.getNode(initializer.to.node);
+    <span class="hljs-keyword">if</span> (!to) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No process defined for inbound node <span class="hljs-subst">${initializer.to.node}</span>`</span>));
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (!to.component) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`No component defined for inbound node <span class="hljs-subst">${initializer.to.node}</span>`</span>));
+      <span class="hljs-keyword">return</span>;
+    }
 
-      <span class="hljs-keyword">if</span> (!to) {
-        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;No process defined for inbound node &quot;</span>.concat(initializer.to.node)));
+    <span class="hljs-keyword">if</span> (!to.component.isReady() &amp;&amp; !to.component.inPorts[initializer.to.port]) {
+      to.component.setMaxListeners(<span class="hljs-number">0</span>);
+      to.component.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.addInitial(initializer, callback);
+      });
+      <span class="hljs-keyword">return</span>;
+    }
+
+    connectPort(socket, to, initializer.to.port, initializer.to.index, <span class="hljs-literal">true</span>, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
         <span class="hljs-keyword">return</span>;
       }
 
-      <span class="hljs-keyword">if</span> (!to.component) {
-        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;No component defined for inbound node &quot;</span>.concat(initializer.to.node)));
-        <span class="hljs-keyword">return</span>;
-      }
+      <span class="hljs-built_in">this</span>.connections.push(socket);
 
-      <span class="hljs-keyword">if</span> (!to.component.isReady() &amp;&amp; !to.component.inPorts[initializer.to.port]) {
-        to.component.setMaxListeners(<span class="hljs-number">0</span>);
-        to.component.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-          _this13.addInitial(initializer, callback);
-        });
-        <span class="hljs-keyword">return</span>;
-      }
+      <span class="hljs-keyword">const</span> init = {
+        socket,
+        <span class="hljs-attr">data</span>: initializer.from.data,
+      };
+      <span class="hljs-built_in">this</span>.initials.push(init);
+      <span class="hljs-built_in">this</span>.nextInitials.push(init);
 
-      connectPort(socket, to, initializer.to.port, initializer.to.index, <span class="hljs-literal">true</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
-        <span class="hljs-keyword">if</span> (err) {
-          callback(err);
-          <span class="hljs-keyword">return</span>;
-        }
-
-        _this13.connections.push(socket);
-
-        <span class="hljs-keyword">var</span> init = {
-          <span class="hljs-attr">socket</span>: socket,
-          <span class="hljs-attr">data</span>: initializer.from.data
-        };
-
-        _this13.initials.push(init);
-
-        _this13.nextInitials.push(init);
-
-        <span class="hljs-keyword">if</span> (_this13.isRunning()) {</pre></div>
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isRunning()) {</pre></div>
             
           
             
             <p>Network is running now, send initials immediately</p>
 
             
-              <div class='highlight'><pre>          _this13.sendInitials();
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!_this13.isStopped()) {</pre></div>
+              <div class='highlight'><pre>        (<span class="hljs-built_in">this</span>.sendInitials)();
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isStopped()) {</pre></div>
             
           
             
@@ -1082,168 +1016,123 @@ when done</p>
 started and set</p>
 
             
-              <div class='highlight'><pre>          _this13.setStarted(<span class="hljs-literal">true</span>);
+              <div class='highlight'><pre>        <span class="hljs-built_in">this</span>.setStarted(<span class="hljs-literal">true</span>);
+        (<span class="hljs-built_in">this</span>.sendInitials)();
+      }
 
-          _this13.sendInitials();
-        }
-
-        callback();
-      });
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;removeInitial&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeInitial</span>(<span class="hljs-params">initializer, callback</span>) </span>{
-      <span class="hljs-keyword">var</span> _this14 = <span class="hljs-built_in">this</span>;
-
-      <span class="hljs-built_in">this</span>.connections.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">connection</span>) </span>{
-        <span class="hljs-keyword">if</span> (!connection) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        <span class="hljs-keyword">if</span> (initializer.to.node !== connection.to.process.id || initializer.to.port !== connection.to.port) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        connection.to.process.component.inPorts[connection.to.port].detach(connection);
-
-        _this14.connections.splice(_this14.connections.indexOf(connection), <span class="hljs-number">1</span>);
-
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; _this14.initials.length; i += <span class="hljs-number">1</span>) {
-          <span class="hljs-keyword">var</span> init = _this14.initials[i];
-
-          <span class="hljs-keyword">if</span> (!init) {
-            <span class="hljs-keyword">return</span>;
-          }
-
-          <span class="hljs-keyword">if</span> (init.socket !== connection) {
-            <span class="hljs-keyword">return</span>;
-          }
-
-          _this14.initials.splice(_this14.initials.indexOf(init), <span class="hljs-number">1</span>);
-        }
-
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> _i = <span class="hljs-number">0</span>; _i &lt; _this14.nextInitials.length; _i += <span class="hljs-number">1</span>) {
-          <span class="hljs-keyword">var</span> _init = _this14.nextInitials[_i];
-
-          <span class="hljs-keyword">if</span> (!_init) {
-            <span class="hljs-keyword">return</span>;
-          }
-
-          <span class="hljs-keyword">if</span> (_init.socket !== connection) {
-            <span class="hljs-keyword">return</span>;
-          }
-
-          _this14.nextInitials.splice(_this14.nextInitials.indexOf(_init), <span class="hljs-number">1</span>);
-        }
-      });
       callback();
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;sendInitials&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sendInitials</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> _this15 = <span class="hljs-built_in">this</span>;
+    });
+  }
 
-      <span class="hljs-keyword">var</span> callback = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{};
+  removeInitial(initializer, callback) {
+    <span class="hljs-built_in">this</span>.connections.forEach(<span class="hljs-function">(<span class="hljs-params">connection</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!connection) { <span class="hljs-keyword">return</span>; }
+      <span class="hljs-keyword">if</span> ((initializer.to.node !== connection.to.process.id)
+        || (initializer.to.port !== connection.to.port)) {
+        <span class="hljs-keyword">return</span>;
+      }
+      connection.to.process.component.inPorts[connection.to.port].detach(connection);
+      <span class="hljs-built_in">this</span>.connections.splice(<span class="hljs-built_in">this</span>.connections.indexOf(connection), <span class="hljs-number">1</span>);
 
-      <span class="hljs-keyword">var</span> send = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send</span>(<span class="hljs-params"></span>) </span>{
-        _this15.initials.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">initial</span>) </span>{
-          sendInitial(initial);
-        });
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">this</span>.initials.length; i += <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">const</span> init = <span class="hljs-built_in">this</span>.initials[i];
+        <span class="hljs-keyword">if</span> (!init) { <span class="hljs-keyword">return</span>; }
+        <span class="hljs-keyword">if</span> (init.socket !== connection) { <span class="hljs-keyword">return</span>; }
+        <span class="hljs-built_in">this</span>.initials.splice(<span class="hljs-built_in">this</span>.initials.indexOf(init), <span class="hljs-number">1</span>);
+      }
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-built_in">this</span>.nextInitials.length; i += <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">const</span> init = <span class="hljs-built_in">this</span>.nextInitials[i];
+        <span class="hljs-keyword">if</span> (!init) { <span class="hljs-keyword">return</span>; }
+        <span class="hljs-keyword">if</span> (init.socket !== connection) { <span class="hljs-keyword">return</span>; }
+        <span class="hljs-built_in">this</span>.nextInitials.splice(<span class="hljs-built_in">this</span>.nextInitials.indexOf(init), <span class="hljs-number">1</span>);
+      }
+    });
 
-        _this15.initials = [];
-        callback();
-      };
+    callback();
+  }
 
-      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> process !== <span class="hljs-string">&#x27;undefined&#x27;</span> &amp;&amp; process.execPath &amp;&amp; process.execPath.indexOf(<span class="hljs-string">&#x27;node&#x27;</span>) !== <span class="hljs-number">-1</span>) {</pre></div>
+  sendInitials(callback = <span class="hljs-function">() =&gt;</span> {}) {
+    <span class="hljs-keyword">const</span> send = <span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-built_in">this</span>.initials.forEach(<span class="hljs-function">(<span class="hljs-params">initial</span>) =&gt;</span> { sendInitial(initial); });
+      <span class="hljs-built_in">this</span>.initials = [];
+      callback();
+    };
+
+    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> process !== <span class="hljs-string">&#x27;undefined&#x27;</span>) &amp;&amp; process.execPath &amp;&amp; (process.execPath.indexOf(<span class="hljs-string">&#x27;node&#x27;</span>) !== <span class="hljs-number">-1</span>)) {</pre></div>
             
           
             
             <p>nextTick is faster on Node.js</p>
 
             
-              <div class='highlight'><pre>        process.nextTick(send);
-      } <span class="hljs-keyword">else</span> {
-        <span class="hljs-built_in">setTimeout</span>(send, <span class="hljs-number">0</span>);
-      }
+              <div class='highlight'><pre>      process.nextTick(send);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-built_in">setTimeout</span>(send, <span class="hljs-number">0</span>);
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;isStarted&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isStarted</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.started;
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;isStopped&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isStopped</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.stopped;
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;isRunning&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isRunning</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.getActiveProcesses().length &gt; <span class="hljs-number">0</span>;
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;startComponents&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">startComponents</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> _this16 = <span class="hljs-built_in">this</span>;
+  }
 
-      <span class="hljs-keyword">var</span> callback = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{};</pre></div>
+  isStarted() {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.started;
+  }
+
+  isStopped() {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.stopped;
+  }
+
+  isRunning() {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.getActiveProcesses().length &gt; <span class="hljs-number">0</span>;
+  }
+
+  startComponents(callback = <span class="hljs-function">() =&gt;</span> {}) {</pre></div>
             
           
             
             <p>Emit start event when all processes are started</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
-      <span class="hljs-keyword">var</span> length = <span class="hljs-built_in">this</span>.processes ? <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).length : <span class="hljs-number">0</span>;
-
-      <span class="hljs-keyword">var</span> onProcessStart = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onProcessStart</span>(<span class="hljs-params">err</span>) </span>{
-        <span class="hljs-keyword">if</span> (err) {
-          callback(err);
-          <span class="hljs-keyword">return</span>;
-        }
-
-        count += <span class="hljs-number">1</span>;
-
-        <span class="hljs-keyword">if</span> (count === length) {
-          callback();
-        }
-      }; <span class="hljs-comment">// Perform any startup routines necessary for every component.</span>
-
-
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.processes || !<span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).length) {
-        callback();
+              <div class='highlight'><pre>    <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">const</span> length = <span class="hljs-built_in">this</span>.processes ? <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).length : <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">const</span> onProcessStart = <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
         <span class="hljs-keyword">return</span>;
       }
+      count += <span class="hljs-number">1</span>;
+      <span class="hljs-keyword">if</span> (count === length) { callback(); }
+    };</pre></div>
+            
+          
+            
+            <p>Perform any startup routines necessary for every component.</p>
 
-      <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">id</span>) </span>{
-        <span class="hljs-keyword">var</span> process = _this16.processes[id];
-
-        <span class="hljs-keyword">if</span> (process.component.isStarted()) {
-          onProcessStart();
-          <span class="hljs-keyword">return</span>;
-        }
-
-        <span class="hljs-keyword">if</span> (process.component.start.length === <span class="hljs-number">0</span>) {
-          platform.deprecated(<span class="hljs-string">&#x27;component.start method without callback is deprecated&#x27;</span>);
-          process.component.start();
-          onProcessStart();
-          <span class="hljs-keyword">return</span>;
-        }
-
-        process.component.start(onProcessStart);
-      });
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.processes || !<span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).length) {
+      callback();
+      <span class="hljs-keyword">return</span>;
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;sendDefaults&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sendDefaults</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> callback = <span class="hljs-built_in">arguments</span>.length &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] !== <span class="hljs-literal">undefined</span> ? <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>] : <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{};
-
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.defaults.length) {
-        callback();
+    <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).forEach(<span class="hljs-function">(<span class="hljs-params">id</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> process = <span class="hljs-built_in">this</span>.processes[id];
+      <span class="hljs-keyword">if</span> (process.component.isStarted()) {
+        onProcessStart();
         <span class="hljs-keyword">return</span>;
       }
+      <span class="hljs-keyword">if</span> (process.component.start.length === <span class="hljs-number">0</span>) {
+        platform.deprecated(<span class="hljs-string">&#x27;component.start method without callback is deprecated&#x27;</span>);
+        process.component.start();
+        onProcessStart();
+        <span class="hljs-keyword">return</span>;
+      }
+      process.component.start(onProcessStart);
+    });
+  }
 
-      <span class="hljs-built_in">this</span>.defaults.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">socket</span>) </span>{</pre></div>
+  sendDefaults(callback = <span class="hljs-function">() =&gt;</span> {}) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.defaults.length) {
+      callback();
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-built_in">this</span>.defaults.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {</pre></div>
             
           
             
@@ -1253,237 +1142,191 @@ as its network is instantiated and its inputs are serialized before
 a socket is attached from the “parent” graph.</p>
 
             
-              <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (socket.to.process.component.inPorts[socket.to.port].sockets.length !== <span class="hljs-number">1</span>) {
-          <span class="hljs-keyword">return</span>;
-        }
+              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (socket.to.process.component.inPorts[socket.to.port].sockets.length !== <span class="hljs-number">1</span>) { <span class="hljs-keyword">return</span>; }
+      socket.connect();
+      socket.send();
+      socket.disconnect();
+    });
 
-        socket.connect();
-        socket.send();
-        socket.disconnect();
-      });
-      callback();
+    callback();
+  }
+
+  start(callback) {
+    <span class="hljs-keyword">if</span> (!callback) {
+      platform.deprecated(<span class="hljs-string">&#x27;Calling network.start() without callback is deprecated&#x27;</span>);
+      callback = <span class="hljs-function">() =&gt;</span> {};
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;start&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">start</span>(<span class="hljs-params">callback</span>) </span>{
-      <span class="hljs-keyword">var</span> _this17 = <span class="hljs-built_in">this</span>;
 
-      <span class="hljs-keyword">if</span> (!callback) {
-        platform.deprecated(<span class="hljs-string">&#x27;Calling network.start() without callback is deprecated&#x27;</span>);
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.debouncedEnd) { <span class="hljs-built_in">this</span>.abortDebounce = <span class="hljs-literal">true</span>; }
 
-        callback = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params"></span>) </span>{};
-      }
-
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.debouncedEnd) {
-        <span class="hljs-built_in">this</span>.abortDebounce = <span class="hljs-literal">true</span>;
-      }
-
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.started) {
-        <span class="hljs-built_in">this</span>.stop(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
-          <span class="hljs-keyword">if</span> (err) {
-            callback(err);
-            <span class="hljs-keyword">return</span>;
-          }
-
-          _this17.start(callback);
-        });
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-built_in">this</span>.initials = <span class="hljs-built_in">this</span>.nextInitials.slice(<span class="hljs-number">0</span>);
-      <span class="hljs-built_in">this</span>.eventBuffer = [];
-      <span class="hljs-built_in">this</span>.startComponents(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.started) {
+      <span class="hljs-built_in">this</span>.stop(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
         <span class="hljs-keyword">if</span> (err) {
           callback(err);
           <span class="hljs-keyword">return</span>;
         }
+        <span class="hljs-built_in">this</span>.start(callback);
+      });
+      <span class="hljs-keyword">return</span>;
+    }
 
-        _this17.sendInitials(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err2</span>) </span>{
-          <span class="hljs-keyword">if</span> (err2) {
-            callback(err2);
+    <span class="hljs-built_in">this</span>.initials = <span class="hljs-built_in">this</span>.nextInitials.slice(<span class="hljs-number">0</span>);
+    <span class="hljs-built_in">this</span>.eventBuffer = [];
+    <span class="hljs-built_in">this</span>.startComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-built_in">this</span>.sendInitials(<span class="hljs-function">(<span class="hljs-params">err2</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err2) {
+          callback(err2);
+          <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-built_in">this</span>.sendDefaults(<span class="hljs-function">(<span class="hljs-params">err3</span>) =&gt;</span> {
+          <span class="hljs-keyword">if</span> (err3) {
+            callback(err3);
             <span class="hljs-keyword">return</span>;
           }
-
-          _this17.sendDefaults(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err3</span>) </span>{
-            <span class="hljs-keyword">if</span> (err3) {
-              callback(err3);
-              <span class="hljs-keyword">return</span>;
-            }
-
-            _this17.setStarted(<span class="hljs-literal">true</span>);
-
-            callback(<span class="hljs-literal">null</span>);
-          });
+          <span class="hljs-built_in">this</span>.setStarted(<span class="hljs-literal">true</span>);
+          callback(<span class="hljs-literal">null</span>);
         });
       });
+    });
+  }
+
+  stop(callback) {
+    <span class="hljs-keyword">if</span> (!callback) {
+      platform.deprecated(<span class="hljs-string">&#x27;Calling network.stop() without callback is deprecated&#x27;</span>);
+      callback = <span class="hljs-function">() =&gt;</span> {};
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;stop&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stop</span>(<span class="hljs-params">callback</span>) </span>{
-      <span class="hljs-keyword">var</span> _this18 = <span class="hljs-built_in">this</span>;
 
-      <span class="hljs-keyword">if</span> (!callback) {
-        platform.deprecated(<span class="hljs-string">&#x27;Calling network.stop() without callback is deprecated&#x27;</span>);
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.debouncedEnd) { <span class="hljs-built_in">this</span>.abortDebounce = <span class="hljs-literal">true</span>; }
 
-        callback = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params"></span>) </span>{};
-      }
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.started) {
+      <span class="hljs-built_in">this</span>.stopped = <span class="hljs-literal">true</span>;
+      callback(<span class="hljs-literal">null</span>);
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Disconnect all connections</p>
 
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.debouncedEnd) {
-        <span class="hljs-built_in">this</span>.abortDebounce = <span class="hljs-literal">true</span>;
-      }
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.connections.forEach(<span class="hljs-function">(<span class="hljs-params">connection</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!connection.isConnected()) { <span class="hljs-keyword">return</span>; }
+      connection.disconnect();
+    });</pre></div>
+            
+          
+            
+            <p>Emit stop event when all processes are stopped</p>
 
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.started) {
-        <span class="hljs-built_in">this</span>.stopped = <span class="hljs-literal">true</span>;
-        callback(<span class="hljs-literal">null</span>);
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">const</span> length = <span class="hljs-built_in">this</span>.processes ? <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).length : <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">const</span> onProcessEnd = <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
         <span class="hljs-keyword">return</span>;
-      } <span class="hljs-comment">// Disconnect all connections</span>
-
-
-      <span class="hljs-built_in">this</span>.connections.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">connection</span>) </span>{
-        <span class="hljs-keyword">if</span> (!connection.isConnected()) {
-          <span class="hljs-keyword">return</span>;
-        }
-
-        connection.disconnect();
-      }); <span class="hljs-comment">// Emit stop event when all processes are stopped</span>
-
-      <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
-      <span class="hljs-keyword">var</span> length = <span class="hljs-built_in">this</span>.processes ? <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).length : <span class="hljs-number">0</span>;
-
-      <span class="hljs-keyword">var</span> onProcessEnd = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onProcessEnd</span>(<span class="hljs-params">err</span>) </span>{
-        <span class="hljs-keyword">if</span> (err) {
-          callback(err);
-          <span class="hljs-keyword">return</span>;
-        }
-
-        count += <span class="hljs-number">1</span>;
-
-        <span class="hljs-keyword">if</span> (count === length) {
-          _this18.setStarted(<span class="hljs-literal">false</span>);
-
-          _this18.stopped = <span class="hljs-literal">true</span>;
-          callback();
-        }
-      };
-
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.processes || !<span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).length) {
+      }
+      count += <span class="hljs-number">1</span>;
+      <span class="hljs-keyword">if</span> (count === length) {
         <span class="hljs-built_in">this</span>.setStarted(<span class="hljs-literal">false</span>);
         <span class="hljs-built_in">this</span>.stopped = <span class="hljs-literal">true</span>;
         callback();
-        <span class="hljs-keyword">return</span>;
-      } <span class="hljs-comment">// Tell processes to shut down</span>
+      }
+    };
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.processes || !<span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).length) {
+      <span class="hljs-built_in">this</span>.setStarted(<span class="hljs-literal">false</span>);
+      <span class="hljs-built_in">this</span>.stopped = <span class="hljs-literal">true</span>;
+      callback();
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Tell processes to shut down</p>
 
-
-      <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">id</span>) </span>{
-        <span class="hljs-keyword">var</span> process = _this18.processes[id];
-
-        <span class="hljs-keyword">if</span> (!process.component.isStarted()) {
-          onProcessEnd();
-          <span class="hljs-keyword">return</span>;
-        }
-
-        <span class="hljs-keyword">if</span> (process.component.shutdown.length === <span class="hljs-number">0</span>) {
-          platform.deprecated(<span class="hljs-string">&#x27;component.shutdown method without callback is deprecated&#x27;</span>);
-          process.component.shutdown();
-          onProcessEnd();
-          <span class="hljs-keyword">return</span>;
-        }
-
-        process.component.shutdown(onProcessEnd);
-      });
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;setStarted&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setStarted</span>(<span class="hljs-params">started</span>) </span>{
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.started === started) {
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).forEach(<span class="hljs-function">(<span class="hljs-params">id</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> process = <span class="hljs-built_in">this</span>.processes[id];
+      <span class="hljs-keyword">if</span> (!process.component.isStarted()) {
+        onProcessEnd();
         <span class="hljs-keyword">return</span>;
       }
+      <span class="hljs-keyword">if</span> (process.component.shutdown.length === <span class="hljs-number">0</span>) {
+        platform.deprecated(<span class="hljs-string">&#x27;component.shutdown method without callback is deprecated&#x27;</span>);
+        process.component.shutdown();
+        onProcessEnd();
+        <span class="hljs-keyword">return</span>;
+      }
+      process.component.shutdown(onProcessEnd);
+    });
+  }
 
-      <span class="hljs-keyword">if</span> (!started) {</pre></div>
+  setStarted(started) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.started === started) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-keyword">if</span> (!started) {</pre></div>
             
           
             
             <p>Ending the execution</p>
 
             
-              <div class='highlight'><pre>        <span class="hljs-built_in">this</span>.started = <span class="hljs-literal">false</span>;
-        <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;end&#x27;</span>, {
-          <span class="hljs-attr">start</span>: <span class="hljs-built_in">this</span>.startupDate,
-          <span class="hljs-attr">end</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(),
-          <span class="hljs-attr">uptime</span>: <span class="hljs-built_in">this</span>.uptime()
-        });
-        <span class="hljs-keyword">return</span>;
-      } <span class="hljs-comment">// Starting the execution</span>
-
-
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.startupDate) {
-        <span class="hljs-built_in">this</span>.startupDate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
-      }
-
-      <span class="hljs-built_in">this</span>.started = <span class="hljs-literal">true</span>;
-      <span class="hljs-built_in">this</span>.stopped = <span class="hljs-literal">false</span>;
-      <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;start&#x27;</span>, {
-        <span class="hljs-attr">start</span>: <span class="hljs-built_in">this</span>.startupDate
+              <div class='highlight'><pre>      <span class="hljs-built_in">this</span>.started = <span class="hljs-literal">false</span>;
+      <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;end&#x27;</span>, {
+        <span class="hljs-attr">start</span>: <span class="hljs-built_in">this</span>.startupDate,
+        <span class="hljs-attr">end</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(),
+        <span class="hljs-attr">uptime</span>: <span class="hljs-built_in">this</span>.uptime(),
       });
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Starting the execution</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.startupDate) { <span class="hljs-built_in">this</span>.startupDate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(); }
+    <span class="hljs-built_in">this</span>.started = <span class="hljs-literal">true</span>;
+    <span class="hljs-built_in">this</span>.stopped = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;start&#x27;</span>,
+      { <span class="hljs-attr">start</span>: <span class="hljs-built_in">this</span>.startupDate });
+  }
+
+  checkIfFinished() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isRunning()) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.abortDebounce;
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.debouncedEnd) {
+      <span class="hljs-built_in">this</span>.debouncedEnd = utils.debounce(<span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.abortDebounce) { <span class="hljs-keyword">return</span>; }
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isRunning()) { <span class="hljs-keyword">return</span>; }
+        <span class="hljs-built_in">this</span>.setStarted(<span class="hljs-literal">false</span>);
+      },
+      <span class="hljs-number">50</span>);
     }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;checkIfFinished&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkIfFinished</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">var</span> _this19 = <span class="hljs-built_in">this</span>;
+    (<span class="hljs-built_in">this</span>.debouncedEnd)();
+  }
 
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isRunning()) {
-        <span class="hljs-keyword">return</span>;
-      }
+  getDebug() {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.debug;
+  }
 
-      <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.abortDebounce;
+  setDebug(active) {
+    <span class="hljs-keyword">if</span> (active === <span class="hljs-built_in">this</span>.debug) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-built_in">this</span>.debug = active;
 
-      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.debouncedEnd) {
-        <span class="hljs-built_in">this</span>.debouncedEnd = utils.debounce(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
-          <span class="hljs-keyword">if</span> (_this19.abortDebounce) {
-            <span class="hljs-keyword">return</span>;
-          }
-
-          <span class="hljs-keyword">if</span> (_this19.isRunning()) {
-            <span class="hljs-keyword">return</span>;
-          }
-
-          _this19.setStarted(<span class="hljs-literal">false</span>);
-        }, <span class="hljs-number">50</span>);
-      }
-
-      <span class="hljs-built_in">this</span>.debouncedEnd();
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;getDebug&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDebug</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.debug;
-    }
-  }, {
-    <span class="hljs-attr">key</span>: <span class="hljs-string">&quot;setDebug&quot;</span>,
-    <span class="hljs-attr">value</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setDebug</span>(<span class="hljs-params">active</span>) </span>{
-      <span class="hljs-keyword">var</span> _this20 = <span class="hljs-built_in">this</span>;
-
-      <span class="hljs-keyword">if</span> (active === <span class="hljs-built_in">this</span>.debug) {
-        <span class="hljs-keyword">return</span>;
-      }
-
-      <span class="hljs-built_in">this</span>.debug = active;
-      <span class="hljs-built_in">this</span>.connections.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">socket</span>) </span>{
-        socket.setDebug(active);
-      });
-      <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">processId</span>) </span>{
-        <span class="hljs-keyword">var</span> process = _this20.processes[processId];
-        <span class="hljs-keyword">var</span> instance = process.component;
-
-        <span class="hljs-keyword">if</span> (instance.isSubgraph()) {
-          instance.network.setDebug(active);
-        }
-      });
-    }
-  }]);
-
-  <span class="hljs-keyword">return</span> BaseNetwork;
-}(EventEmitter);
+    <span class="hljs-built_in">this</span>.connections.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
+      socket.setDebug(active);
+    });
+    <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).forEach(<span class="hljs-function">(<span class="hljs-params">processId</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> process = <span class="hljs-built_in">this</span>.processes[processId];
+      <span class="hljs-keyword">const</span> instance = process.component;
+      <span class="hljs-keyword">if</span> (instance.isSubgraph()) { instance.network.setDebug(active); }
+    });
+  }
+}
 
 <span class="hljs-built_in">module</span>.exports = BaseNetwork;</pre></div>
             
