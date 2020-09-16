@@ -448,7 +448,13 @@ component.</p>
             <p>Live graph instance</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> cPath === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; cPath <span class="hljs-keyword">instanceof</span> fbpGraph.Graph) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> cPath === <span class="hljs-string">&#x27;object&#x27;</span>)
+      &amp;&amp; (cPath <span class="hljs-keyword">instanceof</span> fbpGraph.Graph
+        || (<span class="hljs-built_in">Array</span>.isArray(cPath.nodes)
+          &amp;&amp; <span class="hljs-built_in">Array</span>.isArray(cPath.edges)
+          &amp;&amp; <span class="hljs-built_in">Array</span>.isArray(cPath.initializers)))) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }</pre></div>
             
           
             

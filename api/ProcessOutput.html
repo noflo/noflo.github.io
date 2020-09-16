@@ -264,8 +264,12 @@ NoFlo may be freely distributed under the MIT license</code></pre>
     }
     <span class="hljs-keyword">if</span> ((<span class="hljs-built_in">this</span>.scope !== <span class="hljs-literal">null</span>) &amp;&amp; (ip.scope === <span class="hljs-literal">null</span>)) { ip.scope = <span class="hljs-built_in">this</span>.scope; }
 
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.nodeInstance.outPorts[port]) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Node <span class="hljs-subst">${<span class="hljs-built_in">this</span>.nodeInstance.nodeId}</span> does not have outport <span class="hljs-subst">${port}</span>`</span>);
+    }
+
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.nodeInstance.outPorts[port].isAddressable() &amp;&amp; (ip.index === <span class="hljs-literal">null</span>)) {
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;Sending packets to addressable ports requires specifying index&#x27;</span>);
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Sending packets to addressable port <span class="hljs-subst">${<span class="hljs-built_in">this</span>.nodeInstance.nodeId}</span> <span class="hljs-subst">${port}</span> requires specifying index`</span>);
     }
 
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.nodeInstance.isOrdered()) {

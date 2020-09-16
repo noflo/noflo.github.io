@@ -3,47 +3,47 @@
   
   
   
-    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'noflo'</span>);
+    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noflo&#x27;</span>);
 
-exports.getComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+<span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">const</span> c = <span class="hljs-keyword">new</span> noflo.Component({
-    <span class="hljs-attr">description</span>: <span class="hljs-string">'Convert input array to a NoFlo stream'</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Convert input array to a NoFlo stream&#x27;</span>,
     <span class="hljs-attr">inPorts</span>: {
       <span class="hljs-attr">in</span>: {
-        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'array'</span>,
-        <span class="hljs-attr">description</span>: <span class="hljs-string">'data we want to send'</span>,
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;array&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;data we want to send&#x27;</span>,
         <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
       },
     },
     <span class="hljs-attr">outPorts</span>: {
       <span class="hljs-attr">out</span>: {
-        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'string'</span>,
-        <span class="hljs-attr">description</span>: <span class="hljs-string">'the data wrapped in brackets'</span>,
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the data wrapped in brackets&#x27;</span>,
         <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
       },
     },
   });
 
   c.process(<span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {
-    <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">'in'</span>)) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">&#x27;in&#x27;</span>)) { <span class="hljs-keyword">return</span>; }
 
-    <span class="hljs-keyword">let</span> datas = input.getData(<span class="hljs-string">'in'</span>);
+    <span class="hljs-keyword">let</span> datas = input.getData(<span class="hljs-string">&#x27;in&#x27;</span>);
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Array</span>.isArray(datas)) {
       datas = [datas];
     }
 
     output.send({
-      <span class="hljs-attr">out</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">'openBracket'</span>),
+      <span class="hljs-attr">out</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">&#x27;openBracket&#x27;</span>),
     });
 
     datas.forEach(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
       output.send({
-        <span class="hljs-attr">out</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">'data'</span>, data),
+        <span class="hljs-attr">out</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">&#x27;data&#x27;</span>, data),
       });
     });
 
     output.send({
-      <span class="hljs-attr">out</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">'closeBracket'</span>),
+      <span class="hljs-attr">out</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">&#x27;closeBracket&#x27;</span>),
     });
     output.done();
   });

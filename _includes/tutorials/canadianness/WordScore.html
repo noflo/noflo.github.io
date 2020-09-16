@@ -4,8 +4,8 @@
   <h2 id="import-libraries">Import libraries</h2>
 
   
-    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'noflo'</span>);
-<span class="hljs-keyword">const</span> natural = <span class="hljs-built_in">require</span>(<span class="hljs-string">'natural'</span>);
+    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noflo&#x27;</span>);
+<span class="hljs-keyword">const</span> natural = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;natural&#x27;</span>);
 
 <span class="hljs-keyword">const</span> tokenizer = <span class="hljs-keyword">new</span> natural.WordTokenizer();</pre></div>
   
@@ -14,26 +14,26 @@
   <h2 id="component-declaration">Component declaration</h2>
 
   
-    <div class='highlight'><pre>exports.getComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <div class='highlight'><pre><span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">const</span> c = <span class="hljs-keyword">new</span> noflo.Component({
-    <span class="hljs-attr">description</span>: <span class="hljs-string">'Find how the input words compare against the list of weighted words'</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Find how the input words compare against the list of weighted words&#x27;</span>,
     <span class="hljs-attr">inPorts</span>: {
       <span class="hljs-attr">list</span>: {
-        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'array'</span>,
-        <span class="hljs-attr">description</span>: <span class="hljs-string">'list of words we will use with the list of content'</span>,
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;array&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;list of words we will use with the list of content&#x27;</span>,
         <span class="hljs-attr">control</span>: <span class="hljs-literal">true</span>,
         <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
       },
       <span class="hljs-attr">content</span>: {
-        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'string'</span>,
-        <span class="hljs-attr">description</span>: <span class="hljs-string">'the content which we will determine the score of'</span>,
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the content which we will determine the score of&#x27;</span>,
         <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
       },
     },
     <span class="hljs-attr">outPorts</span>: {
       <span class="hljs-attr">score</span>: {
-        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'number'</span>,
-        <span class="hljs-attr">description</span>: <span class="hljs-string">'the resulting number of comparing the content with the list'</span>,
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;number&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the resulting number of comparing the content with the list&#x27;</span>,
         <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
       },
     },
@@ -55,17 +55,17 @@
 
   
     <div class='highlight'><pre>    <span class="hljs-keyword">let</span> scoringFunction;
-    <span class="hljs-keyword">if</span> (!input.hasStream(<span class="hljs-string">'content'</span>)) { <span class="hljs-keyword">return</span>; }
-    <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">'list'</span>)) { <span class="hljs-keyword">return</span>; }
-    <span class="hljs-keyword">let</span> content = input.getStream(<span class="hljs-string">'content'</span>).filter(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.type === <span class="hljs-string">'data'</span>).map(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.data);
-    <span class="hljs-keyword">const</span> list = input.getData(<span class="hljs-string">'list'</span>);</pre></div>
+    <span class="hljs-keyword">if</span> (!input.hasStream(<span class="hljs-string">&#x27;content&#x27;</span>)) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">&#x27;list&#x27;</span>)) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-keyword">let</span> content = input.getStream(<span class="hljs-string">&#x27;content&#x27;</span>).filter(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.type === <span class="hljs-string">&#x27;data&#x27;</span>).map(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.data);
+    <span class="hljs-keyword">const</span> list = input.getData(<span class="hljs-string">&#x27;list&#x27;</span>);</pre></div>
   
 
   
   <p>there can be multiple pieces of content</p>
 
   
-    <div class='highlight'><pre>    content = content.join(<span class="hljs-string">'\n'</span>);</pre></div>
+    <div class='highlight'><pre>    content = content.join(<span class="hljs-string">&#x27;\n&#x27;</span>);</pre></div>
   
 
   

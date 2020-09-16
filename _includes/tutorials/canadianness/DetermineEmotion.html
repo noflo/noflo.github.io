@@ -4,12 +4,12 @@
   <h2 id="import-libraries">Import libraries</h2>
 
   
-    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'noflo'</span>);</pre></div>
+    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noflo&#x27;</span>);</pre></div>
   
 
   
   <h2 id="useful-functions">Useful functions</h2>
-<p>Function to calculate most common value (the <a href="https://en.wikipedia.org/wiki/Mode_(statistics">mode</a>)</p>
+<p>Function to calculate most common value (the <a href="https://en.wikipedia.org/wiki/Mode_(statistics)">mode</a></p>
 
   
     <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findMode</span>(<span class="hljs-params">array</span>) </span>{
@@ -32,24 +32,24 @@
 <p>Define the input and output ports, and describe their function</p>
 
   
-    <div class='highlight'><pre>exports.getComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <div class='highlight'><pre><span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">const</span> c = <span class="hljs-keyword">new</span> noflo.Component({
-    <span class="hljs-attr">description</span>: <span class="hljs-string">'Find all of the instances of `word` in `content` and send them out in a stream'</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Find all of the instances of `word` in `content` and send them out in a stream&#x27;</span>,
     <span class="hljs-attr">inPorts</span>: {
       <span class="hljs-attr">content</span>: {
-        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'string'</span>,
-        <span class="hljs-attr">description</span>: <span class="hljs-string">'the content which we look for the word in'</span>,
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the content which we look for the word in&#x27;</span>,
         <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
       },
     },
     <span class="hljs-attr">outPorts</span>: {
       <span class="hljs-attr">emotion</span>: {
-        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'string'</span>,
-        <span class="hljs-attr">description</span>: <span class="hljs-string">'the emotion based the content in ehs'</span>,
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the emotion based the content in ehs&#x27;</span>,
         <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
       },
       <span class="hljs-attr">error</span>: {
-        <span class="hljs-attr">datatype</span>: <span class="hljs-string">'object'</span>,
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;object&#x27;</span>,
       },
     },
   });</pre></div>
@@ -75,7 +75,7 @@
 Will also accept a single (non-bracketed) input packet, returned as a stream of length 1</p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!input.hasStream(<span class="hljs-string">'content'</span>)) { <span class="hljs-keyword">return</span>; }</pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!input.hasStream(<span class="hljs-string">&#x27;content&#x27;</span>)) { <span class="hljs-keyword">return</span>; }</pre></div>
   
 
   
@@ -84,7 +84,7 @@ hence we drop the <code>openBracket</code> and <code>closeBracket</code>
 and extract the data payload from the IP objects</p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> contents = input.getStream(<span class="hljs-string">'content'</span>).filter(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.type === <span class="hljs-string">'data'</span>).map(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.data);</pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> contents = input.getStream(<span class="hljs-string">&#x27;content&#x27;</span>).filter(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.type === <span class="hljs-string">&#x27;data&#x27;</span>).map(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.data);</pre></div>
   
 
   
@@ -106,15 +106,15 @@ This could alternatively be split into two dedicate components.</p>
 
   
     <div class='highlight'><pre>    <span class="hljs-keyword">const</span> emotions = {
-      <span class="hljs-attr">joy</span>: [<span class="hljs-string">'eh!'</span>],
-      <span class="hljs-attr">neutral</span>: [<span class="hljs-string">'eh'</span>],
-      <span class="hljs-attr">amusement</span>: [<span class="hljs-string">'eh?'</span>, <span class="hljs-string">'Eh?'</span>, <span class="hljs-string">'Eh??'</span>],
-      <span class="hljs-attr">fear</span>: [<span class="hljs-string">'eH??'</span>, <span class="hljs-string">'eh??'</span>],
-      <span class="hljs-attr">surprise</span>: [<span class="hljs-string">'eh !?'</span>, <span class="hljs-string">'EH!?'</span>],
-      <span class="hljs-attr">anticipation</span>: [<span class="hljs-string">'eh?!'</span>],
-      <span class="hljs-attr">excitment</span>: [<span class="hljs-string">'EH!'</span>, <span class="hljs-string">'eH!'</span>],
-      <span class="hljs-attr">sadness</span>: [<span class="hljs-string">'...eh'</span>, <span class="hljs-string">'...eh...'</span>, <span class="hljs-string">'..eh'</span>, <span class="hljs-string">'eh..'</span>, <span class="hljs-string">'..eh..'</span>],
-      <span class="hljs-attr">anger</span>: [<span class="hljs-string">'EH!?'</span>, <span class="hljs-string">'EH?'</span>],
+      <span class="hljs-attr">joy</span>: [<span class="hljs-string">&#x27;eh!&#x27;</span>],
+      <span class="hljs-attr">neutral</span>: [<span class="hljs-string">&#x27;eh&#x27;</span>],
+      <span class="hljs-attr">amusement</span>: [<span class="hljs-string">&#x27;eh?&#x27;</span>, <span class="hljs-string">&#x27;Eh?&#x27;</span>, <span class="hljs-string">&#x27;Eh??&#x27;</span>],
+      <span class="hljs-attr">fear</span>: [<span class="hljs-string">&#x27;eH??&#x27;</span>, <span class="hljs-string">&#x27;eh??&#x27;</span>],
+      <span class="hljs-attr">surprise</span>: [<span class="hljs-string">&#x27;eh !?&#x27;</span>, <span class="hljs-string">&#x27;EH!?&#x27;</span>],
+      <span class="hljs-attr">anticipation</span>: [<span class="hljs-string">&#x27;eh?!&#x27;</span>],
+      <span class="hljs-attr">excitment</span>: [<span class="hljs-string">&#x27;EH!&#x27;</span>, <span class="hljs-string">&#x27;eH!&#x27;</span>],
+      <span class="hljs-attr">sadness</span>: [<span class="hljs-string">&#x27;...eh&#x27;</span>, <span class="hljs-string">&#x27;...eh...&#x27;</span>, <span class="hljs-string">&#x27;..eh&#x27;</span>, <span class="hljs-string">&#x27;eh..&#x27;</span>, <span class="hljs-string">&#x27;..eh..&#x27;</span>],
+      <span class="hljs-attr">anger</span>: [<span class="hljs-string">&#x27;EH!?&#x27;</span>, <span class="hljs-string">&#x27;EH?&#x27;</span>],
     };</pre></div>
   
 
@@ -139,7 +139,7 @@ then add them to our <code>matches</code></p>
   
     <div class='highlight'><pre>    <span class="hljs-keyword">let</span> mode;
     <span class="hljs-keyword">if</span> (matches.length === <span class="hljs-number">0</span>) {
-      mode = <span class="hljs-string">'neutral'</span>;</pre></div>
+      mode = <span class="hljs-string">&#x27;neutral&#x27;</span>;</pre></div>
   
 
   

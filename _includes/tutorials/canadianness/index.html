@@ -3,12 +3,12 @@
   
   
   
-    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'noflo'</span>);
-<span class="hljs-keyword">const</span> defaultSpellingData = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./spellingdata.json'</span>);
+    <div class='highlight'><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noflo&#x27;</span>);
+<span class="hljs-keyword">const</span> defaultSpellingData = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./spellingdata.json&#x27;</span>);
 
 <span class="hljs-keyword">const</span> defaultWords = {
   <span class="hljs-attr">eh</span>: <span class="hljs-number">11</span>,
-  <span class="hljs-string">'eh!'</span>: <span class="hljs-number">11</span>,
+  <span class="hljs-string">&#x27;eh!&#x27;</span>: <span class="hljs-number">11</span>,
 };</pre></div>
   
 
@@ -42,7 +42,7 @@
   <p>Produce a NoFlo.asCallback wrapped function to execute our graph</p>
 
   
-    <div class='highlight'><pre>  <span class="hljs-keyword">const</span> componentName = <span class="hljs-string">'canadianness/Canadianness'</span>;
+    <div class='highlight'><pre>  <span class="hljs-keyword">const</span> componentName = <span class="hljs-string">&#x27;canadianness/Canadianness&#x27;</span>;
   <span class="hljs-keyword">const</span> wrapperFunction = noflo.asCallback(componentName, {
     <span class="hljs-attr">baseDir</span>: __dirname,
   });</pre></div>
