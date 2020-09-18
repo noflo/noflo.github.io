@@ -286,13 +286,13 @@ NPM modules, as well as for convenience renaming all
 
     <span class="hljs-built_in">this</span>.components = {};
     registerLoader.register(<span class="hljs-built_in">this</span>, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-built_in">this</span>.processing = <span class="hljs-literal">false</span>;
+      <span class="hljs-built_in">this</span>.ready = <span class="hljs-literal">true</span>;
+      <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-literal">true</span>);
       <span class="hljs-keyword">if</span> (err) {
         callback(err);
         <span class="hljs-keyword">return</span>;
       }
-      <span class="hljs-built_in">this</span>.processing = <span class="hljs-literal">false</span>;
-      <span class="hljs-built_in">this</span>.ready = <span class="hljs-literal">true</span>;
-      <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-literal">true</span>);
       callback(<span class="hljs-literal">null</span>, <span class="hljs-built_in">this</span>.components);
     });
   }</pre></div>
@@ -647,6 +647,25 @@ component as a string.</p>
     }
 
     registerLoader.getSource(<span class="hljs-built_in">this</span>, name, callback);
+  }</pre></div>
+            
+          
+            
+            <p><code>getLanguages</code> gets a list of component programming languages supported by the <code>setSource</code>
+method on this runtime instance.</p>
+
+            
+              <div class='highlight'><pre>  getLanguages() {
+    <span class="hljs-keyword">if</span> (!registerLoader.getLanguages) {</pre></div>
+            
+          
+            
+            <p>This component loader doesn’t support the method, default to normal JS</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">return</span> [<span class="hljs-string">&#x27;javascript&#x27;</span>, <span class="hljs-string">&#x27;es2015&#x27;</span>];
+    }
+    <span class="hljs-keyword">return</span> registerLoader.getLanguages();
   }
 
   clear() {
