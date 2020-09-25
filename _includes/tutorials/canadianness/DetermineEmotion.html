@@ -84,7 +84,7 @@ hence we drop the <code>openBracket</code> and <code>closeBracket</code>
 and extract the data payload from the IP objects</p>
 
   
-    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> contents = input.getStream(<span class="hljs-string">&#x27;content&#x27;</span>).filter(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.type === <span class="hljs-string">&#x27;data&#x27;</span>).map(<span class="hljs-function"><span class="hljs-params">ip</span> =&gt;</span> ip.data);</pre></div>
+    <div class='highlight'><pre>    <span class="hljs-keyword">const</span> contents = input.getStream(<span class="hljs-string">&#x27;content&#x27;</span>).filter(<span class="hljs-function">(<span class="hljs-params">ip</span>) =&gt;</span> ip.type === <span class="hljs-string">&#x27;data&#x27;</span>).map(<span class="hljs-function">(<span class="hljs-params">ip</span>) =&gt;</span> ip.data);</pre></div>
   
 
   
