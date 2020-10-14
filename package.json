@@ -2,7 +2,7 @@
   "name": "noflojs-org",
   "version": "1.0.1",
   "devDependencies": {
-    "grunt": "~1.0.1",
+    "grunt": "~1.3.0",
     "grunt-jekyll": "~0.4.6",
     "grunt-contrib-connect": "~3.0.0",
     "grunt-contrib-watch": "~1.1.0",
