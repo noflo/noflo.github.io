@@ -1,0 +1,38 @@
+name: Publish on GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.3
+      - uses: actions/setup-node@v2.1.1
+        with:
+          node-version: 12
+      - run: sudo apt-get install -y bundler
+      - run: bundle install --path vendor/bundle
+      - run: npm install
+      - run: git submodule update --init
+      - run: npm test
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.3
+      - uses: actions/setup-node@v2.1.1
+        with:
+          node-version: 12
+      - run: sudo apt-get install -y bundler
+      - run: bundle install --path vendor/bundle
+      - run: npm install
+      - run: git submodule update --init
+      - run: npm run build
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          cname: noflojs.org
