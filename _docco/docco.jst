@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/<%= title.replace('.js', '.coffee') %>" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/<%= title %>" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -22,7 +22,7 @@ categories:
             <ul class="sidebar__nav">
               <% for (var i=0, l = sources.length; i < l; i++) { %>
                 <% var source = sources[i]; %>
-                <% if (path.basename(source) !== 'shell.coffee') { %>
+                <% if (path.basename(source) !== 'shell.js') { %>
                 <li>
                   <a {% if page.url == '/api/<%= path.basename(destination(source), path.extname(destination(source))) %>/index.html' %}class="active" {% endif %}href="/api/<%= path.basename(destination(source), path.extname(destination(source))) %>/">
                     <%= path.basename(source).replace('.js', '') %>
@@ -43,7 +43,7 @@ categories:
               <%= section.codeHtml %>
             <% } %>
           <% } %>
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/<%= title.replace('.js', '.coffee') %>"><%= title.replace('.js', '.coffee') %></a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/<%= title %>"><%= title %></a> file.</small></p>
         </div>
       </div>
     </div>
