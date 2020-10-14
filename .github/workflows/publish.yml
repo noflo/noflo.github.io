@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v2.1.1
         with:
           node-version: 12
+      - run: gem install bundler
       - run: bundle install --path vendor/bundle
       - run: npm install
       - run: git submodule update --init
@@ -25,6 +26,7 @@ jobs:
       - uses: actions/setup-node@v2.1.1
         with:
           node-version: 12
+      - run: gem install bundler
       - run: bundle install --path vendor/bundle
       - run: npm install
       - run: git submodule update --init
