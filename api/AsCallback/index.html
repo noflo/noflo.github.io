@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AsCallback API | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/AsCallback.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a href="/api/AsCallback/">
+                    AsCallback
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BaseNetwork/">
+                    BaseNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/LegacyNetwork/">
+                    LegacyNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessContext/">
+                    ProcessContext
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessInput/">
+                    ProcessInput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessOutput/">
+                    ProcessOutput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>AsCallback API</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2017</span><span class="hljs-number">-2018</span> Flowhub UG
+NoFlo may be freely distributed under the MIT license</code></pre>
+
+            
+              <div class='highlight'><pre>
+<span class="hljs-comment">/* eslint-disable
+    no-param-reassign,
+*/</span>
+<span class="hljs-keyword">const</span> {
+  Graph,
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fbp-graph&#x27;</span>);
+<span class="hljs-keyword">const</span> {
+  ComponentLoader,
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./ComponentLoader&#x27;</span>);
+<span class="hljs-keyword">const</span> {
+  Network,
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Network&#x27;</span>);
+<span class="hljs-keyword">const</span> IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);
+<span class="hljs-keyword">const</span> internalSocket = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InternalSocket&#x27;</span>);</pre></div>
+            
+          
+            
+            <h2 id="ascallback-embedding-api">asCallback embedding API</h2>
+<p>asCallback is a helper for embedding NoFlo components or
+graphs in other JavaScript programs.</p>
+<p>By using the <code>noflo.asCallback</code> function, you can turn any
+NoFlo component or NoFlo Graph instance into a regular,
+Node.js-style JavaScript function.</p>
+<p>Each call to that function starts a new NoFlo network where
+the given input arguments are sent as IP objects to matching
+inports. Once the network finishes, the IP objects received
+from the network will be sent to the callback function.</p>
+<p>If there was anything sent to an <code>error</code> outport, this will
+be provided as the error argument to the callback.</p>
+
+            
+          
+            
+            <h3 id="option-normalization">Option normalization</h3>
+<p>Here we handle the input valus given to the <code>asCallback</code>
+function. This allows passing things like a pre-initialized
+NoFlo ComponentLoader, or giving the component loading
+baseDir context.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">normalizeOptions</span>(<span class="hljs-params">options, component</span>) </span>{
+  <span class="hljs-keyword">if</span> (!options) { options = {}; }
+  <span class="hljs-keyword">if</span> (!options.name) { options.name = component; }
+  <span class="hljs-keyword">if</span> (options.loader) {
+    options.baseDir = options.loader.baseDir;
+  }
+  <span class="hljs-keyword">if</span> (!options.baseDir &amp;&amp; process &amp;&amp; process.cwd) {
+    options.baseDir = process.cwd();
+  }
+  <span class="hljs-keyword">if</span> (!options.loader) {
+    options.loader = <span class="hljs-keyword">new</span> ComponentLoader(options.baseDir);
+  }
+  <span class="hljs-keyword">if</span> (!options.raw) { options.raw = <span class="hljs-literal">false</span>; }
+  <span class="hljs-keyword">return</span> options;
+}</pre></div>
+            
+          
+            
+            <h3 id="network-preparation">Network preparation</h3>
+<p>Each invocation of the asCallback-wrapped NoFlo graph
+creates a new network. This way we can isolate multiple
+executions of the function in their own contexts.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prepareNetwork</span>(<span class="hljs-params">component, options, callback</span>) </span>{</pre></div>
+            
+          
+            
+            <p>If we were given a graph instance, then just create a network</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">let</span> network;
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> component === <span class="hljs-string">&#x27;object&#x27;</span>) {
+    component.componentLoader = options.loader;
+
+    network = <span class="hljs-keyword">new</span> Network(component, options);</pre></div>
+            
+          
+            
+            <p>Wire the network up</p>
+
+            
+              <div class='highlight'><pre>    network.connect(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      callback(<span class="hljs-literal">null</span>, network);
+    });
+    <span class="hljs-keyword">return</span>;
+  }</pre></div>
+            
+          
+            
+            <p>Start by loading the component</p>
+
+            
+              <div class='highlight'><pre>  options.loader.load(component, <span class="hljs-function">(<span class="hljs-params">err, instance</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (err) {
+      callback(err);
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Prepare a graph wrapping the component</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">const</span> graph = <span class="hljs-keyword">new</span> Graph(options.name);
+    <span class="hljs-keyword">const</span> nodeName = options.name;
+    graph.addNode(nodeName, component);</pre></div>
+            
+          
+            
+            <p>Expose ports</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">const</span> inPorts = instance.inPorts.ports;
+    <span class="hljs-keyword">const</span> outPorts = instance.outPorts.ports;
+    <span class="hljs-built_in">Object</span>.keys(inPorts).forEach(<span class="hljs-function">(<span class="hljs-params">port</span>) =&gt;</span> {
+      graph.addInport(port, nodeName, port);
+    });
+    <span class="hljs-built_in">Object</span>.keys(outPorts).forEach(<span class="hljs-function">(<span class="hljs-params">port</span>) =&gt;</span> {
+      graph.addOutport(port, nodeName, port);
+    });</pre></div>
+            
+          
+            
+            <p>Prepare network</p>
+
+            
+              <div class='highlight'><pre>    graph.componentLoader = options.loader;
+    network = <span class="hljs-keyword">new</span> Network(graph, options);</pre></div>
+            
+          
+            
+            <p>Wire the network up and start execution</p>
+
+            
+              <div class='highlight'><pre>    network.connect(<span class="hljs-function">(<span class="hljs-params">err2</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err2) {
+        callback(err2);
+        <span class="hljs-keyword">return</span>;
+      }
+      callback(<span class="hljs-literal">null</span>, network);
+    });
+  });
+}</pre></div>
+            
+          
+            
+            <h3 id="network-execution">Network execution</h3>
+<p>Once network is ready, we connect to all of its exported
+in and outports and start the network.</p>
+<p>Input data is sent to the inports, and we collect IP
+packets received on the outports.</p>
+<p>Once the network finishes, we send the resulting IP
+objects to the callback.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">runNetwork</span>(<span class="hljs-params">network, inputs, options, callback</span>) </span>{</pre></div>
+            
+          
+            
+            <p>Prepare inports</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">let</span> inSockets = {};</pre></div>
+            
+          
+            
+            <p>Subscribe outports</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> received = [];
+  <span class="hljs-keyword">const</span> outPorts = <span class="hljs-built_in">Object</span>.keys(network.graph.outports);
+  <span class="hljs-keyword">let</span> outSockets = {};
+  outPorts.forEach(<span class="hljs-function">(<span class="hljs-params">outport</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> portDef = network.graph.outports[outport];
+    <span class="hljs-keyword">const</span> process = network.getNode(portDef.process);
+    outSockets[outport] = internalSocket.createSocket();
+    process.component.outPorts[portDef.port].attach(outSockets[outport]);
+    outSockets[outport].from = {
+      process,
+      <span class="hljs-attr">port</span>: portDef.port,
+    };
+    outSockets[outport].on(<span class="hljs-string">&#x27;ip&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">ip</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> res = {};
+      res[outport] = ip;
+      received.push(res);
+    });
+  });</pre></div>
+            
+          
+            
+            <p>Subscribe to process errors</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">let</span> onEnd = <span class="hljs-literal">null</span>;
+  <span class="hljs-keyword">let</span> onError = <span class="hljs-literal">null</span>;
+  onError = <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+    callback(err.error);
+    network.removeListener(<span class="hljs-string">&#x27;end&#x27;</span>, onEnd);
+  };
+  network.once(<span class="hljs-string">&#x27;process-error&#x27;</span>, onError);</pre></div>
+            
+          
+            
+            <p>Subscribe network finish</p>
+
+            
+              <div class='highlight'><pre>  onEnd = <span class="hljs-function">() =&gt;</span> {</pre></div>
+            
+          
+            
+            <p>Clear listeners</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">Object</span>.keys(outSockets).forEach(<span class="hljs-function">(<span class="hljs-params">port</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> socket = outSockets[port];
+      socket.from.process.component.outPorts[socket.from.port].detach(socket);
+    });
+    outSockets = {};
+    inSockets = {};
+    callback(<span class="hljs-literal">null</span>, received);
+    network.removeListener(<span class="hljs-string">&#x27;process-error&#x27;</span>, onError);
+  };
+  network.once(<span class="hljs-string">&#x27;end&#x27;</span>, onEnd);</pre></div>
+            
+          
+            
+            <p>Start network</p>
+
+            
+              <div class='highlight'><pre>  network.start(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (err) {
+      callback(err);
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Send inputs</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; inputs.length; i += <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">const</span> inputMap = inputs[i];
+      <span class="hljs-keyword">const</span> keys = <span class="hljs-built_in">Object</span>.keys(inputMap);
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j = <span class="hljs-number">0</span>; j &lt; keys.length; j += <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">const</span> port = keys[j];
+        <span class="hljs-keyword">const</span> value = inputMap[port];
+        <span class="hljs-keyword">if</span> (!inSockets[port]) {
+          <span class="hljs-keyword">const</span> portDef = network.graph.inports[port];
+          <span class="hljs-keyword">const</span> process = network.getNode(portDef.process);
+          inSockets[port] = internalSocket.createSocket();
+          process.component.inPorts[portDef.port].attach(inSockets[port]);
+        }
+        <span class="hljs-keyword">try</span> {
+          <span class="hljs-keyword">if</span> (IP.isIP(value)) {
+            inSockets[port].post(value);
+          } <span class="hljs-keyword">else</span> {
+            inSockets[port].post(<span class="hljs-keyword">new</span> IP(<span class="hljs-string">&#x27;data&#x27;</span>, value));
+          }
+        } <span class="hljs-keyword">catch</span> (e) {
+          callback(e);
+          network.removeListener(<span class="hljs-string">&#x27;process-error&#x27;</span>, onError);
+          network.removeListener(<span class="hljs-string">&#x27;end&#x27;</span>, onEnd);
+          <span class="hljs-keyword">return</span>;
+        }
+      }
+    }
+  });
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getType</span>(<span class="hljs-params">inputs, network</span>) </span>{</pre></div>
+            
+          
+            
+            <p>Scalar values are always simple inputs</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> inputs !== <span class="hljs-string">&#x27;object&#x27;</span>) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;simple&#x27;</span>; }
+
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(inputs)) {
+    <span class="hljs-keyword">const</span> maps = inputs.filter(<span class="hljs-function">(<span class="hljs-params">entry</span>) =&gt;</span> getType(entry, network) === <span class="hljs-string">&#x27;map&#x27;</span>);</pre></div>
+            
+          
+            
+            <p>If each member if the array is an input map, this is a sequence</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (maps.length === inputs.length) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;sequence&#x27;</span>; }</pre></div>
+            
+          
+            
+            <p>Otherwise arrays must be simple inputs</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;simple&#x27;</span>;
+  }</pre></div>
+            
+          
+            
+            <p>Empty objects can’t be maps</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> keys = <span class="hljs-built_in">Object</span>.keys(inputs);
+  <span class="hljs-keyword">if</span> (!keys.length) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;simple&#x27;</span>; }
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; keys.length; i += <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">const</span> key = keys[i];
+    <span class="hljs-keyword">if</span> (!network.graph.inports[key]) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;simple&#x27;</span>; }
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;map&#x27;</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">prepareInputMap</span>(<span class="hljs-params">inputs, inputType, network</span>) </span>{</pre></div>
+            
+          
+            
+            <p>Sequence we can use as-is</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (inputType === <span class="hljs-string">&#x27;sequence&#x27;</span>) { <span class="hljs-keyword">return</span> inputs; }</pre></div>
+            
+          
+            
+            <p>We can turn a map to a sequence by wrapping it in an array</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (inputType === <span class="hljs-string">&#x27;map&#x27;</span>) { <span class="hljs-keyword">return</span> [inputs]; }</pre></div>
+            
+          
+            
+            <p>Simple inputs need to be converted to a sequence</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">let</span> inPort = <span class="hljs-built_in">Object</span>.keys(network.graph.inports)[<span class="hljs-number">0</span>];</pre></div>
+            
+          
+            
+            <p>If we have a port named “IN”, send to that</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (network.graph.inports.in) { inPort = <span class="hljs-string">&#x27;in&#x27;</span>; }
+  <span class="hljs-keyword">const</span> map = {};
+  map[inPort] = inputs;
+  <span class="hljs-keyword">return</span> [map];
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">normalizeOutput</span>(<span class="hljs-params">values, options</span>) </span>{
+  <span class="hljs-keyword">if</span> (options.raw) { <span class="hljs-keyword">return</span> values; }
+  <span class="hljs-keyword">const</span> result = [];
+  <span class="hljs-keyword">let</span> previous = <span class="hljs-literal">null</span>;
+  <span class="hljs-keyword">let</span> current = result;
+  values.forEach(<span class="hljs-function">(<span class="hljs-params">packet</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (packet.type === <span class="hljs-string">&#x27;openBracket&#x27;</span>) {
+      previous = current;
+      current = [];
+      previous.push(current);
+    }
+    <span class="hljs-keyword">if</span> (packet.type === <span class="hljs-string">&#x27;data&#x27;</span>) {
+      current.push(packet.data);
+    }
+    <span class="hljs-keyword">if</span> (packet.type === <span class="hljs-string">&#x27;closeBracket&#x27;</span>) {
+      current = previous;
+    }
+  });
+  <span class="hljs-keyword">if</span> (result.length === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> result[<span class="hljs-number">0</span>];
+  }
+  <span class="hljs-keyword">return</span> result;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sendOutputMap</span>(<span class="hljs-params">outputs, resultType, options, callback</span>) </span>{</pre></div>
+            
+          
+            
+            <p>First check if the output sequence contains errors</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> errors = outputs.filter(<span class="hljs-function">(<span class="hljs-params">map</span>) =&gt;</span> map.error != <span class="hljs-literal">null</span>).map(<span class="hljs-function">(<span class="hljs-params">map</span>) =&gt;</span> map.error);
+  <span class="hljs-keyword">if</span> (errors.length) {
+    callback(normalizeOutput(errors, options));
+    <span class="hljs-keyword">return</span>;
+  }
+
+  <span class="hljs-keyword">if</span> (resultType === <span class="hljs-string">&#x27;sequence&#x27;</span>) {
+    callback(<span class="hljs-literal">null</span>, outputs.map(<span class="hljs-function">(<span class="hljs-params">map</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> res = {};
+      <span class="hljs-built_in">Object</span>.keys(map).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> {
+        <span class="hljs-keyword">const</span> val = map[key];
+        <span class="hljs-keyword">if</span> (options.raw) {
+          res[key] = val;
+          <span class="hljs-keyword">return</span>;
+        }
+        res[key] = normalizeOutput([val], options);
+      });
+      <span class="hljs-keyword">return</span> res;
+    }));
+    <span class="hljs-keyword">return</span>;
+  }</pre></div>
+            
+          
+            
+            <p>Flatten the sequence</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> mappedOutputs = {};
+  outputs.forEach(<span class="hljs-function">(<span class="hljs-params">map</span>) =&gt;</span> {
+    <span class="hljs-built_in">Object</span>.keys(map).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> val = map[key];
+      <span class="hljs-keyword">if</span> (!mappedOutputs[key]) { mappedOutputs[key] = []; }
+      mappedOutputs[key].push(val);
+    });
+  });
+
+  <span class="hljs-keyword">const</span> outputKeys = <span class="hljs-built_in">Object</span>.keys(mappedOutputs);
+  <span class="hljs-keyword">const</span> withValue = outputKeys.filter(<span class="hljs-function">(<span class="hljs-params">outport</span>) =&gt;</span> mappedOutputs[outport].length &gt; <span class="hljs-number">0</span>);
+  <span class="hljs-keyword">if</span> (withValue.length === <span class="hljs-number">0</span>) {</pre></div>
+            
+          
+            
+            <p>No output</p>
+
+            
+              <div class='highlight'><pre>    callback(<span class="hljs-literal">null</span>);
+    <span class="hljs-keyword">return</span>;
+  }
+  <span class="hljs-keyword">if</span> ((withValue.length === <span class="hljs-number">1</span>) &amp;&amp; (resultType === <span class="hljs-string">&#x27;simple&#x27;</span>)) {</pre></div>
+            
+          
+            
+            <p>Single outport</p>
+
+            
+              <div class='highlight'><pre>    callback(<span class="hljs-literal">null</span>, normalizeOutput(mappedOutputs[withValue[<span class="hljs-number">0</span>]], options));
+    <span class="hljs-keyword">return</span>;
+  }
+  <span class="hljs-keyword">const</span> result = {};
+  <span class="hljs-built_in">Object</span>.keys(mappedOutputs).forEach(<span class="hljs-function">(<span class="hljs-params">port</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> packets = mappedOutputs[port];
+    result[port] = normalizeOutput(packets, options);
+  });
+  callback(<span class="hljs-literal">null</span>, result);
+}
+
+<span class="hljs-built_in">exports</span>.asCallback = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asCallback</span>(<span class="hljs-params">component, options</span>) </span>{
+  options = normalizeOptions(options, component);
+  <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">inputs, callback</span>) =&gt;</span> {
+    prepareNetwork(component, options, <span class="hljs-function">(<span class="hljs-params">err, network</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">if</span> (options.networkCallback) {
+        options.networkCallback(network);
+      }
+      <span class="hljs-keyword">const</span> resultType = getType(inputs, network);
+      <span class="hljs-keyword">const</span> inputMap = prepareInputMap(inputs, resultType, network);
+      runNetwork(network, inputMap, options, <span class="hljs-function">(<span class="hljs-params">err2, outputMap</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err2) {
+          callback(err2);
+          <span class="hljs-keyword">return</span>;
+        }
+        sendOutputMap(outputMap, resultType, options, callback);
+      });
+    });
+  };
+};</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/AsCallback.coffee">AsCallback.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

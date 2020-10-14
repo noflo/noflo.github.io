@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Components | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/" class="active">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">Documentation</h1>
+        <a href="/api/NoFlo/" class="btn btn-primary page-title__button big-button">1.2.6 API docs</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+          <nav>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/documentation/">Getting started</a>
+              </li>
+              
+              
+              <li>
+                
+                <a href="/tutorials/canadianness/">Tutorial: Data transformations</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/graphs/">Graphs</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/components/" class="active">Components</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/embedding/">Embedding</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/testing/">Testing</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/publishing/">Publishing modules</a>
+                
+              </li>
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/tooling/">Related tools</a>
+                
+              </li>
+              
+              
+              
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/glossary/">Glossary</a>
+                
+              </li>
+              
+            </ul>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/support/">Need help?</a>
+                <a href="https://github.com/noflo/noflo.github.io/tree/master/documentation/_posts">Contribute</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="content span8">
+          <h1>Components</h1>
+          <ul>
+  <li><a href="#component-loading">Component loading</a></li>
+  <li><a href="#component-api">Component API</a>
+    <ul>
+      <li><a href="#the-process-function">The process function</a></li>
+      <li><a href="#handling-preconditions">Handling preconditions</a></li>
+      <li><a href="#processing-packets">Processing packets</a></li>
+      <li><a href="#sending-packets">Sending packets</a></li>
+    </ul>
+  </li>
+  <li><a href="#component-lifecycle">Component lifecycle</a>
+    <ul>
+      <li><a href="#setup-and-teardown">Setup and teardown</a></li>
+      <li><a href="#generator-components">Generator components</a></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+<p>NoFlo programs consist of graphs where different nodes are connected together. These nodes can themselves be graphs, or they can be components written in JavaScript.</p>
+
+<p>A NoFlo component is simply a <a href="https://www.sitepoint.com/understanding-module-exports-exports-node-js/">JavaScript module</a> that provides a certain interface that allows NoFlo to run it.</p>
+
+<h2 id="component-loading">Component loading</h2>
+
+<p>By default, NoFlo discovers and loads components from the <code class="language-plaintext highlighter-rouge">components/</code> folder of your project, as well as the <code class="language-plaintext highlighter-rouge">components/</code> folders of any of your NPM dependencies.</p>
+
+<p>Components placed in this folder get named based on the filename, so <code class="language-plaintext highlighter-rouge">components/DoSomething.js</code> becomes available as component <code class="language-plaintext highlighter-rouge">DoSomething</code>. To prevent name clashes, you can also use the fully-qualified name <code class="language-plaintext highlighter-rouge">project-name/DoSomething</code>, where <code class="language-plaintext highlighter-rouge">project-name</code> comes from the name given in <code class="language-plaintext highlighter-rouge">package.json</code>.</p>
+
+<p>Read more about the project directory structure in <a href="/documentation/publishing/#module-structure">Publishing modules</a>.</p>
+
+<h2 id="component-api">Component API</h2>
+
+<p>So, how does a NoFlo component written in JavaScript look like?</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Load the NoFlo interface</span>
+<span class="kd">const</span> <span class="nx">noflo</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">noflo</span><span class="dl">'</span><span class="p">);</span>
+<span class="c1">// Also load any other dependencies you have</span>
+<span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Implement the getComponent function that NoFlo's component loader</span>
+<span class="c1">// uses to instantiate components to the program</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Start by instantiating a component</span>
+  <span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">Component</span><span class="p">();</span>
+
+  <span class="c1">// Provide some metadata, including icon for visual editors</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">description</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Reads a file from the filesystem</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">icon</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">file</span><span class="dl">'</span><span class="p">;</span>
+
+  <span class="c1">// Declare the ports you want your component to have, including</span>
+  <span class="c1">// their data types</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">datatype</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span>
+  <span class="p">});</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">out</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">datatype</span><span class="p">:</span> <span class="dl">'</span><span class="s1">string</span><span class="dl">'</span>
+  <span class="p">});</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">datatype</span><span class="p">:</span> <span class="dl">'</span><span class="s1">object</span><span class="dl">'</span>
+  <span class="p">});</span>
+
+  <span class="c1">// Implement the processing function that gets called when the</span>
+  <span class="c1">// inport buffers have packets available</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">process</span><span class="p">(((</span><span class="nx">input</span><span class="p">,</span> <span class="nx">output</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Precondition: check that the "in" port has a data packet.</span>
+    <span class="c1">// Not necessary for single-inport components but added here</span>
+    <span class="c1">// for the sake of demonstration</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">input</span><span class="p">.</span><span class="nx">hasData</span><span class="p">(</span><span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Since the preconditions matched, we can read from the inport</span>
+    <span class="c1">// buffer and start processing</span>
+    <span class="kd">const</span> <span class="nx">filePath</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">filePath</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf-8</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">contents</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// In case of errors we can just pass the error to the "error"</span>
+      <span class="c1">// outport</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Send the file contents to the "out" port</span>
+      <span class="nx">output</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+        <span class="na">out</span><span class="p">:</span> <span class="nx">contents</span>
+      <span class="p">});</span>
+      <span class="c1">// Tell NoFlo we've finished processing</span>
+      <span class="nx">output</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+
+  <span class="c1">// Finally return to component to the loader</span>
+  <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="the-process-function">The process function</h3>
+
+<p>NoFlo components call their processing function whenever they’ve received packets to any of their regular inports.</p>
+
+<p>In general any new information packets received by the component cause the <code class="language-plaintext highlighter-rouge">process</code> function to trigger. However, there are some exceptions:</p>
+
+<ul>
+  <li>Non-triggering ports don’t cause the function to be called</li>
+  <li>Ports that have been set to forward brackets don’t cause the function to be called on bracket IPs, only on data</li>
+</ul>
+
+<h3 id="handling-preconditions">Handling preconditions</h3>
+
+<p>When the processing function is called, the first job is to determine if the component has received enough data to act. These “<a href="http://ptolemy.eecs.berkeley.edu/papers/97/dataflow/">firing rules</a>” can be used for checking things like:</p>
+
+<ul>
+  <li>When having multiple inports, do all of them contain data packets?</li>
+  <li>If multiple input packets are to be processed together, are all of them available?</li>
+  <li>If receiving a <a href="http://jpaulmorrison.com/fbp/substrs.shtml">stream of packets</a> is the complete stream available?</li>
+  <li>Any input synchronization needs in general</li>
+</ul>
+
+<p>The NoFlo component input handler provides methods for checking the contents of the input buffer. Each of these return a boolean if the conditions are matched:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">input.has('portname')</code> whether an input buffer contains packets of any type</li>
+  <li><code class="language-plaintext highlighter-rouge">input.hasData('portname')</code> whether an input buffer contains data packets</li>
+  <li><code class="language-plaintext highlighter-rouge">input.hasStream('portname')</code> whether an input buffer contains at least one complete stream of packets</li>
+</ul>
+
+<p>For convenience, <code class="language-plaintext highlighter-rouge">has</code> and <code class="language-plaintext highlighter-rouge">hasData</code> can be used to check multiple ports at the same time. For example:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Fail precondition check unless both inports have a data packet</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">input</span><span class="p">.</span><span class="nx">hasData</span><span class="p">(</span><span class="dl">'</span><span class="s1">in1</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">in2</span><span class="dl">'</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>For more complex checking it is also possible to pass a validation function to the <code class="language-plaintext highlighter-rouge">has</code> method. This function will get called for each information packet in the port(s) buffer:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// We want to process only when color is green</span>
+<span class="kd">const</span> <span class="nx">validator</span> <span class="o">=</span> <span class="p">(</span><span class="nx">packet</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">packet</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">color</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">green</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// Run all packets in in1 and in2 through the validator to</span>
+<span class="c1">// check that our firing conditions are met</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">input</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="dl">'</span><span class="s1">in1</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">in2</span><span class="dl">'</span><span class="p">,</span> <span class="nx">validator</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The firing rules should be checked in the beginning of the processing function before we start actually reading packets from the buffer. At that stage you can simply finish the run with a <code class="language-plaintext highlighter-rouge">return</code>.</p>
+
+<h3 id="processing-packets">Processing packets</h3>
+
+<p>Once your preconditions have been met, it is time to read packets from the buffers and start doing work with them.</p>
+
+<p>For reading packets there are equivalent <code class="language-plaintext highlighter-rouge">get</code> functions to the <code class="language-plaintext highlighter-rouge">has</code> functions used above:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">input.get('portname')</code> read the first packet from the port’s buffer</li>
+  <li><code class="language-plaintext highlighter-rouge">input.getData('portname')</code> read the first data packet, discarding preceding bracket IPs if any</li>
+  <li><code class="language-plaintext highlighter-rouge">input.getStream('portname')</code> read a whole stream of packets from the port’s buffer</li>
+</ul>
+
+<p>For <code class="language-plaintext highlighter-rouge">get</code> and <code class="language-plaintext highlighter-rouge">getStream</code> you receive whole <a href="https://noflojs.org/api/IP/">IP objects</a>. For convenience, <code class="language-plaintext highlighter-rouge">getData</code> returns just the data payload of the data packet.</p>
+
+<p>When you have read the packets you want to work with, the next step is to do whatever your component is supposed to do. Do some simple data processing, call some remote API function, or whatever. NoFlo doesn’t really care whether this is done synchronously or asynchronously.</p>
+
+<p><strong>Note:</strong> once you read packets from an inport, the component activates. After this it is necessary to finish the process by calling <code class="language-plaintext highlighter-rouge">output.done()</code> when you’re done.</p>
+
+<h3 id="sending-packets">Sending packets</h3>
+
+<p>While the component is active, it can send packets to any number of outports using the <code class="language-plaintext highlighter-rouge">output.send</code> method. This method accepts a map of port names and information packets.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">output</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+  <span class="na">out1</span><span class="p">:</span> <span class="k">new</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">IP</span><span class="p">(</span><span class="dl">'</span><span class="s1">data</span><span class="dl">'</span><span class="p">,</span> <span class="dl">"</span><span class="s2">some data</span><span class="dl">"</span><span class="p">),</span>
+  <span class="na">out2</span><span class="p">:</span> <span class="k">new</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">IP</span><span class="p">(</span><span class="dl">'</span><span class="s1">data</span><span class="dl">'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>For data packets you can also just send the data as-is, and NoFlo will wrap it to an information packet.</p>
+
+<p>Once you’ve finished processing, simply call <code class="language-plaintext highlighter-rouge">output.done()</code> to deactivate the component. There is also a convenience method that is a combination of <code class="language-plaintext highlighter-rouge">send</code> and <code class="language-plaintext highlighter-rouge">done</code>. This is useful for simple components:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">c</span><span class="p">.</span><span class="nx">process</span><span class="p">((</span><span class="nx">input</span><span class="p">,</span> <span class="nx">output</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">);</span>
+  <span class="c1">// We just add one to the number we received and send it out</span>
+  <span class="nx">output</span><span class="p">.</span><span class="nx">sendDone</span><span class="p">({</span>
+    <span class="na">out</span><span class="p">:</span> <span class="nx">data</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>In normal situations there packets are transmitted immediately. However, when working on individual packets that are part of a stream, NoFlo components keep an output buffer to ensure that packets from the stream are transmitted in original order.</p>
+
+<h2 id="component-lifecycle">Component lifecycle</h2>
+
+<p>The following diagram shows the lifecycle of a NoFlo program:</p>
+
+<p><img src="/img/network-lifecycle.png" alt="NoFlo program lifecycle" /></p>
+
+<p>The component lifecycle is quite similar to the program lifecycle shown above. There are three states:</p>
+
+<ul>
+  <li>Initialized: the component has been instantiated in a NoFlo graph</li>
+  <li>Activated: the component has read some data from inport buffers and is processing it</li>
+  <li>Deactivated: all processing has finished</li>
+</ul>
+
+<p>Once all components in a NoFlo network have deactivated, the whole program is finished.</p>
+
+<p>Components are only allowed to do work and send packets when they’re activated. They shouldn’t do any work before receiving input packets, and should not send anything after deactivating.</p>
+
+<h3 id="setup-and-teardown">Setup and teardown</h3>
+
+<p>If your component needs to do anything special at start-up or shutdown, you can implement the following methods for the component:</p>
+
+<p><code class="language-plaintext highlighter-rouge">component.setUp(callback)</code> called when network starts. Component can do self-initialization but should not send anything at this stage.</p>
+
+<p><code class="language-plaintext highlighter-rouge">component.tearDown(callback)</code> called when network stops. Stateful components can clean their state at this point, and generators should stop generating (remove event listeners, shut down socket connections, etc).</p>
+
+<h3 id="generator-components">Generator components</h3>
+
+<p>Regular NoFlo components only send data associated with input packets they’ve received. One exception is generators, a class of components that can send packets whenever something happens.</p>
+
+<p>Some examples of generators include:</p>
+
+<ul>
+  <li>Network servers that listen to requests</li>
+  <li>Components that wait for user input like mouse clicks or text entry</li>
+  <li>Timer loops</li>
+</ul>
+
+<p>The same rules of “only send when activated” apply also to generators. However, they can utilize the processing context to self-activate as needed:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">exports</span><span class="p">.</span><span class="nx">getComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">Component</span><span class="p">();</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">start</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">datatype</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bang</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">inPorts</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">stop</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">datatype</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bang</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">outPorts</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">out</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">datatype</span><span class="p">:</span> <span class="dl">'</span><span class="s1">bang</span><span class="dl">'</span> <span class="p">});</span>
+  <span class="c1">// Generators generally want to send data immediately and</span>
+  <span class="c1">// not buffer</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">autoOrdering</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+  <span class="c1">// Helper function for clearing a running timer loop</span>
+  <span class="kd">const</span> <span class="nx">cleanup</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Clear the timer</span>
+    <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">timer</span><span class="p">.</span><span class="nx">interval</span><span class="p">);</span>
+    <span class="c1">// Then deactivate the long-running context</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">timer</span><span class="p">.</span><span class="nx">deactivate</span><span class="p">();</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Receive the context together with input and output</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">process</span><span class="p">((</span><span class="nx">input</span><span class="p">,</span> <span class="nx">output</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">hasData</span><span class="p">(</span><span class="dl">'</span><span class="s1">start</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+      <span class="c1">// We've received a packet to the "start" port</span>
+      <span class="c1">// Stop the previous interval and deactivate it, if any</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">cleanup</span><span class="p">();</span>
+      <span class="p">}</span>
+      <span class="c1">// Activate the context by reading the packet</span>
+      <span class="nx">input</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="dl">'</span><span class="s1">start</span><span class="dl">'</span><span class="p">);</span>
+      <span class="c1">// Set the activated context to component so it can</span>
+      <span class="c1">// be deactivated from the outside</span>
+      <span class="nx">c</span><span class="p">.</span><span class="nx">timer</span> <span class="o">=</span> <span class="nx">context</span>
+      <span class="c1">// Start generating packets</span>
+      <span class="nx">c</span><span class="p">.</span><span class="nx">timer</span><span class="p">.</span><span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// Send a packet</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+          <span class="na">out</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">});</span>
+      <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+      <span class="c1">// Since we keep the generator running we don't</span>
+      <span class="c1">// call done here</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">hasData</span><span class="p">(</span><span class="dl">'</span><span class="s1">stop</span><span class="dl">'</span><span class="p">))</span> <span class="p">{</span>
+      <span class="c1">// We've received a packet to the "stop" port</span>
+      <span class="nx">input</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="dl">'</span><span class="s1">stop</span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">c</span><span class="p">.</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// No timers running, we can just finish here</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="c1">// Stop the interval and deactivate</span>
+      <span class="nx">cleanup</span><span class="p">();</span>
+      <span class="c1">// Also call done for this one</span>
+      <span class="nx">output</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+  <span class="c1">// We also may need to clear the timer at network shutdown</span>
+  <span class="nx">c</span><span class="p">.</span><span class="nx">tearDown</span> <span class="o">=</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Stop the interval and deactivate</span>
+      <span class="nx">cleanup</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="dl">'</span><span class="s1">end</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">started</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="nx">callback</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/" class="active">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

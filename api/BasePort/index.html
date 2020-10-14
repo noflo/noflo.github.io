@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BasePort API | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a href="/api/AsCallback/">
+                    AsCallback
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BaseNetwork/">
+                    BaseNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/LegacyNetwork/">
+                    LegacyNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessContext/">
+                    ProcessContext
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessInput/">
+                    ProcessInput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessOutput/">
+                    ProcessOutput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>BasePort API</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
+NoFlo may be freely distributed under the MIT license</code></pre>
+
+            
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> { EventEmitter } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>);</pre></div>
+            
+          
+            
+            <h2 id="noflo-port-base-class">NoFlo Port Base class</h2>
+<p>Base port type used for options normalization. Both inports and outports extend this class.</p>
+
+            
+          
+            
+            <p>The list of valid datatypes for ports.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> validTypes = [
+  <span class="hljs-string">&#x27;all&#x27;</span>,
+  <span class="hljs-string">&#x27;string&#x27;</span>,
+  <span class="hljs-string">&#x27;number&#x27;</span>,
+  <span class="hljs-string">&#x27;int&#x27;</span>,
+  <span class="hljs-string">&#x27;object&#x27;</span>,
+  <span class="hljs-string">&#x27;array&#x27;</span>,
+  <span class="hljs-string">&#x27;boolean&#x27;</span>,
+  <span class="hljs-string">&#x27;color&#x27;</span>,
+  <span class="hljs-string">&#x27;date&#x27;</span>,
+  <span class="hljs-string">&#x27;bang&#x27;</span>,
+  <span class="hljs-string">&#x27;function&#x27;</span>,
+  <span class="hljs-string">&#x27;buffer&#x27;</span>,
+  <span class="hljs-string">&#x27;stream&#x27;</span>,
+];
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleOptions</span>(<span class="hljs-params">options = {}</span>) </span>{</pre></div>
+            
+          
+            
+            <p>We default to the <code>all</code> type if no explicit datatype
+was provided</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">let</span> datatype = options.datatype || <span class="hljs-string">&#x27;all&#x27;</span>;</pre></div>
+            
+          
+            
+            <p>Normalize the legacy <code>integer</code> type to <code>int</code>.</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (datatype === <span class="hljs-string">&#x27;integer&#x27;</span>) { datatype = <span class="hljs-string">&#x27;int&#x27;</span>; }</pre></div>
+            
+          
+            
+            <p>By default ports are not required for graph execution</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> required = options.required || <span class="hljs-literal">false</span>;</pre></div>
+            
+          
+            
+            <p>Ensure datatype defined for the port is valid</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (validTypes.indexOf(datatype) === <span class="hljs-number">-1</span>) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port datatype &#x27;<span class="hljs-subst">${datatype}</span>&#x27; specified, valid are <span class="hljs-subst">${validTypes.join(<span class="hljs-string">&#x27;, &#x27;</span>)}</span>`</span>);
+  }</pre></div>
+            
+          
+            
+            <p>Ensure schema defined for the port is valid</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> schema = options.schema || options.type;
+
+  <span class="hljs-keyword">if</span> (schema &amp;&amp; (schema.indexOf(<span class="hljs-string">&#x27;/&#x27;</span>) === <span class="hljs-number">-1</span>)) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port schema &#x27;<span class="hljs-subst">${schema}</span>&#x27; specified. Should be URL or MIME type`</span>);
+  }
+
+  <span class="hljs-comment">/* eslint-disable prefer-object-spread */</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, options, {
+    datatype,
+    required,
+    schema,
+  });
+}
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BasePort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+  <span class="hljs-keyword">constructor</span>(options) {
+    <span class="hljs-built_in">super</span>();</pre></div>
+            
+          
+            
+            <p>Options holds all options of the current port</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.options = handleOptions(options);</pre></div>
+            
+          
+            
+            <p>Sockets list contains all currently attached
+connections to the port</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.sockets = [];</pre></div>
+            
+          
+            
+            <p>Name of the graph node this port is in</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.node = <span class="hljs-literal">null</span>;</pre></div>
+            
+          
+            
+            <p>Name of the port</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.name = <span class="hljs-literal">null</span>;
+  }
+
+  getId() {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.node || !<span class="hljs-built_in">this</span>.name) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Port&#x27;</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.node}</span> <span class="hljs-subst">${<span class="hljs-built_in">this</span>.name.toUpperCase()}</span>`</span>;
+  }
+
+  getDataType() { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.options.datatype; }
+
+  getSchema() { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.options.schema || <span class="hljs-literal">null</span>; }
+
+  getDescription() { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.options.description; }
+
+  attach(socket, index = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">let</span> idx = index;
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isAddressable() || (index === <span class="hljs-literal">null</span>)) {
+      idx = <span class="hljs-built_in">this</span>.sockets.length;
+    }
+    <span class="hljs-built_in">this</span>.sockets[idx] = socket;
+    <span class="hljs-built_in">this</span>.attachSocket(socket, idx);
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
+      <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;attach&#x27;</span>, socket, idx);
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;attach&#x27;</span>, socket);
+  }
+
+  <span class="hljs-comment">/* eslint-disable class-methods-use-this */</span>
+  attachSocket() { }
+
+  detach(socket) {
+    <span class="hljs-keyword">const</span> index = <span class="hljs-built_in">this</span>.sockets.indexOf(socket);
+    <span class="hljs-keyword">if</span> (index === <span class="hljs-number">-1</span>) {
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-built_in">this</span>.sockets[index] = <span class="hljs-literal">undefined</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
+      <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;detach&#x27;</span>, socket, index);
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;detach&#x27;</span>, socket);
+  }
+
+  isAddressable() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.addressable) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+  isBuffered() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.buffered) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+  isRequired() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.required) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+  isAttached(socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable() &amp;&amp; (socketId !== <span class="hljs-literal">null</span>)) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.sockets[socketId]) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.sockets.length) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+
+  listAttached() {
+    <span class="hljs-keyword">const</span> attached = [];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> idx = <span class="hljs-number">0</span>; idx &lt; <span class="hljs-built_in">this</span>.sockets.length; idx += <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">const</span> socket = <span class="hljs-built_in">this</span>.sockets[idx];
+      <span class="hljs-keyword">if</span> (socket) { attached.push(idx); }
+    }
+    <span class="hljs-keyword">return</span> attached;
+  }
+
+  isConnected(socketId = <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
+      <span class="hljs-keyword">if</span> (socketId === <span class="hljs-literal">null</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.getId()}</span>: Socket ID required`</span>); }
+      <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.sockets[socketId]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.getId()}</span>: Socket <span class="hljs-subst">${socketId}</span> not available`</span>); }
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sockets[socketId].isConnected();
+    }
+
+    <span class="hljs-keyword">let</span> connected = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.sockets.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (!socket) { <span class="hljs-keyword">return</span>; }
+      <span class="hljs-keyword">if</span> (socket.isConnected()) {
+        connected = <span class="hljs-literal">true</span>;
+      }
+    });
+    <span class="hljs-keyword">return</span> connected;
+  }
+
+  <span class="hljs-comment">/* eslint-disable class-methods-use-this */</span>
+  canAttach() { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+};</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.coffee">BasePort.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

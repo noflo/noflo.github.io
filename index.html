@@ -1,40 +1,81 @@
----
-layout: default
-title: NoFlo | Flow-Based Programming for JavaScript
----
-
-  <section class="row-fluid homepage-section">
-    <div class="theflo-panel">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NoFlo | Flow-Based Programming for JavaScript</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
       <div class="container">
-        <div class="main">
-          <img src="{{ site.baseurl}}/img/kickstarter-funded.png" alt="Funded on Kickstarter" /> 
-          <h2>Thank You!</h2>
-          <p>Together we funded the NoFlo Development Environment <a href="http://www.kickstarter.com/projects/noflo/noflo-development-environment">on Kickstarter</a>.</p>
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
 
-          <p>Be first to be updated with progress and launch dates!</p>
-          <div class="call-to-actions">
-          <a href="#" class="btn btn-primary" id="prefinery_apply_link">Sign up for updates</a>
-          <!--a href="http://www.kickstarter.com/projects/noflo/noflo-development-environment" class="btn btn-primary">Watch the video</a-->
-          <a href="{{ site.baseurl }}/documentation/" class="btn btn-primary promo__button download-button">Get started now</a>
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
+    </div>
+  </header>
+
+    <section class="row-fluid homepage-section">
+    <div class="promo">
+      <h1 class="promo__title">NoFlo</h1>
+      <p class="promo__text">Flow-Based Programming for JavaScript &mdash; NoFlo 1.0 is here!</p>
+      <div class="promo__toolbar">
+        <a href="/documentation/" class="btn btn-primary promo__button download-button">Get started now</a>
+        <a href="http://bergie.iki.fi/blog/noflo-10-prep/" class="btn btn-primary promo__button download-button" target="_blank">Read what's new</a>
       </div>
     </div>
   </section>
-  
-  <!--section class="row-fluid homepage-section">
-    <div class="promo">
-      <h1 class="promo__title">{{ site.title }}</h1>
-      <p class="promo__text">{{ site.tagline }}</p>
-      <a href="{{ site.baseurl }}/documentation/" class="btn btn-primary promo__button download-button">Get started now</a>
-    </div>
-  </section-->
 
   <section class="row-fluid homepage-section about-noflo">
     <div class="plain-title">
       <div class="container">
         <div class="span8 offset4">
-          <h1>About NoFlo</h1>
+          <h1>About NoFlo 1.2.6</h1>
         </div>
       </div>
     </div>
@@ -45,21 +86,32 @@ title: NoFlo | Flow-Based Programming for JavaScript
         </div>
         <div class="content span8">
           <h3>Flow-Based Programming (FBP)</h3>
-          <p>NoFlo is a JavaScript implementation of <a href="http://en.wikipedia.org/wiki/Flow-based_programming">Flow-Based Programming</a> (FBP). Separating the control flow of software from the actual software logic. Helping you organize large applications easier than traditional OOP paradigms, especially when importing and modifying large data sets.</p>
+          <p>NoFlo is a JavaScript implementation of <a href="https://en.wikipedia.org/wiki/Flow-based_programming">Flow-Based Programming</a> (FBP). Separating the control flow of software from the actual software logic. Helping you organize large applications easier than traditional OOP paradigms, especially when importing and modifying large data sets.</p>
 
           <h3>NoFlo and Node.js</h3>
-          <p>FBP itself is not a new idea: it comes from a term IBM used in the 70s to define the concepts of more manageable business workflows. NoFlo, however, refreshes these concepts and brings them to <a href="http://nodejs.org/">Node.js</a> applications.</p>
+          <p>FBP itself is not a new idea: it comes from a term IBM used in the 70s to define the concepts of more manageable business workflows. NoFlo, however, refreshes these concepts and brings them to web and <a href="https://nodejs.org/">Node.js</a> applications.</p>
 
           <h3>NoFlo library</h3>
-          <p>The MIT-licensed NoFlo library can either be used to run full flow-based applications or as a library for making complex workflows or asynchronous processes more manageable. It can also be used as an <a href="http://en.wikipedia.org/wiki/Extract,_transform,_load">Extract, Transform, Load (ETL)</a> tool in business applications.</p>
+          <p>The MIT-licensed NoFlo library can either be used to run full flow-based applications or as a library for making complex workflows or asynchronous processes more manageable. It can also be used as an <a href="https://en.wikipedia.org/wiki/Extract,_transform,_load">Extract, Transform, Load (ETL)</a> tool in business applications.</p>
 
-          <p>NoFlo has been written in <a href="http://coffeescript.org/">CoffeeScript</a> for simplicity.</p>
+          <p>NoFlo components can be written in any language that transpiles into JavaScript including ES6.</p>
         </div>
       </div>
     </div>
   </section>
 
-  
+  <section class="row-fluid homepage-section" id="videos">
+    <div class="video">
+      <h2>NoFlo Videos</h2>
+      <p>Featured: <a href="https://youtu.be/YJHT2vARAOQ">The origins of NoFlo</a></p>
+      <a href="https://youtu.be/YJHT2vARAOQ" class="video__play">Play Video</a>
+      <ul class="video-thumbnails">
+        <li><a href="https://vimeo.com/72065207"><img src="/img/bergie-cbase.jpg" alt="Introduction to Flow-Based Programming and NoFlo"></a></li>
+        <li><a href="https://vimeo.com/72855695"><img src="/img/dan-lynch.jpg" alt="Flow-Based Programming is Why I am an Engineer"></a></li>
+        <li><a href="https://vimeo.com/68601823"><img src="/img/leigh-interview.jpg" alt="Leigh Taylor chats about designing the NoFlo UI"></a></li>
+      </ul>
+    </div>
+  </section>
 
   <section class="row-fluid homepage-section">
     <div class="understanding-noflo">
@@ -71,8 +123,8 @@ title: NoFlo | Flow-Based Programming for JavaScript
               in a graph. This makes it possible to split your problem in logical areas that make sense, 
               and to see how they connect with each other.</p>
 
-            <p>NoFlo applications can be designed using the DrawFBP tool, and visualized using the 
-              integrated web-based graph viewer.</p>
+              <p>NoFlo applications can be designed using <a href="https://flowhub.io/ide/">Flowhub's</a> integrated
+              web-based graph editor.</p>
           </div>
           <div class="understanding-noflo__image span10">
             <img src="./img/diagrams/screen-and-map.png" alt="" title="" />
@@ -83,43 +135,72 @@ title: NoFlo | Flow-Based Programming for JavaScript
   </section>
 
   <section class="row-fluid homepage-section">
-    <div class="video">
-      <h2>NoFlo Video</h2>
-      <p>The origins of NoFlo</p>
-      <a href="http://youtu.be/YJHT2vARAOQ" class="video__play">Play Video</a>
-      <p class="video__duration">4min</p>
+    <div class="flowhub-promo">
+      <a class="flowhub-promo-logo" href="https://flowhub.io/ide/"><img src="/img/flowhub-logo.png" alt="Flowhub"></a>
+      <h1 class="flowhub-promo-title">Live program NoFlo with Flowhub</h1>
+      <p class="flowhub-promo-text">By subscribing to Flowhub you directly support NoFlo development, and help us all get to the future of programming faster.</p>
+      <a href="https://flowhub.io/ide/" class="btn btn-primary flowhub-promo-button download-button">Read more</a>
     </div>
   </section>
 
-  <section class="row-fluid homepage-section significance-of-noflo">
-    <div class="container">
-      <div class="plain-title">
-        <h2>NoFlo and Flow-Based Programming</h2>
-        <h3>The significance of FBP.</h3>
-      </div>
-      <div class="main">
-        <div class="span7">
-          <p>"In computer science, flow-based programming (FBP) is a programming paradigm that defines applications as networks of "black box" processes, which exchange data across predefined connections by message passing, where the connections are specified externally to the processes. These black box processes can be reconnected endlessly to form different applications without having to be changed internally. FBP is thus naturally component-oriented..."</p>
-          <p><strong><a href="http://en.wikipedia.org/wiki/Flow-based_programming">Flow-Based Programming on Wikipedia</a></strong></p>
-
-          <p>"This is the Unix philosophy: Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface."</p>
-          <p><strong><a href="http://en.wikipedia.org/wiki/Unix_philosophy">Unix Philosophy</a></strong></p>
-
-          <p>"I thought of objects being like biological cells and/or individual computers on a network, only able to communicate with messages (so messaging came at the very beginning -- it 
-          took a while to see how to do messaging in a programming language efficiently enough to 
-          be useful)."</p>
-          <p><strong><a href="http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht81Ht/doc_kay_oop_en">Alan Kay's original idea of object-oriented programming.</a></strong></p>
+  <section id="featured" class="row-fluid homepage-section">
+    <div class="who-uses-noflo">
+      <div class="container">
+        <div class="span2">
+          <h2>Component Libraries</h2>
+          <p>There are hundreds of <a href="/component/">ready-made NoFlo components</a> available, including:</p>
         </div>
-        <div class="span5 fbp-book">
-          <p><strong>Flow-Based Programming, 2nd Edition</strong> <br /> 
-            by <a href="http://www.jpaulmorrison.com/">J. Paul Morrison</a></p>
-          <a href="http://www.amazon.com/gp/product/B004PLO66O/ref=as_li_ss_tl?ie=UTF8&amp;tag=bergiesweblog-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B004PLO66O" class="paperback">
-            <img src="./img/diagrams/book.png" alt="Flow-Based Programming, 2nd edition" title="Flow-Based Programming, 2nd edition" />
-          </a>
-          <ul class="book-sellers">
-            <li><a href="http://www.lulu.com/spotlight/paul_morrison" class="epub">ePub</a></li>
-            <li><a href="http://www.amazon.com/gp/product/B004PLO66O/ref=as_li_ss_tl?ie=UTF8&amp;tag=bergiesweblog-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B004PLO66O" class="paperback">Paperback</a></li>
-            <li><a href="http://www.amazon.com/gp/product/1451542321/ref=as_li_ss_tl?ie=UTF8&amp;tag=bergiesweblog-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1451542321" class="kindle">Kindle</a></li>
+        <div class="span9 offset1 who-uses-noflo__logos">
+          <ul>
+            
+            <li>
+              <a href="https://www.npmjs.com/package/noflo-couchdb">
+                <img src="/img/library/noflo-couchdb.jpg" alt="noflo-couchdb" title="noflo-couchdb" />
+              </a>
+            </li>
+            
+            <li>
+              <a href="https://www.npmjs.com/package/noflo-diffbot">
+                <img src="/img/library/noflo-diffbot.jpg" alt="noflo-diffbot" title="noflo-diffbot" />
+              </a>
+            </li>
+            
+            <li>
+              <a href="https://www.npmjs.com/package/noflo-ducksboard">
+                <img src="/img/library/noflo-ducksboard.jpg" alt="noflo-ducksboard" title="noflo-ducksboard" />
+              </a>
+            </li>
+            
+            <li>
+              <a href="https://www.npmjs.com/package/noflo-github">
+                <img src="/img/library/noflo-github.jpg" alt="noflo-github" title="noflo-github" />
+              </a>
+            </li>
+            
+            <li>
+              <a href="https://www.npmjs.com/package/noflo-stripe">
+                <img src="/img/library/noflo-stripe.jpg" alt="noflo-stripe" title="noflo-stripe" />
+              </a>
+            </li>
+            
+            <li>
+              <a href="https://www.npmjs.com/package/noflo-redis">
+                <img src="/img/library/noflo-redis.jpg" alt="noflo-redis" title="noflo-redis" />
+              </a>
+            </li>
+            
+            <li>
+              <a href="https://www.npmjs.com/package/noflo-twilio">
+                <img src="/img/library/noflo-twilio.jpg" alt="noflo-twilio" title="noflo-twilio" />
+              </a>
+            </li>
+            
+            <li>
+              <a href="https://www.npmjs.com/package/noflo-twitter">
+                <img src="/img/library/noflo-twitter.jpg" alt="noflo-twitter" title="noflo-twitter" />
+              </a>
+            </li>
+            
           </ul>
         </div>
       </div>
@@ -134,12 +215,12 @@ title: NoFlo | Flow-Based Programming for JavaScript
           <p>Watch and Participate in the development of NoFlo</p>
           <ul class="development-sources">
             <li>
-              <a href="{{ site.repository.web }}">
+              <a href="https://github.com/noflo/noflo">
                 <img src="./img/github-logo.png" alt="GitHub" title="GitHub" />
               </a>
             </li>
             <li>
-              <a href="http://groups.google.com/group/flow-based-programming">
+              <a href="https://groups.google.com/group/flow-based-programming">
                 <img src="./img/google-logo.png" alt="Google Groups" title="Google Groups" />
               </a>
             </li>
@@ -151,7 +232,7 @@ title: NoFlo | Flow-Based Programming for JavaScript
           </ul>
         </div>
         <div class="span9">
-          <p>Participate in the development of NoFlo on <a href="{{ site.repository.web }}">GitHub</a>. Also see the NoFlo <a href="{{ site.repository.web }}/blob/master/CHANGES.md">change log</a>.</p>
+          <p>Participate in the development of NoFlo on <a href="https://github.com/noflo/noflo">GitHub</a>. Also see the NoFlo <a href="https://github.com/noflo/noflo/blob/master/CHANGES.md">change log</a>.</p>
           <hr />
         </div>
         <div class="span9 part-of-noflo__screen"></div>
@@ -159,27 +240,42 @@ title: NoFlo | Flow-Based Programming for JavaScript
     </div>
   </section>
 
-  <section id="featured" class="row-fluid homepage-section">
-    <div class="who-uses-noflo">
+    <footer class="site-footer">
+    <div class="row-fluid">
       <div class="container">
-        <div class="span2">
-          <h2>Component Libraries</h2>
-          <p>There are hundreds of <a href="{{ site.baseurl }}/library/">ready-made NoFlo components</a> available, including:</p>
-        </div>
-        <div class="span9 offset1 who-uses-noflo__logos">
-          <ul>
-            {% for library in site.categories['library'] reversed %}
-              {% if site.highlight_libraries contains library.title %}
-            <li>
-              <a href="{{ site.baseurl }}{{ library.url }}">
-                <img src="{{ site.baseurl }}/img/library/{{ library.title}}.jpg" alt="{{ library.title }}" title="{{ library.title }}" />
-              </a>
-            </li>
-                {% endif %}
-              {% endfor %}
-          </ul>
-        </div>
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
       </div>
     </div>
-  </section>
-  {% include prefinery.html %}
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

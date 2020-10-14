@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Publishing modules | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/" class="active">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">Documentation</h1>
+        <a href="/api/NoFlo/" class="btn btn-primary page-title__button big-button">1.2.6 API docs</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+          <nav>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/documentation/">Getting started</a>
+              </li>
+              
+              
+              <li>
+                
+                <a href="/tutorials/canadianness/">Tutorial: Data transformations</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/graphs/">Graphs</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/components/">Components</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/embedding/">Embedding</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/testing/">Testing</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/publishing/" class="active">Publishing modules</a>
+                
+              </li>
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/tooling/">Related tools</a>
+                
+              </li>
+              
+              
+              
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/glossary/">Glossary</a>
+                
+              </li>
+              
+            </ul>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/support/">Need help?</a>
+                <a href="https://github.com/noflo/noflo.github.io/tree/master/documentation/_posts">Contribute</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="content span8">
+          <h1>Publishing modules</h1>
+          <ul>
+  <li><a href="#module-structure">Module structure</a></li>
+  <li><a href="#publishing-your-module">Publishing your module</a></li>
+  <li><a href="#cross-platform-modules">Cross-platform modules</a>
+    <ul>
+      <li><a href="#components-that-work-on-both-platforms">Components that work on both platforms</a></li>
+      <li><a href="#platform-specific-components">Platform-specific components</a></li>
+      <li><a href="#aliasing-components">Aliasing components</a></li>
+    </ul>
+  </li>
+  <li><a href="#best-practices">Best practices</a>
+    <ul>
+      <li><a href="#release-automation-with-travis-ci">Release automation with Travis CI</a></li>
+    </ul>
+  </li>
+  <li><a href="#bootstrapping-modules">Bootstrapping modules</a></li>
+</ul>
+
+<p>NoFlo modules are distributed via the <a href="https://www.npmjs.com">NPM package registry</a>. You can see a <a href="/component/">list of reusable NoFlo modules</a> using the <code class="language-plaintext highlighter-rouge">noflo</code> keyword.</p>
+
+<p>Developers can publish their own NoFlo modules by simply releasing them on NPM. The module can be NoFlo-only, but it is also possible to include NoFlo components and graphs in any NPM module.</p>
+
+<h2 id="module-structure">Module structure</h2>
+
+<p>To provide NoFlo components, an NPM module should provide the following structure:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">package.json</code>: The module manifest listing dependencies and other package metadata</li>
+  <li><code class="language-plaintext highlighter-rouge">components/</code>: directory used for finding components. Components can be either <code class="language-plaintext highlighter-rouge">.coffee</code> or <code class="language-plaintext highlighter-rouge">.js</code> files</li>
+  <li><code class="language-plaintext highlighter-rouge">graphs/</code>: directory used for finding graphs. Graphs can be either <code class="language-plaintext highlighter-rouge">.json</code> or <code class="language-plaintext highlighter-rouge">.fbp</code> files</li>
+</ul>
+
+<p>Both the <code class="language-plaintext highlighter-rouge">components/</code> and <code class="language-plaintext highlighter-rouge">graphs/</code> directory contain subfolders. This is useful for further organization if your module ships many components or graphs.</p>
+
+<h2 id="publishing-your-module">Publishing your module</h2>
+
+<p>Please refer to <a href="https://npmjs.org/doc/developers.html">the NPM documentation</a> on how to publish packages in general.</p>
+
+<p>To make your module discoverable to NoFlo users, it is a good idea to include the <code class="language-plaintext highlighter-rouge">noflo</code> keyword in your <code class="language-plaintext highlighter-rouge">package.json</code>:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="nl">"keywords"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"noflo"</span><span class="w">
+  </span><span class="p">]</span><span class="err">,</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The NPM registry can also be used for publishing private modules.</p>
+
+<h2 id="cross-platform-modules">Cross-platform modules</h2>
+
+<p>NoFlo components or graphs can either be specific to one platform, or available for both Node.js and the browser. For cross-platform libraries there are some different strategies for dealing with the platform differences. By default NoFlo assumes that each component or graph works in both Node.js and the browser.</p>
+
+<p>There are situations where a component only makes sense for a particular platform. For example, DOM manipulation is typically only useful in the browser, and only Node.js can serve HTTP.</p>
+
+<h3 id="components-that-work-on-both-platforms">Components that work on both platforms</h3>
+
+<p>The ideal setup is that a component would work the same way in both Node.js and the browser.</p>
+
+<p>Since there can be some differences between the environment, including different third-party libraries available, you can perform platform checks at runtime with:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">noflo</span><span class="p">.</span><span class="nx">isBrowser</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1">// Do something specific to the browser environment</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="c1">// Do something specific to Node.js</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="platform-specific-components">Platform-specific components</h3>
+
+<p>If you have components or graphs that only work on one of the platforms, you can use <em>runtime annotations</em>  to tell NoFlo which platform a component works on.</p>
+
+<p>To tell NoFlo that a component works only in the browser, add the following comment to beginning of the source file:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// @runtime noflo-browser</span>
+</code></pre></div></div>
+
+<p>If the component works only on Node.js, use the following comment:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// @runtime noflo-nodejs</span>
+</code></pre></div></div>
+
+<p>The possible values for the <code class="language-plaintext highlighter-rouge">@runtime</code> annotations include:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">noflo-browser</code> for browser-based components</li>
+  <li><code class="language-plaintext highlighter-rouge">noflo-nodejs</code> for Node.js components</li>
+  <li><code class="language-plaintext highlighter-rouge">noflo-gnome</code> for GNOME desktop components</li>
+  <li><code class="language-plaintext highlighter-rouge">microflo</code> for microcontroller components</li>
+</ul>
+
+<h3 id="aliasing-components">Aliasing components</h3>
+
+<p>If you want to provide the same component interface on multiple platforms, but need different implementations for each, you can use the <em>name annotation</em> to alias a file to a different component name.</p>
+
+<p>For example, if you have a <code class="language-plaintext highlighter-rouge">LoadImage</code> component, with platform-specific implementations, you could have:</p>
+
+<p><code class="language-plaintext highlighter-rouge">components/LoadImage-browser.js</code> file:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// @runtime noflo-browser</span>
+<span class="c1">// @name LoadImage</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">components/LoadImage-node.js</code> file:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// @runtime noflo-nodejs</span>
+<span class="c1">// @name LoadImage</span>
+</code></pre></div></div>
+
+<h2 id="best-practices">Best practices</h2>
+
+<p>To make NoFlo modules easy to maintain, it is a good idea to aim for a good <a href="../testing">test coverage</a>.</p>
+
+<p>When the module has tests, there are useful services to automate parts of the module maintenance work:</p>
+
+<ul>
+  <li><a href="https://travis-ci.org">Travis CI</a> can be used for continuous integration</li>
+  <li><a href="https://greenkeeper.io">Greenkeeper</a> can send you Pull Requests when any of your module dependencies get updated</li>
+</ul>
+
+<h3 id="release-automation-with-travis-ci">Release automation with Travis CI</h3>
+
+<p>In addition to running your test suite, <a href="https://docs.travis-ci.com/user/deployment/npm">Travis CI can be configured</a> to automatically release new versions of your module on NPM whenever you <code class="language-plaintext highlighter-rouge">git tag</code> it.</p>
+
+<h4 id="1-have-the-required-gems-installed">1) Have the required gems installed</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>gem <span class="nb">install </span>json
+<span class="nv">$ </span><span class="nb">sudo </span>gem <span class="nb">install </span>travis
+</code></pre></div></div>
+
+<h4 id="2-log-into-npm">2) log into npm</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm login
+</code></pre></div></div>
+
+<h4 id="3-copy-auth-token">3) copy auth token</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> ~/.npmrc | <span class="nb">grep </span>_auth
+</code></pre></div></div>
+
+<p>You’ll get ~ <code class="language-plaintext highlighter-rouge">‘//registry.npmjs.org/:_authToken=12aaeee1-1ee2-101a-1a11-1111aaaa1b23’.</code> copy the part after <code class="language-plaintext highlighter-rouge">‘_authToken=’</code>, in this case it is <code class="language-plaintext highlighter-rouge">12aaeee1-1ee2-101a-1a11-1111aaaa1b23</code></p>
+
+<h4 id="4-configure-travis">4) configure travis</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>travis setup npm
+</code></pre></div></div>
+
+<p>enter the information it asks for, the npm API key is the one from step 3.</p>
+
+<h2 id="bootstrapping-modules">Bootstrapping modules</h2>
+
+<p>For faster setup of new NoFlo modules, we have a <a href="http://gruntjs.com/project-scaffolding">grunt-init project scaffold</a> template for NoFlo libraries.</p>
+
+<p>Start by installing <code class="language-plaintext highlighter-rouge">grunt-init</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">-g</span> grunt-init
+</code></pre></div></div>
+
+<p>Then you can clone the <a href="https://github.com/noflo/grunt-init-noflo">grunt-init-noflo</a> template to your local directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> ~/.grunt-init
+<span class="nv">$ </span>git clone https://github.com/noflo/grunt-init-noflo.git ~/.grunt-init/noflo
+</code></pre></div></div>
+
+<p>After this you can create new NoFlo modules easily. Create an empty directory, and run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>grunt-init noflo
+</code></pre></div></div>
+
+<p>The scaffold will ask you some questions. Answer those, and you’ll be all ready for component development, including a continuous integration setup.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/" class="active">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+# (string)
+INPORT=FindEhs.CONTENT:CONTENT
+# (string)
+OUTPORT=DetermineEmotion.EMOTION:EMOTION
+
+'eh' -> WORD FindEhs(canadianness/FindWords)
+FindEhs MATCHES -> CONTENT DetermineEmotion(canadianness/DetermineEmotion)

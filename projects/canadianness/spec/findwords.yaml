@@ -1,0 +1,12 @@
+topic: "canadianness/FindWords"
+cases:
+-
+  name: 'content eh'
+  assertion: 'should be find one `eh`'
+  inputs:
+    word: 'eh'
+    surrounding: false
+    content: 'eh'
+  expect:
+    matches:
+      equals: 'eh'

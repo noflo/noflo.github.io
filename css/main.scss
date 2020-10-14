@@ -875,7 +875,7 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
 	background-position: 50%;
   @include background-cover;
 	background-image: url(../img/map-bg.jpg);
-  @include image-2x("../img/map-bg@2.jpg", 1360px, 760px);
+  @include background-image-2x("../img/map-bg@2.jpg");
 
 	@include breakpoint(small) {
 		height: 400px;
@@ -906,19 +906,75 @@ $HelveticaNeueBoldStack: "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica N
 
 	}
 
-	.promo__button {
-		display: block;
-		margin: 0 auto 10px auto;
-		padding: 15px 30px;
-		width: 240px;
-	}
+  .promo__toolbar {
+    text-align: center;
+
+    .promo__button {
+      margin: 0 auto 10px auto;
+      display: inline-block;
+      padding: 15px 30px;
+      width: 240px;
+    }
+  }
 
 }
 
-
-
-
-
+.flowhub-promo {
+  background-color: #000000;
+  background-image: url("../img/flowhub.jpg");
+  background-repeat: no-repeat;
+  color: #ffffff;
+  height: 612px;
+  text-align: center;
+  text-shadow: -1px 0px 1px black, 1px 0px 1px black, 0px -1px 1px black, -1px 0px 1px black;
+  background-size: cover;
+  @include breakpoint(small) {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  .flowhub-promo-logo {
+    display: block;
+    padding-top: 108px;
+  }
+  .flowhub-promo-title {
+    margin-top: 36px;
+  }
+  .flowhub-promo-text {
+    padding-bottom: 36px;
+  }
+  .flowhub-promo-button {
+    background-image: none;
+    line-height: 44px;
+    padding-top: 0px;
+    position: relative;
+    display: block;
+    width: 262px;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    background-color: rgba(0, 109, 204, 0.99);
+    box-sizing: border-box;
+    padding-bottom: 0px;
+  }
+  .flowhub-promo-button:before {
+    display: block;
+    content: '';
+    position: absolute;
+    border: 3px solid hsla(189, 11%, 26%, 0.8);
+    left: -6px;
+    top: -6px;
+    width: 268px;
+    height: 50px;
+    border-radius: 7px;
+  }
+}
+@media not all, not all, (-webkit-min-device-pixel-ratio: 1.3), not all, (min-resolution: 1.3dppx) {
+  .flowhub-promo {
+    background-image: url("../img/flowhub@2.jpg");
+  }
+}
 
 /*------------------------------------*\
     $Typography
@@ -975,6 +1031,13 @@ h1 a, h2 a, h3 a {
 p {
   margin: 0 0 15px 0;
   line-height: 1.5;
+}
+
+ul ul {
+  margin-left: 36px;
+}
+ul ul ul {
+  margin-left: 72px;
 }
 
 li {
@@ -1116,6 +1179,7 @@ blockquote {
 
   .sidebar__nav {
     margin: 0;
+    margin-bottom: 50px;
     
     li {
       border-top: 1px solid #ededed;
@@ -1207,8 +1271,6 @@ blockquote {
     $Home - About NoFlo
 \*------------------------------------*/
 .about-noflo {
-  padding-bottom: 90px;
-  
 }
 
 
@@ -1226,7 +1288,7 @@ blockquote {
 	background-repeat: no-repeat;
 	@include background-cover;
 	background-image: url(../img/video-bg.jpg);
-  @include image-2x("../img/video-bg@2.jpg", 1360px, 600px);
+  @include background-image-2x("../img/video-bg@2.jpg");
 
 	@include breakpoint(small) {
 		margin-left: -20px;
@@ -1249,6 +1311,11 @@ blockquote {
     color: rgba(255, 255, 255, 0.5);
   }
 
+  a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+  }
+
 }
 
 .video__play {
@@ -1263,31 +1330,28 @@ blockquote {
   background-image: url(../img/video__play.png);
 }
 
-.video__duration {
-  position: relative;
-  display: block;
-  width: 48px;
-  height: 48px;
-  padding-top: 15px;
-  margin: 0 auto;
-  @include border-radius(30px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  font-size: 13px;
-}
+.video-thumbnails {
+  margin: 0px;
+  margin-top: 72px;
+  text-align: center;
 
-  .video__duration:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    width: 1px;
-    height: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
+  li {
+    display: inline;
+    margin-left: 18px;
+    margin-right: 18px;
   }
 
-
-
+  img {
+    width: 216px;
+    max-width: 20%;
+    border: 2px solid #000000;
+    opacity: 0.9;
+    transition: opacity 1s ease;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
 
 
 /*------------------------------------*\
@@ -1507,7 +1571,7 @@ blockquote {
   background-position: 50%;
   @include background-cover;
   background-image: url(../img/part-of-noflo.jpg);
-  @include image-2x("../img/part-of-noflo@2.jpg", 1360px, 600px);
+  @include background-image-2x("../img/part-of-noflo@2.jpg");
   
   @include breakpoint(small) {
     margin-left: -20px;
@@ -1971,6 +2035,11 @@ code {
   font-size: 11px;
   color: hsl(220, 20%, 20%);
 }
+h3 code {
+  font-size: 1em;
+  border: none;
+  padding: 0px;
+}
 
 body .sourcecode {
   
@@ -2015,74 +2084,29 @@ body pre {
   color: #ffffff;
 }
 
- 
-.highlight pre {
-  .c { color: hsl(220, 8%, 50%); } /* Comment */
-  .err { color: red; } /* Error */
-  .g { color: hsl(300, 78%, 75%) } /* Generic */
-  .k { color: hsl(300, 78%, 75%) } /* Keyword */
-  .l { color: hsl(300, 78%, 75%) } /* Literal */
-  .n { color: hsl(300, 78%, 75%)} /* Name */
-  .o { color: hsl(300, 78%, 75%) } /* Operator */
-  .x { color: #CB4B16 } /* Other */
-  .p { color: hsl( 30, 88%, 70%) } /* Punctuation */
-  .cm { color: #586E75 } /* Comment.Multiline */
-  .cp { color: #859900 } /* Comment.Preproc */
-  .c1 { color: #586E75 } /* Comment.Single */
-  .cs { color: #859900 } /* Comment.Special */
-  .gd { color: #2AA198 } /* Generic.Deleted */
-  .ge { color: hsl( 30, 88%, 70%); font-style: italic } /* Generic.Emph */
-  .gr { color: #DC322F } /* Generic.Error */
-  .gh { color: #CB4B16 } /* Generic.Heading */
-  .gi { color: #859900 } /* Generic.Inserted */
-  .go { color: hsl( 30, 88%, 70%) } /* Generic.Output */
-  .gp { color: hsl( 30, 88%, 70%) } /* Generic.Prompt */
-  .gs { color: hsl( 30, 88%, 70%); font-weight: bold } /* Generic.Strong */
-  .gu { color: #CB4B16 } /* Generic.Subheading */
-  .gt { color: hsl( 30, 88%, 70%) } /* Generic.Traceback */
-  .kc { color: hsl(  0, 88%, 70%) } /* Keyword.Constant */
-  .kd { color: #288BD2 } /* Keyword.Declaration */
-  .kn { color: hsl( 60, 88%, 70%) } /* Keyword.Namespace */
-  .kp { color: #859900 } /* Keyword.Pseudo */
-  .kr { color: #288BD2 } /* Keyword.Reserved */
-  .kt { color: #DC322F } /* Keyword.Type */
-  .ld { color: hsl( 30, 88%, 70%) } /* Literal.Date */
-  .m { color: #2AA198 } /* Literal.Number */
-  .s { color: hsl(180, 88%, 70%); } /* Literal.String */
-  .na { color: hsl( 30, 88%, 70%) } /* Name.Attribute */
-  .nb { color: hsl(  0, 100%, 50%); } /* Name.Builtin */
-  .nc { color: hsl(180, 88%, 70%) } /* Name.Class */
-  .no { color: #CB4B16 } /* Name.Constant */
-  .nd { color: #288BD2 } /* Name.Decorator */
-  .ni { color: hsl(120, 88%, 75%) } /* Name.Entity */
-  .ne { color: hsl(120, 88%, 75%) } /* Name.Exception */
-  .nf { color: hsl(120, 88%, 75%) } /* Name.Function */
-  .nl { color: hsl( 30, 88%, 70%) } /* Name.Label */
-  .nn { color: hsl( 30, 88%, 70%) } /* Name.Namespace */
-  .nx { color: hsl(210, 15%, 99%); } /* Name.Other */
-  .py { color: hsl( 30, 88%, 70%) } /* Name.Property */
-  .nt { color: hsl( 30, 88%, 70%) } /* Name.Tag */
-  .nv { color: hsl(210, 100%, 75%); } /* Name.Variable */
-  .ow { color: #859900 } /* Operator.Word */
-  .w { color: hsl( 30, 88%, 70%) } /* Text.Whitespace */
-  .mf { color: hsl( 90, 88%, 70%) } /* Literal.Number.Float */
-  .mh { color: hsl( 90, 88%, 70%) } /* Literal.Number.Hex */
-  .mi { color: hsl( 90, 88%, 70%) } /* Literal.Number.Integer */
-  .mo { color: hsl( 90, 88%, 70%)} /* Literal.Number.Oct */
-  .sb { color: hsl(180, 88%, 70%); } /* Literal.String.Backtick */
-  .sc { color: hsl(180, 88%, 70%); } /* Literal.String.Char */
-  .sd { color: hsl( 30, 88%, 70%) } /* Literal.String.Doc */
-  .s2 { color: hsl(180, 88%, 70%); } /* Literal.String.Double */
-  .se { color: hsl(180, 88%, 70%); } /* Literal.String.Escape */
-  .sh { color: hsl( 30, 88%, 70%) } /* Literal.String.Heredoc */
-  .si { color: #2AA198 } /* Literal.String.Interpol */
-  .sx { color: #2AA198 } /* Literal.String.Other */
-  .sr { color: #DC322F } /* Literal.String.Regex */
-  .s1 { color: #2AA198 } /* Literal.String.Single */
-  .ss { color: #2AA198 } /* Literal.String.Symbol */
-  .bp { color: hsl(150, 88%, 70%) } /* Name.Builtin.Pseudo */
-  .vc { color: hsl(150, 88%, 70%) } /* Name.Variable.Class */
-  .vg { color: hsl(150, 88%, 70%) } /* Name.Variable.Global */
-  .vi { color: hsl( 60, 88%, 70%) } /* Name.Variable.Instance */
-  .il { color: #2AA198 } /* Literal.Number.Integer.Long */
+.kickstarter_video {
+  background-color: #000000;
+  text-align: center;
+  overflow: hidden;
+  margin-top: 72px;
+  @include breakpoint(small) {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+}
+
+ul.backers {
+  list-style: none;
+  margin: 0px;
+  text-align: center;
+  font-size: 24px;
+
+  li {
+    display: inline-block;
+    line-height: 72px;
+    min-width: 30%;
+    white-space: nowrap;
+    margin-left: 8px;
+    margin-right: 8px;
+  }
 }

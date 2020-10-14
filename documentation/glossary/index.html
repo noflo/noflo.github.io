@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Glossary | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/" class="active">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">Documentation</h1>
+        <a href="/api/NoFlo/" class="btn btn-primary page-title__button big-button">1.2.6 API docs</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+          <nav>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/documentation/">Getting started</a>
+              </li>
+              
+              
+              <li>
+                
+                <a href="/tutorials/canadianness/">Tutorial: Data transformations</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/graphs/">Graphs</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/components/">Components</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/embedding/">Embedding</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/testing/">Testing</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/publishing/">Publishing modules</a>
+                
+              </li>
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/tooling/">Related tools</a>
+                
+              </li>
+              
+              
+              
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/glossary/" class="active">Glossary</a>
+                
+              </li>
+              
+            </ul>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/support/">Need help?</a>
+                <a href="https://github.com/noflo/noflo.github.io/tree/master/documentation/_posts">Contribute</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="content span8">
+          <h1>Glossary</h1>
+          <ul>
+  <li><strong>Component</strong>: individual, pluggable and reusable piece of software. In this case a NoFlo-compatible CommonJS Module. See <a href="../components">Components documentation</a></li>
+  <li><strong>Component Library</strong>: an NPM module providing a set of components for a particular domain (for example, <em>noflo-filesystem</em> for file operations components). See <a href="../publishing">Publishing modules</a></li>
+  <li><strong>Connection</strong>: connection between an outport of a Process, and inport of another Process (also known as Edge in non-live graphs)</li>
+  <li><strong>Graph</strong>: the control logic of a FBP application, can be either in programmatical or file format. See <a href="../graphs">Graphs documentation</a></li>
+  <li><strong>Initial Information Packet</strong> (IIP): predefined data packet sent to a defined inport of a Process</li>
+  <li><strong>Information Packet</strong> (IP): Packets of information with either a type of <code class="language-plaintext highlighter-rouge">data</code>, <code class="language-plaintext highlighter-rouge">openBracket</code>, or <code class="language-plaintext highlighter-rouge">closeBracket</code></li>
+  <li><strong>Inport</strong>: inbound port of a component</li>
+  <li><strong>Network</strong>: collection of processes connected by sockets. A running version of a graph</li>
+  <li><strong>Outport</strong>: outbound port of a component</li>
+  <li><strong>Process</strong>: an instance of a component that is running as part of a graph (also known as Node in non-live graphs)</li>
+  <li><strong>Runtime</strong>: an environment capable of running flow-based programs. For example NoFlo or JavaFBP</li>
+  <li><strong>Stream</strong>: a sequence of information packets surrounded by bracket IPs. A single non-bracketed information packet can also be considered a stream</li>
+  <li><strong>Subgraph</strong>: a graph that is being used as a component in another graph</li>
+</ul>
+
+<p>See also the <a href="http://www.jpaulmorrison.com/fbp/gloss.htm">Flow-Based Programming Glossary</a>.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/" class="active">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

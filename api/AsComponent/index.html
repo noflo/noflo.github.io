@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AsComponent API | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/AsComponent.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a href="/api/AsCallback/">
+                    AsCallback
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BaseNetwork/">
+                    BaseNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/LegacyNetwork/">
+                    LegacyNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessContext/">
+                    ProcessContext
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessInput/">
+                    ProcessInput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessOutput/">
+                    ProcessOutput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>AsComponent API</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2018</span> Flowhub UG
+NoFlo may be freely distributed under the MIT license</code></pre>
+
+            
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> getParams = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;get-function-params&#x27;</span>);
+<span class="hljs-keyword">const</span> { Component } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Component&#x27;</span>);</pre></div>
+            
+          
+            
+            <h2 id="ascomponent-generator-api">asComponent generator API</h2>
+<p>asComponent is a helper for turning JavaScript functions into
+NoFlo components.</p>
+<p>Each call to this function returns a component instance where
+the input parameters of the given function are converted into
+NoFlo inports, and there are <code>out</code> and <code>error</code> ports for the
+results of the function execution.</p>
+<p>Variants supported:</p>
+<ul>
+<li>Regular synchronous functions: return value gets sent to <code>out</code>.
+Thrown errors get sent to <code>error</code></li>
+<li>Functions returning a Promise: resolved promises get sent to <code>out</code>,
+rejected promises to <code>error</code></li>
+<li>Functions taking a Node.js style asynchronous callback: <code>err</code> argument
+to callback gets sent to <code>error</code>, result gets sent to <code>out</code></li>
+</ul>
+<p>Usage example:</p>
+<pre><code><span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> noflo.asComponent(<span class="hljs-built_in">Math</span>.random, {
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Generate a random number&#x27;</span>,
+  });
+};</code></pre>
+<h3 id="wrapping-built-in-functions">Wrapping built-in functions</h3>
+<p>Built-in JavaScript functions don’t make their arguments introspectable.
+Because of this, these cannot be directly converted to components.
+You’ll have to provide a wrapper JavaScript function to make  the arguments appear as ports.</p>
+<p>Example:</p>
+<pre><code><span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> noflo.asComponent(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">selector</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.querySelector(selector);
+  }, {
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Return an element matching the CSS selector&#x27;</span>,
+    <span class="hljs-attr">icon</span>: <span class="hljs-string">&#x27;html5&#x27;</span>,
+  });
+};</code></pre>
+<h3 id="default-values">Default values</h3>
+<p>Function arguments with a default value are supported in ES6 environments.
+The default arguments are visible via the component’s port interface.</p>
+<p>However, ES5 transpilation doesn’t work with default values.
+In these cases the port with a default won’t be visible. It is
+recommended to use default values only with components that don’t need to run in legacy browsers.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.asComponent = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asComponent</span>(<span class="hljs-params">func, options</span>) </span>{
+  <span class="hljs-keyword">let</span> hasCallback = <span class="hljs-literal">false</span>;
+  <span class="hljs-keyword">const</span> params = getParams(func).filter(<span class="hljs-function">(<span class="hljs-params">p</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (p.param !== <span class="hljs-string">&#x27;callback&#x27;</span>) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+    hasCallback = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  });
+
+  <span class="hljs-keyword">const</span> c = <span class="hljs-keyword">new</span> Component(options);
+  params.forEach(<span class="hljs-function">(<span class="hljs-params">p</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> portOptions = { <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span> };
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> p.default !== <span class="hljs-string">&#x27;undefined&#x27;</span>) {
+      portOptions.default = p.default;
+      portOptions.required = <span class="hljs-literal">false</span>;
+    }
+    c.inPorts.add(p.param, portOptions);
+    c.forwardBrackets[p.param] = [<span class="hljs-string">&#x27;out&#x27;</span>, <span class="hljs-string">&#x27;error&#x27;</span>];
+  });
+  <span class="hljs-keyword">if</span> (!params.length) {
+    c.inPorts.add(<span class="hljs-string">&#x27;in&#x27;</span>,
+      { <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;bang&#x27;</span> });
+  }
+
+  c.outPorts.add(<span class="hljs-string">&#x27;out&#x27;</span>);
+  c.outPorts.add(<span class="hljs-string">&#x27;error&#x27;</span>);
+  c.process(<span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {
+    <span class="hljs-keyword">let</span> values;
+    <span class="hljs-keyword">if</span> (params.length) {
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; params.length; i += <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">const</span> p = params[i];
+        <span class="hljs-keyword">if</span> (!input.hasData(p.param)) { <span class="hljs-keyword">return</span>; }
+      }
+      values = params.map(<span class="hljs-function">(<span class="hljs-params">p</span>) =&gt;</span> input.getData(p.param));
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">&#x27;in&#x27;</span>)) { <span class="hljs-keyword">return</span>; }
+      input.getData(<span class="hljs-string">&#x27;in&#x27;</span>);
+      values = [];
+    }
+
+    <span class="hljs-keyword">if</span> (hasCallback) {</pre></div>
+            
+          
+            
+            <p>Handle Node.js style async functions</p>
+
+            
+              <div class='highlight'><pre>      values.push(<span class="hljs-function">(<span class="hljs-params">err, res</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err) {
+          output.done(err);
+          <span class="hljs-keyword">return</span>;
+        }
+        output.sendDone(res);
+      });
+      func(...values);
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">const</span> res = func(...values);
+    <span class="hljs-keyword">if</span> (res &amp;&amp; (<span class="hljs-keyword">typeof</span> res === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; (<span class="hljs-keyword">typeof</span> res.then === <span class="hljs-string">&#x27;function&#x27;</span>)) {</pre></div>
+            
+          
+            
+            <p>Result is a Promise, resolve and handle</p>
+
+            
+              <div class='highlight'><pre>      res.then(<span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> output.sendDone(val),
+        <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> output.done(err));
+      <span class="hljs-keyword">return</span>;
+    }
+    output.sendDone(res);
+  });
+  <span class="hljs-keyword">return</span> c;
+};</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/AsComponent.coffee">AsComponent.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

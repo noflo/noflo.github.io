@@ -1,0 +1,36 @@
+topic: "canadianness/DetermineEmotion"
+name: "DetermineEmotion component"
+timeout: 10000
+fixture:
+ type: 'fbp'
+ data: |
+  # @runtime noflo-nodejs
+  INPORT=stream.IN:IN
+  OUTPORT=DetermineEmotion.EMOTION:EMOTION
+  stream(canadianness/ArrayToStream) OUT -> CONTENT DetermineEmotion(canadianness/DetermineEmotion)
+
+cases:
+-
+  name: 'with content eh!'
+  assertion: 'should be joyful'
+  inputs:
+    in: 'eh!'
+  expect:
+    emotion:
+      equals: 'joy'
+-
+  name: 'content eh'
+  assertion: 'should be neutral'
+  inputs:
+    in: 'eh'
+  expect:
+    emotion:
+      equals: 'neutral'
+-
+  name: 'with content [eh?, eh!?, Eh?]'
+  assertion: 'should be amusement'
+  inputs:
+    in: ['eh?', 'eh!?', 'Eh?']
+  expect:
+    emotion:
+      equals: 'amusement'

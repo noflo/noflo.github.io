@@ -1,14 +1,14 @@
 var UI = {
 
 	"site": {
-		"width": document.documentElement.clientWidth, 
-		"height": $(".container").height(), 
+		"width": document.documentElement.clientWidth,
+		"height": $(".container").height(),
 		"breakpoints": [
-			{ "name": "medium", "min": 767 }, 
+			{ "name": "medium", "min": 767 },
 			{ "name": "small", "min": 0 }
-		], 
+		],
 		"mode": {}
-	}, 
+	},
 
 	init: function() {
 
@@ -33,7 +33,7 @@ var UI = {
 		UI.getSiteMode();
 
 		/**
-		* Main Nav 
+		* Main Nav
 		*/
 		$(".toggle-main-nav").bind("click", function(event) {
 			$(this).toggleClass("toggle-menu--open");
@@ -82,7 +82,35 @@ var UI = {
 			return false;
 		});
 
-	}, 
+		/**
+		* Tabbed CoffeeScript / JavaScript listings
+		*/
+		var listingIndex = 0;
+		$("div.highlight + div.highlight").each(function() {
+			var listingId = 'listing_' + listingIndex;
+			var second = $(this);
+			var first = $(this).prev();
+			var firstLang = first.find('code').one().attr('data-lang');
+			var secondLang = second.find('code').one().attr('data-lang');
+			var firstIndex = listingIndex++;
+			var secondIndex = listingIndex++;
+			var listingNav = $('<ul class="nav nav-tabs" id="' + listingId + '"/>');
+			var li = $('<li class="active"/>').appendTo(listingNav);
+			var a = $('<a/>').attr('href', '#listing_tab_'+firstIndex).text(firstLang).appendTo(li);
+			li = $('<li/>').appendTo(listingNav);
+			a = $('<a/>').attr('href', '#listing_tab_'+secondIndex).text(secondLang).appendTo(li);
+			console.log(listingNav);
+			listingNav.insertBefore(first);
+			first.next().andSelf().wrapAll('<div class="tab-content"/>');
+			first.wrap('<div class="tab-pane active" id="listing_tab_'+firstIndex+'"/>');
+			second.wrap('<div class="tab-pane" id="listing_tab_'+secondIndex+'"/>');
+			$('#' + listingId + ' a').click(function (e) {
+				e.preventDefault();
+				$(this).tab('show');
+			});
+		});
+
+	},
 
 	getSiteMode: function() {
 		for(var i=0, len=UI.site.breakpoints.length; i<len; i++) {
@@ -98,12 +126,12 @@ var UI = {
 		$(".toggle-main-nav").removeClass("toggle-menu--open");
 		$(".main-nav").hide();
 		UI.resetSearchBar();
-	}, 
+	},
 
 	resetDesktopNav: function() {
 		$(".main-nav").show();
 		UI.resetSearchBar();
-	}, 
+	},
 
 	resetSearchBar: function() {
 		$(".toggle-search").removeClass("toggle-search--active");

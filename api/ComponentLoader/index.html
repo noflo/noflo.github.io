@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ComponentLoader API | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a href="/api/AsCallback/">
+                    AsCallback
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BaseNetwork/">
+                    BaseNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/LegacyNetwork/">
+                    LegacyNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessContext/">
+                    ProcessContext
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessInput/">
+                    ProcessInput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessOutput/">
+                    ProcessOutput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>ComponentLoader API</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2013</span><span class="hljs-number">-2017</span> Flowhub UG
+(c) <span class="hljs-number">2013</span> Henri Bergius, Nemein
+NoFlo may be freely distributed under the MIT license</code></pre>
+
+            
+              <div class='highlight'><pre>
+<span class="hljs-comment">/* eslint-disable
+    class-methods-use-this,
+    import/no-unresolved,
+*/</span>
+
+<span class="hljs-keyword">const</span> fbpGraph = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fbp-graph&#x27;</span>);
+<span class="hljs-keyword">const</span> { EventEmitter } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>);
+<span class="hljs-keyword">const</span> registerLoader = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./loader/register&#x27;</span>);
+<span class="hljs-keyword">const</span> platform = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>);</pre></div>
+            
+          
+            
+            <h2 id="the-noflo-component-loader">The NoFlo Component Loader</h2>
+<p>The Component Loader is responsible for discovering components
+available in the running system, as well as for instantiating
+them.</p>
+<p>Internally the loader uses a registered, platform-specific
+loader. NoFlo ships with a loader for Node.js that discovers
+components from the current project’s <code>components/</code> and
+<code>graphs/</code> folders, as well as those folders of any installed
+NPM dependencies. For browsers and embedded devices it is
+possible to generate a statically configured component
+loader using the <a href="https://github.com/noflo/noflo-component-loader">noflo-component-loader</a> webpack plugin.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ComponentLoader</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+  <span class="hljs-keyword">constructor</span>(baseDir, options = {}) {
+    <span class="hljs-built_in">super</span>();
+    <span class="hljs-built_in">this</span>.baseDir = baseDir;
+    <span class="hljs-built_in">this</span>.options = options;
+    <span class="hljs-built_in">this</span>.components = <span class="hljs-literal">null</span>;
+    <span class="hljs-built_in">this</span>.libraryIcons = {};
+    <span class="hljs-built_in">this</span>.processing = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.ready = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.setMaxListeners(<span class="hljs-number">0</span>);
+  }</pre></div>
+            
+          
+            
+            <p>Get the library prefix for a given module name. This
+is mostly used for generating valid names for namespaced
+NPM modules, as well as for convenience renaming all
+<code>noflo-</code> prefixed modules with just their base name.</p>
+<p>Examples:</p>
+<ul>
+<li><code>my-project</code> becomes <code>my-project</code></li>
+<li><code>@foo/my-project</code> becomes <code>my-project</code></li>
+<li><code>noflo-core</code> becomes <code>core</code></li>
+</ul>
+
+            
+              <div class='highlight'><pre>  getModulePrefix(name) {
+    <span class="hljs-keyword">if</span> (!name) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>; }
+    <span class="hljs-keyword">let</span> res = name;
+    <span class="hljs-keyword">if</span> (res === <span class="hljs-string">&#x27;noflo&#x27;</span>) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>; }
+    <span class="hljs-keyword">if</span> (res[<span class="hljs-number">0</span>] === <span class="hljs-string">&#x27;@&#x27;</span>) { res = res.replace(<span class="hljs-regexp">/@[a-z-]+\//</span>, <span class="hljs-string">&#x27;&#x27;</span>); }
+    <span class="hljs-keyword">return</span> res.replace(<span class="hljs-regexp">/^noflo-/</span>, <span class="hljs-string">&#x27;&#x27;</span>);
+  }</pre></div>
+            
+          
+            
+            <p>Get the list of all available components</p>
+
+            
+              <div class='highlight'><pre>  listComponents(callback) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.processing) {
+      <span class="hljs-built_in">this</span>.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> callback(<span class="hljs-literal">null</span>, <span class="hljs-built_in">this</span>.components));
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.components) {
+      callback(<span class="hljs-literal">null</span>, <span class="hljs-built_in">this</span>.components);
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-built_in">this</span>.ready = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.processing = <span class="hljs-literal">true</span>;
+
+    <span class="hljs-built_in">this</span>.components = {};
+    registerLoader.register(<span class="hljs-built_in">this</span>, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-built_in">this</span>.processing = <span class="hljs-literal">false</span>;
+      <span class="hljs-built_in">this</span>.ready = <span class="hljs-literal">true</span>;
+      <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-literal">true</span>);
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      callback(<span class="hljs-literal">null</span>, <span class="hljs-built_in">this</span>.components);
+    });
+  }</pre></div>
+            
+          
+            
+            <p>Load an instance of a specific component. If the
+registered component is a JSON or FBP graph, it will
+be loaded as an instance of the NoFlo subgraph
+component.</p>
+
+            
+              <div class='highlight'><pre>  load(name, callback, metadata) {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ready) {
+      <span class="hljs-built_in">this</span>.listComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err) {
+          callback(err);
+          <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-built_in">this</span>.load(name, callback, metadata);
+      });
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">let</span> component = <span class="hljs-built_in">this</span>.components[name];
+    <span class="hljs-keyword">if</span> (!component) {</pre></div>
+            
+          
+            
+            <p>Try an alias</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">const</span> keys = <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.components);
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; keys.length; i += <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">const</span> componentName = keys[i];
+        <span class="hljs-keyword">if</span> (componentName.split(<span class="hljs-string">&#x27;/&#x27;</span>)[<span class="hljs-number">1</span>] === name) {
+          component = <span class="hljs-built_in">this</span>.components[componentName];
+          <span class="hljs-keyword">break</span>;
+        }
+      }
+      <span class="hljs-keyword">if</span> (!component) {</pre></div>
+            
+          
+            
+            <p>Failure to load</p>
+
+            
+              <div class='highlight'><pre>        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Component <span class="hljs-subst">${name}</span> not available with base <span class="hljs-subst">${<span class="hljs-built_in">this</span>.baseDir}</span>`</span>));
+        <span class="hljs-keyword">return</span>;
+      }
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isGraph(component)) {
+      <span class="hljs-built_in">this</span>.loadGraph(name, component, callback, metadata);
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-built_in">this</span>.createComponent(name, component, metadata, <span class="hljs-function">(<span class="hljs-params">err, instance</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> inst = instance;
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">if</span> (!inst) {
+        callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Component <span class="hljs-subst">${name}</span> could not be loaded.`</span>));
+        <span class="hljs-keyword">return</span>;
+      }
+
+      <span class="hljs-keyword">if</span> (name === <span class="hljs-string">&#x27;Graph&#x27;</span>) { inst.baseDir = <span class="hljs-built_in">this</span>.baseDir; }
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> name === <span class="hljs-string">&#x27;string&#x27;</span>) { inst.componentName = name; }
+
+      <span class="hljs-keyword">if</span> (inst.isLegacy()) {
+        platform.deprecated(<span class="hljs-string">`Component <span class="hljs-subst">${name}</span> uses legacy NoFlo APIs. Please port to Process API`</span>);
+      }
+
+      <span class="hljs-built_in">this</span>.setIcon(name, inst);
+      callback(<span class="hljs-literal">null</span>, inst);
+    });
+  }</pre></div>
+            
+          
+            
+            <p>Creates an instance of a component.</p>
+
+            
+              <div class='highlight'><pre>  createComponent(name, component, metadata, callback) {
+    <span class="hljs-keyword">let</span> e; <span class="hljs-keyword">let</span>
+      instance;
+    <span class="hljs-keyword">const</span> implementation = component;
+    <span class="hljs-keyword">if</span> (!implementation) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Component <span class="hljs-subst">${name}</span> not available`</span>));
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>If a string was specified, attempt to <code>require</code> it.</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> implementation === <span class="hljs-string">&#x27;string&#x27;</span>) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> registerLoader.dynamicLoad === <span class="hljs-string">&#x27;function&#x27;</span>) {
+        registerLoader.dynamicLoad(name, implementation, metadata, callback);
+        <span class="hljs-keyword">return</span>;
+      }
+      callback(<span class="hljs-built_in">Error</span>(<span class="hljs-string">`Dynamic loading of <span class="hljs-subst">${implementation}</span> for component <span class="hljs-subst">${name}</span> not available on this platform.`</span>));
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Attempt to create the component instance using the <code>getComponent</code> method.</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> implementation.getComponent === <span class="hljs-string">&#x27;function&#x27;</span>) {
+      <span class="hljs-keyword">try</span> {
+        instance = implementation.getComponent(metadata);
+      } <span class="hljs-keyword">catch</span> (error) {
+        e = error;
+        callback(e);
+        <span class="hljs-keyword">return</span>;
+      }</pre></div>
+            
+          
+            
+            <p>Attempt to create a component using a factory function.</p>
+
+            
+              <div class='highlight'><pre>    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> implementation === <span class="hljs-string">&#x27;function&#x27;</span>) {
+      <span class="hljs-keyword">try</span> {
+        instance = implementation(metadata);
+      } <span class="hljs-keyword">catch</span> (error1) {
+        e = error1;
+        callback(e);
+        <span class="hljs-keyword">return</span>;
+      }
+    } <span class="hljs-keyword">else</span> {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid type <span class="hljs-subst">${<span class="hljs-keyword">typeof</span> (implementation)}</span> for component <span class="hljs-subst">${name}</span>.`</span>));
+      <span class="hljs-keyword">return</span>;
+    }
+
+    callback(<span class="hljs-literal">null</span>, instance);
+  }</pre></div>
+            
+          
+            
+            <p>Check if a given filesystem path is actually a graph</p>
+
+            
+              <div class='highlight'><pre>  isGraph(cPath) {</pre></div>
+            
+          
+            
+            <p>Live graph instance</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> cPath === <span class="hljs-string">&#x27;object&#x27;</span>)
+      &amp;&amp; (cPath <span class="hljs-keyword">instanceof</span> fbpGraph.Graph
+        || (<span class="hljs-built_in">Array</span>.isArray(cPath.nodes)
+          &amp;&amp; <span class="hljs-built_in">Array</span>.isArray(cPath.edges)
+          &amp;&amp; <span class="hljs-built_in">Array</span>.isArray(cPath.initializers)))) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Graph JSON definition</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> cPath === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; cPath.processes &amp;&amp; cPath.connections) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> cPath !== <span class="hljs-string">&#x27;string&#x27;</span>) { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }</pre></div>
+            
+          
+            
+            <p>Graph file path</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> (cPath.indexOf(<span class="hljs-string">&#x27;.fbp&#x27;</span>) !== <span class="hljs-number">-1</span>) || (cPath.indexOf(<span class="hljs-string">&#x27;.json&#x27;</span>) !== <span class="hljs-number">-1</span>);
+  }</pre></div>
+            
+          
+            
+            <p>Load a graph as a NoFlo subgraph component instance</p>
+
+            
+              <div class='highlight'><pre>  loadGraph(name, component, callback, metadata) {
+    <span class="hljs-built_in">this</span>.createComponent(name, <span class="hljs-built_in">this</span>.components.Graph, metadata, <span class="hljs-function">(<span class="hljs-params">error, graph</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> g = graph;
+      <span class="hljs-keyword">if</span> (error) {
+        callback(error);
+        <span class="hljs-keyword">return</span>;
+      }
+      g.loader = <span class="hljs-built_in">this</span>;
+      g.baseDir = <span class="hljs-built_in">this</span>.baseDir;
+      g.inPorts.remove(<span class="hljs-string">&#x27;graph&#x27;</span>);
+      g.setGraph(component, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err) {
+          callback(err);
+          <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-built_in">this</span>.setIcon(name, g);
+        callback(<span class="hljs-literal">null</span>, g);
+      });
+    });
+  }</pre></div>
+            
+          
+            
+            <p>Set icon for the component instance. If the instance
+has an icon set, then this is a no-op. Otherwise we
+determine an icon based on the module it is coming
+from, or use a fallback icon separately for subgraphs
+and elementary components.</p>
+
+            
+              <div class='highlight'><pre>  setIcon(name, instance) {</pre></div>
+            
+          
+            
+            <p>See if component has an icon</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!instance.getIcon || instance.getIcon()) { <span class="hljs-keyword">return</span>; }</pre></div>
+            
+          
+            
+            <p>See if library has an icon</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">const</span> [library, componentName] = name.split(<span class="hljs-string">&#x27;/&#x27;</span>);
+    <span class="hljs-keyword">if</span> (componentName &amp;&amp; <span class="hljs-built_in">this</span>.getLibraryIcon(library)) {
+      instance.setIcon(<span class="hljs-built_in">this</span>.getLibraryIcon(library));
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>See if instance is a subgraph</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (instance.isSubgraph()) {
+      instance.setIcon(<span class="hljs-string">&#x27;sitemap&#x27;</span>);
+      <span class="hljs-keyword">return</span>;
+    }
+
+    instance.setIcon(<span class="hljs-string">&#x27;gear&#x27;</span>);
+  }
+
+  getLibraryIcon(prefix) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.libraryIcons[prefix]) {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.libraryIcons[prefix];
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+  }
+
+  setLibraryIcon(prefix, icon) {
+    <span class="hljs-built_in">this</span>.libraryIcons[prefix] = icon;
+  }
+
+  normalizeName(packageId, name) {
+    <span class="hljs-keyword">const</span> prefix = <span class="hljs-built_in">this</span>.getModulePrefix(packageId);
+    <span class="hljs-keyword">let</span> fullName = <span class="hljs-string">`<span class="hljs-subst">${prefix}</span>/<span class="hljs-subst">${name}</span>`</span>;
+    <span class="hljs-keyword">if</span> (!packageId) { fullName = name; }
+    <span class="hljs-keyword">return</span> fullName;
+  }</pre></div>
+            
+          
+            
+            <h3 id="registering-components-at-runtime">Registering components at runtime</h3>
+<p>In addition to components discovered by the loader,
+it is possible to register components at runtime.</p>
+<p>With the <code>registerComponent</code> method you can register
+a NoFlo Component constructor or factory method
+as a component available for loading.</p>
+
+            
+              <div class='highlight'><pre>  registerComponent(packageId, name, cPath, callback) {
+    <span class="hljs-keyword">const</span> fullName = <span class="hljs-built_in">this</span>.normalizeName(packageId, name);
+    <span class="hljs-built_in">this</span>.components[fullName] = cPath;
+    <span class="hljs-keyword">if</span> (callback) { callback(); }
+  }</pre></div>
+            
+          
+            
+            <p>With the <code>registerGraph</code> method you can register new
+graphs as loadable components.</p>
+
+            
+              <div class='highlight'><pre>  registerGraph(packageId, name, gPath, callback) {
+    <span class="hljs-built_in">this</span>.registerComponent(packageId, name, gPath, callback);
+  }</pre></div>
+            
+          
+            
+            <p>With <code>registerLoader</code> you can register custom component
+loaders. They will be called immediately and can register
+any components or graphs they wish.</p>
+
+            
+              <div class='highlight'><pre>  registerLoader(loader, callback) {
+    loader(<span class="hljs-built_in">this</span>, callback);
+  }</pre></div>
+            
+          
+            
+            <p>With <code>setSource</code> you can register a component by providing
+a source code string. Supported languages and techniques
+depend on the runtime environment, for example CoffeeScript
+components can only be registered via <code>setSource</code> if
+the environment has a CoffeeScript compiler loaded.</p>
+
+            
+              <div class='highlight'><pre>  setSource(packageId, name, source, language, callback) {
+    <span class="hljs-keyword">if</span> (!registerLoader.setSource) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;setSource not allowed&#x27;</span>));
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ready) {
+      <span class="hljs-built_in">this</span>.listComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err) {
+          callback(err);
+          <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-built_in">this</span>.setSource(packageId, name, source, language, callback);
+      });
+      <span class="hljs-keyword">return</span>;
+    }
+
+    registerLoader.setSource(<span class="hljs-built_in">this</span>, packageId, name, source, language, callback);
+  }</pre></div>
+            
+          
+            
+            <p><code>getSource</code> allows fetching the source code of a registered
+component as a string.</p>
+
+            
+              <div class='highlight'><pre>  getSource(name, callback) {
+    <span class="hljs-keyword">if</span> (!registerLoader.getSource) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;getSource not allowed&#x27;</span>));
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ready) {
+      <span class="hljs-built_in">this</span>.listComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (err) {
+          callback(err);
+          <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-built_in">this</span>.getSource(name, callback);
+      });
+      <span class="hljs-keyword">return</span>;
+    }
+
+    registerLoader.getSource(<span class="hljs-built_in">this</span>, name, callback);
+  }</pre></div>
+            
+          
+            
+            <p><code>getLanguages</code> gets a list of component programming languages supported by the <code>setSource</code>
+method on this runtime instance.</p>
+
+            
+              <div class='highlight'><pre>  getLanguages() {
+    <span class="hljs-keyword">if</span> (!registerLoader.getLanguages) {</pre></div>
+            
+          
+            
+            <p>This component loader doesn’t support the method, default to normal JS</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">return</span> [<span class="hljs-string">&#x27;javascript&#x27;</span>, <span class="hljs-string">&#x27;es2015&#x27;</span>];
+    }
+    <span class="hljs-keyword">return</span> registerLoader.getLanguages();
+  }
+
+  clear() {
+    <span class="hljs-built_in">this</span>.components = <span class="hljs-literal">null</span>;
+    <span class="hljs-built_in">this</span>.ready = <span class="hljs-literal">false</span>;
+    <span class="hljs-built_in">this</span>.processing = <span class="hljs-literal">false</span>;
+  }
+}
+
+<span class="hljs-built_in">exports</span>.ComponentLoader = ComponentLoader;</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.coffee">ComponentLoader.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

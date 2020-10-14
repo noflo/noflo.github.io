@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Embedding | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/" class="active">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">Documentation</h1>
+        <a href="/api/NoFlo/" class="btn btn-primary page-title__button big-button">1.2.6 API docs</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+          <nav>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/documentation/">Getting started</a>
+              </li>
+              
+              
+              <li>
+                
+                <a href="/tutorials/canadianness/">Tutorial: Data transformations</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/graphs/">Graphs</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/components/">Components</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/embedding/" class="active">Embedding</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/testing/">Testing</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/publishing/">Publishing modules</a>
+                
+              </li>
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/tooling/">Related tools</a>
+                
+              </li>
+              
+              
+              
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/glossary/">Glossary</a>
+                
+              </li>
+              
+            </ul>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/support/">Need help?</a>
+                <a href="https://github.com/noflo/noflo.github.io/tree/master/documentation/_posts">Contribute</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="content span8">
+          <h1>Embedding</h1>
+          <ul>
+  <li><a href="#including-noflo-in-your-project">Including NoFlo in your project</a></li>
+  <li><a href="#ascallback">asCallback</a>
+    <ul>
+      <li><a href="#using-with-an-arbitrary-graph">Using with an arbitrary graph</a></li>
+      <li><a href="#use-cases">Use cases</a></li>
+      <li><a href="#network-lifecycle">Network lifecycle</a></li>
+      <li><a href="#promises">Promises</a></li>
+    </ul>
+  </li>
+  <li><a href="#continuous-networks">Continous networks</a></li>
+</ul>
+
+<p>It has always been easy to wrap existing JavaScript code into NoFlo graphs — just <a href="/documentation/components/">write a component</a> that exposes its functionality via some ports.</p>
+
+<p>Going the other way and exposing a NoFlo graph to an existing JavaScript codebase can be accomplished easily using the <code class="language-plaintext highlighter-rouge">noflo.asCallback</code> API. This can also be useful for utilizing NoFlo graphs in serverless environments like AWS Lambda.</p>
+
+<h2 id="including-noflo-in-your-project">Including NoFlo in your project</h2>
+
+<p>For Node.js projects, including NoFlo is easy — simply add NoFlo and any component libraries you need to your NPM dependencies.</p>
+
+<p>On browser, you additionally need to <a href="/documentation/#running-noflo-in-the-browser">configure webpack to find NoFlo components</a>.</p>
+
+<h2 id="ascallback">asCallback</h2>
+
+<p>Let’s say you have a graph (or just a component) with the typical <code class="language-plaintext highlighter-rouge">IN</code>, <code class="language-plaintext highlighter-rouge">OUT</code> and <code class="language-plaintext highlighter-rouge">ERROR</code> ports, you can wrap it like this:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Load the NoFlo module</span>
+<span class="kd">const</span> <span class="nx">noflo</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">noflo</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Use NoFlo's asCallback helper to prepare a JS function that wraps the graph</span>
+<span class="kd">const</span> <span class="nx">wrappedGraph</span> <span class="o">=</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">asCallback</span><span class="p">(</span><span class="dl">'</span><span class="s1">myproject/MyComponent</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// Provide the project base directory where NoFlo seeks graphs and components</span>
+  <span class="na">baseDir</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/path/to/my/project</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">});</span>
+
+<span class="c1">// Call the wrapped graph. Can be done multiple times</span>
+<span class="nx">wrappedGraph</span><span class="p">({</span>
+  <span class="c1">// Provide data to be sent to inports</span>
+  <span class="na">in</span><span class="p">:</span> <span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// If component sent to its error port, then we'll have err</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span> <span class="p">}</span>
+  <span class="c1">// Do something with the results</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">out</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>If the graph has multiple inports, you can provide each of them a value in that input object. Similarly, the results sent to each outport will be in the result object. If a port sent multiple packets, their values will be in an array.</p>
+
+<h3 id="using-with-an-arbitrary-graph">Using with an arbitrary graph</h3>
+
+<p>If you have a graph that is constructed at runtime, and hence not registered as a component, you can still run it with asCallback. Simply call <code class="language-plaintext highlighter-rouge">noflo.asCallback</code> with the Graph instance instead of a component name:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">noflo</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">noflo</span><span class="dl">'</span><span class="p">);</span>
+<span class="c1">// Create a graph instance</span>
+<span class="kd">const</span> <span class="nx">graph</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">Graph</span><span class="p">(</span><span class="dl">'</span><span class="s1">My graph</span><span class="dl">'</span><span class="p">);</span>
+<span class="c1">// Add some nodes</span>
+<span class="nx">graph</span><span class="p">.</span><span class="nx">addNode</span><span class="p">(</span><span class="dl">'</span><span class="s1">Read</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">filesystem/ReadFile</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">graph</span><span class="p">.</span><span class="nx">addNode</span><span class="p">(</span><span class="dl">'</span><span class="s1">Parse</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">yaml/ParseYaml</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">graph</span><span class="p">.</span><span class="nx">addNode</span><span class="p">(</span><span class="dl">'</span><span class="s1">Errors</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">core/Merge</span><span class="dl">'</span><span class="p">);</span>
+<span class="c1">// Connect the nodes together</span>
+<span class="nx">graph</span><span class="p">.</span><span class="nx">addEdge</span><span class="p">(</span><span class="dl">'</span><span class="s1">Read</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">out</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Parse</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">graph</span><span class="p">.</span><span class="nx">addEdge</span><span class="p">(</span><span class="dl">'</span><span class="s1">Read</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Errors</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">graph</span><span class="p">.</span><span class="nx">addEdge</span><span class="p">(</span><span class="dl">'</span><span class="s1">Parse</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Errors</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">);</span>
+<span class="c1">// Export the ports you want to interface with</span>
+<span class="nx">graph</span><span class="p">.</span><span class="nx">addInport</span><span class="p">(</span><span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Read</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">graph</span><span class="p">.</span><span class="nx">addOutport</span><span class="p">(</span><span class="dl">'</span><span class="s1">out</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Parse</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">out</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">graph</span><span class="p">.</span><span class="nx">addOutport</span><span class="p">(</span><span class="dl">'</span><span class="s1">error</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Errors</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">out</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Then just wrap it via asCallback</span>
+<span class="kd">const</span> <span class="nx">wrappedGraph</span> <span class="o">=</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">asCallback</span><span class="p">(</span><span class="nx">graph</span><span class="p">);</span>
+
+<span class="c1">// And run it as many times as needed</span>
+<span class="nx">wrappedGraph</span><span class="p">(</span><span class="dl">'</span><span class="s1">somefile.yml</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Do something with the results</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Please note that instead of constructing graph programatically, you can also load it from a FBP or JSON definition using <code class="language-plaintext highlighter-rouge">noflo.graph.loadFBP</code> or <code class="language-plaintext highlighter-rouge">noflo.graph.loadJSON</code>.</p>
+
+<h3 id="use-cases">Use cases</h3>
+
+<p>With <code class="language-plaintext highlighter-rouge">asCallback</code>, you can implement parts of your system as NoFlo graphs without having to jump in all the way. Even with a normal Node.js or client-side JS application it is easy to see places where NoFlo fits in nicely:</p>
+
+<ul>
+  <li>Making complex <a href="http://expressjs.com/">Express.js</a> or <a href="http://redux.js.org/">Redux</a>  middleware chains manageable</li>
+  <li>Adding customizable workflows to some part of the system</li>
+  <li>Implementing <a href="https://en.wikipedia.org/wiki/Extract,_transform,_load">Extract, Transform, Load</a> (ETL) pipelines</li>
+  <li>Porting a system into NoFlo piece-by-piece</li>
+  <li>Exposing a pure-JS API for an NPM module built in NoFlo</li>
+</ul>
+
+<p>It also makes it easier to test NoFlo graphs and components using standard, non-FBP-aware testing tools like <a href="https://mochajs.org/">Mocha</a>.</p>
+
+<h3 id="network-lifecycle">Network lifecycle</h3>
+
+<p>Each invocation of a callbackified NoFlo graph creates its own Network instance. The function collects result packet until <a href="/documentation/components/#component-lifecycle">network finishes</a>, and then calls its callback.</p>
+
+<p>Since these networks are isolated, you can call the function as many times as you like without any risk of packet collisions.</p>
+
+<h3 id="promises">Promises</h3>
+
+<p>Since the callbackified NoFlo graph looks like a typical Node.js function, you can use all the normal flow control mechanisms like Promises or <a href="http://caolan.github.io/async/">async</a> with it.</p>
+
+<p>For example, you can convert it to a Promise <a href="https://benmccormick.org/2015/12/30/es6-patterns-converting-callbacks-to-promises/">either manually</a>, with Node.js <a href="https://nodejs.org/api/util.html#util_util_promisify_original">util.promisify</a>, or with a library like <a href="http://bluebirdjs.com/docs/getting-started.html">Bluebird</a>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Load Bluebird</span>
+<span class="kd">const</span> <span class="nx">bluebird</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">bluebird</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="c1">// Convert the wrapped function into a Promise</span>
+<span class="kd">const</span> <span class="nx">promisedGraph</span> <span class="o">=</span> <span class="nx">bluebird</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">wrappedGraph</span><span class="p">);</span>
+
+<span class="c1">// Run it</span>
+<span class="nx">promisedGraph</span><span class="p">({</span>
+  <span class="na">in</span><span class="p">:</span> <span class="dl">'</span><span class="s1">baz</span><span class="dl">'</span>
+<span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span> <span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">out</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Once your <code class="language-plaintext highlighter-rouge">asCallback</code> is Promisified, you can also use it with JavaScript <code class="language-plaintext highlighter-rouge">async</code>/<code class="language-plaintext highlighter-rouge">await</code>.</p>
+
+<h2 id="continuous-networks">Continuous networks</h2>
+
+<p>The <a href="#ascallback">asCallback</a> interface works great for batch-style operation where a NoFlo graph executes once, produces results (or errors) and then finishes. If you want to run a persistent network that may contain generators, and can receive data at multiple stages, then the best way is to use the NoFlo Network API.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">ComponentLoader</span><span class="p">();</span>
+<span class="nx">loader</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="dl">'</span><span class="s1">my-project/MyGraph</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">instance</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">instance</span><span class="p">.</span><span class="nx">start</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Here you can bind to ports. Using just in/out as example, but can be more</span>
+    <span class="kd">const</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">internalSocket</span><span class="p">.</span><span class="nx">createSocket</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">ins</span> <span class="o">=</span> <span class="nx">noflo</span><span class="p">.</span><span class="nx">internalSocket</span><span class="p">.</span><span class="nx">createSocket</span><span class="p">();</span>
+
+    <span class="c1">// React to results from outport</span>
+    <span class="nx">out</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">ip</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">ip</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// Received an information packet</span>
+    <span class="p">});</span>
+    <span class="c1">// Send something</span>
+    <span class="nx">ins</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="dl">'</span><span class="s1">Some data</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/" class="active">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

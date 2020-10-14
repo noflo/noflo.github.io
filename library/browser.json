@@ -1,8 +1,5 @@
----
----
 {
   "libraries": {
-    {% for library in site.browser_libraries %}
-    "{{ library }}": "*"{% unless forloop.last %},{% endunless %}{% endfor %}
+    
   }
 }

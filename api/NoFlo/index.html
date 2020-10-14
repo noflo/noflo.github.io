@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NoFlo API | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a href="/api/AsCallback/">
+                    AsCallback
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BaseNetwork/">
+                    BaseNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/LegacyNetwork/">
+                    LegacyNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessContext/">
+                    ProcessContext
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessInput/">
+                    ProcessInput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessOutput/">
+                    ProcessOutput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>NoFlo API</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2013</span><span class="hljs-number">-2018</span> Flowhub UG
+(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
+NoFlo may be freely distributed under the MIT license</code></pre>
+<p>NoFlo is a Flow-Based Programming environment for JavaScript. This file provides the
+main entry point to the NoFlo network.</p>
+<p>Find out more about using NoFlo from <a href="http://noflojs.org/documentation/">http://noflojs.org/documentation/</a></p>
+
+            
+              <div class='highlight'><pre>
+<span class="hljs-comment">/* eslint-disable
+    no-param-reassign,
+*/</span></pre></div>
+            
+          
+            
+            <h2 id="main-apis">Main APIs</h2>
+<h3 id="graph-interface">Graph interface</h3>
+<p><a href="https://github.com/flowbased/fbp-graph">fbp-graph</a> is used for instantiating FBP graph definitions.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> fbpGraph = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fbp-graph&#x27;</span>);
+
+<span class="hljs-built_in">exports</span>.graph = fbpGraph.graph;
+<span class="hljs-built_in">exports</span>.Graph = fbpGraph.Graph;</pre></div>
+            
+          
+            
+            <h3 id="graph-journal">Graph journal</h3>
+<p>Journal is used for keeping track of graph changes</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.journal = fbpGraph.journal;
+<span class="hljs-built_in">exports</span>.Journal = fbpGraph.Journal;</pre></div>
+            
+          
+            
+            <h2 id="network-interface">Network interface</h2>
+<p><a href="../Network/">Network</a> is used for running NoFlo graphs. The direct Network inteface is only
+provided for backwards compatibility purposes. Use <code>createNetwork</code> instead.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> {
+  Network,
+} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Network&#x27;</span>);
+<span class="hljs-built_in">exports</span>.Network = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./LegacyNetwork&#x27;</span>).Network;
+<span class="hljs-keyword">const</span> { deprecated } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>);</pre></div>
+            
+          
+            
+            <h3 id="platform-detection">Platform detection</h3>
+<p>NoFlo works on both Node.js and the browser. Because some dependencies are different,
+we need a way to detect which we’re on.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.isBrowser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>).isBrowser;</pre></div>
+            
+          
+            
+            <h3 id="component-loader">Component Loader</h3>
+<p>The <a href="../ComponentLoader/">ComponentLoader</a> is responsible for finding and loading
+NoFlo components. Component Loader uses <a href="https://github.com/flowbased/fbp-manifest">fbp-manifest</a>
+to find components and graphs by traversing the NPM dependency tree from a given root
+directory on the file system.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.ComponentLoader = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./ComponentLoader&#x27;</span>).ComponentLoader;</pre></div>
+            
+          
+            
+            <h3 id="component-baseclasses">Component baseclasses</h3>
+<p>These baseclasses can be used for defining NoFlo components.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.Component = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Component&#x27;</span>).Component;</pre></div>
+            
+          
+            
+            <h3 id="noflo-ports">NoFlo ports</h3>
+<p>These classes are used for instantiating ports on NoFlo components.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> ports = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Ports&#x27;</span>);
+
+<span class="hljs-built_in">exports</span>.InPorts = ports.InPorts;
+<span class="hljs-built_in">exports</span>.OutPorts = ports.OutPorts;
+<span class="hljs-built_in">exports</span>.InPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InPort&#x27;</span>);
+<span class="hljs-built_in">exports</span>.OutPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./OutPort&#x27;</span>);</pre></div>
+            
+          
+            
+            <h3 id="noflo-sockets">NoFlo sockets</h3>
+<p>The NoFlo <a href="InternalSocket.html">internalSocket</a> is used for connecting ports of
+different components together in a network.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.internalSocket = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InternalSocket&#x27;</span>);</pre></div>
+            
+          
+            
+            <h3 id="information-packets">Information Packets</h3>
+<p>NoFlo Information Packets are defined as “IP” objects.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);</pre></div>
+            
+          
+            
+            <h2 id="network-instantiation">Network instantiation</h2>
+<p>This function handles instantiation of NoFlo networks from a Graph object. It creates
+the network, and then starts execution by sending the Initial Information Packets.</p>
+<pre><code>noflo.createNetwork(someGraph, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Network is now running!&#x27;</span>);
+});</code></pre>
+<p>It is also possible to instantiate a Network but delay its execution by giving the
+third <code>delay</code> parameter. In this case you will have to handle connecting the graph and
+sending of IIPs manually.</p>
+<pre><code>noflo.createNetwork(someGraph, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
+  <span class="hljs-keyword">if</span> (err) {
+    <span class="hljs-keyword">throw</span> err;
+  }
+  network.connect(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
+    network.start();
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Network is now running!&#x27;</span>);
+  })
+}, <span class="hljs-literal">true</span>);</code></pre>
+<h3 id="network-options">Network options</h3>
+<p>It is possible to pass some options to control the behavior of network creation:</p>
+<ul>
+<li><code>delay</code>: (default: FALSE) Whether the network should be started later. Defaults to
+immediate execution</li>
+<li><code>subscribeGraph</code>: (default: TRUE) Whether the network should monitor the underlying
+graph for changes</li>
+</ul>
+<p>Options can be passed as a second argument before the callback:</p>
+<pre><code>noflo.createNetwork(someGraph, options, callback);</code></pre>
+<p>The options object can also be used for setting ComponentLoader options in this
+network.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.createNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createNetwork</span>(<span class="hljs-params">graph, options, callback</span>) </span>{
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
+    <span class="hljs-keyword">const</span> opts = callback;
+    callback = options;
+    options = opts;
+  }
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;boolean&#x27;</span>) {
+    options = { <span class="hljs-attr">delay</span>: options };
+  }
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options !== <span class="hljs-string">&#x27;object&#x27;</span>) {
+    options = {};
+  }
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options.subscribeGraph === <span class="hljs-string">&#x27;undefined&#x27;</span>) {</pre></div>
+            
+          
+            
+            <p>Default to legacy network for backwards compatibility.</p>
+
+            
+              <div class='highlight'><pre>    options.subscribeGraph = <span class="hljs-literal">true</span>;
+  }
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback !== <span class="hljs-string">&#x27;function&#x27;</span>) {
+    deprecated(<span class="hljs-string">&#x27;Calling noflo.createNetwork without a callback is deprecated&#x27;</span>);
+    callback = <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) { <span class="hljs-keyword">throw</span> err; }
+    };
+  }</pre></div>
+            
+          
+            
+            <p>Choose legacy or modern network based on whether graph
+subscription is needed</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> NetworkType = options.subscribeGraph ? <span class="hljs-built_in">exports</span>.Network : Network;
+  <span class="hljs-keyword">const</span> network = <span class="hljs-keyword">new</span> NetworkType(graph, options);
+
+  <span class="hljs-keyword">const</span> networkReady = <span class="hljs-function">(<span class="hljs-params">net</span>) =&gt;</span> { <span class="hljs-comment">// Send IIPs</span>
+    net.start(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      callback(<span class="hljs-literal">null</span>, net);
+    });
+  };</pre></div>
+            
+          
+            
+            <p>Ensure components are loaded before continuing</p>
+
+            
+              <div class='highlight'><pre>  network.loader.listComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (err) {
+      callback(err);
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>In case of delayed execution we don’t wire it up</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (options.delay) {
+      callback(<span class="hljs-literal">null</span>, network);
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Empty network, no need to connect it up</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (graph.nodes.length === <span class="hljs-number">0</span>) {
+      networkReady(network);
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Wire the network up and start execution</p>
+
+            
+              <div class='highlight'><pre>    network.connect(<span class="hljs-function">(<span class="hljs-params">err2</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err2) {
+        callback(err2);
+        <span class="hljs-keyword">return</span>;
+      }
+      networkReady(network);
+    });
+  });
+  <span class="hljs-keyword">return</span> network;
+};</pre></div>
+            
+          
+            
+            <h3 id="starting-a-network-from-a-file">Starting a network from a file</h3>
+<p>It is also possible to start a NoFlo network by giving it a path to a <code>.json</code> or <code>.fbp</code> network
+definition file.</p>
+<pre><code>noflo.loadFile(<span class="hljs-string">&#x27;somefile.json&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
+  <span class="hljs-keyword">if</span> (err) {
+    <span class="hljs-keyword">throw</span> err;
+  }
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Network is now running!&#x27;</span>);
+})</code></pre>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.loadFile = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadFile</span>(<span class="hljs-params">file, options, callback</span>) </span>{
+  <span class="hljs-keyword">if</span> (!callback) {
+    callback = options;
+    options = <span class="hljs-literal">null</span>;
+  }
+
+  <span class="hljs-keyword">if</span> (callback &amp;&amp; (<span class="hljs-keyword">typeof</span> options !== <span class="hljs-string">&#x27;object&#x27;</span>)) {
+    options = { <span class="hljs-attr">baseDir</span>: options };
+  }
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options !== <span class="hljs-string">&#x27;object&#x27;</span>) {
+    options = {};
+  }
+  <span class="hljs-keyword">if</span> (!options.subscribeGraph) {
+    options.subscribeGraph = <span class="hljs-literal">false</span>;
+  }
+
+  <span class="hljs-built_in">exports</span>.graph.loadFile(file, <span class="hljs-function">(<span class="hljs-params">err, net</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (err) {
+      callback(err);
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (options.baseDir) { net.baseDir = options.baseDir; }
+    <span class="hljs-built_in">exports</span>.createNetwork(net, options, callback);
+  });
+};</pre></div>
+            
+          
+            
+            <h3 id="saving-a-network-definition">Saving a network definition</h3>
+<p>NoFlo graph files can be saved back into the filesystem with this method.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.saveFile = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">saveFile</span>(<span class="hljs-params">graph, file, callback</span>) </span>{
+  graph.save(file, callback);
+};</pre></div>
+            
+          
+            
+            <h2 id="embedding-noflo-in-existing-javascript-code">Embedding NoFlo in existing JavaScript code</h2>
+<p>The <code>asCallback</code> helper provides an interface to wrap NoFlo components
+or graphs into existing JavaScript code.</p>
+<pre><code><span class="hljs-comment">// Produce an asynchronous function wrapping a NoFlo graph</span>
+<span class="hljs-keyword">var</span> wrapped = noflo.asCallback(<span class="hljs-string">&#x27;myproject/MyGraph&#x27;</span>);
+
+<span class="hljs-comment">// Call the function, providing input data and a callback for output data</span>
+wrapped({
+  <span class="hljs-attr">in</span>: <span class="hljs-string">&#x27;data&#x27;</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, results</span>) </span>{
+  <span class="hljs-comment">// Do something with results</span>
+});</code></pre>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.asCallback = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./AsCallback&#x27;</span>).asCallback;</pre></div>
+            
+          
+            
+            <h2 id="generating-components-from-javascript-functions">Generating components from JavaScript functions</h2>
+<p>The <code>asComponent</code> helper makes it easy to expose a JavaScript function as a
+NoFlo component. All input arguments become input ports, and the function’s
+result will be sent to either <code>out</code> or <code>error</code> port.</p>
+<pre><code><span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> noflo.asComponent(<span class="hljs-built_in">Math</span>.random, {
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Generate a random number&#x27;</span>,
+  });
+};</code></pre>
+
+            
+              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.asComponent = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./AsComponent&#x27;</span>).asComponent;</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.coffee">NoFlo.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

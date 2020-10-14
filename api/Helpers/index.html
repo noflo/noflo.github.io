@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Helpers API | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Helpers.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a href="/api/AsCallback/">
+                    AsCallback
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Helpers/">
+                    Helpers
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>Helpers API</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
+NoFlo may be freely distributed under the MIT license
+</code></pre>
+            
+              <div class='highlight'><pre><span class="hljs-keyword">var</span> IP, InternalSocket, checkDeprecation, checkWirePatternPreconditions, checkWirePatternPreconditionsInput, checkWirePatternPreconditionsParams, debug, getGroupContext, getInputData, getOutputProxy, handleInputCollation, platform, populateParams, processApiWirePattern, reorderBuffer, setupBracketForwarding, setupControlPorts, setupErrorHandler, setupSendDefaults, utils,
+  hasProp = {}.hasOwnProperty;
+
+InternalSocket = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./InternalSocket'</span>);
+
+IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./IP'</span>);
+
+platform = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Platform'</span>);
+
+utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./Utils'</span>);
+
+debug = <span class="hljs-built_in">require</span>(<span class="hljs-string">'debug'</span>)(<span class="hljs-string">'noflo:helpers'</span>);</pre></div>
+            
+          
+            
+            <h2 id="noflo-wirepattern-helper">NoFlo WirePattern helper</h2>
+
+            
+          
+            
+            <p><strong>Note:</strong> WirePattern is no longer the recommended way to build
+NoFlo components. Please use <a href="https://noflojs.org/documentation/components/">Process API</a> instead.</p>
+
+            
+          
+            
+            <p>WirePattern makes your component collect data from several inports
+and activates a handler <code>proc</code> only when a tuple from all of these
+ports is complete. The signature of handler function is:</p>
+<pre><code>proc = (combinedInputData, inputGroups, outputPorts, asyncCallback) -&gt;
+</code></pre>
+            
+          
+            
+            <p>With <code>config.forwardGroups = true</code> it would forward group IPs from
+inputs to the output sending them along with the data. This option also
+accepts string or array values, if you want to forward groups from specific
+port(s) only. By default group forwarding is <code>false</code>.</p>
+
+            
+          
+            
+            <p>substream cannot be interrupted by other packets, which is important when
+doing asynchronous processing. In fact, <code>sendStreams</code> is enabled by default
+on all outports when <code>config.async</code> is <code>true</code>.</p>
+
+            
+          
+            
+            <p>WirePattern supports async <code>proc</code> handlers. Set <code>config.async = true</code> and
+make sure that <code>proc</code> accepts callback as 4th parameter and calls it when
+async operation completes or fails.</p>
+
+            
+              <div class='highlight'><pre>exports.WirePattern = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, config, proc</span>) </span>{
+  <span class="hljs-keyword">var</span> inPorts, outPorts, ref;</pre></div>
+            
+          
+            
+            <p>In ports</p>
+
+            
+              <div class='highlight'><pre>  inPorts = <span class="hljs-string">'in'</span> <span class="hljs-keyword">in</span> config ? config.in : <span class="hljs-string">'in'</span>;
+  <span class="hljs-keyword">if</span> (!utils.isArray(inPorts)) {
+    inPorts = [inPorts];
+  }</pre></div>
+            
+          
+            
+            <p>Out ports</p>
+
+            
+              <div class='highlight'><pre>  outPorts = <span class="hljs-string">'out'</span> <span class="hljs-keyword">in</span> config ? config.out : <span class="hljs-string">'out'</span>;
+  <span class="hljs-keyword">if</span> (!utils.isArray(outPorts)) {
+    outPorts = [outPorts];
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'error'</span> <span class="hljs-keyword">in</span> config)) {</pre></div>
+            
+          
+            
+            <p>Error port</p>
+
+            
+              <div class='highlight'><pre>    config.error = <span class="hljs-string">'error'</span>;
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'async'</span> <span class="hljs-keyword">in</span> config)) {</pre></div>
+            
+          
+            
+            <p>For async process</p>
+
+            
+              <div class='highlight'><pre>    config.async = <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'ordered'</span> <span class="hljs-keyword">in</span> config)) {</pre></div>
+            
+          
+            
+            <p>Keep correct output order for async mode</p>
+
+            
+              <div class='highlight'><pre>    config.ordered = <span class="hljs-literal">true</span>;
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'group'</span> <span class="hljs-keyword">in</span> config)) {</pre></div>
+            
+          
+            
+            <p>Group requests by group ID</p>
+
+            
+              <div class='highlight'><pre>    config.group = <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'field'</span> <span class="hljs-keyword">in</span> config)) {</pre></div>
+            
+          
+            
+            <p>Group requests by object field</p>
+
+            
+              <div class='highlight'><pre>    config.field = <span class="hljs-literal">null</span>;
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'forwardGroups'</span> <span class="hljs-keyword">in</span> config)) {</pre></div>
+            
+          
+            
+            <p>Forward group events from specific inputs to the output:</p>
+<ul>
+<li>false: don’t forward anything</li>
+<li>true: forward unique groups of all inputs</li>
+<li>string: forward groups of a specific port only</li>
+<li>array: forward unique groups of inports in the list</li>
+</ul>
+
+            
+              <div class='highlight'><pre>    config.forwardGroups = <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-keyword">if</span> (config.forwardGroups) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> config.forwardGroups === <span class="hljs-string">'string'</span>) {</pre></div>
+            
+          
+            
+            <p>Collect groups from one and only port?</p>
+
+            
+              <div class='highlight'><pre>      config.forwardGroups = [config.forwardGroups];
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> config.forwardGroups === <span class="hljs-string">'boolean'</span>) {</pre></div>
+            
+          
+            
+            <p>Forward groups from each port?</p>
+
+            
+              <div class='highlight'><pre>      config.forwardGroups = inPorts;
+    }
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'receiveStreams'</span> <span class="hljs-keyword">in</span> config)) {</pre></div>
+            
+          
+            
+            <p>Receive streams feature</p>
+
+            
+              <div class='highlight'><pre>    config.receiveStreams = <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-keyword">if</span> (config.receiveStreams) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'WirePattern receiveStreams is deprecated'</span>);
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'sendStreams'</span> <span class="hljs-keyword">in</span> config)) {</pre></div>
+            
+          
+            
+            <p>if typeof config.receiveStreams is ‘string’
+  config.receiveStreams = [ config.receiveStreams ]
+Send streams feature</p>
+
+            
+              <div class='highlight'><pre>    config.sendStreams = <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-keyword">if</span> (config.sendStreams) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'WirePattern sendStreams is deprecated'</span>);
+  }
+  <span class="hljs-keyword">if</span> (config.async) {</pre></div>
+            
+          
+            
+            <p>if typeof config.sendStreams is ‘string’
+  config.sendStreams = [ config.sendStreams ]</p>
+
+            
+              <div class='highlight'><pre>    config.sendStreams = outPorts;
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'params'</span> <span class="hljs-keyword">in</span> config)) {</pre></div>
+            
+          
+            
+            <p>Parameter ports</p>
+
+            
+              <div class='highlight'><pre>    config.params = [];
+  }
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> config.params === <span class="hljs-string">'string'</span>) {
+    config.params = [config.params];
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'name'</span> <span class="hljs-keyword">in</span> config)) {</pre></div>
+            
+          
+            
+            <p>Node name</p>
+
+            
+              <div class='highlight'><pre>    config.name = <span class="hljs-string">''</span>;
+  }
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'dropInput'</span> <span class="hljs-keyword">in</span> config)) {</pre></div>
+            
+          
+            
+            <p>Drop premature input before all params are received</p>
+
+            
+              <div class='highlight'><pre>    config.dropInput = <span class="hljs-literal">false</span>;
+  }</pre></div>
+            
+          
+            
+            <p>Firing policy for addressable ports</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">'arrayPolicy'</span> <span class="hljs-keyword">in</span> config)) {
+    config.arrayPolicy = {
+      <span class="hljs-attr">in</span>: <span class="hljs-string">'any'</span>,
+      <span class="hljs-attr">params</span>: <span class="hljs-string">'all'</span>
+    };
+  }
+  config.inPorts = inPorts;
+  config.outPorts = outPorts;</pre></div>
+            
+          
+            
+            <p>Warn user of deprecated features</p>
+
+            
+              <div class='highlight'><pre>  checkDeprecation(config, proc);</pre></div>
+            
+          
+            
+            <p>Allow users to selectively fall back to legacy WirePattern implementation</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (config.legacy || (<span class="hljs-keyword">typeof</span> process !== <span class="hljs-string">"undefined"</span> &amp;&amp; process !== <span class="hljs-literal">null</span> ? (ref = process.env) != <span class="hljs-literal">null</span> ? ref.NOFLO_WIREPATTERN_LEGACY : <span class="hljs-keyword">void</span> <span class="hljs-number">0</span> : <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>)) {
+    platform.deprecated(<span class="hljs-string">'noflo.helpers.WirePattern legacy mode is deprecated'</span>);
+  }
+  <span class="hljs-keyword">return</span> processApiWirePattern(component, config, proc);
+};</pre></div>
+            
+          
+            
+            <p>Takes WirePattern configuration of a component and sets up
+Process API to handle it.</p>
+
+            
+              <div class='highlight'><pre>processApiWirePattern = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, config, func</span>) </span>{</pre></div>
+            
+          
+            
+            <p>Make param ports control ports</p>
+
+            
+              <div class='highlight'><pre>  setupControlPorts(component, config);</pre></div>
+            
+          
+            
+            <p>Set up sendDefaults function</p>
+
+            
+              <div class='highlight'><pre>  setupSendDefaults(component);</pre></div>
+            
+          
+            
+            <p>Set up bracket forwarding rules</p>
+
+            
+              <div class='highlight'><pre>  setupBracketForwarding(component, config);
+  component.ordered = config.ordered;</pre></div>
+            
+          
+            
+            <p>Create the processing function</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">return</span> component.process(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">input, output, context</span>) </span>{
+    <span class="hljs-keyword">var</span> data, errorHandler, groups, outProxy, postpone, resume;</pre></div>
+            
+          
+            
+            <p>Abort unless WirePattern-style preconditions don’t match</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!checkWirePatternPreconditions(config, input, output)) {
+      <span class="hljs-keyword">return</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Populate component.params from control ports</p>
+
+            
+              <div class='highlight'><pre>    component.params = populateParams(config, input);</pre></div>
+            
+          
+            
+            <p>Read input data</p>
+
+            
+              <div class='highlight'><pre>    data = getInputData(config, input);</pre></div>
+            
+          
+            
+            <p>Read bracket context of first inport</p>
+
+            
+              <div class='highlight'><pre>    groups = getGroupContext(component, config.inPorts[<span class="hljs-number">0</span>], input);</pre></div>
+            
+          
+            
+            <p>Produce proxy object wrapping output in legacy-style port API</p>
+
+            
+              <div class='highlight'><pre>    outProxy = getOutputProxy(config.outPorts, output);
+    debug(<span class="hljs-string">"WirePattern Process API call with"</span>, data, groups, component.params, context.scope);
+    postpone = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'noflo.helpers.WirePattern postpone is deprecated'</span>);
+    };
+    resume = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'noflo.helpers.WirePattern resume is deprecated'</span>);
+    };</pre></div>
+            
+          
+            
+            <p>Async WirePattern will call the output.done callback itself</p>
+
+            
+              <div class='highlight'><pre>    errorHandler = setupErrorHandler(component, config, output);
+    <span class="hljs-keyword">return</span> func.call(component, data, groups, outProxy, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+      errorHandler();
+      <span class="hljs-keyword">return</span> output.done(err);
+    }, postpone, resume, input.scope);
+  });
+};</pre></div>
+            
+          
+            
+            <p>Provide deprecation warnings on certain more esoteric WirePattern features</p>
+
+            
+              <div class='highlight'><pre>checkDeprecation = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config, func</span>) </span>{</pre></div>
+            
+          
+            
+            <p>First check the conditions that force us to fall back on legacy WirePattern</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (config.group) {
+    platform.deprecated(<span class="hljs-string">'noflo.helpers.WirePattern group option is deprecated. Please port to Process API'</span>);
+  }
+  <span class="hljs-keyword">if</span> (config.field) {
+    platform.deprecated(<span class="hljs-string">'noflo.helpers.WirePattern field option is deprecated. Please port to Process API'</span>);
+  }</pre></div>
+            
+          
+            
+            <p>Then add deprecation warnings for other unwanted behaviors</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (func.length &gt; <span class="hljs-number">4</span>) {
+    platform.deprecated(<span class="hljs-string">'noflo.helpers.WirePattern postpone and resume are deprecated. Please port to Process API'</span>);
+  }
+  <span class="hljs-keyword">if</span> (!config.async) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'noflo.helpers.WirePattern synchronous is deprecated. Please use async: true'</span>);
+  }
+  <span class="hljs-keyword">if</span> (func.length &lt; <span class="hljs-number">4</span>) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'noflo.helpers.WirePattern callback doesn\'t use callback argument'</span>);
+  }
+  <span class="hljs-keyword">if</span> (config.error !== <span class="hljs-string">'error'</span>) {
+    platform.deprecated(<span class="hljs-string">'noflo.helpers.WirePattern custom error port name is deprecated. Please switch to "error" or port to WirePattern'</span>);
+  }
+};</pre></div>
+            
+          
+            
+            <p>Updates component port definitions to control prots for WirePattern
+-style params array</p>
+
+            
+              <div class='highlight'><pre>setupControlPorts = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, config</span>) </span>{
+  <span class="hljs-keyword">var</span> i, len, param, ref, results;
+  ref = config.params;
+  results = [];
+  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = ref.length; i &lt; len; i++) {
+    param = ref[i];
+    results.push(component.inPorts[param].options.control = <span class="hljs-literal">true</span>);
+  }
+  <span class="hljs-keyword">return</span> results;
+};</pre></div>
+            
+          
+            
+            <p>Sets up Process API bracket forwarding rules for WirePattern configuration</p>
+
+            
+              <div class='highlight'><pre>setupBracketForwarding = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, config</span>) </span>{
+  <span class="hljs-keyword">var</span> i, inPort, inPorts, j, len, len1, outPort, ref;</pre></div>
+            
+          
+            
+            <p>Start with empty bracket forwarding config</p>
+
+            
+              <div class='highlight'><pre>  component.forwardBrackets = {};
+  <span class="hljs-keyword">if</span> (!config.forwardGroups) {
+    <span class="hljs-keyword">return</span>;
+  }</pre></div>
+            
+          
+            
+            <p>By default we forward from all inports</p>
+
+            
+              <div class='highlight'><pre>  inPorts = config.inPorts;
+  <span class="hljs-keyword">if</span> (utils.isArray(config.forwardGroups)) {</pre></div>
+            
+          
+            
+            <p>Selective forwarding enabled</p>
+
+            
+              <div class='highlight'><pre>    inPorts = config.forwardGroups;
+  }
+  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = inPorts.length; i &lt; len; i++) {
+    inPort = inPorts[i];
+    component.forwardBrackets[inPort] = [];
+    ref = config.outPorts;</pre></div>
+            
+          
+            
+            <p>Forward to all declared outports</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>, len1 = ref.length; j &lt; len1; j++) {
+      outPort = ref[j];
+      component.forwardBrackets[inPort].push(outPort);
+    }</pre></div>
+            
+          
+            
+            <p>If component has an error outport, forward there too</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (component.outPorts.error) {
+      component.forwardBrackets[inPort].push(<span class="hljs-string">'error'</span>);
+    }
+  }
+};
+
+setupErrorHandler = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, config, output</span>) </span>{
+  <span class="hljs-keyword">var</span> errorHandler, errors, failHandler, sendErrors;
+  errors = [];
+  errorHandler = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e, groups = []</span>) </span>{
+    platform.deprecated(<span class="hljs-string">'noflo.helpers.WirePattern error method is deprecated. Please send error to callback instead'</span>);
+    errors.push({
+      <span class="hljs-attr">err</span>: e,
+      <span class="hljs-attr">groups</span>: groups
+    });
+    <span class="hljs-keyword">return</span> component.hasErrors = <span class="hljs-literal">true</span>;
+  };
+  failHandler = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e = null, groups = []</span>) </span>{
+    platform.deprecated(<span class="hljs-string">'noflo.helpers.WirePattern fail method is deprecated. Please send error to callback instead'</span>);
+    <span class="hljs-keyword">if</span> (e) {
+      errorHandler(e, groups);
+    }
+    sendErrors();
+    <span class="hljs-keyword">return</span> output.done();
+  };
+  sendErrors = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">if</span> (!errors.length) {
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (config.name) {
+      output.sendIP(<span class="hljs-string">'error'</span>, <span class="hljs-keyword">new</span> IP(<span class="hljs-string">'openBracket'</span>, config.name));
+    }
+    errors.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{
+      <span class="hljs-keyword">var</span> grp, i, j, len, len1, ref, ref1, results;
+      ref = e.groups;
+      <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = ref.length; i &lt; len; i++) {
+        grp = ref[i];
+        output.sendIP(<span class="hljs-string">'error'</span>, <span class="hljs-keyword">new</span> IP(<span class="hljs-string">'openBracket'</span>, grp));
+      }
+      output.sendIP(<span class="hljs-string">'error'</span>, <span class="hljs-keyword">new</span> IP(<span class="hljs-string">'data'</span>, e.err));
+      ref1 = e.groups;
+      results = [];
+      <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>, len1 = ref1.length; j &lt; len1; j++) {
+        grp = ref1[j];
+        results.push(output.sendIP(<span class="hljs-string">'error'</span>, <span class="hljs-keyword">new</span> IP(<span class="hljs-string">'closeBracket'</span>, grp)));
+      }
+      <span class="hljs-keyword">return</span> results;
+    });
+    <span class="hljs-keyword">if</span> (config.name) {
+      output.sendIP(<span class="hljs-string">'error'</span>, <span class="hljs-keyword">new</span> IP(<span class="hljs-string">'closeBracket'</span>, config.name));
+    }
+    component.hasErrors = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">return</span> errors = [];
+  };
+  component.hasErrors = <span class="hljs-literal">false</span>;
+  component.error = errorHandler;
+  component.fail = failHandler;
+  <span class="hljs-keyword">return</span> sendErrors;
+};
+
+setupSendDefaults = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component</span>) </span>{
+  <span class="hljs-keyword">var</span> portsWithDefaults;
+  portsWithDefaults = <span class="hljs-built_in">Object</span>.keys(component.inPorts.ports).filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">p</span>) </span>{
+    <span class="hljs-keyword">if</span> (!component.inPorts[p].options.control) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">if</span> (!component.inPorts[p].hasDefault()) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  });
+  <span class="hljs-keyword">return</span> component.sendDefaults = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    platform.deprecated(<span class="hljs-string">'noflo.helpers.WirePattern sendDefaults method is deprecated. Please start with a Network'</span>);
+    <span class="hljs-keyword">return</span> portsWithDefaults.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">port</span>) </span>{
+      <span class="hljs-keyword">var</span> tempSocket;
+      tempSocket = InternalSocket.createSocket();
+      component.inPorts[port].attach(tempSocket);
+      tempSocket.send();
+      tempSocket.disconnect();
+      <span class="hljs-keyword">return</span> component.inPorts[port].detach(tempSocket);
+    });
+  };
+};
+
+populateParams = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config, input</span>) </span>{
+  <span class="hljs-keyword">var</span> i, idx, j, len, len1, paramPort, params, ref, ref1;
+  <span class="hljs-keyword">if</span> (!config.params.length) {
+    <span class="hljs-keyword">return</span> {};
+  }
+  params = {};
+  ref = config.params;
+  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = ref.length; i &lt; len; i++) {
+    paramPort = ref[i];
+    <span class="hljs-keyword">if</span> (input.ports[paramPort].isAddressable()) {
+      params[paramPort] = {};
+      ref1 = input.attached(paramPort);
+      <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>, len1 = ref1.length; j &lt; len1; j++) {
+        idx = ref1[j];
+        <span class="hljs-keyword">if</span> (!input.hasData([paramPort, idx])) {
+          <span class="hljs-keyword">continue</span>;
+        }
+        params[paramPort][idx] = input.getData([paramPort, idx]);
+      }
+      <span class="hljs-keyword">continue</span>;
+    }
+    params[paramPort] = input.getData(paramPort);
+  }
+  <span class="hljs-keyword">return</span> params;
+};
+
+reorderBuffer = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">buffer, matcher</span>) </span>{
+  <span class="hljs-keyword">var</span> brackets, i, idx, ip, j, len, len1, results, substream, substreamBrackets, substreamIdx;</pre></div>
+            
+          
+            
+            <p>Move matching IP packet to be first in buffer</p>
+
+            
+          
+            
+            <p>Note: the collation mechanism as shown below is not a
+very nice way to deal with inputs as it messes with
+input buffer order. Much better to handle collation
+in a specialized component or to separate flows by
+scope.</p>
+
+            
+          
+            
+            <p>The trick here is to order the input in a way that
+still allows bracket forwarding to work. So if we
+want to first process packet B in stream like:</p>
+
+            
+          
+            
+            <pre><code>&lt; <span class="hljs-number">1</span>
+&lt; <span class="hljs-number">2</span>
+A
+&gt; <span class="hljs-number">2</span>
+&lt; <span class="hljs-number">3</span>
+B
+&gt; <span class="hljs-number">3</span>
+&gt; <span class="hljs-number">1</span>
+</code></pre>
+            
+          
+            
+            <p>We need to change the stream to be like:</p>
+
+            
+          
+            
+            <pre><code>&lt; <span class="hljs-number">1</span>
+&lt; <span class="hljs-number">3</span>
+B
+&gt; <span class="hljs-number">3</span>
+&lt; <span class="hljs-number">2</span>
+A
+&gt; <span class="hljs-number">2</span>
+&gt; <span class="hljs-number">1</span>
+</code></pre>
+            
+              <div class='highlight'><pre>  substream = <span class="hljs-literal">null</span>;
+  brackets = [];
+  substreamBrackets = [];
+  <span class="hljs-keyword">for</span> (idx = i = <span class="hljs-number">0</span>, len = buffer.length; i &lt; len; idx = ++i) {
+    ip = buffer[idx];
+    <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'openBracket'</span>) {
+      brackets.push(ip.data);
+      substreamBrackets.push(ip);
+      <span class="hljs-keyword">continue</span>;
+    }
+    <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'closeBracket'</span>) {
+      brackets.pop();
+      <span class="hljs-keyword">if</span> (substream) {
+        substream.push(ip);
+      }
+      <span class="hljs-keyword">if</span> (substreamBrackets.length) {
+        substreamBrackets.pop();
+      }
+      <span class="hljs-keyword">if</span> (substream &amp;&amp; !substreamBrackets.length) {
+        <span class="hljs-keyword">break</span>;
+      }
+      <span class="hljs-keyword">continue</span>;
+    }
+    <span class="hljs-keyword">if</span> (!matcher(ip, brackets)) {</pre></div>
+            
+          
+            
+            <p>Reset substream bracket tracking when we hit data</p>
+
+            
+              <div class='highlight'><pre>      substreamBrackets = [];
+      <span class="hljs-keyword">continue</span>;
+    }</pre></div>
+            
+          
+            
+            <p>Match found, start tracking the actual substream</p>
+
+            
+              <div class='highlight'><pre>    substream = substreamBrackets.slice(<span class="hljs-number">0</span>);
+    substream.push(ip);
+  }</pre></div>
+            
+          
+            
+            <p>See where in the buffer the matching substream begins</p>
+
+            
+              <div class='highlight'><pre>  substreamIdx = buffer.indexOf(substream[<span class="hljs-number">0</span>]);</pre></div>
+            
+          
+            
+            <p>No need to reorder if matching packet is already first</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (substreamIdx === <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span>;
+  }</pre></div>
+            
+          
+            
+            <p>Remove substream from its natural position</p>
+
+            
+              <div class='highlight'><pre>  buffer.splice(substreamIdx, substream.length);</pre></div>
+            
+          
+            
+            <p>Place the substream in the beginning</p>
+
+            
+              <div class='highlight'><pre>  substream.reverse();
+  results = [];
+  <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>, len1 = substream.length; j &lt; len1; j++) {
+    ip = substream[j];
+    results.push(buffer.unshift(ip));
+  }
+  <span class="hljs-keyword">return</span> results;
+};
+
+handleInputCollation = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, config, input, port, idx</span>) </span>{
+  <span class="hljs-keyword">var</span> buf;
+  <span class="hljs-keyword">if</span> (!config.group &amp;&amp; !config.field) {
+    <span class="hljs-keyword">return</span>;
+  }
+  <span class="hljs-keyword">if</span> (config.group) {
+    buf = input.ports[port].getBuffer(input.scope, idx);
+    reorderBuffer(buf, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ip, brackets</span>) </span>{
+      <span class="hljs-keyword">var</span> grp, i, len, ref;
+      ref = input.collatedBy.brackets;
+      <span class="hljs-keyword">for</span> (idx = i = <span class="hljs-number">0</span>, len = ref.length; i &lt; len; idx = ++i) {
+        grp = ref[idx];
+        <span class="hljs-keyword">if</span> (brackets[idx] !== grp) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    });
+  }
+  <span class="hljs-keyword">if</span> (config.field) {
+    data[config.field] = input.collatedBy.field;
+    buf = input.ports[port].getBuffer(input.scope, idx);
+    <span class="hljs-keyword">return</span> reorderBuffer(buf, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ip</span>) </span>{
+      <span class="hljs-keyword">return</span> ip.data[config.field] === data[config.field];
+    });
+  }
+};
+
+getInputData = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config, input</span>) </span>{
+  <span class="hljs-keyword">var</span> data, i, idx, j, len, len1, port, ref, ref1;
+  data = {};
+  ref = config.inPorts;
+  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = ref.length; i &lt; len; i++) {
+    port = ref[i];
+    <span class="hljs-keyword">if</span> (input.ports[port].isAddressable()) {
+      data[port] = {};
+      ref1 = input.attached(port);
+      <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>, len1 = ref1.length; j &lt; len1; j++) {
+        idx = ref1[j];
+        <span class="hljs-keyword">if</span> (!input.hasData([port, idx])) {
+          <span class="hljs-keyword">continue</span>;
+        }
+        handleInputCollation(data, config, input, port, idx);
+        data[port][idx] = input.getData([port, idx]);
+      }
+      <span class="hljs-keyword">continue</span>;
+    }
+    <span class="hljs-keyword">if</span> (!input.hasData(port)) {
+      <span class="hljs-keyword">continue</span>;
+    }
+    handleInputCollation(data, config, input, port);
+    data[port] = input.getData(port);
+  }
+  <span class="hljs-keyword">if</span> (config.inPorts.length === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> data[config.inPorts[<span class="hljs-number">0</span>]];
+  }
+  <span class="hljs-keyword">return</span> data;
+};
+
+getGroupContext = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">component, port, input</span>) </span>{
+  <span class="hljs-keyword">var</span> ref, ref1;
+  <span class="hljs-keyword">if</span> (((ref = input.result.__bracketContext) != <span class="hljs-literal">null</span> ? ref[port] : <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) == <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> [];
+  }
+  <span class="hljs-keyword">if</span> ((ref1 = input.collatedBy) != <span class="hljs-literal">null</span> ? ref1.brackets : <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> input.collatedBy.brackets;
+  }
+  <span class="hljs-keyword">return</span> input.result.__bracketContext[port].filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">c</span>) </span>{
+    <span class="hljs-keyword">return</span> c.source === port;
+  }).map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">c</span>) </span>{
+    <span class="hljs-keyword">return</span> c.ip.data;
+  });
+};
+
+getOutputProxy = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ports, output</span>) </span>{
+  <span class="hljs-keyword">var</span> outProxy;
+  outProxy = {};
+  ports.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">port</span>) </span>{
+    <span class="hljs-keyword">return</span> outProxy[port] = {
+      <span class="hljs-attr">connect</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{},
+      <span class="hljs-attr">beginGroup</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">group, idx</span>) </span>{
+        <span class="hljs-keyword">var</span> ip;
+        ip = <span class="hljs-keyword">new</span> IP(<span class="hljs-string">'openBracket'</span>, group);
+        ip.index = idx;
+        <span class="hljs-keyword">return</span> output.sendIP(port, ip);
+      },
+      <span class="hljs-attr">send</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, idx</span>) </span>{
+        <span class="hljs-keyword">var</span> ip;
+        ip = <span class="hljs-keyword">new</span> IP(<span class="hljs-string">'data'</span>, data);
+        ip.index = idx;
+        <span class="hljs-keyword">return</span> output.sendIP(port, ip);
+      },
+      <span class="hljs-attr">endGroup</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">group, idx</span>) </span>{
+        <span class="hljs-keyword">var</span> ip;
+        ip = <span class="hljs-keyword">new</span> IP(<span class="hljs-string">'closeBracket'</span>, group);
+        ip.index = idx;
+        <span class="hljs-keyword">return</span> output.sendIP(port, ip);
+      },
+      <span class="hljs-attr">disconnect</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{}
+    };
+  });
+  <span class="hljs-keyword">if</span> (ports.length === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> outProxy[ports[<span class="hljs-number">0</span>]];
+  }
+  <span class="hljs-keyword">return</span> outProxy;
+};
+
+checkWirePatternPreconditions = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config, input, output</span>) </span>{
+  <span class="hljs-keyword">var</span> attached, i, idx, inputsOk, j, len, len1, packetsDropped, paramsOk, port, ref;</pre></div>
+            
+          
+            
+            <p>First check for required params</p>
+
+            
+              <div class='highlight'><pre>  paramsOk = checkWirePatternPreconditionsParams(config, input);</pre></div>
+            
+          
+            
+            <p>Then check actual input ports</p>
+
+            
+              <div class='highlight'><pre>  inputsOk = checkWirePatternPreconditionsInput(config, input);</pre></div>
+            
+          
+            
+            <p>If input port has data but param requirements are not met, and we’re in dropInput
+mode, read the data and call done</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (config.dropInput &amp;&amp; !paramsOk) {</pre></div>
+            
+          
+            
+            <p>Drop all received input packets since params are not available</p>
+
+            
+              <div class='highlight'><pre>    packetsDropped = <span class="hljs-literal">false</span>;
+    ref = config.inPorts;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = ref.length; i &lt; len; i++) {
+      port = ref[i];
+      <span class="hljs-keyword">if</span> (input.ports[port].isAddressable()) {
+        attached = input.attached(port);
+        <span class="hljs-keyword">if</span> (!attached.length) {
+          <span class="hljs-keyword">continue</span>;
+        }
+        <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>, len1 = attached.length; j &lt; len1; j++) {
+          idx = attached[j];
+          <span class="hljs-keyword">while</span> (input.has([port, idx])) {
+            packetsDropped = <span class="hljs-literal">true</span>;
+            input.get([port, idx]).drop();
+          }
+        }
+        <span class="hljs-keyword">continue</span>;
+      }
+      <span class="hljs-keyword">while</span> (input.has(port)) {
+        packetsDropped = <span class="hljs-literal">true</span>;
+        input.get(port).drop();
+      }
+    }
+    <span class="hljs-keyword">if</span> (packetsDropped) {</pre></div>
+            
+          
+            
+            <p>If we ended up dropping inputs because of missing params, we need to
+deactivate here</p>
+
+            
+              <div class='highlight'><pre>      output.done();
+    }
+  }</pre></div>
+            
+          
+            
+            <p>Pass precondition check only if both params and inputs are OK</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">return</span> inputsOk &amp;&amp; paramsOk;
+};
+
+checkWirePatternPreconditionsParams = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config, input</span>) </span>{
+  <span class="hljs-keyword">var</span> attached, i, len, param, ref, withData;
+  ref = config.params;
+  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = ref.length; i &lt; len; i++) {
+    param = ref[i];
+    <span class="hljs-keyword">if</span> (!input.ports[param].isRequired()) {
+      <span class="hljs-keyword">continue</span>;
+    }
+    <span class="hljs-keyword">if</span> (input.ports[param].isAddressable()) {
+      attached = input.attached(param);
+      <span class="hljs-keyword">if</span> (!attached.length) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }
+      withData = attached.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">idx</span>) </span>{
+        <span class="hljs-keyword">return</span> input.hasData([param, idx]);
+      });
+      <span class="hljs-keyword">if</span> (config.arrayPolicy.params === <span class="hljs-string">'all'</span>) {
+        <span class="hljs-keyword">if</span> (withData.length !== attached.length) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">continue</span>;
+      }
+      <span class="hljs-keyword">if</span> (!withData.length) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }
+      <span class="hljs-keyword">continue</span>;
+    }
+    <span class="hljs-keyword">if</span> (!input.hasData(param)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+};
+
+checkWirePatternPreconditionsInput = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">config, input</span>) </span>{
+  <span class="hljs-keyword">var</span> attached, bracketsAtPorts, checkBrackets, checkPacket, checkPort, i, len, port, ref, withData;
+  <span class="hljs-keyword">if</span> (config.group) {
+    bracketsAtPorts = {};
+    input.collatedBy = {
+      <span class="hljs-attr">brackets</span>: [],
+      <span class="hljs-attr">ready</span>: <span class="hljs-literal">false</span>
+    };
+    checkBrackets = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">left, right</span>) </span>{
+      <span class="hljs-keyword">var</span> bracket, i, idx, len;
+      <span class="hljs-keyword">for</span> (idx = i = <span class="hljs-number">0</span>, len = left.length; i &lt; len; idx = ++i) {
+        bracket = left[idx];
+        <span class="hljs-keyword">if</span> (right[idx] !== bracket) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    };
+    checkPacket = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ip, brackets</span>) </span>{
+      <span class="hljs-keyword">var</span> bracketId, bracketsToCheck;</pre></div>
+            
+          
+            
+            <p>With data packets we validate bracket matching</p>
+
+            
+              <div class='highlight'><pre>      bracketsToCheck = brackets.slice(<span class="hljs-number">0</span>);
+      <span class="hljs-keyword">if</span> (config.group <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">RegExp</span>) {</pre></div>
+            
+          
+            
+            <p>Basic regexp validation for the brackets</p>
+
+            
+              <div class='highlight'><pre>        bracketsToCheck = bracketsToCheck.slice(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+        <span class="hljs-keyword">if</span> (!bracketsToCheck.length) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">if</span> (!config.group.test(bracketsToCheck[<span class="hljs-number">0</span>])) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+      }
+      <span class="hljs-keyword">if</span> (input.collatedBy.ready) {</pre></div>
+            
+          
+            
+            <p>We already know what brackets we’re looking for, match</p>
+
+            
+              <div class='highlight'><pre>        <span class="hljs-keyword">return</span> checkBrackets(input.collatedBy.brackets, bracketsToCheck);
+      }
+      bracketId = bracketsToCheck.join(<span class="hljs-string">':'</span>);
+      <span class="hljs-keyword">if</span> (!bracketsAtPorts[bracketId]) {
+        bracketsAtPorts[bracketId] = [];
+      }
+      <span class="hljs-keyword">if</span> (bracketsAtPorts[bracketId].indexOf(port) === <span class="hljs-number">-1</span>) {</pre></div>
+            
+          
+            
+            <p>Register that this port had these brackets</p>
+
+            
+              <div class='highlight'><pre>        bracketsAtPorts[bracketId].push(port);
+      }
+      <span class="hljs-keyword">if</span> (config.inPorts.indexOf(port) !== config.inPorts.length - <span class="hljs-number">1</span>) {</pre></div>
+            
+          
+            
+            <p>To prevent deadlocks we see all bracket sets, and validate if at least
+one of them matches. This means we return true until the last inport
+where we actually check.</p>
+
+            
+              <div class='highlight'><pre>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+      <span class="hljs-keyword">if</span> (bracketsAtPorts[bracketId].length !== config.inPorts.length) {</pre></div>
+            
+          
+            
+            <p>Brackets that are not in every port are invalid</p>
+
+            
+              <div class='highlight'><pre>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }
+      <span class="hljs-keyword">if</span> (input.collatedBy.ready) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }
+      input.collatedBy.ready = <span class="hljs-literal">true</span>;
+      input.collatedBy.brackets = bracketsToCheck;
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    };
+  }
+  <span class="hljs-keyword">if</span> (config.field) {
+    input.collatedBy = {
+      <span class="hljs-attr">field</span>: <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>,
+      <span class="hljs-attr">ready</span>: <span class="hljs-literal">false</span>
+    };
+  }
+  checkPort = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">port</span>) </span>{
+    <span class="hljs-keyword">var</span> buf, dataBrackets, hasData, hasMatching, i, ip, len, portBrackets;
+    <span class="hljs-keyword">if</span> (!config.group &amp;&amp; !config.field) {</pre></div>
+            
+          
+            
+            <p>Without collation rules any data packet is OK</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">return</span> input.hasData(port);
+    }</pre></div>
+            
+          
+            
+            <p>With collation rules set we need can only work when we have full
+streams</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (config.group) {
+      portBrackets = [];
+      dataBrackets = [];
+      hasMatching = <span class="hljs-literal">false</span>;
+      buf = input.ports[port].getBuffer(input.scope);
+      <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = buf.length; i &lt; len; i++) {
+        ip = buf[i];
+        <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'openBracket'</span>) {
+          portBrackets.push(ip.data);
+          <span class="hljs-keyword">continue</span>;
+        }
+        <span class="hljs-keyword">if</span> (ip.type === <span class="hljs-string">'closeBracket'</span>) {
+          portBrackets.pop();
+          <span class="hljs-keyword">if</span> (portBrackets.length) {
+            <span class="hljs-keyword">continue</span>;
+          }
+          <span class="hljs-keyword">if</span> (!hasData) {
+            <span class="hljs-keyword">continue</span>;
+          }
+          hasMatching = <span class="hljs-literal">true</span>;
+          <span class="hljs-keyword">continue</span>;
+        }
+        hasData = checkPacket(ip, portBrackets);
+        <span class="hljs-keyword">continue</span>;
+      }
+      <span class="hljs-keyword">return</span> hasMatching;
+    }
+    <span class="hljs-keyword">if</span> (config.field) {
+      <span class="hljs-keyword">return</span> input.hasStream(port, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ip</span>) </span>{</pre></div>
+            
+          
+            
+            <p>Use first data packet to define what to collate by</p>
+
+            
+              <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (!input.collatedBy.ready) {
+          input.collatedBy.field = ip.data[config.field];
+          input.collatedBy.ready = <span class="hljs-literal">true</span>;
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-keyword">return</span> ip.data[config.field] === input.collatedBy.field;
+      });
+    }
+  };
+  ref = config.inPorts;
+  <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>, len = ref.length; i &lt; len; i++) {
+    port = ref[i];
+    <span class="hljs-keyword">if</span> (input.ports[port].isAddressable()) {
+      attached = input.attached(port);
+      <span class="hljs-keyword">if</span> (!attached.length) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }
+      withData = attached.filter(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">idx</span>) </span>{
+        <span class="hljs-keyword">return</span> checkPort([port, idx]);
+      });
+      <span class="hljs-keyword">if</span> (config.arrayPolicy[<span class="hljs-string">'in'</span>] === <span class="hljs-string">'all'</span>) {
+        <span class="hljs-keyword">if</span> (withData.length !== attached.length) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">continue</span>;
+      }
+      <span class="hljs-keyword">if</span> (!withData.length) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+      }
+      <span class="hljs-keyword">continue</span>;
+    }
+    <span class="hljs-keyword">if</span> (!checkPort(port)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+};</pre></div>
+            
+          
+            
+            <p><code>CustomError</code> returns an <code>Error</code> object carrying additional properties.</p>
+
+            
+              <div class='highlight'><pre>exports.CustomError = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message, options</span>) </span>{
+  <span class="hljs-keyword">var</span> err;
+  err = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message);
+  <span class="hljs-keyword">return</span> exports.CustomizeError(err, options);
+};</pre></div>
+            
+          
+            
+            <p><code>CustomizeError</code> sets additional options for an <code>Error</code> object.</p>
+
+            
+              <div class='highlight'><pre>exports.CustomizeError = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, options</span>) </span>{
+  <span class="hljs-keyword">var</span> key, val;
+  <span class="hljs-keyword">for</span> (key <span class="hljs-keyword">in</span> options) {
+    <span class="hljs-keyword">if</span> (!hasProp.call(options, key)) <span class="hljs-keyword">continue</span>;
+    val = options[key];
+    err[key] = val;
+  }
+  <span class="hljs-keyword">return</span> err;
+};</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Helpers.coffee">Helpers.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

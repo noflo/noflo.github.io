@@ -1,0 +1,51 @@
+topic: "canadianness/Canadianness"
+name: "Canadianness graph"
+fixture:
+ type: 'fbp'
+ data: |
+  # @runtime noflo-nodejs
+  INPORT=graph.WORDS:WORDS
+  INPORT=graph.CONTENT:CONTENT
+  OUTPORT=graph.EMOTION:EMOTION
+  OUTPORT=graph.SCORE:SCORE
+  OUTPORT=errors.OUT:ERROR
+  # read the available spelling
+  './spellingdata.json' -> read(filesystem/ReadFile) -> words(strings/ParseJson)
+  words -> SPELLING graph(canadianness/Canadianness)
+  # forward errors
+  read ERROR -> errors(core/Repeat)
+  words ERROR -> errors
+cases:
+-
+  name: 'content `A bunch of centers had a color cancelation.`'
+  assertion: 'should be neutral and -3'
+  inputs:
+    words: {"eh": 11, "eh!": 11}
+    content: 'A bunch of centers had a color cancelation.'
+  expect:
+    emotion:
+      equals: 'neutral'
+    score:
+      equals: -3
+-
+  name: 'content `eh`'
+  assertion: 'should be neutral, yet highly Canadian'
+  inputs:
+    words: {"eh": 11, "eh!": 11}
+    content: 'eh'
+  expect:
+    emotion:
+      equals: 'neutral'
+    score:
+      equals: 11
+-
+  name: 'content `eh!`'
+  assertion: 'should be joyful, and Canadian'
+  inputs:
+    words: {"eh": 11, "eh!": 11}
+    content: 'eh!'
+  expect:
+    emotion:
+      equals: 'joy'
+    score:
+      equals: 11

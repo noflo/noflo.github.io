@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Getting started with NoFlo | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/" class="active">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">Documentation</h1>
+        <a href="/api/NoFlo/" class="btn btn-primary page-title__button big-button">1.2.6 API docs</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+          <nav>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/documentation/">Getting started</a>
+              </li>
+              
+              
+              <li>
+                
+                <a href="/tutorials/canadianness/">Tutorial: Data transformations</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/graphs/">Graphs</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/components/">Components</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/embedding/">Embedding</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/testing/">Testing</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/publishing/">Publishing modules</a>
+                
+              </li>
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/tooling/">Related tools</a>
+                
+              </li>
+              
+              
+              
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/glossary/">Glossary</a>
+                
+              </li>
+              
+            </ul>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/support/">Need help?</a>
+                <a href="https://github.com/noflo/noflo.github.io/tree/master/documentation/_posts">Contribute</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="content span8">
+          <h1>Getting started with NoFlo</h1>
+          <ul>
+  <li><a href="#using-noflo">Using NoFlo</a>
+    <ul>
+      <li><a href="#activation-model">Activation mode</a></li>
+    </ul>
+  </li>
+  <li><a href="#creating-a-noflo-project">Creating a NoFlo project</a>
+    <ul>
+      <li><a href="#project-folder">Project folder</a></li>
+      <li><a href="#installing-noflo">Installing NoFlo</a></li>
+      <li><a href="#getting-components">Getting components</a></li>
+      <li><a href="#defining-a-graph">Defining a graph</a></li>
+      <li><a href="#debugging-the-graph">Debugging the graph</a></li>
+      <li><a href="#running-noflo-in-the-browser">Running NoFlo in the browser</a></li>
+    </ul>
+  </li>
+  <li><a href="#building-a-simple-calculator">Example: Building a simple calculator</a></li>
+</ul>
+
+<p>NoFlo is a <a href="https://en.wikipedia.org/wiki/Flow-based_programming">Flow-Based Programming</a> environment for JavaScript. In flow-based programs, the logic of your software is defined as a <em>graph</em>. The <em>nodes</em> of the graph are instances of NoFlo components, and the <em>edges</em> define the connections between them.</p>
+
+<p>NoFlo components react to incoming messages, or <em>information packets</em>. When a component receives packets in its input ports it performs a predefined operation, and sends its result out as a packet to its output ports. There is no shared state, and the only way to communicate between components is by sending packets.</p>
+
+<p>NoFlo components are built as simple JavaScript or <a href="http://coffeescript.org/">CoffeeScript</a> modules that define the input and output ports, and register various event listeners on them. When executed, NoFlo creates a live graph, or <em>network</em> out of a graph definition, instantiates the components used in the graph, and connects them together.</p>
+
+<ul>
+  <li>Read more: <a href="/documentation/components/">Writing components</a></li>
+</ul>
+
+<p>NoFlo graphs can deal with multiple different input paradigms. The same flow can react to incoming HTTP requests, text messages, and changes in the file system, and can similarly output to different targets like writing to a database, responding to the HTTP requests, or updating a dashboard. It is simply a matter of choosing the components you want to use.</p>
+
+<ul>
+  <li>Read more: <a href="/documentation/graphs/">Defining graphs</a></li>
+</ul>
+
+<h2 id="using-noflo">Using NoFlo</h2>
+
+<p>There are two ways to run your flow-based programs with NoFlo. If your whole application is based on flows, you can simply have NoFlo execute and run it. Flow-based programs done in this way are called <em>independent</em> graphs. You can run them on Node.js with the <a href="https://www.npmjs.com/package/noflo-nodejs">noflo-nodejs</a> command-line tool.</p>
+
+<ul>
+  <li>Read more: <a href="https://github.com/noflo/noflo-nodejs#readme">noflo-nodejs</a> for execution on Node.js</li>
+  <li>Read more: <a href="#running-noflo-in-the-browser">running NoFlo in a browser</a></li>
+</ul>
+
+<p>The other option is to <em>embed</em> NoFlo graphs into your existing JavaScript application by using it as a regular NPM module. This is useful when you already have an existing system where you want to automate some parts as their own flows, or to add new functionality.</p>
+
+<ul>
+  <li>Read more: <a href="/documentation/embedding">Embedding NoFlo in existing JavaScript</a></li>
+</ul>
+
+<p>Examples of embedded usage of NoFlo include handling billing processes or routing incoming SMS or email within an existing Node.js web application.</p>
+
+<h3 id="activation-model">Activation model</h3>
+
+<p>When you start a NoFlo network, it doesn’t do anything by itself. It only loads the components of the graph and sets up the connections between them. Then it is up to the components to actually start sending messages to their outports, or reacting to messages they receive on their input ports.</p>
+
+<p>Since most components require some input before they act, the usual way to make a NoFlo graph run is to send it some initial information packets, or <em>IIPs</em>. Examples of this would include sending a port number that a web server could listen to the web server component, or sending a file name to a file reader.</p>
+
+<p>This activation model provides many possibilities:</p>
+
+<ul>
+  <li>Starting a flow based on user interaction (shell command, clicking a button)</li>
+  <li>Starting a flow based on a received signal (Redis pub/sub, D-Bus signal, WebHook, email)</li>
+  <li>Starting a flow at a given time or interval (running a graph on the first of every month, or five minutes from now)</li>
+  <li>Starting a flow based on context (when arriving to a physical location, when user goes to a given web site)</li>
+</ul>
+
+<h2 id="creating-a-noflo-project">Creating a NoFlo project</h2>
+
+<p>NoFlo projects are created in the same way as any other Node.js project would. To get started, you need a working installation of <a href="https://nodejs.org/">Node.js</a> (version 6 or later), and the <a href="https://npmjs.com/">NPM</a> package manager that comes with it.</p>
+
+<p>You can test that your Node.js installation works by running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p>If this doesn’t work, read the <a href="https://nodejs.org/en/download/">Node.js installation instructions</a> for your operating system.</p>
+
+<h3 id="project-folder">Project folder</h3>
+
+<p>To create a new project, you should create a new folder in the file system. This folder will contain all the files specific to your project, including dependency declarations, unit tests, and the NoFlo graphs and components. This is what you’ll usually want to manage in version control.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>my-noflo-example-app
+</code></pre></div></div>
+
+<p>Then go to that folder:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>my-noflo-example-app
+</code></pre></div></div>
+
+<h3 id="installing-noflo">Installing NoFlo</h3>
+
+<p>The first thing to do with your project is to create a <code class="language-plaintext highlighter-rouge">package.json</code> file into the project root. This is the file that is used by NPM for finding and installing the libraries your project needs.</p>
+
+<p>A basic <code class="language-plaintext highlighter-rouge">package.json</code> file could look like the following. Create one using a text editor:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-noflo-example-app"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0.1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You can also create the <code class="language-plaintext highlighter-rouge">package.json</code> using the <code class="language-plaintext highlighter-rouge">npm init</code> command.</p>
+
+<p>Once the <code class="language-plaintext highlighter-rouge">package.json</code> file is in place, you’re ready to install NoFlo. Do this by running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>noflo <span class="nt">--save</span>
+</code></pre></div></div>
+
+<p>NPM will fetch the latest release version of NoFlo and all its dependencies. If you want to run NoFlo on Node.js via command-line, you’ll also want to grab <a href="https://npmjs.org/package/noflo-nodejs">noflo-nodejs</a>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>noflo-nodejs <span class="nt">--save</span>
+</code></pre></div></div>
+
+<p>Once this has finished, try that NoFlo works by running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./node_modules/.bin/noflo-nodejs <span class="nt">-h</span>
+</code></pre></div></div>
+
+<h3 id="getting-components">Getting components</h3>
+
+<p>The main NoFlo package gives you the environment for running flows. In addition you’ll need the components that you’ll be using in your graphs.</p>
+
+<p>There are hundreds of open source components available via <a href="/component/">NoFlo Component Libraries</a> that you can install with NPM.</p>
+
+<p>For example, to install the <a href="https://www.npmjs.com/package/noflo-filesystem/">filesystem components</a>, you can run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>noflo-filesystem <span class="nt">--save</span>
+</code></pre></div></div>
+
+<p>We should also install <a href="https://www.npmjs.com/package/noflo-core">noflo-core</a>, which provides various general utility components:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>noflo-core <span class="nt">--save</span>
+</code></pre></div></div>
+
+<p>Once NPM completes the components from that library will be available to your project. Your project can pull in components from as many NoFlo libraries as needed.</p>
+
+<h2 id="defining-a-graph">Defining a graph</h2>
+
+<p>All NoFlo programs are built as graphs, which define the nodes and components used, and connections between them.</p>
+
+<p>NoFlo graphs can be either defined in a <a href="/documentation/graphs/#json">JSON file format</a> or using the <a href="/documentation/graphs/#fbp"><code class="language-plaintext highlighter-rouge">.fbp</code> domain-specific language</a>. For brevity, this guide uses the <code class="language-plaintext highlighter-rouge">.fbp</code> syntax.</p>
+
+<p>Our first graph can be a simple one. Since we already have the file system components available, we can implement a graph that reads a file, and outputs its contents on the screen.</p>
+
+<p>Graphs are typically stored in the graphs subfolder of a NoFlo project. Create that folder:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>graphs
+</code></pre></div></div>
+
+<p>Create a new file in that folder called <code class="language-plaintext highlighter-rouge">ShowContents.fbp</code> and open it in your favorite text editor. Paste in the following contents:</p>
+
+<pre><code class="language-fbp"># In the graph we first need to define the nodes and the connections between them
+Read(filesystem/ReadFile) OUT -&gt; IN Display(core/Output)
+
+# Start off the graph by sending a filename to the file reader
+'package.json' -&gt; IN Read
+</code></pre>
+
+<p>Once you’ve saved the file you can run the graph with NoFlo:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./node_modules/.bin/noflo-nodejs <span class="nt">--graph</span> graphs/ShowContents.fbp <span class="nt">--batch</span>
+</code></pre></div></div>
+
+<p>The contents of your <code class="language-plaintext highlighter-rouge">package.json</code> should be shown on the console.</p>
+
+<h3 id="debugging-the-graph">Debugging the graph</h3>
+
+<p>If you want to see how the graph works internally, you can run NoFlo with the debugger:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./node_modules/.bin/noflo-nodejs <span class="nt">--graph</span> graphs/ShowContents.fbp <span class="nt">--batch</span> <span class="nt">--debug</span>
+</code></pre></div></div>
+
+<p>This will show all the various events happening inside the graph:</p>
+
+<ul>
+  <li>Connections being opened</li>
+  <li>Package groups being started and finished</li>
+  <li>Data being sent through the connections</li>
+  <li>Connections being closed</li>
+</ul>
+
+<p>Looking at this is useful in order to understand how information flows through a NoFlo network. Visual tools like <a href="https://flowhub.io/ide/">Flowhub</a> can give an even better view at how the graph looks and behaves.</p>
+
+<h3 id="running-noflo-in-the-browser">Running NoFlo in the browser</h3>
+
+<p>NoFlo projects can also run in web browsers. You can use the <a href="https://webpack.js.org">webpack</a> tool create a browser-runnable build of a NoFlo project.</p>
+
+<p>In nutshell, making a browser build of a NoFlo project involves the following steps:</p>
+
+<ol>
+  <li>Find all installed browser-compatible components using the <a href="https://github.com/flowbased/fbp-manifest">fbp-manifest</a> tool</li>
+  <li>Generate a custom NoFlo component loader that requires all the component files and registers them for NoFlo to load</li>
+  <li>Configure and run webpack with the application entry point, replacing NoFlo’s standard component loader with the generated custom one</li>
+</ol>
+
+<p>To automate these steps we have <strong><a href="https://www.npmjs.com/package/noflo-component-loader">noflo-component-loader</a></strong>, a WebPack loader plugin. Install it as a development dependency:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>noflo-component-loader <span class="nt">--save-dev</span>
+</code></pre></div></div>
+
+<p>Then edit your webpack configuration and enable this loader in your <code class="language-plaintext highlighter-rouge">module.rules</code>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="c1">// Replace NoFlo's dynamic loader with a generated one</span>
+  <span class="nl">test</span><span class="p">:</span> <span class="sr">/noflo</span><span class="se">\/</span><span class="sr">lib</span><span class="se">\/</span><span class="sr">loader</span><span class="se">\/</span><span class="sr">register.js$/</span><span class="p">,</span>
+  <span class="nx">use</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">loader</span><span class="p">:</span> <span class="dl">'</span><span class="s1">noflo-component-loader</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+        <span class="c1">// Only include components used by this graph</span>
+        <span class="c1">// Set to NULL if you want all installed components</span>
+        <span class="na">graph</span><span class="p">:</span> <span class="dl">'</span><span class="s1">myproject/GraphName</span><span class="dl">'</span><span class="p">,</span>
+        <span class="c1">// Whether to include the original component sources</span>
+        <span class="c1">// in the build</span>
+        <span class="na">debug</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">],</span>
+</code></pre></div></div>
+
+<p>Read more in <a href="https://github.com/noflo/noflo-component-loader#readme">noflo-component-loader documentation</a>.</p>
+
+<h4 id="project-scaffolding">Project scaffolding</h4>
+
+<p>For faster project setup, we have a template for creating NoFlo browser applications: <strong><a href="https://github.com/noflo/noflo-browser-app">noflo-browser-app</a></strong>. To use it, follow these steps:</p>
+
+<ul>
+  <li>Fork the project</li>
+  <li>Import the repository in <a href="https://app.flowhub.io/ide/">Flowhub</a></li>
+  <li>Make changes, synchronize to GitHub</li>
+  <li>If you need additional modules, use <code class="language-plaintext highlighter-rouge">npm install --add</code></li>
+</ul>
+
+<p>The project contains a fully working build setup, including <a href="https://travis-ci.org">Travis CI</a> compatible test automation. If you supply Travis CI a GitHub access token, all tagged versions of your app will automatically get published to <a href="https://pages.github.com">GitHub Pages</a>.</p>
+
+<p>More details for using the template can be found from the <a href="https://github.com/noflo/noflo-browser-app/#readme">project README</a>.</p>
+
+<h2 id="building-a-simple-calculator">Building a simple calculator</h2>
+
+<p>NoFlo has a <a href="/component/">wealth of components</a> available. One such example is the <a href="https://www.npmjs.com/package/noflo-math">noflo-math</a>, which can be used for performing simple calculations.</p>
+
+<p>Install it with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>noflo-math <span class="nt">--save</span>
+</code></pre></div></div>
+
+<p>We also want the <a href="https://www.npmjs.com/package/noflo-core">noflo-core</a> to write to standard out:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>noflo-core <span class="nt">--save</span>
+</code></pre></div></div>
+
+<p>Now we can build a simple calculator. For example, to multiply numbers we can create the following graph at <code class="language-plaintext highlighter-rouge">graphs/Calculate.fbp</code>:</p>
+
+<pre><code class="language-fbp">'6' -&gt; MULTIPLICAND Multiply(math/Multiply)
+'7' -&gt; MULTIPLIER Multiply
+Multiply PRODUCT -&gt; IN Display(core/Output)
+</code></pre>
+
+<p>If you run this with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./node_modules/.bin/noflo-nodejs <span class="nt">--graph</span> graphs/Calculate.fbp <span class="nt">--batch</span>
+</code></pre></div></div>
+
+<p>it will give the answer of <code class="language-plaintext highlighter-rouge">42</code>. Doing other mathematical operations with noflo-math is left as an exercise to the user.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/" class="active">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tutorial: Data transformation | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">Writing your own project</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+          <nav>
+            <ul class="sidebar__nav">
+              
+              
+              <li>
+                <a href="/tutorials/canadianness/" class="active">Tutorial: Data transformation</a>
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="content span8">
+          <h1>Tutorial: Data transformation</h1>
+          <ul>
+  <li>Preparation
+    <ul>
+      <li><a href="#idea">Idea</a></li>
+      <li><a href="#requirements">Requirements</a></li>
+      <li><a href="#planning">Planning</a></li>
+      <li><a href="#researching">Researching</a></li>
+      <li><a href="#pseudo-code">Pseudo code</a></li>
+    </ul>
+  </li>
+  <li>Implementation
+    <ul>
+      <li><a href="#overall-architecture">Overall architecture</a>
+        <ul>
+          <li><a href="#canadianness">Canadianness</a></li>
+          <li><a href="#emotion">Emotion</a></li>
+        </ul>
+      </li>
+      <li><a href="#writing-tests">Writing tests</a></li>
+      <li><a href="#implement-components">Implement components</a>
+        <ul>
+          <li><a href="#determineemotion">DetermineEmotion</a></li>
+          <li><a href="#findwords">FindWords</a></li>
+          <li><a href="#wordscore">WordScore</a></li>
+        </ul>
+      </li>
+      <li><a href="#providing-a-javascript-api">Providing a JavaScript API</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://github.com/noflo/canadianness">See the full project</a></p>
+
+<hr />
+<h1 id="idea">Idea</h1>
+
+<p>Make a project that calculates how Canadian a string is.
+As an added bonus, it will determine the emotion of the string based on how <em>eh</em>’s are used.</p>
+
+<hr />
+<h1 id="requirements">Requirements</h1>
+
+<p>Use:</p>
+<ul>
+  <li>our own components</li>
+  <li>other peoples components (other noflo libraries components)</li>
+  <li>can use fbp</li>
+  <li>graphs</li>
+  <li>subgraphs</li>
+  <li>tests (use fbp-spec and mocha tests to show both options)</li>
+  <li>debugging</li>
+</ul>
+
+<hr />
+<h1 id="planning">Planning</h1>
+
+<ul>
+  <li>To determine how Canadian something is, we want to check words inside of the string.
+    <ul>
+      <li>~ If it is easily possible, figure out how far words are from each other</li>
+      <li>~ and their location inside of the string (ie, at the very end, beginning, near the end.)</li>
+      <li>Check spelling of words, Canadan vs elsewhere. Canadian spelling first, then UK, then American.</li>
+      <li>Check the emotion of the word <em>eh</em> using symbols and letter case (ie, eh, Eh, EH, EH?, eh?!)</li>
+    </ul>
+  </li>
+  <li>The output should have the <em>Emotion</em>, and the <em>Canadian Score</em>.</li>
+</ul>
+
+<hr />
+<h1 id="researching">Researching</h1>
+
+<h2 id="word-weight">Word Weight</h2>
+<p>Search Google for a library that may be able to help us with dealing with word weights, singularize, and pluralize words.
+<a href="https://www.google.com/search?q=js%20library%20determine%20weight%20of%20words">js library determine weight of words</a>
+<a href="https://github.com/NaturalNode/natural">NaturalNode</a> looks promising</p>
+
+<h2 id="spelling">Spelling</h2>
+<p>Search Google for the spelling differences
+<a href="https://www.google.com/search?q=canadian%20vs%20uk%20vs%20usa%20spelling">Canadian vs uk vs usa spelling</a></p>
+
+<p>perfect
+<a href="http://www.lukemastin.com/testing/spelling/cgi-bin/database.cgi?action=view_category&amp;database=spelling&amp;category=C">Canadian, British and American Spelling</a>
+This is data on a table though with no apparent api, so we should get it into usable data (json).
+<a href="https://www.google.com/search?q=get+table+data+as+json">get table as json</a>
+<a href="http://johndyer.name/html-table-to-json/">table to json</a>
+<a href="https://www.dynatable.com/">table to json jquery</a></p>
+
+<hr />
+<h1 id="pseudo-code">Pseudo code</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[How Canadian]
+  INPUT=CONTENT(string)
+  INPUT=WORDS(array) # words to use as weights
+  INPUT=SPELLING(array)
+  OUTPUT=EMOTION(string)
+  OUTPUT=SCORE(number)
+
+  # if we wanted to swap out emotion to calculate emoji insteadof _eh_ for example,
+  # we can easily just replace this box. the same goes for any noflo box.
+  [Emotion]
+    INPUT=CONTENT(string)
+    OUTPUT=EMOTION(string)
+    [Find Ehs]
+      # if it has no _eh_, emotion is flat
+
+      # could also separate to collect and doing each and then sending another stream
+      # and putting those back together as a score and using add
+
+      # collects stream, determines emotion of each
+      [Determine Emotion]
+
+  [WordScore]
+    OUTPUT=SCORE(number)
+    INPUT=LIST(array) # control port, because we want to use one for each input
+    INPUT=CONTENT(STRING)
+
+  # since these both calculate score, one positive, one negative,
+  # they can be separate instances of the same component
+  [CanadianScore] # LIST would use WORDS
+  [SpellingScore] # LIST would use SPELLING
+
+    # output of CanadianScore &amp; SpellingScore should be added together to get result
+    # score from here is the SCORE
+    [noflo/Math/Add]
+</code></pre></div></div>
+
+<h1 id="overall-architecture">Overall architecture</h1>
+
+<h2 id="canadianness">Canadianness</h2>
+
+<h3 id="real-graph-implementation-of-pseudo-code">Real graph implementation of pseudo code:</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># (string)
+INPORT=SplitContent.IN:CONTENT
+# (array)
+INPORT=SpellingScore.LIST:SPELLING
+# (array)
+INPORT=CanadianScore.LIST:WORDS
+
+# (string)
+OUTPORT=Emotion.EMOTION:EMOTION
+# (int)
+OUTPORT=Add.SUM:SCORE
+
+# [core/Split](https://github.com/noflo/noflo-core/blob/master/components/Split.coffee) takes the input
+# and sends it to each of the [sockets](http://noflojs.org/api/InternalSocket/) attached to the outport
+# ----
+# Emotion is subgraph
+SplitContent(core/Split) OUT -&gt; CONTENT Emotion(canadianness/Emotion)
+SplitContent OUT -&gt; CONTENT SpellingScore(canadianness/WordScore)
+SplitContent OUT -&gt; CONTENT CanadianScore(canadianness/WordScore)
+
+SpellingScore SCORE -&gt; ADDEND Add(math/Add)
+CanadianScore SCORE -&gt; AUGEND Add
+</code></pre></div></div>
+
+<p><a href="https://github.com/noflo/canadianness/blob/master/graphs/Canadianness.fbp">See the graph</a>
+<img src="/img/canadianness.png" alt="noflo canadianness graph" /></p>
+
+<h2 id="emotion">Emotion</h2>
+
+<p>This can be its own graph loaded inside of the main graph as a <a href="/documentation/graphs/#subgraphs">subgraph</a> so the whole operation can be represented as a box:</p>
+
+<pre><code class="language-fbp"># (string)
+INPORT=FINDEHS.CONTENT:CONTENT
+# (string)
+OUTPORT=DetermineEmotion.EMOTION:EMOTION
+
+FindEhs(FindEhs) MATCHES -&gt; CONTENT DetermineEmotion(DetermineEmotion)
+</code></pre>
+
+<p><a href="https://github.com/noflo/canadianness/blob/master/graphs/Emotion.fbp">See the graph</a>
+<img src="/img/emotion.png" alt="noflo canadianness emotion graph" /></p>
+
+<h1 id="writing-tests">Writing tests</h1>
+
+<p>First in line for testing, we have <a href="https://github.com/flowbased/fbp-spec">fbp-spec</a></p>
+
+<p>Just add a <code class="language-plaintext highlighter-rouge">fbpspec.js</code> file in <code class="language-plaintext highlighter-rouge">/spec</code> directory</p>
+
+<p>Important to note, you cannot send brackets or do any sort of special operations using fbp-spec. To get around that, you will can write components exclusively for testing, and <a href="https://github.com/noflo/canadianness/blob/master/spec/determineemotion.yaml#L3">fbp graphs as fixtures</a>.</p>
+
+<p>The command we use for noflo, and the flags can be found at <a href="https://github.com/noflo/noflo-nodejs/blob/master/src/noflo-nodejs.coffee#L13">noflo-nodejs flags</a></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fbpspec</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fbp-spec</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">nodeRuntime</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">label</span><span class="p">:</span> <span class="dl">"</span><span class="s2">NoFlo node.js</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">description</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+  <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">noflo</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">protocol</span><span class="p">:</span> <span class="dl">"</span><span class="s2">websocket</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">secret</span><span class="p">:</span> <span class="dl">'</span><span class="s1">notasecret</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">address</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ws://localhost:3333</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">7807f4d8-63e0-4a89-a577-2770c14f8106</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">command</span><span class="p">:</span> <span class="dl">'</span><span class="s1">./node_modules/.bin/noflo-nodejs --catch-exceptions=false --secret notasecret --port=3333 --host=localhost --register=false --capture-output=true</span><span class="dl">'</span>
+<span class="p">};</span>
+
+<span class="nx">fbpspec</span><span class="p">.</span><span class="nx">mocha</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">nodeRuntime</span><span class="p">,</span> <span class="dl">'</span><span class="s1">./spec</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">fixturetimeout</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+  <span class="na">starttimeout</span><span class="p">:</span> <span class="mi">10000</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Then, for each test, just add a <code class="language-plaintext highlighter-rouge">yaml</code> file in the <code class="language-plaintext highlighter-rouge">/spec</code> directory, each <code class="language-plaintext highlighter-rouge">yaml</code> file in <code class="language-plaintext highlighter-rouge">/spec</code> is loaded by the <code class="language-plaintext highlighter-rouge">fbp-spec</code>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">topic</span><span class="pi">:</span> <span class="s2">"</span><span class="s">canadianness/FindWords"</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Find</span><span class="nv"> </span><span class="s">words</span><span class="nv"> </span><span class="s">fbpspec"</span>
+<span class="na">cases</span><span class="pi">:</span>
+<span class="pi">-</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">content</span><span class="nv"> </span><span class="s">eh'</span>
+  <span class="na">assertion</span><span class="pi">:</span> <span class="s1">'</span><span class="s">should</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">find</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">`eh`'</span>
+  <span class="na">inputs</span><span class="pi">:</span>
+    <span class="na">word</span><span class="pi">:</span> <span class="s1">'</span><span class="s">eh'</span>
+    <span class="na">surrounding</span><span class="pi">:</span> <span class="no">false</span>
+    <span class="na">content</span><span class="pi">:</span> <span class="s1">'</span><span class="s">eh'</span>
+  <span class="na">expect</span><span class="pi">:</span>
+    <span class="na">matches</span><span class="pi">:</span>
+      <span class="na">equals</span><span class="pi">:</span> <span class="s1">'</span><span class="s">eh'</span>
+</code></pre></div></div>
+
+<h1 id="implement-components">Implement components</h1>
+
+<h2 id="determineemotion">DetermineEmotion</h2>
+
+<div>
+
+  
+  <h2 id="import-libraries">Import libraries</h2>
+
+  
+    <div class="highlight"><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noflo&#x27;</span>);</pre></div>
+  
+
+  
+  <h2 id="useful-functions">Useful functions</h2>
+<p>Function to calculate most common value (the <a href="https://en.wikipedia.org/wiki/Mode_(statistics)">mode</a></p>
+
+  
+    <div class="highlight"><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findMode</span>(<span class="hljs-params">array</span>) </span>{
+  <span class="hljs-keyword">const</span> frequency = {};
+  <span class="hljs-keyword">let</span> maxFrequency = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">let</span> result;
+  array.forEach(<span class="hljs-function">(<span class="hljs-params">v</span>) =&gt;</span> {
+    frequency[v] = (frequency[v] || <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">if</span> (frequency[v] &gt; maxFrequency) {
+      maxFrequency = frequency[v];
+      result = v;
+    }
+  });
+  <span class="hljs-keyword">return</span> result;
+}</pre></div>
+  
+
+  
+  <h2 id="component-declaration">Component declaration</h2>
+<p>Define the input and output ports, and describe their function</p>
+
+  
+    <div class="highlight"><pre><span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> c = <span class="hljs-keyword">new</span> noflo.Component({
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Find all of the instances of `word` in `content` and send them out in a stream&#x27;</span>,
+    <span class="hljs-attr">inPorts</span>: {
+      <span class="hljs-attr">content</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the content which we look for the word in&#x27;</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+    },
+    <span class="hljs-attr">outPorts</span>: {
+      <span class="hljs-attr">emotion</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the emotion based the content in ehs&#x27;</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+      <span class="hljs-attr">error</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;object&#x27;</span>,
+      },
+    },
+  });</pre></div>
+  
+
+  
+  <p>Since we want to work with a full stream, we disable bracket forwarding</p>
+
+  
+    <div class="highlight"><pre>  c.forwardBrackets = {};</pre></div>
+  
+
+  
+  <h2 id="processing-function">Processing function</h2>
+
+  
+    <div class="highlight"><pre>  c.process(<span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {</pre></div>
+  
+
+  
+  <h3 id="receiving-input">Receiving input</h3>
+<p>We expect a <a href="noflojs.org/documentation/process-api/#full-stream">stream</a>
+Will also accept a single (non-bracketed) input packet, returned as a stream of length 1</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">if</span> (!input.hasStream(<span class="hljs-string">&#x27;content&#x27;</span>)) { <span class="hljs-keyword">return</span>; }</pre></div>
+  
+
+  
+  <p>The output will be a single packet (not a stream),
+hence we drop the <code>openBracket</code> and <code>closeBracket</code>
+and extract the data payload from the IP objects</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">const</span> contents = input.getStream(<span class="hljs-string">&#x27;content&#x27;</span>).filter(<span class="hljs-function">(<span class="hljs-params">ip</span>) =&gt;</span> ip.type === <span class="hljs-string">&#x27;data&#x27;</span>).map(<span class="hljs-function">(<span class="hljs-params">ip</span>) =&gt;</span> ip.data);</pre></div>
+  
+
+  
+  <h3 id="component-business-logic">Component business logic</h3>
+<p>First find which emotions are present, then calculate which one is most common.
+This could alternatively be split into two dedicate components.</p>
+
+  
+
+  
+  <p>to hold the emotions found</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">const</span> matches = [];</pre></div>
+  
+
+  
+  <p>the emotions we will use</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">const</span> emotions = {
+      <span class="hljs-attr">joy</span>: [<span class="hljs-string">&#x27;eh!&#x27;</span>],
+      <span class="hljs-attr">neutral</span>: [<span class="hljs-string">&#x27;eh&#x27;</span>],
+      <span class="hljs-attr">amusement</span>: [<span class="hljs-string">&#x27;eh?&#x27;</span>, <span class="hljs-string">&#x27;Eh?&#x27;</span>, <span class="hljs-string">&#x27;Eh??&#x27;</span>],
+      <span class="hljs-attr">fear</span>: [<span class="hljs-string">&#x27;eH??&#x27;</span>, <span class="hljs-string">&#x27;eh??&#x27;</span>],
+      <span class="hljs-attr">surprise</span>: [<span class="hljs-string">&#x27;eh !?&#x27;</span>, <span class="hljs-string">&#x27;EH!?&#x27;</span>],
+      <span class="hljs-attr">anticipation</span>: [<span class="hljs-string">&#x27;eh?!&#x27;</span>],
+      <span class="hljs-attr">excitment</span>: [<span class="hljs-string">&#x27;EH!&#x27;</span>, <span class="hljs-string">&#x27;eH!&#x27;</span>],
+      <span class="hljs-attr">sadness</span>: [<span class="hljs-string">&#x27;...eh&#x27;</span>, <span class="hljs-string">&#x27;...eh...&#x27;</span>, <span class="hljs-string">&#x27;..eh&#x27;</span>, <span class="hljs-string">&#x27;eh..&#x27;</span>, <span class="hljs-string">&#x27;..eh..&#x27;</span>],
+      <span class="hljs-attr">anger</span>: [<span class="hljs-string">&#x27;EH!?&#x27;</span>, <span class="hljs-string">&#x27;EH?&#x27;</span>],
+    };</pre></div>
+  
+
+  
+  <p>go through our content and our emotions
+then add them to our <code>matches</code></p>
+
+  
+    <div class="highlight"><pre>    contents.forEach(<span class="hljs-function">(<span class="hljs-params">content</span>) =&gt;</span> {
+      <span class="hljs-built_in">Object</span>.keys(emotions).forEach(<span class="hljs-function">(<span class="hljs-params">emotion</span>) =&gt;</span> {
+        <span class="hljs-keyword">const</span> data = emotions[emotion];
+        <span class="hljs-keyword">if</span> (data.indexOf(content) !== <span class="hljs-number">-1</span>) {
+          matches.push(emotion);
+        }
+      });
+    });</pre></div>
+  
+
+  
+  <p>if we didn’t get any emotions, it default to ‘neutral’</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">let</span> mode;
+    <span class="hljs-keyword">if</span> (matches.length === <span class="hljs-number">0</span>) {
+      mode = <span class="hljs-string">&#x27;neutral&#x27;</span>;</pre></div>
+  
+
+  
+  <p>if we did, we need to find the emotion that was the most common</p>
+
+  
+    <div class="highlight"><pre>    } <span class="hljs-keyword">else</span> {
+      mode = findMode(matches);
+    }</pre></div>
+  
+
+  
+  <h3 id="send-output">Send output</h3>
+<p>Also signals completion by using <code>sendDone()</code></p>
+
+  
+    <div class="highlight"><pre>    output.sendDone({
+      <span class="hljs-attr">emotion</span>: mode,
+    });
+  });
+
+  <span class="hljs-keyword">return</span> c;
+};</pre></div>
+  
+
+</div>
+
+<h2 id="findwords">FindWords</h2>
+
+<div>
+
+  
+  <h2 id="import-libraries">Import libraries</h2>
+
+  
+    <div class="highlight"><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noflo&#x27;</span>);</pre></div>
+  
+
+  
+  <h2 id="helper-functions">Helper functions</h2>
+<p>Not NoFlo or even component-logic-specific, so nice to keep them separate</p>
+
+  
+
+  
+  <p>Return all RegExp matches on a string</p>
+
+  
+    <div class="highlight"><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">matchAll</span>(<span class="hljs-params">string, regexp</span>) </span>{
+  <span class="hljs-keyword">const</span> matches = [];
+  string.replace(regexp, <span class="hljs-function">(<span class="hljs-params">...rest</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> arr = rest.slice(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">const</span> extras = arr.splice(<span class="hljs-number">-2</span>);
+    [arr.index, arr.input] = extras;
+    matches.push(arr);
+  });
+  <span class="hljs-keyword">if</span> (matches.length) {
+    <span class="hljs-keyword">return</span> matches;
+  }
+  <span class="hljs-keyword">return</span> [];
+}</pre></div>
+  
+
+  
+  <p>Extract the actual data of the match result</p>
+
+  
+    <div class="highlight"><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">actualMatches</span>(<span class="hljs-params">matches</span>) </span>{</pre></div>
+  
+
+  
+  <p>because we want to send out an empty array if there are no matches</p>
+
+  
+    <div class="highlight"><pre>  <span class="hljs-keyword">if</span> (matches.length === <span class="hljs-number">0</span>) { <span class="hljs-keyword">return</span> [[]]; }
+  <span class="hljs-keyword">return</span> matches.map(<span class="hljs-function">(<span class="hljs-params">match</span>) =&gt;</span> match[<span class="hljs-number">0</span>]);
+}</pre></div>
+  
+
+  
+  <h2 id="component-declaration">Component declaration</h2>
+
+  
+    <div class="highlight"><pre><span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> c = <span class="hljs-keyword">new</span> noflo.Component({
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Find all of the instances of `word` in `content` and send them out in a stream&#x27;</span>,
+    <span class="hljs-attr">inPorts</span>: {
+      <span class="hljs-attr">content</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the content which we look for a word in&#x27;</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+      <span class="hljs-attr">word</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;string&#x27;</span>, <span class="hljs-comment">// could be array|string, which would be `all`</span>
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the word we are looking for instances of&#x27;</span>,
+        <span class="hljs-attr">control</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+      <span class="hljs-attr">surrounding</span>: { <span class="hljs-comment">// could use a regex but this is a specific case</span>
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;boolean&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;whether to get surrounding characters, symbols before and after until space&#x27;</span>,
+        <span class="hljs-attr">default</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// if nothing is sent to it, this is the default when `get`ting from it</span>
+        <span class="hljs-attr">control</span>: <span class="hljs-literal">true</span>,
+      },
+    },
+    <span class="hljs-attr">outPorts</span>: {
+      <span class="hljs-attr">matches</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the resulting findings as a stream of data packets&#x27;</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+    },
+  });</pre></div>
+  
+
+  
+  <h2 id="processing-function">Processing function</h2>
+<p>To preserve streams, forward brackets from the primary inport <code>content</code> to the output.</p>
+
+  
+    <div class="highlight"><pre>  c.forwardBrackets = {
+    <span class="hljs-attr">content</span>: [<span class="hljs-string">&#x27;matches&#x27;</span>],
+  };
+
+  c.process(<span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {</pre></div>
+  
+
+  
+  <h3 id="receiving-input-data">Receiving input data</h3>
+<p>We need both a <code>word</code>, and <code>content</code> to start processing
+Since <code>word</code> is a control port, the latest value is kept, no need to continiously send</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">&#x27;word&#x27;</span>, <span class="hljs-string">&#x27;content&#x27;</span>)) { <span class="hljs-keyword">return</span>; }</pre></div>
+  
+
+  
+  <p>const [word, content] = input.getData(‘word’, ‘content’);</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">const</span> content = input.getData(<span class="hljs-string">&#x27;content&#x27;</span>);</pre></div>
+  
+
+  
+  <h3 id="component-business-logic">Component business logic</h3>
+<p>since we are sending out multiple <code>data</code> IPs
+we want to wrap them in brackets
+TODO: make exception safe</p>
+
+  
+    <div class="highlight"><pre>    output.send({
+      <span class="hljs-attr">matches</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">&#x27;openBracket&#x27;</span>, content),
+    });</pre></div>
+  
+
+  
+  <p>do our word processing</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">const</span> r = <span class="hljs-regexp">/([.?!]*eh[.?!]*)/gi</span>;
+    <span class="hljs-keyword">let</span> matches = matchAll(content, r);
+    matches = actualMatches(matches);</pre></div>
+  
+
+  
+  <h3 id="sending-output">Sending output</h3>
+<p>for each of our matches, send them out</p>
+
+  
+    <div class="highlight"><pre>    matches.forEach(<span class="hljs-function">(<span class="hljs-params">match</span>) =&gt;</span> {</pre></div>
+  
+
+  
+  <p>if you just send content, it will automatically put it in a data ip
+so this is the same as <code>output.send matches: new noflo.IP &#39;data&#39;, match</code></p>
+
+  
+    <div class="highlight"><pre>      output.send({
+        <span class="hljs-attr">matches</span>: match,
+      });
+    });</pre></div>
+  
+
+  
+  <p>this is the same as doing <code>output.send</code> and then <code>output.done</code></p>
+
+  
+    <div class="highlight"><pre>    output.sendDone({
+      <span class="hljs-attr">matches</span>: <span class="hljs-keyword">new</span> noflo.IP(<span class="hljs-string">&#x27;closeBracket&#x27;</span>, content),
+    });
+  });
+
+  <span class="hljs-keyword">return</span> c;
+};</pre></div>
+  
+
+</div>
+
+<h2 id="wordscore">WordScore</h2>
+
+<div>
+
+  
+  <h2 id="import-libraries">Import libraries</h2>
+
+  
+    <div class="highlight"><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noflo&#x27;</span>);
+<span class="hljs-keyword">const</span> natural = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;natural&#x27;</span>);
+
+<span class="hljs-keyword">const</span> tokenizer = <span class="hljs-keyword">new</span> natural.WordTokenizer();</pre></div>
+  
+
+  
+  <h2 id="component-declaration">Component declaration</h2>
+
+  
+    <div class="highlight"><pre><span class="hljs-built_in">exports</span>.getComponent = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> c = <span class="hljs-keyword">new</span> noflo.Component({
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;Find how the input words compare against the list of weighted words&#x27;</span>,
+    <span class="hljs-attr">inPorts</span>: {
+      <span class="hljs-attr">list</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;array&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;list of words we will use with the list of content&#x27;</span>,
+        <span class="hljs-attr">control</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+      <span class="hljs-attr">content</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;string&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the content which we will determine the score of&#x27;</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+    },
+    <span class="hljs-attr">outPorts</span>: {
+      <span class="hljs-attr">score</span>: {
+        <span class="hljs-attr">datatype</span>: <span class="hljs-string">&#x27;number&#x27;</span>,
+        <span class="hljs-attr">description</span>: <span class="hljs-string">&#x27;the resulting number of comparing the content with the list&#x27;</span>,
+        <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      },
+    },
+  });</pre></div>
+  
+
+  
+  <h2 id="processing-function">Processing function</h2>
+<p>To preserve streams, forward brackets from the primary inport to the output.</p>
+
+  
+    <div class="highlight"><pre>  c.forwardBrackets = {};
+
+  c.process(<span class="hljs-function">(<span class="hljs-params">input, output</span>) =&gt;</span> {</pre></div>
+  
+
+  
+  <h3 id="receive-input">Receive input</h3>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">let</span> scoringFunction;
+    <span class="hljs-keyword">if</span> (!input.hasStream(<span class="hljs-string">&#x27;content&#x27;</span>)) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-keyword">if</span> (!input.hasData(<span class="hljs-string">&#x27;list&#x27;</span>)) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-keyword">let</span> content = input.getStream(<span class="hljs-string">&#x27;content&#x27;</span>).filter(<span class="hljs-function">(<span class="hljs-params">ip</span>) =&gt;</span> ip.type === <span class="hljs-string">&#x27;data&#x27;</span>).map(<span class="hljs-function">(<span class="hljs-params">ip</span>) =&gt;</span> ip.data);
+    <span class="hljs-keyword">const</span> list = input.getData(<span class="hljs-string">&#x27;list&#x27;</span>);</pre></div>
+  
+
+  
+  <p>there can be multiple pieces of content</p>
+
+  
+    <div class="highlight"><pre>    content = content.join(<span class="hljs-string">&#x27;\n&#x27;</span>);</pre></div>
+  
+
+  
+  <h3 id="component-business-logic">Component business logic</h3>
+<p>our base score we will send out</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">let</span> score = <span class="hljs-number">0</span>;</pre></div>
+  
+
+  
+  <p>splits content into an array of words</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">const</span> tokens = tokenizer.tokenize(content);</pre></div>
+  
+
+  
+  <p>if the list has the word in it, return the score
+otherwise, 0 points</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">const</span> wordScore = <span class="hljs-function">(<span class="hljs-params">word</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (list[word] != <span class="hljs-literal">null</span>) {
+        <span class="hljs-keyword">return</span> list[word];
+      }
+      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    };</pre></div>
+  
+
+  
+  <p>go through each of the comparisons in the list
+if it is Canadian: 1, American: -1, British: .5, None: 0</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">const</span> spellingScore = <span class="hljs-function">(<span class="hljs-params">word</span>) =&gt;</span> {
+      <span class="hljs-keyword">let</span> value = <span class="hljs-number">0</span>;
+      list.forEach(<span class="hljs-function">(<span class="hljs-params">comparison</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (comparison.American.indexOf(word) !== <span class="hljs-number">-1</span>) {
+          value = <span class="hljs-number">-1</span>;
+          <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-keyword">if</span> (comparison.Canadian.indexOf(word) !== <span class="hljs-number">-1</span>) {
+          value = <span class="hljs-number">1</span>;
+          <span class="hljs-keyword">return</span>;
+        }
+        <span class="hljs-keyword">if</span> (comparison.British.indexOf(word) !== <span class="hljs-number">-1</span>) {
+          value = <span class="hljs-number">0.5</span>;
+        }
+      });
+      <span class="hljs-keyword">return</span> value;
+    };</pre></div>
+  
+
+  
+  <p>if it has this, it is a spelling list</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">if</span> ((list[<span class="hljs-number">0</span>] != <span class="hljs-literal">null</span> ? list[<span class="hljs-number">0</span>].Canadian : <span class="hljs-literal">undefined</span>) != <span class="hljs-literal">null</span>) {
+      scoringFunction = spellingScore;</pre></div>
+  
+
+  
+  <p>otherwise it is an object list of words with scores</p>
+
+  
+    <div class="highlight"><pre>    } <span class="hljs-keyword">else</span> {
+      scoringFunction = wordScore;
+    }</pre></div>
+  
+
+  
+  <p>use this to singularize and pluralize each word</p>
+
+  
+    <div class="highlight"><pre>    <span class="hljs-keyword">const</span> nounInflector = <span class="hljs-keyword">new</span> natural.NounInflector();</pre></div>
+  
+
+  
+  <p>go through each item in contents</p>
+
+  
+    <div class="highlight"><pre>    tokens.forEach(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> plural = nounInflector.pluralize(data);
+      <span class="hljs-keyword">const</span> singular = nounInflector.singularize(data);</pre></div>
+  
+
+  
+  <p>if it is already plural or singular do not use it</p>
+
+  
+    <div class="highlight"><pre>      <span class="hljs-keyword">if</span> (plural !== data) {
+        score += scoringFunction(plural);
+      }
+      <span class="hljs-keyword">if</span> (singular !== data) {
+        score += scoringFunction(singular);
+      }
+
+      score += scoringFunction(data);
+    });</pre></div>
+  
+
+  
+  <h3 id="send-output">Send output</h3>
+
+  
+    <div class="highlight"><pre>    output.sendDone({
+      score,
+    });
+  });
+
+  <span class="hljs-keyword">return</span> c;
+};</pre></div>
+  
+
+</div>
+
+<h1 id="providing-a-javascript-api">Providing a JavaScript API</h1>
+
+<p>If we want to make the NoFlo project also available to regular JavaScript users, it is possible to utilize the <a href="/documentation/embedding">NoFlo embedding API</a> to produce a regular Node.js style function.</p>
+
+<div>
+
+  
+  
+  
+    <div class="highlight"><pre><span class="hljs-keyword">const</span> noflo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;noflo&#x27;</span>);
+<span class="hljs-keyword">const</span> defaultSpellingData = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./spellingdata.json&#x27;</span>);
+
+<span class="hljs-keyword">const</span> defaultWords = {
+  <span class="hljs-attr">eh</span>: <span class="hljs-number">11</span>,
+  <span class="hljs-string">&#x27;eh!&#x27;</span>: <span class="hljs-number">11</span>,
+};</pre></div>
+  
+
+  
+  <p>Produce the JavaScript entry point</p>
+
+  
+    <div class="highlight"><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">canadianness</span>(<span class="hljs-params">contentData, options, callback</span>) </span>{</pre></div>
+  
+
+  
+  <p>Normalize options</p>
+
+  
+    <div class="highlight"><pre>  <span class="hljs-keyword">const</span> spellingData = options.spelling || defaultSpellingData;
+  <span class="hljs-keyword">const</span> wordsData = options.words || defaultWords;</pre></div>
+  
+
+  
+  <p>Convert options and input to a set of NoFlo packets to be sent</p>
+
+  
+    <div class="highlight"><pre>  <span class="hljs-keyword">const</span> inputs = {
+    <span class="hljs-attr">words</span>: wordsData,
+    <span class="hljs-attr">spelling</span>: spellingData,
+    <span class="hljs-attr">content</span>: contentData,
+  };</pre></div>
+  
+
+  
+  <p>Produce a NoFlo.asCallback wrapped function to execute our graph</p>
+
+  
+    <div class="highlight"><pre>  <span class="hljs-keyword">const</span> componentName = <span class="hljs-string">&#x27;canadianness/Canadianness&#x27;</span>;
+  <span class="hljs-keyword">const</span> wrapperFunction = noflo.asCallback(componentName, {
+    <span class="hljs-attr">baseDir</span>: __dirname,
+  });</pre></div>
+  
+
+  
+  <p>Run the graph with inputs and call callback</p>
+
+  
+    <div class="highlight"><pre>  wrapperFunction(inputs, callback);
+}</pre></div>
+  
+
+  
+  <p>Expose function as public API</p>
+
+  
+    <div class="highlight"><pre><span class="hljs-built_in">module</span>.exports = canadianness;</pre></div>
+  
+
+</div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

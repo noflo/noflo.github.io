@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Graphs | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/" class="active">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">Documentation</h1>
+        <a href="/api/NoFlo/" class="btn btn-primary page-title__button big-button">1.2.6 API docs</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+          <nav>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/documentation/">Getting started</a>
+              </li>
+              
+              
+              <li>
+                
+                <a href="/tutorials/canadianness/">Tutorial: Data transformations</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/graphs/" class="active">Graphs</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/components/">Components</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/embedding/">Embedding</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/testing/">Testing</a>
+                
+              </li>
+              
+              
+              <li>
+                
+                <a href="/documentation/publishing/">Publishing modules</a>
+                
+              </li>
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/tooling/">Related tools</a>
+                
+              </li>
+              
+              
+              
+              
+              
+              
+              <li>
+                
+                <a href="/documentation/glossary/">Glossary</a>
+                
+              </li>
+              
+            </ul>
+            <ul class="sidebar__nav">
+              <li>
+                <a href="/support/">Need help?</a>
+                <a href="https://github.com/noflo/noflo.github.io/tree/master/documentation/_posts">Contribute</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="content span8">
+          <h1>Graphs</h1>
+          <ul>
+  <li><a href="#graph-loading">Graph loading</a></li>
+  <li><a href="#json">JSON format</a></li>
+  <li><a href="#fbp">FBP domain-specific language</a>
+    <ul>
+      <li><a href="#converting-fbp-to-json">Converting FBP to JSON</a></li>
+    </ul>
+  </li>
+  <li><a href="#subgraphs">Using subgraphs</a></li>
+  <li><a href="#executing-graphs">Executing graphs</a>
+    <ul>
+      <li><a href="#inline-fbp-in-web-applications">Inline FBP in web applications</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Graphs are the way a NoFlo program is defined. A graph has a set of nodes, each representing an instance of a component or another graph, and edges connecting their ports to each other.</p>
+
+<h2 id="graph-loading">Graph loading</h2>
+
+<p>By default, NoFlo discovers and loads graphs from the <code class="language-plaintext highlighter-rouge">graphs/</code> folder of your project, as well as the <code class="language-plaintext highlighter-rouge">graphs/</code> folders of any of your NPM dependencies.</p>
+
+<p>Graphs placed in this folder get named based on the filename, so <code class="language-plaintext highlighter-rouge">components/DoSomething.json</code> becomes available as component <code class="language-plaintext highlighter-rouge">DoSomething</code>. To prevent name clashes, you can also use the fully-qualified name <code class="language-plaintext highlighter-rouge">project-name/DoSomething</code>, where <code class="language-plaintext highlighter-rouge">project-name</code> comes from the name given in <code class="language-plaintext highlighter-rouge">package.json</code>.</p>
+
+<p>Read more about the project directory structure in <a href="/documentation/publishing/#module-structure">Publishing modules</a>.</p>
+
+<h2 id="json">JSON</h2>
+
+<p>In addition to using NoFlo in <em>embedded mode</em> where you create the FBP graph programmatically (<a href="https://raw.github.com/noflo/noflo/master/examples/linecount/count.coffee">see example</a>), you can also initialize and run graphs defined using a JSON file.</p>
+
+<p>The NoFlo JSON files declare the processes used in the FBP graph, and the connections between them. They look like the following:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Count lines in a file"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"processes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"Read File"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"component"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ReadFile"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"Split by Lines"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"component"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SplitStr"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"connections"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"package.json"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"tgt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Read File"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"src"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Read File"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"out"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"tgt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"process"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Split by Lines"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Please refer to the <a href="https://github.com/flowbased/fbp/blob/master/schema/graph.json">Graph JSON Schema</a> for full definition.</p>
+
+<h2 id="fbp">FBP</h2>
+
+<p>In addition to the JSON format described above, FBP has its own Domain-Specific Language (DSL) for easy graph definition. The syntax is the following:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">'somedata' -&gt; PORT Process(Component)</code> sends initial data <em>somedata</em> to port <em>PORT</em> of process <em>Process</em> that runs component <em>Component</em></li>
+  <li><code class="language-plaintext highlighter-rouge">A(Component1) X -&gt; Y B(Component2)</code> sets up a connection between port <em>X</em> of process <em>A</em> that runs component <em>Component1</em> and port <em>Y</em> of process <em>B</em> that runs component <em>Component2</em></li>
+</ul>
+
+<p>You can connect multiple components and ports together on one line, and separate connection definitions with a newline or a comma (<code class="language-plaintext highlighter-rouge">,</code>).</p>
+
+<p>You can find more information in the <a href="https://github.com/noflo/fbp#readme">README of the stand-alone FBP parser</a>.</p>
+
+<p>Example:</p>
+
+<pre><code class="language-fbp">'somefile.txt' -&gt; IN Read(ReadFile) OUT -&gt; IN Split(SplitStr)
+Split OUT -&gt; IN Count(Counter) COUNT -&gt; IN Display(Output)
+Read ERROR -&gt; IN Display
+</code></pre>
+
+<h3 id="converting-fbp-to-json">Converting FBP to JSON</h3>
+
+<p>The <a href="https://github.com/flowbased/fbp">FBP tool</a> can be used to convert your FBP to JSON. Start by installing the command-line tool:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">-g</span> fbp
+</code></pre></div></div>
+
+<p>Now you can convert a <code class="language-plaintext highlighter-rouge">.fbp</code> graph to JSON by running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>fbp path/to/graph.fbp
+</code></pre></div></div>
+
+<p>This will output the graph to standard out. Write it to a file with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>fbp path/to/graph.fbp <span class="o">&gt;</span> path/to/graph.json
+</code></pre></div></div>
+
+<h2 id="subgraphs">Subgraphs</h2>
+
+<p>NoFlo graphs can also be used as components inside another graph. These subgraphs are provided by instances of the NoFlo built-in <code class="language-plaintext highlighter-rouge">Graph</code> component.</p>
+
+<p>Subgraphs are useful for packaging particular flows to be used as a “new component” by other flows. This allows building more advanced functionality by creating reusable graphs of connected components.</p>
+
+<p>The Graph component loads the graph given to it as a new NoFlo network. The graph’s exported in and outports become the ports of this new component instance.</p>
+
+<p>A simple example, using a subgraph as a component by splitting <a href="https://github.com/noflo/noflo/blob/master/examples/linecount/count.fbp">linecount example fbp</a> into two files:</p>
+
+<h3 id="count">Count</h3>
+
+<pre><code class="language-fbp"># File: graphs/count.fbp
+# Define the ports exported from this subgraph
+INPORT=Read.IN:FILENAME
+OUTPORT=Count.COUNT:COUNT
+OUTPORT=Read.ERROR:ERROR
+
+# Split the file contents by newlines
+Read(filesystem/ReadFile) OUT -&gt; IN Split(strings/SplitStr)
+# Count the packets
+Split OUT -&gt; IN Count(packets/Counter)
+</code></pre>
+
+<h3 id="main">Main</h3>
+
+<pre><code class="language-fbp"># File: graphs/main.fbp
+
+# Read a file (using our subgraph defined above)
+'package.json' -&gt; IN Count(Count)
+Count COUNT -&gt; IN Display(core/Output)
+
+# Display also file read errors
+Count ERROR -&gt; IN Display
+</code></pre>
+
+<p>A more advanced example, specifying what file a spreadsheet-parsing subgraph should run with:</p>
+
+<pre><code class="language-fbp"># Load a subgraph as a new process
+'examples/spreadsheet/parse.fbp' -&gt; GRAPH Reader(Graph)
+# Send the filename to the component (subgraph)
+'somefile.xls' -&gt; FILENAME Reader
+# Display the results
+Reader COUNT -&gt; IN Display(core/Output)
+
+# Display also file read errors
+Reader ERROR -&gt; IN Display
+</code></pre>
+
+<p>Just like with components, it is possible to share subgraphs via NPM. Just make sure they’re contained in the <code class="language-plaintext highlighter-rouge">graphs/</code> subdirectory of your package.</p>
+
+<p>After this the subgraph is available as a “virtual component” with the name <code class="language-plaintext highlighter-rouge">spreadsheet/Parse</code> and can be used just like any other component. Subgraphs exported in this manner can be in either JSON or the <code class="language-plaintext highlighter-rouge">.fbp</code> format.</p>
+
+<p>Read more about NPM modules in <a href="../publishing/">Publishing modules</a>.</p>
+
+<h2 id="executing-graphs">Executing graphs</h2>
+
+<p>To run a graph file, you can either use the <a href="https://github.com/noflo/noflo-nodejs">noflo-nodejs tool</a>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>noflo-nodejs example.json
+</code></pre></div></div>
+
+<p>Graphs can also be executed programmatically:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">noflo</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">noflo</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">noflo</span><span class="p">.</span><span class="nx">loadFile</span><span class="p">(</span><span class="dl">"</span><span class="s2">example.json</span><span class="dl">"</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">network</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Graph loaded</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">network</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">toDOT</span><span class="p">());</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="inline-fbp-in-web-applications">Inline FBP in web applications</h3>
+
+<p>In addition to separate files, FBP graph definitions can also be defined inline in HTML. The typical way to do this is to utilize a <code class="language-plaintext highlighter-rouge">script</code> tag. For example, the following would change the contents of an element identified with the ID <code class="language-plaintext highlighter-rouge">header</code> to say <em>Hello World</em>:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/fbp"</span> <span class="na">id=</span><span class="s">"main"</span><span class="nt">&gt;</span>
+  <span class="dl">'</span><span class="s1">#header</span><span class="dl">'</span> <span class="o">-&gt;</span> <span class="nx">SELECTOR</span> <span class="nx">GetHeader</span><span class="p">(</span><span class="nx">dom</span><span class="o">/</span><span class="nx">GetElement</span><span class="p">)</span>
+  <span class="dl">'</span><span class="s1">Hello World</span><span class="dl">'</span> <span class="o">-&gt;</span> <span class="nx">HTML</span> <span class="nx">WriteContent</span><span class="p">(</span><span class="nx">dom</span><span class="o">/</span><span class="nx">WriteHTML</span><span class="p">)</span>
+  <span class="nx">GetHeader</span> <span class="nx">ELEMENT</span> <span class="o">-&gt;</span> <span class="nx">CONTAINER</span> <span class="nx">WriteContent</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>Loading and running inline FBP is quite simple:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Get the FBP contents</span>
+<span class="kd">const</span> <span class="nx">fbp</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">main</span><span class="dl">'</span><span class="p">).</span><span class="nx">textContent</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+
+<span class="c1">// Load the NoFlo graph based on the FBP string</span>
+<span class="nx">noflo</span><span class="p">.</span><span class="nx">graph</span><span class="p">.</span><span class="nx">loadFBP</span><span class="p">(</span><span class="nx">fbp</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">graph</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Throw on parse errors</span>
+    <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Run the graph</span>
+  <span class="nx">noflo</span><span class="p">.</span><span class="nx">createNetwork</span><span class="p">(</span><span class="nx">graph</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">network</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Throw if network can't be initialized</span>
+      <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Network is running!</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Read more about executing NoFlo graphs in JavaScript code in <a href="../embedding/">Embedding</a>.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/" class="active">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

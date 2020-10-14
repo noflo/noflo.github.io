@@ -1,77 +1,395 @@
----
-layout: default
-title: Examples
-categories:
- - example
----
-  <div class="row-fluid">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Examples | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/" class="active">Examples</a></li>
+            <li><a href="/documentation/">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
     <div class="container">
       <div class="plain-title">
         <h1>NoFlo Examples</h1>
-        <h2>{{ site.tagline }}</h2>
-        <p>This page lists some demos and applications that have been built with NoFlo. If you have something out in the open that you'd like to add, please <a href="mailto:henri.bergius@iki.fi">drop us a line</a>!</p>
+        <h2>Flow-Based Programming for JavaScript</h2>
+        <p>This page lists some demos and applications that have been built with NoFlo. You can also find <a href="/component/">dozens of projects</a> on NPM. If you have something out in the open that you'd like to add, please <a href="mailto:henri.bergius@iki.fi">drop us a line</a>!</p>
       </div>
 
       <div class="main">
         <div class="demos">
           <h2>Examples for Node.js</h2>
-          {% for example in site.categories['example'] %}
-          {% if example.tags contains 'nodejs' %}
+          
+          
+          
+          
           <div class="demo">
             <div class="demo__info span4">
-              <h3 class="demo__title">{{ example.title }}</h3>
-              {{ example.content }}
-              {% if example.demo %}
-              <a href="{{ example.demo }}" class="btn btn-primary big-button demo__button">View Demo</a>
-              {% endif %}
+              <h3 class="demo__title">c-base station announcer</h3>
+              <p>System for generating random announcements at the <a href="https://c-base.org">c-base space station</a>. These announcements can be converted to audio or displayed on various information screens.</p>
+
+<blockquote>
+  <p>Security advise. Due to intergalactic regulations, passengers are required to keep their antigravity generators with them at all times.</p>
+</blockquote>
+
+              
+              
+              <a href="https://app.flowhub.io/#github/c-base/station-announcer" class="btn btn-primary big-button demo__button">Open in Flowhub</a>
+              
               <h4>Related Resources </h4>
-              {% if example.blog %}
-              <p><a href="{{ example.blog }}">Introductory blog post</a></p>
-              {% endif %}
-              {% if example.source %}
-              <p><a href="{{ example.source }}">Source code</a></p>
-              {% endif %}
+              
+              
+              <p><a href="https://github.com/c-base/station-announcer">Source code</a></p>
+              
             </div>
             <div class="demo__screenshot span8">
-              {% if example.image %}
-              <img src="{{ example.image }}" alt="" title="" />
-              {% else %}
-              <img src="http://placehold.it/760x370" alt="" title="" />
-              {% endif %}
+              
+              <img src="/img/example/station-announcer.jpg" alt="" title="" />
+              
             </div>
           </div>
-          {% endif %}
-          {% endfor %}
+          
+          
+          
+          <div class="demo">
+            <div class="demo__info span4">
+              <h3 class="demo__title">Ingress Table</h3>
+              <p>An Internet of Things project build with NoFlo and <a href="http://microflo.org/">MicroFlo</a> to visualize <a href="https://www.ingress.com/">Ingress</a> gameplay around the <a href="https://c-base.org/">c-base hackerspace</a> in Berlin.</p>
+
+              
+              
+              <a href="https://app.flowhub.io/#github/c-base/ingress-table" class="btn btn-primary big-button demo__button">Open in Flowhub</a>
+              
+              <h4>Related Resources </h4>
+              
+              <p><a href="http://bergie.iki.fi/blog/ingress-table/">Introductory blog post</a></p>
+              
+              
+              <p><a href="https://github.com/c-base/ingress-table">Source code</a></p>
+              
+            </div>
+            <div class="demo__screenshot span8">
+              
+              <img src="/img/example/ingress-table.png" alt="" title="" />
+              
+            </div>
+          </div>
+          
+          
+          
+          <div class="demo">
+            <div class="demo__info span4">
+              <h3 class="demo__title">NoFlo drawing robot</h3>
+              <p>Controlling <a href="http://mirobot.io/">Mirobot</a> drawing robots with NoFlo.</p>
+
+              
+              
+              <h4>Related Resources </h4>
+              
+              <p><a href="http://meemoo.org/blog/2015-01-14-turtle-power-to-the-people">Introductory blog post</a></p>
+              
+              
+              <p><a href="https://github.com/noflo/noflo-mirobot">Source code</a></p>
+              
+            </div>
+            <div class="demo__screenshot span8">
+              
+              <img src="/img/example/noflo-mirobot.jpg" alt="" title="" />
+              
+            </div>
+          </div>
+          
+          
+          
+          
+          
+          
+          
+          <div class="demo">
+            <div class="demo__info span4">
+              <h3 class="demo__title">noflo-jekyll</h3>
+              <p>Implementation of the <a href="http://jekyllrb.com/">Jekyll</a> static site generator in NoFlo.</p>
+
+              
+              
+              <h4>Related Resources </h4>
+              
+              <p><a href="http://bergie.iki.fi/blog/noflo-jekyll/">Introductory blog post</a></p>
+              
+              
+              <p><a href="https://github.com/the-grid/noflo-jekyll">Source code</a></p>
+              
+            </div>
+            <div class="demo__screenshot span8">
+              
+              <img src="/img/example/noflo-jekyll.png" alt="" title="" />
+              
+            </div>
+          </div>
+          
+          
+          
+          
+          
+          <div class="demo">
+            <div class="demo__info span4">
+              <h3 class="demo__title">Controlling an AR.Drone</h3>
+              <p>Controlling a <a href="http://ardrone2.parrot.com/">Parrot AR.Drone</a> with NoFlo</p>
+
+              
+              
+              <h4>Related Resources </h4>
+              
+              <p><a href="http://bergie.iki.fi/blog/noflo-ardrone/">Introductory blog post</a></p>
+              
+              
+              <p><a href="https://github.com/noflo/noflo-ardrone">Source code</a></p>
+              
+            </div>
+            <div class="demo__screenshot span8">
+              
+              <img src="/img/example/noflo-ardrone.png" alt="" title="" />
+              
+            </div>
+          </div>
+          
+          
+          
+          
           <hr />
           <h2>Examples for web browsers</h2>
-          {% for example in site.categories['example'] %}
-          {% unless example.tags contains 'nodejs' %}
+          
+          
           <div class="demo">
             <div class="demo__info span4">
-              <h3 class="demo__title">{{ example.title }}</h3>
-              {{ example.content }}
-              {% if example.demo %}
-              <a href="{{ example.demo }}" class="btn btn-primary big-button demo__button">View Demo</a>
-              {% endif %}
+              <h3 class="demo__title">Flowhub</h3>
+              <p>Full integrated development environment for Flow-Based Programming. Supports graph and component editing, running tests, as well as live programming when connected to a FBP runtime.</p>
+
+              
+              <a href="https://app.flowhub.io" class="btn btn-primary big-button demo__button">Run Demo</a>
+              
+              
               <h4>Related Resources </h4>
-              {% if example.blog %}
-              <p><a href="{{ example.blog }}">Introductory blog post</a></p>
-              {% endif %}
-              {% if example.source %}
-              <p><a href="{{ example.source }}">Source code</a></p>
-              {% endif %}
+              
+              <p><a href="https://www.kickstarter.com/projects/noflo/noflo-development-environment">Introductory blog post</a></p>
+              
+              
+              <p><a href="https://github.com/noflo/noflo-ui">Source code</a></p>
+              
             </div>
             <div class="demo__screenshot span8">
-              {% if example.image %}
-              <img src="{{ example.image }}" alt="" title="" />
-              {% else %}
-              <img src="http://placehold.it/760x370" alt="" title="" />
-              {% endif %}
+              
+              <img src="/img/example/noflo-ui.png" alt="" title="" />
+              
             </div>
           </div>
-          {% endunless %}
-          {% endfor %}
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <div class="demo">
+            <div class="demo__info span4">
+              <h3 class="demo__title">WebAudio with NoFlo</h3>
+              <p>Virtual Theremin built with NoFlo and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">WebAudio</a>. Let’s make some noise!</p>
+
+              
+              <a href="https://app.flowhub.io/#gist/6724a6eb8a1aaf351866e7a43c3ecd43" class="btn btn-primary big-button demo__button">Run Demo</a>
+              
+              
+              <h4>Related Resources </h4>
+              
+              <p><a href="http://meemoo.org/blog/2014-08-05-first-steps-for-noflo-webaudio">Introductory blog post</a></p>
+              
+              
+              <p><a href="https://gist.github.com/bergie/6724a6eb8a1aaf351866e7a43c3ecd43">Source code</a></p>
+              
+            </div>
+            <div class="demo__screenshot span8">
+              
+              <img src="/img/example/webaudio.png" alt="" title="" />
+              
+            </div>
+          </div>
+          
+          
+          
+          <div class="demo">
+            <div class="demo__info span4">
+              <h3 class="demo__title">React TODO list with NoFlo</h3>
+              <p>Basic TODO list built with <a href="https://reactjs.org/">React.js</a> using the <a href="https://facebook.github.io/flux/">Flux pattern</a> adapted to NoFlo.</p>
+
+              
+              <a href="https://app.flowhub.io/#gist/c111454c9fd2f74d37d1e8a4e739adfd" class="btn btn-primary big-button demo__button">Run Demo</a>
+              
+              
+              <h4>Related Resources </h4>
+              
+              <p><a href="https://plus.google.com/+HenriBergius/posts/eUMtHgw6bG9">Introductory blog post</a></p>
+              
+              
+              <p><a href="https://gist.github.com/bergie/c111454c9fd2f74d37d1e8a4e739adfd">Source code</a></p>
+              
+            </div>
+            <div class="demo__screenshot span8">
+              
+              <img src="/img/example/react.png" alt="" title="" />
+              
+            </div>
+          </div>
+          
+          
+          
+          
+          
+          <div class="demo">
+            <div class="demo__info span4">
+              <h3 class="demo__title">Analog Clock</h3>
+              <p>Analog clock implemented using NoFlo’s timers and CSS manipulation components.</p>
+
+              
+              <a href="https://app.flowhub.io/#gist/86a28c01d66cd8bf672f4e0a3e1ba851" class="btn btn-primary big-button demo__button">Run Demo</a>
+              
+              
+              <h4>Related Resources </h4>
+              
+              <p><a href="http://www.forresto.com/2013/09/noflo-clock-demo/">Introductory blog post</a></p>
+              
+              
+              <p><a href="https://gist.github.com/bergie/86a28c01d66cd8bf672f4e0a3e1ba851">Source code</a></p>
+              
+            </div>
+            <div class="demo__screenshot span8">
+              
+              <img src="/img/example/clock.png" alt="" title="" />
+              
+            </div>
+          </div>
+          
+          
+          
+          
+          
+          <div class="demo">
+            <div class="demo__info span4">
+              <h3 class="demo__title">Draggable image with spring physics</h3>
+              <p>Draggable image with spring physics implemented using NoFlo. Try tuning the spring parameters!</p>
+
+              
+              <a href="http://noflo.github.io/dataflow-noflo/demo/draggabilly.html" class="btn btn-primary big-button demo__button">Run Demo</a>
+              
+              
+              <h4>Related Resources </h4>
+              
+              
+              <p><a href="https://github.com/noflo/dataflow-noflo/tree/gh-pages/demo">Source code</a></p>
+              
+            </div>
+            <div class="demo__screenshot span8">
+              
+              <img src="/img/example/draggabilly.png" alt="" title="" />
+              
+            </div>
+          </div>
+          
+          
         </div>
       </div>
     </div>
   </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/" class="active">Examples</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

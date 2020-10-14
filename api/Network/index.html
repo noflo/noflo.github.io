@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Network API | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">API Documentation</h1>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+        
+          <nav>
+            <ul class="sidebar__nav">
+              
+                
+                
+                <li>
+                  <a href="/api/AsCallback/">
+                    AsCallback
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/AsComponent/">
+                    AsComponent
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BaseNetwork/">
+                    BaseNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/BasePort/">
+                    BasePort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Component/">
+                    Component
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ComponentLoader/">
+                    ComponentLoader
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/IP/">
+                    IP
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InPort/">
+                    InPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/InternalSocket/">
+                    InternalSocket
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/LegacyNetwork/">
+                    LegacyNetwork
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Network/">
+                    Network
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/NoFlo/">
+                    NoFlo
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/OutPort/">
+                    OutPort
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Platform/">
+                    Platform
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Ports/">
+                    Ports
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessContext/">
+                    ProcessContext
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessInput/">
+                    ProcessInput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/ProcessOutput/">
+                    ProcessOutput
+                  </a>
+                </li>
+                
+              
+                
+                
+                <li>
+                  <a href="/api/Utils/">
+                    Utils
+                  </a>
+                </li>
+                
+              
+            </ul>
+          </nav>
+        
+        </div>
+        <div class="content span8">
+          <h1>Network API</h1>
+          
+            
+            <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
+(c) <span class="hljs-number">2013</span><span class="hljs-number">-2018</span> Flowhub UG
+(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
+NoFlo may be freely distributed under the MIT license</code></pre>
+
+            
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> BaseNetwork = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./BaseNetwork&#x27;</span>);
+
+<span class="hljs-comment">/* eslint-disable
+    no-param-reassign,
+*/</span></pre></div>
+            
+          
+            
+            <h2 id="the-noflo-network-coordinator">The NoFlo network coordinator</h2>
+<p>NoFlo networks consist of processes connected to each other
+via sockets attached from outports to inports.</p>
+<p>The role of the network coordinator is to take a graph and
+instantiate all the necessary processes from the designated
+components, attach sockets between them, and handle the sending
+of Initial Information Packets.</p>
+
+            
+              <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Network</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseNetwork</span> </span>{</pre></div>
+            
+          
+            
+            <p>All NoFlo networks are instantiated with a graph. Upon instantiation
+they will load all the needed components, instantiate them, and
+set up the defined connections and IIPs.</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">constructor</span>(graph, options = {}) {
+    <span class="hljs-built_in">super</span>(graph, options);
+  }</pre></div>
+            
+          
+            
+            <p>Add a process to the network. The node will also be registered
+with the current graph.</p>
+
+            
+              <div class='highlight'><pre>  addNode(node, options, callback) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
+      callback = options;
+      options = {};
+    }
+    <span class="hljs-built_in">super</span>.addNode(node, options, <span class="hljs-function">(<span class="hljs-params">err, process</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">if</span> (!options.initial) {
+        <span class="hljs-built_in">this</span>.graph.addNode(node.id, node.component, node.metadata);
+      }
+      callback(<span class="hljs-literal">null</span>, process);
+    });
+  }</pre></div>
+            
+          
+            
+            <p>Remove a process from the network. The node will also be removed
+from the current graph.</p>
+
+            
+              <div class='highlight'><pre>  removeNode(node, callback) {
+    <span class="hljs-built_in">super</span>.removeNode(node, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-built_in">this</span>.graph.removeNode(node.id);
+      callback();
+    });
+  }</pre></div>
+            
+          
+            
+            <p>Rename a process in the network. Renaming a process also modifies
+the current graph.</p>
+
+            
+              <div class='highlight'><pre>  renameNode(oldId, newId, callback) {
+    <span class="hljs-built_in">super</span>.renameNode(oldId, newId, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-built_in">this</span>.graph.renameNode(oldId, newId);
+      callback();
+    });
+  }</pre></div>
+            
+          
+            
+            <p>Add a connection to the network. The edge will also be registered
+with the current graph.</p>
+
+            
+              <div class='highlight'><pre>  addEdge(edge, options, callback) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
+      callback = options;
+      options = {};
+    }
+    <span class="hljs-built_in">super</span>.addEdge(edge, options, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">if</span> (!options.initial) {
+        <span class="hljs-built_in">this</span>.graph.addEdgeIndex(
+          edge.from.node,
+          edge.from.port,
+          edge.from.index,
+          edge.to.node,
+          edge.to.port,
+          edge.to.index,
+          edge.metadata,
+        );
+      }
+      callback();
+    });
+  }</pre></div>
+            
+          
+            
+            <p>Remove a connection from the network. The edge will also be removed
+from the current graph.</p>
+
+            
+              <div class='highlight'><pre>  removeEdge(edge, callback) {
+    <span class="hljs-built_in">super</span>.removeEdge(edge, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-built_in">this</span>.graph.removeEdge(edge.from.node, edge.from.port, edge.to.node, edge.to.port);
+      callback();
+    });
+  }</pre></div>
+            
+          
+            
+            <p>Add an IIP to the network. The IIP will also be registered with the
+current graph. If the network is running, the IIP will be sent immediately.</p>
+
+            
+              <div class='highlight'><pre>  addInitial(iip, options, callback) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
+      callback = options;
+      options = {};
+    }
+    <span class="hljs-built_in">super</span>.addInitial(iip, options, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">if</span> (!options.initial) {
+        <span class="hljs-built_in">this</span>.graph.addInitialIndex(
+          iip.from.data,
+          iip.to.node,
+          iip.to.port,
+          iip.to.index,
+          iip.metadata,
+        );
+      }
+      callback();
+    });
+  }</pre></div>
+            
+          
+            
+            <p>Remove an IIP from the network. The IIP will also be removed from the
+current graph.</p>
+
+            
+              <div class='highlight'><pre>  removeInitial(iip, callback) {
+    <span class="hljs-built_in">super</span>.removeInitial(iip, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) {
+        callback(err);
+        <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-built_in">this</span>.graph.removeInitial(iip.to.node, iip.to.port);
+      callback();
+    });
+  }
+}
+
+<span class="hljs-built_in">exports</span>.Network = Network;</pre></div>
+            
+          
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.coffee">Network.coffee</a> file.</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>

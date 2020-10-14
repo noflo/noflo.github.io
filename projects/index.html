@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Writing projects | NoFlo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/zenburn.css">
+  <link rel="shortcut icon" href="/img/favicon.png">
+  <link rel="publisher" href="https://plus.google.com/u/0/112372998187205178398">
+  <meta name="theme-color" content="#f5f6f7">
+  <meta property="fb:admins" content="722463139">
+  <meta name="google-site-verification" content="shV-uX9JiafQZT3nSkhQfC67DLrp3q7tVaSKXzBTe1c">
+</head>
+<body>
+<div class="page">
+    <header class="row-fluid">
+    <div class="site-header span12">
+      <div class="container">
+        <a href="/" class="logo">NoFlo</a>
+        <a href="/" class="toggle-main-nav">Navigation</a>
+        <div class="search-site">
+          <a href="" class="toggle-search">Search</a>
+                    <form id="cse-search-box" action="https://google.com/cse" class="search-form">
+            <fieldset>
+              <input type="hidden" name="cx" value="016364845905675673706:orufl0szkhw" />
+              <input type="text" id="keywords" name="q" class="search__keywords" value="" placeholder="Search Noflo Site ..." />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input class="search-button" type="submit" name="sa" value="Search" />
+              <span class="search-prompt">Hit Return</span>
+            </fieldset>
+          </form>
+
+        </div>
+        <nav class="main-nav">
+          <ul class="nav">
+            <li><a href="/example/">Examples</a></li>
+            <li><a href="/documentation/">Documentation</a></li>
+            <li class="last"><a href="/component/">Components</a></li>
+          </ul>
+        </nav>
+
+        <div class="right">
+          <nav class="util-nav">
+            <ul class="nav">
+              <li class="dropdown">
+                <a href="/support/" class="email">Support channels</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://twitter.com/noflo" class="share">Twitter</a>
+              </li>
+              <li class="dropdown">
+                <a href="https://github.com/noflo" class="github">Github</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="row-fluid">
+    <div class="page-title documentation-page-title">
+      <div class="container">
+        <h1 class="page-title__title">Writing your own project</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="container documentation-main-container">
+      <div class="main">
+        <div class="sidebar span4">
+          <nav>
+            <ul class="sidebar__nav">
+              
+              
+              <li>
+                <a href="/tutorials/canadianness/">Tutorial: Data transformation</a>
+              </li>
+              
+            </ul>
+          </nav>
+        </div>
+        <div class="content span8">
+          <h1>Writing projects</h1>
+          <hr />
+<h2 id="project-steps">Project steps:</h2>
+
+<h3 id="initial">Initial:</h3>
+<ul>
+  <li><a href="#idea">Idea</a></li>
+  <li><a href="#requirements">Requirements</a></li>
+  <li><a href="#planning">Planning</a></li>
+  <li><a href="#researching">Researching</a></li>
+  <li><a href="#pseudo-code">Pseudo code</a></li>
+</ul>
+
+<h3 id="writing-components">Writing components</h3>
+<ul>
+  <li><a href="/projects/find-ehs">FindEhs</a></li>
+  <li><a href="/projects/determine-emotion">DetermineEmotion</a></li>
+  <li><a href="/projects/word-score">WordScore</a></li>
+</ul>
+
+<h3 id="writing-graphs">Writing graphs</h3>
+<ul>
+  <li><a href="/projects/graphs">Graphs</a></li>
+</ul>
+
+<h3 id="testing">Testing</h3>
+<ul>
+  <li><a href="/projects/testing">Testing</a></li>
+</ul>
+
+<h3 id="finishing-up">Finishing up</h3>
+<ul>
+  <li><a href="/projects/embedding">Embedding</a></li>
+  <li><a href="/projects/summary">Summary</a></li>
+</ul>
+
+<p><a href="https://github.com/aretecode/canadianness">See the full project</a></p>
+
+<hr />
+<h1 id="idea-">Idea <a id="idea"></a></h1>
+
+<p>Make a project that calculates how Canadian a string is.
+As an added bonus, it will determine the emotion of the string based on how <em>eh</em>’s are used.</p>
+
+<hr />
+<h1 id="requirements-">Requirements <a id="requirements"></a></h1>
+
+<p>Use:</p>
+<ul>
+  <li>our own components</li>
+  <li>other peoples components (other noflo libraries components)</li>
+  <li>can use fbp</li>
+  <li>graphs</li>
+  <li>subgraphs</li>
+  <li>tests (use fbp-spec and mocha tests to show both options)</li>
+  <li>debugging</li>
+</ul>
+
+<hr />
+<h1 id="planning-">Planning <a id="planning"></a></h1>
+
+<ul>
+  <li>To determine how Canadian something is, we want to check words inside of the string.
+    <ul>
+      <li>~ If it is easily possible, figure out how far words are from each other</li>
+      <li>~ and their location inside of the string (ie, at the very end, beginning, near the end.)</li>
+      <li>Check spelling of words, Canadan vs elsewhere. Canadian spelling first, then UK, then American.</li>
+      <li>Check the emotion of the word <em>eh</em> using symbols and letter case (ie, eh, Eh, EH, EH?, eh?!)</li>
+    </ul>
+  </li>
+  <li>The output should have the <em>Emotion</em>, and the <em>Canadian Score</em>.</li>
+</ul>
+
+<hr />
+<h1 id="researching-">Researching <a id="researching"></a></h1>
+
+<h2 id="word-weight">Word Weight</h2>
+<p>Search Google for a library that may be able to help us with dealing with word weights, singularize, and pluralize words.
+<a href="https://www.google.com/search?q=js%20library%20determine%20weight%20of%20words">js library determine weight of words</a>
+<a href="https://github.com/NaturalNode/natural">NaturalNode</a> looks promising</p>
+
+<h2 id="spelling">Spelling</h2>
+<p>Search Google for the spelling differences
+<a href="https://www.google.com/search?q=canadian%20vs%20uk%20vs%20usa%20spelling">Canadian vs uk vs usa spelling</a></p>
+
+<p>perfect
+<a href="http://www.lukemastin.com/testing/spelling/cgi-bin/database.cgi?action=view_category&amp;database=spelling&amp;category=C">Canadian, British and American Spelling</a>
+This is data on a table though with no apparent api, so we should get it into usable data (json).
+<a href="https://www.google.com/search?q=get+table+data+as+json">get table as json</a>
+<a href="http://johndyer.name/html-table-to-json/">table to json</a>
+<a href="https://www.dynatable.com/">table to json jquery</a></p>
+
+<hr />
+<h1 id="pseudo-code-">Pseudo code <a id="pseudo-code"></a></h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[How Canadian]
+  INPUT=CONTENT(string)
+  INPUT=WORDS(array) # words to use as weights
+  INPUT=SPELLING(array)
+  OUTPUT=EMOTION(string)
+  OUTPUT=SCORE(number)
+
+  # if we wanted to swap out emotion to calculate emoji insteadof _eh_ for example,
+  # we can easily just replace this box. the same goes for any noflo box.
+  [Emotion]
+    INPUT=CONTENT(string)
+    OUTPUT=EMOTION(string)
+    [Find Ehs]
+      # if it has no _eh_, emotion is flat
+
+      # could also separate to collect and doing each and then sending another stream
+      # and putting those back together as a score and using add
+
+      # collects stream, determines emotion of each
+      [Determine Emotion]
+
+  [WordScore]
+    OUTPUT=SCORE(number)
+    INPUT=LIST(array) # control port, because we want to use one for each input
+    INPUT=CONTENT(STRING)
+
+  # since these both calculate score, one positive, one negative,
+  # they can be separate instances of the same component
+  [CanadianScore] # LIST would use WORDS
+  [SpellingScore] # LIST would use SPELLING
+
+    # output of CanadianScore &amp; SpellingScore should be added together to get result
+    # score from here is the SCORE
+    [noflo/Math/Add]
+</code></pre></div></div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="site-footer">
+    <div class="row-fluid">
+      <div class="container">
+        <p>NoFlo - Flow-Based Programming for JavaScript is <a href="/license/">free software</a> developed by 
+        <a href="http://bergie.iki.fi/">Henri Bergius</a>
+        and backed via <a href="/kickstarter/">Kickstarter</a>.</p>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-nav">
+    <ul class="nav">
+      <li><h3>Site</h3></li>
+      <li><a href="/example/">Examples</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+      <li class="last"><a href="/component/">Components</a></li>
+      <li><h3>Contact</h3></li>
+      <li><a href="/support/">Support channels</a></li>
+      <li><a href="https://twitter.com/noflo">Twitter</a></li>
+      <li><a href="https://github.com/noflo">Github</a></li>
+    </ul>
+  </nav>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="/js/min/bootstrap.min.js"></script>
+<script src="/js/min/all.min.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-75936-14']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+</script>
+
+</body>
+</html>
