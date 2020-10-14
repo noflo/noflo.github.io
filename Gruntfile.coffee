@@ -90,6 +90,13 @@ module.exports = ->
         ]
         tasks: ['sass:src']
 
+    copy:
+      package:
+        files: [
+          src: ['node_modules/noflo/package.json']
+          dest: '_data/noflo.json'
+        ]
+
   @loadNpmTasks 'grunt-jekyll'
   @loadNpmTasks 'grunt-docco'
   @loadNpmTasks 'grunt-contrib-connect'
@@ -115,6 +122,7 @@ module.exports = ->
   ]
   @registerTask 'build', [
     'sass:src'
+    'copy:package'
     'docco'
     'jekyll'
   ]

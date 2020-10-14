@@ -40,6 +40,7 @@ publish
 _site
 /node_modules/
 /_src/
+/_data/noflo.json
 
 # Docco documentation tweaks
 docco.css
