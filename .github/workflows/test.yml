@@ -15,7 +15,7 @@ jobs:
       uses: actions/setup-node@v2.1.2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: gem install bundler
+    - run: sudo apt-get install -y bundler
     - run: bundle install --path vendor/bundle
     - run: npm install
     - run: git submodule update --init
