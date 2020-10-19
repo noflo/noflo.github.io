@@ -257,8 +257,8 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2013</span><span class="hljs-number">-2018</span> Flowhub UG
-(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
+(c) <span class="hljs-number">2013</span>-<span class="hljs-number">2018</span> Flowhub UG
+(c) <span class="hljs-number">2011</span>-<span class="hljs-number">2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
@@ -342,7 +342,7 @@ they will load all the needed components, instantiate them, and
 set up the defined connections and IIPs.</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">constructor</span>(graph, options) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">graph, options</span>)</span> {
     <span class="hljs-keyword">if</span> (options == <span class="hljs-literal">null</span>) { options = {}; }
     <span class="hljs-built_in">super</span>();
     <span class="hljs-built_in">this</span>.options = options;</pre></div>
@@ -433,12 +433,12 @@ way we can calculate the uptime of the network.</p>
 time, in seconds.</p>
 
             
-              <div class='highlight'><pre>  uptime() {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">uptime</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.startupDate) { <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; }
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>() - <span class="hljs-built_in">this</span>.startupDate;
   }
 
-  getActiveProcesses() {
+  <span class="hljs-function"><span class="hljs-title">getActiveProcesses</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">const</span> active = [];
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.started) { <span class="hljs-keyword">return</span> active; }
     <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).forEach(<span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
@@ -465,7 +465,7 @@ time, in seconds.</p>
     <span class="hljs-keyword">return</span> active;
   }
 
-  bufferedEmit(event, payload) {</pre></div>
+  <span class="hljs-function"><span class="hljs-title">bufferedEmit</span>(<span class="hljs-params">event, payload</span>)</span> {</pre></div>
             
           
             
@@ -531,7 +531,7 @@ time, in seconds.</p>
 </ul>
 
             
-              <div class='highlight'><pre>  load(component, metadata, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">load</span>(<span class="hljs-params">component, metadata, callback</span>)</span> {
     <span class="hljs-built_in">this</span>.loader.load(component, callback, metadata);
   }</pre></div>
             
@@ -547,7 +547,7 @@ that includes the following properties:</p>
 </ul>
 
             
-              <div class='highlight'><pre>  addNode(node, options, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">addNode</span>(<span class="hljs-params">node, options, callback</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
       callback = options;
       options = {};
@@ -626,7 +626,7 @@ we already have a process with the given ID, return that.</p>
     });
   }
 
-  removeNode(node, callback) {
+  <span class="hljs-function"><span class="hljs-title">removeNode</span>(<span class="hljs-params">node, callback</span>)</span> {
     <span class="hljs-keyword">const</span> process = <span class="hljs-built_in">this</span>.getNode(node.id);
     <span class="hljs-keyword">if</span> (!process) {
       callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Node <span class="hljs-subst">${node.id}</span> not found`</span>));
@@ -642,7 +642,7 @@ we already have a process with the given ID, return that.</p>
     });
   }
 
-  renameNode(oldId, newId, callback) {
+  <span class="hljs-function"><span class="hljs-title">renameNode</span>(<span class="hljs-params">oldId, newId, callback</span>)</span> {
     <span class="hljs-keyword">const</span> process = <span class="hljs-built_in">this</span>.getNode(oldId);
     <span class="hljs-keyword">if</span> (!process) {
       callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Process <span class="hljs-subst">${oldId}</span> not found`</span>));
@@ -684,11 +684,11 @@ we already have a process with the given ID, return that.</p>
             <p>Get process by its ID.</p>
 
             
-              <div class='highlight'><pre>  getNode(id) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">getNode</span>(<span class="hljs-params">id</span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.processes[id];
   }
 
-  connect(done = <span class="hljs-function">() =&gt;</span> {}) {</pre></div>
+  <span class="hljs-function"><span class="hljs-title">connect</span>(<span class="hljs-params">done = () =&gt; {}</span>)</span> {</pre></div>
             
           
             
@@ -768,7 +768,7 @@ when done</p>
               <div class='highlight'><pre>    nodes(<span class="hljs-string">&#x27;Node&#x27;</span>);
   }
 
-  subscribeSubgraph(node) {
+  <span class="hljs-function"><span class="hljs-title">subscribeSubgraph</span>(<span class="hljs-params">node</span>)</span> {
     <span class="hljs-keyword">if</span> (!node.component.isReady()) {
       node.component.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
         <span class="hljs-built_in">this</span>.subscribeSubgraph(node);
@@ -810,7 +810,7 @@ when done</p>
             <p>Subscribe to events from all connected sockets and re-emit them</p>
 
             
-              <div class='highlight'><pre>  subscribeSocket(socket, source) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">subscribeSocket</span>(<span class="hljs-params">socket, source</span>)</span> {
     socket.on(<span class="hljs-string">&#x27;ip&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">ip</span>) =&gt;</span> {
       <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;ip&#x27;</span>, {
         <span class="hljs-attr">id</span>: socket.getId(),
@@ -851,7 +851,7 @@ when done</p>
     });
   }
 
-  subscribeNode(node) {
+  <span class="hljs-function"><span class="hljs-title">subscribeNode</span>(<span class="hljs-params">node</span>)</span> {
     node.component.on(<span class="hljs-string">&#x27;activate&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
       <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.debouncedEnd) { <span class="hljs-built_in">this</span>.abortDebounce = <span class="hljs-literal">true</span>; }
     });
@@ -868,7 +868,7 @@ when done</p>
     });
   }
 
-  addEdge(edge, options, callback) {
+  <span class="hljs-function"><span class="hljs-title">addEdge</span>(<span class="hljs-params">edge, options, callback</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
       callback = options;
       options = {};
@@ -934,7 +934,7 @@ when done</p>
     });
   }
 
-  removeEdge(edge, callback) {
+  <span class="hljs-function"><span class="hljs-title">removeEdge</span>(<span class="hljs-params">edge, callback</span>)</span> {
     <span class="hljs-built_in">this</span>.connections.forEach(<span class="hljs-function">(<span class="hljs-params">connection</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> (!connection) { <span class="hljs-keyword">return</span>; }
       <span class="hljs-keyword">if</span> ((edge.to.node !== connection.to.process.id) || (edge.to.port !== connection.to.port)) {
@@ -953,7 +953,7 @@ when done</p>
     });
   }
 
-  addDefaults(node, options, callback) {
+  <span class="hljs-function"><span class="hljs-title">addDefaults</span>(<span class="hljs-params">node, options, callback</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
       callback = options;
       options = {};
@@ -1007,7 +1007,7 @@ when done</p>
     callback();
   }
 
-  addInitial(initializer, options, callback) {
+  <span class="hljs-function"><span class="hljs-title">addInitial</span>(<span class="hljs-params">initializer, options, callback</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
       callback = options;
       options = {};
@@ -1080,7 +1080,7 @@ started and set</p>
     });
   }
 
-  removeInitial(initializer, callback) {
+  <span class="hljs-function"><span class="hljs-title">removeInitial</span>(<span class="hljs-params">initializer, callback</span>)</span> {
     <span class="hljs-built_in">this</span>.connections.forEach(<span class="hljs-function">(<span class="hljs-params">connection</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> (!connection) { <span class="hljs-keyword">return</span>; }
       <span class="hljs-keyword">if</span> ((initializer.to.node !== connection.to.process.id)
@@ -1107,14 +1107,14 @@ started and set</p>
     callback();
   }
 
-  sendInitials(callback = <span class="hljs-function">() =&gt;</span> {}) {
+  <span class="hljs-function"><span class="hljs-title">sendInitials</span>(<span class="hljs-params">callback = () =&gt; {}</span>)</span> {
     <span class="hljs-keyword">const</span> send = <span class="hljs-function">() =&gt;</span> {
       <span class="hljs-built_in">this</span>.initials.forEach(<span class="hljs-function">(<span class="hljs-params">initial</span>) =&gt;</span> { sendInitial(initial); });
       <span class="hljs-built_in">this</span>.initials = [];
       callback();
     };
 
-    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> process !== <span class="hljs-string">&#x27;undefined&#x27;</span>) &amp;&amp; process.execPath &amp;&amp; (process.execPath.indexOf(<span class="hljs-string">&#x27;node&#x27;</span>) !== <span class="hljs-number">-1</span>)) {</pre></div>
+    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> process !== <span class="hljs-string">&#x27;undefined&#x27;</span>) &amp;&amp; process.execPath &amp;&amp; (process.execPath.indexOf(<span class="hljs-string">&#x27;node&#x27;</span>) !== -<span class="hljs-number">1</span>)) {</pre></div>
             
           
             
@@ -1127,19 +1127,19 @@ started and set</p>
     }
   }
 
-  isStarted() {
+  <span class="hljs-function"><span class="hljs-title">isStarted</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.started;
   }
 
-  isStopped() {
+  <span class="hljs-function"><span class="hljs-title">isStopped</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.stopped;
   }
 
-  isRunning() {
+  <span class="hljs-function"><span class="hljs-title">isRunning</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.getActiveProcesses().length &gt; <span class="hljs-number">0</span>;
   }
 
-  startComponents(callback = <span class="hljs-function">() =&gt;</span> {}) {</pre></div>
+  <span class="hljs-function"><span class="hljs-title">startComponents</span>(<span class="hljs-params">callback = () =&gt; {}</span>)</span> {</pre></div>
             
           
             
@@ -1182,7 +1182,7 @@ started and set</p>
     });
   }
 
-  sendDefaults(callback = <span class="hljs-function">() =&gt;</span> {}) {
+  <span class="hljs-function"><span class="hljs-title">sendDefaults</span>(<span class="hljs-params">callback = () =&gt; {}</span>)</span> {
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.defaults.length) {
       callback();
       <span class="hljs-keyword">return</span>;
@@ -1207,7 +1207,7 @@ a socket is attached from the “parent” graph.</p>
     callback();
   }
 
-  start(callback) {
+  <span class="hljs-function"><span class="hljs-title">start</span>(<span class="hljs-params">callback</span>)</span> {
     <span class="hljs-keyword">if</span> (!callback) {
       platform.deprecated(<span class="hljs-string">&#x27;Calling network.start() without callback is deprecated&#x27;</span>);
       callback = <span class="hljs-function">() =&gt;</span> {};
@@ -1250,7 +1250,7 @@ a socket is attached from the “parent” graph.</p>
     });
   }
 
-  stop(callback) {
+  <span class="hljs-function"><span class="hljs-title">stop</span>(<span class="hljs-params">callback</span>)</span> {
     <span class="hljs-keyword">if</span> (!callback) {
       platform.deprecated(<span class="hljs-string">&#x27;Calling network.stop() without callback is deprecated&#x27;</span>);
       callback = <span class="hljs-function">() =&gt;</span> {};
@@ -1321,7 +1321,7 @@ a socket is attached from the “parent” graph.</p>
     });
   }
 
-  setStarted(started) {
+  <span class="hljs-function"><span class="hljs-title">setStarted</span>(<span class="hljs-params">started</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.started === started) { <span class="hljs-keyword">return</span>; }
     <span class="hljs-keyword">if</span> (!started) {</pre></div>
             
@@ -1351,7 +1351,7 @@ a socket is attached from the “parent” graph.</p>
       { <span class="hljs-attr">start</span>: <span class="hljs-built_in">this</span>.startupDate });
   }
 
-  checkIfFinished() {
+  <span class="hljs-function"><span class="hljs-title">checkIfFinished</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isRunning()) { <span class="hljs-keyword">return</span>; }
     <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.abortDebounce;
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.debouncedEnd) {
@@ -1365,11 +1365,11 @@ a socket is attached from the “parent” graph.</p>
     (<span class="hljs-built_in">this</span>.debouncedEnd)();
   }
 
-  getDebug() {
+  <span class="hljs-function"><span class="hljs-title">getDebug</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.debug;
   }
 
-  setDebug(active) {
+  <span class="hljs-function"><span class="hljs-title">setDebug</span>(<span class="hljs-params">active</span>)</span> {
     <span class="hljs-keyword">if</span> (active === <span class="hljs-built_in">this</span>.debug) { <span class="hljs-keyword">return</span>; }
     <span class="hljs-built_in">this</span>.debug = active;
 

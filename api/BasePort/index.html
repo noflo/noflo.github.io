@@ -257,7 +257,7 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
+(c) <span class="hljs-number">2014</span>-<span class="hljs-number">2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
@@ -319,7 +319,7 @@ was provided</p>
             <p>Ensure datatype defined for the port is valid</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (validTypes.indexOf(datatype) === <span class="hljs-number">-1</span>) {
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (validTypes.indexOf(datatype) === -<span class="hljs-number">1</span>) {
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port datatype &#x27;<span class="hljs-subst">${datatype}</span>&#x27; specified, valid are <span class="hljs-subst">${validTypes.join(<span class="hljs-string">&#x27;, &#x27;</span>)}</span>`</span>);
   }</pre></div>
             
@@ -330,7 +330,7 @@ was provided</p>
             
               <div class='highlight'><pre>  <span class="hljs-keyword">const</span> schema = options.schema || options.type;
 
-  <span class="hljs-keyword">if</span> (schema &amp;&amp; (schema.indexOf(<span class="hljs-string">&#x27;/&#x27;</span>) === <span class="hljs-number">-1</span>)) {
+  <span class="hljs-keyword">if</span> (schema &amp;&amp; (schema.indexOf(<span class="hljs-string">&#x27;/&#x27;</span>) === -<span class="hljs-number">1</span>)) {
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port schema &#x27;<span class="hljs-subst">${schema}</span>&#x27; specified. Should be URL or MIME type`</span>);
   }
 
@@ -343,7 +343,7 @@ was provided</p>
 }
 
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BasePort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
-  <span class="hljs-keyword">constructor</span>(options) {
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">options</span>)</span> {
     <span class="hljs-built_in">super</span>();</pre></div>
             
           
@@ -376,20 +376,20 @@ connections to the port</p>
               <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.name = <span class="hljs-literal">null</span>;
   }
 
-  getId() {
+  <span class="hljs-function"><span class="hljs-title">getId</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.node || !<span class="hljs-built_in">this</span>.name) {
       <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Port&#x27;</span>;
     }
     <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.node}</span> <span class="hljs-subst">${<span class="hljs-built_in">this</span>.name.toUpperCase()}</span>`</span>;
   }
 
-  getDataType() { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.options.datatype; }
+  <span class="hljs-function"><span class="hljs-title">getDataType</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.options.datatype; }
 
-  getSchema() { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.options.schema || <span class="hljs-literal">null</span>; }
+  <span class="hljs-function"><span class="hljs-title">getSchema</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.options.schema || <span class="hljs-literal">null</span>; }
 
-  getDescription() { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.options.description; }
+  <span class="hljs-function"><span class="hljs-title">getDescription</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.options.description; }
 
-  attach(socket, index = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">attach</span>(<span class="hljs-params">socket, index = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">let</span> idx = index;
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isAddressable() || (index === <span class="hljs-literal">null</span>)) {
       idx = <span class="hljs-built_in">this</span>.sockets.length;
@@ -404,11 +404,11 @@ connections to the port</p>
   }
 
   <span class="hljs-comment">/* eslint-disable class-methods-use-this */</span>
-  attachSocket() { }
+  <span class="hljs-function"><span class="hljs-title">attachSocket</span>(<span class="hljs-params"></span>)</span> { }
 
-  detach(socket) {
+  <span class="hljs-function"><span class="hljs-title">detach</span>(<span class="hljs-params">socket</span>)</span> {
     <span class="hljs-keyword">const</span> index = <span class="hljs-built_in">this</span>.sockets.indexOf(socket);
-    <span class="hljs-keyword">if</span> (index === <span class="hljs-number">-1</span>) {
+    <span class="hljs-keyword">if</span> (index === -<span class="hljs-number">1</span>) {
       <span class="hljs-keyword">return</span>;
     }
     <span class="hljs-built_in">this</span>.sockets[index] = <span class="hljs-literal">undefined</span>;
@@ -419,22 +419,22 @@ connections to the port</p>
     <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;detach&#x27;</span>, socket);
   }
 
-  isAddressable() {
+  <span class="hljs-function"><span class="hljs-title">isAddressable</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.addressable) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }
 
-  isBuffered() {
+  <span class="hljs-function"><span class="hljs-title">isBuffered</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.buffered) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }
 
-  isRequired() {
+  <span class="hljs-function"><span class="hljs-title">isRequired</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.required) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }
 
-  isAttached(socketId = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">isAttached</span>(<span class="hljs-params">socketId = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable() &amp;&amp; (socketId !== <span class="hljs-literal">null</span>)) {
       <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.sockets[socketId]) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
       <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
@@ -443,7 +443,7 @@ connections to the port</p>
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }
 
-  listAttached() {
+  <span class="hljs-function"><span class="hljs-title">listAttached</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">const</span> attached = [];
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> idx = <span class="hljs-number">0</span>; idx &lt; <span class="hljs-built_in">this</span>.sockets.length; idx += <span class="hljs-number">1</span>) {
       <span class="hljs-keyword">const</span> socket = <span class="hljs-built_in">this</span>.sockets[idx];
@@ -452,7 +452,7 @@ connections to the port</p>
     <span class="hljs-keyword">return</span> attached;
   }
 
-  isConnected(socketId = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">isConnected</span>(<span class="hljs-params">socketId = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
       <span class="hljs-keyword">if</span> (socketId === <span class="hljs-literal">null</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.getId()}</span>: Socket ID required`</span>); }
       <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.sockets[socketId]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.getId()}</span>: Socket <span class="hljs-subst">${socketId}</span> not available`</span>); }
@@ -470,7 +470,7 @@ connections to the port</p>
   }
 
   <span class="hljs-comment">/* eslint-disable class-methods-use-this */</span>
-  canAttach() { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+  <span class="hljs-function"><span class="hljs-title">canAttach</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
 };</pre></div>
             
           

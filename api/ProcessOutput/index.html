@@ -257,8 +257,8 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2013</span><span class="hljs-number">-2020</span> Flowhub UG
-(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
+(c) <span class="hljs-number">2013</span>-<span class="hljs-number">2020</span> Flowhub UG
+(c) <span class="hljs-number">2011</span>-<span class="hljs-number">2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
@@ -279,7 +279,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 }
 
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessOutput</span> </span>{
-  <span class="hljs-keyword">constructor</span>(ports, context) {
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">ports, context</span>)</span> {
     <span class="hljs-built_in">this</span>.ports = ports;
     <span class="hljs-built_in">this</span>.context = context;
     <span class="hljs-built_in">this</span>.nodeInstance = <span class="hljs-built_in">this</span>.context.nodeInstance;
@@ -293,7 +293,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
             <p>Sends an error object</p>
 
             
-              <div class='highlight'><pre>  error(err) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">error</span>(<span class="hljs-params">err</span>)</span> {
     <span class="hljs-keyword">let</span> errs = err;
     <span class="hljs-keyword">const</span> multiple = <span class="hljs-built_in">Array</span>.isArray(err);
     <span class="hljs-keyword">if</span> (!multiple) { errs = [err]; }
@@ -311,7 +311,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
             <p>Sends a single IP object to a port</p>
 
             
-              <div class='highlight'><pre>  sendIP(port, packet) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">sendIP</span>(<span class="hljs-params">port, packet</span>)</span> {
     <span class="hljs-keyword">let</span> ip;
     <span class="hljs-keyword">if</span> (!IP.isIP(packet)) {
       ip = <span class="hljs-keyword">new</span> IP(<span class="hljs-string">&#x27;data&#x27;</span>, packet);
@@ -344,7 +344,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 or sends Error or a list of Errors if passed such</p>
 
             
-              <div class='highlight'><pre>  send(outputMap) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">send</span>(<span class="hljs-params">outputMap</span>)</span> {
     <span class="hljs-keyword">if</span> (isError(outputMap)) {
       <span class="hljs-built_in">this</span>.error(outputMap);
       <span class="hljs-keyword">return</span>;
@@ -354,7 +354,7 @@ or sends Error or a list of Errors if passed such</p>
     <span class="hljs-keyword">let</span> mapIsInPorts = <span class="hljs-literal">false</span>;
     <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.ports.ports).forEach(<span class="hljs-function">(<span class="hljs-params">port</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> ((port !== <span class="hljs-string">&#x27;error&#x27;</span>) &amp;&amp; (port !== <span class="hljs-string">&#x27;ports&#x27;</span>) &amp;&amp; (port !== <span class="hljs-string">&#x27;_callbacks&#x27;</span>)) { componentPorts.push(port); }
-      <span class="hljs-keyword">if</span> (!mapIsInPorts &amp;&amp; (outputMap != <span class="hljs-literal">null</span>) &amp;&amp; (<span class="hljs-keyword">typeof</span> outputMap === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; (<span class="hljs-built_in">Object</span>.keys(outputMap).indexOf(port) !== <span class="hljs-number">-1</span>)) {
+      <span class="hljs-keyword">if</span> (!mapIsInPorts &amp;&amp; (outputMap != <span class="hljs-literal">null</span>) &amp;&amp; (<span class="hljs-keyword">typeof</span> outputMap === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; (<span class="hljs-built_in">Object</span>.keys(outputMap).indexOf(port) !== -<span class="hljs-number">1</span>)) {
         mapIsInPorts = <span class="hljs-literal">true</span>;
       }
     });
@@ -379,7 +379,7 @@ or sends Error or a list of Errors if passed such</p>
             <p>Sends the argument via <code>send()</code> and marks activation as <code>done()</code></p>
 
             
-              <div class='highlight'><pre>  sendDone(outputMap) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">sendDone</span>(<span class="hljs-params">outputMap</span>)</span> {
     <span class="hljs-built_in">this</span>.send(outputMap);
     <span class="hljs-built_in">this</span>.done();
   }</pre></div>
@@ -391,7 +391,7 @@ keeping all IP metadata received from <code>in</code>,
 or modifying it if <code>options</code> is provided</p>
 
             
-              <div class='highlight'><pre>  pass(data, options = {}) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">pass</span>(<span class="hljs-params">data, options = {}</span>)</span> {
     <span class="hljs-keyword">if</span> (!(<span class="hljs-string">&#x27;out&#x27;</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.ports)) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;output.pass() requires port &quot;out&quot; to be present&#x27;</span>);
     }
@@ -410,7 +410,7 @@ or modifying it if <code>options</code> is provided</p>
             <p>Finishes process activation gracefully</p>
 
             
-              <div class='highlight'><pre>  done(error) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">done</span>(<span class="hljs-params">error</span>)</span> {
     <span class="hljs-built_in">this</span>.result.__resolved = <span class="hljs-literal">true</span>;
     <span class="hljs-built_in">this</span>.nodeInstance.activate(<span class="hljs-built_in">this</span>.context);
     <span class="hljs-keyword">if</span> (error) { <span class="hljs-built_in">this</span>.error(error); }
@@ -435,7 +435,7 @@ or modifying it if <code>options</code> is provided</p>
         load,
       } = <span class="hljs-built_in">this</span>.nodeInstance;
       <span class="hljs-keyword">if</span> (pos === (len - <span class="hljs-number">1</span>)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
-      <span class="hljs-keyword">if</span> ((pos === <span class="hljs-number">-1</span>) &amp;&amp; (load === (len + <span class="hljs-number">1</span>))) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+      <span class="hljs-keyword">if</span> ((pos === -<span class="hljs-number">1</span>) &amp;&amp; (load === (len + <span class="hljs-number">1</span>))) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
       <span class="hljs-keyword">if</span> ((len &lt;= <span class="hljs-number">1</span>) &amp;&amp; (load === <span class="hljs-number">1</span>)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
       <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     };

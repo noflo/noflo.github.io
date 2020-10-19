@@ -257,7 +257,7 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
+(c) <span class="hljs-number">2014</span>-<span class="hljs-number">2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
@@ -271,7 +271,7 @@ ports are the way a component receives Information Packets.</p>
 
             
               <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
-  <span class="hljs-keyword">constructor</span>(options = {}) {
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">options = {}</span>)</span> {
     <span class="hljs-keyword">const</span> opts = options;
     <span class="hljs-keyword">if</span> (opts.control == <span class="hljs-literal">null</span>) { opts.control = <span class="hljs-literal">false</span>; }
     <span class="hljs-keyword">if</span> (opts.scoped == <span class="hljs-literal">null</span>) { opts.scoped = <span class="hljs-literal">true</span>; }
@@ -295,7 +295,7 @@ ports are the way a component receives Information Packets.</p>
             <p>Assign a delegate for retrieving data should this inPort</p>
 
             
-              <div class='highlight'><pre>  attachSocket(socket, localId = <span class="hljs-literal">null</span>) {</pre></div>
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">attachSocket</span>(<span class="hljs-params">socket, localId = <span class="hljs-literal">null</span></span>)</span> {</pre></div>
             
           
             
@@ -317,7 +317,7 @@ ports are the way a component receives Information Packets.</p>
     socket.on(<span class="hljs-string">&#x27;ip&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">ip</span>) =&gt;</span> <span class="hljs-built_in">this</span>.handleIP(ip, localId));
   }
 
-  handleIP(packet, index) {
+  <span class="hljs-function"><span class="hljs-title">handleIP</span>(<span class="hljs-params">packet, index</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.control &amp;&amp; (packet.type !== <span class="hljs-string">&#x27;data&#x27;</span>)) { <span class="hljs-keyword">return</span>; }
     <span class="hljs-keyword">const</span> ip = packet;
     ip.owner = <span class="hljs-built_in">this</span>.nodeInstance;
@@ -348,7 +348,7 @@ ports are the way a component receives Information Packets.</p>
     <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;ip&#x27;</span>, ip, index);
   }
 
-  handleSocketEvent(event, payload, id) {</pre></div>
+  <span class="hljs-function"><span class="hljs-title">handleSocketEvent</span>(<span class="hljs-params">event, payload, id</span>)</span> {</pre></div>
             
           
             
@@ -361,11 +361,11 @@ ports are the way a component receives Information Packets.</p>
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.emit(event, payload);
   }
 
-  hasDefault() {
+  <span class="hljs-function"><span class="hljs-title">hasDefault</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.options.default !== <span class="hljs-literal">undefined</span>;
   }
 
-  prepareBuffer() {
+  <span class="hljs-function"><span class="hljs-title">prepareBuffer</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
       <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.scoped) { <span class="hljs-built_in">this</span>.scopedBuffer = {}; }
       <span class="hljs-built_in">this</span>.indexedBuffer = {};
@@ -377,7 +377,7 @@ ports are the way a component receives Information Packets.</p>
     <span class="hljs-built_in">this</span>.buffer = [];
   }
 
-  prepareBufferForIP(ip) {
+  <span class="hljs-function"><span class="hljs-title">prepareBufferForIP</span>(<span class="hljs-params">ip</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
       <span class="hljs-keyword">if</span> ((ip.scope != <span class="hljs-literal">null</span>) &amp;&amp; <span class="hljs-built_in">this</span>.options.scoped) {
         <span class="hljs-keyword">if</span> (!(ip.scope <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.scopedBuffer)) { <span class="hljs-built_in">this</span>.scopedBuffer[ip.scope] = []; }
@@ -403,14 +403,14 @@ ports are the way a component receives Information Packets.</p>
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.buffer;
   }
 
-  validateData(data) {
+  <span class="hljs-function"><span class="hljs-title">validateData</span>(<span class="hljs-params">data</span>)</span> {
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.options.values) { <span class="hljs-keyword">return</span>; }
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.values.indexOf(data) === <span class="hljs-number">-1</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.values.indexOf(data) === -<span class="hljs-number">1</span>) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid data=&#x27;<span class="hljs-subst">${data}</span>&#x27; received, not in [<span class="hljs-subst">${<span class="hljs-built_in">this</span>.options.values}</span>]`</span>);
     }
   }
 
-  getBuffer(scope, index, initial = <span class="hljs-literal">false</span>) {
+  <span class="hljs-function"><span class="hljs-title">getBuffer</span>(<span class="hljs-params">scope, index, initial = <span class="hljs-literal">false</span></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
       <span class="hljs-keyword">if</span> ((scope != <span class="hljs-literal">null</span>) &amp;&amp; <span class="hljs-built_in">this</span>.options.scoped) {
         <span class="hljs-keyword">if</span> (!(scope <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.scopedBuffer)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>; }
@@ -434,7 +434,7 @@ ports are the way a component receives Information Packets.</p>
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.buffer;
   }
 
-  getFromBuffer(scope, index, initial = <span class="hljs-literal">false</span>) {
+  <span class="hljs-function"><span class="hljs-title">getFromBuffer</span>(<span class="hljs-params">scope, index, initial = <span class="hljs-literal">false</span></span>)</span> {
     <span class="hljs-keyword">const</span> buf = <span class="hljs-built_in">this</span>.getBuffer(scope, index, initial);
     <span class="hljs-keyword">if</span> (!(buf != <span class="hljs-literal">null</span> ? buf.length : <span class="hljs-literal">undefined</span>)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>; }
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.control) { <span class="hljs-keyword">return</span> buf[buf.length - <span class="hljs-number">1</span>]; } <span class="hljs-keyword">return</span> buf.shift();
@@ -445,7 +445,7 @@ ports are the way a component receives Information Packets.</p>
             <p>Fetches a packet from the port</p>
 
             
-              <div class='highlight'><pre>  get(scope, index) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params">scope, index</span>)</span> {
     <span class="hljs-keyword">const</span> res = <span class="hljs-built_in">this</span>.getFromBuffer(scope, index);
     <span class="hljs-keyword">if</span> (res !== <span class="hljs-literal">undefined</span>) { <span class="hljs-keyword">return</span> res; }</pre></div>
             
@@ -457,7 +457,7 @@ ports are the way a component receives Information Packets.</p>
               <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.getFromBuffer(<span class="hljs-literal">null</span>, index, <span class="hljs-literal">true</span>);
   }
 
-  hasIPinBuffer(scope, index, validate, initial = <span class="hljs-literal">false</span>) {
+  <span class="hljs-function"><span class="hljs-title">hasIPinBuffer</span>(<span class="hljs-params">scope, index, validate, initial = <span class="hljs-literal">false</span></span>)</span> {
     <span class="hljs-keyword">const</span> buf = <span class="hljs-built_in">this</span>.getBuffer(scope, index, initial);
     <span class="hljs-keyword">if</span> (!(buf != <span class="hljs-literal">null</span> ? buf.length : <span class="hljs-literal">undefined</span>)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; buf.length; i += <span class="hljs-number">1</span>) {
@@ -466,7 +466,7 @@ ports are the way a component receives Information Packets.</p>
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }
 
-  hasIIP(index, validate) {
+  <span class="hljs-function"><span class="hljs-title">hasIIP</span>(<span class="hljs-params">index, validate</span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.hasIPinBuffer(<span class="hljs-literal">null</span>, index, validate, <span class="hljs-literal">true</span>);
   }</pre></div>
             
@@ -475,7 +475,7 @@ ports are the way a component receives Information Packets.</p>
             <p>Returns true if port contains packet(s) matching the validator</p>
 
             
-              <div class='highlight'><pre>  has(scope, index, validate) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">has</span>(<span class="hljs-params">scope, index, validate</span>)</span> {
     <span class="hljs-keyword">let</span> valid = validate;
     <span class="hljs-keyword">let</span> idx = index;
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isAddressable()) {
@@ -492,7 +492,7 @@ ports are the way a component receives Information Packets.</p>
             <p>Returns the number of data packets in an inport</p>
 
             
-              <div class='highlight'><pre>  length(scope, index) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">length</span>(<span class="hljs-params">scope, index</span>)</span> {
     <span class="hljs-keyword">const</span> buf = <span class="hljs-built_in">this</span>.getBuffer(scope, index);
     <span class="hljs-keyword">if</span> (!buf) { <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; }
     <span class="hljs-keyword">return</span> buf.length;
@@ -503,7 +503,7 @@ ports are the way a component receives Information Packets.</p>
             <p>Tells if buffer has packets or not</p>
 
             
-              <div class='highlight'><pre>  ready(scope) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">ready</span>(<span class="hljs-params">scope</span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.length(scope) &gt; <span class="hljs-number">0</span>;
   }</pre></div>
             
@@ -512,7 +512,7 @@ ports are the way a component receives Information Packets.</p>
             <p>Clears inport buffers</p>
 
             
-              <div class='highlight'><pre>  clear() {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">clear</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.prepareBuffer();
   }
 };</pre></div>

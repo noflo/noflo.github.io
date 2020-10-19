@@ -257,7 +257,7 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2013</span><span class="hljs-number">-2017</span> Flowhub UG
+(c) <span class="hljs-number">2013</span>-<span class="hljs-number">2017</span> Flowhub UG
 (c) <span class="hljs-number">2013</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
@@ -289,7 +289,7 @@ loader using the <a href="https://github.com/noflo/noflo-component-loader">noflo
 
             
               <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ComponentLoader</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
-  <span class="hljs-keyword">constructor</span>(baseDir, options = {}) {
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">baseDir, options = {}</span>)</span> {
     <span class="hljs-built_in">super</span>();
     <span class="hljs-built_in">this</span>.baseDir = baseDir;
     <span class="hljs-built_in">this</span>.options = options;
@@ -314,7 +314,7 @@ NPM modules, as well as for convenience renaming all
 </ul>
 
             
-              <div class='highlight'><pre>  getModulePrefix(name) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">getModulePrefix</span>(<span class="hljs-params">name</span>)</span> {
     <span class="hljs-keyword">if</span> (!name) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>; }
     <span class="hljs-keyword">let</span> res = name;
     <span class="hljs-keyword">if</span> (res === <span class="hljs-string">&#x27;noflo&#x27;</span>) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>; }
@@ -327,7 +327,7 @@ NPM modules, as well as for convenience renaming all
             <p>Get the list of all available components</p>
 
             
-              <div class='highlight'><pre>  listComponents(callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">listComponents</span>(<span class="hljs-params">callback</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.processing) {
       <span class="hljs-built_in">this</span>.once(<span class="hljs-string">&#x27;ready&#x27;</span>, <span class="hljs-function">() =&gt;</span> callback(<span class="hljs-literal">null</span>, <span class="hljs-built_in">this</span>.components));
       <span class="hljs-keyword">return</span>;
@@ -361,7 +361,7 @@ be loaded as an instance of the NoFlo subgraph
 component.</p>
 
             
-              <div class='highlight'><pre>  load(name, callback, metadata) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">load</span>(<span class="hljs-params">name, callback, metadata</span>)</span> {
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ready) {
       <span class="hljs-built_in">this</span>.listComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
         <span class="hljs-keyword">if</span> (err) {
@@ -434,7 +434,7 @@ component.</p>
             <p>Creates an instance of a component.</p>
 
             
-              <div class='highlight'><pre>  createComponent(name, component, metadata, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">createComponent</span>(<span class="hljs-params">name, component, metadata, callback</span>)</span> {
     <span class="hljs-keyword">let</span> e; <span class="hljs-keyword">let</span>
       instance;
     <span class="hljs-keyword">const</span> implementation = component;
@@ -497,7 +497,7 @@ component.</p>
             <p>Check if a given filesystem path is actually a graph</p>
 
             
-              <div class='highlight'><pre>  isGraph(cPath) {</pre></div>
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">isGraph</span>(<span class="hljs-params">cPath</span>)</span> {</pre></div>
             
           
             
@@ -525,7 +525,7 @@ component.</p>
             <p>Graph file path</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> (cPath.indexOf(<span class="hljs-string">&#x27;.fbp&#x27;</span>) !== <span class="hljs-number">-1</span>) || (cPath.indexOf(<span class="hljs-string">&#x27;.json&#x27;</span>) !== <span class="hljs-number">-1</span>);
+              <div class='highlight'><pre>    <span class="hljs-keyword">return</span> (cPath.indexOf(<span class="hljs-string">&#x27;.fbp&#x27;</span>) !== -<span class="hljs-number">1</span>) || (cPath.indexOf(<span class="hljs-string">&#x27;.json&#x27;</span>) !== -<span class="hljs-number">1</span>);
   }</pre></div>
             
           
@@ -533,7 +533,7 @@ component.</p>
             <p>Load a graph as a NoFlo subgraph component instance</p>
 
             
-              <div class='highlight'><pre>  loadGraph(name, component, callback, metadata) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">loadGraph</span>(<span class="hljs-params">name, component, callback, metadata</span>)</span> {
     <span class="hljs-built_in">this</span>.createComponent(name, <span class="hljs-built_in">this</span>.components.Graph, metadata, <span class="hljs-function">(<span class="hljs-params">error, graph</span>) =&gt;</span> {
       <span class="hljs-keyword">const</span> g = graph;
       <span class="hljs-keyword">if</span> (error) {
@@ -563,7 +563,7 @@ from, or use a fallback icon separately for subgraphs
 and elementary components.</p>
 
             
-              <div class='highlight'><pre>  setIcon(name, instance) {</pre></div>
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">setIcon</span>(<span class="hljs-params">name, instance</span>)</span> {</pre></div>
             
           
             
@@ -596,18 +596,18 @@ and elementary components.</p>
     instance.setIcon(<span class="hljs-string">&#x27;gear&#x27;</span>);
   }
 
-  getLibraryIcon(prefix) {
+  <span class="hljs-function"><span class="hljs-title">getLibraryIcon</span>(<span class="hljs-params">prefix</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.libraryIcons[prefix]) {
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.libraryIcons[prefix];
     }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
   }
 
-  setLibraryIcon(prefix, icon) {
+  <span class="hljs-function"><span class="hljs-title">setLibraryIcon</span>(<span class="hljs-params">prefix, icon</span>)</span> {
     <span class="hljs-built_in">this</span>.libraryIcons[prefix] = icon;
   }
 
-  normalizeName(packageId, name) {
+  <span class="hljs-function"><span class="hljs-title">normalizeName</span>(<span class="hljs-params">packageId, name</span>)</span> {
     <span class="hljs-keyword">const</span> prefix = <span class="hljs-built_in">this</span>.getModulePrefix(packageId);
     <span class="hljs-keyword">let</span> fullName = <span class="hljs-string">`<span class="hljs-subst">${prefix}</span>/<span class="hljs-subst">${name}</span>`</span>;
     <span class="hljs-keyword">if</span> (!packageId) { fullName = name; }
@@ -624,7 +624,7 @@ a NoFlo Component constructor or factory method
 as a component available for loading.</p>
 
             
-              <div class='highlight'><pre>  registerComponent(packageId, name, cPath, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">registerComponent</span>(<span class="hljs-params">packageId, name, cPath, callback</span>)</span> {
     <span class="hljs-keyword">const</span> fullName = <span class="hljs-built_in">this</span>.normalizeName(packageId, name);
     <span class="hljs-built_in">this</span>.components[fullName] = cPath;
     <span class="hljs-keyword">if</span> (callback) { callback(); }
@@ -636,7 +636,7 @@ as a component available for loading.</p>
 graphs as loadable components.</p>
 
             
-              <div class='highlight'><pre>  registerGraph(packageId, name, gPath, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">registerGraph</span>(<span class="hljs-params">packageId, name, gPath, callback</span>)</span> {
     <span class="hljs-built_in">this</span>.registerComponent(packageId, name, gPath, callback);
   }</pre></div>
             
@@ -647,7 +647,7 @@ loaders. They will be called immediately and can register
 any components or graphs they wish.</p>
 
             
-              <div class='highlight'><pre>  registerLoader(loader, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">registerLoader</span>(<span class="hljs-params">loader, callback</span>)</span> {
     loader(<span class="hljs-built_in">this</span>, callback);
   }</pre></div>
             
@@ -660,7 +660,7 @@ components can only be registered via <code>setSource</code> if
 the environment has a CoffeeScript compiler loaded.</p>
 
             
-              <div class='highlight'><pre>  setSource(packageId, name, source, language, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">setSource</span>(<span class="hljs-params">packageId, name, source, language, callback</span>)</span> {
     <span class="hljs-keyword">if</span> (!registerLoader.setSource) {
       callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;setSource not allowed&#x27;</span>));
       <span class="hljs-keyword">return</span>;
@@ -686,7 +686,7 @@ the environment has a CoffeeScript compiler loaded.</p>
 component as a string.</p>
 
             
-              <div class='highlight'><pre>  getSource(name, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">getSource</span>(<span class="hljs-params">name, callback</span>)</span> {
     <span class="hljs-keyword">if</span> (!registerLoader.getSource) {
       callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;getSource not allowed&#x27;</span>));
       <span class="hljs-keyword">return</span>;
@@ -711,7 +711,7 @@ component as a string.</p>
 method on this runtime instance.</p>
 
             
-              <div class='highlight'><pre>  getLanguages() {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">getLanguages</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (!registerLoader.getLanguages) {</pre></div>
             
           
@@ -724,7 +724,7 @@ method on this runtime instance.</p>
     <span class="hljs-keyword">return</span> registerLoader.getLanguages();
   }
 
-  clear() {
+  <span class="hljs-function"><span class="hljs-title">clear</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-built_in">this</span>.components = <span class="hljs-literal">null</span>;
     <span class="hljs-built_in">this</span>.ready = <span class="hljs-literal">false</span>;
     <span class="hljs-built_in">this</span>.processing = <span class="hljs-literal">false</span>;

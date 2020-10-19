@@ -257,8 +257,8 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2013</span><span class="hljs-number">-2018</span> Flowhub UG
-(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
+(c) <span class="hljs-number">2013</span>-<span class="hljs-number">2018</span> Flowhub UG
+(c) <span class="hljs-number">2011</span>-<span class="hljs-number">2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
@@ -288,7 +288,7 @@ they will load all the needed components, instantiate them, and
 set up the defined connections and IIPs.</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">constructor</span>(graph, options = {}) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">graph, options = {}</span>)</span> {
     <span class="hljs-built_in">super</span>(graph, options);
   }</pre></div>
             
@@ -298,7 +298,7 @@ set up the defined connections and IIPs.</p>
 with the current graph.</p>
 
             
-              <div class='highlight'><pre>  addNode(node, options, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">addNode</span>(<span class="hljs-params">node, options, callback</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
       callback = options;
       options = {};
@@ -321,7 +321,7 @@ with the current graph.</p>
 from the current graph.</p>
 
             
-              <div class='highlight'><pre>  removeNode(node, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">removeNode</span>(<span class="hljs-params">node, callback</span>)</span> {
     <span class="hljs-built_in">super</span>.removeNode(node, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> (err) {
         callback(err);
@@ -338,7 +338,7 @@ from the current graph.</p>
 the current graph.</p>
 
             
-              <div class='highlight'><pre>  renameNode(oldId, newId, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">renameNode</span>(<span class="hljs-params">oldId, newId, callback</span>)</span> {
     <span class="hljs-built_in">super</span>.renameNode(oldId, newId, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> (err) {
         callback(err);
@@ -355,7 +355,7 @@ the current graph.</p>
 with the current graph.</p>
 
             
-              <div class='highlight'><pre>  addEdge(edge, options, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">addEdge</span>(<span class="hljs-params">edge, options, callback</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
       callback = options;
       options = {};
@@ -386,7 +386,7 @@ with the current graph.</p>
 from the current graph.</p>
 
             
-              <div class='highlight'><pre>  removeEdge(edge, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">removeEdge</span>(<span class="hljs-params">edge, callback</span>)</span> {
     <span class="hljs-built_in">super</span>.removeEdge(edge, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> (err) {
         callback(err);
@@ -403,7 +403,7 @@ from the current graph.</p>
 current graph. If the network is running, the IIP will be sent immediately.</p>
 
             
-              <div class='highlight'><pre>  addInitial(iip, options, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">addInitial</span>(<span class="hljs-params">iip, options, callback</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
       callback = options;
       options = {};
@@ -432,7 +432,7 @@ current graph. If the network is running, the IIP will be sent immediately.</p>
 current graph.</p>
 
             
-              <div class='highlight'><pre>  removeInitial(iip, callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">removeInitial</span>(<span class="hljs-params">iip, callback</span>)</span> {
     <span class="hljs-built_in">super</span>.removeInitial(iip, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> (err) {
         callback(err);

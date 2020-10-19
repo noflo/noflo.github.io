@@ -257,8 +257,8 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2013</span><span class="hljs-number">-2017</span> Flowhub UG
-(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
+(c) <span class="hljs-number">2013</span>-<span class="hljs-number">2017</span> Flowhub UG
+(c) <span class="hljs-number">2011</span>-<span class="hljs-number">2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
@@ -285,7 +285,7 @@ and extend NoFlo components.</p>
 
             
               <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Component</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
-  <span class="hljs-keyword">constructor</span>(options = {}) {
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">options = {}</span>)</span> {
     <span class="hljs-built_in">super</span>();
     <span class="hljs-keyword">const</span> opts = options;</pre></div>
             
@@ -392,18 +392,18 @@ instantation using the <code>component.process</code> method.</p>
     }
   }
 
-  getDescription() { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.description; }
+  <span class="hljs-function"><span class="hljs-title">getDescription</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.description; }
 
-  isReady() { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+  <span class="hljs-function"><span class="hljs-title">isReady</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
 
-  isSubgraph() { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }
+  <span class="hljs-function"><span class="hljs-title">isSubgraph</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }
 
-  setIcon(icon) {
+  <span class="hljs-function"><span class="hljs-title">setIcon</span>(<span class="hljs-params">icon</span>)</span> {
     <span class="hljs-built_in">this</span>.icon = icon;
     <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;icon&#x27;</span>, <span class="hljs-built_in">this</span>.icon);
   }
 
-  getIcon() { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.icon; }</pre></div>
+  <span class="hljs-function"><span class="hljs-title">getIcon</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.icon; }</pre></div>
             
           
             
@@ -413,7 +413,7 @@ are sent as IP objects there. If the port is not connected,
 errors are thrown.</p>
 
             
-              <div class='highlight'><pre>  error(e, groups = [], errorPort = <span class="hljs-string">&#x27;error&#x27;</span>, scope = <span class="hljs-literal">null</span>) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">error</span>(<span class="hljs-params">e, groups = [], errorPort = <span class="hljs-string">&#x27;error&#x27;</span>, scope = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.outPorts[errorPort]
       &amp;&amp; (<span class="hljs-built_in">this</span>.outPorts[errorPort].isAttached() || !<span class="hljs-built_in">this</span>.outPorts[errorPort].isRequired())) {
       groups.forEach(<span class="hljs-function">(<span class="hljs-params">group</span>) =&gt;</span> { <span class="hljs-built_in">this</span>.outPorts[errorPort].openBracket(group, { scope }); });
@@ -433,7 +433,7 @@ Called at network start-up.</p>
 setup work.</p>
 
             
-              <div class='highlight'><pre>  setUp(callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">setUp</span>(<span class="hljs-params">callback</span>)</span> {
     callback();
   }</pre></div>
             
@@ -446,7 +446,7 @@ at network shutdown</p>
 cleanup work, like clearing any accumulated state.</p>
 
             
-              <div class='highlight'><pre>  tearDown(callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">tearDown</span>(<span class="hljs-params">callback</span>)</span> {
     callback();
   }</pre></div>
             
@@ -457,7 +457,7 @@ cleanup work, like clearing any accumulated state.</p>
 method and sets the component to a started state.</p>
 
             
-              <div class='highlight'><pre>  start(callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">start</span>(<span class="hljs-params">callback</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isStarted()) {
       callback();
       <span class="hljs-keyword">return</span>;
@@ -483,7 +483,7 @@ non-started state.</p>
 all active processing contexts have ended.</p>
 
             
-              <div class='highlight'><pre>  shutdown(callback) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">shutdown</span>(<span class="hljs-params">callback</span>)</span> {
     <span class="hljs-keyword">const</span> finalize = <span class="hljs-function">() =&gt;</span> {</pre></div>
             
           
@@ -545,14 +545,14 @@ all active processing contexts have ended.</p>
     });
   }
 
-  isStarted() { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.started; }</pre></div>
+  <span class="hljs-function"><span class="hljs-title">isStarted</span>(<span class="hljs-params"></span>)</span> { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.started; }</pre></div>
             
           
             
             <p>Ensures braket forwarding map is correct for the existing ports</p>
 
             
-              <div class='highlight'><pre>  prepareForwarding() {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">prepareForwarding</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.forwardBrackets).forEach(<span class="hljs-function">(<span class="hljs-params">inPort</span>) =&gt;</span> {
       <span class="hljs-keyword">const</span> outPorts = <span class="hljs-built_in">this</span>.forwardBrackets[inPort];
       <span class="hljs-keyword">if</span> (!(inPort <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.inPorts.ports)) {
@@ -577,7 +577,7 @@ all active processing contexts have ended.</p>
 NoFlo Process API</p>
 
             
-              <div class='highlight'><pre>  isLegacy() {</pre></div>
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">isLegacy</span>(<span class="hljs-params"></span>)</span> {</pre></div>
             
           
             
@@ -599,7 +599,7 @@ NoFlo Process API</p>
             <p>Sets process handler function</p>
 
             
-              <div class='highlight'><pre>  process(handle) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">process</span>(<span class="hljs-params">handle</span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> handle !== <span class="hljs-string">&#x27;function&#x27;</span>) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;Process handler must be a function&#x27;</span>);
     }
@@ -622,7 +622,7 @@ NoFlo Process API</p>
 automatic bracket forwarding</p>
 
             
-              <div class='highlight'><pre>  isForwardingInport(port) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">isForwardingInport</span>(<span class="hljs-params">port</span>)</span> {
     <span class="hljs-keyword">let</span> portName;
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> port === <span class="hljs-string">&#x27;string&#x27;</span>) {
       portName = port;
@@ -641,7 +641,7 @@ automatic bracket forwarding</p>
 automatic bracket forwarding</p>
 
             
-              <div class='highlight'><pre>  isForwardingOutport(inport, outport) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">isForwardingOutport</span>(<span class="hljs-params">inport, outport</span>)</span> {
     <span class="hljs-keyword">let</span> inportName; <span class="hljs-keyword">let</span>
       outportName;
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> inport === <span class="hljs-string">&#x27;string&#x27;</span>) {
@@ -655,7 +655,7 @@ automatic bracket forwarding</p>
       outportName = outport.name;
     }
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.forwardBrackets[inportName]) { <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; }
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.forwardBrackets[inportName].indexOf(outportName) !== <span class="hljs-number">-1</span>) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.forwardBrackets[inportName].indexOf(outportName) !== -<span class="hljs-number">1</span>) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }</pre></div>
             
@@ -665,7 +665,7 @@ automatic bracket forwarding</p>
 in the same order they were received.</p>
 
             
-              <div class='highlight'><pre>  isOrdered() {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">isOrdered</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.ordered) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.autoOrdering) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
@@ -679,7 +679,7 @@ processing function so that firing pattern preconditions can
 be checked and component can do processing as needed.</p>
 
             
-              <div class='highlight'><pre>  handleIP(ip, port) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">handleIP</span>(<span class="hljs-params">ip, port</span>)</span> {
     <span class="hljs-keyword">let</span> context;
     <span class="hljs-keyword">if</span> (!port.options.triggering) {</pre></div>
             
@@ -814,7 +814,7 @@ activate, log that input conditions were not met</p>
             <p>Get the current bracket forwarding context for an IP object</p>
 
             
-              <div class='highlight'><pre>  getBracketContext(type, port, scope, idx) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">getBracketContext</span>(<span class="hljs-params">type, port, scope, idx</span>)</span> {
     <span class="hljs-keyword">let</span> { name, index } = ports.normalizePortName(port);
     <span class="hljs-keyword">if</span> (idx != <span class="hljs-literal">null</span>) { index = idx; }
     <span class="hljs-keyword">const</span> portsList = type === <span class="hljs-string">&#x27;in&#x27;</span> ? <span class="hljs-built_in">this</span>.inPorts : <span class="hljs-built_in">this</span>.outPorts;
@@ -844,7 +844,7 @@ activate, log that input conditions were not met</p>
 order</p>
 
             
-              <div class='highlight'><pre>  addToResult(result, port, packet, before = <span class="hljs-literal">false</span>) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">addToResult</span>(<span class="hljs-params">result, port, packet, before = <span class="hljs-literal">false</span></span>)</span> {
     <span class="hljs-keyword">const</span> res = result;
     <span class="hljs-keyword">const</span> ip = packet;
     <span class="hljs-keyword">const</span> { name, index } = ports.normalizePortName(port);
@@ -867,7 +867,7 @@ order</p>
 pair.</p>
 
             
-              <div class='highlight'><pre>  getForwardableContexts(inport, outport, contexts) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">getForwardableContexts</span>(<span class="hljs-params">inport, outport, contexts</span>)</span> {
     <span class="hljs-keyword">const</span> { name, index } = ports.normalizePortName(outport);
     <span class="hljs-keyword">const</span> forwardable = [];
     contexts.forEach(<span class="hljs-function">(<span class="hljs-params">ctx, idx</span>) =&gt;</span> {</pre></div>
@@ -884,7 +884,7 @@ pair.</p>
             <p>We have already forwarded this context to this outport</p>
 
             
-              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (ctx.ports.indexOf(outport) !== <span class="hljs-number">-1</span>) { <span class="hljs-keyword">return</span>; }</pre></div>
+              <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (ctx.ports.indexOf(outport) !== -<span class="hljs-number">1</span>) { <span class="hljs-keyword">return</span>; }</pre></div>
             
           
             
@@ -894,7 +894,7 @@ inport</p>
             
               <div class='highlight'><pre>      <span class="hljs-keyword">const</span> outContext = <span class="hljs-built_in">this</span>.getBracketContext(<span class="hljs-string">&#x27;out&#x27;</span>, name, ctx.ip.scope, index)[idx];
       <span class="hljs-keyword">if</span> (outContext) {
-        <span class="hljs-keyword">if</span> ((outContext.ip.data === ctx.ip.data) &amp;&amp; (outContext.ports.indexOf(outport) !== <span class="hljs-number">-1</span>)) {
+        <span class="hljs-keyword">if</span> ((outContext.ip.data === ctx.ip.data) &amp;&amp; (outContext.ports.indexOf(outport) !== -<span class="hljs-number">1</span>)) {
           <span class="hljs-keyword">return</span>;
         }
       }
@@ -908,7 +908,7 @@ inport</p>
             <p>Add any bracket forwards needed to the result queue</p>
 
             
-              <div class='highlight'><pre>  addBracketForwards(result) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">addBracketForwards</span>(<span class="hljs-params">result</span>)</span> {
     <span class="hljs-keyword">const</span> res = result;
     <span class="hljs-keyword">if</span> (res.__bracketClosingBefore != <span class="hljs-literal">null</span> ? res.__bracketClosingBefore.length : <span class="hljs-literal">undefined</span>) {
       res.__bracketClosingBefore.forEach(<span class="hljs-function">(<span class="hljs-params">context</span>) =&gt;</span> {
@@ -1011,7 +1011,7 @@ the keys so that they get added in correct order</p>
 output from the queue in the order it is in.</p>
 
             
-              <div class='highlight'><pre>  processOutputQueue() {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">processOutputQueue</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">while</span> (<span class="hljs-built_in">this</span>.outputQ.length &gt; <span class="hljs-number">0</span>) {
       <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.outputQ[<span class="hljs-number">0</span>].__resolved) { <span class="hljs-keyword">break</span>; }
       <span class="hljs-keyword">const</span> result = <span class="hljs-built_in">this</span>.outputQ.shift();
@@ -1069,7 +1069,7 @@ output from the queue in the order it is in.</p>
 activated contexts at the same time</p>
 
             
-              <div class='highlight'><pre>  activate(context) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">activate</span>(<span class="hljs-params">context</span>)</span> {
     <span class="hljs-keyword">if</span> (context.activated) { <span class="hljs-keyword">return</span>; } <span class="hljs-comment">// prevent double activation</span>
     context.activated = <span class="hljs-literal">true</span>;
     context.deactivated = <span class="hljs-literal">false</span>;
@@ -1086,7 +1086,7 @@ activated contexts at the same time</p>
 activated contexts at the same time</p>
 
             
-              <div class='highlight'><pre>  deactivate(context) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">deactivate</span>(<span class="hljs-params">context</span>)</span> {
     <span class="hljs-keyword">if</span> (context.deactivated) { <span class="hljs-keyword">return</span>; } <span class="hljs-comment">// prevent double deactivation</span>
     context.deactivated = <span class="hljs-literal">true</span>;
     context.activated = <span class="hljs-literal">false</span>;

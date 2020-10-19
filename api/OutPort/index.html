@@ -257,7 +257,7 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2014</span><span class="hljs-number">-2017</span> Flowhub UG
+(c) <span class="hljs-number">2014</span>-<span class="hljs-number">2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
@@ -272,21 +272,21 @@ These ports are the way a component sends Information Packets.</p>
 
             
               <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
-  <span class="hljs-keyword">constructor</span>(options = {}) {
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">options = {}</span>)</span> {
     <span class="hljs-keyword">const</span> opts = options;
     <span class="hljs-keyword">if</span> (opts.scoped == <span class="hljs-literal">null</span>) { opts.scoped = <span class="hljs-literal">true</span>; }
     <span class="hljs-built_in">super</span>(opts);
     <span class="hljs-built_in">this</span>.cache = {};
   }
 
-  attach(socket, index = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">attach</span>(<span class="hljs-params">socket, index = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-built_in">super</span>.attach(socket, index);
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isCaching() &amp;&amp; (<span class="hljs-built_in">this</span>.cache[index] != <span class="hljs-literal">null</span>)) {
       <span class="hljs-built_in">this</span>.send(<span class="hljs-built_in">this</span>.cache[index], index);
     }
   }
 
-  connect(index = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">connect</span>(<span class="hljs-params">index = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">const</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
     <span class="hljs-built_in">this</span>.checkRequired(sockets);
     sockets.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
@@ -295,7 +295,7 @@ These ports are the way a component sends Information Packets.</p>
     });
   }
 
-  beginGroup(group, index = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">beginGroup</span>(<span class="hljs-params">group, index = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">const</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
     <span class="hljs-built_in">this</span>.checkRequired(sockets);
     sockets.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
@@ -304,7 +304,7 @@ These ports are the way a component sends Information Packets.</p>
     });
   }
 
-  send(data, index = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">send</span>(<span class="hljs-params">data, index = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">const</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
     <span class="hljs-built_in">this</span>.checkRequired(sockets);
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isCaching() &amp;&amp; (data !== <span class="hljs-built_in">this</span>.cache[index])) {
@@ -316,7 +316,7 @@ These ports are the way a component sends Information Packets.</p>
     });
   }
 
-  endGroup(index = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">endGroup</span>(<span class="hljs-params">index = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">const</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
     <span class="hljs-built_in">this</span>.checkRequired(sockets);
     sockets.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
@@ -325,7 +325,7 @@ These ports are the way a component sends Information Packets.</p>
     });
   }
 
-  disconnect(index = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">disconnect</span>(<span class="hljs-params">index = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">const</span> sockets = <span class="hljs-built_in">this</span>.getSockets(index);
     <span class="hljs-built_in">this</span>.checkRequired(sockets);
     sockets.forEach(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
@@ -334,7 +334,7 @@ These ports are the way a component sends Information Packets.</p>
     });
   }
 
-  sendIP(type, data, options, index, autoConnect = <span class="hljs-literal">true</span>) {
+  <span class="hljs-function"><span class="hljs-title">sendIP</span>(<span class="hljs-params">type, data, options, index, autoConnect = <span class="hljs-literal">true</span></span>)</span> {
     <span class="hljs-keyword">let</span> ip;
     <span class="hljs-keyword">let</span> idx = index;
     <span class="hljs-keyword">if</span> (IP.isIP(type)) {
@@ -383,25 +383,25 @@ These ports are the way a component sends Information Packets.</p>
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
   }
 
-  openBracket(data = <span class="hljs-literal">null</span>, options = {}, index = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">openBracket</span>(<span class="hljs-params">data = <span class="hljs-literal">null</span>, options = {}, index = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sendIP(<span class="hljs-string">&#x27;openBracket&#x27;</span>, data, options, index);
   }
 
-  data(data, options = {}, index = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params">data, options = {}, index = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sendIP(<span class="hljs-string">&#x27;data&#x27;</span>, data, options, index);
   }
 
-  closeBracket(data = <span class="hljs-literal">null</span>, options = {}, index = <span class="hljs-literal">null</span>) {
+  <span class="hljs-function"><span class="hljs-title">closeBracket</span>(<span class="hljs-params">data = <span class="hljs-literal">null</span>, options = {}, index = <span class="hljs-literal">null</span></span>)</span> {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sendIP(<span class="hljs-string">&#x27;closeBracket&#x27;</span>, data, options, index);
   }
 
-  checkRequired(sockets) {
+  <span class="hljs-function"><span class="hljs-title">checkRequired</span>(<span class="hljs-params">sockets</span>)</span> {
     <span class="hljs-keyword">if</span> ((sockets.length === <span class="hljs-number">0</span>) &amp;&amp; <span class="hljs-built_in">this</span>.isRequired()) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.getId()}</span>: No connections available`</span>);
     }
   }
 
-  getSockets(index) {</pre></div>
+  <span class="hljs-function"><span class="hljs-title">getSockets</span>(<span class="hljs-params">index</span>)</span> {</pre></div>
             
           
             
@@ -422,7 +422,7 @@ These ports are the way a component sends Information Packets.</p>
               <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sockets;
   }
 
-  isCaching() {
+  <span class="hljs-function"><span class="hljs-title">isCaching</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.caching) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }

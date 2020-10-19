@@ -257,14 +257,14 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2013</span><span class="hljs-number">-2020</span> Flowhub UG
-(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
+(c) <span class="hljs-number">2013</span>-<span class="hljs-number">2020</span> Flowhub UG
+(c) <span class="hljs-number">2011</span>-<span class="hljs-number">2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
               <div class='highlight'><pre>
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessContext</span> </span>{
-  <span class="hljs-keyword">constructor</span>(ip, nodeInstance, port, result) {
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">ip, nodeInstance, port, result</span>)</span> {
     <span class="hljs-built_in">this</span>.ip = ip;
     <span class="hljs-built_in">this</span>.nodeInstance = nodeInstance;
     <span class="hljs-built_in">this</span>.port = port;
@@ -274,7 +274,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
     <span class="hljs-built_in">this</span>.deactivated = <span class="hljs-literal">false</span>;
   }
 
-  activate() {</pre></div>
+  <span class="hljs-function"><span class="hljs-title">activate</span>(<span class="hljs-params"></span>)</span> {</pre></div>
             
           
             
@@ -282,13 +282,13 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 
             
               <div class='highlight'><pre>    <span class="hljs-comment">/* eslint-disable no-underscore-dangle */</span>
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.result.__resolved || (<span class="hljs-built_in">this</span>.nodeInstance.outputQ.indexOf(<span class="hljs-built_in">this</span>.result) === <span class="hljs-number">-1</span>)) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.result.__resolved || (<span class="hljs-built_in">this</span>.nodeInstance.outputQ.indexOf(<span class="hljs-built_in">this</span>.result) === -<span class="hljs-number">1</span>)) {
       <span class="hljs-built_in">this</span>.result = {};
     }
     <span class="hljs-built_in">this</span>.nodeInstance.activate(<span class="hljs-built_in">this</span>);
   }
 
-  deactivate() {
+  <span class="hljs-function"><span class="hljs-title">deactivate</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.result.__resolved) { <span class="hljs-built_in">this</span>.result.__resolved = <span class="hljs-literal">true</span>; }
     <span class="hljs-built_in">this</span>.nodeInstance.deactivate(<span class="hljs-built_in">this</span>);
   }

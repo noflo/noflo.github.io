@@ -437,7 +437,7 @@ then add them to our <code>matches</code></p>
     <div class="highlight"><pre>    contents.forEach(<span class="hljs-function">(<span class="hljs-params">content</span>) =&gt;</span> {
       <span class="hljs-built_in">Object</span>.keys(emotions).forEach(<span class="hljs-function">(<span class="hljs-params">emotion</span>) =&gt;</span> {
         <span class="hljs-keyword">const</span> data = emotions[emotion];
-        <span class="hljs-keyword">if</span> (data.indexOf(content) !== <span class="hljs-number">-1</span>) {
+        <span class="hljs-keyword">if</span> (data.indexOf(content) !== -<span class="hljs-number">1</span>) {
           matches.push(emotion);
         }
       });
@@ -503,7 +503,7 @@ then add them to our <code>matches</code></p>
   <span class="hljs-keyword">const</span> matches = [];
   string.replace(regexp, <span class="hljs-function">(<span class="hljs-params">...rest</span>) =&gt;</span> {
     <span class="hljs-keyword">const</span> arr = rest.slice(<span class="hljs-number">0</span>);
-    <span class="hljs-keyword">const</span> extras = arr.splice(<span class="hljs-number">-2</span>);
+    <span class="hljs-keyword">const</span> extras = arr.splice(-<span class="hljs-number">2</span>);
     [arr.index, arr.input] = extras;
     matches.push(arr);
   });
@@ -757,15 +757,15 @@ if it is Canadian: 1, American: -1, British: .5, None: 0</p>
     <div class="highlight"><pre>    <span class="hljs-keyword">const</span> spellingScore = <span class="hljs-function">(<span class="hljs-params">word</span>) =&gt;</span> {
       <span class="hljs-keyword">let</span> value = <span class="hljs-number">0</span>;
       list.forEach(<span class="hljs-function">(<span class="hljs-params">comparison</span>) =&gt;</span> {
-        <span class="hljs-keyword">if</span> (comparison.American.indexOf(word) !== <span class="hljs-number">-1</span>) {
-          value = <span class="hljs-number">-1</span>;
+        <span class="hljs-keyword">if</span> (comparison.American.indexOf(word) !== -<span class="hljs-number">1</span>) {
+          value = -<span class="hljs-number">1</span>;
           <span class="hljs-keyword">return</span>;
         }
-        <span class="hljs-keyword">if</span> (comparison.Canadian.indexOf(word) !== <span class="hljs-number">-1</span>) {
+        <span class="hljs-keyword">if</span> (comparison.Canadian.indexOf(word) !== -<span class="hljs-number">1</span>) {
           value = <span class="hljs-number">1</span>;
           <span class="hljs-keyword">return</span>;
         }
-        <span class="hljs-keyword">if</span> (comparison.British.indexOf(word) !== <span class="hljs-number">-1</span>) {
+        <span class="hljs-keyword">if</span> (comparison.British.indexOf(word) !== -<span class="hljs-number">1</span>) {
           value = <span class="hljs-number">0.5</span>;
         }
       });

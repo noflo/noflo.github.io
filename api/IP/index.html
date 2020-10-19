@@ -257,7 +257,7 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2016</span><span class="hljs-number">-2017</span> Flowhub UG
+(c) <span class="hljs-number">2016</span>-<span class="hljs-number">2017</span> Flowhub UG
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
@@ -298,7 +298,7 @@ port is transmitted with the IP object.</p>
             <p>Detects if an arbitrary value is an IP</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">static</span> isIP(obj) {
+              <div class='highlight'><pre>  <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-title">isIP</span>(<span class="hljs-params">obj</span>)</span> {
     <span class="hljs-keyword">return</span> obj &amp;&amp; (<span class="hljs-keyword">typeof</span> obj === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; (obj.isIP === <span class="hljs-literal">true</span>);
   }</pre></div>
             
@@ -308,7 +308,7 @@ port is transmitted with the IP object.</p>
 Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">constructor</span>(type, data = null, options = {}) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">type, data = <span class="hljs-literal">null</span>, options = {}</span>)</span> {
     <span class="hljs-built_in">this</span>.type = type || <span class="hljs-string">&#x27;data&#x27;</span>;
     <span class="hljs-built_in">this</span>.data = data;
     <span class="hljs-built_in">this</span>.isIP = <span class="hljs-literal">true</span>;
@@ -329,7 +329,7 @@ Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
             <p>Creates a new IP copying its contents by value not reference</p>
 
             
-              <div class='highlight'><pre>  clone() {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">clone</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">const</span> ip = <span class="hljs-keyword">new</span> IP(<span class="hljs-built_in">this</span>.type);
     <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> {
       <span class="hljs-keyword">const</span> val = <span class="hljs-built_in">this</span>[key];
@@ -349,7 +349,7 @@ Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
             <p>Moves an IP to a different owner</p>
 
             
-              <div class='highlight'><pre>  move(owner) {</pre></div>
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">move</span>(<span class="hljs-params">owner</span>)</span> {</pre></div>
             
           
             
@@ -365,7 +365,7 @@ Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
             <p>Frees IP contents</p>
 
             
-              <div class='highlight'><pre>  drop() {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">drop</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> { <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>[key]; });
   }
 };</pre></div>

@@ -257,8 +257,8 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2013</span><span class="hljs-number">-2018</span> Flowhub UG
-(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
+(c) <span class="hljs-number">2013</span>-<span class="hljs-number">2018</span> Flowhub UG
+(c) <span class="hljs-number">2011</span>-<span class="hljs-number">2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
@@ -288,12 +288,12 @@ accordingly, including removing connections, adding new nodes,
 and sending new IIPs.</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">constructor</span>(graph, options = {}) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">graph, options = {}</span>)</span> {
     deprecated(<span class="hljs-string">&#x27;noflo.Network construction is deprecated, use noflo.createNetwork&#x27;</span>);
     <span class="hljs-built_in">super</span>(graph, options);
   }
 
-  connect(done = <span class="hljs-function">() =&gt;</span> {}) {
+  <span class="hljs-function"><span class="hljs-title">connect</span>(<span class="hljs-params">done = () =&gt; {}</span>)</span> {
     <span class="hljs-built_in">super</span>.connect(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> (err) {
         done(err);
@@ -313,7 +313,7 @@ from the graph.</p>
 to NoFlo processes, and edges to connections between them.</p>
 
             
-              <div class='highlight'><pre>  subscribeGraph() {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">subscribeGraph</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">const</span> graphOps = [];
     <span class="hljs-keyword">let</span> processing = <span class="hljs-literal">false</span>;
     <span class="hljs-keyword">const</span> registerOp = <span class="hljs-function">(<span class="hljs-params">op, details</span>) =&gt;</span> {

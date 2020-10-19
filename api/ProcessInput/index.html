@@ -257,8 +257,8 @@
           
             
             <pre><code>NoFlo - Flow-Based Programming <span class="hljs-keyword">for</span> JavaScript
-(c) <span class="hljs-number">2013</span><span class="hljs-number">-2020</span> Flowhub UG
-(c) <span class="hljs-number">2011</span><span class="hljs-number">-2012</span> Henri Bergius, Nemein
+(c) <span class="hljs-number">2013</span>-<span class="hljs-number">2020</span> Flowhub UG
+(c) <span class="hljs-number">2011</span>-<span class="hljs-number">2012</span> Henri Bergius, Nemein
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
@@ -266,7 +266,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 <span class="hljs-keyword">const</span> debug = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;debug&#x27;</span>)(<span class="hljs-string">&#x27;noflo:component&#x27;</span>);
 
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessInput</span> </span>{
-  <span class="hljs-keyword">constructor</span>(ports, context) {
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">ports, context</span>)</span> {
     <span class="hljs-built_in">this</span>.ports = ports;
     <span class="hljs-built_in">this</span>.context = context;
     <span class="hljs-built_in">this</span>.nodeInstance = <span class="hljs-built_in">this</span>.context.nodeInstance;
@@ -281,7 +281,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
             <p>When preconditions are met, set component state to <code>activated</code></p>
 
             
-              <div class='highlight'><pre>  activate() {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">activate</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.context.activated) { <span class="hljs-keyword">return</span>; }
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.nodeInstance.isOrdered()) {</pre></div>
             
@@ -308,7 +308,7 @@ so that it can be send when the order comes up</p>
 useful mainly for addressable ports</p>
 
             
-              <div class='highlight'><pre>  attached(...params) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">attached</span>(<span class="hljs-params">...params</span>)</span> {
     <span class="hljs-keyword">let</span> args = params;
     <span class="hljs-keyword">if</span> (!args.length) { args = [<span class="hljs-string">&#x27;in&#x27;</span>]; }
     <span class="hljs-keyword">const</span> res = [];
@@ -337,7 +337,7 @@ Passing a validation callback as a last argument allows more selective
 checking of packets.</p>
 
             
-              <div class='highlight'><pre>  has(...params) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">has</span>(<span class="hljs-params">...params</span>)</span> {
     <span class="hljs-keyword">let</span> args = params;
     <span class="hljs-keyword">let</span> validate;
     <span class="hljs-keyword">if</span> (!args.length) { args = [<span class="hljs-string">&#x27;in&#x27;</span>]; }
@@ -374,7 +374,7 @@ checking of packets.</p>
             <p>Returns true if the ports contain data packets</p>
 
             
-              <div class='highlight'><pre>  hasData(...params) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">hasData</span>(<span class="hljs-params">...params</span>)</span> {
     <span class="hljs-keyword">let</span> args = params;
     <span class="hljs-keyword">if</span> (!args.length) { args = [<span class="hljs-string">&#x27;in&#x27;</span>]; }
     args.push(<span class="hljs-function">(<span class="hljs-params">ip</span>) =&gt;</span> ip.type === <span class="hljs-string">&#x27;data&#x27;</span>);
@@ -386,7 +386,7 @@ checking of packets.</p>
             <p>Returns true if a port has a complete stream in its input buffer.</p>
 
             
-              <div class='highlight'><pre>  hasStream(...params) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">hasStream</span>(<span class="hljs-params">...params</span>)</span> {
     <span class="hljs-keyword">let</span> args = params;
     <span class="hljs-keyword">let</span> validateStream;
     <span class="hljs-keyword">if</span> (!args.length) { args = [<span class="hljs-string">&#x27;in&#x27;</span>]; }
@@ -450,7 +450,7 @@ the input buffers. Reading packets sets the component as “activated”.</p>
 <p>Fetches IP object(s) for port(s)</p>
 
             
-              <div class='highlight'><pre>  get(...params) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">get</span>(<span class="hljs-params">...params</span>)</span> {
     <span class="hljs-built_in">this</span>.activate();
     <span class="hljs-keyword">let</span> args = params;
     <span class="hljs-keyword">if</span> (!args.length) { args = [<span class="hljs-string">&#x27;in&#x27;</span>]; }
@@ -483,7 +483,7 @@ the input buffers. Reading packets sets the component as “activated”.</p>
     <span class="hljs-keyword">if</span> (args.length === <span class="hljs-number">1</span>) { <span class="hljs-keyword">return</span> res[<span class="hljs-number">0</span>]; } <span class="hljs-keyword">return</span> res;
   }
 
-  __getForForwarding(port, idx) {
+  <span class="hljs-function"><span class="hljs-title">__getForForwarding</span>(<span class="hljs-params">port, idx</span>)</span> {
     <span class="hljs-keyword">const</span> prefix = [];
     <span class="hljs-keyword">let</span> dataIp = <span class="hljs-literal">null</span>;</pre></div>
             
@@ -586,7 +586,7 @@ be added to result for done() to read them from</p>
             <p>Fetches <code>data</code> property of IP object(s) for given port(s)</p>
 
             
-              <div class='highlight'><pre>  getData(...params) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">getData</span>(<span class="hljs-params">...params</span>)</span> {
     <span class="hljs-keyword">let</span> args = params;
     <span class="hljs-keyword">if</span> (!args.length) { args = [<span class="hljs-string">&#x27;in&#x27;</span>]; }
 
@@ -623,7 +623,7 @@ so the indexes are correct.</p>
             <p>Fetches a complete data stream from the buffer.</p>
 
             
-              <div class='highlight'><pre>  getStream(...params) {
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">getStream</span>(<span class="hljs-params">...params</span>)</span> {
     <span class="hljs-keyword">let</span> args = params;
     <span class="hljs-keyword">if</span> (!args.length) { args = [<span class="hljs-string">&#x27;in&#x27;</span>]; }
     <span class="hljs-keyword">const</span> datas = [];
