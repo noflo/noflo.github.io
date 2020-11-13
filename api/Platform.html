@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Platform.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Platform.js" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -232,7 +232,6 @@ env var.</p>
             
               <div class='highlight'><pre><span class="hljs-built_in">exports</span>.deprecated = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deprecated</span>(<span class="hljs-params">message</span>) </span>{
   <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exports</span>.isBrowser()) {
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.NOFLO_FATAL_DEPRECATED) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message); }
     <span class="hljs-built_in">console</span>.warn(message);
     <span class="hljs-keyword">return</span>;
   }
@@ -243,7 +242,7 @@ env var.</p>
 };</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Platform.coffee">Platform.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Platform.js">Platform.js</a> file.</small></p>
         </div>
       </div>
     </div>

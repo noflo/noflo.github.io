@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.js" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -268,8 +268,8 @@ method.</p>
             <p>Set the default component icon and description</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.icon = opts.icon ? opts.icon : <span class="hljs-built_in">this</span>.constructor.icon;
-    <span class="hljs-built_in">this</span>.description = opts.description ? opts.description : <span class="hljs-built_in">this</span>.constructor.description;</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.icon = opts.icon ? opts.icon : <span class="hljs-string">&#x27;&#x27;</span>;
+    <span class="hljs-built_in">this</span>.description = opts.description ? opts.description : <span class="hljs-string">&#x27;&#x27;</span>;</pre></div>
             
           
             
@@ -319,10 +319,10 @@ receives packets</p>
 brackets from <code>in</code> port to <code>out</code> and <code>error</code> ports.</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.forwardBrackets = { <span class="hljs-attr">in</span>: [<span class="hljs-string">&#x27;out&#x27;</span>, <span class="hljs-string">&#x27;error&#x27;</span>] };
-    <span class="hljs-keyword">if</span> (<span class="hljs-string">&#x27;forwardBrackets&#x27;</span> <span class="hljs-keyword">in</span> opts) {
-      <span class="hljs-built_in">this</span>.forwardBrackets = opts.forwardBrackets;
-    }</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!opts.forwardBrackets) {
+      opts.forwardBrackets = { <span class="hljs-attr">in</span>: [<span class="hljs-string">&#x27;out&#x27;</span>, <span class="hljs-string">&#x27;error&#x27;</span>] };
+    }
+    <span class="hljs-built_in">this</span>.forwardBrackets = opts.forwardBrackets;</pre></div>
             
           
             
@@ -333,7 +333,15 @@ instantation using the <code>component.process</code> method.</p>
             
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> opts.process === <span class="hljs-string">&#x27;function&#x27;</span>) {
       <span class="hljs-built_in">this</span>.process(opts.process);
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Placeholder for the ID of the current node, populated
+by NoFlo network</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.nodeId = <span class="hljs-literal">null</span>;
   }
 
   getDescription() { <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.description; }
@@ -1047,7 +1055,7 @@ Component.icon = <span class="hljs-literal">null</span>;
 <span class="hljs-built_in">exports</span>.Component = Component;</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.coffee">Component.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Component.js">Component.js</a> file.</small></p>
         </div>
       </div>
     </div>

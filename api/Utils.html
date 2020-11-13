@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.js" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -315,7 +315,7 @@ instead of the trailing.</p>
   <span class="hljs-keyword">let</span> result;
 
   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">later</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">const</span> last = <span class="hljs-built_in">Date</span>.now - timestamp;
+    <span class="hljs-keyword">const</span> last = <span class="hljs-built_in">Date</span>.now() - timestamp;
     <span class="hljs-keyword">if</span> ((last &lt; wait) &amp;&amp; (last &gt;= <span class="hljs-number">0</span>)) {
       timeout = <span class="hljs-built_in">setTimeout</span>(later, wait - last);
     } <span class="hljs-keyword">else</span> {
@@ -333,7 +333,7 @@ instead of the trailing.</p>
   <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">after</span>(<span class="hljs-params"></span>) </span>{
     context = <span class="hljs-built_in">this</span>;
     args = <span class="hljs-built_in">arguments</span>;
-    timestamp = <span class="hljs-built_in">Date</span>.now;
+    timestamp = <span class="hljs-built_in">Date</span>.now();
     <span class="hljs-keyword">const</span> callNow = immediate &amp;&amp; !timeout;
     <span class="hljs-keyword">if</span> (!timeout) {
       timeout = <span class="hljs-built_in">setTimeout</span>(later, wait);
@@ -353,7 +353,7 @@ instead of the trailing.</p>
 <span class="hljs-built_in">exports</span>.isArray = isArray;</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.coffee">Utils.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.js">Utils.js</a> file.</small></p>
         </div>
       </div>
     </div>

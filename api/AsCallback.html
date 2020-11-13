@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/AsCallback.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/AsCallback.js" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -278,8 +278,14 @@ executions of the function in their own contexts.</p>
 
             
               <div class='highlight'><pre>  <span class="hljs-keyword">let</span> network;
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> component === <span class="hljs-string">&#x27;object&#x27;</span>) {
-    component.componentLoader = options.loader;
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> component === <span class="hljs-string">&#x27;object&#x27;</span>) {</pre></div>
+            
+          
+            
+            <p>This is a graph object</p>
+
+            
+              <div class='highlight'><pre>    component.properties.componentLoader = options.loader;
 
     network = <span class="hljs-keyword">new</span> Network(component, options);</pre></div>
             
@@ -337,7 +343,7 @@ executions of the function in their own contexts.</p>
             <p>Prepare network</p>
 
             
-              <div class='highlight'><pre>    graph.componentLoader = options.loader;
+              <div class='highlight'><pre>    graph.properties.componentLoader = options.loader;
     network = <span class="hljs-keyword">new</span> Network(graph, options);</pre></div>
             
           
@@ -459,6 +465,10 @@ objects to the callback.</p>
         <span class="hljs-keyword">const</span> value = inputMap[port];
         <span class="hljs-keyword">if</span> (!inSockets[port]) {
           <span class="hljs-keyword">const</span> portDef = network.graph.inports[port];
+          <span class="hljs-keyword">if</span> (!portDef) {
+            callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${port}</span> not available in the graph`</span>));
+            <span class="hljs-keyword">return</span>;
+          }
           <span class="hljs-keyword">const</span> process = network.getNode(portDef.process);
           inSockets[port] = internalSocket.createSocket();
           process.component.inPorts[portDef.port].attach(inSockets[port]);
@@ -487,7 +497,7 @@ objects to the callback.</p>
             <p>Scalar values are always simple inputs</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> inputs !== <span class="hljs-string">&#x27;object&#x27;</span>) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;simple&#x27;</span>; }
+              <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> inputs !== <span class="hljs-string">&#x27;object&#x27;</span> || !inputs) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;simple&#x27;</span>; }
 
   <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray(inputs)) {
     <span class="hljs-keyword">const</span> maps = inputs.filter(<span class="hljs-function">(<span class="hljs-params">entry</span>) =&gt;</span> getType(entry, network) === <span class="hljs-string">&#x27;map&#x27;</span>);</pre></div>
@@ -542,7 +552,10 @@ objects to the callback.</p>
             <p>Simple inputs need to be converted to a sequence</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">let</span> inPort = <span class="hljs-built_in">Object</span>.keys(network.graph.inports)[<span class="hljs-number">0</span>];</pre></div>
+              <div class='highlight'><pre>  <span class="hljs-keyword">let</span> inPort = <span class="hljs-built_in">Object</span>.keys(network.graph.inports)[<span class="hljs-number">0</span>];
+  <span class="hljs-keyword">if</span> (!inPort) {
+    <span class="hljs-keyword">return</span> {};
+  }</pre></div>
             
           
             
@@ -653,6 +666,9 @@ objects to the callback.</p>
 }
 
 <span class="hljs-built_in">exports</span>.asCallback = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">asCallback</span>(<span class="hljs-params">component, options</span>) </span>{
+  <span class="hljs-keyword">if</span> (!component) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;No component or graph provided&#x27;</span>);
+  }
   options = normalizeOptions(options, component);
   <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">inputs, callback</span>) =&gt;</span> {
     prepareNetwork(component, options, <span class="hljs-function">(<span class="hljs-params">err, network</span>) =&gt;</span> {
@@ -677,7 +693,7 @@ objects to the callback.</p>
 };</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/AsCallback.coffee">AsCallback.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/AsCallback.js">AsCallback.js</a> file.</small></p>
         </div>
       </div>
     </div>
