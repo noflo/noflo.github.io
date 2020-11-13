@@ -362,6 +362,10 @@ component.</p>
 
             
               <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">load</span>(<span class="hljs-params">name, callback, metadata</span>)</span> {
+    <span class="hljs-keyword">if</span> (!name) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;No component name provided&#x27;</span>));
+      <span class="hljs-keyword">return</span>;
+    }
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ready) {
       <span class="hljs-built_in">this</span>.listComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
         <span class="hljs-keyword">if</span> (err) {

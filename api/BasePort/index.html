@@ -290,7 +290,22 @@ NoFlo may be freely distributed under the MIT license</code></pre>
   <span class="hljs-string">&#x27;stream&#x27;</span>,
 ];
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleOptions</span>(<span class="hljs-params">options = {}</span>) </span>{</pre></div>
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@typedef <span class="hljs-type">{Object}</span> <span class="hljs-variable">BaseOptions</span></span> - Options for configuring all types of ports
+ * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[description=&#x27;&#x27;]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[datatype=&#x27;all&#x27;]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[schema=null]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[type=null]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[required=false]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[scoped=true]
+ */</span>
+
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@template <span class="hljs-type">{BaseOptions}</span> <span class="hljs-variable">BaseportOptions</span></span>
+ * <span class="hljs-doctag">@param <span class="hljs-type">{BaseportOptions}</span> <span class="hljs-variable">options</span></span>
+ * <span class="hljs-doctag">@return <span class="hljs-type">{BaseportOptions}</span></span>
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleOptions</span>(<span class="hljs-params">options</span>) </span>{</pre></div>
             
           
             
@@ -332,13 +347,29 @@ was provided</p>
 
   <span class="hljs-keyword">if</span> (schema &amp;&amp; (schema.indexOf(<span class="hljs-string">&#x27;/&#x27;</span>) === -<span class="hljs-number">1</span>)) {
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port schema &#x27;<span class="hljs-subst">${schema}</span>&#x27; specified. Should be URL or MIME type`</span>);
-  }
+  }</pre></div>
+            
+          
+            
+            <p>Scoping</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> scoped = (<span class="hljs-keyword">typeof</span> options.scoped === <span class="hljs-string">&#x27;boolean&#x27;</span>) ? options.scoped : <span class="hljs-literal">true</span>;</pre></div>
+            
+          
+            
+            <p>Description</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> description = options.description || <span class="hljs-string">&#x27;&#x27;</span>;
 
   <span class="hljs-comment">/* eslint-disable prefer-object-spread */</span>
   <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, options, {
+    description,
     datatype,
     required,
     schema,
+    scoped,
   });
 }
 
@@ -401,10 +432,14 @@ connections to the port</p>
       <span class="hljs-keyword">return</span>;
     }
     <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;attach&#x27;</span>, socket);
-  }
+  }</pre></div>
+            
+          
+            
+            <p>eslint-disable-next-line class-methods-use-this,no-unused-vars</p>
 
-  <span class="hljs-comment">/* eslint-disable class-methods-use-this */</span>
-  <span class="hljs-function"><span class="hljs-title">attachSocket</span>(<span class="hljs-params"></span>)</span> { }
+            
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">attachSocket</span>(<span class="hljs-params">socket, index = <span class="hljs-literal">null</span></span>)</span> { }
 
   <span class="hljs-function"><span class="hljs-title">detach</span>(<span class="hljs-params">socket</span>)</span> {
     <span class="hljs-keyword">const</span> index = <span class="hljs-built_in">this</span>.sockets.indexOf(socket);

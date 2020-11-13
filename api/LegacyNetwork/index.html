@@ -291,9 +291,14 @@ and sending new IIPs.</p>
               <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">graph, options = {}</span>)</span> {
     deprecated(<span class="hljs-string">&#x27;noflo.Network construction is deprecated, use noflo.createNetwork&#x27;</span>);
     <span class="hljs-built_in">super</span>(graph, options);
-  }
+  }</pre></div>
+            
+          
+            
+            <p>eslint-disable-next-line no-unused-vars</p>
 
-  <span class="hljs-function"><span class="hljs-title">connect</span>(<span class="hljs-params">done = () =&gt; {}</span>)</span> {
+            
+              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">connect</span>(<span class="hljs-params">done = (err) =&gt; {}</span>)</span> {
     <span class="hljs-built_in">super</span>.connect(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> (err) {
         done(err);

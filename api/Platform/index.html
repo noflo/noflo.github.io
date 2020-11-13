@@ -288,7 +288,6 @@ env var.</p>
             
               <div class='highlight'><pre><span class="hljs-built_in">exports</span>.deprecated = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deprecated</span>(<span class="hljs-params">message</span>) </span>{
   <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exports</span>.isBrowser()) {
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">window</span>.NOFLO_FATAL_DEPRECATED) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message); }
     <span class="hljs-built_in">console</span>.warn(message);
     <span class="hljs-keyword">return</span>;
   }

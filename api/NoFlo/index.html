@@ -524,7 +524,9 @@ definition file.</p>
       callback(err);
       <span class="hljs-keyword">return</span>;
     }
-    <span class="hljs-keyword">if</span> (options.baseDir) { net.baseDir = options.baseDir; }
+    <span class="hljs-keyword">if</span> (options.baseDir) {
+      net.properties.baseDir = options.baseDir;
+    }
     <span class="hljs-built_in">exports</span>.createNetwork(net, options, callback);
   });
 };</pre></div>

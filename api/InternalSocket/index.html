@@ -362,6 +362,8 @@ connected process.</p>
     <span class="hljs-built_in">this</span>.dataDelegate = <span class="hljs-literal">null</span>;
     <span class="hljs-built_in">this</span>.debug = <span class="hljs-literal">false</span>;
     <span class="hljs-built_in">this</span>.emitEvent = <span class="hljs-built_in">this</span>.regularEmitEvent;
+    <span class="hljs-built_in">this</span>.from = <span class="hljs-literal">null</span>;
+    <span class="hljs-built_in">this</span>.to = <span class="hljs-literal">null</span>;
   }</pre></div>
             
           
@@ -614,7 +616,7 @@ components may also loom like <em>DATA -&gt; ReadFile:SOURCE</em>.</p>
 
 <span class="hljs-built_in">exports</span>.InternalSocket = InternalSocket;
 
-<span class="hljs-built_in">exports</span>.createSocket = <span class="hljs-function">() =&gt;</span> <span class="hljs-keyword">new</span> InternalSocket();</pre></div>
+<span class="hljs-built_in">exports</span>.createSocket = <span class="hljs-function">(<span class="hljs-params">metadata = {}</span>) =&gt;</span> <span class="hljs-keyword">new</span> InternalSocket(metadata);</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InternalSocket.js">InternalSocket.js</a> file.</small></p>
