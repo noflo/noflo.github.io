@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.js" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -234,7 +234,22 @@ NoFlo may be freely distributed under the MIT license</code></pre>
   <span class="hljs-string">&#x27;stream&#x27;</span>,
 ];
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleOptions</span>(<span class="hljs-params">options = {}</span>) </span>{</pre></div>
+<span class="hljs-comment">/**
+ * @typedef {Object} BaseOptions - Options for configuring all types of ports
+ * @property {string} [description=&#x27;&#x27;]
+ * @property {string} [datatype=&#x27;all&#x27;]
+ * @property {string} [schema=null]
+ * @property {string} [type=null]
+ * @property {boolean} [required=false]
+ * @property {boolean} [scoped=true]
+ */</span>
+
+<span class="hljs-comment">/**
+ * @template {BaseOptions} BaseportOptions
+ * @param {BaseportOptions} options
+ * @return {BaseportOptions}
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleOptions</span>(<span class="hljs-params">options</span>) </span>{</pre></div>
             
           
             
@@ -276,13 +291,29 @@ was provided</p>
 
   <span class="hljs-keyword">if</span> (schema &amp;&amp; (schema.indexOf(<span class="hljs-string">&#x27;/&#x27;</span>) === <span class="hljs-number">-1</span>)) {
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port schema &#x27;<span class="hljs-subst">${schema}</span>&#x27; specified. Should be URL or MIME type`</span>);
-  }
+  }</pre></div>
+            
+          
+            
+            <p>Scoping</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> scoped = (<span class="hljs-keyword">typeof</span> options.scoped === <span class="hljs-string">&#x27;boolean&#x27;</span>) ? options.scoped : <span class="hljs-literal">true</span>;</pre></div>
+            
+          
+            
+            <p>Description</p>
+
+            
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> description = options.description || <span class="hljs-string">&#x27;&#x27;</span>;
 
   <span class="hljs-comment">/* eslint-disable prefer-object-spread */</span>
   <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, options, {
+    description,
     datatype,
     required,
     schema,
+    scoped,
   });
 }
 
@@ -345,10 +376,14 @@ connections to the port</p>
       <span class="hljs-keyword">return</span>;
     }
     <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;attach&#x27;</span>, socket);
-  }
+  }</pre></div>
+            
+          
+            
+            <p>eslint-disable-next-line class-methods-use-this,no-unused-vars</p>
 
-  <span class="hljs-comment">/* eslint-disable class-methods-use-this */</span>
-  attachSocket() { }
+            
+              <div class='highlight'><pre>  attachSocket(socket, index = <span class="hljs-literal">null</span>) { }
 
   detach(socket) {
     <span class="hljs-keyword">const</span> index = <span class="hljs-built_in">this</span>.sockets.indexOf(socket);
@@ -418,7 +453,7 @@ connections to the port</p>
 };</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.coffee">BasePort.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.js">BasePort.js</a> file.</small></p>
         </div>
       </div>
     </div>

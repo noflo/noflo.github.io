@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.js" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -282,12 +282,12 @@ used to hold a set of input or output ports of a component.</p>
 
   on(name, event, callback) {
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
-    <span class="hljs-built_in">this</span>.ports[name].on(event, callback);
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.ports[name].on(event, callback);
   }
 
   once(name, event, callback) {
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
-    <span class="hljs-built_in">this</span>.ports[name].once(event, callback);
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.ports[name].once(event, callback);
   }
 };
 
@@ -353,7 +353,7 @@ format <code>portname</code> or <code>portname[index]</code>.</p>
 };</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.coffee">Ports.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.js">Ports.js</a> file.</small></p>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.js" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -306,6 +306,10 @@ component.</p>
 
             
               <div class='highlight'><pre>  load(name, callback, metadata) {
+    <span class="hljs-keyword">if</span> (!name) {
+      callback(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;No component name provided&#x27;</span>));
+      <span class="hljs-keyword">return</span>;
+    }
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ready) {
       <span class="hljs-built_in">this</span>.listComponents(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
         <span class="hljs-keyword">if</span> (err) {
@@ -678,7 +682,7 @@ method on this runtime instance.</p>
 <span class="hljs-built_in">exports</span>.ComponentLoader = ComponentLoader;</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.coffee">ComponentLoader.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ComponentLoader.js">ComponentLoader.js</a> file.</small></p>
         </div>
       </div>
     </div>

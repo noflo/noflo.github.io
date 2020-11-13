@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/BaseNetwork.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/BaseNetwork.js" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -338,7 +338,7 @@ the current working directory</p>
 
             
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!platform.isBrowser()) {
-      <span class="hljs-built_in">this</span>.baseDir = graph.baseDir || process.cwd();</pre></div>
+      <span class="hljs-built_in">this</span>.baseDir = graph.properties.baseDir || process.cwd();</pre></div>
             
           
             
@@ -347,7 +347,7 @@ root</p>
 
             
               <div class='highlight'><pre>    } <span class="hljs-keyword">else</span> {
-      <span class="hljs-built_in">this</span>.baseDir = graph.baseDir || <span class="hljs-string">&#x27;/&#x27;</span>;
+      <span class="hljs-built_in">this</span>.baseDir = graph.properties.baseDir || <span class="hljs-string">&#x27;/&#x27;</span>;
     }</pre></div>
             
           
@@ -364,8 +364,8 @@ way we can calculate the uptime of the network.</p>
             <p>Initialize a Component Loader for the network</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (graph.componentLoader) {
-      <span class="hljs-built_in">this</span>.loader = graph.componentLoader;
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (graph.properties.componentLoader) {
+      <span class="hljs-built_in">this</span>.loader = graph.properties.componentLoader;
     } <span class="hljs-keyword">else</span> {
       <span class="hljs-built_in">this</span>.loader = <span class="hljs-keyword">new</span> componentLoader.ComponentLoader(<span class="hljs-built_in">this</span>.baseDir, <span class="hljs-built_in">this</span>.options);
     }
@@ -378,8 +378,10 @@ time, in seconds.</p>
 
             
               <div class='highlight'><pre>  uptime() {
-    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.startupDate) { <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; }
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>() - <span class="hljs-built_in">this</span>.startupDate;
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.startupDate) {
+      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Date</span>.now() - <span class="hljs-built_in">this</span>.startupDate.getTime();
   }
 
   getActiveProcesses() {
@@ -630,9 +632,14 @@ we already have a process with the given ID, return that.</p>
             
               <div class='highlight'><pre>  getNode(id) {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.processes[id];
-  }
+  }</pre></div>
+            
+          
+            
+            <p>eslint-disable-next-line no-unused-vars</p>
 
-  connect(done = <span class="hljs-function">() =&gt;</span> {}) {</pre></div>
+            
+              <div class='highlight'><pre>  connect(done = <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {}) {</pre></div>
             
           
             
@@ -1081,9 +1088,14 @@ started and set</p>
 
   isRunning() {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.getActiveProcesses().length &gt; <span class="hljs-number">0</span>;
-  }
+  }</pre></div>
+            
+          
+            
+            <p>eslint-disable-next-line no-unused-vars</p>
 
-  startComponents(callback = <span class="hljs-function">() =&gt;</span> {}) {</pre></div>
+            
+              <div class='highlight'><pre>  startComponents(callback = <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {}) {</pre></div>
             
           
             
@@ -1288,7 +1300,9 @@ a socket is attached from the “parent” graph.</p>
             <p>Starting the execution</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.startupDate) { <span class="hljs-built_in">this</span>.startupDate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(); }
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.startupDate) {
+      <span class="hljs-built_in">this</span>.startupDate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
+    }
     <span class="hljs-built_in">this</span>.started = <span class="hljs-literal">true</span>;
     <span class="hljs-built_in">this</span>.stopped = <span class="hljs-literal">false</span>;
     <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;start&#x27;</span>,
@@ -1331,7 +1345,7 @@ a socket is attached from the “parent” graph.</p>
 <span class="hljs-built_in">module</span>.exports = BaseNetwork;</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BaseNetwork.coffee">BaseNetwork.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BaseNetwork.js">BaseNetwork.js</a> file.</small></p>
         </div>
       </div>
     </div>

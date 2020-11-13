@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.js" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -468,7 +468,9 @@ definition file.</p>
       callback(err);
       <span class="hljs-keyword">return</span>;
     }
-    <span class="hljs-keyword">if</span> (options.baseDir) { net.baseDir = options.baseDir; }
+    <span class="hljs-keyword">if</span> (options.baseDir) {
+      net.properties.baseDir = options.baseDir;
+    }
     <span class="hljs-built_in">exports</span>.createNetwork(net, options, callback);
   });
 };</pre></div>
@@ -517,7 +519,7 @@ result will be sent to either <code>out</code> or <code>error</code> port.</p>
               <div class='highlight'><pre><span class="hljs-built_in">exports</span>.asComponent = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./AsComponent&#x27;</span>).asComponent;</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.coffee">NoFlo.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.js">NoFlo.js</a> file.</small></p>
         </div>
       </div>
     </div>

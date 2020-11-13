@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.js" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -215,10 +215,26 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 These ports are the way a component sends Information Packets.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
+              <div class='highlight'><pre><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@typedef <span class="hljs-type">{Object}</span> <span class="hljs-variable">OutportOptions</span></span> - Options for configuring outports
+ * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[description=&#x27;&#x27;]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[datatype=&#x27;all&#x27;]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[schema=null]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[required=false]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[caching=false]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[scoped=true]
+ */</span>
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{OutportOptions}</span> <span class="hljs-variable">options</span></span> - Options for the outport
+   */</span>
   <span class="hljs-keyword">constructor</span>(options = {}) {
     <span class="hljs-keyword">const</span> opts = options;
     <span class="hljs-keyword">if</span> (opts.scoped == <span class="hljs-literal">null</span>) { opts.scoped = <span class="hljs-literal">true</span>; }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> opts.caching !== <span class="hljs-string">&#x27;boolean&#x27;</span>) {
+      opts.caching = <span class="hljs-literal">false</span>;
+    }
     <span class="hljs-built_in">super</span>(opts);
     <span class="hljs-built_in">this</span>.cache = {};
   }
@@ -367,13 +383,15 @@ These ports are the way a component sends Information Packets.</p>
   }
 
   isCaching() {
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.caching) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.caching) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }
 };</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.coffee">OutPort.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.js">OutPort.js</a> file.</small></p>
         </div>
       </div>
     </div>

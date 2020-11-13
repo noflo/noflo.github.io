@@ -8,7 +8,7 @@ categories:
     <div class="page-title documentation-page-title">
       <div class="container">
         <h1 class="page-title__title">API Documentation</h1>
-        <a href="https://github.com/noflo/noflo/blob/master/src/lib/LegacyNetwork.coffee" class="btn btn-primary page-title__button big-button">On GitHub</a>
+        <a href="https://github.com/noflo/noflo/blob/master/src/lib/LegacyNetwork.js" class="btn btn-primary page-title__button big-button">On GitHub</a>
       </div>
     </div>
   </div>
@@ -235,9 +235,14 @@ and sending new IIPs.</p>
               <div class='highlight'><pre>  <span class="hljs-keyword">constructor</span>(graph, options = {}) {
     deprecated(<span class="hljs-string">&#x27;noflo.Network construction is deprecated, use noflo.createNetwork&#x27;</span>);
     <span class="hljs-built_in">super</span>(graph, options);
-  }
+  }</pre></div>
+            
+          
+            
+            <p>eslint-disable-next-line no-unused-vars</p>
 
-  connect(done = <span class="hljs-function">() =&gt;</span> {}) {
+            
+              <div class='highlight'><pre>  connect(done = <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {}) {
     <span class="hljs-built_in">super</span>.connect(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> (err) {
         done(err);
@@ -325,7 +330,7 @@ to NoFlo processes, and edges to connections between them.</p>
 <span class="hljs-built_in">exports</span>.Network = LegacyNetwork;</pre></div>
             
           
-          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/LegacyNetwork.coffee">LegacyNetwork.coffee</a> file.</small></p>
+          <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/LegacyNetwork.js">LegacyNetwork.js</a> file.</small></p>
         </div>
       </div>
     </div>
