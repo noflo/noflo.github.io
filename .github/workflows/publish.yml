@@ -10,26 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
+        with:
+          submodules: true
       - uses: actions/setup-node@v2.1.2
         with:
           node-version: 12
       - run: sudo apt-get install -y bundler
       - run: bundle install --path vendor/bundle
       - run: npm install
-      - run: git submodule update --init
       - run: npm test
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
+        with:
+          submodules: true
       - uses: actions/setup-node@v2.1.2
         with:
           node-version: 12
       - run: sudo apt-get install -y bundler
       - run: bundle install --path vendor/bundle
       - run: npm install
-      - run: git submodule update --init
       - run: npm run build
       - uses: peaceiris/actions-gh-pages@v3
         with:
