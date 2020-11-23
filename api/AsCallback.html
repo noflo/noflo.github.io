@@ -285,9 +285,10 @@ executions of the function in their own contexts.</p>
             <p>This is a graph object</p>
 
             
-              <div class='highlight'><pre>    component.properties.componentLoader = options.loader;
-
-    network = <span class="hljs-keyword">new</span> Network(component, options);</pre></div>
+              <div class='highlight'><pre>    network = <span class="hljs-keyword">new</span> Network(component, {
+      ...options,
+      <span class="hljs-attr">componentLoader</span>: options.loader,
+    });</pre></div>
             
           
             
@@ -343,8 +344,10 @@ executions of the function in their own contexts.</p>
             <p>Prepare network</p>
 
             
-              <div class='highlight'><pre>    graph.properties.componentLoader = options.loader;
-    network = <span class="hljs-keyword">new</span> Network(graph, options);</pre></div>
+              <div class='highlight'><pre>    network = <span class="hljs-keyword">new</span> Network(graph, {
+      ...options,
+      <span class="hljs-attr">componentLoader</span>: options.loader,
+    });</pre></div>
             
           
             
@@ -393,6 +396,7 @@ objects to the callback.</p>
     <span class="hljs-keyword">const</span> portDef = network.graph.outports[outport];
     <span class="hljs-keyword">const</span> process = network.getNode(portDef.process);
     outSockets[outport] = internalSocket.createSocket();
+    network.subscribeSocket(outSockets[outport]);
     process.component.outPorts[portDef.port].attach(outSockets[outport]);
     outSockets[outport].from = {
       process,
@@ -471,6 +475,11 @@ objects to the callback.</p>
           }
           <span class="hljs-keyword">const</span> process = network.getNode(portDef.process);
           inSockets[port] = internalSocket.createSocket();
+          network.subscribeSocket(inSockets[port]);
+          inSockets[port].to = {
+            process,
+            port,
+          };
           process.component.inPorts[portDef.port].attach(inSockets[port]);
         }
         <span class="hljs-keyword">try</span> {

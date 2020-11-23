@@ -2,20 +2,21 @@
   "name": "noflojs-org",
   "version": "1.0.1",
   "devDependencies": {
+    "coffeescript": "^2.5.1",
     "grunt": "~1.3.0",
-    "grunt-jekyll": "~1.0.1",
     "grunt-contrib-connect": "~3.0.0",
-    "grunt-contrib-watch": "~1.1.0",
-    "grunt-contrib-sass": "~2.0.0",
     "grunt-contrib-copy": "~1.0.0",
-    "grunt-shell": "~3.0.1",
-    "grunt-docco": "~0.5.0"
+    "grunt-contrib-sass": "~2.0.0",
+    "grunt-contrib-watch": "~1.1.0",
+    "grunt-docco": "~0.5.0",
+    "grunt-jekyll": "~1.0.1",
+    "grunt-shell": "~3.0.1"
   },
   "scripts": {
     "build": "grunt build",
     "test": "grunt test"
   },
   "dependencies": {
-    "noflo": "1.2.7"
+    "noflo": "1.3.0"
   }
 }
