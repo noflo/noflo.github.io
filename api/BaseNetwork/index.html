@@ -274,6 +274,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 <span class="hljs-keyword">const</span> componentLoader = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./ComponentLoader&#x27;</span>);
 <span class="hljs-keyword">const</span> utils = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Utils&#x27;</span>);
 <span class="hljs-keyword">const</span> IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);
+<span class="hljs-keyword">const</span> { deprecated } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connectPort</span>(<span class="hljs-params">socket, process, port, index, inbound, callback</span>) </span>{
   <span class="hljs-keyword">if</span> (inbound) {
@@ -393,8 +394,11 @@ set up the defined connections and IIPs.</p>
 the current working directory</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!platform.isBrowser()) {
-      <span class="hljs-built_in">this</span>.baseDir = graph.properties.baseDir || process.cwd();</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (graph.properties.baseDir &amp;&amp; !options.baseDir) {
+      deprecated(<span class="hljs-string">&#x27;Passing baseDir via Graph properties is deprecated, pass via Network options instead&#x27;</span>);
+    }
+    <span class="hljs-keyword">if</span> (!platform.isBrowser()) {
+      <span class="hljs-built_in">this</span>.baseDir = options.baseDir || graph.properties.baseDir || process.cwd();</pre></div>
             
           
             
@@ -403,7 +407,7 @@ root</p>
 
             
               <div class='highlight'><pre>    } <span class="hljs-keyword">else</span> {
-      <span class="hljs-built_in">this</span>.baseDir = graph.properties.baseDir || <span class="hljs-string">&#x27;/&#x27;</span>;
+      <span class="hljs-built_in">this</span>.baseDir = options.baseDir || graph.properties.baseDir || <span class="hljs-string">&#x27;/&#x27;</span>;
     }</pre></div>
             
           
@@ -420,11 +424,22 @@ way we can calculate the uptime of the network.</p>
             <p>Initialize a Component Loader for the network</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (graph.properties.componentLoader) {
+              <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (options.componentLoader) {
+      <span class="hljs-built_in">this</span>.loader = options.componentLoader;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (graph.properties.componentLoader) {
+      deprecated(<span class="hljs-string">&#x27;Passing componentLoader via Graph properties is deprecated, pass via Network options instead&#x27;</span>);
       <span class="hljs-built_in">this</span>.loader = graph.properties.componentLoader;
     } <span class="hljs-keyword">else</span> {
       <span class="hljs-built_in">this</span>.loader = <span class="hljs-keyword">new</span> componentLoader.ComponentLoader(<span class="hljs-built_in">this</span>.baseDir, <span class="hljs-built_in">this</span>.options);
-    }
+    }</pre></div>
+            
+          
+            
+            <p>Enable Flowtrace for this network, when available</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.flowtraceName = <span class="hljs-literal">null</span>;
+    <span class="hljs-built_in">this</span>.setFlowtrace(options.flowtrace || <span class="hljs-literal">false</span>, <span class="hljs-literal">null</span>);
   }</pre></div>
             
           
@@ -467,7 +482,81 @@ time, in seconds.</p>
     <span class="hljs-keyword">return</span> active;
   }
 
+  <span class="hljs-function"><span class="hljs-title">traceEvent</span>(<span class="hljs-params">event, payload</span>)</span> {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.flowtrace) {
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.flowtraceName &amp;&amp; <span class="hljs-built_in">this</span>.flowtraceName !== <span class="hljs-built_in">this</span>.flowtrace.mainGraph) {</pre></div>
+            
+          
+            
+            <p>Let main graph log all events from subgraphs</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">switch</span> (event) {
+      <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;ip&#x27;</span>: {
+        <span class="hljs-keyword">let</span> type = <span class="hljs-string">&#x27;data&#x27;</span>;
+        <span class="hljs-keyword">if</span> (payload.type === <span class="hljs-string">&#x27;openBracket&#x27;</span>) {
+          type = <span class="hljs-string">&#x27;begingroup&#x27;</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (payload.type === <span class="hljs-string">&#x27;closeBracket&#x27;</span>) {
+          type = <span class="hljs-string">&#x27;endgroup&#x27;</span>;
+        }
+        <span class="hljs-keyword">const</span> src = payload.socket.from ? {
+          <span class="hljs-attr">node</span>: payload.socket.from.process.id,
+          <span class="hljs-attr">port</span>: payload.socket.from.port,
+        } : <span class="hljs-literal">null</span>;
+        <span class="hljs-keyword">const</span> tgt = payload.socket.to ? {
+          <span class="hljs-attr">node</span>: payload.socket.to.process.id,
+          <span class="hljs-attr">port</span>: payload.socket.to.port,
+        } : <span class="hljs-literal">null</span>;
+        <span class="hljs-built_in">this</span>.flowtrace.addNetworkPacket(
+          <span class="hljs-string">`network:<span class="hljs-subst">${type}</span>`</span>,
+          src,
+          tgt,
+          <span class="hljs-built_in">this</span>.flowtraceName,
+          {
+            <span class="hljs-attr">subgraph</span>: payload.subgraph,
+            <span class="hljs-attr">group</span>: payload.group,
+            <span class="hljs-attr">datatype</span>: payload.datatype,
+            <span class="hljs-attr">schema</span>: payload.schema,
+            <span class="hljs-attr">data</span>: payload.data,
+          },
+        );
+        <span class="hljs-keyword">break</span>;
+      }
+      <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;start&#x27;</span>: {
+        <span class="hljs-built_in">this</span>.flowtrace.addNetworkStarted(<span class="hljs-built_in">this</span>.flowtraceName);
+        <span class="hljs-keyword">break</span>;
+      }
+      <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;end&#x27;</span>: {
+        <span class="hljs-built_in">this</span>.flowtrace.addNetworkStopped(<span class="hljs-built_in">this</span>.flowtraceName);
+        <span class="hljs-keyword">break</span>;
+      }
+      <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;error&#x27;</span>: {
+        <span class="hljs-built_in">this</span>.flowtrace.addNetworkError(<span class="hljs-built_in">this</span>.flowtraceName, payload);
+        <span class="hljs-keyword">break</span>;
+      }
+      <span class="hljs-attr">default</span>: {</pre></div>
+            
+          
+            
+            <p>No default handler</p>
+
+            
+              <div class='highlight'><pre>      }
+    }
+  }
+
   <span class="hljs-function"><span class="hljs-title">bufferedEmit</span>(<span class="hljs-params">event, payload</span>)</span> {</pre></div>
+            
+          
+            
+            <p>Add the event to Flowtrace immediately</p>
+
+            
+              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.traceEvent(event, payload);</pre></div>
             
           
             
@@ -783,9 +872,14 @@ when done</p>
       <span class="hljs-keyword">return</span>;
     }
 
-    <span class="hljs-keyword">if</span> (!node.component.network) { <span class="hljs-keyword">return</span>; }
+    <span class="hljs-keyword">if</span> (!node.component.network) {
+      <span class="hljs-keyword">return</span>;
+    }
 
     node.component.network.setDebug(<span class="hljs-built_in">this</span>.debug);
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.flowtrace) {
+      node.component.network.setFlowtrace(<span class="hljs-built_in">this</span>.flowtrace, node.componentName, <span class="hljs-literal">false</span>);
+    }
 
     <span class="hljs-keyword">const</span> emitSub = <span class="hljs-function">(<span class="hljs-params">type, data</span>) =&gt;</span> {
       <span class="hljs-keyword">if</span> ((type === <span class="hljs-string">&#x27;process-error&#x27;</span>) &amp;&amp; (<span class="hljs-built_in">this</span>.listeners(<span class="hljs-string">&#x27;process-error&#x27;</span>).length === <span class="hljs-number">0</span>)) {
@@ -801,7 +895,7 @@ when done</p>
       } <span class="hljs-keyword">else</span> {
         data.subgraph = [node.id];
       }
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.bufferedEmit(type, data);
+      <span class="hljs-built_in">this</span>.bufferedEmit(type, data);
     };
 
     node.component.network.on(<span class="hljs-string">&#x27;ip&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
@@ -1394,6 +1488,39 @@ a socket is attached from the “parent” graph.</p>
       <span class="hljs-keyword">const</span> process = <span class="hljs-built_in">this</span>.processes[processId];
       <span class="hljs-keyword">const</span> instance = process.component;
       <span class="hljs-keyword">if</span> (instance.isSubgraph()) { instance.network.setDebug(active); }
+    });
+  }
+
+  <span class="hljs-function"><span class="hljs-title">setFlowtrace</span>(<span class="hljs-params">flowtrace, name = <span class="hljs-literal">null</span>, main = <span class="hljs-literal">true</span></span>)</span> {
+    <span class="hljs-keyword">if</span> (!flowtrace) {
+      <span class="hljs-built_in">this</span>.flowtraceName = <span class="hljs-literal">null</span>;
+      <span class="hljs-built_in">this</span>.flowtrace = <span class="hljs-literal">null</span>;
+      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.flowtrace) {</pre></div>
+            
+          
+            
+            <p>We already have a tracer</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-built_in">this</span>.flowtrace = flowtrace;
+    <span class="hljs-built_in">this</span>.flowtraceName = name || <span class="hljs-built_in">this</span>.graph.name;
+    <span class="hljs-built_in">this</span>.flowtrace.addGraph(<span class="hljs-built_in">this</span>.flowtraceName, <span class="hljs-built_in">this</span>.graph, main);
+    <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).forEach(<span class="hljs-function">(<span class="hljs-params">nodeId</span>) =&gt;</span> {</pre></div>
+            
+          
+            
+            <p>Register existing subgraphs</p>
+
+            
+              <div class='highlight'><pre>      <span class="hljs-keyword">const</span> node = <span class="hljs-built_in">this</span>.processes[nodeId];
+      <span class="hljs-keyword">if</span> (!node.component.isSubgraph() || !node.component.network) {
+        <span class="hljs-keyword">return</span>;
+      }
+      node.component.network.setFlowtrace(<span class="hljs-built_in">this</span>.flowtrace, node.componentName, <span class="hljs-literal">false</span>);
     });
   }
 }

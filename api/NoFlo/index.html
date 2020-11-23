@@ -293,19 +293,6 @@ main entry point to the NoFlo network.</p>
             
           
             
-            <h2 id="network-interface">Network interface</h2>
-<p><a href="../Network/">Network</a> is used for running NoFlo graphs. The direct Network inteface is only
-provided for backwards compatibility purposes. Use <code>createNetwork</code> instead.</p>
-
-            
-              <div class='highlight'><pre><span class="hljs-keyword">const</span> {
-  Network,
-} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Network&#x27;</span>);
-<span class="hljs-built_in">exports</span>.Network = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./LegacyNetwork&#x27;</span>).Network;
-<span class="hljs-keyword">const</span> { deprecated } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>);</pre></div>
-            
-          
-            
             <h3 id="platform-detection">Platform detection</h3>
 <p>NoFlo works on both Node.js and the browser. Because some dependencies are different,
 we need a way to detect which we’re on.</p>
@@ -367,27 +354,34 @@ different components together in a network.</p>
             <h2 id="network-instantiation">Network instantiation</h2>
 <p>This function handles instantiation of NoFlo networks from a Graph object. It creates
 the network, and then starts execution by sending the Initial Information Packets.</p>
-<pre><code>noflo.createNetwork(someGraph, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
+<pre><code>noflo.createNetwork(someGraph, {}, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Network is now running!&#x27;</span>);
 });</code></pre>
 <p>It is also possible to instantiate a Network but delay its execution by giving the
-third <code>delay</code> parameter. In this case you will have to handle connecting the graph and
+third <code>delay</code> option. In this case you will have to handle connecting the graph and
 sending of IIPs manually.</p>
-<pre><code>noflo.createNetwork(someGraph, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
+<pre><code>noflo.createNetwork(someGraph, {
+  <span class="hljs-attr">delay</span>: <span class="hljs-literal">true</span>,
+}, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
   <span class="hljs-keyword">if</span> (err) {
     <span class="hljs-keyword">throw</span> err;
   }
   network.connect(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
     network.start();
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Network is now running!&#x27;</span>);
-  })
-}, <span class="hljs-literal">true</span>);</code></pre>
+  });
+});</code></pre>
 <h3 id="network-options">Network options</h3>
 <p>It is possible to pass some options to control the behavior of network creation:</p>
 <ul>
+<li><code>baseDir</code>: (default: cwd) Project base directory used for component loading</li>
+<li><code>componentLoader</code>: (default: NULL) NoFlo ComponentLoader instance to use for the
+network. New one will be instantiated for the baseDir if this is not given.</li>
 <li><code>delay</code>: (default: FALSE) Whether the network should be started later. Defaults to
 immediate execution</li>
-<li><code>subscribeGraph</code>: (default: TRUE) Whether the network should monitor the underlying
+<li><code>flowtrace</code>: (default: NULL) Flowtrace instance to create a retroactive debugging
+trace of the network run.</li>
+<li><code>subscribeGraph</code>: (default: FALSE) Whether the network should monitor the underlying
 graph for changes</li>
 </ul>
 <p>Options can be passed as a second argument before the callback:</p>
@@ -396,26 +390,16 @@ graph for changes</li>
 network.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.createNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createNetwork</span>(<span class="hljs-params">graph, options, callback</span>) </span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
-    <span class="hljs-keyword">const</span> opts = callback;
-    callback = options;
-    options = opts;
-  }
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;boolean&#x27;</span>) {
-    options = { <span class="hljs-attr">delay</span>: options };
-  }
+              <div class='highlight'><pre><span class="hljs-keyword">const</span> { Network } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Network&#x27;</span>);
+<span class="hljs-keyword">const</span> { <span class="hljs-attr">Network</span>: LegacyNetwork } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./LegacyNetwork&#x27;</span>);
+<span class="hljs-keyword">const</span> { deprecated } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>);
+
+<span class="hljs-built_in">exports</span>.createNetwork = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createNetwork</span>(<span class="hljs-params">graph, options, callback</span>) </span>{
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options !== <span class="hljs-string">&#x27;object&#x27;</span>) {
     options = {};
   }
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options.subscribeGraph === <span class="hljs-string">&#x27;undefined&#x27;</span>) {</pre></div>
-            
-          
-            
-            <p>Default to legacy network for backwards compatibility.</p>
-
-            
-              <div class='highlight'><pre>    options.subscribeGraph = <span class="hljs-literal">true</span>;
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options.subscribeGraph === <span class="hljs-string">&#x27;undefined&#x27;</span>) {
+    options.subscribeGraph = <span class="hljs-literal">false</span>;
   }
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback !== <span class="hljs-string">&#x27;function&#x27;</span>) {
     deprecated(<span class="hljs-string">&#x27;Calling noflo.createNetwork without a callback is deprecated&#x27;</span>);
@@ -430,7 +414,7 @@ network.</p>
 subscription is needed</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> NetworkType = options.subscribeGraph ? <span class="hljs-built_in">exports</span>.Network : Network;
+              <div class='highlight'><pre>  <span class="hljs-keyword">const</span> NetworkType = options.subscribeGraph ? LegacyNetwork : Network;
   <span class="hljs-keyword">const</span> network = <span class="hljs-keyword">new</span> NetworkType(graph, options);
 
   <span class="hljs-keyword">const</span> networkReady = <span class="hljs-function">(<span class="hljs-params">net</span>) =&gt;</span> { <span class="hljs-comment">// Send IIPs</span>
@@ -495,7 +479,7 @@ subscription is needed</p>
             <h3 id="starting-a-network-from-a-file">Starting a network from a file</h3>
 <p>It is also possible to start a NoFlo network by giving it a path to a <code>.json</code> or <code>.fbp</code> network
 definition file.</p>
-<pre><code>noflo.loadFile(<span class="hljs-string">&#x27;somefile.json&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
+<pre><code>noflo.loadFile(<span class="hljs-string">&#x27;somefile.json&#x27;</span>, {}, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, network</span>) </span>{
   <span class="hljs-keyword">if</span> (err) {
     <span class="hljs-keyword">throw</span> err;
   }
@@ -504,30 +488,22 @@ definition file.</p>
 
             
               <div class='highlight'><pre><span class="hljs-built_in">exports</span>.loadFile = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadFile</span>(<span class="hljs-params">file, options, callback</span>) </span>{
-  <span class="hljs-keyword">if</span> (!callback) {
-    callback = options;
-    options = <span class="hljs-literal">null</span>;
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback !== <span class="hljs-string">&#x27;function&#x27;</span>) {
+    deprecated(<span class="hljs-string">&#x27;Calling noflo.loadFile without a callback is deprecated&#x27;</span>);
+    callback = <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      <span class="hljs-keyword">if</span> (err) { <span class="hljs-keyword">throw</span> err; }
+    };
   }
 
-  <span class="hljs-keyword">if</span> (callback &amp;&amp; (<span class="hljs-keyword">typeof</span> options !== <span class="hljs-string">&#x27;object&#x27;</span>)) {
-    options = { <span class="hljs-attr">baseDir</span>: options };
-  }
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options !== <span class="hljs-string">&#x27;object&#x27;</span>) {
-    options = {};
-  }
-  <span class="hljs-keyword">if</span> (!options.subscribeGraph) {
-    options.subscribeGraph = <span class="hljs-literal">false</span>;
-  }
-
-  <span class="hljs-built_in">exports</span>.graph.loadFile(file, <span class="hljs-function">(<span class="hljs-params">err, net</span>) =&gt;</span> {
+  <span class="hljs-built_in">exports</span>.graph.loadFile(file, <span class="hljs-function">(<span class="hljs-params">err, graph</span>) =&gt;</span> {
     <span class="hljs-keyword">if</span> (err) {
       callback(err);
       <span class="hljs-keyword">return</span>;
     }
     <span class="hljs-keyword">if</span> (options.baseDir) {
-      net.properties.baseDir = options.baseDir;
+      graph.properties.baseDir = options.baseDir;
     }
-    <span class="hljs-built_in">exports</span>.createNetwork(net, options, callback);
+    <span class="hljs-built_in">exports</span>.createNetwork(graph, options, callback);
   });
 };</pre></div>
             
