@@ -206,8 +206,8 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">const</span> { EventEmitter } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>);
-<span class="hljs-keyword">const</span> IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);
+              <div class='highlight'><pre><span class="hljs-keyword">import</span> { EventEmitter } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;events&#x27;</span>;
+<span class="hljs-keyword">import</span> IP <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./IP&#x27;</span>;
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">legacyToIp</span>(<span class="hljs-params">event, payload</span>) </span>{</pre></div>
             
@@ -267,7 +267,7 @@ events so that the packets can be caught to the inport of the
 connected process.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InternalSocket</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+              <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InternalSocket</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
   regularEmitEvent(event, data) {
     <span class="hljs-built_in">this</span>.emit(event, data);
   }
@@ -558,9 +558,13 @@ components may also loom like <em>DATA -&gt; ReadFile:SOURCE</em>.</p>
   }
 }
 
-<span class="hljs-built_in">exports</span>.InternalSocket = InternalSocket;
-
-<span class="hljs-built_in">exports</span>.createSocket = <span class="hljs-function">(<span class="hljs-params">metadata = {}</span>) =&gt;</span> <span class="hljs-keyword">new</span> InternalSocket(metadata);</pre></div>
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{Object}</span> </span>[metadata]
+ * <span class="hljs-doctag">@returns <span class="hljs-type">{InternalSocket}</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createSocket</span>(<span class="hljs-params">metadata = {}</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> InternalSocket(metadata);
+}</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InternalSocket.js">InternalSocket.js</a> file.</small></p>

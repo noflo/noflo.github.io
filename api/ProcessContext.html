@@ -207,7 +207,13 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 
             
               <div class='highlight'><pre>
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessContext</span> </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessContext</span> </span>{
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{import(&quot;./IP&quot;).default}</span> <span class="hljs-variable">ip</span></span> - IP for this processing context
+   * <span class="hljs-doctag">@param <span class="hljs-type">{import(&quot;./Component&quot;).Component}</span> <span class="hljs-variable">nodeInstance</span></span> - Component being run
+   * <span class="hljs-doctag">@param <span class="hljs-type">{import(&quot;./InPort&quot;).default}</span> <span class="hljs-variable">port</span></span> - InPort that triggered this context
+   * <span class="hljs-doctag">@param <span class="hljs-type">{Object&lt;string, any&gt;}</span> <span class="hljs-variable">result</span></span>
+   */</span>
   <span class="hljs-keyword">constructor</span>(ip, nodeInstance, port, result) {
     <span class="hljs-built_in">this</span>.ip = ip;
     <span class="hljs-built_in">this</span>.nodeInstance = nodeInstance;
@@ -236,7 +242,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.result.__resolved) { <span class="hljs-built_in">this</span>.result.__resolved = <span class="hljs-literal">true</span>; }
     <span class="hljs-built_in">this</span>.nodeInstance.deactivate(<span class="hljs-built_in">this</span>);
   }
-};</pre></div>
+}</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ProcessContext.js">ProcessContext.js</a> file.</small></p>

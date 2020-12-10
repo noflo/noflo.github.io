@@ -206,11 +206,20 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">const</span> BaseNetwork = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./BaseNetwork&#x27;</span>);
+              <div class='highlight'><pre><span class="hljs-keyword">import</span> { BaseNetwork } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./BaseNetwork&#x27;</span>;
+<span class="hljs-keyword">import</span> { deprecated } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./Platform&#x27;</span>;
 
 <span class="hljs-comment">/* eslint-disable
     no-param-reassign,
-*/</span></pre></div>
+    import/prefer-default-export,
+*/</span>
+
+<span class="hljs-comment">/**
+ * @typedef NetworkProcess
+ * @property {string} id
+ * @property {string} [componentName]
+ * @property {import(&quot;./Component&quot;).Component} [component]
+ */</span></pre></div>
             
           
             
@@ -223,18 +232,7 @@ components, attach sockets between them, and handle the sending
 of Initial Information Packets.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Network</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseNetwork</span> </span>{</pre></div>
-            
-          
-            
-            <p>All NoFlo networks are instantiated with a graph. Upon instantiation
-they will load all the needed components, instantiate them, and
-set up the defined connections and IIPs.</p>
-
-            
-              <div class='highlight'><pre>  <span class="hljs-keyword">constructor</span>(graph, options = {}) {
-    <span class="hljs-built_in">super</span>(graph, options);
-  }</pre></div>
+              <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Network</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseNetwork</span> </span>{</pre></div>
             
           
             
@@ -242,21 +240,31 @@ set up the defined connections and IIPs.</p>
 with the current graph.</p>
 
             
-              <div class='highlight'><pre>  addNode(node, options, callback) {
+              <div class='highlight'><pre>  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{import(&quot;fbp-graph/lib/Types&quot;).GraphNode}</span> <span class="hljs-variable">node</span></span>
+   * <span class="hljs-doctag">@param <span class="hljs-type">{Object}</span> <span class="hljs-variable">options</span></span>
+   * <span class="hljs-doctag">@returns <span class="hljs-type">{Promise&lt;NetworkProcess&gt;}</span></span>
+   */</span>
+  addNode(node, options, callback) {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
       callback = options;
       options = {};
     }
-    <span class="hljs-built_in">super</span>.addNode(node, options, <span class="hljs-function">(<span class="hljs-params">err, process</span>) =&gt;</span> {
-      <span class="hljs-keyword">if</span> (err) {
-        callback(err);
-        <span class="hljs-keyword">return</span>;
-      }
-      <span class="hljs-keyword">if</span> (!options.initial) {
-        <span class="hljs-built_in">this</span>.graph.addNode(node.id, node.component, node.metadata);
-      }
-      callback(<span class="hljs-literal">null</span>, process);
-    });
+    options = options || {};
+    <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.addNode(node, options)
+      .then(<span class="hljs-function">(<span class="hljs-params">process</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (!options.initial) {
+          <span class="hljs-built_in">this</span>.graph.addNode(node.id, node.component, node.metadata);
+        }
+        <span class="hljs-keyword">return</span> process;
+      });
+    <span class="hljs-keyword">if</span> (callback) {
+      deprecated(<span class="hljs-string">&#x27;Providing a callback to Network.addNode is deprecated, use Promises&#x27;</span>);
+      promise.then(<span class="hljs-function">(<span class="hljs-params">process</span>) =&gt;</span> {
+        callback(<span class="hljs-literal">null</span>, process);
+      }, callback);
+    }
+    <span class="hljs-keyword">return</span> promise;
   }</pre></div>
             
           
@@ -266,14 +274,18 @@ from the current graph.</p>
 
             
               <div class='highlight'><pre>  removeNode(node, callback) {
-    <span class="hljs-built_in">super</span>.removeNode(node, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-      <span class="hljs-keyword">if</span> (err) {
-        callback(err);
-        <span class="hljs-keyword">return</span>;
-      }
-      <span class="hljs-built_in">this</span>.graph.removeNode(node.id);
-      callback();
-    });
+    <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.removeNode(node)
+      .then(<span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.graph.removeNode(node.id);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+      });
+    <span class="hljs-keyword">if</span> (callback) {
+      deprecated(<span class="hljs-string">&#x27;Providing a callback to Network.removeNode is deprecated, use Promises&#x27;</span>);
+      promise.then(<span class="hljs-function">() =&gt;</span> {
+        callback(<span class="hljs-literal">null</span>);
+      }, callback);
+    }
+    <span class="hljs-keyword">return</span> promise;
   }</pre></div>
             
           
@@ -283,14 +295,17 @@ the current graph.</p>
 
             
               <div class='highlight'><pre>  renameNode(oldId, newId, callback) {
-    <span class="hljs-built_in">super</span>.renameNode(oldId, newId, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-      <span class="hljs-keyword">if</span> (err) {
-        callback(err);
-        <span class="hljs-keyword">return</span>;
-      }
-      <span class="hljs-built_in">this</span>.graph.renameNode(oldId, newId);
-      callback();
-    });
+    <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.renameNode(oldId, newId)
+      .then(<span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.graph.renameNode(oldId, newId);
+      });
+    <span class="hljs-keyword">if</span> (callback) {
+      deprecated(<span class="hljs-string">&#x27;Providing a callback to Network.renameNode is deprecated, use Promises&#x27;</span>);
+      promise.then(<span class="hljs-function">() =&gt;</span> {
+        callback(<span class="hljs-literal">null</span>);
+      }, callback);
+    }
+    <span class="hljs-keyword">return</span> promise;
   }</pre></div>
             
           
@@ -304,24 +319,29 @@ with the current graph.</p>
       callback = options;
       options = {};
     }
-    <span class="hljs-built_in">super</span>.addEdge(edge, options, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-      <span class="hljs-keyword">if</span> (err) {
-        callback(err);
-        <span class="hljs-keyword">return</span>;
-      }
-      <span class="hljs-keyword">if</span> (!options.initial) {
-        <span class="hljs-built_in">this</span>.graph.addEdgeIndex(
-          edge.from.node,
-          edge.from.port,
-          edge.from.index,
-          edge.to.node,
-          edge.to.port,
-          edge.to.index,
-          edge.metadata,
-        );
-      }
-      callback();
-    });
+    options = options || {};
+    <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.addEdge(edge, options)
+      .then(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (!options.initial) {
+          <span class="hljs-built_in">this</span>.graph.addEdgeIndex(
+            edge.from.node,
+            edge.from.port,
+            edge.from.index,
+            edge.to.node,
+            edge.to.port,
+            edge.to.index,
+            edge.metadata,
+          );
+        }
+        <span class="hljs-keyword">return</span> socket;
+      });
+    <span class="hljs-keyword">if</span> (callback) {
+      deprecated(<span class="hljs-string">&#x27;Providing a callback to Network.addEdge is deprecated, use Promises&#x27;</span>);
+      promise.then(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
+        callback(<span class="hljs-literal">null</span>, socket);
+      }, callback);
+    }
+    <span class="hljs-keyword">return</span> promise;
   }</pre></div>
             
           
@@ -331,14 +351,18 @@ from the current graph.</p>
 
             
               <div class='highlight'><pre>  removeEdge(edge, callback) {
-    <span class="hljs-built_in">super</span>.removeEdge(edge, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-      <span class="hljs-keyword">if</span> (err) {
-        callback(err);
-        <span class="hljs-keyword">return</span>;
-      }
-      <span class="hljs-built_in">this</span>.graph.removeEdge(edge.from.node, edge.from.port, edge.to.node, edge.to.port);
-      callback();
-    });
+    <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.removeEdge(edge)
+      .then(<span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.graph.removeEdge(edge.from.node, edge.from.port, edge.to.node, edge.to.port);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+      });
+    <span class="hljs-keyword">if</span> (callback) {
+      deprecated(<span class="hljs-string">&#x27;Providing a callback to Network.removeEdge is deprecated, use Promises&#x27;</span>);
+      promise.then(<span class="hljs-function">() =&gt;</span> {
+        callback(<span class="hljs-literal">null</span>);
+      }, callback);
+    }
+    <span class="hljs-keyword">return</span> promise;
   }</pre></div>
             
           
@@ -352,22 +376,27 @@ current graph. If the network is running, the IIP will be sent immediately.</p>
       callback = options;
       options = {};
     }
-    <span class="hljs-built_in">super</span>.addInitial(iip, options, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-      <span class="hljs-keyword">if</span> (err) {
-        callback(err);
-        <span class="hljs-keyword">return</span>;
-      }
-      <span class="hljs-keyword">if</span> (!options.initial) {
-        <span class="hljs-built_in">this</span>.graph.addInitialIndex(
-          iip.from.data,
-          iip.to.node,
-          iip.to.port,
-          iip.to.index,
-          iip.metadata,
-        );
-      }
-      callback();
-    });
+    options = options || {};
+    <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.addInitial(iip, options)
+      .then(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (!options.initial) {
+          <span class="hljs-built_in">this</span>.graph.addInitialIndex(
+            iip.from.data,
+            iip.to.node,
+            iip.to.port,
+            iip.to.index,
+            iip.metadata,
+          );
+        }
+        <span class="hljs-keyword">return</span> socket;
+      });
+    <span class="hljs-keyword">if</span> (callback) {
+      deprecated(<span class="hljs-string">&#x27;Providing a callback to Network.addInitial is deprecated, use Promises&#x27;</span>);
+      promise.then(<span class="hljs-function">() =&gt;</span> {
+        callback(<span class="hljs-literal">null</span>);
+      }, callback);
+    }
+    <span class="hljs-keyword">return</span> promise;
   }</pre></div>
             
           
@@ -377,18 +406,19 @@ current graph.</p>
 
             
               <div class='highlight'><pre>  removeInitial(iip, callback) {
-    <span class="hljs-built_in">super</span>.removeInitial(iip, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-      <span class="hljs-keyword">if</span> (err) {
-        callback(err);
-        <span class="hljs-keyword">return</span>;
-      }
-      <span class="hljs-built_in">this</span>.graph.removeInitial(iip.to.node, iip.to.port);
-      callback();
-    });
+    <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.removeInitial(iip)
+      .then(<span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.graph.removeInitial(iip.to.node, iip.to.port);
+      });
+    <span class="hljs-keyword">if</span> (callback) {
+      deprecated(<span class="hljs-string">&#x27;Providing a callback to Network.removeInitial is deprecated, use Promises&#x27;</span>);
+      promise.then(<span class="hljs-function">() =&gt;</span> {
+        callback(<span class="hljs-literal">null</span>);
+      }, callback);
+    }
+    <span class="hljs-keyword">return</span> promise;
   }
-}
-
-<span class="hljs-built_in">exports</span>.Network = Network;</pre></div>
+}</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.js">Network.js</a> file.</small></p>

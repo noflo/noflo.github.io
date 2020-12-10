@@ -205,7 +205,7 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">const</span> BasePort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./BasePort&#x27;</span>);</pre></div>
+              <div class='highlight'><pre><span class="hljs-keyword">import</span> BasePort <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./BasePort&#x27;</span>;</pre></div>
             
           
             
@@ -214,7 +214,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 ports are the way a component receives Information Packets.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
+              <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
   <span class="hljs-keyword">constructor</span>(options = {}) {
     <span class="hljs-keyword">const</span> opts = options;
     <span class="hljs-keyword">if</span> (opts.control == <span class="hljs-literal">null</span>) { opts.control = <span class="hljs-literal">false</span>; }
@@ -313,34 +313,50 @@ ports are the way a component receives Information Packets.</p>
 
   prepareBuffer() {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
-      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.scoped) { <span class="hljs-built_in">this</span>.scopedBuffer = {}; }
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.scoped) {
+        <span class="hljs-comment">/** @type {Object&lt;string,Object&lt;number,Array&lt;import(&quot;./IP&quot;).default&gt;&gt;&gt;} */</span>
+        <span class="hljs-built_in">this</span>.indexedScopedBuffer = {};
+      }
+      <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{Object&lt;number,Array&lt;import(&quot;./IP&quot;).default&gt;&gt;}</span> </span>*/</span>
+      <span class="hljs-built_in">this</span>.indexedIipBuffer = {};
+      <span class="hljs-comment">/** @type {Object&lt;number,Array&lt;import(&quot;./IP&quot;).default&gt;&gt;} */</span>
       <span class="hljs-built_in">this</span>.indexedBuffer = {};
-      <span class="hljs-built_in">this</span>.iipBuffer = {};
       <span class="hljs-keyword">return</span>;
     }
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.scoped) { <span class="hljs-built_in">this</span>.scopedBuffer = {}; }
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.scoped) {
+      <span class="hljs-comment">/** @type {Object&lt;string,Array&lt;import(&quot;./IP&quot;).default&gt;&gt;} */</span>
+      <span class="hljs-built_in">this</span>.scopedBuffer = {};
+    }
+    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{Array&lt;import(&quot;./IP&quot;).default&gt;}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.iipBuffer = [];
+    <span class="hljs-comment">/** @type {Array&lt;import(&quot;./IP&quot;).default&gt;} */</span>
     <span class="hljs-built_in">this</span>.buffer = [];
   }
 
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{import(&quot;./IP&quot;).default}</span> <span class="hljs-variable">ip</span></span>
+   * <span class="hljs-doctag">@returns <span class="hljs-type">{Array&lt;import(&quot;./IP&quot;).default&gt;}</span></span>
+   */</span>
   prepareBufferForIP(ip) {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
       <span class="hljs-keyword">if</span> ((ip.scope != <span class="hljs-literal">null</span>) &amp;&amp; <span class="hljs-built_in">this</span>.options.scoped) {
-        <span class="hljs-keyword">if</span> (!(ip.scope <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.scopedBuffer)) { <span class="hljs-built_in">this</span>.scopedBuffer[ip.scope] = []; }
-        <span class="hljs-keyword">if</span> (!(ip.index <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.scopedBuffer[ip.scope])) {
-          <span class="hljs-built_in">this</span>.scopedBuffer[ip.scope][ip.index] = [];
+        <span class="hljs-keyword">if</span> (!(ip.scope <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.indexedScopedBuffer)) { <span class="hljs-built_in">this</span>.indexedScopedBuffer[ip.scope] = []; }
+        <span class="hljs-keyword">if</span> (!(ip.index <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.indexedScopedBuffer[ip.scope])) {
+          <span class="hljs-built_in">this</span>.indexedScopedBuffer[ip.scope][ip.index] = [];
         }
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.scopedBuffer[ip.scope][ip.index];
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.indexedScopedBuffer[ip.scope][ip.index];
       }
       <span class="hljs-keyword">if</span> (ip.initial) {
-        <span class="hljs-keyword">if</span> (!(ip.index <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.iipBuffer)) { <span class="hljs-built_in">this</span>.iipBuffer[ip.index] = []; }
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.iipBuffer[ip.index];
+        <span class="hljs-keyword">if</span> (!(ip.index <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.indexedIipBuffer)) { <span class="hljs-built_in">this</span>.indexedIipBuffer[ip.index] = []; }
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.indexedIipBuffer[ip.index];
       }
       <span class="hljs-keyword">if</span> (!(ip.index <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.indexedBuffer)) { <span class="hljs-built_in">this</span>.indexedBuffer[ip.index] = []; }
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.indexedBuffer[ip.index];
     }
     <span class="hljs-keyword">if</span> ((ip.scope != <span class="hljs-literal">null</span>) &amp;&amp; <span class="hljs-built_in">this</span>.options.scoped) {
-      <span class="hljs-keyword">if</span> (!(ip.scope <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.scopedBuffer)) { <span class="hljs-built_in">this</span>.scopedBuffer[ip.scope] = []; }
+      <span class="hljs-keyword">if</span> (!(ip.scope <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.scopedBuffer)) {
+        <span class="hljs-built_in">this</span>.scopedBuffer[ip.scope] = [];
+      }
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.scopedBuffer[ip.scope];
     }
     <span class="hljs-keyword">if</span> (ip.initial) {
@@ -356,16 +372,22 @@ ports are the way a component receives Information Packets.</p>
     }
   }
 
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{string|null}</span> <span class="hljs-variable">scope</span></span>
+   * <span class="hljs-doctag">@param <span class="hljs-type">{number|null}</span> <span class="hljs-variable">index</span></span>
+   * <span class="hljs-doctag">@param <span class="hljs-type">{boolean}</span> </span>[initial]
+   * <span class="hljs-doctag">@returns <span class="hljs-type">{Array&lt;import(&quot;./IP&quot;).default&gt;}</span></span>
+   */</span>
   getBuffer(scope, index, initial = <span class="hljs-literal">false</span>) {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
       <span class="hljs-keyword">if</span> ((scope != <span class="hljs-literal">null</span>) &amp;&amp; <span class="hljs-built_in">this</span>.options.scoped) {
-        <span class="hljs-keyword">if</span> (!(scope <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.scopedBuffer)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>; }
-        <span class="hljs-keyword">if</span> (!(index <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.scopedBuffer[scope])) { <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>; }
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.scopedBuffer[scope][index];
+        <span class="hljs-keyword">if</span> (!(scope <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.indexedScopedBuffer)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>; }
+        <span class="hljs-keyword">if</span> (!(index <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.indexedScopedBuffer[scope])) { <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>; }
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.indexedScopedBuffer[scope][index];
       }
       <span class="hljs-keyword">if</span> (initial) {
-        <span class="hljs-keyword">if</span> (!(index <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.iipBuffer)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>; }
-        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.iipBuffer[index];
+        <span class="hljs-keyword">if</span> (!(index <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.indexedIipBuffer)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>; }
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.indexedIipBuffer[index];
       }
       <span class="hljs-keyword">if</span> (!(index <span class="hljs-keyword">in</span> <span class="hljs-built_in">this</span>.indexedBuffer)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>; }
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.indexedBuffer[index];
@@ -380,10 +402,21 @@ ports are the way a component receives Information Packets.</p>
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.buffer;
   }
 
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{string|null}</span> <span class="hljs-variable">scope</span></span>
+   * <span class="hljs-doctag">@param <span class="hljs-type">{number|null}</span> <span class="hljs-variable">index</span></span>
+   * <span class="hljs-doctag">@param <span class="hljs-type">{boolean}</span> </span>[initial]
+   * <span class="hljs-doctag">@returns <span class="hljs-type">{import(&quot;./IP&quot;).default|void}</span></span>
+   */</span>
   getFromBuffer(scope, index, initial = <span class="hljs-literal">false</span>) {
     <span class="hljs-keyword">const</span> buf = <span class="hljs-built_in">this</span>.getBuffer(scope, index, initial);
-    <span class="hljs-keyword">if</span> (!(buf != <span class="hljs-literal">null</span> ? buf.length : <span class="hljs-literal">undefined</span>)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>; }
-    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.control) { <span class="hljs-keyword">return</span> buf[buf.length - <span class="hljs-number">1</span>]; } <span class="hljs-keyword">return</span> buf.shift();
+    <span class="hljs-keyword">if</span> (!(buf != <span class="hljs-literal">null</span> ? buf.length : <span class="hljs-literal">undefined</span>)) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.options.control) {
+      <span class="hljs-keyword">return</span> buf[buf.length - <span class="hljs-number">1</span>];
+    }
+    <span class="hljs-keyword">return</span> buf.shift();
   }</pre></div>
             
           
@@ -461,7 +494,7 @@ ports are the way a component receives Information Packets.</p>
               <div class='highlight'><pre>  clear() {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.prepareBuffer();
   }
-};</pre></div>
+}</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InPort.js">InPort.js</a> file.</small></p>

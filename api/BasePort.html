@@ -205,7 +205,7 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">const</span> { EventEmitter } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>);</pre></div>
+              <div class='highlight'><pre><span class="hljs-keyword">import</span> { EventEmitter } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;events&#x27;</span>;</pre></div>
             
           
             
@@ -317,7 +317,7 @@ was provided</p>
   });
 }
 
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BasePort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BasePort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
   <span class="hljs-keyword">constructor</span>(options) {
     <span class="hljs-built_in">super</span>();</pre></div>
             
@@ -334,21 +334,26 @@ was provided</p>
 connections to the port</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.sockets = [];</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{Array&lt;import(&quot;./InternalSocket&quot;).InternalSocket&gt;}</span> </span>*/</span>
+    <span class="hljs-built_in">this</span>.sockets = [];</pre></div>
             
           
             
             <p>Name of the graph node this port is in</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.node = <span class="hljs-literal">null</span>;</pre></div>
+              <div class='highlight'><pre>    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{string|null}</span> </span>*/</span>
+    <span class="hljs-built_in">this</span>.node = <span class="hljs-literal">null</span>;
+    <span class="hljs-comment">/** @type {import(&quot;./Component&quot;).Component|null} */</span>
+    <span class="hljs-built_in">this</span>.nodeInstance = <span class="hljs-literal">null</span>;</pre></div>
             
           
             
             <p>Name of the port</p>
 
             
-              <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.name = <span class="hljs-literal">null</span>;
+              <div class='highlight'><pre>    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{string|null}</span> </span>*/</span>
+    <span class="hljs-built_in">this</span>.name = <span class="hljs-literal">null</span>;
   }
 
   getId() {
@@ -450,7 +455,7 @@ connections to the port</p>
 
   <span class="hljs-comment">/* eslint-disable class-methods-use-this */</span>
   canAttach() { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
-};</pre></div>
+}</pre></div>
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.js">BasePort.js</a> file.</small></p>
