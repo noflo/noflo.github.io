@@ -205,17 +205,20 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre>
 <span class="hljs-comment">/* eslint-disable
     no-console,
     no-undef,
 */</span></pre></div>
+              {% endraw %}
             
           
             
             <p>Platform detection method</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-comment">/**
  * <span class="hljs-doctag">@returns <span class="hljs-type">{boolean}</span></span>
  */</span>
@@ -225,6 +228,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
   }
   <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 }</pre></div>
+              {% endraw %}
             
           
             
@@ -233,6 +237,7 @@ but can also be configured to throw instead with the <code>NOFLO_FATAL_DEPRECATE
 env var.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">message</span></span>
  * <span class="hljs-doctag">@returns <span class="hljs-type">{void}</span></span>
@@ -261,6 +266,7 @@ env var.</p>
     func();
   });
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Platform.js">Platform.js</a> file.</small></p>

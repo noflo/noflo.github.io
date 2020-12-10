@@ -206,6 +206,7 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">import</span> { BaseNetwork } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./BaseNetwork&#x27;</span>;
 <span class="hljs-keyword">import</span> { deprecated } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./Platform&#x27;</span>;
 
@@ -220,6 +221,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
  * @property {string} [componentName]
  * @property {import(&quot;./Component&quot;).Component} [component]
  */</span></pre></div>
+              {% endraw %}
             
           
             
@@ -232,7 +234,9 @@ components, attach sockets between them, and handle the sending
 of Initial Information Packets.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Network</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseNetwork</span> </span>{</pre></div>
+              {% endraw %}
             
           
             
@@ -240,6 +244,7 @@ of Initial Information Packets.</p>
 with the current graph.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{import(&quot;fbp-graph/lib/Types&quot;).GraphNode}</span> <span class="hljs-variable">node</span></span>
    * <span class="hljs-doctag">@param <span class="hljs-type">{Object}</span> <span class="hljs-variable">options</span></span>
@@ -266,6 +271,7 @@ with the current graph.</p>
     }
     <span class="hljs-keyword">return</span> promise;
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -273,6 +279,7 @@ with the current graph.</p>
 from the current graph.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  removeNode(node, callback) {
     <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.removeNode(node)
       .then(<span class="hljs-function">() =&gt;</span> {
@@ -287,6 +294,7 @@ from the current graph.</p>
     }
     <span class="hljs-keyword">return</span> promise;
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -294,6 +302,7 @@ from the current graph.</p>
 the current graph.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  renameNode(oldId, newId, callback) {
     <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.renameNode(oldId, newId)
       .then(<span class="hljs-function">() =&gt;</span> {
@@ -307,6 +316,7 @@ the current graph.</p>
     }
     <span class="hljs-keyword">return</span> promise;
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -314,6 +324,7 @@ the current graph.</p>
 with the current graph.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  addEdge(edge, options, callback) {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
       callback = options;
@@ -343,6 +354,7 @@ with the current graph.</p>
     }
     <span class="hljs-keyword">return</span> promise;
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -350,6 +362,7 @@ with the current graph.</p>
 from the current graph.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  removeEdge(edge, callback) {
     <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.removeEdge(edge)
       .then(<span class="hljs-function">() =&gt;</span> {
@@ -364,6 +377,7 @@ from the current graph.</p>
     }
     <span class="hljs-keyword">return</span> promise;
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -371,6 +385,7 @@ from the current graph.</p>
 current graph. If the network is running, the IIP will be sent immediately.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  addInitial(iip, options, callback) {
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;function&#x27;</span>) {
       callback = options;
@@ -398,6 +413,7 @@ current graph. If the network is running, the IIP will be sent immediately.</p>
     }
     <span class="hljs-keyword">return</span> promise;
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -405,6 +421,7 @@ current graph. If the network is running, the IIP will be sent immediately.</p>
 current graph.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  removeInitial(iip, callback) {
     <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.removeInitial(iip)
       .then(<span class="hljs-function">() =&gt;</span> {
@@ -419,6 +436,7 @@ current graph.</p>
     <span class="hljs-keyword">return</span> promise;
   }
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Network.js">Network.js</a> file.</small></p>

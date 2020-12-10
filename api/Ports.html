@@ -202,7 +202,9 @@ categories:
             
             
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-comment">/* eslint-disable max-classes-per-file */</span></pre></div>
+              {% endraw %}
             
           
             
@@ -211,6 +213,7 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">import</span> { EventEmitter } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;events&#x27;</span>;
 <span class="hljs-keyword">import</span> InPort <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./InPort&#x27;</span>;
 <span class="hljs-keyword">import</span> OutPort <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./OutPort&#x27;</span>;
@@ -224,6 +227,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
  * @property {boolean} [required=false]
  * @property {boolean} [scoped=true]
  */</span></pre></div>
+              {% endraw %}
             
           
             
@@ -232,6 +236,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 used to hold a set of input or output ports of a component.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ports</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
   <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{Object&lt;string, import(&quot;./BasePort&quot;).default|PortOptions&gt;}</span> <span class="hljs-variable">ports</span></span>
@@ -262,12 +267,14 @@ used to hold a set of input or output ports of a component.</p>
     <span class="hljs-keyword">if</span> (!name.match(<span class="hljs-regexp">/^[a-z0-9_\.\/]+$/</span>)) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port names can only contain lowercase alphanumeric characters and underscores. &#x27;<span class="hljs-subst">${name}</span>&#x27; not allowed`</span>);
     }</pre></div>
+              {% endraw %}
             
           
             
             <p>Remove previous implementation</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-built_in">this</span>.remove(name); }
 
     <span class="hljs-keyword">const</span> maybePort = <span class="hljs-comment">/** @type {import(&quot;./BasePort&quot;).default} */</span> (options);
@@ -351,6 +358,7 @@ used to hold a set of input or output ports of a component.</p>
     port.disconnect(socketId);
   }
 }</pre></div>
+              {% endraw %}
             
           
             
@@ -359,25 +367,30 @@ returns object containing keys name and index for ports names in
 format <code>portname</code> or <code>portname[index]</code>.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">name</span></span>
  * <span class="hljs-doctag">@returns <span class="hljs-type">{{ name: string, index?: string }</span></span>}
  */</span>
 <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">normalizePortName</span>(<span class="hljs-params">name</span>) </span>{
   <span class="hljs-keyword">const</span> port = { name };</pre></div>
+              {% endraw %}
             
           
             
             <p>Regular port</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (name.indexOf(<span class="hljs-string">&#x27;[&#x27;</span>) === <span class="hljs-number">-1</span>) { <span class="hljs-keyword">return</span> port; }</pre></div>
+              {% endraw %}
             
           
             
             <p>Addressable port with index</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">const</span> matched = name.match(<span class="hljs-regexp">/(.*)\[([0-9]+)\]/</span>);
   <span class="hljs-keyword">if</span> (!matched || matched.length &lt; <span class="hljs-number">3</span>) {
     <span class="hljs-keyword">return</span> port;
@@ -387,6 +400,7 @@ format <code>portname</code> or <code>portname[index]</code>.</p>
     <span class="hljs-attr">index</span>: matched[<span class="hljs-number">2</span>],
   };
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.js">Ports.js</a> file.</small></p>

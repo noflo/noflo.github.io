@@ -206,6 +206,7 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProcessContext</span> </span>{
   <span class="hljs-comment">/**
@@ -225,12 +226,14 @@ NoFlo may be freely distributed under the MIT license</code></pre>
   }
 
   activate() {</pre></div>
+              {% endraw %}
             
           
             
             <p>Push a new result value if previous has been sent already</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-comment">/* eslint-disable no-underscore-dangle */</span>
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.result.__resolved || (<span class="hljs-built_in">this</span>.nodeInstance.outputQ.indexOf(<span class="hljs-built_in">this</span>.result) === <span class="hljs-number">-1</span>)) {
       <span class="hljs-built_in">this</span>.result = {};
@@ -243,6 +246,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
     <span class="hljs-built_in">this</span>.nodeInstance.deactivate(<span class="hljs-built_in">this</span>);
   }
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ProcessContext.js">ProcessContext.js</a> file.</small></p>

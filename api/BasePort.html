@@ -205,7 +205,9 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">import</span> { EventEmitter } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;events&#x27;</span>;</pre></div>
+              {% endraw %}
             
           
             
@@ -218,6 +220,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
             <p>The list of valid datatypes for ports.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">const</span> validTypes = [
   <span class="hljs-string">&#x27;all&#x27;</span>,
   <span class="hljs-string">&#x27;string&#x27;</span>,
@@ -250,6 +253,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
  * @return {BaseportOptions}
  */</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleOptions</span>(<span class="hljs-params">options</span>) </span>{</pre></div>
+              {% endraw %}
             
           
             
@@ -257,54 +261,67 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 was provided</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">let</span> datatype = options.datatype || <span class="hljs-string">&#x27;all&#x27;</span>;</pre></div>
+              {% endraw %}
             
           
             
             <p>Normalize the legacy <code>integer</code> type to <code>int</code>.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (datatype === <span class="hljs-string">&#x27;integer&#x27;</span>) { datatype = <span class="hljs-string">&#x27;int&#x27;</span>; }</pre></div>
+              {% endraw %}
             
           
             
             <p>By default ports are not required for graph execution</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">const</span> required = options.required || <span class="hljs-literal">false</span>;</pre></div>
+              {% endraw %}
             
           
             
             <p>Ensure datatype defined for the port is valid</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (validTypes.indexOf(datatype) === <span class="hljs-number">-1</span>) {
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port datatype &#x27;<span class="hljs-subst">${datatype}</span>&#x27; specified, valid are <span class="hljs-subst">${validTypes.join(<span class="hljs-string">&#x27;, &#x27;</span>)}</span>`</span>);
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Ensure schema defined for the port is valid</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">const</span> schema = options.schema || options.type;
 
   <span class="hljs-keyword">if</span> (schema &amp;&amp; (schema.indexOf(<span class="hljs-string">&#x27;/&#x27;</span>) === <span class="hljs-number">-1</span>)) {
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Invalid port schema &#x27;<span class="hljs-subst">${schema}</span>&#x27; specified. Should be URL or MIME type`</span>);
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Scoping</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">const</span> scoped = (<span class="hljs-keyword">typeof</span> options.scoped === <span class="hljs-string">&#x27;boolean&#x27;</span>) ? options.scoped : <span class="hljs-literal">true</span>;</pre></div>
+              {% endraw %}
             
           
             
             <p>Description</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">const</span> description = options.description || <span class="hljs-string">&#x27;&#x27;</span>;
 
   <span class="hljs-comment">/* eslint-disable prefer-object-spread */</span>
@@ -320,13 +337,16 @@ was provided</p>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BasePort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
   <span class="hljs-keyword">constructor</span>(options) {
     <span class="hljs-built_in">super</span>();</pre></div>
+              {% endraw %}
             
           
             
             <p>Options holds all options of the current port</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.options = handleOptions(options);</pre></div>
+              {% endraw %}
             
           
             
@@ -334,24 +354,29 @@ was provided</p>
 connections to the port</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{Array&lt;import(&quot;./InternalSocket&quot;).InternalSocket&gt;}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.sockets = [];</pre></div>
+              {% endraw %}
             
           
             
             <p>Name of the graph node this port is in</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{string|null}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.node = <span class="hljs-literal">null</span>;
     <span class="hljs-comment">/** @type {import(&quot;./Component&quot;).Component|null} */</span>
     <span class="hljs-built_in">this</span>.nodeInstance = <span class="hljs-literal">null</span>;</pre></div>
+              {% endraw %}
             
           
             
             <p>Name of the port</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{string|null}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.name = <span class="hljs-literal">null</span>;
   }
@@ -382,12 +407,14 @@ connections to the port</p>
     }
     <span class="hljs-built_in">this</span>.emit(<span class="hljs-string">&#x27;attach&#x27;</span>, socket);
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>eslint-disable-next-line class-methods-use-this,no-unused-vars</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  attachSocket(socket, index = <span class="hljs-literal">null</span>) { }
 
   detach(socket) {
@@ -456,6 +483,7 @@ connections to the port</p>
   <span class="hljs-comment">/* eslint-disable class-methods-use-this */</span>
   canAttach() { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BasePort.js">BasePort.js</a> file.</small></p>

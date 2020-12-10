@@ -205,17 +205,20 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre>
 <span class="hljs-comment">/* eslint-disable
     no-param-reassign,
     prefer-rest-params,
 */</span></pre></div>
+              {% endraw %}
             
           
             
             <p>Guess language from filename</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">filename</span></span>
  * <span class="hljs-doctag">@returns <span class="hljs-type">{string}</span></span>
@@ -234,6 +237,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
   <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Array</span>.isArray) { <span class="hljs-keyword">return</span> <span class="hljs-built_in">Array</span>.isArray(obj); }
   <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.prototype.toString.call(obj) === <span class="hljs-string">&#x27;[object Array]&#x27;</span>;
 }</pre></div>
+              {% endraw %}
             
           
             
@@ -252,6 +256,7 @@ If immediate is passed, trigger the function on the leading edge,
 instead of the trailing.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param <span class="hljs-type">{Function}</span> <span class="hljs-variable">func</span></span>
  * <span class="hljs-doctag">@param <span class="hljs-type">{number}</span> <span class="hljs-variable">wait</span></span>
@@ -302,6 +307,7 @@ instead of the trailing.</p>
     <span class="hljs-keyword">return</span> result;
   };
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Utils.js">Utils.js</a> file.</small></p>

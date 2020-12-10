@@ -205,6 +205,7 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-comment">/* eslint-disable
     import/prefer-default-export,
 */</span>
@@ -226,6 +227,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
  * @property {boolean} [scoped=true]
  * @property {any} [default]
  */</span></pre></div>
+              {% endraw %}
             
           
             
@@ -272,6 +274,7 @@ In these cases the port with a default won’t be visible. It is
 recommended to use default values only with components that don’t need to run in legacy browsers.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param <span class="hljs-type">{Function}</span> <span class="hljs-variable">func</span></span>
  * <span class="hljs-doctag">@param <span class="hljs-type">{Object}</span> <span class="hljs-variable">options</span></span>
@@ -319,12 +322,14 @@ recommended to use default values only with components that don’t need to run 
     }
 
     <span class="hljs-keyword">if</span> (hasCallback) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Handle Node.js style async functions</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-comment">/**
        * <span class="hljs-doctag">@param <span class="hljs-type">{Error|null}</span> <span class="hljs-variable">err</span></span>
        * <span class="hljs-doctag">@param <span class="hljs-type">{any}</span> </span>[res]
@@ -343,12 +348,14 @@ recommended to use default values only with components that don’t need to run 
 
     <span class="hljs-keyword">const</span> res = func(...values);
     <span class="hljs-keyword">if</span> (res &amp;&amp; (<span class="hljs-keyword">typeof</span> res === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; (<span class="hljs-keyword">typeof</span> res.then === <span class="hljs-string">&#x27;function&#x27;</span>)) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Result is a Promise, resolve and handle</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-keyword">const</span> resPromise = <span class="hljs-comment">/** @type {Promise&lt;any&gt;} */</span> (res);
       resPromise.then(
         <span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> output.sendDone(val),
@@ -360,6 +367,7 @@ recommended to use default values only with components that don’t need to run 
   });
   <span class="hljs-keyword">return</span> c;
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/AsComponent.js">AsComponent.js</a> file.</small></p>

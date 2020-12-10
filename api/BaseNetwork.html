@@ -206,6 +206,7 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre>
 <span class="hljs-comment">/* eslint-disable
     no-param-reassign,
@@ -298,6 +299,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 <span class="hljs-comment">/**
  * <span class="hljs-doctag">@typedef <span class="hljs-type">{ NetworkOwnOptions &amp; import(&quot;./ComponentLoader&quot;).ComponentLoaderOptions}</span> <span class="hljs-variable">NetworkOptions</span></span>
  */</span></pre></div>
+              {% endraw %}
             
           
             
@@ -310,6 +312,7 @@ components, attach sockets between them, and handle the sending
 of Initial Information Packets.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BaseNetwork</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
   <span class="hljs-comment">/**
    * All NoFlo networks are instantiated with a graph. Upon instantiation
@@ -322,52 +325,63 @@ of Initial Information Packets.</p>
   <span class="hljs-keyword">constructor</span>(graph, options = {}) {
     <span class="hljs-built_in">super</span>();
     <span class="hljs-built_in">this</span>.options = options;</pre></div>
+              {% endraw %}
             
           
             
             <p>Processes contains all the instantiated components for this network</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{Object&lt;string, NetworkProcess&gt;}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.processes = {};</pre></div>
+              {% endraw %}
             
           
             
             <p>Connections contains all the socket connections in the network</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{Array&lt;internalSocket.InternalSocket&gt;}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.connections = [];</pre></div>
+              {% endraw %}
             
           
             
             <p>Initials contains all Initial Information Packets (IIPs)</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{Array&lt;NetworkIIP&gt;}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.initials = [];
     <span class="hljs-comment">/** @type {Array&lt;NetworkIIP&gt;} */</span>
     <span class="hljs-built_in">this</span>.nextInitials = [];</pre></div>
+              {% endraw %}
             
           
             
             <p>Container to hold sockets that will be sending default data.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{Array&lt;import(&quot;./InternalSocket&quot;).InternalSocket&gt;}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.defaults = [];</pre></div>
+              {% endraw %}
             
           
             
             <p>The Graph this network is instantiated with</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.graph = graph;
     <span class="hljs-built_in">this</span>.started = <span class="hljs-literal">false</span>;
     <span class="hljs-built_in">this</span>.stopped = <span class="hljs-literal">true</span>;
     <span class="hljs-built_in">this</span>.debug = <span class="hljs-literal">true</span>;
     <span class="hljs-comment">/** @type {Array&lt;NetworkEvent&gt;} */</span>
     <span class="hljs-built_in">this</span>.eventBuffer = [];</pre></div>
+              {% endraw %}
             
           
             
@@ -375,12 +389,14 @@ of Initial Information Packets.</p>
 the current working directory</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (graph.properties.baseDir &amp;&amp; !options.baseDir) {
       deprecated(<span class="hljs-string">&#x27;Passing baseDir via Graph properties is deprecated, pass via Network options instead&#x27;</span>);
     }
     <span class="hljs-built_in">this</span>.baseDir = <span class="hljs-literal">null</span>;
     <span class="hljs-keyword">if</span> (!isBrowser()) {
       <span class="hljs-built_in">this</span>.baseDir = options.baseDir || graph.properties.baseDir || process.cwd();</pre></div>
+              {% endraw %}
             
           
             
@@ -388,9 +404,11 @@ the current working directory</p>
 root</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    } <span class="hljs-keyword">else</span> {
       <span class="hljs-built_in">this</span>.baseDir = options.baseDir || graph.properties.baseDir || <span class="hljs-string">&#x27;/&#x27;</span>;
     }</pre></div>
+              {% endraw %}
             
           
             
@@ -399,14 +417,17 @@ network coordinator marks down the start-up time. This
 way we can calculate the uptime of the network.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{Date | null}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.startupDate = <span class="hljs-literal">null</span>;</pre></div>
+              {% endraw %}
             
           
             
             <p>Initialize a Component Loader for the network</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (options.componentLoader) {
       <span class="hljs-comment">/** @type {ComponentLoader} */</span>
       <span class="hljs-built_in">this</span>.loader = options.componentLoader;
@@ -418,15 +439,18 @@ way we can calculate the uptime of the network.</p>
       <span class="hljs-comment">/** @type {ComponentLoader} */</span>
       <span class="hljs-built_in">this</span>.loader = <span class="hljs-keyword">new</span> ComponentLoader(<span class="hljs-built_in">this</span>.baseDir, <span class="hljs-built_in">this</span>.options);
     }</pre></div>
+              {% endraw %}
             
           
             
             <p>Enable Flowtrace for this network, when available</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.flowtraceName = <span class="hljs-literal">null</span>;
     <span class="hljs-built_in">this</span>.setFlowtrace(options.flowtrace || <span class="hljs-literal">false</span>, <span class="hljs-literal">null</span>);
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -434,6 +458,7 @@ way we can calculate the uptime of the network.</p>
 time, in seconds.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@returns <span class="hljs-type">{number}</span></span>
    */</span>
@@ -457,21 +482,25 @@ time, in seconds.</p>
         <span class="hljs-keyword">return</span>;
       }
       <span class="hljs-keyword">if</span> (process.component.load &gt; <span class="hljs-number">0</span>) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Modern component with load</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        active.push(name);
       }
       <span class="hljs-keyword">if</span> (process.component.__openConnections &gt; <span class="hljs-number">0</span>) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Legacy component</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        active.push(name);
       }
     });
@@ -488,12 +517,14 @@ time, in seconds.</p>
       <span class="hljs-keyword">return</span>;
     }
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.flowtraceName &amp;&amp; <span class="hljs-built_in">this</span>.flowtraceName !== <span class="hljs-built_in">this</span>.flowtrace.mainGraph) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Let main graph log all events from subgraphs</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-keyword">return</span>;
     }
     <span class="hljs-keyword">switch</span> (event) {
@@ -540,12 +571,14 @@ time, in seconds.</p>
         <span class="hljs-keyword">break</span>;
       }
       <span class="hljs-attr">default</span>: {</pre></div>
+              {% endraw %}
             
           
             
             <p>No default handler</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      }
     }
   }
@@ -556,19 +589,23 @@ time, in seconds.</p>
    * <span class="hljs-doctag">@protected</span>
    */</span>
   bufferedEmit(event, payload) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Add the event to Flowtrace immediately</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.traceEvent(event, payload);</pre></div>
+              {% endraw %}
             
           
             
             <p>Errors get emitted immediately, like does network end</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> ([<span class="hljs-string">&#x27;icon&#x27;</span>, <span class="hljs-string">&#x27;error&#x27;</span>, <span class="hljs-string">&#x27;process-error&#x27;</span>, <span class="hljs-string">&#x27;end&#x27;</span>].includes(event)) {
       <span class="hljs-built_in">this</span>.emit(event, payload);
       <span class="hljs-keyword">return</span>;
@@ -584,12 +621,14 @@ time, in seconds.</p>
     <span class="hljs-built_in">this</span>.emit(event, payload);
 
     <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;start&#x27;</span>) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Once network has started we can send the IP-related events</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-built_in">this</span>.eventBuffer.forEach(<span class="hljs-function">(<span class="hljs-params">ev</span>) =&gt;</span> {
         <span class="hljs-built_in">this</span>.emit(ev.type, ev.payload);
       });
@@ -597,12 +636,14 @@ time, in seconds.</p>
     }
 
     <span class="hljs-keyword">if</span> (event === <span class="hljs-string">&#x27;ip&#x27;</span>) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Emit also the legacy events from IP</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-keyword">switch</span> (payload.type) {
         <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;openBracket&#x27;</span>:
           <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;begingroup&#x27;</span>, payload);
@@ -617,6 +658,7 @@ time, in seconds.</p>
       }
     }
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -628,6 +670,7 @@ time, in seconds.</p>
 </ul>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@callback <span class="hljs-variable">ComponentLoadCallback</span></span>
    * <span class="hljs-doctag">@param <span class="hljs-type">{Error|null}</span> <span class="hljs-variable">err</span></span>
@@ -650,6 +693,7 @@ time, in seconds.</p>
     }
     <span class="hljs-keyword">return</span> promise;
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -663,6 +707,7 @@ that includes the following properties:</p>
 </ul>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@callback <span class="hljs-variable">AddNodeCallback</span></span>
    * <span class="hljs-doctag">@param <span class="hljs-type">{Error|null}</span> <span class="hljs-variable">error</span></span>
@@ -681,6 +726,7 @@ that includes the following properties:</p>
       options = {};
     }
     <span class="hljs-keyword">let</span> promise;</pre></div>
+              {% endraw %}
             
           
             
@@ -688,38 +734,45 @@ that includes the following properties:</p>
 we already have a process with the given ID, return that.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.processes[node.id]) {
       promise = <span class="hljs-built_in">Promise</span>.resolve(<span class="hljs-built_in">this</span>.processes[node.id]);
     } <span class="hljs-keyword">else</span> {
       <span class="hljs-comment">/** @type {NetworkProcess} */</span>
       <span class="hljs-keyword">const</span> process = { <span class="hljs-attr">id</span>: node.id };</pre></div>
+              {% endraw %}
             
           
             
             <p>No component defined, just register the process but don’t start.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (!node.component) {
         <span class="hljs-built_in">this</span>.processes[process.id] = process;
         promise = <span class="hljs-built_in">Promise</span>.resolve(process);
       } <span class="hljs-keyword">else</span> {</pre></div>
+              {% endraw %}
             
           
             
             <p>Load the component for the process.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        promise = <span class="hljs-built_in">this</span>.load(node.component, node.metadata)
           .then(<span class="hljs-function">(<span class="hljs-params">instance</span>) =&gt;</span> {
             instance.nodeId = node.id;
             process.component = instance;
             process.componentName = node.component;</pre></div>
+              {% endraw %}
             
           
             
             <p>Inform the ports of the node name</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>            <span class="hljs-keyword">const</span> inPorts = process.component.inPorts.ports;
             <span class="hljs-keyword">const</span> outPorts = process.component.outPorts.ports;
             <span class="hljs-built_in">Object</span>.keys(inPorts).forEach(<span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
@@ -739,12 +792,14 @@ we already have a process with the given ID, return that.</p>
               <span class="hljs-built_in">this</span>.subscribeSubgraph(process);
             }
             <span class="hljs-built_in">this</span>.subscribeNode(process);</pre></div>
+              {% endraw %}
             
           
             
             <p>Store and return the process instance</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>            <span class="hljs-built_in">this</span>.processes[process.id] = process;
             <span class="hljs-keyword">return</span> process;
           });
@@ -801,20 +856,24 @@ we already have a process with the given ID, return that.</p>
     <span class="hljs-keyword">if</span> (!process) {
       promise = <span class="hljs-built_in">Promise</span>.reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Process <span class="hljs-subst">${oldId}</span> not found`</span>));
     } <span class="hljs-keyword">else</span> {</pre></div>
+              {% endraw %}
             
           
             
             <p>Inform the process of its ID</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      process.id = newId;
       <span class="hljs-keyword">if</span> (process.component) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Inform the ports of the node name</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        <span class="hljs-keyword">const</span> inPorts = process.component.inPorts.ports;
         <span class="hljs-keyword">const</span> outPorts = process.component.outPorts.ports;
         <span class="hljs-built_in">Object</span>.keys(inPorts).forEach(<span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
@@ -840,12 +899,14 @@ we already have a process with the given ID, return that.</p>
     }
     <span class="hljs-keyword">return</span> promise;
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Get process by its ID.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> </span>id compone
    * <span class="hljs-doctag">@returns <span class="hljs-type">{NetworkProcess|void}</span></span>
@@ -949,12 +1010,14 @@ we already have a process with the given ID, return that.</p>
       emitSub(<span class="hljs-string">&#x27;process-error&#x27;</span>, data);
     });
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Subscribe to events from all connected sockets and re-emit them</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{internalSocket.InternalSocket}</span> <span class="hljs-variable">socket</span></span>
    * <span class="hljs-doctag">@param <span class="hljs-type">{NetworkProcess}</span> </span>[source]
@@ -980,12 +1043,14 @@ we already have a process with the given ID, return that.</p>
       <span class="hljs-keyword">return</span>;
     }
     <span class="hljs-keyword">const</span> comp = <span class="hljs-comment">/** @type {import(&quot;./Component&quot;).Component} */</span> (source.component);</pre></div>
+              {% endraw %}
             
           
             
             <p>Handle activation for legacy components via connects/disconnects</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    socket.on(<span class="hljs-string">&#x27;connect&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
       <span class="hljs-keyword">if</span> (!comp.__openConnections) {
         comp.__openConnections = <span class="hljs-number">0</span>;
@@ -1075,12 +1140,14 @@ we already have a process with the given ID, return that.</p>
         socket.setDebug(<span class="hljs-built_in">this</span>.debug);
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.ensureNode(edge.to.node, <span class="hljs-string">&#x27;inbound&#x27;</span>)
           .then(<span class="hljs-function">(<span class="hljs-params">to</span>) =&gt;</span> {</pre></div>
+              {% endraw %}
             
           
             
             <p>Subscribe to events from the socket</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>            <span class="hljs-built_in">this</span>.subscribeSocket(socket, <span class="hljs-keyword">from</span>);
 
             <span class="hljs-keyword">return</span> connectPort(socket, to, edge.to.port, edge.to.index, <span class="hljs-literal">true</span>);
@@ -1136,24 +1203,28 @@ we already have a process with the given ID, return that.</p>
   addDefaults(node) {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.ensureNode(node.id, <span class="hljs-string">&#x27;inbound&#x27;</span>)
       .then(<span class="hljs-function">(<span class="hljs-params">process</span>) =&gt;</span> <span class="hljs-built_in">Promise</span>.all(<span class="hljs-built_in">Object</span>.keys(process.component.inPorts.ports).map(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> {</pre></div>
+              {% endraw %}
             
           
             
             <p>Attach a socket to any defaulted inPorts as long as they aren’t already attached.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        <span class="hljs-keyword">const</span> port = process.component.inPorts.ports[key];
         <span class="hljs-keyword">if</span> (!port.hasDefault() || port.isAttached()) {
           <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
         }
         <span class="hljs-keyword">const</span> socket = internalSocket.createSocket();
         socket.setDebug(<span class="hljs-built_in">this</span>.debug);</pre></div>
+              {% endraw %}
             
           
             
             <p>Subscribe to events from the socket</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        <span class="hljs-built_in">this</span>.subscribeSocket(socket);
 
         <span class="hljs-keyword">return</span> connectPort(socket, process, key, <span class="hljs-literal">undefined</span>, <span class="hljs-literal">true</span>)
@@ -1181,12 +1252,14 @@ we already have a process with the given ID, return that.</p>
       .then(<span class="hljs-function">(<span class="hljs-params">to</span>) =&gt;</span> {
         <span class="hljs-keyword">const</span> socket = internalSocket.createSocket(initializer.metadata);
         socket.setDebug(<span class="hljs-built_in">this</span>.debug);</pre></div>
+              {% endraw %}
             
           
             
             <p>Subscribe to events from the socket</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        <span class="hljs-built_in">this</span>.subscribeSocket(socket);
 
         <span class="hljs-keyword">return</span> connectPort(socket, to, initializer.to.port, initializer.to.index, <span class="hljs-literal">true</span>);
@@ -1200,14 +1273,17 @@ we already have a process with the given ID, return that.</p>
         <span class="hljs-built_in">this</span>.initials.push(init);
         <span class="hljs-built_in">this</span>.nextInitials.push(init);
         <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isRunning()) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Network is running now, send initials immediately</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>          (<span class="hljs-built_in">this</span>.sendInitials)();
         } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.isStopped()) {</pre></div>
+              {% endraw %}
             
           
             
@@ -1215,6 +1291,7 @@ we already have a process with the given ID, return that.</p>
 started and set</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>          <span class="hljs-built_in">this</span>.setStarted(<span class="hljs-literal">true</span>);
           (<span class="hljs-built_in">this</span>.sendInitials)();
         }
@@ -1280,12 +1357,14 @@ started and set</p>
           <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
         }), <span class="hljs-built_in">Promise</span>.resolve()))
       .then(<span class="hljs-function">() =&gt;</span> {</pre></div>
+              {% endraw %}
             
           
             
             <p>Clear the list of initials to still be sent</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        <span class="hljs-built_in">this</span>.initials = [];
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
       });
@@ -1311,12 +1390,14 @@ started and set</p>
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.processes || !<span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).length) {
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
     }</pre></div>
+              {% endraw %}
             
           
             
             <p>Perform any startup routines necessary for every component.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.all(<span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).map(<span class="hljs-function">(<span class="hljs-params">id</span>) =&gt;</span> {
       <span class="hljs-keyword">const</span> process = <span class="hljs-built_in">this</span>.processes[id];
       <span class="hljs-keyword">if</span> (!process.component) {
@@ -1332,6 +1413,7 @@ started and set</p>
    */</span>
   sendDefaults() {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.all(<span class="hljs-built_in">this</span>.defaults.map(<span class="hljs-function">(<span class="hljs-params">socket</span>) =&gt;</span> {</pre></div>
+              {% endraw %}
             
           
             
@@ -1341,6 +1423,7 @@ as its network is instantiated and its inputs are serialized before
 a socket is attached from the “parent” graph.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-keyword">if</span> (socket.to.process.component.inPorts[socket.to.port].sockets.length !== <span class="hljs-number">1</span>) {
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
       }
@@ -1399,12 +1482,14 @@ a socket is attached from the “parent” graph.</p>
       <span class="hljs-built_in">this</span>.stopped = <span class="hljs-literal">true</span>;
       promise = <span class="hljs-built_in">Promise</span>.resolve(<span class="hljs-built_in">this</span>);
     } <span class="hljs-keyword">else</span> {</pre></div>
+              {% endraw %}
             
           
             
             <p>Disconnect all connections</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-built_in">this</span>.connections.forEach(<span class="hljs-function">(<span class="hljs-params">connection</span>) =&gt;</span> {
         <span class="hljs-keyword">if</span> (!connection.isConnected()) {
           <span class="hljs-keyword">return</span>;
@@ -1413,33 +1498,39 @@ a socket is attached from the “parent” graph.</p>
       });
 
       <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.processes || !<span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).length) {</pre></div>
+              {% endraw %}
             
           
             
             <p>No processes to stop</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        <span class="hljs-built_in">this</span>.setStarted(<span class="hljs-literal">false</span>);
         <span class="hljs-built_in">this</span>.stopped = <span class="hljs-literal">true</span>;
         promise = <span class="hljs-built_in">Promise</span>.resolve(<span class="hljs-built_in">this</span>);
       } <span class="hljs-keyword">else</span> {</pre></div>
+              {% endraw %}
             
           
             
             <p>Emit stop event when all processes are stopped</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        promise = <span class="hljs-built_in">Promise</span>.all(<span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes)
           .map(<span class="hljs-function">(<span class="hljs-params">id</span>) =&gt;</span> {
             <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.processes[id].component) {
               <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve();
             }</pre></div>
+              {% endraw %}
             
           
             
             <p>eslint-disable-next-line max-len</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>            <span class="hljs-keyword">const</span> comp = <span class="hljs-comment">/** @type {import(&quot;./Component&quot;).Component} */</span> (<span class="hljs-built_in">this</span>.processes[id].component);
             <span class="hljs-keyword">return</span> comp.shutdown();
           }))
@@ -1465,12 +1556,14 @@ a socket is attached from the “parent” graph.</p>
   setStarted(started) {
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.started === started) { <span class="hljs-keyword">return</span>; }
     <span class="hljs-keyword">if</span> (!started) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Ending the execution</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-built_in">this</span>.started = <span class="hljs-literal">false</span>;
       <span class="hljs-built_in">this</span>.bufferedEmit(<span class="hljs-string">&#x27;end&#x27;</span>, {
         <span class="hljs-attr">start</span>: <span class="hljs-built_in">this</span>.startupDate,
@@ -1479,12 +1572,14 @@ a socket is attached from the “parent” graph.</p>
       });
       <span class="hljs-keyword">return</span>;
     }</pre></div>
+              {% endraw %}
             
           
             
             <p>Starting the execution</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.startupDate) {
       <span class="hljs-built_in">this</span>.startupDate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
     }
@@ -1546,24 +1641,28 @@ a socket is attached from the “parent” graph.</p>
       <span class="hljs-keyword">return</span>;
     }
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.flowtrace) {</pre></div>
+              {% endraw %}
             
           
             
             <p>We already have a tracer</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-keyword">return</span>;
     }
     <span class="hljs-built_in">this</span>.flowtrace = flowtrace;
     <span class="hljs-built_in">this</span>.flowtraceName = name || <span class="hljs-built_in">this</span>.graph.name;
     <span class="hljs-built_in">this</span>.flowtrace.addGraph(<span class="hljs-built_in">this</span>.flowtraceName, <span class="hljs-built_in">this</span>.graph, main);
     <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.processes).forEach(<span class="hljs-function">(<span class="hljs-params">nodeId</span>) =&gt;</span> {</pre></div>
+              {% endraw %}
             
           
             
             <p>Register existing subgraphs</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-keyword">const</span> node = <span class="hljs-built_in">this</span>.processes[nodeId];
       <span class="hljs-keyword">const</span> inst = <span class="hljs-comment">/** @type {import(&quot;../components/Graph&quot;).Graph} */</span> (node.component);
       <span class="hljs-keyword">if</span> (!inst.isSubgraph() || !inst.network) {
@@ -1573,6 +1672,7 @@ a socket is attached from the “parent” graph.</p>
     });
   }
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/BaseNetwork.js">BaseNetwork.js</a> file.</small></p>

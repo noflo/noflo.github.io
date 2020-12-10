@@ -209,11 +209,13 @@ main entry point to the NoFlo network.</p>
 <p>Find out more about using NoFlo from <a href="http://noflojs.org/documentation/">http://noflojs.org/documentation/</a></p>
 
             
+              {% raw %}
               <div class='highlight'><pre>
 <span class="hljs-comment">/* eslint-disable
     no-param-reassign,
     import/first
 */</span></pre></div>
+              {% endraw %}
             
           
             
@@ -222,7 +224,9 @@ main entry point to the NoFlo network.</p>
 <p><a href="https://github.com/flowbased/fbp-graph">fbp-graph</a> is used for instantiating FBP graph definitions.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">import</span> { graph } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fbp-graph&#x27;</span>;</pre></div>
+              {% endraw %}
             
           
             
@@ -261,6 +265,7 @@ graph for changes</li>
 network.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">import</span> { Network } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./Network&#x27;</span>;
 <span class="hljs-keyword">import</span> { LegacyNetwork } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./LegacyNetwork&#x27;</span>;
 <span class="hljs-keyword">import</span> { deprecated } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./Platform&#x27;</span>;
@@ -271,6 +276,7 @@ network.</p>
   journal,
   Journal,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fbp-graph&#x27;</span>;</pre></div>
+              {% endraw %}
             
           
             
@@ -279,7 +285,9 @@ network.</p>
 we need a way to detect which we’re on.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">export</span> { isBrowser } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./Platform&#x27;</span>;</pre></div>
+              {% endraw %}
             
           
             
@@ -290,7 +298,9 @@ to find components and graphs by traversing the NPM dependency tree from a given
 directory on the file system.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">export</span> { ComponentLoader } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./ComponentLoader&#x27;</span>;</pre></div>
+              {% endraw %}
             
           
             
@@ -298,7 +308,9 @@ directory on the file system.</p>
 <p>These baseclasses can be used for defining NoFlo components.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">export</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./Component&#x27;</span>;</pre></div>
+              {% endraw %}
             
           
             
@@ -306,10 +318,12 @@ directory on the file system.</p>
 <p>These classes are used for instantiating ports on NoFlo components.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">export</span> { InPorts, OutPorts } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./Ports&#x27;</span>;
 
 <span class="hljs-keyword">export</span> { <span class="hljs-keyword">default</span> <span class="hljs-keyword">as</span> InPort } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./InPort&#x27;</span>;
 <span class="hljs-keyword">export</span> { <span class="hljs-keyword">default</span> <span class="hljs-keyword">as</span> OutPort } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./OutPort&#x27;</span>;</pre></div>
+              {% endraw %}
             
           
             
@@ -318,9 +332,11 @@ directory on the file system.</p>
 different components together in a network.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> internalSocket <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./InternalSocket&#x27;</span>;
 
 <span class="hljs-keyword">export</span> { internalSocket };</pre></div>
+              {% endraw %}
             
           
             
@@ -328,6 +344,7 @@ different components together in a network.</p>
 <p>NoFlo Information Packets are defined as “IP” objects.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">export</span> { <span class="hljs-keyword">default</span> <span class="hljs-keyword">as</span> IP } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./IP&#x27;</span>;
 
 <span class="hljs-comment">/**
@@ -359,6 +376,7 @@ different components together in a network.</p>
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options.subscribeGraph === <span class="hljs-string">&#x27;undefined&#x27;</span>) {
     options.subscribeGraph = <span class="hljs-literal">false</span>;
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -366,23 +384,28 @@ different components together in a network.</p>
 subscription is needed</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">const</span> NetworkType = options.subscribeGraph ? LegacyNetwork : Network;
   <span class="hljs-keyword">const</span> network = <span class="hljs-keyword">new</span> NetworkType(graphInstance, options);</pre></div>
+              {% endraw %}
             
           
             
             <p>Ensure components are loaded before continuing</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">const</span> promise = network.loader.listComponents()
     .then(<span class="hljs-function">() =&gt;</span> {
       <span class="hljs-keyword">if</span> (options.delay) {</pre></div>
+              {% endraw %}
             
           
             
             <p>In case of delayed execution we don’t wire it up</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(network);
       }
       <span class="hljs-keyword">const</span> connected = <span class="hljs-comment">/** @type {Promise&lt;Network|LegacyNetwork&gt;} */</span> (network.connect());
@@ -396,6 +419,7 @@ subscription is needed</p>
   }
   <span class="hljs-keyword">return</span> promise;
 }</pre></div>
+              {% endraw %}
             
           
             
@@ -408,6 +432,7 @@ definition file.</p>
   });</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">file</span></span>
  * <span class="hljs-doctag">@param <span class="hljs-type">{NetworkOptions}</span> <span class="hljs-variable">options</span></span> - Network options
@@ -425,6 +450,7 @@ definition file.</p>
   }
   <span class="hljs-keyword">return</span> promise;
 }</pre></div>
+              {% endraw %}
             
           
             
@@ -432,6 +458,7 @@ definition file.</p>
 <p>NoFlo graph files can be saved back into the filesystem with this method.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param <span class="hljs-type">{graph.Graph}</span> <span class="hljs-variable">graphInstance</span></span>
  * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">file</span></span>
@@ -441,6 +468,7 @@ definition file.</p>
 <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">saveFile</span>(<span class="hljs-params">graphInstance, file, callback</span>) </span>{
   <span class="hljs-keyword">return</span> graphInstance.save(file, callback);
 }</pre></div>
+              {% endraw %}
             
           
             
@@ -458,7 +486,9 @@ wrapped({
 });</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">export</span> { asCallback, asPromise } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./AsCallback&#x27;</span>;</pre></div>
+              {% endraw %}
             
           
             
@@ -473,7 +503,9 @@ result will be sent to either <code>out</code> or <code>error</code> port.</p>
 };</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">export</span> { asComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./AsComponent&#x27;</span>;</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/NoFlo.js">NoFlo.js</a> file.</small></p>

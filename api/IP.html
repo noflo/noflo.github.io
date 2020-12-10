@@ -234,14 +234,17 @@ port is transmitted with the IP object.</p>
 </ul>
 
             
+              {% raw %}
               <div class='highlight'><pre>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IP</span> </span>{</pre></div>
+              {% endraw %}
             
           
             
             <p>Detects if an arbitrary value is an IP</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{any}</span> <span class="hljs-variable">obj</span></span>
    * <span class="hljs-doctag">@returns <span class="hljs-type">{boolean}</span></span>
@@ -249,6 +252,7 @@ port is transmitted with the IP object.</p>
   <span class="hljs-keyword">static</span> isIP(obj) {
     <span class="hljs-keyword">return</span> obj &amp;&amp; (<span class="hljs-keyword">typeof</span> obj === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; (obj.isIP === <span class="hljs-literal">true</span>);
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -256,6 +260,7 @@ port is transmitted with the IP object.</p>
 Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">type</span></span>
    * <span class="hljs-doctag">@param <span class="hljs-type">{any}</span> <span class="hljs-variable">data</span></span>
@@ -280,12 +285,14 @@ Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
     }
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Creates a new IP copying its contents by value not reference</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@returns <span class="hljs-type">{IP}</span></span>
    */</span>
@@ -303,37 +310,44 @@ Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
     });
     <span class="hljs-keyword">return</span> ip;
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Moves an IP to a different owner</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{string|null}</span> <span class="hljs-variable">owner</span></span>
    */</span>
   move(owner) {</pre></div>
+              {% endraw %}
             
           
             
             <p>no-op</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.owner = owner;
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Frees IP contents</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  drop() {
     <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> {
       <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>[key];
     });
   }
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/IP.js">IP.js</a> file.</small></p>

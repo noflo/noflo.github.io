@@ -206,12 +206,14 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">import</span> { BaseNetwork } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./BaseNetwork&#x27;</span>;
 <span class="hljs-keyword">import</span> { deprecated } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./Platform&#x27;</span>;
 
 <span class="hljs-comment">/* eslint-disable
     import/prefer-default-export,
 */</span></pre></div>
+              {% endraw %}
             
           
             
@@ -224,7 +226,9 @@ components, attach sockets between them, and handle the sending
 of Initial Information Packets.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LegacyNetwork</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseNetwork</span> </span>{</pre></div>
+              {% endraw %}
             
           
             
@@ -236,6 +240,7 @@ accordingly, including removing connections, adding new nodes,
 and sending new IIPs.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-keyword">constructor</span>(graph, options = {}) {
     deprecated(<span class="hljs-string">&#x27;subscribeGraph: true is deprecated. Live-edit network graphs via the network methods instead&#x27;</span>);
     <span class="hljs-built_in">super</span>(graph, options);
@@ -264,6 +269,7 @@ and sending new IIPs.</p>
     }
     <span class="hljs-keyword">return</span> promise;
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -274,6 +280,7 @@ from the graph.</p>
 to NoFlo processes, and edges to connections between them.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  subscribeGraph() {
     <span class="hljs-keyword">const</span> graphOps = [];
     <span class="hljs-keyword">let</span> processing = <span class="hljs-literal">false</span>;
@@ -338,6 +345,7 @@ to NoFlo processes, and edges to connections between them.</p>
     });
   }
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/LegacyNetwork.js">LegacyNetwork.js</a> file.</small></p>

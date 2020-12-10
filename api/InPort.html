@@ -205,7 +205,9 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">import</span> BasePort <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./BasePort&#x27;</span>;</pre></div>
+              {% endraw %}
             
           
             
@@ -214,6 +216,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 ports are the way a component receives Information Packets.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
   <span class="hljs-keyword">constructor</span>(options = {}) {
     <span class="hljs-keyword">const</span> opts = options;
@@ -235,19 +238,23 @@ ports are the way a component receives Information Packets.</p>
 
     <span class="hljs-built_in">this</span>.prepareBuffer();
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Assign a delegate for retrieving data should this inPort</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  attachSocket(socket, localId = <span class="hljs-literal">null</span>) {</pre></div>
+              {% endraw %}
             
           
             
             <p>have a default value.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.hasDefault()) {
       socket.setDataDelegate(<span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">this</span>.options.default);
     }
@@ -269,21 +276,25 @@ ports are the way a component receives Information Packets.</p>
     ip.owner = <span class="hljs-built_in">this</span>.nodeInstance;
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) { ip.index = index; }
     <span class="hljs-keyword">if</span> (ip.datatype === <span class="hljs-string">&#x27;all&#x27;</span>) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Stamp non-specific IP objects with port datatype</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      ip.datatype = <span class="hljs-built_in">this</span>.getDataType();
     }
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.getSchema() &amp;&amp; !ip.schema) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Stamp non-specific IP objects with port schema</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      ip.schema = <span class="hljs-built_in">this</span>.getSchema();
     }
 
@@ -295,12 +306,14 @@ ports are the way a component receives Information Packets.</p>
   }
 
   handleSocketEvent(event, payload, id) {</pre></div>
+              {% endraw %}
             
           
             
             <p>Emit port event</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.emit(event, payload, id);
     }
@@ -418,21 +431,25 @@ ports are the way a component receives Information Packets.</p>
     }
     <span class="hljs-keyword">return</span> buf.shift();
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Fetches a packet from the port</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  get(scope, index) {
     <span class="hljs-keyword">const</span> res = <span class="hljs-built_in">this</span>.getFromBuffer(scope, index);
     <span class="hljs-keyword">if</span> (res !== <span class="hljs-literal">undefined</span>) { <span class="hljs-keyword">return</span> res; }</pre></div>
+              {% endraw %}
             
           
             
             <p>Try to find an IIP instead</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.getFromBuffer(<span class="hljs-literal">null</span>, index, <span class="hljs-literal">true</span>);
   }
 
@@ -448,12 +465,14 @@ ports are the way a component receives Information Packets.</p>
   hasIIP(index, validate) {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.hasIPinBuffer(<span class="hljs-literal">null</span>, index, validate, <span class="hljs-literal">true</span>);
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Returns true if port contains packet(s) matching the validator</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  has(scope, index, validate) {
     <span class="hljs-keyword">let</span> valid = validate;
     <span class="hljs-keyword">let</span> idx = index;
@@ -465,36 +484,43 @@ ports are the way a component receives Information Packets.</p>
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.hasIIP(idx, valid)) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Returns the number of data packets in an inport</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  length(scope, index) {
     <span class="hljs-keyword">const</span> buf = <span class="hljs-built_in">this</span>.getBuffer(scope, index);
     <span class="hljs-keyword">if</span> (!buf) { <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; }
     <span class="hljs-keyword">return</span> buf.length;
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Tells if buffer has packets or not</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  ready(scope) {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.length(scope) &gt; <span class="hljs-number">0</span>;
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Clears inport buffers</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  clear() {
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.prepareBuffer();
   }
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/InPort.js">InPort.js</a> file.</small></p>

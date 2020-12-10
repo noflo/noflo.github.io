@@ -40,7 +40,9 @@ categories:
             <% var section = sections[i]; %>
             <%= section.docsHtml %>
             <% if (!(/^\s*$/).test(section.codeText)) { %>
+              {% raw %}
               <%= section.codeHtml %>
+              {% endraw %}
             <% } %>
           <% } %>
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/<%= title %>"><%= title %></a> file.</small></p>

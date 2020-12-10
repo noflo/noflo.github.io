@@ -206,18 +206,21 @@ categories:
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              {% raw %}
               <div class='highlight'><pre>
 <span class="hljs-comment">/* eslint-disable no-underscore-dangle */</span>
 <span class="hljs-keyword">import</span> debug <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;debug&#x27;</span>;
 <span class="hljs-keyword">import</span> IP <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./IP&#x27;</span>;
 
 <span class="hljs-keyword">const</span> debugComponent = debug(<span class="hljs-string">&#x27;noflo:component&#x27;</span>);</pre></div>
+              {% endraw %}
             
           
             
             <p>Checks if a value is an Error</p>
 
             
+              {% raw %}
               <div class='highlight'><pre><span class="hljs-comment">/**
  * <span class="hljs-doctag">@param <span class="hljs-type">{any}</span> <span class="hljs-variable">err</span></span>
  * <span class="hljs-doctag">@returns <span class="hljs-type">{boolean}</span></span>
@@ -240,12 +243,14 @@ NoFlo may be freely distributed under the MIT license</code></pre>
     <span class="hljs-built_in">this</span>.result = <span class="hljs-built_in">this</span>.context.result;
     <span class="hljs-built_in">this</span>.scope = <span class="hljs-built_in">this</span>.context.scope;
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Sends an error object</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{Error|Error[]}</span> <span class="hljs-variable">err</span></span>
    * <span class="hljs-doctag">@returns <span class="hljs-type">{void}</span></span>
@@ -261,12 +266,14 @@ NoFlo may be freely distributed under the MIT license</code></pre>
       errs.forEach(<span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> { <span class="hljs-keyword">throw</span> e; });
     }
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Sends a single IP object to a port</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">port</span></span> - Port to send to
    * <span class="hljs-doctag">@param <span class="hljs-type">{IP|any}</span> <span class="hljs-variable">packet</span></span> - IP or data to send
@@ -279,12 +286,14 @@ NoFlo may be freely distributed under the MIT license</code></pre>
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.nodeInstance.outPorts.ports[port]) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Node <span class="hljs-subst">${<span class="hljs-built_in">this</span>.nodeInstance.nodeId}</span> does not have outport <span class="hljs-subst">${port}</span>`</span>);
     }</pre></div>
+              {% endraw %}
             
           
             
             <p>eslint-disable-next-line max-len</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>    <span class="hljs-keyword">const</span> portImpl = <span class="hljs-comment">/** @type {import(&quot;./OutPort&quot;).default} */</span> (<span class="hljs-built_in">this</span>.nodeInstance.outPorts.ports[port]);
 
     <span class="hljs-keyword">if</span> (portImpl.isAddressable() &amp;&amp; (ip.index === <span class="hljs-literal">null</span>)) {
@@ -300,6 +309,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
     }
     portImpl.sendIP(ip);
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -307,6 +317,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 or sends Error or a list of Errors if passed such</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{Error|Array&lt;Error&gt;|Object&lt;string, any&gt;}</span> <span class="hljs-variable">outputMap</span></span>
    */</span>
@@ -341,12 +352,14 @@ or sends Error or a list of Errors if passed such</p>
       <span class="hljs-built_in">this</span>.sendIP(port, packet);
     });
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Sends the argument via <code>send()</code> and marks activation as <code>done()</code></p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{Error|Array&lt;Error&gt;|Object&lt;string, any&gt;}</span> <span class="hljs-variable">outputMap</span></span>
    */</span>
@@ -354,6 +367,7 @@ or sends Error or a list of Errors if passed such</p>
     <span class="hljs-built_in">this</span>.send(outputMap);
     <span class="hljs-built_in">this</span>.done();
   }</pre></div>
+              {% endraw %}
             
           
             
@@ -362,6 +376,7 @@ keeping all IP metadata received from <code>in</code>,
 or modifying it if <code>options</code> is provided</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{any}</span> <span class="hljs-variable">data</span></span>
    * <span class="hljs-doctag">@param <span class="hljs-type">{Object&lt;string, any&gt;}</span> </span>[options]
@@ -379,12 +394,14 @@ or modifying it if <code>options</code> is provided</p>
     <span class="hljs-built_in">this</span>.sendIP(<span class="hljs-string">&#x27;out&#x27;</span>, <span class="hljs-built_in">this</span>.ip);
     <span class="hljs-built_in">this</span>.done();
   }</pre></div>
+              {% endraw %}
             
           
             
             <p>Finishes process activation gracefully</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>  <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{Error|Array&lt;Error&gt;}</span> </span>[error]
    */</span>
@@ -394,12 +411,14 @@ or modifying it if <code>options</code> is provided</p>
     <span class="hljs-keyword">if</span> (error) { <span class="hljs-built_in">this</span>.error(error); }
 
     <span class="hljs-keyword">const</span> isLast = <span class="hljs-function">() =&gt;</span> {</pre></div>
+              {% endraw %}
             
           
             
             <p>We only care about real output sets with processing data</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-keyword">const</span> resultsOnly = <span class="hljs-built_in">this</span>.nodeInstance.outputQ.filter(<span class="hljs-function">(<span class="hljs-params">q</span>) =&gt;</span> {
         <span class="hljs-keyword">if</span> (!q.__resolved) { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }
         <span class="hljs-keyword">if</span> ((<span class="hljs-built_in">Object</span>.keys(q).length === <span class="hljs-number">2</span>) &amp;&amp; q.__bracketClosingAfter) {
@@ -418,6 +437,7 @@ or modifying it if <code>options</code> is provided</p>
       <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     };
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.nodeInstance.isOrdered() &amp;&amp; isLast()) {</pre></div>
+              {% endraw %}
             
           
             
@@ -426,18 +446,21 @@ dangling closeBrackets in buffer since we’re the
 last running process function.</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>      <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>.nodeInstance.bracketContext.in).forEach(<span class="hljs-function">(<span class="hljs-params">port</span>) =&gt;</span> {
         <span class="hljs-keyword">const</span> contexts = <span class="hljs-built_in">this</span>.nodeInstance.bracketContext.in[port];
         <span class="hljs-keyword">if</span> (!contexts[<span class="hljs-built_in">this</span>.scope]) { <span class="hljs-keyword">return</span>; }
         <span class="hljs-keyword">const</span> nodeContext = contexts[<span class="hljs-built_in">this</span>.scope];
         <span class="hljs-keyword">if</span> (!nodeContext.length) { <span class="hljs-keyword">return</span>; }
         <span class="hljs-keyword">const</span> context = nodeContext[nodeContext.length - <span class="hljs-number">1</span>];</pre></div>
+              {% endraw %}
             
           
             
             <p>eslint-disable-next-line max-len</p>
 
             
+              {% raw %}
               <div class='highlight'><pre>        <span class="hljs-keyword">const</span> inPorts = <span class="hljs-comment">/** @type {import(&quot;./InPort&quot;).default} */</span> (<span class="hljs-built_in">this</span>.nodeInstance.inPorts.ports[context.source]);
         <span class="hljs-keyword">const</span> buf = inPorts.getBuffer(context.ip.scope, context.ip.index);
         <span class="hljs-keyword">while</span> (buf.length &gt; <span class="hljs-number">0</span> &amp;&amp; buf[<span class="hljs-number">0</span>].type === <span class="hljs-string">&#x27;closeBracket&#x27;</span>) {
@@ -455,6 +478,7 @@ last running process function.</p>
     <span class="hljs-built_in">this</span>.nodeInstance.deactivate(<span class="hljs-built_in">this</span>.context);
   }
 }</pre></div>
+              {% endraw %}
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/ProcessOutput.js">ProcessOutput.js</a> file.</small></p>
