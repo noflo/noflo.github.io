@@ -258,7 +258,9 @@
             
             
             
+              
               <div class='highlight'><pre><span class="hljs-comment">/* eslint-disable max-classes-per-file */</span></pre></div>
+              
             
           
             
@@ -267,9 +269,21 @@
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">const</span> { EventEmitter } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>);
-<span class="hljs-keyword">const</span> InPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./InPort&#x27;</span>);
-<span class="hljs-keyword">const</span> OutPort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./OutPort&#x27;</span>);</pre></div>
+              
+              <div class='highlight'><pre><span class="hljs-keyword">import</span> { EventEmitter } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;events&#x27;</span>;
+<span class="hljs-keyword">import</span> InPort <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./InPort&#x27;</span>;
+<span class="hljs-keyword">import</span> OutPort <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./OutPort&#x27;</span>;
+
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@typedef <span class="hljs-variable">PortOptions</span></span>
+ * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[description=&#x27;&#x27;]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[datatype=&#x27;all&#x27;]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[schema=null]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[type=null]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[required=false]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[scoped=true]
+ */</span></pre></div>
+              
             
           
             
@@ -278,10 +292,16 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 used to hold a set of input or output ports of a component.</p>
 
             
+              
               <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ports</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">EventEmitter</span> </span>{
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{Object&lt;string, import(&quot;./BasePort&quot;).default|PortOptions&gt;}</span> <span class="hljs-variable">ports</span></span>
+   * <span class="hljs-doctag">@param <span class="hljs-type">{typeof import(&quot;./BasePort&quot;).default}</span> <span class="hljs-variable">model</span></span>
+   */</span>
   <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">ports, model</span>)</span> {
     <span class="hljs-built_in">super</span>();
     <span class="hljs-built_in">this</span>.model = model;
+    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{Object&lt;string, import(&quot;./BasePort&quot;).default&gt;}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.ports = {};
     <span class="hljs-keyword">if</span> (!ports) { <span class="hljs-keyword">return</span>; }
     <span class="hljs-built_in">Object</span>.keys(ports).forEach(<span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
@@ -290,7 +310,11 @@ used to hold a set of input or output ports of a component.</p>
     });
   }
 
-  <span class="hljs-function"><span class="hljs-title">add</span>(<span class="hljs-params">name, options, process</span>)</span> {
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">name</span></span>
+   * <span class="hljs-doctag">@param <span class="hljs-type">{Object|import(&quot;./BasePort&quot;).default|PortOptions}</span> </span>[options]
+   */</span>
+  <span class="hljs-function"><span class="hljs-title">add</span>(<span class="hljs-params">name, options = {}</span>)</span> {
     <span class="hljs-keyword">if</span> ((name === <span class="hljs-string">&#x27;add&#x27;</span>) || (name === <span class="hljs-string">&#x27;remove&#x27;</span>)) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;Add and remove are restricted port names&#x27;</span>);
     }
@@ -299,19 +323,22 @@ used to hold a set of input or output ports of a component.</p>
     <span class="hljs-keyword">if</span> (!name.match(<span class="hljs-regexp">/^[a-z0-9_\.\/]+$/</span>)) {
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port names can only contain lowercase alphanumeric characters and underscores. &#x27;<span class="hljs-subst">${name}</span>&#x27; not allowed`</span>);
     }</pre></div>
+              
             
           
             
             <p>Remove previous implementation</p>
 
             
+              
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-built_in">this</span>.remove(name); }
 
-    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; options.canAttach) {
-      <span class="hljs-built_in">this</span>.ports[name] = options;
+    <span class="hljs-keyword">const</span> maybePort = <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{import(&quot;./BasePort&quot;).default}</span> </span>*/</span> (options);
+    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> maybePort === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; maybePort.canAttach) {
+      <span class="hljs-built_in">this</span>.ports[name] = maybePort;
     } <span class="hljs-keyword">else</span> {
       <span class="hljs-keyword">const</span> Model = <span class="hljs-built_in">this</span>.model;
-      <span class="hljs-built_in">this</span>.ports[name] = <span class="hljs-keyword">new</span> Model(options, process);
+      <span class="hljs-built_in">this</span>.ports[name] = <span class="hljs-keyword">new</span> Model(options);
     }
 
     <span class="hljs-built_in">this</span>[name] = <span class="hljs-built_in">this</span>.ports[name];
@@ -321,6 +348,9 @@ used to hold a set of input or output ports of a component.</p>
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>; <span class="hljs-comment">// chainable</span>
   }
 
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">name</span></span>
+   */</span>
   <span class="hljs-function"><span class="hljs-title">remove</span>(<span class="hljs-params">name</span>)</span> {
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not defined`</span>); }
     <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>.ports[name];
@@ -331,52 +361,60 @@ used to hold a set of input or output ports of a component.</p>
   }
 }
 
-<span class="hljs-built_in">exports</span>.InPorts = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPorts</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ports</span> </span>{
-  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">ports</span>)</span> {
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@typedef <span class="hljs-type">{{ [key: string]: InPort|PortOptions }</span></span>} InPortsOptions
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPorts</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ports</span> </span>{
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{InPortsOptions}</span> </span>[ports]
+   */</span>
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">ports = {}</span>)</span> {
     <span class="hljs-built_in">super</span>(ports, InPort);
   }
+}
 
-  <span class="hljs-function"><span class="hljs-title">on</span>(<span class="hljs-params">name, event, callback</span>)</span> {
-    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.ports[name].on(event, callback);
-  }
-
-  <span class="hljs-function"><span class="hljs-title">once</span>(<span class="hljs-params">name, event, callback</span>)</span> {
-    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.ports[name].once(event, callback);
-  }
-};
-
-<span class="hljs-built_in">exports</span>.OutPorts = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPorts</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ports</span> </span>{
-  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">ports</span>)</span> {
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@typedef <span class="hljs-type">{{ [key: string]: OutPort|PortOptions }</span></span>} OutPortsOptions
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPorts</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ports</span> </span>{
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{OutPortsOptions}</span> </span>[ports]
+   */</span>
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">ports = {}</span>)</span> {
     <span class="hljs-built_in">super</span>(ports, OutPort);
   }
 
   <span class="hljs-function"><span class="hljs-title">connect</span>(<span class="hljs-params">name, socketId</span>)</span> {
-    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
-    <span class="hljs-built_in">this</span>.ports[name].connect(socketId);
+    <span class="hljs-keyword">const</span> port = <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{OutPort}</span> </span>*/</span> (<span class="hljs-built_in">this</span>.ports[name]);
+    <span class="hljs-keyword">if</span> (!port) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    port.connect(socketId);
   }
 
   <span class="hljs-function"><span class="hljs-title">beginGroup</span>(<span class="hljs-params">name, group, socketId</span>)</span> {
-    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
-    <span class="hljs-built_in">this</span>.ports[name].beginGroup(group, socketId);
+    <span class="hljs-keyword">const</span> port = <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{OutPort}</span> </span>*/</span> (<span class="hljs-built_in">this</span>.ports[name]);
+    <span class="hljs-keyword">if</span> (!port) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    port.beginGroup(group, socketId);
   }
 
   <span class="hljs-function"><span class="hljs-title">send</span>(<span class="hljs-params">name, data, socketId</span>)</span> {
-    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
-    <span class="hljs-built_in">this</span>.ports[name].send(data, socketId);
+    <span class="hljs-keyword">const</span> port = <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{OutPort}</span> </span>*/</span> (<span class="hljs-built_in">this</span>.ports[name]);
+    <span class="hljs-keyword">if</span> (!port) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    port.send(data, socketId);
   }
 
   <span class="hljs-function"><span class="hljs-title">endGroup</span>(<span class="hljs-params">name, socketId</span>)</span> {
-    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
-    <span class="hljs-built_in">this</span>.ports[name].endGroup(socketId);
+    <span class="hljs-keyword">const</span> port = <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{OutPort}</span> </span>*/</span> (<span class="hljs-built_in">this</span>.ports[name]);
+    <span class="hljs-keyword">if</span> (!port) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    port.endGroup(socketId);
   }
 
   <span class="hljs-function"><span class="hljs-title">disconnect</span>(<span class="hljs-params">name, socketId</span>)</span> {
-    <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.ports[name]) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
-    <span class="hljs-built_in">this</span>.ports[name].disconnect(socketId);
+    <span class="hljs-keyword">const</span> port = <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{OutPort}</span> </span>*/</span> (<span class="hljs-built_in">this</span>.ports[name]);
+    <span class="hljs-keyword">if</span> (!port) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`Port <span class="hljs-subst">${name}</span> not available`</span>); }
+    port.disconnect(socketId);
   }
-};</pre></div>
+}</pre></div>
+              
             
           
             
@@ -385,28 +423,40 @@ returns object containing keys name and index for ports names in
 format <code>portname</code> or <code>portname[index]</code>.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.normalizePortName = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">normalizePortName</span>(<span class="hljs-params">name</span>) </span>{
+              
+              <div class='highlight'><pre><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">name</span></span>
+ * <span class="hljs-doctag">@returns <span class="hljs-type">{{ name: string, index?: string }</span></span>}
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">normalizePortName</span>(<span class="hljs-params">name</span>) </span>{
   <span class="hljs-keyword">const</span> port = { name };</pre></div>
+              
             
           
             
             <p>Regular port</p>
 
             
+              
               <div class='highlight'><pre>  <span class="hljs-keyword">if</span> (name.indexOf(<span class="hljs-string">&#x27;[&#x27;</span>) === -<span class="hljs-number">1</span>) { <span class="hljs-keyword">return</span> port; }</pre></div>
+              
             
           
             
             <p>Addressable port with index</p>
 
             
+              
               <div class='highlight'><pre>  <span class="hljs-keyword">const</span> matched = name.match(<span class="hljs-regexp">/(.*)\[([0-9]+)\]/</span>);
-  <span class="hljs-keyword">if</span> (!(matched != <span class="hljs-literal">null</span> ? matched.length : <span class="hljs-literal">undefined</span>)) { <span class="hljs-keyword">return</span> name; }
+  <span class="hljs-keyword">if</span> (!matched || matched.length &lt; <span class="hljs-number">3</span>) {
+    <span class="hljs-keyword">return</span> port;
+  }
   <span class="hljs-keyword">return</span> {
     <span class="hljs-attr">name</span>: matched[<span class="hljs-number">1</span>],
     <span class="hljs-attr">index</span>: matched[<span class="hljs-number">2</span>],
   };
-};</pre></div>
+}</pre></div>
+              
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Ports.js">Ports.js</a> file.</small></p>

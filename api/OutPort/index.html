@@ -261,8 +261,10 @@
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">const</span> BasePort = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./BasePort&#x27;</span>);
-<span class="hljs-keyword">const</span> IP = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./IP&#x27;</span>);</pre></div>
+              
+              <div class='highlight'><pre><span class="hljs-keyword">import</span> BasePort <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./BasePort&#x27;</span>;
+<span class="hljs-keyword">import</span> IP <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./IP&#x27;</span>;</pre></div>
+              
             
           
             
@@ -271,6 +273,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 These ports are the way a component sends Information Packets.</p>
 
             
+              
               <div class='highlight'><pre><span class="hljs-comment">/**
  * <span class="hljs-doctag">@typedef <span class="hljs-type">{Object}</span> <span class="hljs-variable">OutportOptions</span></span> - Options for configuring outports
  * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[description=&#x27;&#x27;]
@@ -281,7 +284,7 @@ These ports are the way a component sends Information Packets.</p>
  * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[scoped=true]
  */</span>
 
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
   <span class="hljs-comment">/**
    * <span class="hljs-doctag">@param <span class="hljs-type">{OutportOptions}</span> <span class="hljs-variable">options</span></span> - Options for the outport
    */</span>
@@ -363,21 +366,25 @@ These ports are the way a component sends Information Packets.</p>
     <span class="hljs-built_in">this</span>.checkRequired(sockets);
 
     <span class="hljs-keyword">if</span> (ip.datatype === <span class="hljs-string">&#x27;all&#x27;</span>) {</pre></div>
+              
             
           
             
             <p>Stamp non-specific IP objects with port datatype</p>
 
             
+              
               <div class='highlight'><pre>      ip.datatype = <span class="hljs-built_in">this</span>.getDataType();
     }
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.getSchema() &amp;&amp; !ip.schema) {</pre></div>
+              
             
           
             
             <p>Stamp non-specific IP objects with port schema</p>
 
             
+              
               <div class='highlight'><pre>      ip.schema = <span class="hljs-built_in">this</span>.getSchema();
     }
 
@@ -418,23 +425,27 @@ These ports are the way a component sends Information Packets.</p>
   }
 
   <span class="hljs-function"><span class="hljs-title">getSockets</span>(<span class="hljs-params">index</span>)</span> {</pre></div>
+              
             
           
             
             <p>Addressable sockets affect only one connection at time</p>
 
             
+              
               <div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.isAddressable()) {
       <span class="hljs-keyword">if</span> (index === <span class="hljs-literal">null</span>) { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-built_in">this</span>.getId()}</span> Socket ID required`</span>); }
       <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">this</span>.sockets[index]) { <span class="hljs-keyword">return</span> []; }
       <span class="hljs-keyword">return</span> [<span class="hljs-built_in">this</span>.sockets[index]];
     }</pre></div>
+              
             
           
             
             <p>Regular sockets affect all outbound connections</p>
 
             
+              
               <div class='highlight'><pre>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.sockets;
   }
 
@@ -444,7 +455,8 @@ These ports are the way a component sends Information Packets.</p>
     }
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }
-};</pre></div>
+}</pre></div>
+              
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/OutPort.js">OutPort.js</a> file.</small></p>

@@ -261,23 +261,30 @@
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
+              
               <div class='highlight'><pre>
 <span class="hljs-comment">/* eslint-disable
     no-console,
     no-undef,
 */</span></pre></div>
+              
             
           
             
             <p>Platform detection method</p>
 
             
-              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.isBrowser = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isBrowser</span>(<span class="hljs-params"></span>) </span>{
+              
+              <div class='highlight'><pre><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@returns <span class="hljs-type">{boolean}</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isBrowser</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">typeof</span> process !== <span class="hljs-string">&#x27;undefined&#x27;</span>) &amp;&amp; process.execPath &amp;&amp; process.execPath.match(<span class="hljs-regexp">/node|iojs/</span>)) {
     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
   }
   <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-};</pre></div>
+}</pre></div>
+              
             
           
             
@@ -286,8 +293,13 @@ but can also be configured to throw instead with the <code>NOFLO_FATAL_DEPRECATE
 env var.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-built_in">exports</span>.deprecated = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deprecated</span>(<span class="hljs-params">message</span>) </span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exports</span>.isBrowser()) {
+              
+              <div class='highlight'><pre><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">message</span></span>
+ * <span class="hljs-doctag">@returns <span class="hljs-type">{void}</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deprecated</span>(<span class="hljs-params">message</span>) </span>{
+  <span class="hljs-keyword">if</span> (isBrowser()) {
     <span class="hljs-built_in">console</span>.warn(message);
     <span class="hljs-keyword">return</span>;
   }
@@ -295,7 +307,22 @@ env var.</p>
     <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message);
   }
   <span class="hljs-built_in">console</span>.warn(message);
-};</pre></div>
+}
+
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@param <span class="hljs-type">{Function}</span> <span class="hljs-variable">func</span></span>
+ * <span class="hljs-doctag">@returns <span class="hljs-type">{void}</span></span>
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">makeAsync</span>(<span class="hljs-params">func</span>) </span>{
+  <span class="hljs-keyword">if</span> (isBrowser()) {
+    <span class="hljs-built_in">setTimeout</span>(func, <span class="hljs-number">0</span>);
+    <span class="hljs-keyword">return</span>;
+  }
+  setImmediate(<span class="hljs-function">() =&gt;</span> {
+    func();
+  });
+}</pre></div>
+              
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/Platform.js">Platform.js</a> file.</small></p>

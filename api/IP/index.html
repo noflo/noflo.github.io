@@ -290,17 +290,25 @@ port is transmitted with the IP object.</p>
 </ul>
 
             
+              
               <div class='highlight'><pre>
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IP</span> </span>{</pre></div>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IP</span> </span>{</pre></div>
+              
             
           
             
             <p>Detects if an arbitrary value is an IP</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-title">isIP</span>(<span class="hljs-params">obj</span>)</span> {
+              
+              <div class='highlight'><pre>  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{any}</span> <span class="hljs-variable">obj</span></span>
+   * <span class="hljs-doctag">@returns <span class="hljs-type">{boolean}</span></span>
+   */</span>
+  <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-title">isIP</span>(<span class="hljs-params">obj</span>)</span> {
     <span class="hljs-keyword">return</span> obj &amp;&amp; (<span class="hljs-keyword">typeof</span> obj === <span class="hljs-string">&#x27;object&#x27;</span>) &amp;&amp; (obj.isIP === <span class="hljs-literal">true</span>);
   }</pre></div>
+              
             
           
             
@@ -308,28 +316,43 @@ port is transmitted with the IP object.</p>
 Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">type, data = <span class="hljs-literal">null</span>, options = {}</span>)</span> {
+              
+              <div class='highlight'><pre>  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{string}</span> <span class="hljs-variable">type</span></span>
+   * <span class="hljs-doctag">@param <span class="hljs-type">{any}</span> <span class="hljs-variable">data</span></span>
+   * <span class="hljs-doctag">@param <span class="hljs-type">{Object&lt;string, boolean|string&gt;}</span> </span>[options]
+   */</span>
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">type, data = <span class="hljs-literal">null</span>, options = {}</span>)</span> {
     <span class="hljs-built_in">this</span>.type = type || <span class="hljs-string">&#x27;data&#x27;</span>;
     <span class="hljs-built_in">this</span>.data = data;
     <span class="hljs-built_in">this</span>.isIP = <span class="hljs-literal">true</span>;
+    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{string|null}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.scope = <span class="hljs-literal">null</span>; <span class="hljs-comment">// sync scope id</span>
+    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{string|null}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.owner = <span class="hljs-literal">null</span>; <span class="hljs-comment">// packet owner process</span>
     <span class="hljs-built_in">this</span>.clonable = <span class="hljs-literal">false</span>; <span class="hljs-comment">// cloning safety flag</span>
+    <span class="hljs-comment">/** <span class="hljs-doctag">@type <span class="hljs-type">{number|null}</span> </span>*/</span>
     <span class="hljs-built_in">this</span>.index = <span class="hljs-literal">null</span>; <span class="hljs-comment">// addressable port index</span>
     <span class="hljs-built_in">this</span>.schema = <span class="hljs-literal">null</span>;
     <span class="hljs-built_in">this</span>.datatype = <span class="hljs-string">&#x27;all&#x27;</span>;
+    <span class="hljs-built_in">this</span>.initial = <span class="hljs-literal">false</span>;
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> options === <span class="hljs-string">&#x27;object&#x27;</span>) {
       <span class="hljs-built_in">Object</span>.keys(options).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> { <span class="hljs-built_in">this</span>[key] = options[key]; });
     }
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
   }</pre></div>
+              
             
           
             
             <p>Creates a new IP copying its contents by value not reference</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">clone</span>(<span class="hljs-params"></span>)</span> {
+              
+              <div class='highlight'><pre>  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@returns <span class="hljs-type">{IP}</span></span>
+   */</span>
+  <span class="hljs-function"><span class="hljs-title">clone</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">const</span> ip = <span class="hljs-keyword">new</span> IP(<span class="hljs-built_in">this</span>.type);
     <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> {
       <span class="hljs-keyword">const</span> val = <span class="hljs-built_in">this</span>[key];
@@ -343,32 +366,44 @@ Valid types: ‘data’, ‘openBracket’, ‘closeBracket’</p>
     });
     <span class="hljs-keyword">return</span> ip;
   }</pre></div>
+              
             
           
             
             <p>Moves an IP to a different owner</p>
 
             
-              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">move</span>(<span class="hljs-params">owner</span>)</span> {</pre></div>
+              
+              <div class='highlight'><pre>  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{string|null}</span> <span class="hljs-variable">owner</span></span>
+   */</span>
+  <span class="hljs-function"><span class="hljs-title">move</span>(<span class="hljs-params">owner</span>)</span> {</pre></div>
+              
             
           
             
             <p>no-op</p>
 
             
+              
               <div class='highlight'><pre>    <span class="hljs-built_in">this</span>.owner = owner;
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
   }</pre></div>
+              
             
           
             
             <p>Frees IP contents</p>
 
             
+              
               <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">drop</span>(<span class="hljs-params"></span>)</span> {
-    <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> { <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>[key]; });
+    <span class="hljs-built_in">Object</span>.keys(<span class="hljs-built_in">this</span>).forEach(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> {
+      <span class="hljs-keyword">delete</span> <span class="hljs-built_in">this</span>[key];
+    });
   }
-};</pre></div>
+}</pre></div>
+              
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/IP.js">IP.js</a> file.</small></p>

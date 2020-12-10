@@ -262,8 +262,14 @@
 NoFlo may be freely distributed under the MIT license</code></pre>
 
             
-              <div class='highlight'><pre><span class="hljs-keyword">const</span> BaseNetwork = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./BaseNetwork&#x27;</span>);
-<span class="hljs-keyword">const</span> { deprecated } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./Platform&#x27;</span>);</pre></div>
+              
+              <div class='highlight'><pre><span class="hljs-keyword">import</span> { BaseNetwork } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./BaseNetwork&#x27;</span>;
+<span class="hljs-keyword">import</span> { deprecated } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./Platform&#x27;</span>;
+
+<span class="hljs-comment">/* eslint-disable
+    import/prefer-default-export,
+*/</span></pre></div>
+              
             
           
             
@@ -276,7 +282,9 @@ components, attach sockets between them, and handle the sending
 of Initial Information Packets.</p>
 
             
-              <div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LegacyNetwork</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseNetwork</span> </span>{</pre></div>
+              
+              <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LegacyNetwork</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseNetwork</span> </span>{</pre></div>
+              
             
           
             
@@ -288,26 +296,36 @@ accordingly, including removing connections, adding new nodes,
 and sending new IIPs.</p>
 
             
+              
               <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">graph, options = {}</span>)</span> {
     deprecated(<span class="hljs-string">&#x27;subscribeGraph: true is deprecated. Live-edit network graphs via the network methods instead&#x27;</span>);
     <span class="hljs-built_in">super</span>(graph, options);
-  }</pre></div>
-            
-          
-            
-            <p>eslint-disable-next-line no-unused-vars</p>
+  }
 
-            
-              <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">connect</span>(<span class="hljs-params">done = (err) =&gt; {}</span>)</span> {
-    <span class="hljs-built_in">super</span>.connect(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
-      <span class="hljs-keyword">if</span> (err) {
-        done(err);
-        <span class="hljs-keyword">return</span>;
-      }
-      <span class="hljs-built_in">this</span>.subscribeGraph();
-      done();
-    });
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@callback <span class="hljs-variable">ErrorableCallback</span></span>
+   * <span class="hljs-doctag">@param <span class="hljs-type">{Error|null}</span> </span>[err]
+   * <span class="hljs-doctag">@returns <span class="hljs-type">{void}</span></span>
+   */</span>
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{ErrorableCallback}</span> </span>[callback]
+   * <span class="hljs-doctag">@returns <span class="hljs-type">{Promise&lt;this&gt;}</span></span>
+   */</span>
+  <span class="hljs-function"><span class="hljs-title">connect</span>(<span class="hljs-params">callback</span>)</span> {
+    <span class="hljs-keyword">const</span> promise = <span class="hljs-built_in">super</span>.connect()
+      .then(<span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.subscribeGraph();
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
+      });
+    <span class="hljs-keyword">if</span> (callback) {
+      deprecated(<span class="hljs-string">&#x27;Providing a callback to Network.connect is deprecated, use Promises&#x27;</span>);
+      promise.then(<span class="hljs-function">() =&gt;</span> {
+        callback(<span class="hljs-literal">null</span>);
+      }, callback);
+    }
+    <span class="hljs-keyword">return</span> promise;
   }</pre></div>
+              
             
           
             
@@ -318,6 +336,7 @@ from the graph.</p>
 to NoFlo processes, and edges to connections between them.</p>
 
             
+              
               <div class='highlight'><pre>  <span class="hljs-function"><span class="hljs-title">subscribeGraph</span>(<span class="hljs-params"></span>)</span> {
     <span class="hljs-keyword">const</span> graphOps = [];
     <span class="hljs-keyword">let</span> processing = <span class="hljs-literal">false</span>;
@@ -381,9 +400,8 @@ to NoFlo processes, and edges to connections between them.</p>
       <span class="hljs-keyword">if</span> (!processing) { processOps(); }
     });
   }
-}
-
-<span class="hljs-built_in">exports</span>.Network = LegacyNetwork;</pre></div>
+}</pre></div>
+              
             
           
           <p><small>This page contains documentation generated automatically from NoFlo's <a href="https://github.com/noflo/noflo/blob/master/src/lib/LegacyNetwork.js">LegacyNetwork.js</a> file.</small></p>
