@@ -17,6 +17,6 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "noflo": "1.4.2"
+    "noflo": "1.4.3"
   }
 }
