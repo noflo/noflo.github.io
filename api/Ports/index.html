@@ -275,13 +275,7 @@ NoFlo may be freely distributed under the MIT license</code></pre>
 <span class="hljs-keyword">import</span> OutPort <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./OutPort&#x27;</span>;
 
 <span class="hljs-comment">/**
- * <span class="hljs-doctag">@typedef <span class="hljs-variable">PortOptions</span></span>
- * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[description=&#x27;&#x27;]
- * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[datatype=&#x27;all&#x27;]
- * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[schema=null]
- * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[type=null]
- * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[required=false]
- * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[scoped=true]
+ * <span class="hljs-doctag">@typedef <span class="hljs-type">{import(&quot;./BasePort&quot;).BaseOptions}</span> <span class="hljs-variable">PortOptions</span></span>
  */</span></pre></div>
               
             
@@ -362,7 +356,7 @@ used to hold a set of input or output ports of a component.</p>
 }
 
 <span class="hljs-comment">/**
- * <span class="hljs-doctag">@typedef <span class="hljs-type">{{ [key: string]: InPort|PortOptions }</span></span>} InPortsOptions
+ * <span class="hljs-doctag">@typedef <span class="hljs-type">{{ [key: string]: InPort|import(&quot;./InPort&quot;).PortOptions }</span></span>} InPortsOptions
  */</span>
 <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPorts</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ports</span> </span>{
   <span class="hljs-comment">/**
@@ -374,7 +368,7 @@ used to hold a set of input or output ports of a component.</p>
 }
 
 <span class="hljs-comment">/**
- * <span class="hljs-doctag">@typedef <span class="hljs-type">{{ [key: string]: OutPort|PortOptions }</span></span>} OutPortsOptions
+ * <span class="hljs-doctag">@typedef <span class="hljs-type">{{ [key: string]: OutPort|import(&quot;./OutPort&quot;).PortOptions }</span></span>} OutPortsOptions
  */</span>
 <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPorts</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Ports</span> </span>{
   <span class="hljs-comment">/**

@@ -275,18 +275,16 @@ These ports are the way a component sends Information Packets.</p>
             
               
               <div class='highlight'><pre><span class="hljs-comment">/**
- * <span class="hljs-doctag">@typedef <span class="hljs-type">{Object}</span> <span class="hljs-variable">OutportOptions</span></span> - Options for configuring outports
- * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[description=&#x27;&#x27;]
- * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[datatype=&#x27;all&#x27;]
- * <span class="hljs-doctag">@property <span class="hljs-type">{string}</span> </span>[schema=null]
- * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[required=false]
- * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[caching=false]
- * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[scoped=true]
+ * <span class="hljs-doctag">@typedef <span class="hljs-variable">OutPortOptions</span></span>
+ * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[caching]
+ */</span>
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@typedef <span class="hljs-type">{import(&quot;./BasePort&quot;).BaseOptions &amp; OutPortOptions}</span> <span class="hljs-variable">PortOptions</span></span>
  */</span>
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OutPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
   <span class="hljs-comment">/**
-   * <span class="hljs-doctag">@param <span class="hljs-type">{OutportOptions}</span> <span class="hljs-variable">options</span></span> - Options for the outport
+   * <span class="hljs-doctag">@param <span class="hljs-type">{PortOptions}</span> <span class="hljs-variable">options</span></span> - Options for the outport
    */</span>
   <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">options = {}</span>)</span> {
     <span class="hljs-keyword">const</span> opts = options;

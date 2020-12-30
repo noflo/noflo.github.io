@@ -273,20 +273,24 @@ ports are the way a component receives Information Packets.</p>
 
             
               
-              <div class='highlight'><pre><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
+              <div class='highlight'><pre><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@typedef <span class="hljs-variable">InPortOptions</span></span>
+ * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[control]
+ * <span class="hljs-doctag">@property <span class="hljs-type">{boolean}</span> </span>[triggering]
+ */</span>
+<span class="hljs-comment">/**
+ * <span class="hljs-doctag">@typedef <span class="hljs-type">{import(&quot;./BasePort&quot;).BaseOptions &amp; InPortOptions}</span> <span class="hljs-variable">PortOptions</span></span>
+ */</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InPort</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BasePort</span> </span>{
+  <span class="hljs-comment">/**
+   * <span class="hljs-doctag">@param <span class="hljs-type">{PortOptions}</span> </span>[options]
+   */</span>
   <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">options = {}</span>)</span> {
     <span class="hljs-keyword">const</span> opts = options;
     <span class="hljs-keyword">if</span> (opts.control == <span class="hljs-literal">null</span>) { opts.control = <span class="hljs-literal">false</span>; }
     <span class="hljs-keyword">if</span> (opts.scoped == <span class="hljs-literal">null</span>) { opts.scoped = <span class="hljs-literal">true</span>; }
     <span class="hljs-keyword">if</span> (opts.triggering == <span class="hljs-literal">null</span>) { opts.triggering = <span class="hljs-literal">true</span>; }
-
-    <span class="hljs-keyword">if</span> (opts.process) {
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;InPort process callback is deprecated. Please use Process API&#x27;</span>);
-    }
-
-    <span class="hljs-keyword">if</span> (opts.handle) {
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;InPort handle callback is deprecated. Please use Process API&#x27;</span>);
-    }
 
     <span class="hljs-built_in">super</span>(opts);
 
