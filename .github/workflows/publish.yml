@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3.0.1
         with:
           submodules: true
       - uses: actions/setup-node@v2.1.5
@@ -23,7 +23,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3.0.1
         with:
           submodules: true
       - uses: actions/setup-node@v2.1.5
