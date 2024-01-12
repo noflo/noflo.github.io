@@ -180,7 +180,7 @@ This will show all the various events happening inside the graph:
 * Data being sent through the connections
 * Connections being closed
 
-Looking at this is useful in order to understand how information flows through a NoFlo network. Visual tools like [Flowhub](https://flowhub.io/ide/) can give an even better view at how the graph looks and behaves.
+Looking at this is useful in order to understand how information flows through a NoFlo network. Visual tools like [NoFlo UI](https://app.noflojs.org/) can give an even better view at how the graph looks and behaves.
 
 ### Running NoFlo in the browser
 
@@ -226,7 +226,7 @@ Read more in [noflo-component-loader documentation](https://github.com/noflo/nof
 For faster project setup, we have a template for creating NoFlo browser applications: **[noflo-browser-app](https://github.com/noflo/noflo-browser-app)**. To use it, follow these steps:
 
 * Fork the project
-* Import the repository in [Flowhub](https://app.flowhub.io/ide/)
+* Import the repository in [NoFlo UI](https://app.noflojs.org/)
 * Make changes, synchronize to GitHub
 * If you need additional modules, use `npm install --add`
 
